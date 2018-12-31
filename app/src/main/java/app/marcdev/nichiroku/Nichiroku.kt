@@ -1,6 +1,7 @@
 package app.marcdev.nichiroku
 
 import android.app.Application
+import app.marcdev.nichiroku.addentryscreen.AddEntryViewModelFactory
 import app.marcdev.nichiroku.data.database.AppDatabase
 import app.marcdev.nichiroku.data.database.DAO
 import app.marcdev.nichiroku.data.database.ProductionAppDatabase
@@ -22,6 +23,7 @@ class Nichiroku : Application(), KodeinAware {
     bind<DAO>() with singleton { instance<AppDatabase>().dao() }
     bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance()) }
     bind() from provider { MainScreenViewModelFactory(instance()) }
+    bind() from provider { AddEntryViewModelFactory(instance()) }
   }
 
   override fun onCreate() {

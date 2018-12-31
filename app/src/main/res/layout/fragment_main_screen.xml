@@ -5,14 +5,6 @@
   android:layout_height="match_parent"
   android:orientation="vertical">
 
-  <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/app_bar_layout_main_screen"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize">
-
-    <include layout="@layout/toolbar_main" />
-  </com.google.android.material.appbar.AppBarLayout>
-
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/const_entries_loading"
     android:layout_width="match_parent"

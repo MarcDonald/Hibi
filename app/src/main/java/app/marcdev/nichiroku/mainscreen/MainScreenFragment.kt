@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,26 +55,11 @@ class MainScreenFragment : ScopedFragment(), KodeinAware {
     loadingDisplay = view.findViewById(R.id.const_entries_loading)
     val fab: FloatingActionButton = view.findViewById(R.id.fab_main)
     fab.setOnClickListener(fabClickListener)
-    fab.setOnLongClickListener(fabLongClickListener)
   }
 
   private val fabClickListener = View.OnClickListener {
-    // TODO remove this testing code
-    addShortTestEntry()
-  }
-
-  private val fabLongClickListener = View.OnLongClickListener {
-    // TODO remove this testing code
-    addLongTestEntry()
-    return@OnLongClickListener true
-  }
-
-  private fun addLongTestEntry() = launch {
-    viewModel.addLongEntry()
-  }
-
-  private fun addShortTestEntry() = launch {
-    viewModel.addShortEntry()
+    val addEntryAction = MainScreenFragmentDirections.addEntryAction()
+    Navigation.findNavController(it).navigate(addEntryAction)
   }
 
   private fun initRecycler(view: View) {

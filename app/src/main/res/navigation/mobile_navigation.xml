@@ -7,5 +7,21 @@
   <fragment
     android:id="@+id/destination_main"
     android:name="app.marcdev.nichiroku.mainscreen.MainScreenFragment"
-    android:label="MainFragment" />
+    android:label="MainFragment">
+    <action
+      android:id="@+id/add_entry_action"
+      app:destination="@id/destination_add_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim" />
+  </fragment>
+  <fragment
+    android:id="@+id/destination_add_entry"
+    android:name="app.marcdev.nichiroku.addentryscreen.AddEntryFragment"
+    android:label="AddEntryFragment">
+    <action
+      android:id="@+id/add_entry_back_main_screen"
+      app:destination="@id/destination_main"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim" />
+  </fragment>
 </navigation>
