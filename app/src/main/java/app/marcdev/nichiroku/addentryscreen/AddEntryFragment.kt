@@ -52,10 +52,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
   private val saveClickListener = View.OnClickListener {
     onSaveClick()
-
-    val backAction = AddEntryFragmentDirections.addEntryBackMainScreen()
-    Navigation.findNavController(it).navigate(backAction)
-
+    Navigation.findNavController(it).popBackStack()
   }
 
   private fun onSaveClick() = launch {
