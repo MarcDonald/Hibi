@@ -2,4 +2,9 @@
   <string name="app_name">Nichiroku</string>
   <string name="loading_entries">Loading Entries</string>
   <string name="back">Back</string>
+
+  <!--Entry-->
+  <string name="date">Date</string>
+  <string name="time">Time</string>
+  <string name="content">Content</string>
 </resources>
