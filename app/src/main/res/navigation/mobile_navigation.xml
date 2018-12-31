@@ -6,6 +6,6 @@
 
   <fragment
     android:id="@+id/destination_main"
-    android:name="app.marcdev.nichiroku.mainfragment.MainFragment"
+    android:name="app.marcdev.nichiroku.mainscreen.MainScreenFragment"
     android:label="MainFragment" />
 </navigation>
