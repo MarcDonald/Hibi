@@ -1,14 +1,24 @@
 package app.marcdev.nichiroku
 
 import android.app.Application
+import app.marcdev.nichiroku.data.database.AppDatabase
+import app.marcdev.nichiroku.data.database.DAO
+import app.marcdev.nichiroku.data.database.ProductionAppDatabase
+import app.marcdev.nichiroku.data.repository.EntryRepository
+import app.marcdev.nichiroku.data.repository.EntryRepositoryImpl
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 import timber.log.Timber
 
 class Nichiroku : Application(), KodeinAware {
 
   override val kodein = Kodein.lazy {
-    // TODO
+    bind<AppDatabase>() with singleton { ProductionAppDatabase.invoke(applicationContext) }
+    bind<DAO>() with singleton { instance<AppDatabase>().dao() }
+    bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance()) }
   }
 
   override fun onCreate() {
