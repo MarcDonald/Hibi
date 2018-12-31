@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar_layout_main_screen"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize">
+
+    <include layout="@layout/toolbar_main" />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/const_entries_loading"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+      android:id="@+id/prog_entries"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_standard"
+      app:layout_constraintBottom_toTopOf="@id/gd_entries_loading"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+      android:id="@+id/txt_entries_loading"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_standard"
+      android:text="@string/loading_entries"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/gd_entries_loading" />
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/gd_entries_loading"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.5" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.core.widget.NestedScrollView
+    android:id="@+id/scroll_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_entries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/fab_main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="@dimen/fab_margin"
+    android:src="@drawable/ic_add_black_24dp"
+    app:fabSize="normal" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
