@@ -1,6 +1,9 @@
 <resources>
   <string name="app_name">Nikki</string>
   <string name="loading_entries">Loading Entries</string>
+  <string name="add_entry">Add Entry</string>
+  <string name="edit_entry">Edit Entry</string>
+  <string name="view_entry">View Entry</string>
   <string name="back">Back</string>
   <string name="save">Save</string>
   <string name="ok">OK</string>
@@ -11,6 +14,8 @@
   <string name="negative">Negative</string>
   <string name="warning_caps">WARNING</string>
   <string name="generic_error">An error occurred</string>
+  <string name="delete_confirm_title">DELETE ENTRY</string>
+  <string name="delete_confirm">Are you sure you want to delete this entry?</string>
 
   <!--Entry-->
   <string name="date">Date</string>

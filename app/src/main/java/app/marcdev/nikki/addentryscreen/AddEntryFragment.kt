@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.nikki.R
+import app.marcdev.nikki.formatDateForDisplay
+import app.marcdev.nikki.formatTimeForDisplay
 import app.marcdev.nikki.internal.base.ScopedFragment
 import app.marcdev.nikki.uicomponents.TransparentSquareButton
 import app.marcdev.nikki.uicomponents.YesNoDialog
@@ -34,9 +37,11 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var timeButton: TransparentSquareButton
   private lateinit var contentInput: EditText
   private lateinit var backConfirmDialog: YesNoDialog
+  private lateinit var toolbarTitle: TextView
 
   // Other
   private val dateTimeStore = DateTimeStore()
+  private var entryIdBeingEdited = 0
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -53,7 +58,19 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     return view
   }
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    arguments?.let {
+      val entryId = AddEntryFragmentArgs.fromBundle(it).entryId
+      if(entryId != 0) {
+        convertToEditMode(entryId)
+      }
+    }
+  }
+
   private fun bindViews(view: View) {
+    toolbarTitle = view.findViewById(R.id.txt_add_toolbar_title)
     dateButton = view.findViewById(R.id.btn_date)
     dateButton.setOnClickListener(dateClickListener)
     initDateButton()
@@ -124,6 +141,23 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     })
   }
 
+  private fun convertToEditMode(entryId: Int) = launch {
+    toolbarTitle.text = resources.getString(R.string.edit_entry)
+    entryIdBeingEdited = entryId
+    viewModel.getEntry(entryId).observe(this@AddEntryFragment, Observer { entry ->
+      contentInput.setText(entry.content)
+
+      val day = entry.day
+      val month = entry.month
+      val year = entry.year
+      val hour = entry.hour
+      val minute = entry.minute
+
+      dateButton.setText(formatDateForDisplay(day, month, year))
+      timeButton.setText(formatTimeForDisplay(hour, minute))
+    })
+  }
+
   private fun onSaveClick() = launch {
     val content = contentInput.text.toString()
 
@@ -135,7 +169,13 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
       val year = dateTimeStore.getYear()
       val hour = dateTimeStore.getHour()
       val minute = dateTimeStore.getMinute()
-      viewModel.addEntry(day, month, year, hour, minute, content)
+
+      if(entryIdBeingEdited == 0) {
+        viewModel.addEntry(day, month, year, hour, minute, content)
+      } else {
+        viewModel.updateEntry(day, month, year, hour, minute, content, entryIdBeingEdited)
+      }
+
       popBackStack()
     }
   }

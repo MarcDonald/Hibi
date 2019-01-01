@@ -9,11 +9,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import app.marcdev.nikki.R
 import app.marcdev.nikki.formatDateForDisplay
 import app.marcdev.nikki.formatTimeForDisplay
 import app.marcdev.nikki.internal.base.ScopedFragment
 import app.marcdev.nikki.uicomponents.TransparentSquareButton
+import app.marcdev.nikki.uicomponents.YesNoDialog
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -31,10 +33,10 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   lateinit var dateButton: TransparentSquareButton
   lateinit var timeButton: TransparentSquareButton
   lateinit var contentDisplay: TextView
-  lateinit var backButton: ImageView
+  lateinit var deleteConfirmDialog: YesNoDialog
 
   // Other
-  var entryIdBeingViewed = 0
+  private var entryIdBeingViewed = 0
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -46,6 +48,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
     val view = inflater.inflate(R.layout.fragment_view_entry, container, false)
 
     bindViews(view)
+    initDeleteConfirmDialog()
 
     return view
   }
@@ -83,7 +86,53 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   private fun bindViews(view: View) {
     dateButton = view.findViewById(R.id.btn_view_date)
     timeButton = view.findViewById(R.id.btn_view_time)
-    backButton = view.findViewById(R.id.img_view_entry_toolbar_back)
     contentDisplay = view.findViewById(R.id.txt_view_content)
+
+    val backButton: ImageView = view.findViewById(R.id.img_view_entry_toolbar_back)
+    backButton.setOnClickListener(backClickListener)
+
+    val editButton: ImageView = view.findViewById(R.id.img_edit)
+    editButton.setOnClickListener(editClickListener)
+
+    val deleteButton: ImageView = view.findViewById(R.id.img_delete)
+    deleteButton.setOnClickListener(deleteClickListener)
+  }
+
+  private val backClickListener = View.OnClickListener {
+    Navigation.findNavController(view!!).popBackStack()
+  }
+
+  private val editClickListener = View.OnClickListener {
+    val editEntryAction = ViewEntryFragmentDirections.editEntryAction()
+    if(entryIdBeingViewed != 0) {
+      editEntryAction.entryId = entryIdBeingViewed
+    }
+    Navigation.findNavController(it).navigate(editEntryAction)
+  }
+
+  private val deleteClickListener = View.OnClickListener {
+    deleteConfirmDialog.show(requireFragmentManager(), "Delete Confirmation Dialog")
+  }
+
+  private fun initDeleteConfirmDialog() {
+    deleteConfirmDialog = YesNoDialog()
+    deleteConfirmDialog.setTitle(resources.getString(R.string.delete_confirm_title))
+    deleteConfirmDialog.setMessage(resources.getString(R.string.delete_confirm))
+    deleteConfirmDialog.setYesButton(resources.getString(R.string.delete), okDeleteClickListener)
+    deleteConfirmDialog.setNoButton(resources.getString(R.string.cancel), cancelDeleteClickListener)
+  }
+
+  private val okDeleteClickListener = View.OnClickListener {
+    deleteEntry()
+    deleteConfirmDialog.dismiss()
+  }
+
+  private val cancelDeleteClickListener = View.OnClickListener {
+    deleteConfirmDialog.dismiss()
+  }
+
+  private fun deleteEntry() = launch {
+    viewModel.deleteEntry(entryIdBeingViewed)
+    Navigation.findNavController(view!!).popBackStack()
   }
 }

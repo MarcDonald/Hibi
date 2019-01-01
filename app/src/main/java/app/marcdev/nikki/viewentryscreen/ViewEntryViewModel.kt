@@ -10,4 +10,8 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository) : ViewMod
   suspend fun getEntry(id: Int): LiveData<Entry> {
     return entryRepository.getEntry(id)
   }
+
+  suspend fun deleteEntry(id: Int) {
+    return entryRepository.deleteEntry(id)
+  }
 }

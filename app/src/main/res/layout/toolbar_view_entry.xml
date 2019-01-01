@@ -26,21 +26,22 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-      android:id="@+id/txt_main_toolbar_title"
+      android:id="@+id/txt_view_toolbar_title"
       style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/app_name"
+      android:text="@string/view_entry"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-      android:id="@+id/btn_edit"
+      android:id="@+id/img_edit"
       android:layout_width="@dimen/toolbar_icon_size"
       android:layout_height="@dimen/toolbar_icon_size"
       android:src="@drawable/ic_edit_black_24dp"
+      android:background="?selectableItemBackgroundBorderless"
       android:contentDescription="@string/edit"
       android:layout_margin="@dimen/toolbar_icon_margin"
       android:padding="@dimen/toolbar_icon_padding"
@@ -49,15 +50,16 @@
       app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-      android:id="@+id/btn_delete"
+      android:id="@+id/img_delete"
       android:layout_width="@dimen/toolbar_icon_size"
       android:layout_height="@dimen/toolbar_icon_size"
       android:src="@drawable/ic_delete_black_24dp"
+      android:background="?selectableItemBackgroundBorderless"
       android:contentDescription="@string/delete"
       android:layout_margin="@dimen/toolbar_icon_margin"
       android:padding="@dimen/toolbar_icon_padding"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/btn_edit"
+      app:layout_constraintEnd_toStartOf="@id/img_edit"
       app:layout_constraintBottom_toBottomOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.Toolbar>
