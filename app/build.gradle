@@ -11,11 +11,11 @@ apply plugin: 'androidx.navigation.safeargs'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "app.marcdev.nichiroku"
+        applicationId "app.marcdev.nikki"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 3
-        versionName "0.3.0"
+        versionCode 4
+        versionName "0.4.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

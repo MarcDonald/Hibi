@@ -1,4 +1,4 @@
-package app.marcdev.nichiroku.mainscreen
+package app.marcdev.nikki.mainscreen
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
-import app.marcdev.nichiroku.R
-import app.marcdev.nichiroku.data.entity.Entry
+import app.marcdev.nikki.R
+import app.marcdev.nikki.data.entity.Entry
 
 class EntriesRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<EntriesRecyclerViewHolder>() {
 

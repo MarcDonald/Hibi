@@ -1,8 +1,8 @@
-package app.marcdev.nichiroku.mainscreen
+package app.marcdev.nikki.mainscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import app.marcdev.nichiroku.data.repository.EntryRepository
+import app.marcdev.nikki.data.repository.EntryRepository
 
 class MainScreenViewModelFactory(private val entryRepository: EntryRepository)
   : ViewModelProvider.NewInstanceFactory() {

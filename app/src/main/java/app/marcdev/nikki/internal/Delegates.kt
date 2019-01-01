@@ -1,4 +1,4 @@
-package app.marcdev.nichiroku.internal
+package app.marcdev.nikki.internal
 
 import kotlinx.coroutines.*
 

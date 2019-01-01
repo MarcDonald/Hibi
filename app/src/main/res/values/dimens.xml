@@ -5,4 +5,6 @@
   <dimen name="toolbar_icon_size">36dp</dimen>
   <dimen name="toolbar_icon_padding">6dp</dimen>
   <dimen name="toolbar_icon_margin">16dp</dimen>
+  <dimen name="option_bar_height">32dp</dimen>
+  <dimen name="search_fab_bottom_margin">48dp</dimen>
 </resources>

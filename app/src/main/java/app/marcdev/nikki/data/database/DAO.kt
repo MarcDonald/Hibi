@@ -1,11 +1,11 @@
-package app.marcdev.nichiroku.data.database
+package app.marcdev.nikki.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import app.marcdev.nichiroku.data.entity.Entry
+import app.marcdev.nikki.data.entity.Entry
 
 @Dao
 interface DAO {

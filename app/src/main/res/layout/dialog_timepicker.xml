@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <TimePicker
+    android:id="@+id/timepicker"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:timePickerMode="clock"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+  <app.marcdev.nikki.uicomponents.TransparentSquareButton
+    android:id="@+id/btn_timepicker_ok"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:layout_marginBottom="8dp"
+    app:text="@string/ok"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/timepicker" />
+
+  <app.marcdev.nikki.uicomponents.TransparentSquareButton
+    android:id="@+id/btn_timepicker_cancel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:layout_marginBottom="8dp"
+    app:text="@string/cancel"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/btn_timepicker_ok"
+    app:layout_constraintTop_toBottomOf="@id/timepicker" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

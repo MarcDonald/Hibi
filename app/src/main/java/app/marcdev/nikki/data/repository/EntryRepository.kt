@@ -1,7 +1,7 @@
-package app.marcdev.nichiroku.data.repository
+package app.marcdev.nikki.data.repository
 
 import androidx.lifecycle.LiveData
-import app.marcdev.nichiroku.data.entity.Entry
+import app.marcdev.nikki.data.entity.Entry
 
 interface EntryRepository {
 

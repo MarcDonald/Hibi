@@ -1,4 +1,4 @@
-package app.marcdev.nichiroku.internal.base
+package app.marcdev.nikki.internal.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

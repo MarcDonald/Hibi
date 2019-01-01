@@ -1,12 +1,15 @@
-package app.marcdev.nichiroku.data.entity
+package app.marcdev.nikki.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "entries")
 data class Entry(
-  var date: String,
-  var time: String,
+  var day: Int,
+  var month: Int,
+  var year: Int,
+  var hour: Int,
+  var minute: Int,
   var content: String
 ) {
 

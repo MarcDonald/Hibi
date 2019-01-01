@@ -1,12 +1,12 @@
-package app.marcdev.nichiroku.data.database
+package app.marcdev.nikki.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import app.marcdev.nichiroku.data.entity.Entry
+import app.marcdev.nikki.data.entity.Entry
 
-@Database(entities = [Entry::class], version = 1)
+@Database(entities = [Entry::class], version = 3)
 
 abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
   abstract override fun dao(): DAO
@@ -25,6 +25,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
       Room.databaseBuilder(context.applicationContext,
         ProductionAppDatabase::class.java,
         "ProductionAppDatabase.db")
+        .fallbackToDestructiveMigration()
         .build()
   }
 }

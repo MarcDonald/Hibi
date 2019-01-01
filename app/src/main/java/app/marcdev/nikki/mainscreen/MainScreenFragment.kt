@@ -1,4 +1,4 @@
-package app.marcdev.nichiroku.mainscreen
+package app.marcdev.nikki.mainscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import app.marcdev.nichiroku.R
-import app.marcdev.nichiroku.internal.base.ScopedFragment
+import app.marcdev.nikki.R
+import app.marcdev.nikki.internal.base.ScopedFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -41,7 +42,7 @@ class MainScreenFragment : ScopedFragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.d("Log: onCreateView: Started")
+    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_main_screen, container, false)
 
     bindViews(view)
@@ -54,26 +55,11 @@ class MainScreenFragment : ScopedFragment(), KodeinAware {
     loadingDisplay = view.findViewById(R.id.const_entries_loading)
     val fab: FloatingActionButton = view.findViewById(R.id.fab_main)
     fab.setOnClickListener(fabClickListener)
-    fab.setOnLongClickListener(fabLongClickListener)
   }
 
   private val fabClickListener = View.OnClickListener {
-    // TODO remove this testing code
-    addShortTestEntry()
-  }
-
-  private val fabLongClickListener = View.OnLongClickListener {
-    // TODO remove this testing code
-    addLongTestEntry()
-    return@OnLongClickListener true
-  }
-
-  private fun addLongTestEntry() = launch {
-    viewModel.addLongEntry()
-  }
-
-  private fun addShortTestEntry() = launch {
-    viewModel.addShortEntry()
+    val addEntryAction = MainScreenFragmentDirections.addEntryAction()
+    Navigation.findNavController(it).navigate(addEntryAction)
   }
 
   private fun initRecycler(view: View) {

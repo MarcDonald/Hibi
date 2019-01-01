@@ -1,8 +1,8 @@
-package app.marcdev.nichiroku.data.repository
+package app.marcdev.nikki.data.repository
 
 import androidx.lifecycle.LiveData
-import app.marcdev.nichiroku.data.database.DAO
-import app.marcdev.nichiroku.data.entity.Entry
+import app.marcdev.nikki.data.database.DAO
+import app.marcdev.nikki.data.entity.Entry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
