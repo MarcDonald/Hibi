@@ -13,7 +13,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent" />
 
-  <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+  <app.marcdev.nikki.uicomponents.TransparentSquareButton
     android:id="@+id/btn_datepicker_ok"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@id/datepicker" />
 
-  <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+  <app.marcdev.nikki.uicomponents.TransparentSquareButton
     android:id="@+id/btn_datepicker_cancel"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

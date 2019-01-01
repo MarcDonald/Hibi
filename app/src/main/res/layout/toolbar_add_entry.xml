@@ -36,7 +36,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+    <app.marcdev.nikki.uicomponents.TransparentSquareButton
       android:id="@+id/btn_save"
       android:layout_height="wrap_content"
       android:layout_width="0dp"

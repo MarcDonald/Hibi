@@ -1,4 +1,4 @@
-# Nichiroku
+# Nikki
 An Android app for learning Japanese by keeping a journal.
 
 ## Open Source Libraries Used

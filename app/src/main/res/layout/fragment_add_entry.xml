@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+        <app.marcdev.nikki.uicomponents.TransparentSquareButton
           android:id="@+id/btn_date"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
 
-        <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+        <app.marcdev.nikki.uicomponents.TransparentSquareButton
           android:id="@+id/btn_time"
           android:layout_width="0dp"
           android:layout_height="wrap_content"

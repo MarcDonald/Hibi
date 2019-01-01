@@ -27,7 +27,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/txt_yes_no_title" />
 
-  <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+  <app.marcdev.nikki.uicomponents.TransparentSquareButton
     android:id="@+id/btn_yes_no_positive"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
     app:layout_constraintTop_toBottomOf="@id/txt_yes_no_message"
     app:text="@string/positive" />
 
-  <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+  <app.marcdev.nikki.uicomponents.TransparentSquareButton
     android:id="@+id/btn_yes_no_negative"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

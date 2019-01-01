@@ -6,7 +6,7 @@
 
   <fragment
     android:id="@+id/destination_main"
-    android:name="app.marcdev.nichiroku.mainscreen.MainScreenFragment"
+    android:name="app.marcdev.nikki.mainscreen.MainScreenFragment"
     android:label="MainFragment">
     <action
       android:id="@+id/add_entry_action"
@@ -16,7 +16,7 @@
   </fragment>
   <fragment
     android:id="@+id/destination_add_entry"
-    android:name="app.marcdev.nichiroku.addentryscreen.AddEntryFragment"
+    android:name="app.marcdev.nikki.addentryscreen.AddEntryFragment"
     android:label="AddEntryFragment">
   </fragment>
 </navigation>

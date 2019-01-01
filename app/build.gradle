@@ -11,7 +11,7 @@ apply plugin: 'androidx.navigation.safeargs'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "app.marcdev.nichiroku"
+        applicationId "app.marcdev.nikki"
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 4
