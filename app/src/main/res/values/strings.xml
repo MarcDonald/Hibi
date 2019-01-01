@@ -11,6 +11,8 @@
   <string name="negative">Negative</string>
   <string name="warning_caps">WARNING</string>
   <string name="generic_error">An error occurred</string>
+  <string name="delete_confirm_title">DELETE ENTRY</string>
+  <string name="delete_confirm">Are you sure you want to delete this entry?</string>
 
   <!--Entry-->
   <string name="date">Date</string>
