@@ -153,6 +153,8 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
       val hour = entry.hour
       val minute = entry.minute
 
+      dateTimeStore.setDate(day, month, year)
+      dateTimeStore.setTime(hour, minute)
       dateButton.setText(formatDateForDisplay(day, month, year))
       timeButton.setText(formatTimeForDisplay(hour, minute))
     })
