@@ -57,6 +57,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
     timeButton = view.findViewById(R.id.frame_time)
     timeButton.setOnClickListener(timeClickListener)
+    initTimeButton()
 
     contentInput = view.findViewById(R.id.edt_content)
 
@@ -76,7 +77,9 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private val timeClickListener = View.OnClickListener {
-    // TODO open time picker
+    val timeDialog = TimePickerDialog()
+    timeDialog.bindDateTimeStore(dateTimeStore)
+    timeDialog.show(requireFragmentManager(), "Time Picker")
   }
 
   private fun initDateButton() {
@@ -86,12 +89,20 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     })
   }
 
+  private fun initTimeButton() {
+    dateTimeStore.readableTime.observe(this@AddEntryFragment, Observer { time ->
+      val timeDisplay: TextView = timeButton.findViewById(R.id.txt_time)
+      timeDisplay.text = time
+    })
+  }
+
   private fun onSaveClick() = launch {
     val day = dateTimeStore.getDay()
     val month = dateTimeStore.getMonth()
     val year = dateTimeStore.getYear()
-    val time = "Time"
+    val hour = dateTimeStore.getHour()
+    val minute = dateTimeStore.getMinute()
     val content = contentInput.text.toString()
-    viewModel.addEntry(day, month, year, time, content)
+    viewModel.addEntry(day, month, year, hour, minute, content)
   }
 }

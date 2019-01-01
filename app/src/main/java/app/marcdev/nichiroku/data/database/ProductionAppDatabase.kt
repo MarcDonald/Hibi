@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import app.marcdev.nichiroku.data.entity.Entry
 
-@Database(entities = [Entry::class], version = 2)
+@Database(entities = [Entry::class], version = 3)
 
 abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
   abstract override fun dao(): DAO

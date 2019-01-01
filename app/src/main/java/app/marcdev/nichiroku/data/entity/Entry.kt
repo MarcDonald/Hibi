@@ -8,7 +8,8 @@ data class Entry(
   var day: Int,
   var month: Int,
   var year: Int,
-  var time: String,
+  var hour: Int,
+  var minute: Int,
   var content: String
 ) {
 
