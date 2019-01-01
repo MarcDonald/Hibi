@@ -26,11 +26,11 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-      android:id="@+id/txt_main_toolbar_title"
+      android:id="@+id/txt_add_toolbar_title"
       style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/app_name"
+      android:text="@string/add_entry"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

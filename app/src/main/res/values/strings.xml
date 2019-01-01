@@ -1,6 +1,9 @@
 <resources>
   <string name="app_name">Nikki</string>
   <string name="loading_entries">Loading Entries</string>
+  <string name="add_entry">Add Entry</string>
+  <string name="edit_entry">Edit Entry</string>
+  <string name="view_entry">View Entry</string>
   <string name="back">Back</string>
   <string name="save">Save</string>
   <string name="ok">OK</string>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -36,6 +37,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var timeButton: TransparentSquareButton
   private lateinit var contentInput: EditText
   private lateinit var backConfirmDialog: YesNoDialog
+  private lateinit var toolbarTitle: TextView
 
   // Other
   private val dateTimeStore = DateTimeStore()
@@ -68,6 +70,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun bindViews(view: View) {
+    toolbarTitle = view.findViewById(R.id.txt_add_toolbar_title)
     dateButton = view.findViewById(R.id.btn_date)
     dateButton.setOnClickListener(dateClickListener)
     initDateButton()
@@ -139,6 +142,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun convertToEditMode(entryId: Int) = launch {
+    toolbarTitle.text = resources.getString(R.string.edit_entry)
     entryIdBeingEdited = entryId
     viewModel.getEntry(entryId).observe(this@AddEntryFragment, Observer { entry ->
       contentInput.setText(entry.content)
