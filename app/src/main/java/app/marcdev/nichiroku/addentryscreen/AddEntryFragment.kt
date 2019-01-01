@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.nichiroku.R
 import app.marcdev.nichiroku.internal.base.ScopedFragment
-import com.google.android.material.button.MaterialButton
+import app.marcdev.nichiroku.uicomponents.YesNoDialog
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -32,6 +30,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var dateButton: FrameLayout
   private lateinit var timeButton: FrameLayout
   private lateinit var contentInput: EditText
+  private lateinit var backConfirmDialog: YesNoDialog
 
   // Other
   private val dateTimeStore = DateTimeStore()
@@ -46,6 +45,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val view = inflater.inflate(R.layout.fragment_add_entry, container, false)
 
     bindViews(view)
+    initBackConfirmDialog()
 
     return view
   }
@@ -61,13 +61,40 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
     contentInput = view.findViewById(R.id.edt_content)
 
-    val saveButton: MaterialButton = view.findViewById(R.id.btn_save)
+    val saveButton: FrameLayout = view.findViewById(R.id.frame_save)
     saveButton.setOnClickListener(saveClickListener)
+
+    val backButton: ImageView = view.findViewById(R.id.img_add_entry_toolbar_back)
+    backButton.setOnClickListener(backClickListener)
+  }
+
+  private fun initBackConfirmDialog() {
+    backConfirmDialog = YesNoDialog()
+    backConfirmDialog.setTitle(resources.getString(R.string.warning_caps))
+    backConfirmDialog.setMessage(resources.getString(R.string.go_back_warning))
+    backConfirmDialog.setYesButton(resources.getString(R.string.ok), okBackClickListener)
+    backConfirmDialog.setNoButton(resources.getString(R.string.cancel), cancelBackClickListener)
   }
 
   private val saveClickListener = View.OnClickListener {
     onSaveClick()
-    Navigation.findNavController(it).popBackStack()
+  }
+
+  private val backClickListener = View.OnClickListener {
+    if(contentInput.text.toString().isBlank()) {
+      popBackStack()
+    } else {
+      backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
+    }
+  }
+
+  private val okBackClickListener = View.OnClickListener {
+    backConfirmDialog.dismiss()
+    popBackStack()
+  }
+
+  private val cancelBackClickListener = View.OnClickListener {
+    backConfirmDialog.dismiss()
   }
 
   private val dateClickListener = View.OnClickListener {
@@ -97,12 +124,22 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun onSaveClick() = launch {
-    val day = dateTimeStore.getDay()
-    val month = dateTimeStore.getMonth()
-    val year = dateTimeStore.getYear()
-    val hour = dateTimeStore.getHour()
-    val minute = dateTimeStore.getMinute()
     val content = contentInput.text.toString()
-    viewModel.addEntry(day, month, year, hour, minute, content)
+
+    if(content.isBlank()) {
+      Toast.makeText(requireContext(), resources.getString(R.string.empty_content_warning), Toast.LENGTH_SHORT).show()
+    } else {
+      val day = dateTimeStore.getDay()
+      val month = dateTimeStore.getMonth()
+      val year = dateTimeStore.getYear()
+      val hour = dateTimeStore.getHour()
+      val minute = dateTimeStore.getMinute()
+      viewModel.addEntry(day, month, year, hour, minute, content)
+      popBackStack()
+    }
+  }
+
+  private fun popBackStack() {
+    Navigation.findNavController(view!!).popBackStack()
   }
 }

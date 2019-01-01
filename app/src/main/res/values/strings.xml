@@ -5,9 +5,17 @@
   <string name="save">Save</string>
   <string name="ok">OK</string>
   <string name="cancel">Cancel</string>
+  <string name="title">Title</string>
+  <string name="message">Message</string>
+  <string name="positive">Positive</string>
+  <string name="negative">Negative</string>
+  <string name="warning_caps">WARNING</string>
 
   <!--Entry-->
   <string name="date">Date</string>
   <string name="time">Time</string>
   <string name="content">Content</string>
+  <string name="content_hint">What did you do today?</string>
+  <string name="empty_content_warning">Please enter something before saving</string>
+  <string name="go_back_warning">Go back and lose all unsaved progress?</string>
 </resources>

@@ -1,14 +1,32 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+  <style name="LightTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
-  <style name="AppTheme.TextAppearance.DateTimeAddEntry" parent="TextAppearance.MaterialComponents.Headline6">
+
+  <!--Text Appearances-->
+  <style name="LightTheme.TextAppearance.DateTimeAddEntry" parent="TextAppearance.MaterialComponents.Headline6">
+    <item name="android:textSize">16sp</item>
+  </style>
+
+  <style name="LightTheme.TextAppearance.ToolbarTextButton" parent="TextAppearance.MaterialComponents.Headline6">
+    <item name="android:textSize">16sp</item>
+  </style>
+
+  <style name="LightTheme.TextAppearance.YesNoDialogTitle" parent="TextAppearance.MaterialComponents.Headline5">
+    <item name="android:textSize">20sp</item>
+  </style>
+
+  <style name="LightTheme.TextAppearance.YesNoDialogMessage" parent="TextAppearance.MaterialComponents.Headline6">
+    <item name="android:textSize">18sp</item>
+  </style>
+
+  <style name="LightTheme.TextAppearance.YesNoDialogButton" parent="TextAppearance.MaterialComponents.Headline6">
     <item name="android:textSize">16sp</item>
   </style>
 
