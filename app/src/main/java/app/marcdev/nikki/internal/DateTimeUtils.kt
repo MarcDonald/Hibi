@@ -17,6 +17,16 @@ fun formatDateForDisplay(day: Int, month: Int, year: Int): String {
   return formatDateForDisplay(calendar)
 }
 
+fun formatDateForHeader(month: Int, year: Int): String {
+  val calendar = Calendar.getInstance()
+  calendar.set(Calendar.MONTH, month)
+  calendar.set(Calendar.YEAR, year)
+
+  val datePattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), "MMMMyyyy")
+  val formattedDate = DateFormat.format(datePattern, calendar)
+  return formattedDate.toString()
+}
+
 fun formatTimeForDisplay(calendar: Calendar): String {
   val timePattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), "HHmm")
   val formattedTime = DateFormat.format(timePattern, calendar)

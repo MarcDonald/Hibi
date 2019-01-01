@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.nikki.R
 import app.marcdev.nikki.internal.base.ScopedFragment
+import app.marcdev.nikki.mainscreen.mainscreenrecycler.EntriesRecyclerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
