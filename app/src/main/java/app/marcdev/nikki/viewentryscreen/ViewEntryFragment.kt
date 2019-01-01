@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import app.marcdev.nikki.R
 import app.marcdev.nikki.formatDateForDisplay
 import app.marcdev.nikki.formatTimeForDisplay
@@ -31,10 +32,9 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   lateinit var dateButton: TransparentSquareButton
   lateinit var timeButton: TransparentSquareButton
   lateinit var contentDisplay: TextView
-  lateinit var backButton: ImageView
 
   // Other
-  var entryIdBeingViewed = 0
+  private var entryIdBeingViewed = 0
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -83,7 +83,24 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   private fun bindViews(view: View) {
     dateButton = view.findViewById(R.id.btn_view_date)
     timeButton = view.findViewById(R.id.btn_view_time)
-    backButton = view.findViewById(R.id.img_view_entry_toolbar_back)
     contentDisplay = view.findViewById(R.id.txt_view_content)
+
+    val backButton: ImageView = view.findViewById(R.id.img_view_entry_toolbar_back)
+    backButton.setOnClickListener(backClickListener)
+
+    val editButton: ImageView = view.findViewById(R.id.img_edit)
+    editButton.setOnClickListener(editClickListener)
+  }
+
+  private val backClickListener = View.OnClickListener {
+    Navigation.findNavController(view!!).popBackStack()
+  }
+
+  private val editClickListener = View.OnClickListener {
+    val editEntryAction = ViewEntryFragmentDirections.editEntryAction()
+    if(entryIdBeingViewed != 0) {
+      editEntryAction.entryId = entryIdBeingViewed
+    }
+    Navigation.findNavController(it).navigate(editEntryAction)
   }
 }

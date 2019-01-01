@@ -11,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.nikki.R
+import app.marcdev.nikki.formatDateForDisplay
+import app.marcdev.nikki.formatTimeForDisplay
 import app.marcdev.nikki.internal.base.ScopedFragment
 import app.marcdev.nikki.uicomponents.TransparentSquareButton
 import app.marcdev.nikki.uicomponents.YesNoDialog
@@ -37,6 +39,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
   // Other
   private val dateTimeStore = DateTimeStore()
+  private var entryIdBeingEdited = 0
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -51,6 +54,17 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     initBackConfirmDialog()
 
     return view
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    arguments?.let {
+      val entryId = AddEntryFragmentArgs.fromBundle(it).entryId
+      if(entryId != 0) {
+        convertToEditMode(entryId)
+      }
+    }
   }
 
   private fun bindViews(view: View) {
@@ -124,6 +138,22 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     })
   }
 
+  private fun convertToEditMode(entryId: Int) = launch {
+    entryIdBeingEdited = entryId
+    viewModel.getEntry(entryId).observe(this@AddEntryFragment, Observer { entry ->
+      contentInput.setText(entry.content)
+
+      val day = entry.day
+      val month = entry.month
+      val year = entry.year
+      val hour = entry.hour
+      val minute = entry.minute
+
+      dateButton.setText(formatDateForDisplay(day, month, year))
+      timeButton.setText(formatTimeForDisplay(hour, minute))
+    })
+  }
+
   private fun onSaveClick() = launch {
     val content = contentInput.text.toString()
 
@@ -135,7 +165,13 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
       val year = dateTimeStore.getYear()
       val hour = dateTimeStore.getHour()
       val minute = dateTimeStore.getMinute()
-      viewModel.addEntry(day, month, year, hour, minute, content)
+
+      if(entryIdBeingEdited == 0) {
+        viewModel.addEntry(day, month, year, hour, minute, content)
+      } else {
+        viewModel.updateEntry(day, month, year, hour, minute, content, entryIdBeingEdited)
+      }
+
       popBackStack()
     }
   }

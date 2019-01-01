@@ -28,6 +28,10 @@
     android:id="@+id/destination_add_entry"
     android:name="app.marcdev.nikki.addentryscreen.AddEntryFragment"
     android:label="AddEntryFragment">
+    <argument
+      android:name="entryId"
+      android:defaultValue="0"
+      app:argType="integer" />
   </fragment>
 
   <fragment
@@ -38,5 +42,10 @@
       android:name="entryId"
       android:defaultValue="0"
       app:argType="integer" />
+    <action
+      android:id="@+id/edit_entry_action"
+      app:destination="@id/destination_add_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim" />
   </fragment>
 </navigation>
