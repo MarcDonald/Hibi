@@ -26,7 +26,7 @@
     <item name="android:textSize">18sp</item>
   </style>
 
-  <style name="LightTheme.TextAppearance.YesNoDialogButton" parent="TextAppearance.MaterialComponents.Headline6">
+  <style name="LightTheme.TextAppearance.TransparentSquareButton" parent="TextAppearance.MaterialComponents.Headline6">
     <item name="android:textSize">16sp</item>
   </style>
 

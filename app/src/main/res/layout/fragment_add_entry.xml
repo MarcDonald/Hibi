@@ -29,49 +29,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <FrameLayout
-          android:id="@+id/frame_date"
+        <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+          android:id="@+id/btn_date"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
-          android:background="?selectableItemBackground"
-          android:clickable="true"
-          android:focusable="true"
+          app:text="@string/date"
           app:layout_constraintEnd_toStartOf="@id/gd_date_and_time_vert_50"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent">
+          app:layout_constraintTop_toTopOf="parent" />
 
-          <TextView
-            android:id="@+id/txt_date"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_standard"
-            android:text="@string/date"
-            android:textAlignment="center"
-            android:textAppearance="@style/LightTheme.TextAppearance.DateTimeAddEntry" />
-        </FrameLayout>
-
-        <FrameLayout
-          android:id="@+id/frame_time"
+        <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+          android:id="@+id/btn_time"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
-          android:background="?attr/selectableItemBackground"
-          android:clickable="true"
-          android:focusable="true"
+          app:text="@string/time"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@id/gd_date_and_time_vert_50"
-          app:layout_constraintTop_toTopOf="parent">
-
-          <TextView
-            android:id="@+id/txt_time"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_standard"
-            android:text="@string/time"
-            android:textAlignment="center"
-            android:textAppearance="@style/LightTheme.TextAppearance.DateTimeAddEntry" />
-        </FrameLayout>
+          app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
           android:id="@+id/gd_date_and_time_vert_50"

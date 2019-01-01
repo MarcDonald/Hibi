@@ -27,48 +27,24 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/txt_yes_no_title" />
 
-  <FrameLayout
-    android:id="@+id/frame_yes_no_positive"
+  <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+    android:id="@+id/btn_yes_no_positive"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_standard"
     android:layout_margin="@dimen/margin_standard"
-    android:background="?selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/txt_yes_no_message">
+    app:layout_constraintTop_toBottomOf="@id/txt_yes_no_message"
+    app:text="@string/positive" />
 
-    <TextView
-      android:id="@+id/txt_yes_no_positive"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_margin="@dimen/margin_standard"
-      android:text="@string/positive"
-      android:textAlignment="center"
-      android:textAppearance="@style/LightTheme.TextAppearance.YesNoDialogButton" />
-  </FrameLayout>
-
-  <FrameLayout
-    android:id="@+id/frame_yes_no_negative"
+  <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+    android:id="@+id/btn_yes_no_negative"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
-    android:background="?selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/frame_yes_no_positive"
-    app:layout_constraintTop_toBottomOf="@id/txt_yes_no_message">
-
-    <TextView
-      android:id="@+id/txt_yes_no_negative"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_margin="@dimen/margin_standard"
-      android:text="@string/negative"
-      android:textAlignment="center"
-      android:textAppearance="@style/LightTheme.TextAppearance.YesNoDialogButton" />
-  </FrameLayout>
-
+    app:layout_constraintEnd_toStartOf="@id/btn_yes_no_positive"
+    app:layout_constraintTop_toBottomOf="@id/txt_yes_no_message"
+    app:text="@string/negative" />
 </androidx.constraintlayout.widget.ConstraintLayout>

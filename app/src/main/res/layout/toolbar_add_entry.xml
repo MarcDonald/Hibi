@@ -6,8 +6,7 @@
   android:layout_height="?attr/actionBarSize"
   android:orientation="vertical"
   app:contentInsetEnd="0dp"
-  app:contentInsetStart="0dp"
-  app:layout_scrollFlags="scroll|snap|enterAlways">
+  app:contentInsetStart="0dp">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -37,28 +36,15 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
-      android:id="@+id/frame_save"
-      android:background="?selectableItemBackgroundBorderless"
-      android:focusable="true"
-      android:clickable="true"
-      android:elevation="0dp"
+    <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
+      android:id="@+id/btn_save"
       android:layout_height="wrap_content"
       android:layout_width="0dp"
       android:layout_margin="@dimen/toolbar_icon_margin"
+      app:text="@string/save"
+      app:borderlessRipple="true"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent">
-
-      <TextView
-        android:id="@+id/txt_date"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_margin="@dimen/toolbar_icon_padding"
-        android:text="@string/save"
-        android:textAppearance="@style/LightTheme.TextAppearance.ToolbarTextButton"
-        android:textAlignment="center" />
-    </FrameLayout>
+      app:layout_constraintBottom_toBottomOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.appcompat.widget.Toolbar>

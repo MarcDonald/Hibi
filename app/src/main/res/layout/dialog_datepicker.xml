@@ -13,27 +13,26 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent" />
 
-  <com.google.android.material.button.MaterialButton
+  <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
     android:id="@+id/btn_datepicker_ok"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/margin_standard"
     android:layout_marginBottom="8dp"
-    android:text="@string/ok"
+    app:text="@string/ok"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@id/datepicker" />
 
-  <com.google.android.material.button.MaterialButton
+  <app.marcdev.nichiroku.uicomponents.TransparentSquareButton
     android:id="@+id/btn_datepicker_cancel"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/margin_standard"
     android:layout_marginBottom="8dp"
-    android:text="@string/cancel"
+    app:text="@string/cancel"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@id/btn_datepicker_ok"
     app:layout_constraintTop_toBottomOf="@id/datepicker" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

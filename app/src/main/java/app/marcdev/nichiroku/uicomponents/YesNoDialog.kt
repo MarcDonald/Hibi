@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import app.marcdev.nichiroku.R
@@ -12,10 +11,8 @@ import app.marcdev.nichiroku.R
 class YesNoDialog : DialogFragment() {
 
   // UI Components
-  lateinit var yesButton: FrameLayout
-  lateinit var yesButtonText: TextView
-  lateinit var noButton: FrameLayout
-  lateinit var noButtonText: TextView
+  lateinit var yesButton: TransparentSquareButton
+  lateinit var noButton: TransparentSquareButton
   lateinit var titleDisplay: TextView
   lateinit var messageDisplay: TextView
 
@@ -35,11 +32,8 @@ class YesNoDialog : DialogFragment() {
   }
 
   private fun bindViews(view: View) {
-    yesButton = view.findViewById(R.id.frame_yes_no_positive)
-    yesButtonText = view.findViewById(R.id.txt_yes_no_positive)
-
-    noButton = view.findViewById(R.id.frame_yes_no_negative)
-    noButtonText = view.findViewById(R.id.txt_yes_no_negative)
+    yesButton = view.findViewById(R.id.btn_yes_no_positive)
+    noButton = view.findViewById(R.id.btn_yes_no_negative)
 
     titleDisplay = view.findViewById(R.id.txt_yes_no_title)
     messageDisplay = view.findViewById(R.id.txt_yes_no_message)
@@ -55,11 +49,11 @@ class YesNoDialog : DialogFragment() {
     }
 
     if(yesText.isNotBlank()) {
-      yesButtonText.text = yesText
+      yesButton.setText(yesText)
     }
 
     if(noText.isNotBlank()) {
-      noButtonText.text = noText
+      noButton.setText(noText)
     }
 
     if(yesClickListener != null) {

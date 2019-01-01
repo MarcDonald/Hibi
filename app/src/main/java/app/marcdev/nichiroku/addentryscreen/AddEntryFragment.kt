@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.nichiroku.R
 import app.marcdev.nichiroku.internal.base.ScopedFragment
+import app.marcdev.nichiroku.uicomponents.TransparentSquareButton
 import app.marcdev.nichiroku.uicomponents.YesNoDialog
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -27,8 +30,8 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var viewModel: AddEntryViewModel
 
   // UI Components
-  private lateinit var dateButton: FrameLayout
-  private lateinit var timeButton: FrameLayout
+  private lateinit var dateButton: TransparentSquareButton
+  private lateinit var timeButton: TransparentSquareButton
   private lateinit var contentInput: EditText
   private lateinit var backConfirmDialog: YesNoDialog
 
@@ -51,17 +54,17 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun bindViews(view: View) {
-    dateButton = view.findViewById(R.id.frame_date)
+    dateButton = view.findViewById(R.id.btn_date)
     dateButton.setOnClickListener(dateClickListener)
     initDateButton()
 
-    timeButton = view.findViewById(R.id.frame_time)
+    timeButton = view.findViewById(R.id.btn_time)
     timeButton.setOnClickListener(timeClickListener)
     initTimeButton()
 
     contentInput = view.findViewById(R.id.edt_content)
 
-    val saveButton: FrameLayout = view.findViewById(R.id.frame_save)
+    val saveButton: TransparentSquareButton = view.findViewById(R.id.btn_save)
     saveButton.setOnClickListener(saveClickListener)
 
     val backButton: ImageView = view.findViewById(R.id.img_add_entry_toolbar_back)
@@ -111,15 +114,13 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
   private fun initDateButton() {
     dateTimeStore.readableDate.observe(this@AddEntryFragment, Observer { date ->
-      val dateDisplay: TextView = dateButton.findViewById(R.id.txt_date)
-      dateDisplay.text = date
+      dateButton.setText(date)
     })
   }
 
   private fun initTimeButton() {
     dateTimeStore.readableTime.observe(this@AddEntryFragment, Observer { time ->
-      val timeDisplay: TextView = timeButton.findViewById(R.id.txt_time)
-      timeDisplay.text = time
+      timeButton.setText(time)
     })
   }
 

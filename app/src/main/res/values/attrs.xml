@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="TransparentSquareButton">
+    <attr name="text" format="string" />
+    <attr name="borderlessRipple" format="boolean" />
+  </declare-styleable>
+</resources>

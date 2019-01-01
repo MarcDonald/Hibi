@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <FrameLayout
+    android:id="@+id/frame_transparent_square_button"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+      android:id="@+id/txt_transparent_square_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_standard"
+      android:layout_gravity="center"
+      android:text="@string/message"
+      android:textAlignment="center"
+      android:textAppearance="@style/LightTheme.TextAppearance.TransparentSquareButton" />
+  </FrameLayout>
+</merge>

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import app.marcdev.nichiroku.R
-import com.google.android.material.button.MaterialButton
+import app.marcdev.nichiroku.uicomponents.TransparentSquareButton
 import timber.log.Timber
 
 class TimePickerDialog : DialogFragment() {
@@ -34,10 +34,10 @@ class TimePickerDialog : DialogFragment() {
       Timber.e("Log: bindViews: dateTimeStore is null")
     }
 
-    val cancelButton: MaterialButton = view.findViewById(R.id.btn_timepicker_cancel)
+    val cancelButton: TransparentSquareButton = view.findViewById(R.id.btn_timepicker_cancel)
     cancelButton.setOnClickListener(cancelOnClickListener)
 
-    val okButton: MaterialButton = view.findViewById(R.id.btn_timepicker_ok)
+    val okButton: TransparentSquareButton = view.findViewById(R.id.btn_timepicker_ok)
     okButton.setOnClickListener(okOnClickListener)
   }
 
