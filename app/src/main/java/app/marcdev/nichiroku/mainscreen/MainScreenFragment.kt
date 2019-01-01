@@ -42,7 +42,7 @@ class MainScreenFragment : ScopedFragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.d("Log: onCreateView: Started")
+    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_main_screen, container, false)
 
     bindViews(view)

@@ -3,6 +3,8 @@
   <string name="loading_entries">Loading Entries</string>
   <string name="back">Back</string>
   <string name="save">Save</string>
+  <string name="ok">OK</string>
+  <string name="cancel">Cancel</string>
 
   <!--Entry-->
   <string name="date">Date</string>

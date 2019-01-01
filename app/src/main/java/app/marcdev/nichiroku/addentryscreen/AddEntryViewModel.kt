@@ -6,7 +6,7 @@ import app.marcdev.nichiroku.data.repository.EntryRepository
 
 class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewModel() {
 
-  suspend fun addEntry(date: String, time: String, content: String) {
-    entryRepository.addEntry(Entry(date, time, content))
+  suspend fun addEntry(day: Int, month: Int, year: Int, time: String, content: String) {
+    entryRepository.addEntry(Entry(day, month, year, time, content))
   }
 }

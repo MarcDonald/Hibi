@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.nichiroku.R
 import app.marcdev.nichiroku.data.entity.Entry
+import app.marcdev.nichiroku.formatDateForDisplay
 
 class EntriesRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -17,7 +18,7 @@ class EntriesRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
   private var contentDisplay: TextView = itemView.findViewById(R.id.item_content)
 
   fun display(entry: Entry) {
-    dateDisplay.text = entry.date
+    dateDisplay.text = formatDateForDisplay(entry.day, entry.month, entry.year)
     timeDisplay.text = entry.time
     contentDisplay.text = entry.content
     this.displayedEntry = entry

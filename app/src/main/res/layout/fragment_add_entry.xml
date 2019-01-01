@@ -9,35 +9,71 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
-      android:id="@+id/edt_date"
+    <FrameLayout
+      android:id="@+id/frame_date"
+      android:background="?selectableItemBackground"
+      android:focusable="true"
+      android:clickable="true"
+      android:elevation="0dp"
       android:layout_height="wrap_content"
-      android:layout_width="match_parent"
-      android:hint="@string/date"
+      android:layout_width="0dp"
       android:layout_margin="@dimen/margin_standard"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/gd_add_entry_vert_50">
 
-    <EditText
-      android:id="@+id/edt_time"
+      <TextView
+        android:id="@+id/txt_date"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/date"
+        android:textAppearance="@style/AppTheme.TextAppearance.DateTimeAddEntry"
+        android:textAlignment="center" />
+    </FrameLayout>
+
+    <FrameLayout
+      android:id="@+id/frame_time"
+      android:background="?attr/selectableItemBackground"
+      android:focusable="true"
+      android:clickable="true"
       android:layout_height="wrap_content"
-      android:layout_width="match_parent"
-      android:hint="@string/time"
+      android:layout_width="0dp"
       android:layout_margin="@dimen/margin_standard"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/edt_date" />
+      app:layout_constraintStart_toEndOf="@id/gd_add_entry_vert_50"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toEndOf="parent">
+
+      <TextView
+        android:id="@+id/txt_time"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/time"
+        android:textAppearance="@style/AppTheme.TextAppearance.DateTimeAddEntry"
+        android:textAlignment="center" />
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/gd_add_entry_vert_50"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.5" />
 
     <EditText
       android:id="@+id/edt_content"
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
       android:hint="@string/content"
+      android:inputType="textCapSentences"
       android:layout_margin="@dimen/margin_standard"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/edt_time" />
+      app:layout_constraintTop_toBottomOf="@id/frame_date" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/btn_save"
+      android:background="@android:color/transparent"
       android:text="@string/save"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

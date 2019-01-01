@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.nichiroku.R
 import app.marcdev.nichiroku.internal.base.ScopedFragment
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 class AddEntryFragment : ScopedFragment(), KodeinAware {
 
@@ -25,9 +29,12 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var viewModel: AddEntryViewModel
 
   // UI Components
-  private lateinit var dateInput: EditText
-  private lateinit var timeInput: EditText
+  private lateinit var dateButton: FrameLayout
+  private lateinit var timeButton: FrameLayout
   private lateinit var contentInput: EditText
+
+  // Other
+  private val dateTimeStore = DateTimeStore()
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -35,6 +42,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_add_entry, container, false)
 
     bindViews(view)
@@ -43,10 +51,16 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun bindViews(view: View) {
-    dateInput = view.findViewById(R.id.edt_date)
-    timeInput = view.findViewById(R.id.edt_time)
+    dateButton = view.findViewById(R.id.frame_date)
+    dateButton.setOnClickListener(dateClickListener)
+    initDateButton()
+
+    timeButton = view.findViewById(R.id.frame_time)
+    timeButton.setOnClickListener(timeClickListener)
+
     contentInput = view.findViewById(R.id.edt_content)
-    val saveButton: Button = view.findViewById(R.id.btn_save)
+
+    val saveButton: MaterialButton = view.findViewById(R.id.btn_save)
     saveButton.setOnClickListener(saveClickListener)
   }
 
@@ -55,10 +69,29 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     Navigation.findNavController(it).popBackStack()
   }
 
+  private val dateClickListener = View.OnClickListener {
+    val dateDialog = DatePickerDialog()
+    dateDialog.bindDateTimeStore(dateTimeStore)
+    dateDialog.show(requireFragmentManager(), "Date Picker")
+  }
+
+  private val timeClickListener = View.OnClickListener {
+    // TODO open time picker
+  }
+
+  private fun initDateButton() {
+    dateTimeStore.readableDate.observe(this@AddEntryFragment, Observer { date ->
+      val dateDisplay: TextView = dateButton.findViewById(R.id.txt_date)
+      dateDisplay.text = date
+    })
+  }
+
   private fun onSaveClick() = launch {
-    val date = dateInput.text.toString()
-    val time = timeInput.text.toString()
+    val day = dateTimeStore.getDay()
+    val month = dateTimeStore.getMonth()
+    val year = dateTimeStore.getYear()
+    val time = "Time"
     val content = contentInput.text.toString()
-    viewModel.addEntry(date, time, content)
+    viewModel.addEntry(day, month, year, time, content)
   }
 }
