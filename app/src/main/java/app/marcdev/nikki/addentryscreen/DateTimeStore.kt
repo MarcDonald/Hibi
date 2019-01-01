@@ -1,8 +1,8 @@
 package app.marcdev.nikki.addentryscreen
 
 import androidx.lifecycle.MutableLiveData
-import app.marcdev.nikki.formatDateForDisplay
-import app.marcdev.nikki.formatTimeForDisplay
+import app.marcdev.nikki.internal.formatDateForDisplay
+import app.marcdev.nikki.internal.formatTimeForDisplay
 import java.util.*
 
 

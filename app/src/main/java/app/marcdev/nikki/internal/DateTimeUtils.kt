@@ -1,4 +1,4 @@
-package app.marcdev.nikki
+package app.marcdev.nikki.internal
 
 import android.text.format.DateFormat
 import java.util.*

@@ -6,8 +6,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.nikki.R
 import app.marcdev.nikki.data.entity.Entry
-import app.marcdev.nikki.formatDateForDisplay
-import app.marcdev.nikki.formatTimeForDisplay
+import app.marcdev.nikki.internal.formatDateForDisplay
+import app.marcdev.nikki.internal.formatTimeForDisplay
 
 class EntriesRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

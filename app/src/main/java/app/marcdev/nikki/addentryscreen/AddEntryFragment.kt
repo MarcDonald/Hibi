@@ -12,9 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.nikki.R
-import app.marcdev.nikki.formatDateForDisplay
-import app.marcdev.nikki.formatTimeForDisplay
 import app.marcdev.nikki.internal.base.ScopedFragment
+import app.marcdev.nikki.internal.formatDateForDisplay
+import app.marcdev.nikki.internal.formatTimeForDisplay
 import app.marcdev.nikki.uicomponents.TransparentSquareButton
 import app.marcdev.nikki.uicomponents.YesNoDialog
 import kotlinx.coroutines.launch

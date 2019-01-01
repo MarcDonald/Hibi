@@ -78,7 +78,8 @@ class MainScreenFragment : ScopedFragment(), KodeinAware {
   private fun displayRecyclerData() = launch {
     val allEntries = viewModel.allEntries.await()
     allEntries.observe(this@MainScreenFragment, Observer { entries ->
-      recyclerAdapter.updateList(entries)
+      val sortedEntries = viewModel.sortEntries(entries)
+      recyclerAdapter.updateList(sortedEntries)
 
       if(loadingDisplay.visibility == View.VISIBLE) {
         loadingDisplay.visibility = View.GONE
