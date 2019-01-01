@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.nikki.R
 import app.marcdev.nikki.internal.base.ScopedFragment
+import app.marcdev.nikki.mainscreen.mainscreenrecycler.EntriesRecyclerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -31,7 +33,8 @@ class MainScreenFragment : ScopedFragment(), KodeinAware {
   private lateinit var viewModel: MainScreenViewModel
 
   // UI Components
-  lateinit var loadingDisplay: ConstraintLayout
+  private lateinit var loadingDisplay: ConstraintLayout
+  private lateinit var fab: FloatingActionButton
 
   // RecyclerView
   private lateinit var recyclerAdapter: EntriesRecyclerAdapter
@@ -53,8 +56,22 @@ class MainScreenFragment : ScopedFragment(), KodeinAware {
 
   private fun bindViews(view: View) {
     loadingDisplay = view.findViewById(R.id.const_entries_loading)
-    val fab: FloatingActionButton = view.findViewById(R.id.fab_main)
+
+    fab = view.findViewById(R.id.fab_main)
     fab.setOnClickListener(fabClickListener)
+
+    val scrollView: NestedScrollView = view.findViewById(R.id.scroll_main)
+    scrollView.setOnScrollChangeListener(mainOnScrollChangeListener)
+  }
+
+  private var mainOnScrollChangeListener = { _: View, _: Int, scrollY: Int, _: Int, oldScrollY: Int -> hideFabOnScroll(scrollY, oldScrollY) }
+
+  private fun hideFabOnScroll(scrollY: Int, oldScrollY: Int) {
+    if(scrollY > oldScrollY) {
+      fab.hide()
+    } else {
+      fab.show()
+    }
   }
 
   private val fabClickListener = View.OnClickListener {
@@ -78,7 +95,8 @@ class MainScreenFragment : ScopedFragment(), KodeinAware {
   private fun displayRecyclerData() = launch {
     val allEntries = viewModel.allEntries.await()
     allEntries.observe(this@MainScreenFragment, Observer { entries ->
-      recyclerAdapter.updateList(entries)
+      val sortedEntries = viewModel.sortEntries(entries)
+      recyclerAdapter.updateList(sortedEntries)
 
       if(loadingDisplay.visibility == View.VISIBLE) {
         loadingDisplay.visibility = View.GONE

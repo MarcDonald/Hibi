@@ -1,4 +1,4 @@
-package app.marcdev.nikki
+package app.marcdev.nikki.internal
 
 import android.text.format.DateFormat
 import java.util.*
@@ -15,6 +15,16 @@ fun formatDateForDisplay(day: Int, month: Int, year: Int): String {
   calendar.set(Calendar.MONTH, month)
   calendar.set(Calendar.YEAR, year)
   return formatDateForDisplay(calendar)
+}
+
+fun formatDateForHeader(month: Int, year: Int): String {
+  val calendar = Calendar.getInstance()
+  calendar.set(Calendar.MONTH, month)
+  calendar.set(Calendar.YEAR, year)
+
+  val datePattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), "MMMMyyyy")
+  val formattedDate = DateFormat.format(datePattern, calendar)
+  return formattedDate.toString()
 }
 
 fun formatTimeForDisplay(calendar: Calendar): String {
