@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -14,6 +15,7 @@ import app.marcdev.nikki.R
 import app.marcdev.nikki.internal.base.ScopedFragment
 import app.marcdev.nikki.internal.formatDateForDisplay
 import app.marcdev.nikki.internal.formatTimeForDisplay
+import app.marcdev.nikki.searchscreen.SearchResultsDialog
 import app.marcdev.nikki.uicomponents.TransparentSquareButton
 import app.marcdev.nikki.uicomponents.YesNoDialog
 import kotlinx.coroutines.launch
@@ -30,10 +32,11 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var viewModel: ViewEntryViewModel
 
   // UI Components
-  lateinit var dateButton: TransparentSquareButton
-  lateinit var timeButton: TransparentSquareButton
-  lateinit var contentDisplay: TextView
-  lateinit var deleteConfirmDialog: YesNoDialog
+  private lateinit var dateButton: TransparentSquareButton
+  private lateinit var timeButton: TransparentSquareButton
+  private lateinit var contentDisplay: TextView
+  private lateinit var deleteConfirmDialog: YesNoDialog
+  private lateinit var searchBar: EditText
 
   // Other
   private var entryIdBeingViewed = 0
@@ -87,6 +90,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
     dateButton = view.findViewById(R.id.btn_view_date)
     timeButton = view.findViewById(R.id.btn_view_time)
     contentDisplay = view.findViewById(R.id.txt_view_content)
+    searchBar = view.findViewById(R.id.edt_search_bar)
 
     val backButton: ImageView = view.findViewById(R.id.img_view_entry_toolbar_back)
     backButton.setOnClickListener(backClickListener)
@@ -96,6 +100,9 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
 
     val deleteButton: ImageView = view.findViewById(R.id.img_delete)
     deleteButton.setOnClickListener(deleteClickListener)
+
+    val searchButton: ImageView = view.findViewById(R.id.img_search_button)
+    searchButton.setOnClickListener(searchClickListener)
   }
 
   private val backClickListener = View.OnClickListener {
@@ -112,6 +119,22 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
 
   private val deleteClickListener = View.OnClickListener {
     deleteConfirmDialog.show(requireFragmentManager(), "Delete Confirmation Dialog")
+  }
+
+  private val searchClickListener = View.OnClickListener {
+    val searchTerm = searchBar.text.toString()
+    if(searchTerm.isNotBlank()) {
+      val args = Bundle()
+      args.putString("searchTerm", searchBar.text.toString())
+
+      val searchDialog = SearchResultsDialog()
+      searchDialog.arguments = args
+
+      searchDialog.show(requireFragmentManager(), "View Entry Search")
+      searchBar.setText("")
+    } else {
+      Toast.makeText(requireContext(), resources.getString(R.string.no_search_term_warning), Toast.LENGTH_SHORT).show()
+    }
   }
 
   private fun initDeleteConfirmDialog() {

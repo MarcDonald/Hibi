@@ -16,7 +16,8 @@
   <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="?attr/actionBarSize">
+    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_marginBottom="@dimen/search_bar_height">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -70,13 +71,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/fab_add_entry_search"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:fabSize="normal"
-    android:layout_marginEnd="@dimen/fab_margin"
-    android:layout_marginBottom="@dimen/fab_margin"
-    android:src="@drawable/ic_search_black_24dp"
-    android:layout_gravity="bottom|end" />
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar_layout_add_entry_option_bar"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/search_bar_height"
+    android:layout_gravity="bottom">
+
+    <include layout="@layout/include_search_bar" />
+  </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

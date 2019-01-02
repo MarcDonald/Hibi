@@ -2,7 +2,6 @@
 <Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="@dimen/add_entry_bottom_bar_height"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:contentInsetStart="0dp">
 
   <LinearLayout
@@ -10,85 +9,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/const_search"
-      android:layout_marginStart="@dimen/margin_standard"
-      android:layout_marginEnd="@dimen/margin_standard"
-      android:layout_marginTop="@dimen/margin_standard"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+    <include layout="@layout/include_search_bar" />
 
-      <EditText
-        android:id="@+id/edt_search_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_standard"
-        android:hint="@string/search_bar_hint"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/img_search_button"
-        app:layout_constraintStart_toStartOf="parent" />
-
-      <ImageView
-        android:id="@+id/img_search_button"
-        android:layout_width="@dimen/toolbar_icon_size"
-        android:layout_height="@dimen/toolbar_icon_size"
-        android:layout_marginBottom="@dimen/margin_standard"
-        android:layout_marginEnd="@dimen/margin_standard"
-        android:background="?selectableItemBackgroundBorderless"
-        android:contentDescription="@string/search_bar_hint"
-        android:src="@drawable/ic_search_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/const_option_bar"
-      android:background="@color/colorPrimary"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-
-      <ImageView
-        android:id="@+id/placeholder1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/placeholder2"
-        android:layout_margin="@dimen/margin_standard"
-        android:src="@drawable/ic_add_black_24dp" />
-
-      <ImageView
-        android:id="@+id/placeholder2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintStart_toEndOf="@id/placeholder1"
-        app:layout_constraintEnd_toStartOf="@id/placeholder3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="@dimen/margin_standard"
-        android:src="@drawable/ic_add_black_24dp" />
-
-      <ImageView
-        android:id="@+id/placeholder3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintStart_toEndOf="@id/placeholder2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="@dimen/margin_standard"
-        android:src="@drawable/ic_add_black_24dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/include_option_bar" />
   </LinearLayout>
 </Toolbar>
