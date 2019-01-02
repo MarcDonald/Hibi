@@ -27,4 +27,7 @@
   <string name="edit">Edit</string>
   <string name="delete">Delete</string>
 
+  <!--Search-->
+  <string name="search_bar_hint">Search on Jisho.org</string>
+
 </resources>
