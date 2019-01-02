@@ -8,4 +8,5 @@
   <dimen name="option_bar_height">32dp</dimen>
   <dimen name="search_fab_bottom_margin">48dp</dimen>
   <dimen name="no_connection_icon_size">48dp</dimen>
+  <dimen name="search_bar_height">40dp</dimen>
 </resources>

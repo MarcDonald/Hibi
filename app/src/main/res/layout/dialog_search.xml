@@ -1,39 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:orientation="vertical"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:orientation="vertical">
 
-  <ImageView
-    android:id="@+id/img_search_close"
-    android:layout_width="@dimen/toolbar_icon_size"
-    android:layout_height="@dimen/toolbar_icon_size"
-    android:layout_margin="@dimen/margin_standard"
-    android:src="@drawable/ic_close_black_24dp"
-    android:contentDescription="@string/close"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toEndOf="parent" />
-
-  <TextView
-    android:id="@+id/txt_results_word"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Word"
-    app:layout_constraintTop_toBottomOf="@id/img_search_close"
-    app:layout_constraintBottom_toTopOf="@id/txt_results_reading"
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_search_results"
+    android:layout_width="250dp"
+    android:layout_height="350dp"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:layout_marginBottom="@dimen/search_bar_height"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent" />
-
-  <TextView
-    android:id="@+id/txt_results_reading"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Reading"
-    app:layout_constraintTop_toBottomOf="@id/img_search_close"
-    app:layout_constraintBottom_toTopOf="@id/edt_search_bar"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent" />
+    app:layout_constraintTop_toTopOf="parent" />
 
   <ProgressBar
     android:id="@+id/prog_search_results"
@@ -48,45 +30,54 @@
     android:id="@+id/lin_search_no_connection"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     app:layout_constraintBottom_toTopOf="@id/prog_search_results"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    android:orientation="vertical">
+    app:layout_constraintStart_toStartOf="parent">
 
     <ImageView
       android:layout_width="@dimen/no_connection_icon_size"
       android:layout_height="@dimen/no_connection_icon_size"
+      android:layout_gravity="center"
       android:layout_margin="@dimen/margin_standard"
-      android:src="@drawable/ic_signal_wifi_off_black_24dp"
       android:contentDescription="@string/no_connection_warning"
-      android:layout_gravity="center" />
+      android:src="@drawable/ic_signal_wifi_off_black_24dp" />
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/no_connection_warning"
-      android:layout_gravity="center" />
+      android:layout_gravity="center"
+      android:text="@string/no_connection_warning" />
   </LinearLayout>
+
+  <ImageView
+    android:id="@+id/img_search_close"
+    android:layout_width="@dimen/toolbar_icon_size"
+    android:layout_height="@dimen/toolbar_icon_size"
+    android:contentDescription="@string/search_bar_hint"
+    android:src="@drawable/ic_close_black_24dp"
+    android:background="?selectableItemBackgroundBorderless"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
 
   <EditText
     android:id="@+id/edt_search_bar"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_standard"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/search_bar_height"
+    android:layout_marginEnd="@dimen/margin_standard"
     android:hint="@string/search_bar_hint"
     android:inputType="text"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/img_search_button" />
+    app:layout_constraintEnd_toStartOf="@id/img_search_button"
+    app:layout_constraintStart_toEndOf="@id/img_search_close" />
 
   <ImageView
     android:id="@+id/img_search_button"
     android:layout_width="@dimen/toolbar_icon_size"
     android:layout_height="@dimen/toolbar_icon_size"
-    android:layout_margin="@dimen/margin_standard"
-    android:src="@drawable/ic_search_black_24dp"
     android:contentDescription="@string/search_bar_hint"
+    android:src="@drawable/ic_search_black_24dp"
+    android:background="?selectableItemBackgroundBorderless"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
