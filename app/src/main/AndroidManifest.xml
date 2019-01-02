@@ -3,6 +3,9 @@
   xmlns:tools="http://schemas.android.com/tools"
   package="app.marcdev.nikki">
 
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
   <application
     android:name="app.marcdev.nikki.Nikki"
     android:allowBackup="false"
