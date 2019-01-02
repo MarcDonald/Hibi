@@ -28,6 +28,7 @@ class SearchScreenDialog : ScopedDialogFragment(), KodeinAware {
   private lateinit var resultsWord: TextView
   private lateinit var resultsReading: TextView
   private lateinit var progressBar: ProgressBar
+  private lateinit var noConnectionWarning: LinearLayout
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -55,8 +56,14 @@ class SearchScreenDialog : ScopedDialogFragment(), KodeinAware {
     resultsReading = view.findViewById(R.id.txt_results_reading)
     resultsReading.visibility = View.GONE
 
+    noConnectionWarning = view.findViewById(R.id.lin_search_no_connection)
+    noConnectionWarning.visibility = View.GONE
+
     val searchButton: ImageView = view.findViewById(R.id.img_search_button)
     searchButton.setOnClickListener(searchClickListener)
+
+    val closeButton: ImageView = view.findViewById(R.id.img_search_close)
+    closeButton.setOnClickListener(closeClickListener)
   }
 
   private val searchClickListener = View.OnClickListener {
@@ -67,24 +74,40 @@ class SearchScreenDialog : ScopedDialogFragment(), KodeinAware {
     }
   }
 
+  private val closeClickListener = View.OnClickListener {
+    dismiss()
+  }
+
   private fun search() = launch {
     progressBar.visibility = View.VISIBLE
+    noConnectionWarning.visibility = View.GONE
     resultsWord.visibility = View.GONE
     resultsReading.visibility = View.GONE
 
-    val response = viewModel.searchTerm(searchBar.text.toString()).await()
+    val response = viewModel.searchTerm(searchBar.text.toString())
 
-    if(response.data.isNotEmpty()) {
-      if(response.data[0].japanese.isNotEmpty()) {
-        resultsReading.text = "Reading: ${response.data[0].japanese[0].reading}"
-        resultsWord.text = "Word: ${response.data[0].japanese[0].word}"
-      }
+    if(response == null) {
+      noConnectionWarning.visibility = View.VISIBLE
+      progressBar.visibility = View.GONE
     } else {
-      resultsReading.text = "Null Result"
-      resultsWord.text = "Null Result"
+      if(response.data.isNotEmpty()) {
+        if(response.data[0].japanese.isNotEmpty()) {
+          resultsReading.text = "Reading: ${response.data[0].japanese[0].reading}"
+          resultsWord.text = "Word: ${response.data[0].japanese[0].word}"
+        }
+      } else {
+        resultsReading.text = "Null Result"
+        resultsWord.text = "Null Result"
+      }
+      noConnectionWarning.visibility = View.GONE
+      progressBar.visibility = View.GONE
+      resultsReading.visibility = View.VISIBLE
+      resultsWord.visibility = View.VISIBLE
     }
-    progressBar.visibility = View.GONE
-    resultsReading.visibility = View.VISIBLE
-    resultsWord.visibility = View.VISIBLE
+  }
+
+  override fun dismiss() {
+    super.dismiss()
+    searchBar.setText("")
   }
 }

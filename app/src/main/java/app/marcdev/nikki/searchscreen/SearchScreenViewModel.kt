@@ -1,13 +1,17 @@
 package app.marcdev.nikki.searchscreen
 
 import androidx.lifecycle.ViewModel
-import app.marcdev.nikki.data.JishoAPIService
-import app.marcdev.nikki.data.apiresponse.SearchResponse
-import kotlinx.coroutines.Deferred
+import app.marcdev.nikki.data.network.JishoAPIService
+import app.marcdev.nikki.data.network.apiresponse.SearchResponse
+import app.marcdev.nikki.internal.NoConnectivityException
 
 class SearchScreenViewModel(private val apiService: JishoAPIService) : ViewModel() {
 
-  fun searchTerm(searchTerm: String): Deferred<SearchResponse> {
-    return apiService.searchWord(searchTerm)
+  suspend fun searchTerm(searchTerm: String): SearchResponse? {
+    return try {
+      apiService.searchTerm(searchTerm).await()
+    } catch(e: NoConnectivityException) {
+      null
+    }
   }
 }

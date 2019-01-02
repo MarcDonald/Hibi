@@ -16,6 +16,7 @@
   <string name="generic_error">An error occurred</string>
   <string name="delete_confirm_title">DELETE ENTRY</string>
   <string name="delete_confirm">Are you sure you want to delete this entry?</string>
+  <string name="close">Close</string>
 
   <!--Entry-->
   <string name="date">Date</string>
@@ -29,5 +30,6 @@
 
   <!--Search-->
   <string name="search_bar_hint">Search on Jisho.org</string>
+  <string name="no_connection_warning">No Internet Connection</string>
 
 </resources>

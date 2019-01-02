@@ -2,7 +2,7 @@ package app.marcdev.nikki.searchscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import app.marcdev.nikki.data.JishoAPIService
+import app.marcdev.nikki.data.network.JishoAPIService
 
 class SearchScreenViewModelFactory(private val apiService: JishoAPIService)
   : ViewModelProvider.NewInstanceFactory() {

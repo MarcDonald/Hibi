@@ -1,4 +1,4 @@
-package app.marcdev.nikki.data.apiresponse
+package app.marcdev.nikki.data.network.apiresponse
 
 import com.google.gson.annotations.SerializedName
 
