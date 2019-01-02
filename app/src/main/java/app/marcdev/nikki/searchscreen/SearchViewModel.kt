@@ -5,7 +5,7 @@ import app.marcdev.nikki.data.network.JishoAPIService
 import app.marcdev.nikki.data.network.apiresponse.SearchResponse
 import app.marcdev.nikki.internal.NoConnectivityException
 
-class SearchScreenViewModel(private val apiService: JishoAPIService) : ViewModel() {
+class SearchViewModel(private val apiService: JishoAPIService) : ViewModel() {
 
   suspend fun searchTerm(searchTerm: String): SearchResponse? {
     return try {

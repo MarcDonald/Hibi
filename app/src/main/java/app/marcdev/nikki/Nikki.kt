@@ -11,7 +11,7 @@ import app.marcdev.nikki.data.network.JishoAPIService
 import app.marcdev.nikki.data.repository.EntryRepository
 import app.marcdev.nikki.data.repository.EntryRepositoryImpl
 import app.marcdev.nikki.mainscreen.MainScreenViewModelFactory
-import app.marcdev.nikki.searchscreen.SearchScreenViewModelFactory
+import app.marcdev.nikki.searchscreen.SearchViewModelFactory
 import app.marcdev.nikki.viewentryscreen.ViewEntryViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -35,7 +35,7 @@ class Nikki : Application(), KodeinAware {
     bind() from provider { MainScreenViewModelFactory(instance()) }
     bind() from provider { AddEntryViewModelFactory(instance()) }
     bind() from provider { ViewEntryViewModelFactory(instance()) }
-    bind() from provider { SearchScreenViewModelFactory(instance()) }
+    bind() from provider { SearchViewModelFactory(instance()) }
   }
 
   override fun onCreate() {

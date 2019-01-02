@@ -17,7 +17,8 @@
   <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="?attr/actionBarSize">
+    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_marginBottom="@dimen/add_entry_bottom_bar_height">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -33,20 +34,20 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
-          app:text="@string/date"
           app:layout_constraintEnd_toStartOf="@id/gd_date_and_time_vert_50"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+          app:layout_constraintTop_toTopOf="parent"
+          app:text="@string/date" />
 
         <app.marcdev.nikki.uicomponents.TransparentSquareButton
           android:id="@+id/btn_time"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
-          app:text="@string/time"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@id/gd_date_and_time_vert_50"
-          app:layout_constraintTop_toTopOf="parent" />
+          app:layout_constraintTop_toTopOf="parent"
+          app:text="@string/time" />
 
         <androidx.constraintlayout.widget.Guideline
           android:id="@+id/gd_date_and_time_vert_50"
@@ -71,22 +72,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/fab_add_entry_search"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:fabSize="normal"
-    android:layout_marginEnd="@dimen/fab_margin"
-    android:layout_marginBottom="@dimen/search_fab_bottom_margin"
-    android:src="@drawable/ic_search_black_24dp"
-    android:layout_gravity="bottom|end" />
-
   <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/app_bar_layout_add_entry_option_bar"
+    android:background="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/option_bar_height"
+    android:layout_height="@dimen/add_entry_bottom_bar_height"
     android:layout_gravity="bottom">
 
-    <include layout="@layout/include_option_bar" />
+    <include layout="@layout/include_add_entry_bottom_bar" />
   </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

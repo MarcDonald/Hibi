@@ -6,34 +6,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.nikki.R
-import app.marcdev.nikki.internal.base.ScopedDialogFragment
+import app.marcdev.nikki.internal.base.ScopedBottomSheetDialogFragment
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class SearchScreenDialog : ScopedDialogFragment(), KodeinAware {
+class SearchResultsDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
 
   // Kodein initialisation
   override val kodein by closestKodein()
 
   // Viewmodel
-  private val viewModelFactory: SearchScreenViewModelFactory by instance()
-  private lateinit var viewModel: SearchScreenViewModel
+  private val viewModelFactory: SearchViewModelFactory by instance()
+  private lateinit var viewModel: SearchViewModel
 
   // UI Components
-  private lateinit var searchBar: EditText
   private lateinit var progressBar: ProgressBar
   private lateinit var noConnectionWarning: LinearLayout
-  private lateinit var searchButton: ImageView
-  private lateinit var closeButton: ImageView
 
   // Recycler
   private lateinit var recyclerAdapter: SearchResultsRecyclerAdapter
@@ -41,7 +39,7 @@ class SearchScreenDialog : ScopedDialogFragment(), KodeinAware {
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchScreenViewModel::class.java)
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,23 +52,24 @@ class SearchScreenDialog : ScopedDialogFragment(), KodeinAware {
     return view
   }
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    arguments?.let {
+      val searchTerm = arguments!!.getString("searchTerm", "")
+      search(searchTerm)
+    }
+  }
+
   private fun bindViews(view: View) {
     recycler = view.findViewById(R.id.recycler_search_results)
     recycler.visibility = View.GONE
-
-    searchBar = view.findViewById(R.id.edt_search_bar)
 
     progressBar = view.findViewById(R.id.prog_search_results)
     progressBar.visibility = View.GONE
 
     noConnectionWarning = view.findViewById(R.id.lin_search_no_connection)
     noConnectionWarning.visibility = View.GONE
-
-    searchButton = view.findViewById(R.id.img_search_button)
-    searchButton.setOnClickListener(searchClickListener)
-
-    closeButton = view.findViewById(R.id.img_search_close)
-    closeButton.setOnClickListener(closeClickListener)
   }
 
   private fun initRecycler() {
@@ -83,26 +82,13 @@ class SearchScreenDialog : ScopedDialogFragment(), KodeinAware {
     recycler.addItemDecoration(dividerItemDecoration)
   }
 
-  private val searchClickListener = View.OnClickListener {
-    if(searchBar.text.toString().isNotBlank()) {
-      search()
-    } else {
-      Toast.makeText(requireContext(), "Enter something first", Toast.LENGTH_SHORT).show()
-    }
-  }
-
-  private val closeClickListener = View.OnClickListener {
-    searchBar.setText("")
-    dismiss()
-  }
-
-  private fun search() = launch {
+  private fun search(searchTerm: String) = launch {
     val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(view!!.windowToken, 0)
 
     displayLoading(true)
 
-    val response = viewModel.searchTerm(searchBar.text.toString())
+    val response = viewModel.searchTerm(searchTerm)
 
     if(response == null) {
       displayLoading(false)
@@ -121,16 +107,10 @@ class SearchScreenDialog : ScopedDialogFragment(), KodeinAware {
     if(isLoading) {
       progressBar.visibility = View.VISIBLE
       recycler.visibility = View.GONE
-      searchBar.visibility = View.GONE
-      closeButton.visibility = View.GONE
-      searchButton.visibility = View.GONE
       noConnectionWarning.visibility = View.GONE
     } else {
       progressBar.visibility = View.GONE
       recycler.visibility = View.VISIBLE
-      searchBar.visibility = View.VISIBLE
-      closeButton.visibility = View.VISIBLE
-      searchButton.visibility = View.VISIBLE
     }
   }
 }

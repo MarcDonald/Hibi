@@ -15,10 +15,9 @@ import app.marcdev.nikki.R
 import app.marcdev.nikki.internal.base.ScopedFragment
 import app.marcdev.nikki.internal.formatDateForDisplay
 import app.marcdev.nikki.internal.formatTimeForDisplay
-import app.marcdev.nikki.searchscreen.SearchScreenDialog
+import app.marcdev.nikki.searchscreen.SearchResultsDialog
 import app.marcdev.nikki.uicomponents.TransparentSquareButton
 import app.marcdev.nikki.uicomponents.YesNoDialog
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -39,8 +38,8 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var timeButton: TransparentSquareButton
   private lateinit var contentInput: EditText
   private lateinit var backConfirmDialog: YesNoDialog
-  private lateinit var searchDialog: SearchScreenDialog
   private lateinit var toolbarTitle: TextView
+  private lateinit var searchBar: EditText
 
   // Other
   private val dateTimeStore = DateTimeStore()
@@ -57,7 +56,6 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
     bindViews(view)
     initBackConfirmDialog()
-    initSearchDialog()
 
     return view
   }
@@ -75,6 +73,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
   private fun bindViews(view: View) {
     toolbarTitle = view.findViewById(R.id.txt_add_toolbar_title)
+    searchBar = view.findViewById(R.id.edt_search_bar)
     dateButton = view.findViewById(R.id.btn_date)
     dateButton.setOnClickListener(dateClickListener)
     initDateButton()
@@ -91,8 +90,8 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val backButton: ImageView = view.findViewById(R.id.img_add_entry_toolbar_back)
     backButton.setOnClickListener(backClickListener)
 
-    val fab: FloatingActionButton = view.findViewById(R.id.fab_add_entry_search)
-    fab.setOnClickListener(fabClickListener)
+    val searchButton: ImageView = view.findViewById(R.id.img_search_button)
+    searchButton.setOnClickListener(searchClickListener)
   }
 
   private fun initBackConfirmDialog() {
@@ -101,10 +100,6 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     backConfirmDialog.setMessage(resources.getString(R.string.go_back_warning))
     backConfirmDialog.setYesButton(resources.getString(R.string.ok), okBackClickListener)
     backConfirmDialog.setNoButton(resources.getString(R.string.cancel), cancelBackClickListener)
-  }
-
-  private fun initSearchDialog() {
-    searchDialog = SearchScreenDialog()
   }
 
   private val saveClickListener = View.OnClickListener {
@@ -140,8 +135,20 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     timeDialog.show(requireFragmentManager(), "Time Picker")
   }
 
-  private val fabClickListener = View.OnClickListener {
-    searchDialog.show(requireFragmentManager(), "Add Entry Search")
+  private val searchClickListener = View.OnClickListener {
+    val searchTerm = searchBar.text.toString()
+    if(searchTerm.isNotBlank()) {
+      val args = Bundle()
+      args.putString("searchTerm", searchBar.text.toString())
+
+      val searchDialog = SearchResultsDialog()
+      searchDialog.arguments = args
+
+      searchDialog.show(requireFragmentManager(), "Add Entry Search")
+      searchBar.setText("")
+    } else {
+      Toast.makeText(requireContext(), resources.getString(R.string.no_search_term_warning), Toast.LENGTH_SHORT).show()
+    }
   }
 
   private fun initDateButton() {

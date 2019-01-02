@@ -1,13 +1,13 @@
 package app.marcdev.nikki.internal.base
 
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-abstract class ScopedDialogFragment : DialogFragment(), CoroutineScope {
+abstract class ScopedBottomSheetDialogFragment : BottomSheetDialogFragment(), CoroutineScope {
   private lateinit var job: Job
 
   override val coroutineContext: CoroutineContext
