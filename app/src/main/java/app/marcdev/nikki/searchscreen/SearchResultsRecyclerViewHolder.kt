@@ -54,9 +54,16 @@ class SearchResultsRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(
 
   private fun displayEnglish(data: Data) {
     var englishDisplayString = ""
+    val definitionList = mutableListOf<String>()
+
     for(x in 0 until data.senses.size) {
       for(y in 0 until data.senses[x].englishDefinitions.size) {
-        englishDisplayString += "${data.senses[x].englishDefinitions[y]}; "
+        val englishDefinition = data.senses[x].englishDefinitions[y]
+        // If the definition isn't already being displayed
+        if(!definitionList.contains(englishDefinition.toLowerCase())) {
+          englishDisplayString += "$englishDefinition; "
+          definitionList.add(englishDefinition.toLowerCase())
+        }
       }
     }
     englishDisplay.text = itemView.resources.getString(R.string.search_results_english, englishDisplayString)
