@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="@dimen/add_entry_bottom_bar_height"
   android:contentInsetStart="0dp">
@@ -9,7 +10,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_search_bar" />
+    <app.marcdev.nikki.uicomponents.SearchBar
+      android:id="@+id/searchbar_add_entry"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/search_bar_height"
+      app:hint="@string/search_bar_hint" />
 
     <include layout="@layout/include_option_bar" />
   </LinearLayout>

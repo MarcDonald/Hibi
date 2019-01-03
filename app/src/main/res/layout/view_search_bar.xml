@@ -14,6 +14,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/margin_standard"
     android:hint="@string/search_bar_hint"
+    android:imeOptions="actionSearch"
     android:inputType="text"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@id/img_search_button"
@@ -23,11 +24,11 @@
     android:id="@+id/img_search_button"
     android:layout_width="@dimen/toolbar_icon_size"
     android:layout_height="@dimen/toolbar_icon_size"
-    android:layout_marginEnd="@dimen/margin_standard"
-    android:layout_marginBottom="@dimen/margin_standard"
+    android:layout_margin="@dimen/margin_standard"
     android:background="?selectableItemBackgroundBorderless"
     android:contentDescription="@string/search_bar_hint"
     android:src="@drawable/ic_search_black_24dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent" />
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

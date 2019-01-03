@@ -16,6 +16,7 @@ import app.marcdev.nikki.internal.base.ScopedFragment
 import app.marcdev.nikki.internal.formatDateForDisplay
 import app.marcdev.nikki.internal.formatTimeForDisplay
 import app.marcdev.nikki.searchscreen.SearchResultsDialog
+import app.marcdev.nikki.uicomponents.SearchBar
 import app.marcdev.nikki.uicomponents.TransparentSquareButton
 import app.marcdev.nikki.uicomponents.YesNoDialog
 import kotlinx.coroutines.launch
@@ -39,7 +40,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var contentInput: EditText
   private lateinit var backConfirmDialog: YesNoDialog
   private lateinit var toolbarTitle: TextView
-  private lateinit var searchBar: EditText
+  private lateinit var searchBar: SearchBar
 
   // Other
   private val dateTimeStore = DateTimeStore()
@@ -73,7 +74,10 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
   private fun bindViews(view: View) {
     toolbarTitle = view.findViewById(R.id.txt_add_toolbar_title)
-    searchBar = view.findViewById(R.id.edt_search_bar)
+
+    searchBar = view.findViewById(R.id.searchbar_add_entry)
+    searchBar.setSearchAction(this::search)
+
     dateButton = view.findViewById(R.id.btn_date)
     dateButton.setOnClickListener(dateClickListener)
     initDateButton()
@@ -89,9 +93,6 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
     val backButton: ImageView = view.findViewById(R.id.img_add_entry_toolbar_back)
     backButton.setOnClickListener(backClickListener)
-
-    val searchButton: ImageView = view.findViewById(R.id.img_search_button)
-    searchButton.setOnClickListener(searchClickListener)
   }
 
   private fun initBackConfirmDialog() {
@@ -135,20 +136,14 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     timeDialog.show(requireFragmentManager(), "Time Picker")
   }
 
-  private val searchClickListener = View.OnClickListener {
-    val searchTerm = searchBar.text.toString()
-    if(searchTerm.isNotBlank()) {
-      val args = Bundle()
-      args.putString("searchTerm", searchBar.text.toString())
+  private fun search(searchTerm: String) {
+    val args = Bundle()
+    args.putString("searchTerm", searchTerm)
 
-      val searchDialog = SearchResultsDialog()
-      searchDialog.arguments = args
+    val searchDialog = SearchResultsDialog()
+    searchDialog.arguments = args
 
-      searchDialog.show(requireFragmentManager(), "Add Entry Search")
-      searchBar.setText("")
-    } else {
-      Toast.makeText(requireContext(), resources.getString(R.string.no_search_term_warning), Toast.LENGTH_SHORT).show()
-    }
+    searchDialog.show(requireFragmentManager(), "Add Entry Search")
   }
 
   private fun initDateButton() {

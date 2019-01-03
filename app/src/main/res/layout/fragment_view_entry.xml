@@ -79,6 +79,10 @@
     android:layout_gravity="bottom"
     android:background="@android:color/white">
 
-    <include layout="@layout/include_search_bar" />
+    <app.marcdev.nikki.uicomponents.SearchBar
+      android:id="@+id/searchbar_view_entry"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/search_bar_height"
+      app:hint="@string/search_bar_hint" />
   </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
