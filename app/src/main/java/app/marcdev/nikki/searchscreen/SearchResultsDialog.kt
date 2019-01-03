@@ -32,6 +32,7 @@ class SearchResultsDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
   // UI Components
   private lateinit var progressBar: ProgressBar
   private lateinit var noConnectionWarning: LinearLayout
+  private lateinit var noResultsWarning: LinearLayout
 
   // Recycler
   private lateinit var recyclerAdapter: SearchResultsRecyclerAdapter
@@ -70,6 +71,9 @@ class SearchResultsDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
 
     noConnectionWarning = view.findViewById(R.id.lin_search_no_connection)
     noConnectionWarning.visibility = View.GONE
+
+    noResultsWarning = view.findViewById(R.id.lin_search_no_results)
+    noResultsWarning.visibility = View.GONE
   }
 
   private fun initRecycler() {
@@ -91,14 +95,14 @@ class SearchResultsDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
     val response = viewModel.searchTerm(searchTerm)
 
     if(response == null) {
-      displayLoading(false)
-      recycler.visibility = View.GONE
-      noConnectionWarning.visibility = View.VISIBLE
+      displayNoConnection()
     } else {
       if(response.data.isNotEmpty()) {
         recyclerAdapter.updateList(response.data)
         recycler.scrollToPosition(0)
         displayLoading(false)
+      } else {
+        displayNoResults()
       }
     }
   }
@@ -112,5 +116,17 @@ class SearchResultsDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
       progressBar.visibility = View.GONE
       recycler.visibility = View.VISIBLE
     }
+  }
+
+  private fun displayNoConnection() {
+    progressBar.visibility = View.GONE
+    recycler.visibility = View.GONE
+    noConnectionWarning.visibility = View.VISIBLE
+  }
+
+  private fun displayNoResults() {
+    progressBar.visibility = View.GONE
+    recycler.visibility = View.GONE
+    noResultsWarning.visibility = View.VISIBLE
   }
 }

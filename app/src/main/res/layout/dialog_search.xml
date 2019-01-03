@@ -38,8 +38,8 @@
     app:layout_constraintStart_toStartOf="parent">
 
     <ImageView
-      android:layout_width="@dimen/no_connection_icon_size"
-      android:layout_height="@dimen/no_connection_icon_size"
+      android:layout_width="@dimen/search_warning_icon_size"
+      android:layout_height="@dimen/search_warning_icon_size"
       android:layout_gravity="center"
       android:layout_margin="@dimen/margin_standard"
       android:contentDescription="@string/no_connection_warning"
@@ -50,5 +50,31 @@
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:text="@string/no_connection_warning" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/lin_search_no_results"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_standard"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <ImageView
+      android:layout_width="@dimen/search_warning_icon_size"
+      android:layout_height="@dimen/search_warning_icon_size"
+      android:layout_gravity="center"
+      android:layout_margin="@dimen/margin_standard"
+      android:contentDescription="@string/no_results"
+      android:src="@drawable/ic_sentiment_dissatisfied_black_24dp" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/no_results" />
   </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

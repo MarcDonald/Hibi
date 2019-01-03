@@ -32,5 +32,6 @@
   <string name="no_search_term_warning">Please enter something to search for</string>
   <string name="search_bar_hint">Search on Jisho.org</string>
   <string name="no_connection_warning">No Internet Connection</string>
+  <string name="no_results">No Results Found</string>
 
 </resources>

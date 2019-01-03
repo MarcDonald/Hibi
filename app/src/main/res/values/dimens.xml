@@ -7,6 +7,6 @@
   <dimen name="toolbar_icon_margin">16dp</dimen>
   <dimen name="add_entry_bottom_bar_height">84dp</dimen>
   <dimen name="search_fab_bottom_margin">48dp</dimen>
-  <dimen name="no_connection_icon_size">48dp</dimen>
+  <dimen name="search_warning_icon_size">48dp</dimen>
   <dimen name="search_bar_height">48dp</dimen>
 </resources>
