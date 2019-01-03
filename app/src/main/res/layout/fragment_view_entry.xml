@@ -33,20 +33,20 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
-          app:text="@string/date"
           app:layout_constraintEnd_toStartOf="@id/gd_date_and_time_vert_50"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+          app:layout_constraintTop_toTopOf="parent"
+          app:text="@string/date" />
 
         <app.marcdev.nikki.uicomponents.TransparentSquareButton
           android:id="@+id/btn_view_time"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
-          app:text="@string/time"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@id/gd_date_and_time_vert_50"
-          app:layout_constraintTop_toTopOf="parent" />
+          app:layout_constraintTop_toTopOf="parent"
+          app:text="@string/time" />
 
         <androidx.constraintlayout.widget.Guideline
           android:id="@+id/gd_date_and_time_vert_50"
@@ -64,6 +64,7 @@
         android:layout_margin="@dimen/margin_standard"
         android:hint="@string/content_hint"
         android:textAppearance="@style/LightTheme.TextAppearance.ViewEntryContent"
+        android:textIsSelectable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/const_view_date_and_time" />
@@ -73,10 +74,10 @@
 
   <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/app_bar_layout_add_entry_option_bar"
-    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="@dimen/search_bar_height"
-    android:layout_gravity="bottom">
+    android:layout_gravity="bottom"
+    android:background="@android:color/white">
 
     <include layout="@layout/include_search_bar" />
   </com.google.android.material.appbar.AppBarLayout>
