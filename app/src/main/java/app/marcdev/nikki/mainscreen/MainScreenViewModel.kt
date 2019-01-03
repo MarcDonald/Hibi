@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import app.marcdev.nikki.data.entity.Entry
 import app.marcdev.nikki.data.repository.EntryRepository
 import app.marcdev.nikki.internal.lazyDeferred
-import timber.log.Timber
 
 class MainScreenViewModel(private val entryRepository: EntryRepository) : ViewModel() {
 
@@ -46,7 +45,6 @@ class MainScreenViewModel(private val entryRepository: EntryRepository) : ViewMo
          || (allItems[x].month > lastMonth) && (allItems[x].year < lastYear)
          || (allItems[x].year < lastYear)
       ) {
-        Timber.v("Log: addListHeaders: x = $x")
         val header = Entry(0, allItems[x].month, allItems[x].year, 0, 0, "")
         lastMonth = allItems[x].month
         lastYear = allItems[x].year
