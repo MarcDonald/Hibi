@@ -11,7 +11,7 @@ import app.marcdev.nikki.data.network.JishoAPIService
 import app.marcdev.nikki.data.repository.EntryRepository
 import app.marcdev.nikki.data.repository.EntryRepositoryImpl
 import app.marcdev.nikki.mainscreen.MainScreenViewModelFactory
-import app.marcdev.nikki.searchscreen.SearchViewModelFactory
+import app.marcdev.nikki.searchresults.SearchViewModelFactory
 import app.marcdev.nikki.viewentryscreen.ViewEntryViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

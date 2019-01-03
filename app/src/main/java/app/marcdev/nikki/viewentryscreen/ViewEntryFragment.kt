@@ -14,7 +14,7 @@ import app.marcdev.nikki.R
 import app.marcdev.nikki.internal.base.ScopedFragment
 import app.marcdev.nikki.internal.formatDateForDisplay
 import app.marcdev.nikki.internal.formatTimeForDisplay
-import app.marcdev.nikki.searchscreen.SearchResultsDialog
+import app.marcdev.nikki.searchresults.SearchResultsDialog
 import app.marcdev.nikki.uicomponents.SearchBar
 import app.marcdev.nikki.uicomponents.TransparentSquareButton
 import app.marcdev.nikki.uicomponents.YesNoDialog

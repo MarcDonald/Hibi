@@ -1,4 +1,4 @@
-package app.marcdev.nikki.searchscreen
+package app.marcdev.nikki.searchresults
 
 import android.view.View
 import android.widget.TextView

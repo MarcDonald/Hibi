@@ -1,4 +1,4 @@
-package app.marcdev.nikki.searchscreen
+package app.marcdev.nikki.searchresults
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
