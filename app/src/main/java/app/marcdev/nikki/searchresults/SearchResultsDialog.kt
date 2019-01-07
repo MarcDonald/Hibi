@@ -77,7 +77,7 @@ class SearchResultsDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
   }
 
   private fun initRecycler() {
-    this.recyclerAdapter = SearchResultsRecyclerAdapter(requireContext())
+    this.recyclerAdapter = SearchResultsRecyclerAdapter(requireContext(), requireFragmentManager())
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager

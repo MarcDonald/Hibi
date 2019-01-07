@@ -37,6 +37,17 @@
   <string name="search_results_reading">Reading: %1$s</string>
   <string name="search_results_other">Other forms available</string>
   <string name="search_results_english">English: %1$s</string>
-  <string name="search_results_type">Type</string>
+
+  <!--Search more info-->
+  <string name="main_japanese">Japanese</string>
+  <string name="main_reading">Reading</string>
+  <string name="information">Information</string>
+  <string name="tags">Tags</string>
+  <string name="search_results_restrictions">Restrictions: %1$s</string>
+  <string name="search_results_antonyms">Antonyms: %1$s</string>
+  <string name="search_results_see_also">See Also: %1$s</string>
+  <string name="type">Type</string>
+  <string name="english">English</string>
+  <string name="alternatives">Alternatives</string>
 
 </resources>

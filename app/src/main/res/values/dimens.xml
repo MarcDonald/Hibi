@@ -2,6 +2,7 @@
 <resources>
   <dimen name="fab_margin">16dp</dimen>
   <dimen name="margin_standard">8dp</dimen>
+  <dimen name="margin_half">4dp</dimen>
   <dimen name="toolbar_icon_size">36dp</dimen>
   <dimen name="toolbar_icon_padding">6dp</dimen>
   <dimen name="toolbar_icon_margin">16dp</dimen>
@@ -9,4 +10,5 @@
   <dimen name="search_fab_bottom_margin">48dp</dimen>
   <dimen name="search_warning_icon_size">48dp</dimen>
   <dimen name="search_bar_height">48dp</dimen>
+  <dimen name="scroll_bar_size">6dp</dimen>
 </resources>

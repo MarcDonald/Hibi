@@ -1,21 +1,46 @@
 package app.marcdev.nikki.searchresults
 
+import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.nikki.R
 import app.marcdev.nikki.data.network.apiresponse.Data
+import app.marcdev.nikki.searchmoreinfoscreen.SearchMoreInfoDialog
+import com.google.gson.Gson
 
-class SearchResultsRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManager) : RecyclerView.ViewHolder(itemView) {
 
   private val wordDisplay: TextView = itemView.findViewById(R.id.txt_search_result_word)
   private val typeDisplay: TextView = itemView.findViewById(R.id.txt_search_result_type)
   private val readingDisplay: TextView = itemView.findViewById(R.id.txt_search_result_reading)
   private val otherFormsDisplay: TextView = itemView.findViewById(R.id.txt_search_result_other_forms)
   private val englishDisplay: TextView = itemView.findViewById(R.id.txt_search_result_english)
+  private val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.const_search_result)
+
+  private var displayedData: Data? = null
+
+  private val clickListener = View.OnClickListener {
+    val dialog = SearchMoreInfoDialog()
+
+    val listOfJapaneseJson = getAllJapaneseAsJson()
+    val listOfSensesJson = getAllSensesAsJson()
+    val bundle = Bundle()
+    bundle.putStringArrayList("japaneseList", listOfJapaneseJson)
+    bundle.putStringArrayList("sensesList", listOfSensesJson)
+
+    dialog.arguments = bundle
+    dialog.show(fragmentManager, "Search Result More Info Dialog")
+  }
+
+  init {
+    constraintLayout.setOnClickListener(clickListener)
+  }
 
   fun display(data: Data) {
-
+    displayedData = data
     displayJapanese(data)
     displayType(data)
     displayEnglish(data)
@@ -61,7 +86,11 @@ class SearchResultsRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(
         val englishDefinition = data.senses[x].englishDefinitions[y]
         // If the definition isn't already being displayed
         if(!definitionList.contains(englishDefinition.toLowerCase())) {
-          englishDisplayString += "$englishDefinition; "
+          englishDisplayString += if(x == data.senses.size - 1 && y == data.senses[x].englishDefinitions.size - 1) {
+            "$englishDefinition "
+          } else {
+            "$englishDefinition; "
+          }
           definitionList.add(englishDefinition.toLowerCase())
         }
       }
@@ -74,6 +103,36 @@ class SearchResultsRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(
       otherFormsDisplay.visibility = View.VISIBLE
     } else {
       otherFormsDisplay.visibility = View.GONE
+    }
+  }
+
+  private fun getAllJapaneseAsJson(): ArrayList<String> {
+    val listOfJapaneseJson = ArrayList<String>()
+
+    displayedData?.let {
+      if(displayedData!!.japanese.isNotEmpty()) {
+        for(x in 0 until displayedData!!.japanese.size) {
+          val japaneseJson = Gson().toJson(displayedData!!.japanese[x])
+          listOfJapaneseJson.add(japaneseJson)
+        }
+      }
+    }
+
+    return listOfJapaneseJson
+  }
+
+  private fun getAllSensesAsJson(): ArrayList<String> {
+    val listOfSensesJson = ArrayList<String>()
+
+    displayedData?.let {
+      if(displayedData!!.senses.isNotEmpty()) {
+        for(x in 0 until displayedData!!.senses.size) {
+          val sensesJson = Gson().toJson(displayedData!!.senses[x])
+          listOfSensesJson.add(sensesJson)
+        }
+      }
+
+      return listOfSensesJson
     }
   }
 }
