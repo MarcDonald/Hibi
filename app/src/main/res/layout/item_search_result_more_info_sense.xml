@@ -23,7 +23,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_standard"
     android:layout_marginEnd="@dimen/margin_standard"
-    android:text="@string/tags"
+    android:text="@string/search_tags"
     app:layout_constraintBottom_toTopOf="@id/txt_search_more_info_sense_english"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />

@@ -93,6 +93,10 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
     val backButton: ImageView = view.findViewById(R.id.img_add_entry_toolbar_back)
     backButton.setOnClickListener(backClickListener)
+
+    // Option bar icons
+    val addTagButton: ImageView = view.findViewById(R.id.img_option_tag)
+    addTagButton.setOnClickListener(addTagClickListener)
   }
 
   private fun initBackConfirmDialog() {
@@ -134,6 +138,10 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val timeDialog = TimePickerDialog()
     timeDialog.bindDateTimeStore(dateTimeStore)
     timeDialog.show(requireFragmentManager(), "Time Picker")
+  }
+
+  private val addTagClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), resources.getString(R.string.add_tags_hint), Toast.LENGTH_SHORT).show()
   }
 
   private fun search(searchTerm: String) {
