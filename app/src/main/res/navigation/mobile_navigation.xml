@@ -6,7 +6,7 @@
 
   <fragment
     android:id="@+id/destination_main"
-    android:name="app.marcdev.nikki.mainscreen.MainScreenFragment"
+    android:name="app.marcdev.hibi.mainscreen.MainScreenFragment"
     android:label="MainFragment">
     <action
       android:id="@+id/add_entry_action"
@@ -26,7 +26,7 @@
 
   <fragment
     android:id="@+id/destination_add_entry"
-    android:name="app.marcdev.nikki.addentryscreen.AddEntryFragment"
+    android:name="app.marcdev.hibi.addentryscreen.AddEntryFragment"
     android:label="AddEntryFragment">
     <argument
       android:name="entryId"
@@ -36,7 +36,7 @@
 
   <fragment
     android:id="@+id/destination_view_entry"
-    android:name="app.marcdev.nikki.viewentryscreen.ViewEntryFragment"
+    android:name="app.marcdev.hibi.viewentryscreen.ViewEntryFragment"
     android:label="ViewEntryFragment">
     <argument
       android:name="entryId"

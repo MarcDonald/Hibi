@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <app.marcdev.nikki.uicomponents.TransparentSquareButton
+        <app.marcdev.hibi.uicomponents.TransparentSquareButton
           android:id="@+id/btn_view_date"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
           app:layout_constraintTop_toTopOf="parent"
           app:text="@string/date" />
 
-        <app.marcdev.nikki.uicomponents.TransparentSquareButton
+        <app.marcdev.hibi.uicomponents.TransparentSquareButton
           android:id="@+id/btn_view_time"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
     android:layout_gravity="bottom"
     android:background="@android:color/white">
 
-    <app.marcdev.nikki.uicomponents.SearchBar
+    <app.marcdev.hibi.uicomponents.SearchBar
       android:id="@+id/searchbar_view_entry"
       android:layout_width="match_parent"
       android:layout_height="@dimen/search_bar_height"
