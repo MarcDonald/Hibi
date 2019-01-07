@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">Nikki</string>
+  <string name="app_name">Hibi</string>
   <string name="loading_entries">Loading Entries</string>
   <string name="add_entry">Add Entry</string>
   <string name="edit_entry">Edit Entry</string>
@@ -16,6 +16,8 @@
   <string name="generic_error">An error occurred</string>
   <string name="delete_confirm_title">DELETE ENTRY</string>
   <string name="delete_confirm">Are you sure you want to delete this entry?</string>
+  <string name="close">Close</string>
+  <string name="copied_to_clipboard">Copied %1$s to clipboard</string>
 
   <!--Entry-->
   <string name="date">Date</string>
@@ -26,5 +28,27 @@
   <string name="go_back_warning">Go back and lose all unsaved progress?</string>
   <string name="edit">Edit</string>
   <string name="delete">Delete</string>
+
+  <!--Search-->
+  <string name="no_search_term_warning">Please enter something to search for</string>
+  <string name="search_bar_hint">Search on Jisho.org</string>
+  <string name="no_connection_warning">No Internet Connection</string>
+  <string name="no_results">No Results Found</string>
+  <string name="search_results_word">Japanese: %1$s</string>
+  <string name="search_results_reading">Reading: %1$s</string>
+  <string name="search_results_other">Other forms available</string>
+  <string name="search_results_english">English: %1$s</string>
+
+  <!--Search more info-->
+  <string name="main_japanese">Japanese</string>
+  <string name="main_reading">Reading</string>
+  <string name="information">Information</string>
+  <string name="tags">Tags</string>
+  <string name="search_results_restrictions">Restrictions: %1$s</string>
+  <string name="search_results_antonyms">Antonyms: %1$s</string>
+  <string name="search_results_see_also">See Also: %1$s</string>
+  <string name="type">Type</string>
+  <string name="english">English</string>
+  <string name="alternatives">Alternatives</string>
 
 </resources>

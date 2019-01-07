@@ -4,4 +4,9 @@
     <attr name="text" format="string" />
     <attr name="borderlessRipple" format="boolean" />
   </declare-styleable>
+
+  <declare-styleable name="SearchBar">
+    <attr name="hint" format="string" />
+  </declare-styleable>
+
 </resources>

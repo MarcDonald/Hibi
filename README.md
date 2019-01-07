@@ -1,4 +1,4 @@
-# Nikki
+﻿# Hibi 「日々」
 An Android app for learning Japanese by keeping a journal.
 
 ## Open Source Libraries Used
@@ -11,3 +11,13 @@ Apache 2 License
 Used for dependency injection
 
 MIT License
+
+### [Retrofit](https://github.com/square/retrofit)
+Used for API calls
+
+Apache 2 License
+
+### [Gson](https://github.com/google/gson)
+Used for converting API responses into Kotlin objects
+
+Apache 2 License
