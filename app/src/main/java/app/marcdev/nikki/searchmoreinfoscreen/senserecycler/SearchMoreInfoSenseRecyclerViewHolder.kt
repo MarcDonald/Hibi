@@ -1,7 +1,11 @@
 package app.marcdev.nikki.searchmoreinfoscreen.senserecycler
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.nikki.R
 import app.marcdev.nikki.data.network.apiresponse.Sense
@@ -14,6 +18,21 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
   private val restrictionsDisplay: TextView = itemView.findViewById(R.id.txt_search_more_info_sense_restrictions)
   private val antonymsDisplay: TextView = itemView.findViewById(R.id.txt_search_more_info_sense_antonyms)
   private val seeAlsoDisplay: TextView = itemView.findViewById(R.id.txt_search_more_info_sense_see_also)
+
+  private var seeAlsoContent = ""
+
+  private val seeAlsoClickListener = View.OnClickListener {
+    val clipboard: ClipboardManager = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip: ClipData = ClipData.newPlainText("See Also", seeAlsoContent)
+    clipboard.primaryClip = clip
+
+    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard, seeAlsoContent)
+    Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
+  }
+
+  init {
+    seeAlsoDisplay.setOnClickListener(seeAlsoClickListener)
+  }
 
   fun display(sense: Sense) {
     displayType(sense)
@@ -112,6 +131,8 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
       }
       val displayString = itemView.resources.getString(R.string.search_results_see_also, seeAlsoString)
       seeAlsoDisplay.text = displayString
+      // Set the see also content that would be copied to clipboard if clicked
+      seeAlsoContent = seeAlsoString
     } else {
       seeAlsoDisplay.visibility = View.GONE
     }

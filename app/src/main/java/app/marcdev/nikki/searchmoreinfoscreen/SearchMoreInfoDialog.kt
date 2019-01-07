@@ -1,10 +1,14 @@
 package app.marcdev.nikki.searchmoreinfoscreen
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -39,6 +43,10 @@ class SearchMoreInfoDialog : ScopedDialogFragment(), KodeinAware {
   private lateinit var senseRecycler: RecyclerView
   private lateinit var senseRecyclerAdapter: SearchMoreInfoSenseRecyclerAdapter
 
+  // Other
+  private var mainWordContent = ""
+  private var mainReadingContent = ""
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
     /* Normally viewmodel is instantiated in onActivityCreated but that seems to crash for this
@@ -68,13 +76,34 @@ class SearchMoreInfoDialog : ScopedDialogFragment(), KodeinAware {
 
   private fun bindViews(view: View) {
     mainWordDisplay = view.findViewById(R.id.txt_search_more_info_main_word)
+    mainWordDisplay.setOnClickListener(mainWordClickListener)
+
     mainReadingDisplay = view.findViewById(R.id.txt_search_more_info_main_reading)
+    mainReadingDisplay.setOnClickListener(mainReadingClickListener)
 
     senseTitle = view.findViewById(R.id.txt_search_more_info_sense_title)
     senseRecycler = view.findViewById(R.id.recycler_search_more_info_sense)
 
     alternativeTitle = view.findViewById(R.id.txt_search_more_info_alternative_title)
     alternativeRecycler = view.findViewById(R.id.recycler_search_more_info_alternative_japanese)
+  }
+
+  private val mainWordClickListener = View.OnClickListener {
+    val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip: ClipData = ClipData.newPlainText("Main Word", mainWordContent)
+    clipboard.primaryClip = clip
+
+    val toastMessage = resources.getString(R.string.copied_to_clipboard, mainWordContent)
+    Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+  }
+
+  private val mainReadingClickListener = View.OnClickListener {
+    val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip: ClipData = ClipData.newPlainText("Main Reading", mainReadingContent)
+    clipboard.primaryClip = clip
+
+    val toastMessage = resources.getString(R.string.copied_to_clipboard, mainReadingContent)
+    Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
   }
 
   private fun initAlternativesRecycler() {
@@ -111,12 +140,14 @@ class SearchMoreInfoDialog : ScopedDialogFragment(), KodeinAware {
 
         if(mainWord != null && mainWord.isNotBlank()) {
           mainWordDisplay.text = mainWordString
+          mainWordContent = mainWord
         } else {
           mainWordDisplay.visibility = View.GONE
         }
 
         if(mainReading != null && mainReading.isNotBlank()) {
           mainReadingDisplay.text = mainReadingString
+          mainReadingContent = mainReading
         } else {
           mainReadingDisplay.visibility = View.GONE
         }

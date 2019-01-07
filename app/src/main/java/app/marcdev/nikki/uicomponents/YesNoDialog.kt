@@ -11,10 +11,10 @@ import app.marcdev.nikki.R
 class YesNoDialog : DialogFragment() {
 
   // UI Components
-  lateinit var yesButton: TransparentSquareButton
-  lateinit var noButton: TransparentSquareButton
-  lateinit var titleDisplay: TextView
-  lateinit var messageDisplay: TextView
+  private lateinit var yesButton: TransparentSquareButton
+  private lateinit var noButton: TransparentSquareButton
+  private lateinit var titleDisplay: TextView
+  private lateinit var messageDisplay: TextView
 
   // To set
   private var yesText = ""

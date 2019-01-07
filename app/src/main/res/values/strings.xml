@@ -17,6 +17,7 @@
   <string name="delete_confirm_title">DELETE ENTRY</string>
   <string name="delete_confirm">Are you sure you want to delete this entry?</string>
   <string name="close">Close</string>
+  <string name="copied_to_clipboard">Copied %1$s to clipboard</string>
 
   <!--Entry-->
   <string name="date">Date</string>
