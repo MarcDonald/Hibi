@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
+import app.marcdev.hibi.addentryscreen.addtagdialog.AddTagDialog
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
@@ -141,7 +142,8 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private val addTagClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), resources.getString(R.string.add_tags_hint), Toast.LENGTH_SHORT).show()
+    val dialog = AddTagDialog()
+    dialog.show(requireFragmentManager(), "Add Tag Dialog")
   }
 
   private fun search(searchTerm: String) {
