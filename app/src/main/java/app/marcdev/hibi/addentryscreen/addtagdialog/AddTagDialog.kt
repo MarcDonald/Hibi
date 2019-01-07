@@ -8,12 +8,14 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 import timber.log.Timber
 
 class AddTagDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
@@ -22,6 +24,15 @@ class AddTagDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
   // UI Components
   private lateinit var title: TextView
   private lateinit var tagHolder: LinearLayout
+
+  // Viewmodel
+  private val viewModelFactory: TagsViewModelFactory by instance()
+  private lateinit var viewModel: TagsViewModel
+
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(TagsViewModel::class.java)
+  }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
