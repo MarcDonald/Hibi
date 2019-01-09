@@ -7,9 +7,9 @@ interface TagRepository {
 
   suspend fun addTag(tag: Tag)
 
-  suspend fun getTag(id: Int): LiveData<Tag>
+  suspend fun getTag(tag: String): LiveData<Tag>
 
   suspend fun getAllTags(): LiveData<List<Tag>>
 
-  suspend fun deleteTag(id: Int)
+  suspend fun deleteTag(tag: String)
 }

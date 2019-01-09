@@ -2,8 +2,8 @@ package app.marcdev.hibi.data.entity
 
 import androidx.room.Entity
 
-@Entity(tableName = "TagEntryRelation", primaryKeys = ["tagId", "entryId"])
+@Entity(tableName = "TagEntryRelation", primaryKeys = ["tag", "entryId"])
 data class TagEntryRelation(
-  var tagId: Int,
+  var tag: String,
   var entryId: Int
 )

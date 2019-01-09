@@ -2,7 +2,8 @@ package app.marcdev.hibi
 
 import android.app.Application
 import app.marcdev.hibi.addentryscreen.AddEntryViewModelFactory
-import app.marcdev.hibi.addentryscreen.addtagdialog.TagsViewModelFactory
+import app.marcdev.hibi.addentryscreen.addtagdialog.AddTagToEntryViewModelFactory
+import app.marcdev.hibi.addentryscreen.tagmanagerdialog.AddTagViewModelFactory
 import app.marcdev.hibi.data.database.AppDatabase
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.database.ProductionAppDatabase
@@ -40,7 +41,8 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { ViewEntryViewModelFactory(instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
-    bind() from provider { TagsViewModelFactory(instance(), instance()) }
+    bind() from provider { AddTagToEntryViewModelFactory(instance(), instance()) }
+    bind() from provider { AddTagViewModelFactory(instance()) }
   }
 
   override fun onCreate() {

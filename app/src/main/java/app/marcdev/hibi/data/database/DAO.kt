@@ -29,28 +29,35 @@ interface DAO {
   fun getAmountOfEntries(): LiveData<Int>
 
   /* Tag */
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
   fun upsertTag(tag: Tag)
 
   @Query("SELECT * FROM Tag")
   fun getAllTags(): LiveData<List<Tag>>
 
-  @Query("SELECT * FROM Tag WHERE id = :id")
-  fun getTag(id: Int): LiveData<Tag>
+  @Query("SELECT * FROM Tag WHERE name = :tag")
+  fun getTag(tag: String): LiveData<Tag>
 
-  @Query("DELETE FROM Tag WHERE id = :id")
-  fun deleteTag(id: Int)
+  @Query("DELETE FROM Tag WHERE name = :tag")
+  fun deleteTag(tag: String)
 
   /* Tag Entry Relation */
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun upsertTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
-  @Query("SELECT * FROM Entry WHERE id = (SELECT entryId FROM TagEntryRelation WHERE tagId = :tagId)")
-  fun getEntriesWithTag(tagId: Int): LiveData<List<Entry>>
+  // This query may not work
+  @Query("SELECT * FROM Entry WHERE id = (SELECT entryId FROM TagEntryRelation WHERE tag = :tag)")
+  fun getEntriesWithTag(tag: String): LiveData<List<Entry>>
 
-  @Query("SELECT * FROM Tag WHERE id = (SELECT tagId FROM TagEntryRelation WHERE entryId = :entryId)")
-  fun getTagsWithEntry(entryId: Int): LiveData<List<Tag>>
+  @Query("SELECT tag FROM TagEntryRelation WHERE entryId = :entryId")
+  fun getTagsWithEntry(entryId: Int): List<String>
 
-  @Query("DELETE FROM TagEntryRelation WHERE tagId = :tagId AND entryId = :entryId")
-  fun deleteTagEntryRelation(tagId: Int, entryId: Int)
+  @Query("DELETE FROM TagEntryRelation WHERE tag = :tag AND entryId = :entryId")
+  fun deleteTagEntryRelation(tag: String, entryId: Int)
+
+  @Query("DELETE FROM TagEntryRelation WHERE tag = :tag")
+  fun deleteTagEntryRelationByTagId(tag: String)
+
+  @Query("DELETE FROM TagEntryRelation WHERE entryId = :entryId")
+  fun deleteTagEntryRelationByEntryId(entryId: Int)
 }

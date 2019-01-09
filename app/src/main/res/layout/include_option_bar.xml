@@ -19,7 +19,7 @@
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
       android:src="@drawable/ic_tag_black_24dp"
-      android:contentDescription="@string/add_tags_hint"
+      android:contentDescription="@string/add_tags_to_entry_hint"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
