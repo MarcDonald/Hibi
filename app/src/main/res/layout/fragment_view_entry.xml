@@ -69,6 +69,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/const_view_date_and_time" />
 
+      <LinearLayout
+        android:id="@+id/lin_view_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_content"
+        android:orientation="vertical">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/margin_standard"
+          android:layout_marginTop="@dimen/margin_standard"
+          android:layout_marginEnd="@dimen/margin_standard"
+          android:text="@string/entry_tags" />
+
+        <com.google.android.material.chip.ChipGroup
+          android:id="@+id/cg_view_tags"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/margin_standard" />
+      </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 

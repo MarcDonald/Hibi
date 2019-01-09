@@ -38,7 +38,7 @@ class Hibi : Application(), KodeinAware {
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
     bind() from provider { MainScreenViewModelFactory(instance()) }
     bind() from provider { AddEntryViewModelFactory(instance()) }
-    bind() from provider { ViewEntryViewModelFactory(instance()) }
+    bind() from provider { ViewEntryViewModelFactory(instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
     bind() from provider { AddTagToEntryViewModelFactory(instance(), instance()) }

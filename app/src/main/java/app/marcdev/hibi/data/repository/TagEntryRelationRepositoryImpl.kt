@@ -21,9 +21,15 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
-  override suspend fun getTagsWithEntry(entryId: Int): List<String> {
+  override suspend fun getTagsWithEntry(entryId: Int): LiveData<List<String>> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getTagsWithEntry(entryId)
+    }
+  }
+
+  override suspend fun getTagsWithEntryNotLiveData(entryId: Int): List<String> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getTagsWithEntryNotLiveData(entryId)
     }
   }
 
@@ -31,15 +37,6 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     withContext(Dispatchers.IO) {
       dao.deleteTagEntryRelation(tag, entryId)
     }
-  }
-
-  companion object {
-    @Volatile private var instance: TagEntryRelationRepositoryImpl? = null
-
-    fun getInstance(dao: DAO) =
-      instance ?: synchronized(this) {
-        instance ?: TagEntryRelationRepositoryImpl(dao).also { instance = it }
-      }
   }
 
   override suspend fun deleteTagEntryRelationByEntryId(entryId: Int) {
@@ -52,5 +49,14 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     withContext(Dispatchers.IO) {
       dao.deleteTagEntryRelationByTagId(tag)
     }
+  }
+
+  companion object {
+    @Volatile private var instance: TagEntryRelationRepositoryImpl? = null
+
+    fun getInstance(dao: DAO) =
+      instance ?: synchronized(this) {
+        instance ?: TagEntryRelationRepositoryImpl(dao).also { instance = it }
+      }
   }
 }

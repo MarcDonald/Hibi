@@ -14,8 +14,7 @@ class AddTagToEntryViewModel(private val tagRepository: TagRepository, private v
   }
 
   suspend fun getTagsForEntry(): List<String> {
-    val tagList = tagEntryRelationRepository.getTagsWithEntry(entryId)
-    return tagList
+    return tagEntryRelationRepository.getTagsWithEntryNotLiveData(entryId)
   }
 
   suspend fun saveTagEntryRelation(tag: String) {

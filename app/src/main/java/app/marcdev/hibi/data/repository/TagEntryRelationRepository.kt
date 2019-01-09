@@ -10,7 +10,9 @@ interface TagEntryRelationRepository {
 
   suspend fun getEntriesWithTag(tag: String): LiveData<List<Entry>>
 
-  suspend fun getTagsWithEntry(entryId: Int): List<String>
+  suspend fun getTagsWithEntry(entryId: Int): LiveData<List<String>>
+
+  suspend fun getTagsWithEntryNotLiveData(entryId: Int): List<String>
 
   suspend fun deleteTagEntryRelation(tag: String, entryId: Int)
 

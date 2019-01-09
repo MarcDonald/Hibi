@@ -50,7 +50,10 @@ interface DAO {
   fun getEntriesWithTag(tag: String): LiveData<List<Entry>>
 
   @Query("SELECT tag FROM TagEntryRelation WHERE entryId = :entryId")
-  fun getTagsWithEntry(entryId: Int): List<String>
+  fun getTagsWithEntry(entryId: Int): LiveData<List<String>>
+
+  @Query("SELECT tag FROM TagEntryRelation WHERE entryId = :entryId")
+  fun getTagsWithEntryNotLiveData(entryId: Int): List<String>
 
   @Query("DELETE FROM TagEntryRelation WHERE tag = :tag AND entryId = :entryId")
   fun deleteTagEntryRelation(tag: String, entryId: Int)
