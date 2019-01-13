@@ -37,7 +37,16 @@
     android:layout_margin="@dimen/margin_standard"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/item_date"
-    app:layout_constraintBottom_toBottomOf="parent" />
+    app:layout_constraintTop_toBottomOf="@id/item_date" />
+
+  <com.google.android.material.chip.ChipGroup
+    android:id="@+id/cg_main_tags"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_standard"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/item_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

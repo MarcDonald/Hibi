@@ -45,6 +45,9 @@ interface DAO {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun upsertTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
+  @Query("SELECT * FROM TagEntryRelation")
+  fun getAllTagEntryRelations(): LiveData<List<TagEntryRelation>>
+
   // This query may not work
   @Query("SELECT * FROM Entry WHERE id = (SELECT entryId FROM TagEntryRelation WHERE tag = :tag)")
   fun getEntriesWithTag(tag: String): LiveData<List<Entry>>

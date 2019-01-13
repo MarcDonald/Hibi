@@ -8,6 +8,8 @@ interface TagEntryRelationRepository {
 
   suspend fun addTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
+  suspend fun getAllTagEntryRelations(): LiveData<List<TagEntryRelation>>
+
   suspend fun getEntriesWithTag(tag: String): LiveData<List<Entry>>
 
   suspend fun getTagsWithEntry(entryId: Int): LiveData<List<String>>

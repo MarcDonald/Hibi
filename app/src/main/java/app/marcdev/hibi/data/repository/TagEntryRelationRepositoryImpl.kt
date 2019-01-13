@@ -15,6 +15,12 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
+  override suspend fun getAllTagEntryRelations(): LiveData<List<TagEntryRelation>> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getAllTagEntryRelations()
+    }
+  }
+
   override suspend fun getEntriesWithTag(tag: String): LiveData<List<Entry>> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getEntriesWithTag(tag)
