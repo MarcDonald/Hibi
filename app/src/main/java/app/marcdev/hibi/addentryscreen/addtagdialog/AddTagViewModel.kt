@@ -1,4 +1,4 @@
-package app.marcdev.hibi.addentryscreen.tagmanagerdialog
+package app.marcdev.hibi.addentryscreen.addtagdialog
 
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.Tag

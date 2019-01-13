@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
-import app.marcdev.hibi.addentryscreen.addtagdialog.AddTagToEntryDialog
+import app.marcdev.hibi.addentryscreen.addtagtoentrydialog.AddTagToEntryDialog
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay

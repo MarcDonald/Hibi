@@ -1,4 +1,4 @@
-package app.marcdev.hibi.addentryscreen.tagmanagerdialog
+package app.marcdev.hibi.addentryscreen.addtagdialog
 
 import android.os.Bundle
 import android.view.LayoutInflater

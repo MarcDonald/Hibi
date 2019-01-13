@@ -2,8 +2,8 @@ package app.marcdev.hibi
 
 import android.app.Application
 import app.marcdev.hibi.addentryscreen.AddEntryViewModelFactory
-import app.marcdev.hibi.addentryscreen.addtagdialog.AddTagToEntryViewModelFactory
-import app.marcdev.hibi.addentryscreen.tagmanagerdialog.AddTagViewModelFactory
+import app.marcdev.hibi.addentryscreen.addtagdialog.AddTagViewModelFactory
+import app.marcdev.hibi.addentryscreen.addtagtoentrydialog.AddTagToEntryViewModelFactory
 import app.marcdev.hibi.data.database.AppDatabase
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.database.ProductionAppDatabase

@@ -2,14 +2,13 @@ package app.marcdev.hibi.addentryscreen.addtagdialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.data.repository.TagRepository
 
-class AddTagToEntryViewModelFactory(private val tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository)
+class AddTagViewModelFactory(private val tagRepository: TagRepository)
   : ViewModelProvider.NewInstanceFactory() {
 
   @Suppress("UNCHECKED_CAST")
   override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-    return AddTagToEntryViewModel(tagRepository, tagEntryRelationRepository) as T
+    return AddTagViewModel(tagRepository) as T
   }
 }

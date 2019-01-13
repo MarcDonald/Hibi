@@ -1,4 +1,4 @@
-package app.marcdev.hibi.addentryscreen.addtagdialog
+package app.marcdev.hibi.addentryscreen.addtagtoentrydialog
 
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.TagEntryRelation

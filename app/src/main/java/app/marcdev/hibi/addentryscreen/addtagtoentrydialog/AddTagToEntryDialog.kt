@@ -1,4 +1,4 @@
-package app.marcdev.hibi.addentryscreen.addtagdialog
+package app.marcdev.hibi.addentryscreen.addtagtoentrydialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
-import app.marcdev.hibi.addentryscreen.tagmanagerdialog.AddTagDialog
+import app.marcdev.hibi.addentryscreen.addtagdialog.AddTagDialog
 import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import kotlinx.coroutines.launch
@@ -93,23 +93,23 @@ class AddTagToEntryDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
   private fun displayTags() = launch {
     val tagEntryRelations = viewModel.getTagsForEntry()
 
-    // Gets list of all tags displayed
-    val displayedTags = ArrayList<CheckBox>()
-    for(x in 0 until tagHolder.childCount) {
-      val tag = tagHolder.getChildAt(x) as CheckBox
-      displayedTags.add(tag)
-    }
-
     val allTags = viewModel.allTags.await()
     allTags.observe(this@AddTagToEntryDialog, Observer { tags ->
       tags.forEach { it ->
+        // Gets list of all tags displayed
+        val alreadyDisplayedTags = ArrayList<CheckBox>()
+        for(x in 0 until tagHolder.childCount) {
+          val tag = tagHolder.getChildAt(x) as CheckBox
+          alreadyDisplayedTags.add(tag)
+        }
+
         val displayTag = CheckBox(tagHolder.context)
         displayTag.text = it.name
 
         // If the new tag is already displayed, don't add it
         // This stops it removing user progress before saving
         var addIt = true
-        displayedTags.forEach {
+        alreadyDisplayedTags.forEach {
           if(it.text == displayTag.text) {
             addIt = false
           }
