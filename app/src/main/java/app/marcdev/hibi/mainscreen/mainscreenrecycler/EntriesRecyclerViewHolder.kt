@@ -41,6 +41,7 @@ class EntriesRecyclerViewHolder(itemView: View) : BaseEntriesRecyclerViewHolder(
     contentDisplay.text = item.entry.content
 
     if(item.tagEntryRelations.isNotEmpty()) {
+      chipGroup.removeAllViews()
       item.tagEntryRelations.forEach {
         val chip = Chip(itemView.context)
         chip.text = it.tag
