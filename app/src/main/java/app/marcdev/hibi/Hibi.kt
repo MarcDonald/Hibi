@@ -37,7 +37,7 @@ class Hibi : Application(), KodeinAware {
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
     bind() from provider { MainScreenViewModelFactory(instance(), instance()) }
-    bind() from provider { AddEntryViewModelFactory(instance()) }
+    bind() from provider { AddEntryViewModelFactory(instance(), instance()) }
     bind() from provider { ViewEntryViewModelFactory(instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }

@@ -16,7 +16,7 @@ interface TagEntryRelationRepository {
 
   suspend fun getTagsWithEntryNotLiveData(entryId: Int): List<String>
 
-  suspend fun deleteTagEntryRelation(tag: String, entryId: Int)
+  suspend fun deleteTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
   suspend fun deleteTagEntryRelationByTagId(tag: String)
 

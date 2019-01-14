@@ -39,9 +39,9 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
-  override suspend fun deleteTagEntryRelation(tag: String, entryId: Int) {
+  override suspend fun deleteTagEntryRelation(tagEntryRelation: TagEntryRelation) {
     withContext(Dispatchers.IO) {
-      dao.deleteTagEntryRelation(tag, entryId)
+      dao.deleteTagEntryRelation(tagEntryRelation)
     }
   }
 

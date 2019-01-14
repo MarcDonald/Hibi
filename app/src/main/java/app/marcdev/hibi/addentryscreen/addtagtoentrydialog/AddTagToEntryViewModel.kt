@@ -1,6 +1,7 @@
 package app.marcdev.hibi.addentryscreen.addtagtoentrydialog
 
 import androidx.lifecycle.ViewModel
+import app.marcdev.hibi.addentryscreen.TagsToSaveToNewEntry
 import app.marcdev.hibi.data.entity.TagEntryRelation
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.data.repository.TagRepository
@@ -22,15 +23,16 @@ class AddTagToEntryViewModel(private val tagRepository: TagRepository, private v
       val tagEntryRelation = TagEntryRelation(tag, entryId)
       tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
     } else {
-      // TODO save temporarily and then save on full save
+      TagsToSaveToNewEntry.list.add(tag)
     }
   }
 
   suspend fun deleteTagEntryRelation(tag: String) {
     if(entryId != 0) {
-      tagEntryRelationRepository.deleteTagEntryRelation(tag, entryId)
+      val tagEntryRelation = TagEntryRelation(tag, entryId)
+      tagEntryRelationRepository.deleteTagEntryRelation(tagEntryRelation)
     } else {
-      // TODO
+      TagsToSaveToNewEntry.list.remove(tag)
     }
   }
 }

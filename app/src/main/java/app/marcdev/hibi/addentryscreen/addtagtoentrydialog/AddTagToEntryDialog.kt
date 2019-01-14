@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
+import app.marcdev.hibi.addentryscreen.TagsToSaveToNewEntry
 import app.marcdev.hibi.addentryscreen.addtagdialog.AddTagDialog
 import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
@@ -91,7 +92,11 @@ class AddTagToEntryDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
   }
 
   private fun displayTags() = launch {
-    val tagEntryRelations = viewModel.getTagsForEntry()
+    val tagEntryRelations = if(viewModel.entryId == 0) {
+      TagsToSaveToNewEntry.list
+    } else {
+      viewModel.getTagsForEntry()
+    }
 
     val allTags = viewModel.allTags.await()
     allTags.observe(this@AddTagToEntryDialog, Observer { tags ->

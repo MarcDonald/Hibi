@@ -1,10 +1,7 @@
 package app.marcdev.hibi.data.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
@@ -28,6 +25,9 @@ interface DAO {
   @Query("SELECT COUNT(*) FROM Entry")
   fun getAmountOfEntries(): LiveData<Int>
 
+  @Query("SELECT id FROM Entry ORDER BY id DESC LIMIT 1")
+  fun getLastEntryId(): Int
+
   /* Tag */
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   fun upsertTag(tag: Tag)
@@ -42,7 +42,7 @@ interface DAO {
   fun deleteTag(tag: String)
 
   /* Tag Entry Relation */
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
   fun upsertTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
   @Query("SELECT * FROM TagEntryRelation")
@@ -58,8 +58,8 @@ interface DAO {
   @Query("SELECT tag FROM TagEntryRelation WHERE entryId = :entryId")
   fun getTagsWithEntryNotLiveData(entryId: Int): List<String>
 
-  @Query("DELETE FROM TagEntryRelation WHERE tag = :tag AND entryId = :entryId")
-  fun deleteTagEntryRelation(tag: String, entryId: Int)
+  @Delete
+  fun deleteTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
   @Query("DELETE FROM TagEntryRelation WHERE tag = :tag")
   fun deleteTagEntryRelationByTagId(tag: String)
