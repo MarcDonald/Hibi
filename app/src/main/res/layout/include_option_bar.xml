@@ -7,6 +7,7 @@
   android:background="@color/colorPrimary">
 
   <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_gravity="center"
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
@@ -25,68 +26,57 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-      android:id="@+id/img_placeholder_1"
+      android:id="@+id/img_option_location"
       android:layout_width="@dimen/option_bar_icon_width"
       android:layout_height="@dimen/option_bar_height"
       android:background="?selectableItemBackground"
       android:clickable="true"
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_add_black_24dp"
+      android:src="@drawable/ic_location_on_black_24dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toEndOf="@id/img_option_tag"
       app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-      android:id="@+id/img_placeholder_2"
+      android:id="@+id/img_option_media"
       android:layout_width="@dimen/option_bar_icon_width"
       android:layout_height="@dimen/option_bar_height"
       android:background="?selectableItemBackground"
       android:clickable="true"
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_add_black_24dp"
+      android:src="@drawable/ic_image_black_24dp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toEndOf="@id/img_placeholder_1"
+      app:layout_constraintStart_toEndOf="@id/img_option_location"
       app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-      android:id="@+id/img_placeholder_3"
+      android:id="@+id/img_option_mood"
       android:layout_width="@dimen/option_bar_icon_width"
       android:layout_height="@dimen/option_bar_height"
       android:background="?selectableItemBackground"
       android:clickable="true"
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_add_black_24dp"
+      android:src="@drawable/ic_mood_black_24dp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toEndOf="@id/img_placeholder_2"
+      app:layout_constraintStart_toEndOf="@id/img_option_media"
       app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-      android:id="@+id/img_placeholder_4"
+      android:id="@+id/img_option_words"
       android:layout_width="@dimen/option_bar_icon_width"
       android:layout_height="@dimen/option_bar_height"
+      android:layout_marginEnd="8dp"
       android:background="?selectableItemBackground"
       android:clickable="true"
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_add_black_24dp"
+      android:src="@drawable/ic_word"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toEndOf="@id/img_placeholder_3"
-      app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-      android:id="@+id/img_placeholder_5"
-      android:layout_width="@dimen/option_bar_icon_width"
-      android:layout_height="@dimen/option_bar_height"
-      android:background="?selectableItemBackground"
-      android:clickable="true"
-      android:focusable="true"
-      android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_add_black_24dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toEndOf="@id/img_placeholder_4"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/img_option_mood"
       app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </HorizontalScrollView>

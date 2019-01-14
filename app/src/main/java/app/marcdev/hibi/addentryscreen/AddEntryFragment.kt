@@ -98,6 +98,18 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     // Option bar icons
     val addTagButton: ImageView = view.findViewById(R.id.img_option_tag)
     addTagButton.setOnClickListener(addTagClickListener)
+
+    val addLocationButton: ImageView = view.findViewById(R.id.img_option_location)
+    addLocationButton.setOnClickListener(addLocationClickListener)
+
+    val addMediaButton: ImageView = view.findViewById(R.id.img_option_media)
+    addMediaButton.setOnClickListener(addMediaClickListener)
+
+    val addMoodButton: ImageView = view.findViewById(R.id.img_option_mood)
+    addMoodButton.setOnClickListener(addMoodClickListener)
+
+    val wordButton: ImageView = view.findViewById(R.id.img_option_words)
+    wordButton.setOnClickListener(wordClickListener)
   }
 
   private fun initBackConfirmDialog() {
@@ -149,6 +161,22 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     dialog.arguments = bundle
 
     dialog.show(requireFragmentManager(), "Add Tag Dialog")
+  }
+
+  private val addLocationClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+  }
+
+  private val addMediaClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+  }
+
+  private val addMoodClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+  }
+
+  private val wordClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
   }
 
   private fun search(searchTerm: String) {
