@@ -1,50 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/const_option_bar"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
+  android:layout_height="@dimen/option_bar_height"
   android:background="@color/colorPrimary">
 
-  <ImageView
-    android:id="@+id/placeholder1"
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_standard"
-    android:background="?selectableItemBackgroundBorderless"
-    android:clickable="true"
-    android:focusable="true"
-    android:src="@drawable/ic_add_black_24dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/placeholder2"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent">
 
-  <ImageView
-    android:id="@+id/placeholder2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_standard"
-    android:background="?selectableItemBackgroundBorderless"
-    android:clickable="true"
-    android:focusable="true"
-    android:src="@drawable/ic_add_black_24dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/placeholder3"
-    app:layout_constraintStart_toEndOf="@id/placeholder1"
-    app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+      android:id="@+id/img_option_tag"
+      android:layout_width="@dimen/option_bar_icon_width"
+      android:layout_height="@dimen/option_bar_height"
+      android:background="?selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      android:padding="@dimen/option_bar_icon_padding"
+      android:src="@drawable/ic_tag_black_24dp"
+      android:contentDescription="@string/add_tags_to_entry_hint"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-  <ImageView
-    android:id="@+id/placeholder3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_standard"
-    android:background="?selectableItemBackgroundBorderless"
-    android:clickable="true"
-    android:focusable="true"
-    android:src="@drawable/ic_add_black_24dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@id/placeholder2"
-    app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+      android:id="@+id/img_placeholder_1"
+      android:layout_width="@dimen/option_bar_icon_width"
+      android:layout_height="@dimen/option_bar_height"
+      android:background="?selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      android:padding="@dimen/option_bar_icon_padding"
+      android:src="@drawable/ic_add_black_24dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@id/img_option_tag"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/img_placeholder_2"
+      android:layout_width="@dimen/option_bar_icon_width"
+      android:layout_height="@dimen/option_bar_height"
+      android:background="?selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      android:padding="@dimen/option_bar_icon_padding"
+      android:src="@drawable/ic_add_black_24dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@id/img_placeholder_1"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/img_placeholder_3"
+      android:layout_width="@dimen/option_bar_icon_width"
+      android:layout_height="@dimen/option_bar_height"
+      android:background="?selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      android:padding="@dimen/option_bar_icon_padding"
+      android:src="@drawable/ic_add_black_24dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@id/img_placeholder_2"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/img_placeholder_4"
+      android:layout_width="@dimen/option_bar_icon_width"
+      android:layout_height="@dimen/option_bar_height"
+      android:background="?selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      android:padding="@dimen/option_bar_icon_padding"
+      android:src="@drawable/ic_add_black_24dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@id/img_placeholder_3"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/img_placeholder_5"
+      android:layout_width="@dimen/option_bar_icon_width"
+      android:layout_height="@dimen/option_bar_height"
+      android:background="?selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true"
+      android:padding="@dimen/option_bar_icon_padding"
+      android:src="@drawable/ic_add_black_24dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@id/img_placeholder_4"
+      app:layout_constraintTop_toTopOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</HorizontalScrollView>

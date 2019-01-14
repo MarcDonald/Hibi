@@ -43,12 +43,20 @@
   <string name="main_japanese">Japanese</string>
   <string name="main_reading">Reading</string>
   <string name="information">Information</string>
-  <string name="tags">Tags</string>
+  <string name="search_tags">Tags</string>
   <string name="search_results_restrictions">Restrictions: %1$s</string>
   <string name="search_results_antonyms">Antonyms: %1$s</string>
   <string name="search_results_see_also">See Also: %1$s</string>
   <string name="type">Type</string>
   <string name="english">English</string>
   <string name="alternatives">Alternatives</string>
+
+  <!--Tags-->
+  <string name="add_tags_to_entry_hint">Add Tags to Entry</string>
+  <string name="add_tag">Add a Tag</string>
+  <string name="entry_tags">Tags</string>
+  <string name="no_tags_found_warning">No Tags Found</string>
+  <string name="tag_manager">Tag Manager</string>
+  <string name="tag_name">Tag Name</string>
 
 </resources>

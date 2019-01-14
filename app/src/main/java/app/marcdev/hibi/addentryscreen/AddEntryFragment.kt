@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
+import app.marcdev.hibi.addentryscreen.addtagtoentrydialog.AddTagToEntryDialog
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
@@ -93,6 +94,10 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
     val backButton: ImageView = view.findViewById(R.id.img_add_entry_toolbar_back)
     backButton.setOnClickListener(backClickListener)
+
+    // Option bar icons
+    val addTagButton: ImageView = view.findViewById(R.id.img_option_tag)
+    addTagButton.setOnClickListener(addTagClickListener)
   }
 
   private fun initBackConfirmDialog() {
@@ -134,6 +139,16 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val timeDialog = TimePickerDialog()
     timeDialog.bindDateTimeStore(dateTimeStore)
     timeDialog.show(requireFragmentManager(), "Time Picker")
+  }
+
+  private val addTagClickListener = View.OnClickListener {
+    val dialog = AddTagToEntryDialog()
+
+    val bundle = Bundle()
+    bundle.putInt("entryId", entryIdBeingEdited)
+    dialog.arguments = bundle
+
+    dialog.show(requireFragmentManager(), "Add Tag Dialog")
   }
 
   private fun search(searchTerm: String) {

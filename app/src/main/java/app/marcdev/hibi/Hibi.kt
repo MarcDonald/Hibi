@@ -2,14 +2,15 @@ package app.marcdev.hibi
 
 import android.app.Application
 import app.marcdev.hibi.addentryscreen.AddEntryViewModelFactory
+import app.marcdev.hibi.addentryscreen.addtagdialog.AddTagViewModelFactory
+import app.marcdev.hibi.addentryscreen.addtagtoentrydialog.AddTagToEntryViewModelFactory
 import app.marcdev.hibi.data.database.AppDatabase
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.database.ProductionAppDatabase
 import app.marcdev.hibi.data.network.ConnectivityInterceptor
 import app.marcdev.hibi.data.network.ConnectivityInterceptorImpl
 import app.marcdev.hibi.data.network.JishoAPIService
-import app.marcdev.hibi.data.repository.EntryRepository
-import app.marcdev.hibi.data.repository.EntryRepositoryImpl
+import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.mainscreen.MainScreenViewModelFactory
 import app.marcdev.hibi.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
 import app.marcdev.hibi.searchresults.SearchViewModelFactory
@@ -31,13 +32,17 @@ class Hibi : Application(), KodeinAware {
     bind<AppDatabase>() with singleton { ProductionAppDatabase.invoke(applicationContext) }
     bind<DAO>() with singleton { instance<AppDatabase>().dao() }
     bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance()) }
+    bind<TagRepository>() with singleton { TagRepositoryImpl.getInstance(instance()) }
+    bind<TagEntryRelationRepository>() with singleton { TagEntryRelationRepositoryImpl.getInstance(instance()) }
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
-    bind() from provider { MainScreenViewModelFactory(instance()) }
-    bind() from provider { AddEntryViewModelFactory(instance()) }
-    bind() from provider { ViewEntryViewModelFactory(instance()) }
+    bind() from provider { MainScreenViewModelFactory(instance(), instance()) }
+    bind() from provider { AddEntryViewModelFactory(instance(), instance()) }
+    bind() from provider { ViewEntryViewModelFactory(instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
+    bind() from provider { AddTagToEntryViewModelFactory(instance(), instance()) }
+    bind() from provider { AddTagViewModelFactory(instance()) }
   }
 
   override fun onCreate() {

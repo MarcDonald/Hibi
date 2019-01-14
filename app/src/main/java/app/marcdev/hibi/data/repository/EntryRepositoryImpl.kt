@@ -38,6 +38,12 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
     }
   }
 
+  override suspend fun getLastEntryId(): Int {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getLastEntryId()
+    }
+  }
+
   companion object {
     @Volatile private var instance: EntryRepositoryImpl? = null
 

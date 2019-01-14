@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -18,6 +19,8 @@ import app.marcdev.hibi.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.SearchBar
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import app.marcdev.hibi.uicomponents.YesNoDialog
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -37,6 +40,8 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var contentDisplay: TextView
   private lateinit var deleteConfirmDialog: YesNoDialog
   private lateinit var searchBar: SearchBar
+  private lateinit var tagDisplay: ChipGroup
+  private lateinit var tagDisplayHolder: LinearLayout
 
   // Other
   private var entryIdBeingViewed = 0
@@ -84,12 +89,29 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
       dateButton.setText(formatDateForDisplay(day, month, year))
       timeButton.setText(formatTimeForDisplay(hour, minute))
     })
+
+    viewModel.getTags(entryId).observe(this@ViewEntryFragment, Observer { tags ->
+      tagDisplay.removeAllViews()
+
+      if(tags.isEmpty()) {
+        tagDisplayHolder.visibility = View.GONE
+      } else {
+        tagDisplayHolder.visibility = View.VISIBLE
+        tags.forEach {
+          val displayTag = Chip(tagDisplay.context)
+          displayTag.text = it
+          tagDisplay.addView(displayTag)
+        }
+      }
+    })
   }
 
   private fun bindViews(view: View) {
     dateButton = view.findViewById(R.id.btn_view_date)
     timeButton = view.findViewById(R.id.btn_view_time)
     contentDisplay = view.findViewById(R.id.txt_view_content)
+    tagDisplay = view.findViewById(R.id.cg_view_tags)
+    tagDisplayHolder = view.findViewById(R.id.lin_view_tags)
     searchBar = view.findViewById(R.id.searchbar_view_entry)
     searchBar.setSearchAction(this::search)
 

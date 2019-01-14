@@ -93,14 +93,12 @@ class MainScreenFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun displayRecyclerData() = launch {
-    val allEntries = viewModel.allEntries.await()
-    allEntries.observe(this@MainScreenFragment, Observer { entries ->
-      val sortedEntries = viewModel.sortEntries(entries)
-      recyclerAdapter.updateList(sortedEntries)
+    val displayItems = viewModel.displayItems.await()
 
-      if(loadingDisplay.visibility == View.VISIBLE) {
-        loadingDisplay.visibility = View.GONE
-      }
+    displayItems.observe(this@MainScreenFragment, Observer { items ->
+      loadingDisplay.visibility = View.VISIBLE
+      recyclerAdapter.updateList(items)
+      loadingDisplay.visibility = View.GONE
     })
   }
 }

@@ -3,7 +3,7 @@ package app.marcdev.hibi.data.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "entries")
+@Entity(tableName = "Entry")
 data class Entry(
   var day: Int,
   var month: Int,
