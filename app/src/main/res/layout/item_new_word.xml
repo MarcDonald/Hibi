@@ -6,7 +6,7 @@
   android:layout_height="wrap_content">
 
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/const_search_result"
+    android:id="@+id/const_new_word"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?selectableItemBackground"
@@ -15,17 +15,17 @@
     android:orientation="vertical">
 
     <TextView
-      android:id="@+id/txt_search_result_word"
+      android:id="@+id/txt_new_word_word"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
       android:text="@string/japanese_word_with_output"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/txt_search_result_type"
+      app:layout_constraintEnd_toStartOf="@id/txt_new_word_part"
       app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-      android:id="@+id/txt_search_result_type"
+      android:id="@+id/txt_new_word_part"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
@@ -35,38 +35,34 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-      android:id="@+id/txt_search_result_reading"
+      android:id="@+id/txt_new_word_reading"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
       android:text="@string/reading_with_output"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/txt_search_result_word" />
+      app:layout_constraintTop_toBottomOf="@id/txt_new_word_word" />
 
     <TextView
-      android:id="@+id/txt_search_result_english"
+      android:id="@+id/txt_new_word_english"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
       android:text="@string/english_with_output"
-      app:layout_constraintBottom_toTopOf="@id/txt_search_result_other_forms"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/txt_search_result_reading" />
+      app:layout_constraintTop_toBottomOf="@id/txt_new_word_reading" />
 
     <TextView
-      android:id="@+id/txt_search_result_other_forms"
+      android:id="@+id/txt_new_word_notes"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/margin_standard"
-      android:layout_marginEnd="@dimen/margin_standard"
-      android:layout_marginStart="@dimen/margin_standard"
-      android:text="@string/search_results_other"
-      android:gravity="end"
+      android:layout_margin="@dimen/margin_standard"
+      android:text="@string/notes_with_output"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/txt_search_result_english"
-      app:layout_constraintBottom_toBottomOf="parent" />
+      app:layout_constraintTop_toBottomOf="@id/txt_new_word_english" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

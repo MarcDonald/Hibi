@@ -13,9 +13,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
 import app.marcdev.hibi.addentryscreen.addtagtoentrydialog.AddTagToEntryDialog
+import app.marcdev.hibi.internal.ENTRY_ID_KEY
+import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
+import app.marcdev.hibi.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.SearchBar
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
@@ -157,7 +160,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val dialog = AddTagToEntryDialog()
 
     val bundle = Bundle()
-    bundle.putInt("entryId", entryIdBeingEdited)
+    bundle.putInt(ENTRY_ID_KEY, entryIdBeingEdited)
     dialog.arguments = bundle
 
     dialog.show(requireFragmentManager(), "Add Tag Dialog")
@@ -176,12 +179,18 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private val wordClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+    val dialog = NewWordDialog()
+
+    val bundle = Bundle()
+    bundle.putInt(ENTRY_ID_KEY, entryIdBeingEdited)
+    dialog.arguments = bundle
+
+    dialog.show(requireFragmentManager(), "New Words Dialog")
   }
 
   private fun search(searchTerm: String) {
     val args = Bundle()
-    args.putString("searchTerm", searchTerm)
+    args.putString(SEARCH_TERM_KEY, searchTerm)
 
     val searchDialog = SearchResultsDialog()
     searchDialog.arguments = args

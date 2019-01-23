@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
 
-@Database(entities = [Entry::class, Tag::class, TagEntryRelation::class], version = 5)
+@Database(entities = [Entry::class, Tag::class, TagEntryRelation::class, NewWord::class], version = 6)
 
 abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
   abstract override fun dao(): DAO
@@ -30,6 +31,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
         ProductionAppDatabase::class.java,
         "ProductionAppDatabase.db")
         .addMigrations(MIGRATION_3_TO_5())
+        .addMigrations(MIGRATION_5_TO_6())
         .fallbackToDestructiveMigration()
         .build()
 
@@ -38,6 +40,12 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
         database.execSQL("ALTER TABLE entries RENAME TO Entry")
         database.execSQL("CREATE TABLE Tag('name' TEXT NOT NULL, PRIMARY KEY (name))")
         database.execSQL("CREATE TABLE TagEntryRelation('tag' TEXT NOT NULL, 'entryId' INTEGER NOT NULL, PRIMARY KEY (tag, entryId))")
+      }
+    }
+
+    class MIGRATION_5_TO_6 : Migration(5, 6) {
+      override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("CREATE TABLE NewWord('word' TEXT NOT NULL, 'reading' TEXT NOT NULL, 'partOfSpeech' TEXT NOT NULL, 'english' TEXT NOT NULL, 'notes' TEXT NOT NULL, 'entryId' INTEGER NOT NULL, 'id' INTEGER NOT NULL PRIMARY KEY)")
       }
     }
   }

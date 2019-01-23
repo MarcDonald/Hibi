@@ -3,6 +3,7 @@ package app.marcdev.hibi.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
 
@@ -66,4 +67,14 @@ interface DAO {
 
   @Query("DELETE FROM TagEntryRelation WHERE entryId = :entryId")
   fun deleteTagEntryRelationByEntryId(entryId: Int)
+
+  /* New Word */
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  fun upsertNewWord(newWord: NewWord)
+
+  @Query("DELETE FROM NewWord WHERE entryId = :entryId")
+  fun deleteNewWordByEntryId(entryId: Int)
+
+  @Query("SELECT * FROM NewWord WHERE entryId = :entryId")
+  fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>
 }

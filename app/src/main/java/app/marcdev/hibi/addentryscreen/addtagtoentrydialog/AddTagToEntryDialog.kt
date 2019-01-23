@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.addentryscreen.TagsToSaveToNewEntry
 import app.marcdev.hibi.addentryscreen.addtagdialog.AddTagDialog
+import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import kotlinx.coroutines.launch
@@ -47,7 +48,7 @@ class AddTagToEntryDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddTagToEntryViewModel::class.java)
 
     arguments?.let {
-      val entryId = arguments!!.getInt("entryId")
+      val entryId = arguments!!.getInt(ENTRY_ID_KEY)
       viewModel.entryId = entryId
     }
 

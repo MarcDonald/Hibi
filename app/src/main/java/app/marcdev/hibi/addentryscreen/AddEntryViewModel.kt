@@ -5,12 +5,14 @@ import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.TagEntryRelation
 import app.marcdev.hibi.data.repository.EntryRepository
+import app.marcdev.hibi.data.repository.NewWordRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 
-class AddEntryViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class AddEntryViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository, private val newWordRepository: NewWordRepository) : ViewModel() {
 
   init {
     TagsToSaveToNewEntry.list.clear()
+    NewWordsToSaveToNewEntry.list.clear()
   }
 
   suspend fun addEntry(day: Int, month: Int, year: Int, hour: Int, minute: Int, content: String) {
@@ -19,6 +21,10 @@ class AddEntryViewModel(private val entryRepository: EntryRepository, private va
     TagsToSaveToNewEntry.list.forEach {
       val tagEntryRelation = TagEntryRelation(it, id)
       tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
+    }
+    NewWordsToSaveToNewEntry.list.forEach {
+      it.entryId = id
+      newWordRepository.addNewWord(it)
     }
   }
 

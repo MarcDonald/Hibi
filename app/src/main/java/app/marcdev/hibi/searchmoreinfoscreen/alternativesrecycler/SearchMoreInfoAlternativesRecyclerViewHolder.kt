@@ -53,16 +53,16 @@ class SearchMoreInfoAlternativesRecyclerViewHolder(itemView: View) : RecyclerVie
 
     if(reading != null) {
       if(word == null || word.isBlank()) {
-        wordDisplay.text = itemView.resources.getString(R.string.search_results_word, reading)
+        wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, reading)
         readingDisplay.visibility = View.GONE
         wordContent = reading
       } else {
-        wordDisplay.text = itemView.resources.getString(R.string.search_results_word, word)
+        wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, word)
         wordContent = word
         if(reading.isBlank()) {
           readingDisplay.visibility = View.GONE
         } else {
-          readingDisplay.text = itemView.resources.getString(R.string.search_results_reading, reading)
+          readingDisplay.text = itemView.resources.getString(R.string.reading_with_output, reading)
           readingContent = reading
         }
       }

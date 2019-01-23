@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <TextView
+    android:id="@+id/txt_new_words_title"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="@string/new_words"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/btn_add_new_word"
+    app:layout_constraintStart_toStartOf="parent"
+    android:textAlignment="textStart"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:layout_margin="@dimen/margin_standard" />
+
+  <app.marcdev.hibi.uicomponents.TransparentSquareButton
+    android:id="@+id/btn_add_new_word"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:text="@string/add_new_word"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_margin="@dimen/margin_standard" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_new_words"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_standard"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btn_add_new_word" />
+
+  <LinearLayout
+    android:id="@+id/lin_new_words_no_results"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_standard"
+    app:layout_constraintTop_toBottomOf="@id/btn_add_new_word"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <ImageView
+      android:layout_width="@dimen/search_warning_icon_size"
+      android:layout_height="@dimen/search_warning_icon_size"
+      android:layout_gravity="center"
+      android:layout_margin="@dimen/margin_standard"
+      android:contentDescription="@string/no_results"
+      android:src="@drawable/ic_sentiment_dissatisfied_black_24dp" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/no_new_words" />
+  </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

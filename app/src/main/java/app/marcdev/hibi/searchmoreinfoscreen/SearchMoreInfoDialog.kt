@@ -135,8 +135,8 @@ class SearchMoreInfoDialog : ScopedDialogFragment(), KodeinAware {
       if(list.isNotEmpty()) {
         val mainWord: String? = list[0].word
         val mainReading: String? = list[0].reading
-        val mainWordString = resources.getString(R.string.search_results_word, mainWord)
-        val mainReadingString = resources.getString(R.string.search_results_reading, mainReading)
+        val mainWordString = resources.getString(R.string.japanese_word_with_output, mainWord)
+        val mainReadingString = resources.getString(R.string.reading_with_output, mainReading)
 
         if(mainWord != null && mainWord.isNotBlank()) {
           mainWordDisplay.text = mainWordString
