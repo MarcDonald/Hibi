@@ -26,7 +26,10 @@
       <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/const_view_date_and_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <app.marcdev.hibi.uicomponents.TransparentSquareButton
           android:id="@+id/btn_view_date"
@@ -73,7 +76,6 @@
         android:id="@+id/lin_view_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_view_content"
@@ -94,6 +96,15 @@
           android:layout_margin="@dimen/margin_standard" />
       </LinearLayout>
 
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_view_new_words"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_words"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintTop_toBottomOf="@id/lin_view_tags"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 

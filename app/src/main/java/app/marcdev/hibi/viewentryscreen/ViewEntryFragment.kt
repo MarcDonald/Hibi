@@ -12,13 +12,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.ENTRY_ID_KEY
+import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
+import app.marcdev.hibi.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.SearchBar
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import app.marcdev.hibi.uicomponents.YesNoDialog
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kotlinx.coroutines.launch
@@ -123,6 +127,9 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
 
     val deleteButton: ImageView = view.findViewById(R.id.img_delete)
     deleteButton.setOnClickListener(deleteClickListener)
+
+    val newWordsButton: MaterialButton = view.findViewById(R.id.btn_view_new_words)
+    newWordsButton.setOnClickListener(newWordsClickListener)
   }
 
   private val backClickListener = View.OnClickListener {
@@ -139,6 +146,17 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
 
   private val deleteClickListener = View.OnClickListener {
     deleteConfirmDialog.show(requireFragmentManager(), "Delete Confirmation Dialog")
+  }
+
+  private val newWordsClickListener = View.OnClickListener {
+    val dialog = NewWordDialog()
+
+    val bundle = Bundle()
+    bundle.putInt(ENTRY_ID_KEY, entryIdBeingViewed)
+    bundle.putBoolean(IS_EDIT_MODE_KEY, false)
+    dialog.arguments = bundle
+
+    dialog.show(requireFragmentManager(), "View New Words Dialog")
   }
 
   private fun search(searchTerm: String) {

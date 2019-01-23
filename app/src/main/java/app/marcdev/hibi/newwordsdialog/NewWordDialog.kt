@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.addentryscreen.NewWordsToSaveToNewEntry
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
+import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
 import app.marcdev.hibi.newwordsdialog.addnewworddialog.AddNewWordDialog
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
@@ -28,6 +29,7 @@ class NewWordDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
 
   // UI Components
   private lateinit var noResultsWarning: LinearLayout
+  private lateinit var addButton: TransparentSquareButton
 
   // Viewmodel
   private val viewModelFactory: NewWordViewModelFactory by instance()
@@ -36,6 +38,9 @@ class NewWordDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
   // Recycler
   private lateinit var recyclerAdapter: NewWordsRecyclerAdapter
   private lateinit var recycler: RecyclerView
+
+  // Other
+  private var isEditMode = true
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
@@ -53,7 +58,12 @@ class NewWordDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
     arguments?.let {
       val entryId = arguments!!.getInt(ENTRY_ID_KEY)
       viewModel.entryId = entryId
+
+      isEditMode = arguments!!.getBoolean(IS_EDIT_MODE_KEY, true)
     }
+
+    if(!isEditMode)
+      addButton.visibility = View.GONE
 
     displayData()
   }
@@ -62,7 +72,7 @@ class NewWordDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
     noResultsWarning = view.findViewById(R.id.lin_new_words_no_results)
     recycler = view.findViewById(R.id.recycler_new_words)
 
-    val addButton: TransparentSquareButton = view.findViewById(R.id.btn_add_new_word)
+    addButton = view.findViewById(R.id.btn_add_new_word)
     addButton.setOnClickListener(addClickListener)
 
     initRecycler()
