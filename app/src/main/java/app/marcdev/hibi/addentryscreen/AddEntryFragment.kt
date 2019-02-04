@@ -20,9 +20,9 @@ import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
 import app.marcdev.hibi.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.searchresults.SearchResultsDialog
+import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.SearchBar
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
-import app.marcdev.hibi.uicomponents.YesNoDialog
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -42,7 +42,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var dateButton: TransparentSquareButton
   private lateinit var timeButton: TransparentSquareButton
   private lateinit var contentInput: EditText
-  private lateinit var backConfirmDialog: YesNoDialog
+  private lateinit var backConfirmDialog: BinaryOptionDialog
   private lateinit var toolbarTitle: TextView
   private lateinit var searchBar: SearchBar
 
@@ -116,11 +116,11 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun initBackConfirmDialog() {
-    backConfirmDialog = YesNoDialog()
+    backConfirmDialog = BinaryOptionDialog()
     backConfirmDialog.setTitle(resources.getString(R.string.warning_caps))
     backConfirmDialog.setMessage(resources.getString(R.string.go_back_warning))
-    backConfirmDialog.setYesButton(resources.getString(R.string.ok), okBackClickListener)
-    backConfirmDialog.setNoButton(resources.getString(R.string.cancel), cancelBackClickListener)
+    backConfirmDialog.setRightButton(resources.getString(R.string.ok), okBackClickListener)
+    backConfirmDialog.setLeftButton(resources.getString(R.string.cancel), cancelBackClickListener)
   }
 
   private val saveClickListener = View.OnClickListener {

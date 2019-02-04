@@ -131,8 +131,8 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
           listOfSensesJson.add(sensesJson)
         }
       }
-
-      return listOfSensesJson
     }
+
+    return listOfSensesJson
   }
 }

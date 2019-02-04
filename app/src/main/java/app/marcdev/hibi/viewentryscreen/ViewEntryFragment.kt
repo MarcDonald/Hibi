@@ -19,9 +19,9 @@ import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
 import app.marcdev.hibi.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.searchresults.SearchResultsDialog
+import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.SearchBar
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
-import app.marcdev.hibi.uicomponents.YesNoDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -42,7 +42,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var dateButton: TransparentSquareButton
   private lateinit var timeButton: TransparentSquareButton
   private lateinit var contentDisplay: TextView
-  private lateinit var deleteConfirmDialog: YesNoDialog
+  private lateinit var deleteConfirmDialog: BinaryOptionDialog
   private lateinit var searchBar: SearchBar
   private lateinit var tagDisplay: ChipGroup
   private lateinit var tagDisplayHolder: LinearLayout
@@ -170,11 +170,11 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun initDeleteConfirmDialog() {
-    deleteConfirmDialog = YesNoDialog()
+    deleteConfirmDialog = BinaryOptionDialog()
     deleteConfirmDialog.setTitle(resources.getString(R.string.delete_confirm_title))
     deleteConfirmDialog.setMessage(resources.getString(R.string.delete_confirm))
-    deleteConfirmDialog.setYesButton(resources.getString(R.string.delete), okDeleteClickListener)
-    deleteConfirmDialog.setNoButton(resources.getString(R.string.cancel), cancelDeleteClickListener)
+    deleteConfirmDialog.setRightButton(resources.getString(R.string.delete), okDeleteClickListener)
+    deleteConfirmDialog.setLeftButton(resources.getString(R.string.cancel), cancelDeleteClickListener)
   }
 
   private val okDeleteClickListener = View.OnClickListener {
