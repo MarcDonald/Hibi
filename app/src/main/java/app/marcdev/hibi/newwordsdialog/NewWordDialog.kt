@@ -60,6 +60,7 @@ class NewWordDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
       viewModel.entryId = entryId
 
       isEditMode = arguments!!.getBoolean(IS_EDIT_MODE_KEY, true)
+      recyclerAdapter.isEditMode = isEditMode
     }
 
     if(!isEditMode)
@@ -89,7 +90,7 @@ class NewWordDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
   }
 
   private fun initRecycler() {
-    this.recyclerAdapter = NewWordsRecyclerAdapter(requireContext())
+    this.recyclerAdapter = NewWordsRecyclerAdapter(requireContext(), requireFragmentManager())
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager

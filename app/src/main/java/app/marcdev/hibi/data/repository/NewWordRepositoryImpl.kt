@@ -14,9 +14,15 @@ class NewWordRepositoryImpl private constructor(private val dao: DAO) : NewWordR
     }
   }
 
-  override suspend fun deleteNewWordByEntryId(entryId: Int) {
+  override suspend fun getNewWord(id: Int): NewWord {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getNewWord(id)
+    }
+  }
+
+  override suspend fun deleteNewWord(id: Int) {
     withContext(Dispatchers.IO) {
-      return@withContext dao.deleteNewWordByEntryId(entryId)
+      dao.deleteNewWord(id)
     }
   }
 

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
+import app.marcdev.hibi.internal.NEW_WORD_ID_KEY
 import app.marcdev.hibi.internal.base.ScopedDialogFragment
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import kotlinx.coroutines.launch
@@ -46,8 +47,14 @@ class AddNewWordDialog : ScopedDialogFragment(), KodeinAware {
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddNewWordViewModel::class.java)
 
     arguments?.let {
-      val entryId = arguments!!.getInt(ENTRY_ID_KEY)
+      val entryId = arguments!!.getInt(ENTRY_ID_KEY, 0)
       viewModel.entryId = entryId
+
+      val newWordId = arguments!!.getInt(NEW_WORD_ID_KEY, 0)
+      if(newWordId != 0) {
+        viewModel.newWordId = newWordId
+        fillData()
+      }
     }
   }
 
@@ -60,6 +67,9 @@ class AddNewWordDialog : ScopedDialogFragment(), KodeinAware {
 
     val saveButton: TransparentSquareButton = view.findViewById(R.id.btn_save_new_word)
     saveButton.setOnClickListener(saveClickListener)
+
+    val deleteButton: TransparentSquareButton = view.findViewById(R.id.btn_delete_new_word)
+    deleteButton.setOnClickListener(deleteClickListener)
   }
 
   private val saveClickListener = View.OnClickListener {
@@ -71,5 +81,25 @@ class AddNewWordDialog : ScopedDialogFragment(), KodeinAware {
         dismiss()
       }
     }
+  }
+
+  private val deleteClickListener = View.OnClickListener {
+    if(viewModel.newWordId == 0) {
+      dismiss()
+    } else {
+      launch {
+        viewModel.deleteNewWord()
+        dismiss()
+      }
+    }
+  }
+
+  private fun fillData() = launch {
+    val entry = viewModel.getNewWord()
+    wordInput.setText(entry.word)
+    readingInput.setText(entry.reading)
+    typeInput.setText(entry.partOfSpeech)
+    englishInput.setText(entry.english)
+    notesInput.setText(entry.notes)
   }
 }

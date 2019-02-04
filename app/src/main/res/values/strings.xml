@@ -64,6 +64,7 @@
   <string name="reading">Reading</string>
   <string name="part_of_speech">Part of Speech</string>
   <string name="notes">Notes</string>
+  <string name="edit_or_delete_word_title">Edit or Delete Word</string>
 
   <!--Strings with wildcards-->
   <string name="japanese_word_with_output">Japanese: %1$s</string>

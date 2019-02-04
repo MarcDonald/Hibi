@@ -7,14 +7,26 @@ import app.marcdev.hibi.data.repository.NewWordRepository
 
 class AddNewWordViewModel(private val newWordRepository: NewWordRepository) : ViewModel() {
   var entryId: Int = 0
+  var newWordId: Int = 0
 
   suspend fun saveNewWord(word: String, reading: String, part: String, english: String, notes: String) {
-    val newWord = NewWord(word, reading, part, english, notes, entryId)
+    val newWordToSave = NewWord(word, reading, part, english, notes, entryId)
 
     if(entryId != 0) {
-      newWordRepository.addNewWord(newWord)
+      if(newWordId != 0) {
+        newWordToSave.id = newWordId
+      }
+      newWordRepository.addNewWord(newWordToSave)
     } else {
-      NewWordsToSaveToNewEntry.list.add(newWord)
+      NewWordsToSaveToNewEntry.list.add(newWordToSave)
     }
+  }
+
+  suspend fun getNewWord(): NewWord {
+    return newWordRepository.getNewWord(newWordId)
+  }
+
+  suspend fun deleteNewWord() {
+    newWordRepository.deleteNewWord(newWordId)
   }
 }

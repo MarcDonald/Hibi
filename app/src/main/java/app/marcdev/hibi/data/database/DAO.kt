@@ -11,9 +11,10 @@ import app.marcdev.hibi.data.entity.TagEntryRelation
 interface DAO {
 
   /* Entry */
-  /* When a conflict occurs, ignores the one row that is conflicting and continues with the rest.
-     This stops the entity being replaced which triggered a delete cascade for all foreign keys
-     https://sqlite.org/lang_conflict.html
+  /* When a constraint violation occurs, ignores the one row that is the constraint violation and
+     continues with the rest. This stops the entity being replaced which triggered a delete cascade
+     for all foreign keys
+     See https://sqlite.org/lang_conflict.html
    */
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   fun upsertEntry(entry: Entry)
@@ -47,7 +48,7 @@ interface DAO {
   fun deleteTag(tag: String)
 
   /* Tag Entry Relation */
-  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun upsertTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
   @Query("SELECT * FROM TagEntryRelation")
@@ -73,11 +74,14 @@ interface DAO {
   fun deleteTagEntryRelationByEntryId(entryId: Int)
 
   /* New Word */
-  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun upsertNewWord(newWord: NewWord)
 
-  @Query("DELETE FROM NewWord WHERE entryId = :entryId")
-  fun deleteNewWordByEntryId(entryId: Int)
+  @Query("SELECT * FROM NewWord WHERE id = :id")
+  fun getNewWord(id: Int): NewWord
+
+  @Query("DELETE FROM NewWord WHERE id = :id")
+  fun deleteNewWord(id: Int)
 
   @Query("SELECT * FROM NewWord WHERE entryId = :entryId")
   fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>

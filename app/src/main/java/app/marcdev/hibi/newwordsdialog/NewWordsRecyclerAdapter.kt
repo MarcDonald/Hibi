@@ -5,19 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.data.entity.NewWord
 
-class NewWordsRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<NewWordsRecyclerViewHolder>() {
+class NewWordsRecyclerAdapter(private val context: Context, private val fragmentManager: FragmentManager) : RecyclerView.Adapter<NewWordsRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var dataList: List<NewWord> = listOf()
   private var lastPosition = -1
+  var isEditMode = false
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewWordsRecyclerViewHolder {
     val view = inflater.inflate(R.layout.item_new_word, parent, false)
-    return NewWordsRecyclerViewHolder(view)
+    return NewWordsRecyclerViewHolder(view, fragmentManager, isEditMode)
   }
 
   override fun getItemCount(): Int {

@@ -7,7 +7,9 @@ interface NewWordRepository {
 
   suspend fun addNewWord(newWord: NewWord)
 
-  suspend fun deleteNewWordByEntryId(entryId: Int)
+  suspend fun getNewWord(id: Int): NewWord
+
+  suspend fun deleteNewWord(id: Int)
 
   suspend fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>
 }
