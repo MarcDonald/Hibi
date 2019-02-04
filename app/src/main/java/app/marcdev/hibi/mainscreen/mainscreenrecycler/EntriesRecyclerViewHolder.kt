@@ -24,9 +24,7 @@ class EntriesRecyclerViewHolder(itemView: View) : BaseEntriesRecyclerViewHolder(
   private val clickListener = View.OnClickListener {
     val viewEntryAction = MainScreenFragmentDirections.viewEntryAction()
     if(displayedItem != null) {
-      if(displayedItem!!.entry.id != null) {
-        viewEntryAction.entryId = displayedItem!!.entry.id!!
-      }
+      viewEntryAction.entryId = displayedItem!!.entry.id
     }
     Navigation.findNavController(it).navigate(viewEntryAction)
   }

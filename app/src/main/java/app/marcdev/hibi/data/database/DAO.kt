@@ -11,7 +11,11 @@ import app.marcdev.hibi.data.entity.TagEntryRelation
 interface DAO {
 
   /* Entry */
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  /* When a conflict occurs, ignores the one row that is conflicting and continues with the rest.
+     This stops the entity being replaced which triggered a delete cascade for all foreign keys
+     https://sqlite.org/lang_conflict.html
+   */
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
   fun upsertEntry(entry: Entry)
 
   @Query("SELECT * FROM Entry WHERE id = :id")
@@ -69,7 +73,7 @@ interface DAO {
   fun deleteTagEntryRelationByEntryId(entryId: Int)
 
   /* New Word */
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
   fun upsertNewWord(newWord: NewWord)
 
   @Query("DELETE FROM NewWord WHERE entryId = :entryId")

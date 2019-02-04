@@ -124,7 +124,27 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private val saveClickListener = View.OnClickListener {
-    onSaveClick()
+    launch {
+      val content = contentInput.text.toString()
+
+      if(content.isBlank()) {
+        Toast.makeText(requireContext(), resources.getString(R.string.empty_content_warning), Toast.LENGTH_SHORT).show()
+      } else {
+        val day = dateTimeStore.getDay()
+        val month = dateTimeStore.getMonth()
+        val year = dateTimeStore.getYear()
+        val hour = dateTimeStore.getHour()
+        val minute = dateTimeStore.getMinute()
+
+        if(entryIdBeingEdited == 0) {
+          viewModel.addEntry(day, month, year, hour, minute, content)
+        } else {
+          viewModel.updateEntry(day, month, year, hour, minute, content, entryIdBeingEdited)
+        }
+
+        popBackStack()
+      }
+    }
   }
 
   private val backClickListener = View.OnClickListener {
@@ -227,28 +247,6 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
       dateButton.setText(formatDateForDisplay(day, month, year))
       timeButton.setText(formatTimeForDisplay(hour, minute))
     })
-  }
-
-  private fun onSaveClick() = launch {
-    val content = contentInput.text.toString()
-
-    if(content.isBlank()) {
-      Toast.makeText(requireContext(), resources.getString(R.string.empty_content_warning), Toast.LENGTH_SHORT).show()
-    } else {
-      val day = dateTimeStore.getDay()
-      val month = dateTimeStore.getMonth()
-      val year = dateTimeStore.getYear()
-      val hour = dateTimeStore.getHour()
-      val minute = dateTimeStore.getMinute()
-
-      if(entryIdBeingEdited == 0) {
-        viewModel.addEntry(day, month, year, hour, minute, content)
-      } else {
-        viewModel.updateEntry(day, month, year, hour, minute, content, entryIdBeingEdited)
-      }
-
-      popBackStack()
-    }
   }
 
   private fun popBackStack() {
