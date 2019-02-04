@@ -12,6 +12,8 @@ import app.marcdev.hibi.data.network.ConnectivityInterceptorImpl
 import app.marcdev.hibi.data.network.JishoAPIService
 import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.mainscreen.MainScreenViewModelFactory
+import app.marcdev.hibi.newwordsdialog.NewWordViewModelFactory
+import app.marcdev.hibi.newwordsdialog.addnewworddialog.AddNewWordViewModelFactory
 import app.marcdev.hibi.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
 import app.marcdev.hibi.searchresults.SearchViewModelFactory
 import app.marcdev.hibi.viewentryscreen.ViewEntryViewModelFactory
@@ -34,15 +36,18 @@ class Hibi : Application(), KodeinAware {
     bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance()) }
     bind<TagRepository>() with singleton { TagRepositoryImpl.getInstance(instance()) }
     bind<TagEntryRelationRepository>() with singleton { TagEntryRelationRepositoryImpl.getInstance(instance()) }
+    bind<NewWordRepository>() with singleton { NewWordRepositoryImpl.getInstance(instance()) }
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
     bind() from provider { MainScreenViewModelFactory(instance(), instance()) }
-    bind() from provider { AddEntryViewModelFactory(instance(), instance()) }
+    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { ViewEntryViewModelFactory(instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
     bind() from provider { AddTagToEntryViewModelFactory(instance(), instance()) }
     bind() from provider { AddTagViewModelFactory(instance()) }
+    bind() from provider { NewWordViewModelFactory(instance()) }
+    bind() from provider { AddNewWordViewModelFactory(instance()) }
   }
 
   override fun onCreate() {

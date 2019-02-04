@@ -34,10 +34,7 @@
   <string name="search_bar_hint">Search on Jisho.org</string>
   <string name="no_connection_warning">No Internet Connection</string>
   <string name="no_results">No Results Found</string>
-  <string name="search_results_word">Japanese: %1$s</string>
-  <string name="search_results_reading">Reading: %1$s</string>
   <string name="search_results_other">Other forms available</string>
-  <string name="search_results_english">English: %1$s</string>
 
   <!--Search more info-->
   <string name="main_japanese">Japanese</string>
@@ -58,5 +55,21 @@
   <string name="no_tags_found_warning">No Tags Found</string>
   <string name="tag_manager">Tag Manager</string>
   <string name="tag_name">Tag Name</string>
+
+  <!--New Words-->
+  <string name="add_new_word">Add a New Word</string>
+  <string name="new_words">New Words</string>
+  <string name="no_new_words">No New Words</string>
+  <string name="word">Word</string>
+  <string name="reading">Reading</string>
+  <string name="part_of_speech">Part of Speech</string>
+  <string name="notes">Notes</string>
+  <string name="edit_or_delete_word_title">Edit or Delete Word</string>
+
+  <!--Strings with wildcards-->
+  <string name="japanese_word_with_output">Japanese: %1$s</string>
+  <string name="reading_with_output">Reading: %1$s</string>
+  <string name="english_with_output">English: %1$s</string>
+  <string name="notes_with_output">Notes: %1$s</string>
 
 </resources>

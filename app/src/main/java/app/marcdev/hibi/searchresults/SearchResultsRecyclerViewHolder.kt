@@ -52,14 +52,14 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
     val reading: String? = data.japanese[0].reading
 
     if(word == null || word.isBlank()) {
-      wordDisplay.text = itemView.resources.getString(R.string.search_results_word, reading)
+      wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, reading)
       readingDisplay.visibility = View.GONE
     } else {
-      wordDisplay.text = itemView.resources.getString(R.string.search_results_word, word)
+      wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, word)
       if(reading == null || reading.isBlank()) {
         readingDisplay.visibility = View.GONE
       } else {
-        readingDisplay.text = itemView.resources.getString(R.string.search_results_reading, reading)
+        readingDisplay.text = itemView.resources.getString(R.string.reading_with_output, reading)
       }
     }
   }
@@ -95,7 +95,7 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
         }
       }
     }
-    englishDisplay.text = itemView.resources.getString(R.string.search_results_english, englishDisplayString)
+    englishDisplay.text = itemView.resources.getString(R.string.english_with_output, englishDisplayString)
   }
 
   private fun displayOtherForms(data: Data) {
@@ -131,8 +131,8 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
           listOfSensesJson.add(sensesJson)
         }
       }
-
-      return listOfSensesJson
     }
+
+    return listOfSensesJson
   }
 }

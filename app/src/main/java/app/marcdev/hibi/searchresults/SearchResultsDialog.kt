@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -57,7 +58,7 @@ class SearchResultsDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
     super.onViewCreated(view, savedInstanceState)
 
     arguments?.let {
-      val searchTerm = arguments!!.getString("searchTerm", "")
+      val searchTerm = arguments!!.getString(SEARCH_TERM_KEY, "")
       search(searchTerm)
     }
   }

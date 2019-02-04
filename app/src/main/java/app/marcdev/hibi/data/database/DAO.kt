@@ -3,6 +3,7 @@ package app.marcdev.hibi.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
 
@@ -10,7 +11,12 @@ import app.marcdev.hibi.data.entity.TagEntryRelation
 interface DAO {
 
   /* Entry */
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  /* When a constraint violation occurs, ignores the one row that is the constraint violation and
+     continues with the rest. This stops the entity being replaced which triggered a delete cascade
+     for all foreign keys
+     See https://sqlite.org/lang_conflict.html
+   */
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
   fun upsertEntry(entry: Entry)
 
   @Query("SELECT * FROM Entry WHERE id = :id")
@@ -42,7 +48,7 @@ interface DAO {
   fun deleteTag(tag: String)
 
   /* Tag Entry Relation */
-  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun upsertTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
   @Query("SELECT * FROM TagEntryRelation")
@@ -66,4 +72,17 @@ interface DAO {
 
   @Query("DELETE FROM TagEntryRelation WHERE entryId = :entryId")
   fun deleteTagEntryRelationByEntryId(entryId: Int)
+
+  /* New Word */
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  fun upsertNewWord(newWord: NewWord)
+
+  @Query("SELECT * FROM NewWord WHERE id = :id")
+  fun getNewWord(id: Int): NewWord
+
+  @Query("DELETE FROM NewWord WHERE id = :id")
+  fun deleteNewWord(id: Int)
+
+  @Query("SELECT * FROM NewWord WHERE entryId = :entryId")
+  fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>
 }

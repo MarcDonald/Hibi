@@ -13,13 +13,16 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
 import app.marcdev.hibi.addentryscreen.addtagtoentrydialog.AddTagToEntryDialog
+import app.marcdev.hibi.internal.ENTRY_ID_KEY
+import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
+import app.marcdev.hibi.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.searchresults.SearchResultsDialog
+import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.SearchBar
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
-import app.marcdev.hibi.uicomponents.YesNoDialog
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -39,7 +42,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var dateButton: TransparentSquareButton
   private lateinit var timeButton: TransparentSquareButton
   private lateinit var contentInput: EditText
-  private lateinit var backConfirmDialog: YesNoDialog
+  private lateinit var backConfirmDialog: BinaryOptionDialog
   private lateinit var toolbarTitle: TextView
   private lateinit var searchBar: SearchBar
 
@@ -98,18 +101,50 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     // Option bar icons
     val addTagButton: ImageView = view.findViewById(R.id.img_option_tag)
     addTagButton.setOnClickListener(addTagClickListener)
+
+    val addLocationButton: ImageView = view.findViewById(R.id.img_option_location)
+    addLocationButton.setOnClickListener(addLocationClickListener)
+
+    val addMediaButton: ImageView = view.findViewById(R.id.img_option_media)
+    addMediaButton.setOnClickListener(addMediaClickListener)
+
+    val addMoodButton: ImageView = view.findViewById(R.id.img_option_mood)
+    addMoodButton.setOnClickListener(addMoodClickListener)
+
+    val wordButton: ImageView = view.findViewById(R.id.img_option_words)
+    wordButton.setOnClickListener(wordClickListener)
   }
 
   private fun initBackConfirmDialog() {
-    backConfirmDialog = YesNoDialog()
+    backConfirmDialog = BinaryOptionDialog()
     backConfirmDialog.setTitle(resources.getString(R.string.warning_caps))
     backConfirmDialog.setMessage(resources.getString(R.string.go_back_warning))
-    backConfirmDialog.setYesButton(resources.getString(R.string.ok), okBackClickListener)
-    backConfirmDialog.setNoButton(resources.getString(R.string.cancel), cancelBackClickListener)
+    backConfirmDialog.setRightButton(resources.getString(R.string.ok), okBackClickListener)
+    backConfirmDialog.setLeftButton(resources.getString(R.string.cancel), cancelBackClickListener)
   }
 
   private val saveClickListener = View.OnClickListener {
-    onSaveClick()
+    launch {
+      val content = contentInput.text.toString()
+
+      if(content.isBlank()) {
+        Toast.makeText(requireContext(), resources.getString(R.string.empty_content_warning), Toast.LENGTH_SHORT).show()
+      } else {
+        val day = dateTimeStore.getDay()
+        val month = dateTimeStore.getMonth()
+        val year = dateTimeStore.getYear()
+        val hour = dateTimeStore.getHour()
+        val minute = dateTimeStore.getMinute()
+
+        if(entryIdBeingEdited == 0) {
+          viewModel.addEntry(day, month, year, hour, minute, content)
+        } else {
+          viewModel.updateEntry(day, month, year, hour, minute, content, entryIdBeingEdited)
+        }
+
+        popBackStack()
+      }
+    }
   }
 
   private val backClickListener = View.OnClickListener {
@@ -145,15 +180,37 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val dialog = AddTagToEntryDialog()
 
     val bundle = Bundle()
-    bundle.putInt("entryId", entryIdBeingEdited)
+    bundle.putInt(ENTRY_ID_KEY, entryIdBeingEdited)
     dialog.arguments = bundle
 
     dialog.show(requireFragmentManager(), "Add Tag Dialog")
   }
 
+  private val addLocationClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+  }
+
+  private val addMediaClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+  }
+
+  private val addMoodClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+  }
+
+  private val wordClickListener = View.OnClickListener {
+    val dialog = NewWordDialog()
+
+    val bundle = Bundle()
+    bundle.putInt(ENTRY_ID_KEY, entryIdBeingEdited)
+    dialog.arguments = bundle
+
+    dialog.show(requireFragmentManager(), "New Words Dialog")
+  }
+
   private fun search(searchTerm: String) {
     val args = Bundle()
-    args.putString("searchTerm", searchTerm)
+    args.putString(SEARCH_TERM_KEY, searchTerm)
 
     val searchDialog = SearchResultsDialog()
     searchDialog.arguments = args
@@ -190,28 +247,6 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
       dateButton.setText(formatDateForDisplay(day, month, year))
       timeButton.setText(formatTimeForDisplay(hour, minute))
     })
-  }
-
-  private fun onSaveClick() = launch {
-    val content = contentInput.text.toString()
-
-    if(content.isBlank()) {
-      Toast.makeText(requireContext(), resources.getString(R.string.empty_content_warning), Toast.LENGTH_SHORT).show()
-    } else {
-      val day = dateTimeStore.getDay()
-      val month = dateTimeStore.getMonth()
-      val year = dateTimeStore.getYear()
-      val hour = dateTimeStore.getHour()
-      val minute = dateTimeStore.getMinute()
-
-      if(entryIdBeingEdited == 0) {
-        viewModel.addEntry(day, month, year, hour, minute, content)
-      } else {
-        viewModel.updateEntry(day, month, year, hour, minute, content, entryIdBeingEdited)
-      }
-
-      popBackStack()
-    }
   }
 
   private fun popBackStack() {
