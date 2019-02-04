@@ -19,6 +19,12 @@
   <string name="close">Close</string>
   <string name="copied_to_clipboard">Copied %1$s to clipboard</string>
 
+  <!--Tab Titles-->
+  <string name="tab_entries">Entries</string>
+  <string name="tab_calendar">Calendar</string>
+  <string name="tab_tags">Tags</string>
+  <string name="tab_books">Books</string>
+
   <!--Entry-->
   <string name="date">Date</string>
   <string name="time">Time</string>

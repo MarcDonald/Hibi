@@ -1,9 +1,9 @@
 package app.marcdev.hibi.newwordsdialog.addnewworddialog
 
 import androidx.lifecycle.ViewModel
-import app.marcdev.hibi.addentryscreen.NewWordsToSaveToNewEntry
 import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.data.repository.NewWordRepository
+import app.marcdev.hibi.entryscreens.addentryscreen.NewWordsToSaveToNewEntry
 
 class AddNewWordViewModel(private val newWordRepository: NewWordRepository) : ViewModel() {
   var entryId: Int = 0

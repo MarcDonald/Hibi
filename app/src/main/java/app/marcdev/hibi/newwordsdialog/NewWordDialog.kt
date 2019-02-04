@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.addentryscreen.NewWordsToSaveToNewEntry
+import app.marcdev.hibi.entryscreens.addentryscreen.NewWordsToSaveToNewEntry
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
