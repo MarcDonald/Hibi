@@ -25,6 +25,12 @@
   <string name="tab_tags">Tags</string>
   <string name="tab_books">Books</string>
 
+  <!--Main Fab Text-->
+  <string name="create_entry">Create Entry</string>
+  <string name="create_tag">Create Tag</string>
+  <string name="create_book">Create Book</string>
+
+
   <!--Entry-->
   <string name="date">Date</string>
   <string name="time">Time</string>

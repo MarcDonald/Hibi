@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.maintabs.mainentries.mainentriesrecycler.EntriesRecyclerAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -34,7 +31,6 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
 
   // UI Components
   private lateinit var loadingDisplay: ConstraintLayout
-  private lateinit var fab: FloatingActionButton
 
   // RecyclerView
   private lateinit var recyclerAdapter: EntriesRecyclerAdapter
@@ -56,28 +52,6 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
 
   private fun bindViews(view: View) {
     loadingDisplay = view.findViewById(R.id.const_entries_loading)
-
-    fab = view.findViewById(R.id.fab_main)
-    fab.setOnClickListener(fabClickListener)
-
-    val scrollView: NestedScrollView = view.findViewById(R.id.scroll_main)
-    scrollView.setOnScrollChangeListener(mainOnScrollChangeListener)
-  }
-
-  private var mainOnScrollChangeListener = { _: View, _: Int, scrollY: Int, _: Int, oldScrollY: Int -> hideFabOnScroll(scrollY, oldScrollY) }
-
-  private fun hideFabOnScroll(scrollY: Int, oldScrollY: Int) {
-    if(scrollY > oldScrollY) {
-      fab.hide()
-    } else {
-      fab.show()
-    }
-  }
-
-  private val fabClickListener = View.OnClickListener {
-    //    val addEntryAction = MainScreenFragmentDirections.addEntryAction()
-//    Navigation.findNavController(it).navigate(addEntryAction)
-    Toast.makeText(requireContext(), "Add", Toast.LENGTH_SHORT).show()
   }
 
   private fun initRecycler(view: View) {
