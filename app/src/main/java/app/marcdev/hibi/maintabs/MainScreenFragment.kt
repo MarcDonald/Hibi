@@ -86,7 +86,7 @@ class MainScreenFragment : ScopedFragment() {
 
   private val fabClickListener = View.OnClickListener {
     //    val addEntryAction = MainScreenFragmentDirections.addEntryAction()
-//    Navigation.findNavController(it).navigate(addEntryAction)
+    //    Navigation.findNavController(it).navigate(addEntryAction)
     when (viewPager.currentItem) {
       ENTRIES_TAB, CALENDAR_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_entry), Toast.LENGTH_SHORT).show()
       TAGS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_tag), Toast.LENGTH_SHORT).show()
