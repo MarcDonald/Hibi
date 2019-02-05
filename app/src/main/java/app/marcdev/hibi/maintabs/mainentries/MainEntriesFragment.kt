@@ -30,6 +30,7 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
 
   // UI Components
   private lateinit var loadingDisplay: ConstraintLayout
+  private lateinit var noResults: ConstraintLayout
 
   // RecyclerView
   private lateinit var recyclerAdapter: EntriesRecyclerAdapter
@@ -51,6 +52,10 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
 
   private fun bindViews(view: View) {
     loadingDisplay = view.findViewById(R.id.const_entries_loading)
+    loadingDisplay.visibility = View.GONE
+
+    noResults = view.findViewById(R.id.const_no_entries)
+    noResults.visibility = View.GONE
   }
 
   private fun initRecycler(view: View) {
@@ -68,10 +73,17 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun displayRecyclerData() = launch {
+    loadingDisplay.visibility = View.VISIBLE
     val displayItems = viewModel.displayItems.await()
 
     displayItems.observe(this@MainEntriesFragment, Observer { items ->
-      loadingDisplay.visibility = View.VISIBLE
+      noResults.visibility = View.GONE
+
+      if(items.isEmpty())
+        noResults.visibility = View.VISIBLE
+      else
+        noResults.visibility = View.GONE
+
       recyclerAdapter.updateList(items)
       loadingDisplay.visibility = View.GONE
     })
