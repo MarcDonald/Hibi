@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.BOOKS_TAB
@@ -24,7 +25,6 @@ import timber.log.Timber
 
 class MainScreenFragment : ScopedFragment() {
 
-  private lateinit var pageAdapter: MainScreenPageAdapter
   private lateinit var viewPager: ViewPager
 
   private lateinit var fab: MaterialButton
@@ -39,8 +39,6 @@ class MainScreenFragment : ScopedFragment() {
 
     bindViews(view)
 
-    pageAdapter = MainScreenPageAdapter(requireFragmentManager())
-
     viewPager = view.findViewById(app.marcdev.hibi.R.id.view_pager_main)
     viewPager.addOnPageChangeListener(pageChangeListener)
     setupViewPager(viewPager)
@@ -50,7 +48,7 @@ class MainScreenFragment : ScopedFragment() {
   }
 
   private fun setupViewPager(viewPager: ViewPager) {
-    val adapter = MainScreenPageAdapter(requireFragmentManager())
+    val adapter = MainScreenPageAdapter(childFragmentManager)
     adapter.addFragment(MainEntriesFragment(), resources.getString(app.marcdev.hibi.R.string.tab_entries))
     adapter.addFragment(CalendarFragment(), resources.getString(app.marcdev.hibi.R.string.tab_calendar))
     adapter.addFragment(TagsFragment(), resources.getString(app.marcdev.hibi.R.string.tab_tags))
@@ -85,10 +83,11 @@ class MainScreenFragment : ScopedFragment() {
   }
 
   private val fabClickListener = View.OnClickListener {
-    //    val addEntryAction = MainScreenFragmentDirections.addEntryAction()
-    //    Navigation.findNavController(it).navigate(addEntryAction)
     when (viewPager.currentItem) {
-      ENTRIES_TAB, CALENDAR_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_entry), Toast.LENGTH_SHORT).show()
+      ENTRIES_TAB, CALENDAR_TAB -> {
+        val addEntryAction = MainScreenFragmentDirections.addEntryAction()
+        Navigation.findNavController(it).navigate(addEntryAction)
+      }
       TAGS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_tag), Toast.LENGTH_SHORT).show()
       BOOKS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_book), Toast.LENGTH_SHORT).show()
     }
