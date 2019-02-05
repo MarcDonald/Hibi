@@ -1,16 +1,24 @@
 package app.marcdev.hibi.data.repository
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Entry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepository {
 
   override suspend fun addEntry(entry: Entry) {
     withContext(Dispatchers.IO) {
-      dao.upsertEntry(entry)
+      try {
+        Timber.d("Log: addEntry: Entry doesn't exist, adding new")
+        dao.insertEntry(entry)
+      } catch(exception: SQLiteConstraintException) {
+        Timber.d("Log: addEntry: Entry already exists, updating existing")
+        dao.updateEntry(entry)
+      }
     }
   }
 
