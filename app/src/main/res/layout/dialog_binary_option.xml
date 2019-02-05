@@ -11,7 +11,7 @@
     android:layout_margin="@dimen/margin_standard"
     android:text="@string/title"
     android:textAlignment="center"
-    android:textAppearance="@style/LightTheme.TextAppearance.YesNoDialogTitle"
+    android:textAppearance="@style/TextAppearance.Hibi.BinaryDialogTitle"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
     android:text="@string/message"
-    android:textAppearance="@style/LightTheme.TextAppearance.YesNoDialogMessage"
+    android:textAppearance="@style/TextAppearance.Hibi.BinaryDialogMessage"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/txt_yes_no_title" />

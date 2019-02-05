@@ -17,6 +17,6 @@
       android:layout_gravity="center"
       android:text="@string/message"
       android:textAlignment="center"
-      android:textAppearance="@style/LightTheme.TextAppearance.TransparentSquareButton" />
+      android:textAppearance="@style/TextAppearance.Hibi.TransparentSquareButton" />
   </FrameLayout>
 </merge>

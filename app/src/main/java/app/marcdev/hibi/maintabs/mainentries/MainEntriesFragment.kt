@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
@@ -61,8 +60,9 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager
 
-    val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
-    recycler.addItemDecoration(dividerItemDecoration)
+//    TODO make this an option
+//    val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
+//    recycler.addItemDecoration(dividerItemDecoration)
 
     displayRecyclerData()
   }

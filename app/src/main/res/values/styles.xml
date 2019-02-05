@@ -5,36 +5,48 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:windowLightStatusBar">true</item>
   </style>
-
 
   <!--Text Appearances-->
-  <style name="LightTheme.TextAppearance.DateTimeAddEntry" parent="TextAppearance.MaterialComponents.Headline6">
+  <style name="TextAppearance.Hibi.DateTimeAddEntry" parent="TextAppearance.MaterialComponents.Headline6">
     <item name="android:textSize">16sp</item>
   </style>
 
-  <style name="LightTheme.TextAppearance.ToolbarTextButton" parent="TextAppearance.MaterialComponents.Headline6">
+  <style name="TextAppearance.Hibi.ToolbarTextButton" parent="TextAppearance.MaterialComponents.Headline6">
     <item name="android:textSize">16sp</item>
   </style>
 
-  <style name="LightTheme.TextAppearance.YesNoDialogTitle" parent="TextAppearance.MaterialComponents.Headline5">
+  <style name="TextAppearance.Hibi.BinaryDialogTitle" parent="TextAppearance.MaterialComponents.Headline5">
     <item name="android:textSize">20sp</item>
   </style>
 
-  <style name="LightTheme.TextAppearance.YesNoDialogMessage" parent="TextAppearance.MaterialComponents.Headline6">
+  <style name="TextAppearance.Hibi.BinaryDialogMessage" parent="TextAppearance.MaterialComponents.Headline6">
     <item name="android:textSize">18sp</item>
   </style>
 
-  <style name="LightTheme.TextAppearance.TransparentSquareButton" parent="TextAppearance.MaterialComponents.Headline6">
+  <style name="TextAppearance.Hibi.TransparentSquareButton" parent="TextAppearance.MaterialComponents.Headline6">
     <item name="android:textSize">16sp</item>
   </style>
 
-  <style name="LightTheme.TextAppearance.ViewEntryContent" parent="TextAppearance.MaterialComponents.Body1">
+  <style name="TextAppearance.Hibi.ViewEntryContent" parent="TextAppearance.MaterialComponents.Body1">
     <item name="android:textSize">18sp</item>
   </style>
 
-  <style name="LightTheme.TextAppearance.MainScreenRecyclerHeader" parent="TextAppearance.MaterialComponents.Headline5">
-    <item name="android:textSize">20sp</item>
+  <style name="TextAppearance.Hibi.TextAppearance.Tab" parent="TextAppearance.MaterialComponents.Body1">
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline5">
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.MainScreenRecyclerHeader" parent="TextAppearance.MaterialComponents.Headline5">
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.MainEntryDate" parent="TextAppearance.MaterialComponents.Headline6">
+    <item name="android:textSize">18sp</item>
     <item name="android:textStyle">bold</item>
   </style>
 </resources>

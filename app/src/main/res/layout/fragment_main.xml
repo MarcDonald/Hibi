@@ -15,7 +15,10 @@
     <com.google.android.material.tabs.TabLayout
       android:id="@+id/tabs_main"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+      android:layout_height="wrap_content"
+      app:tabIndicator="@drawable/tab_indicator"
+      app:tabIndicatorFullWidth="false"
+      app:tabTextAppearance="@style/TextAppearance.Hibi.TextAppearance.Tab" />
   </com.google.android.material.appbar.AppBarLayout>
 
   <androidx.viewpager.widget.ViewPager
@@ -34,6 +37,7 @@
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
     android:layout_marginBottom="24dp"
+    android:elevation="12dp"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
     android:text="@string/create_entry"
@@ -46,22 +50,23 @@
     app:iconPadding="12dp"
     app:iconSize="24dp"
     app:iconTint="@android:color/white"
-    app:layout_anchor="@+id/bot_app_bar_layout_main"
+    app:layout_anchor="@+id/toolbar_main_bot"
     app:layout_anchorGravity="top|center" />
 
-  <com.google.android.material.bottomappbar.BottomAppBar
-    android:id="@+id/bot_app_bar_layout_main"
-    android:layout_width="match_parent"
-    app:contentInsetStart="0dp"
-    android:layout_height="?attr/actionBarSize"
-    android:layout_gravity="bottom">
+  <!--Show drop shadow for bottom app bar-->
+  <View
+    android:id="@+id/shadow_main_bot_app_bar"
+    android:layout_width="wrap_content"
+    android:layout_height="4dp"
+    android:background="@drawable/shadow"
+    android:layout_gravity="bottom"
+    android:layout_marginBottom="?attr/actionBarSize" />
 
-    <!--Show drop shadow for bottom app bar-->
-    <View
-      android:layout_width="wrap_content"
-      android:layout_height="4dp"
-      android:layout_marginBottom="?attr/actionBarSize"
-      android:background="@drawable/shadow" />
-  </com.google.android.material.bottomappbar.BottomAppBar>
+  <include
+    android:id="@+id/toolbar_main_bot"
+    layout="@layout/toolbar_main_bot"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

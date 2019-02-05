@@ -39,3 +39,23 @@ fun formatTimeForDisplay(hour: Int, minute: Int): String {
   calendar.set(Calendar.MINUTE, minute)
   return formatTimeForDisplay(calendar)
 }
+
+fun formatDateTimeForDisplay(day: Int, month: Int, year: Int, hour: Int, minute: Int): String {
+  val calendar = Calendar.getInstance()
+  calendar.set(Calendar.DAY_OF_MONTH, day)
+  calendar.set(Calendar.MONTH, month)
+  calendar.set(Calendar.YEAR, year)
+  calendar.set(Calendar.HOUR, hour)
+  calendar.set(Calendar.MINUTE, minute)
+  return formatDateTimeForDisplay(calendar)
+}
+
+fun formatDateTimeForDisplay(calendar: Calendar): String {
+  val datePattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), "EEEdMMMMyyyy")
+  val formattedDate = DateFormat.format(datePattern, calendar)
+
+  val timePattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), "HHmm")
+  val formattedTime = DateFormat.format(timePattern, calendar)
+
+  return "$formattedDate - $formattedTime"
+}

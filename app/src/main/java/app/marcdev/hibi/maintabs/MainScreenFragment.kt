@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.BOOKS_TAB
+import app.marcdev.hibi.internal.CALENDAR_TAB
+import app.marcdev.hibi.internal.ENTRIES_TAB
+import app.marcdev.hibi.internal.TAGS_TAB
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.maintabs.booksfragment.BooksFragment
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarFragment
@@ -32,8 +37,7 @@ class MainScreenFragment : ScopedFragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    fab = view.findViewById(app.marcdev.hibi.R.id.fab_main)
-    fab.setOnClickListener(clickListener)
+    bindViews(view)
 
     pageAdapter = MainScreenPageAdapter(requireFragmentManager())
 
@@ -54,16 +58,25 @@ class MainScreenFragment : ScopedFragment() {
     viewPager.adapter = adapter
   }
 
+  private fun bindViews(view: View) {
+    fab = view.findViewById(app.marcdev.hibi.R.id.fab_main)
+    fab.setOnClickListener(fabClickListener)
+
+    val bottomLeftButton: ImageView = view.findViewById(R.id.img_main_bot_left)
+    bottomLeftButton.setOnClickListener(bottomLeftClickListener)
+    val bottomRightButton: ImageView = view.findViewById(R.id.img_main_bot_right)
+    bottomRightButton.setOnClickListener(bottomRightClickListener)
+  }
+
   private val pageChangeListener = object : ViewPager.OnPageChangeListener {
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {/*Necessary*/
     }
 
     override fun onPageSelected(position: Int) {
       when (position) {
-        0 -> fab.text = resources.getString(R.string.create_entry)
-        1 -> fab.text = resources.getString(R.string.create_entry)
-        2 -> fab.text = resources.getString(R.string.create_tag)
-        3 -> fab.text = resources.getString(R.string.create_book)
+        ENTRIES_TAB, CALENDAR_TAB -> fab.text = resources.getString(R.string.create_entry)
+        TAGS_TAB -> fab.text = resources.getString(R.string.create_tag)
+        BOOKS_TAB -> fab.text = resources.getString(R.string.create_book)
       }
     }
 
@@ -71,14 +84,21 @@ class MainScreenFragment : ScopedFragment() {
     }
   }
 
-  private val clickListener = View.OnClickListener {
+  private val fabClickListener = View.OnClickListener {
     //    val addEntryAction = MainScreenFragmentDirections.addEntryAction()
 //    Navigation.findNavController(it).navigate(addEntryAction)
     when (viewPager.currentItem) {
-      0 -> Toast.makeText(requireContext(), resources.getString(R.string.create_entry), Toast.LENGTH_SHORT).show()
-      1 -> Toast.makeText(requireContext(), resources.getString(R.string.create_entry), Toast.LENGTH_SHORT).show()
-      2 -> Toast.makeText(requireContext(), resources.getString(R.string.create_tag), Toast.LENGTH_SHORT).show()
-      3 -> Toast.makeText(requireContext(), resources.getString(R.string.create_book), Toast.LENGTH_SHORT).show()
+      ENTRIES_TAB, CALENDAR_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_entry), Toast.LENGTH_SHORT).show()
+      TAGS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_tag), Toast.LENGTH_SHORT).show()
+      BOOKS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_book), Toast.LENGTH_SHORT).show()
     }
+  }
+
+  private val bottomLeftClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show()
+  }
+
+  private val bottomRightClickListener = View.OnClickListener {
+    Toast.makeText(requireContext(), "Menu", Toast.LENGTH_SHORT).show()
   }
 }

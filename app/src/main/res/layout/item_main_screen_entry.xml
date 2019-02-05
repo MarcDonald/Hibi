@@ -9,21 +9,13 @@
   android:background="?selectableItemBackground">
 
   <TextView
-    android:id="@+id/item_date"
+    android:id="@+id/item_date_time"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/date"
+    android:textAppearance="@style/TextAppearance.Hibi.MainEntryDate"
     android:layout_margin="@dimen/margin_standard"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
-  <TextView
-    android:id="@+id/item_time"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/time"
-    android:layout_margin="@dimen/margin_standard"
-    app:layout_constraintStart_toEndOf="@id/item_date"
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
@@ -37,7 +29,7 @@
     android:layout_margin="@dimen/margin_standard"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/item_date" />
+    app:layout_constraintTop_toBottomOf="@id/item_date_time" />
 
   <com.google.android.material.chip.ChipGroup
     android:id="@+id/cg_main_tags"
