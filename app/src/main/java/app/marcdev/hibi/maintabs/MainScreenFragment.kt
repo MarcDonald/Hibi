@@ -95,10 +95,10 @@ class MainScreenFragment : ScopedFragment() {
   }
 
   private val bottomLeftClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show()
+    Toast.makeText(requireContext(), "Menu", Toast.LENGTH_SHORT).show()
   }
 
   private val bottomRightClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), "Menu", Toast.LENGTH_SHORT).show()
+    Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show()
   }
 }

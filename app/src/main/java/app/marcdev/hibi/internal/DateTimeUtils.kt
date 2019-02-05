@@ -45,7 +45,7 @@ fun formatDateTimeForDisplay(day: Int, month: Int, year: Int, hour: Int, minute:
   calendar.set(Calendar.DAY_OF_MONTH, day)
   calendar.set(Calendar.MONTH, month)
   calendar.set(Calendar.YEAR, year)
-  calendar.set(Calendar.HOUR, hour)
+  calendar.set(Calendar.HOUR_OF_DAY, hour)
   calendar.set(Calendar.MINUTE, minute)
   return formatDateTimeForDisplay(calendar)
 }
