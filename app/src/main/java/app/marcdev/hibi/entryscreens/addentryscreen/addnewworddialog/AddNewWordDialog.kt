@@ -1,4 +1,4 @@
-package app.marcdev.hibi.newwordsdialog.addnewworddialog
+package app.marcdev.hibi.entryscreens.addentryscreen.addnewworddialog
 
 import android.os.Bundle
 import android.view.LayoutInflater

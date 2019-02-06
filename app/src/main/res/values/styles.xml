@@ -1,11 +1,20 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="LightTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+  <style name="Hibi.LightTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
     <item name="android:windowLightStatusBar">true</item>
+  </style>
+
+  <!--UI Components-->
+  <style name="Hibi.LightTheme.BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+    <item name="bottomSheetStyle">@style/Hibi.BottomSheetStyle</item>
+  </style>
+
+  <style name="Hibi.BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
+    <item name="android:background">@drawable/rounded_bottom_sheet_background</item>
   </style>
 
   <!--Text Appearances-->

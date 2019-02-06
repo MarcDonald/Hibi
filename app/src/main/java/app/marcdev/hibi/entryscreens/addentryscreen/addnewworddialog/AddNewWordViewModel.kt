@@ -1,4 +1,4 @@
-package app.marcdev.hibi.newwordsdialog.addnewworddialog
+package app.marcdev.hibi.entryscreens.addentryscreen.addnewworddialog
 
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.NewWord

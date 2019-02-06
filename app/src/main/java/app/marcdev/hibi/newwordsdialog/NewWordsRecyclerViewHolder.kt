@@ -8,9 +8,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.data.entity.NewWord
+import app.marcdev.hibi.entryscreens.addentryscreen.addnewworddialog.AddNewWordDialog
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.NEW_WORD_ID_KEY
-import app.marcdev.hibi.newwordsdialog.addnewworddialog.AddNewWordDialog
 
 class NewWordsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManager, isEditMode: Boolean) : RecyclerView.ViewHolder(itemView) {
 

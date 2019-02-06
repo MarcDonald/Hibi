@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.entryscreens.addentryscreen.NewWordsToSaveToNewEntry
+import app.marcdev.hibi.entryscreens.addentryscreen.addnewworddialog.AddNewWordDialog
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
-import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
-import app.marcdev.hibi.newwordsdialog.addnewworddialog.AddNewWordDialog
+import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -24,7 +24,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class NewWordDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
+class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
   // UI Components

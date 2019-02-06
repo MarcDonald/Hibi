@@ -14,14 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
-import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
+import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class SearchResultsDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
+class SearchResultsDialog : HibiBottomSheetDialogFragment(), KodeinAware {
 
   // Kodein initialisation
   override val kodein by closestKodein()

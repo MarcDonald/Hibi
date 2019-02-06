@@ -13,7 +13,7 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.addtagdialog.AddTagDialog
 import app.marcdev.hibi.entryscreens.addentryscreen.TagsToSaveToNewEntry
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
-import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
+import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -22,7 +22,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class AddTagToEntryDialog : ScopedBottomSheetDialogFragment(), KodeinAware {
+class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
   // UI Components

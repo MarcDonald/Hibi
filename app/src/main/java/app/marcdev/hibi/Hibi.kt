@@ -10,11 +10,11 @@ import app.marcdev.hibi.data.network.ConnectivityInterceptorImpl
 import app.marcdev.hibi.data.network.JishoAPIService
 import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.entryscreens.addentryscreen.AddEntryViewModelFactory
+import app.marcdev.hibi.entryscreens.addentryscreen.addnewworddialog.AddNewWordViewModelFactory
 import app.marcdev.hibi.entryscreens.addentryscreen.addtagtoentrydialog.AddTagToEntryViewModelFactory
 import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesViewModelFactory
 import app.marcdev.hibi.newwordsdialog.NewWordViewModelFactory
-import app.marcdev.hibi.newwordsdialog.addnewworddialog.AddNewWordViewModelFactory
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
 import app.marcdev.hibi.search.searchresults.SearchViewModelFactory
 import org.kodein.di.Kodein
