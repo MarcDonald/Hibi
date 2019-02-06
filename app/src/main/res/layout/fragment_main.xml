@@ -40,7 +40,7 @@
     android:elevation="12dp"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    android:text="@string/create_entry"
+    android:text="@string/fab_create_entry"
     android:textAllCaps="true"
     android:textColor="@android:color/white"
     android:textSize="14sp"

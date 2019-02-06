@@ -72,9 +72,9 @@ class MainScreenFragment : ScopedFragment() {
 
     override fun onPageSelected(position: Int) {
       when (position) {
-        ENTRIES_TAB, CALENDAR_TAB -> fab.text = resources.getString(R.string.create_entry)
-        TAGS_TAB -> fab.text = resources.getString(R.string.create_tag)
-        BOOKS_TAB -> fab.text = resources.getString(R.string.create_book)
+        ENTRIES_TAB, CALENDAR_TAB -> fab.text = resources.getString(R.string.fab_create_entry)
+        TAGS_TAB -> fab.text = resources.getString(R.string.fab_create_tag)
+        BOOKS_TAB -> fab.text = resources.getString(R.string.fab_create_book)
       }
     }
 
@@ -88,8 +88,8 @@ class MainScreenFragment : ScopedFragment() {
         val addEntryAction = MainScreenFragmentDirections.addEntryAction()
         Navigation.findNavController(it).navigate(addEntryAction)
       }
-      TAGS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_tag), Toast.LENGTH_SHORT).show()
-      BOOKS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.create_book), Toast.LENGTH_SHORT).show()
+      TAGS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.fab_create_tag), Toast.LENGTH_SHORT).show()
+      BOOKS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.fab_create_book), Toast.LENGTH_SHORT).show()
     }
   }
 

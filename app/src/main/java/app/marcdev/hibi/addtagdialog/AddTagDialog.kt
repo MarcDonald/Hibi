@@ -29,7 +29,7 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
-    val view = inflater.inflate(R.layout.dialog_tag_manager, container, false)
+    val view = inflater.inflate(R.layout.dialog_new_tag, container, false)
     bindViews(view)
     return view
   }

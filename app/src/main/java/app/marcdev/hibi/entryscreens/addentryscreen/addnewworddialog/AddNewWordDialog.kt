@@ -74,7 +74,7 @@ class AddNewWordDialog : HibiDialogFragment(), KodeinAware {
 
   private val saveClickListener = View.OnClickListener {
     if(wordInput.text.isBlank() && readingInput.text.isBlank()) {
-      Toast.makeText(requireContext(), resources.getString(R.string.empty_content_warning), Toast.LENGTH_SHORT).show()
+      Toast.makeText(requireContext(), resources.getString(R.string.empty_input_new_word), Toast.LENGTH_SHORT).show()
     } else {
       launch {
         viewModel.saveNewWord(wordInput.text.toString(), readingInput.text.toString(), typeInput.text.toString(), englishInput.text.toString(), notesInput.text.toString())

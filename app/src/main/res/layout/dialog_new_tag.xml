@@ -18,14 +18,12 @@
 
       <TextView
         android:id="@+id/txt_add_tag_title"
+        style="@style/TextAppearance.Hibi.DialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         android:gravity="start"
-        android:text="@string/tag_manager"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:text="@string/create_tag"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,13 +41,13 @@
 
       <app.marcdev.hibi.uicomponents.TransparentSquareButton
         android:id="@+id/btn_save_tags"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        app:text="@string/save"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        app:layout_constraintTop_toBottomOf="@id/edt_new_tag_input"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/edt_new_tag_input"
+        app:text="@string/save" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
