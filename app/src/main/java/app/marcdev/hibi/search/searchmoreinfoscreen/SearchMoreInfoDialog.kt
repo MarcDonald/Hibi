@@ -15,16 +15,16 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.base.ScopedDialogFragment
 import app.marcdev.hibi.search.searchmoreinfoscreen.alternativesrecycler.SearchMoreInfoAlternativesRecyclerAdapter
 import app.marcdev.hibi.search.searchmoreinfoscreen.senserecycler.SearchMoreInfoSenseRecyclerAdapter
+import app.marcdev.hibi.uicomponents.HibiDialogFragment
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class SearchMoreInfoDialog : ScopedDialogFragment(), KodeinAware {
+class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
   // Viewmodel

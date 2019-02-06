@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.DialogFragment
 import app.marcdev.hibi.R
 
-class BinaryOptionDialog : DialogFragment() {
+class BinaryOptionDialog : HibiDialogFragment() {
 
   // UI Components
   private lateinit var rightButton: TransparentSquareButton

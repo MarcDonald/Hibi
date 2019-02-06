@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.base.ScopedDialogFragment
+import app.marcdev.hibi.uicomponents.HibiDialogFragment
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -17,7 +17,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class AddTagDialog : ScopedDialogFragment(), KodeinAware {
+class AddTagDialog : HibiDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
   // UI Components
