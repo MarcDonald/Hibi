@@ -36,7 +36,7 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
-    val view = inflater.inflate(R.layout.dialog_add_tags_to_entry, container, false)
+    val view = inflater.inflate(R.layout.dialog_entry_tags, container, false)
     bindViews(view)
     return view
   }

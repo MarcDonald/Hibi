@@ -3,7 +3,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_margin="@dimen/margin_standard"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content">
+  android:layout_height="wrap_content"
+  app:cardCornerRadius="@dimen/rounded_corner_radius">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/const_new_word"
@@ -20,6 +21,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
       android:text="@string/japanese_word_with_output"
+      style="@style/TextAppearance.Hibi.ResultItemPrimary"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toStartOf="@id/txt_new_word_part"
       app:layout_constraintTop_toTopOf="parent" />
@@ -30,6 +32,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
       android:text="@string/type"
+      android:textAppearance="@style/TextAppearance.Hibi.ResultItemTertiary"
       android:textStyle="italic"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
@@ -40,6 +43,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
       android:text="@string/reading_with_output"
+      style="@style/TextAppearance.Hibi.ResultItemPrimary"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@id/txt_new_word_word" />
@@ -49,7 +53,8 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
-      android:text="@string/english_with_output"
+      android:text="@string/english"
+      android:textAppearance="@style/TextAppearance.Hibi.ResultItemSecondary"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/txt_new_word_reading" />
@@ -60,6 +65,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
       android:text="@string/notes_with_output"
+      android:textAppearance="@style/TextAppearance.Hibi.ResultItemTertiary"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

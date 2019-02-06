@@ -95,7 +95,7 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
         }
       }
     }
-    englishDisplay.text = itemView.resources.getString(R.string.english_with_output, englishDisplayString)
+    englishDisplay.text = englishDisplayString
   }
 
   private fun displayOtherForms(data: Data) {

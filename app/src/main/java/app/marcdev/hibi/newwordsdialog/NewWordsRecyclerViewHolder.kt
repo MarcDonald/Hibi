@@ -41,8 +41,9 @@ class NewWordsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManage
   fun display(newWord: NewWord) {
     displayedNewWord = newWord
 
-    if(newWord.word.isNotBlank())
-      wordDisplay.text = newWord.word
+    if(newWord.word.isNotBlank()) {
+      wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, newWord.word)
+    }
     else
       wordDisplay.visibility = View.GONE
 
@@ -51,8 +52,9 @@ class NewWordsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManage
     else
       typeDisplay.visibility = View.GONE
 
-    if(newWord.reading.isNotBlank())
-      readingDisplay.text = newWord.reading
+    if(newWord.reading.isNotBlank()) {
+      readingDisplay.text = itemView.resources.getString(R.string.reading_with_output, newWord.reading)
+    }
     else
       readingDisplay.visibility = View.GONE
 
@@ -61,8 +63,9 @@ class NewWordsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManage
     else
       englishDisplay.visibility = View.GONE
 
-    if(newWord.notes.isNotBlank())
-      notesDisplay.text = newWord.notes
+    if(newWord.notes.isNotBlank()) {
+      notesDisplay.text = itemView.resources.getString(R.string.notes_with_output, newWord.notes)
+    }
     else
       notesDisplay.visibility = View.GONE
   }

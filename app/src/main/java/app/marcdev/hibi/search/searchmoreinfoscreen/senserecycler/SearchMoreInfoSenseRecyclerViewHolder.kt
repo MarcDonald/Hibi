@@ -20,6 +20,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
   private val seeAlsoDisplay: TextView = itemView.findViewById(R.id.txt_search_more_info_sense_see_also)
 
   private var seeAlsoContent = ""
+  private var antonymContent = ""
 
   private val seeAlsoClickListener = View.OnClickListener {
     val clipboard: ClipboardManager = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -27,6 +28,15 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
     clipboard.primaryClip = clip
 
     val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard, seeAlsoContent)
+    Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
+  }
+
+  private val antonymClickListener = View.OnClickListener {
+    val clipboard: ClipboardManager = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip: ClipData = ClipData.newPlainText("Antonym", antonymContent)
+    clipboard.primaryClip = clip
+
+    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard, antonymContent)
     Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
   }
 
@@ -115,6 +125,8 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
       }
       val displayString = itemView.resources.getString(R.string.search_results_antonyms, antonymsString)
       antonymsDisplay.text = displayString
+      // Set the antonym content that would be copied to clipboard if clicked
+      antonymContent = antonymsString
     } else {
       antonymsDisplay.visibility = View.GONE
     }
