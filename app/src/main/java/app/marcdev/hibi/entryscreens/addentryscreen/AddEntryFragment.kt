@@ -1,9 +1,11 @@
 package app.marcdev.hibi.entryscreens.addentryscreen
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,7 +13,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import app.marcdev.hibi.R
 import app.marcdev.hibi.entryscreens.addentryscreen.addtagtoentrydialog.AddTagToEntryDialog
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
@@ -57,10 +58,11 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
-    val view = inflater.inflate(R.layout.fragment_add_entry, container, false)
+    val view = inflater.inflate(app.marcdev.hibi.R.layout.fragment_add_entry, container, false)
 
     bindViews(view)
     initBackConfirmDialog()
+    focusInput()
 
     return view
   }
@@ -77,50 +79,50 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun bindViews(view: View) {
-    toolbarTitle = view.findViewById(R.id.txt_add_toolbar_title)
+    toolbarTitle = view.findViewById(app.marcdev.hibi.R.id.txt_add_toolbar_title)
 
-    searchBar = view.findViewById(R.id.searchbar_add_entry)
+    searchBar = view.findViewById(app.marcdev.hibi.R.id.searchbar_add_entry)
     searchBar.setSearchAction(this::search)
 
-    dateButton = view.findViewById(R.id.btn_date)
+    dateButton = view.findViewById(app.marcdev.hibi.R.id.btn_date)
     dateButton.setOnClickListener(dateClickListener)
     initDateButton()
 
-    timeButton = view.findViewById(R.id.btn_time)
+    timeButton = view.findViewById(app.marcdev.hibi.R.id.btn_time)
     timeButton.setOnClickListener(timeClickListener)
     initTimeButton()
 
-    contentInput = view.findViewById(R.id.edt_content)
+    contentInput = view.findViewById(app.marcdev.hibi.R.id.edt_content)
 
-    val saveButton: TransparentSquareButton = view.findViewById(R.id.btn_save)
+    val saveButton: TransparentSquareButton = view.findViewById(app.marcdev.hibi.R.id.btn_save)
     saveButton.setOnClickListener(saveClickListener)
 
-    val backButton: ImageView = view.findViewById(R.id.img_add_entry_toolbar_back)
+    val backButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_add_entry_toolbar_back)
     backButton.setOnClickListener(backClickListener)
 
     // Option bar icons
-    val addTagButton: ImageView = view.findViewById(R.id.img_option_tag)
+    val addTagButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_option_tag)
     addTagButton.setOnClickListener(addTagClickListener)
 
-    val addLocationButton: ImageView = view.findViewById(R.id.img_option_location)
+    val addLocationButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_option_location)
     addLocationButton.setOnClickListener(addLocationClickListener)
 
-    val addMediaButton: ImageView = view.findViewById(R.id.img_option_media)
+    val addMediaButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_option_media)
     addMediaButton.setOnClickListener(addMediaClickListener)
 
-    val addMoodButton: ImageView = view.findViewById(R.id.img_option_mood)
+    val addMoodButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_option_mood)
     addMoodButton.setOnClickListener(addMoodClickListener)
 
-    val wordButton: ImageView = view.findViewById(R.id.img_option_words)
+    val wordButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_option_words)
     wordButton.setOnClickListener(wordClickListener)
   }
 
   private fun initBackConfirmDialog() {
     backConfirmDialog = BinaryOptionDialog()
-    backConfirmDialog.setTitle(resources.getString(R.string.warning_caps))
-    backConfirmDialog.setMessage(resources.getString(R.string.go_back_warning))
-    backConfirmDialog.setRightButton(resources.getString(R.string.ok), okBackClickListener)
-    backConfirmDialog.setLeftButton(resources.getString(R.string.cancel), cancelBackClickListener)
+    backConfirmDialog.setTitle(resources.getString(app.marcdev.hibi.R.string.warning_caps))
+    backConfirmDialog.setMessage(resources.getString(app.marcdev.hibi.R.string.go_back_warning))
+    backConfirmDialog.setRightButton(resources.getString(app.marcdev.hibi.R.string.ok), okBackClickListener)
+    backConfirmDialog.setLeftButton(resources.getString(app.marcdev.hibi.R.string.cancel), cancelBackClickListener)
   }
 
   private val saveClickListener = View.OnClickListener {
@@ -128,7 +130,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
       val content = contentInput.text.toString()
 
       if(content.isBlank()) {
-        Toast.makeText(requireContext(), resources.getString(R.string.empty_content_warning), Toast.LENGTH_SHORT).show()
+        contentInput.error = resources.getString(app.marcdev.hibi.R.string.empty_content_warning)
       } else {
         val day = dateTimeStore.getDay()
         val month = dateTimeStore.getMonth()
@@ -208,6 +210,12 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     dialog.show(requireFragmentManager(), "New Words Dialog")
   }
 
+  private fun focusInput() {
+    contentInput.requestFocus()
+    val imm = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+  }
+
   private fun search(searchTerm: String) {
     val args = Bundle()
     args.putString(SEARCH_TERM_KEY, searchTerm)
@@ -231,7 +239,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun convertToEditMode(entryId: Int) = launch {
-    toolbarTitle.text = resources.getString(R.string.edit_entry)
+    toolbarTitle.text = resources.getString(app.marcdev.hibi.R.string.edit_entry)
     entryIdBeingEdited = entryId
     viewModel.getEntry(entryId).observe(this@AddEntryFragment, Observer { entry ->
       contentInput.setText(entry.content)

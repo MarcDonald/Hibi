@@ -135,28 +135,36 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
       if(list.isNotEmpty()) {
         val mainWord: String? = list[0].word
         val mainReading: String? = list[0].reading
-        val mainWordString = resources.getString(R.string.japanese_word_with_output, mainWord)
-        val mainReadingString = resources.getString(R.string.reading_with_output, mainReading)
 
-        if(mainWord != null && mainWord.isNotBlank()) {
-          mainWordDisplay.text = mainWordString
-          mainWordContent = mainWord
-        } else {
-          mainWordDisplay.visibility = View.GONE
-        }
-
-        if(mainReading != null && mainReading.isNotBlank()) {
-          mainReadingDisplay.text = mainReadingString
-          mainReadingContent = mainReading
-        } else {
+        // If no mainWord is supplied, use the reading as the main word and hide the reading display
+        if(mainWord == null || mainWord.isBlank()) {
+          mainWordDisplay.text = resources.getString(R.string.japanese_word_with_output, mainReading)
           mainReadingDisplay.visibility = View.GONE
+          mainReading?.let {
+            mainWordContent = mainReading
+          }
+        } else {
+          // If a mainWord is displayed, just it as the main word
+          mainWordDisplay.text = resources.getString(R.string.japanese_word_with_output, mainWord)
+          mainWordContent = mainWord
+
+          if(mainReading == null || mainReading.isBlank()) {
+            // If no mainReading is supplied then hide the reading field
+            mainReadingDisplay.visibility = View.GONE
+          } else {
+            // Otherwise use the reading
+            mainReadingDisplay.text = resources.getString(R.string.reading_with_output, mainReading)
+            mainReadingContent = mainReading
+          }
         }
       }
 
+      // If there is more than one result then display all the others as alternatives
       if(list.size > 1) {
         val listExcludingMainResult = list.subList(1, list.size)
         alternativesRecyclerAdapter.updateList(listExcludingMainResult)
       } else {
+        // Otherwise hide the alternative UI components
         alternativeRecycler.visibility = View.GONE
         alternativeTitle.visibility = View.GONE
       }

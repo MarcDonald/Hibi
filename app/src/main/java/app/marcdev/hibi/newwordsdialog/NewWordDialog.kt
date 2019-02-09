@@ -64,7 +64,7 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     }
 
     if(!isEditMode)
-      addButton.visibility = View.GONE
+      addButton.visibility = View.INVISIBLE
 
     displayData()
   }

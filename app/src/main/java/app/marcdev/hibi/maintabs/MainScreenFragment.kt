@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import app.marcdev.hibi.R
+import app.marcdev.hibi.addtagdialog.AddTagDialog
 import app.marcdev.hibi.internal.BOOKS_TAB
 import app.marcdev.hibi.internal.CALENDAR_TAB
 import app.marcdev.hibi.internal.ENTRIES_TAB
@@ -88,7 +89,10 @@ class MainScreenFragment : ScopedFragment() {
         val addEntryAction = MainScreenFragmentDirections.addEntryAction()
         Navigation.findNavController(it).navigate(addEntryAction)
       }
-      TAGS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.fab_create_tag), Toast.LENGTH_SHORT).show()
+      TAGS_TAB -> {
+        val dialog = AddTagDialog()
+        dialog.show(requireFragmentManager(), "Add Tag Dialog")
+      }
       BOOKS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.fab_create_book), Toast.LENGTH_SHORT).show()
     }
   }

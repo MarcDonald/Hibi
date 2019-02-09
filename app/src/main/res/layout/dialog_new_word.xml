@@ -28,10 +28,12 @@
     android:id="@+id/recycler_new_words"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_standard"
+    android:layout_marginBottom="@dimen/margin_standard"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/txt_new_words_title" />
+    app:layout_constraintTop_toBottomOf="@id/btn_add_new_word" />
 
   <LinearLayout
     android:id="@+id/lin_new_words_no_results"

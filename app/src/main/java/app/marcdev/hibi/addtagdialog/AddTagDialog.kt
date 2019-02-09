@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.uicomponents.HibiDialogFragment
@@ -54,7 +53,7 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
   private fun saveTag() = launch {
     val save = viewModel.addTag(input.text.toString())
     if(!save) {
-      Toast.makeText(requireContext(), resources.getString(R.string.empty_content_warning), Toast.LENGTH_SHORT).show()
+      input.error = resources.getString(R.string.empty_content_warning)
     } else {
       dismiss()
     }

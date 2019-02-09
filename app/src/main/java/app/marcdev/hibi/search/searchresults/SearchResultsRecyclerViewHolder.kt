@@ -51,14 +51,18 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
     val word: String? = data.japanese[0].word
     val reading: String? = data.japanese[0].reading
 
+    // If no mainWord is supplied, use the reading as the main word and hide the reading display
     if(word == null || word.isBlank()) {
       wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, reading)
       readingDisplay.visibility = View.GONE
     } else {
+      // If a mainWord is displayed, just it as the main word
       wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, word)
       if(reading == null || reading.isBlank()) {
+        // If no mainReading is supplied then hide the reading field
         readingDisplay.visibility = View.GONE
       } else {
+        // Otherwise use the reading
         readingDisplay.text = itemView.resources.getString(R.string.reading_with_output, reading)
       }
     }

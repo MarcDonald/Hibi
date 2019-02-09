@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
@@ -74,7 +73,9 @@ class AddNewWordDialog : HibiDialogFragment(), KodeinAware {
 
   private val saveClickListener = View.OnClickListener {
     if(wordInput.text.isBlank() && readingInput.text.isBlank()) {
-      Toast.makeText(requireContext(), resources.getString(R.string.empty_input_new_word), Toast.LENGTH_SHORT).show()
+      if(wordInput.text.isBlank()) {
+        wordInput.error = resources.getString(R.string.empty_input_new_word)
+      }
     } else {
       launch {
         viewModel.saveNewWord(wordInput.text.toString(), readingInput.text.toString(), typeInput.text.toString(), englishInput.text.toString(), notesInput.text.toString())

@@ -5,12 +5,17 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorError">@color/error</item>
     <item name="android:windowLightStatusBar">true</item>
   </style>
 
   <!--UI Components-->
   <style name="Hibi.LightTheme.BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
     <item name="bottomSheetStyle">@style/Hibi.BottomSheetStyle</item>
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:windowLightStatusBar">true</item>
   </style>
 
   <style name="Hibi.BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
