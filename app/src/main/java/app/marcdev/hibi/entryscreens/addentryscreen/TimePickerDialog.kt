@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TimePicker
-import androidx.fragment.app.DialogFragment
 import app.marcdev.hibi.R
+import app.marcdev.hibi.uicomponents.HibiDialogFragment
 import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import timber.log.Timber
 
-class TimePickerDialog : DialogFragment() {
+class TimePickerDialog : HibiDialogFragment() {
   // Date/Time Store
   private var dateTimeStore: DateTimeStore? = null
 
