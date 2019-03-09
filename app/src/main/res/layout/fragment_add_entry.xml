@@ -81,7 +81,7 @@
     android:id="@+id/app_bar_layout_add_entry_option_bar"
     android:background="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/add_entry_bottom_bar_height"
+    android:layout_height="wrap_content"
     android:layout_gravity="bottom">
 
     <include layout="@layout/include_add_entry_bottom_bar" />

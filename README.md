@@ -21,3 +21,8 @@ Apache 2 License
 Used for converting API responses into Kotlin objects
 
 Apache 2 License
+
+### [M PLUS Rounded 1c Bold](https://fonts.google.com/specimen/M+PLUS+Rounded+1c)
+Used as the icon font
+
+Open Font License
