@@ -172,8 +172,8 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
     deleteConfirmDialog = BinaryOptionDialog()
     deleteConfirmDialog.setTitle(resources.getString(R.string.delete_confirm_title))
     deleteConfirmDialog.setMessage(resources.getString(R.string.delete_confirm))
-    deleteConfirmDialog.setRightButton(resources.getString(R.string.delete), okDeleteClickListener)
-    deleteConfirmDialog.setLeftButton(resources.getString(R.string.cancel), cancelDeleteClickListener)
+    deleteConfirmDialog.setNegativeButton(resources.getString(R.string.delete), okDeleteClickListener)
+    deleteConfirmDialog.setPositiveButton(resources.getString(R.string.cancel), cancelDeleteClickListener)
   }
 
   private val okDeleteClickListener = View.OnClickListener {

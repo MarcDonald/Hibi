@@ -122,8 +122,8 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     backConfirmDialog = BinaryOptionDialog()
     backConfirmDialog.setTitle(resources.getString(app.marcdev.hibi.R.string.warning_caps))
     backConfirmDialog.setMessage(resources.getString(app.marcdev.hibi.R.string.go_back_warning))
-    backConfirmDialog.setRightButton(resources.getString(app.marcdev.hibi.R.string.ok), okBackClickListener)
-    backConfirmDialog.setLeftButton(resources.getString(app.marcdev.hibi.R.string.cancel), cancelBackClickListener)
+    backConfirmDialog.setNegativeButton(resources.getString(app.marcdev.hibi.R.string.go_back), confirmBackClickListener)
+    backConfirmDialog.setPositiveButton(resources.getString(app.marcdev.hibi.R.string.cancel), cancelBackClickListener)
   }
 
   private val saveClickListener = View.OnClickListener {
@@ -158,7 +158,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     }
   }
 
-  private val okBackClickListener = View.OnClickListener {
+  private val confirmBackClickListener = View.OnClickListener {
     backConfirmDialog.dismiss()
     popBackStack()
   }

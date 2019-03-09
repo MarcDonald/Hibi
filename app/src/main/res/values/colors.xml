@@ -5,4 +5,5 @@
   <color name="colorAccent">#F57C00</color>
   <color name="error">#f44336</color>
   <color name="textOnPrimary">#000000</color>
+  <color name="textOnError">#FFFFFF</color>
 </resources>

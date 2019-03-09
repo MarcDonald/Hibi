@@ -11,18 +11,18 @@ import com.google.android.material.button.MaterialButton
 class BinaryOptionDialog : HibiDialogFragment() {
 
   // UI Components
-  private lateinit var rightButton: MaterialButton
-  private lateinit var leftButton: MaterialButton
+  private lateinit var negativeButton: MaterialButton
+  private lateinit var positiveButton: MaterialButton
   private lateinit var titleDisplay: TextView
   private lateinit var messageDisplay: TextView
 
   // To set
-  private var rightButtonText = ""
-  private var leftButtonText = ""
+  private var negativeButtonText = ""
+  private var positiveButtonText = ""
   private var titleText = ""
   private var messageText = ""
-  private var rightButtonClickListener: View.OnClickListener? = null
-  private var leftButtonClickListener: View.OnClickListener? = null
+  private var negativeButtonClickListener: View.OnClickListener? = null
+  private var positiveButtonClickListener: View.OnClickListener? = null
   private var isTitleVisible = true
   private var isMessageVisible = true
 
@@ -34,11 +34,11 @@ class BinaryOptionDialog : HibiDialogFragment() {
   }
 
   private fun bindViews(view: View) {
-    rightButton = view.findViewById(R.id.btn_yes_no_positive)
-    leftButton = view.findViewById(R.id.btn_yes_no_negative)
+    negativeButton = view.findViewById(R.id.btn_binary_dialog_negative)
+    positiveButton = view.findViewById(R.id.btn_binary_dialog_positive)
 
-    titleDisplay = view.findViewById(R.id.txt_yes_no_title)
-    messageDisplay = view.findViewById(R.id.txt_yes_no_message)
+    titleDisplay = view.findViewById(R.id.txt_binary_dialog_title)
+    messageDisplay = view.findViewById(R.id.txt_binary_dialog_message)
   }
 
   private fun setContent() {
@@ -50,24 +50,24 @@ class BinaryOptionDialog : HibiDialogFragment() {
       messageDisplay.text = messageText
     }
 
-    if(rightButtonText.isNotBlank()) {
-      rightButton.text = rightButtonText
+    if(negativeButtonText.isNotBlank()) {
+      negativeButton.text = negativeButtonText
     }
 
-    if(leftButtonText.isNotBlank()) {
-      leftButton.text = leftButtonText
+    if(positiveButtonText.isNotBlank()) {
+      positiveButton.text = positiveButtonText
     }
 
-    if(rightButtonClickListener != null) {
-      rightButton.setOnClickListener(rightButtonClickListener)
+    if(negativeButtonClickListener != null) {
+      negativeButton.setOnClickListener(negativeButtonClickListener)
     } else {
-      rightButton.setOnClickListener(defaultClickListener)
+      negativeButton.setOnClickListener(defaultClickListener)
     }
 
-    if(leftButtonClickListener != null) {
-      leftButton.setOnClickListener(leftButtonClickListener)
+    if(positiveButtonClickListener != null) {
+      positiveButton.setOnClickListener(positiveButtonClickListener)
     } else {
-      leftButton.setOnClickListener(defaultClickListener)
+      positiveButton.setOnClickListener(defaultClickListener)
     }
 
     if(isTitleVisible)
@@ -81,14 +81,14 @@ class BinaryOptionDialog : HibiDialogFragment() {
       messageDisplay.visibility = View.GONE
   }
 
-  fun setRightButton(text: String, clickListener: View.OnClickListener) {
-    rightButtonText = text
-    rightButtonClickListener = clickListener
+  fun setNegativeButton(text: String, clickListener: View.OnClickListener) {
+    negativeButtonText = text
+    negativeButtonClickListener = clickListener
   }
 
-  fun setLeftButton(text: String, clickListener: View.OnClickListener) {
-    leftButtonText = text
-    leftButtonClickListener = clickListener
+  fun setPositiveButton(text: String, clickListener: View.OnClickListener) {
+    positiveButtonText = text
+    positiveButtonClickListener = clickListener
   }
 
   fun setTitle(text: String) {
