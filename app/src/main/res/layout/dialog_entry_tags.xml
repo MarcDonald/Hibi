@@ -31,11 +31,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-      <app.marcdev.hibi.uicomponents.TransparentSquareButton
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_add_tag"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        app:text="@string/create_tag"
+        android:text="@string/create_tag"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -61,11 +61,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-      <app.marcdev.hibi.uicomponents.TransparentSquareButton
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_tags"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        app:text="@string/save"
+        android:text="@string/save"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_no_tags_warning"

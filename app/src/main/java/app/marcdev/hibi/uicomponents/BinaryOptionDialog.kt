@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import app.marcdev.hibi.R
+import com.google.android.material.button.MaterialButton
 
 class BinaryOptionDialog : HibiDialogFragment() {
 
   // UI Components
-  private lateinit var rightButton: TransparentSquareButton
-  private lateinit var leftButton: TransparentSquareButton
+  private lateinit var rightButton: MaterialButton
+  private lateinit var leftButton: MaterialButton
   private lateinit var titleDisplay: TextView
   private lateinit var messageDisplay: TextView
 
@@ -50,11 +51,11 @@ class BinaryOptionDialog : HibiDialogFragment() {
     }
 
     if(rightButtonText.isNotBlank()) {
-      rightButton.setText(rightButtonText)
+      rightButton.text = rightButtonText
     }
 
     if(leftButtonText.isNotBlank()) {
-      leftButton.setText(leftButtonText)
+      leftButton.text = leftButtonText
     }
 
     if(rightButtonClickListener != null) {

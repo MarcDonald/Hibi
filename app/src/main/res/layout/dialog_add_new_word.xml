@@ -90,22 +90,22 @@
         app:layout_constraintGuide_percent="0.5"
         android:orientation="vertical" />
 
-      <app.marcdev.hibi.uicomponents.TransparentSquareButton
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_new_word"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:text="@string/save"
+        android:text="@string/save"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/edt_new_word_notes"
         app:layout_constraintStart_toStartOf="@id/gd_add_new_word_vert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-      <app.marcdev.hibi.uicomponents.TransparentSquareButton
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete_new_word"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:text="@string/delete"
+        android:text="@string/delete"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/edt_new_word_notes"
         app:layout_constraintStart_toStartOf="parent"

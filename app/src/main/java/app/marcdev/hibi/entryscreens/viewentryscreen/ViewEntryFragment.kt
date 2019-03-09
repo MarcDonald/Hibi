@@ -21,7 +21,6 @@ import app.marcdev.hibi.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.SearchBar
-import app.marcdev.hibi.uicomponents.TransparentSquareButton
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -39,8 +38,8 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var viewModel: ViewEntryViewModel
 
   // UI Components
-  private lateinit var dateButton: TransparentSquareButton
-  private lateinit var timeButton: TransparentSquareButton
+  private lateinit var dateButton: MaterialButton
+  private lateinit var timeButton: MaterialButton
   private lateinit var contentDisplay: TextView
   private lateinit var deleteConfirmDialog: BinaryOptionDialog
   private lateinit var searchBar: SearchBar
@@ -90,8 +89,8 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
       val hour = entry.hour
       val minute = entry.minute
 
-      dateButton.setText(formatDateForDisplay(day, month, year))
-      timeButton.setText(formatTimeForDisplay(hour, minute))
+      dateButton.text = formatDateForDisplay(day, month, year)
+      timeButton.text = formatTimeForDisplay(hour, minute)
     })
 
     viewModel.getTags(entryId).observe(this@ViewEntryFragment, Observer { tags ->

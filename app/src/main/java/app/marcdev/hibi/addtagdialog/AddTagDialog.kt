@@ -8,7 +8,7 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.uicomponents.HibiDialogFragment
-import app.marcdev.hibi.uicomponents.TransparentSquareButton
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -42,7 +42,7 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
 
   private fun bindViews(view: View) {
     input = view.findViewById(R.id.edt_new_tag_input)
-    val saveButton: TransparentSquareButton = view.findViewById(R.id.btn_save_tags)
+    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_tags)
     saveButton.setOnClickListener(saveClickListener)
   }
 

@@ -10,7 +10,7 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.NEW_WORD_ID_KEY
 import app.marcdev.hibi.uicomponents.HibiDialogFragment
-import app.marcdev.hibi.uicomponents.TransparentSquareButton
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -64,10 +64,10 @@ class AddNewWordDialog : HibiDialogFragment(), KodeinAware {
     englishInput = view.findViewById(R.id.edt_new_word_english)
     notesInput = view.findViewById(R.id.edt_new_word_notes)
 
-    val saveButton: TransparentSquareButton = view.findViewById(R.id.btn_save_new_word)
+    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_new_word)
     saveButton.setOnClickListener(saveClickListener)
 
-    val deleteButton: TransparentSquareButton = view.findViewById(R.id.btn_delete_new_word)
+    val deleteButton: MaterialButton = view.findViewById(R.id.btn_delete_new_word)
     deleteButton.setOnClickListener(deleteClickListener)
   }
 

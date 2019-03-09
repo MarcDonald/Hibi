@@ -15,25 +15,26 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
-  <app.marcdev.hibi.uicomponents.TransparentSquareButton
+  <com.google.android.material.button.MaterialButton
     android:id="@+id/btn_add_new_word"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:text="@string/add_new_word"
+    android:layout_margin="@dimen/margin_standard"
+    android:text="@string/add_new_word"
+    app:icon="@drawable/ic_add_black_24dp"
+    app:iconTint="@color/textOnPrimary"
+    app:layout_constraintBottom_toTopOf="@+id/recycler_new_words"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_margin="@dimen/margin_standard" />
+    app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recycler_new_words"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_standard"
-    android:layout_marginStart="@dimen/margin_standard"
-    android:layout_marginEnd="@dimen/margin_standard"
+    android:layout_margin="@dimen/margin_standard"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/btn_add_new_word" />
+    app:layout_constraintTop_toBottomOf="@id/txt_new_words_title" />
 
   <LinearLayout
     android:id="@+id/lin_new_words_no_results"

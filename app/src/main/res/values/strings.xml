@@ -1,5 +1,6 @@
 <resources>
   <string name="app_name">Hibi</string>
+  <string name="coming_soon">Coming Soon</string>
   <string name="loading_entries">Loading Entries</string>
   <string name="add_entry">Add Entry</string>
   <string name="edit_entry">Edit Entry</string>
@@ -40,6 +41,7 @@
   <string name="go_back_warning">Go back and lose all unsaved progress?</string>
   <string name="edit">Edit</string>
   <string name="delete">Delete</string>
+  <string name="view_new_words">New words in this entry</string>
 
   <!--Search-->
   <string name="no_search_term_warning">Please enter something to search for</string>

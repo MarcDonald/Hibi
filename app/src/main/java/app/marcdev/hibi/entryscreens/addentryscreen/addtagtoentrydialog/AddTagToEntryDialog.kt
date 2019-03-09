@@ -14,7 +14,7 @@ import app.marcdev.hibi.addtagdialog.AddTagDialog
 import app.marcdev.hibi.entryscreens.addentryscreen.TagsToSaveToNewEntry
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
-import app.marcdev.hibi.uicomponents.TransparentSquareButton
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -60,10 +60,10 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     tagHolder = view.findViewById(R.id.lin_tags_entry_tag_holder)
     noTagsWarning = view.findViewById(R.id.txt_no_tags_warning)
 
-    val addButton: TransparentSquareButton = view.findViewById(R.id.btn_add_tag)
+    val addButton: MaterialButton = view.findViewById(R.id.btn_add_tag)
     addButton.setOnClickListener(addClickListener)
 
-    val saveButton: TransparentSquareButton = view.findViewById(R.id.btn_save_tags)
+    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_tags)
     saveButton.setOnClickListener(saveClickListener)
   }
 

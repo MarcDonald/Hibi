@@ -16,7 +16,7 @@ import app.marcdev.hibi.entryscreens.addentryscreen.addnewworddialog.AddNewWordD
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
-import app.marcdev.hibi.uicomponents.TransparentSquareButton
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -29,7 +29,7 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
 
   // UI Components
   private lateinit var noResultsWarning: LinearLayout
-  private lateinit var addButton: TransparentSquareButton
+  private lateinit var addButton: MaterialButton
 
   // Viewmodel
   private val viewModelFactory: NewWordViewModelFactory by instance()

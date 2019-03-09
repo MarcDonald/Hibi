@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import app.marcdev.hibi.R
 import app.marcdev.hibi.entryscreens.addentryscreen.addtagtoentrydialog.AddTagToEntryDialog
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
@@ -23,7 +24,7 @@ import app.marcdev.hibi.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.SearchBar
-import app.marcdev.hibi.uicomponents.TransparentSquareButton
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -40,8 +41,8 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var viewModel: AddEntryViewModel
 
   // UI Components
-  private lateinit var dateButton: TransparentSquareButton
-  private lateinit var timeButton: TransparentSquareButton
+  private lateinit var dateButton: MaterialButton
+  private lateinit var timeButton: MaterialButton
   private lateinit var contentInput: EditText
   private lateinit var backConfirmDialog: BinaryOptionDialog
   private lateinit var toolbarTitle: TextView
@@ -94,7 +95,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
     contentInput = view.findViewById(app.marcdev.hibi.R.id.edt_content)
 
-    val saveButton: TransparentSquareButton = view.findViewById(app.marcdev.hibi.R.id.btn_save)
+    val saveButton: MaterialButton = view.findViewById(app.marcdev.hibi.R.id.btn_save)
     saveButton.setOnClickListener(saveClickListener)
 
     val backButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_add_entry_toolbar_back)
@@ -189,15 +190,15 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private val addLocationClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+    Toast.makeText(requireContext(), resources.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
   }
 
   private val addMediaClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+    Toast.makeText(requireContext(), resources.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
   }
 
   private val addMoodClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), "Coming Soon", Toast.LENGTH_SHORT).show()
+    Toast.makeText(requireContext(), resources.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
   }
 
   private val wordClickListener = View.OnClickListener {

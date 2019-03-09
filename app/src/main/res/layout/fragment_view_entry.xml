@@ -31,25 +31,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <app.marcdev.hibi.uicomponents.TransparentSquareButton
+        <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_view_date"
+          style="@style/Hibi.DateTimeDisplayButton"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
+          android:text="@string/date"
           app:layout_constraintEnd_toStartOf="@id/gd_date_and_time_vert_50"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:text="@string/date" />
+          app:layout_constraintTop_toTopOf="parent" />
 
-        <app.marcdev.hibi.uicomponents.TransparentSquareButton
+        <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_view_time"
+          style="@style/Hibi.DateTimeDisplayButton"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:text="@string/time"
           android:layout_margin="@dimen/margin_standard"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@id/gd_date_and_time_vert_50"
-          app:layout_constraintTop_toTopOf="parent"
-          app:text="@string/time" />
+          app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
           android:id="@+id/gd_date_and_time_vert_50"
@@ -100,7 +102,7 @@
         android:id="@+id/btn_view_new_words"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_words"
+        android:text="@string/view_new_words"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/lin_view_tags"
         app:layout_constraintEnd_toEndOf="parent"
