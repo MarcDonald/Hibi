@@ -10,6 +10,8 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
+    android:paddingStart="@dimen/margin_standard"
+    android:paddingEnd="@dimen/margin_standard"
     android:text="@string/new_words"
     app:layout_constraintEnd_toStartOf="@id/btn_add_new_word"
     app:layout_constraintStart_toStartOf="parent"
