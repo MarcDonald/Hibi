@@ -7,8 +7,8 @@
     <item name="colorAccent">@color/colorAccent</item>
     <item name="colorError">@color/error</item>
     <item name="android:windowLightStatusBar">true</item>
-    <item name="buttonStyle">@style/Hibi.DefaultButton</item>
-    <item name="materialButtonStyle">@style/Hibi.DefaultButton</item>
+    <item name="buttonStyle">@style/Hibi.Button.Text</item>
+    <item name="materialButtonStyle">@style/Hibi.Button.Text</item>
   </style>
 
   <!--UI Components-->
@@ -18,24 +18,41 @@
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
     <item name="android:windowLightStatusBar">true</item>
-    <item name="buttonStyle">@style/Hibi.DefaultButton</item>
-    <item name="materialButtonStyle">@style/Hibi.DefaultButton</item>
+    <item name="buttonStyle">@style/Hibi.Button.Text</item>
+    <item name="materialButtonStyle">@style/Hibi.Button.Text</item>
   </style>
 
   <style name="Hibi.BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
     <item name="android:background">@drawable/rounded_bottom_sheet_background</item>
   </style>
 
-  <style name="Hibi.DefaultButton" parent="Widget.MaterialComponents.Button.TextButton">
+  <style name="Hibi.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
     <item name="android:textColor">@color/textOnPrimary</item>
     <item name="android:textAllCaps">false</item>
     <item name="android:textSize">16sp</item>
   </style>
 
-  <style name="Hibi.NegativeButton" parent="Hibi.DefaultButton">
+  <style name="Hibi.Button.Negative" parent="Hibi.Button.Text">
     <item name="android:backgroundTint">@color/error</item>
     <item name="android:textColor">@color/textOnError</item>
     <item name="rippleColor">@color/textOnError</item>
+  </style>
+
+  <style name="Hibi.Button.ExtendedFab" parent="Widget.MaterialComponents.Button">
+    <item name="android:layout_alignParentBottom">true</item>
+    <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:layout_marginBottom">24dp</item>
+    <item name="android:elevation">12dp</item>
+    <item name="android:paddingStart">20dp</item>
+    <item name="android:paddingEnd">20dp</item>
+    <item name="android:textAllCaps">true</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textSize">14sp</item>
+    <item name="backgroundTint">?attr/colorAccent</item>
+    <item name="cornerRadius">32dp</item>
+    <item name="iconSize">24dp</item>
+    <item name="iconTint">@android:color/white</item>
+    <item name="iconPadding">12dp</item>
   </style>
 
   <!--Edit Texts-->

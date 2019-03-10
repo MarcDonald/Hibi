@@ -30,7 +30,7 @@
   <com.google.android.material.button.MaterialButton
     android:id="@+id/btn_binary_dialog_negative"
     android:layout_width="wrap_content"
-    style="@style/Hibi.NegativeButton"
+    style="@style/Hibi.Button.Negative"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
     android:layout_marginBottom="@dimen/margin_standard"
