@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -64,6 +65,12 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     bindViews(view)
     initBackConfirmDialog()
     focusInput()
+
+    requireActivity().addOnBackPressedCallback(this, object : OnBackPressedCallback {
+      override fun handleOnBackPressed(): Boolean {
+        return onBackPress()
+      }
+    })
 
     return view
   }
@@ -151,11 +158,16 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private val backClickListener = View.OnClickListener {
+    onBackPress()
+  }
+
+  private fun onBackPress(): Boolean {
     if(contentInput.text.toString().isBlank()) {
       popBackStack()
     } else {
       backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
     }
+    return true
   }
 
   private val confirmBackClickListener = View.OnClickListener {
@@ -229,13 +241,13 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
   private fun initDateButton() {
     dateTimeStore.readableDate.observe(this@AddEntryFragment, Observer { date ->
-      dateButton.setText(date)
+      dateButton.text = date
     })
   }
 
   private fun initTimeButton() {
     dateTimeStore.readableTime.observe(this@AddEntryFragment, Observer { time ->
-      timeButton.setText(time)
+      timeButton.text = time
     })
   }
 
@@ -253,8 +265,8 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
       dateTimeStore.setDate(day, month, year)
       dateTimeStore.setTime(hour, minute)
-      dateButton.setText(formatDateForDisplay(day, month, year))
-      timeButton.setText(formatTimeForDisplay(hour, minute))
+      dateButton.text = formatDateForDisplay(day, month, year)
+      timeButton.text = formatTimeForDisplay(hour, minute)
     })
   }
 
