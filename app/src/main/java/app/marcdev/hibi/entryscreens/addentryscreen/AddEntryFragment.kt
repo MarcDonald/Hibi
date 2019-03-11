@@ -130,7 +130,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     backConfirmDialog.setTitle(resources.getString(app.marcdev.hibi.R.string.warning_caps))
     backConfirmDialog.setMessage(resources.getString(app.marcdev.hibi.R.string.go_back_warning))
     backConfirmDialog.setNegativeButton(resources.getString(app.marcdev.hibi.R.string.go_back), confirmBackClickListener)
-    backConfirmDialog.setPositiveButton(resources.getString(app.marcdev.hibi.R.string.cancel), cancelBackClickListener)
+    backConfirmDialog.setPositiveButton(resources.getString(app.marcdev.hibi.R.string.stay), cancelBackClickListener)
   }
 
   private val saveClickListener = View.OnClickListener {

@@ -103,6 +103,7 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete_new_word"
+        style="@style/Hibi.Button.Negative"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:text="@string/delete"
