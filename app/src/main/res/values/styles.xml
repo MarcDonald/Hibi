@@ -118,4 +118,6 @@
   <style name="TextAppearance.Hibi.ResultItemTertiary" parent="TextAppearance.MaterialComponents.Caption">
     <item name="android:textSize">14sp</item>
   </style>
+
+  <style name="TextAppearance.Hibi.MainMenuOption" parent="TextAppearance.MaterialComponents.Caption" />
 </resources>

@@ -22,6 +22,9 @@
   <string name="no_entries">You haven\'t made any entries yet</string>
   <string name="go_back">Go Back</string>
   <string name="stay">Stay</string>
+  <string name="settings">Settings</string>
+  <string name="open_source_licences">Open Source Licences</string>
+  <string name="source_code">Source Code</string>
 
   <!--Tab Titles-->
   <string name="tab_entries">Entries</string>

@@ -29,6 +29,7 @@ class MainScreenFragment : ScopedFragment() {
   private lateinit var viewPager: ViewPager
 
   private lateinit var fab: MaterialButton
+  private lateinit var mainMenu: MainScreenMenuDialog
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
@@ -46,6 +47,8 @@ class MainScreenFragment : ScopedFragment() {
 
     val tabLayout: TabLayout = view.findViewById(app.marcdev.hibi.R.id.tabs_main)
     tabLayout.setupWithViewPager(viewPager)
+
+    mainMenu = MainScreenMenuDialog()
   }
 
   private fun setupViewPager(viewPager: ViewPager) {
@@ -98,7 +101,7 @@ class MainScreenFragment : ScopedFragment() {
   }
 
   private val bottomLeftClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), "Menu", Toast.LENGTH_SHORT).show()
+    mainMenu.show(requireFragmentManager(), "Main Menu Dialog")
   }
 
   private val bottomRightClickListener = View.OnClickListener {
