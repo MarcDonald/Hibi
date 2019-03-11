@@ -26,6 +26,10 @@
     <item name="android:background">@drawable/rounded_bottom_sheet_background</item>
   </style>
 
+  <style name="Hibi.CardView.Rounded" parent="Widget.MaterialComponents.CardView">
+    <item name="cardCornerRadius">8dp</item>
+  </style>
+
   <style name="Hibi.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
     <item name="android:textColor">@color/textOnPrimary</item>
     <item name="android:textAllCaps">false</item>
@@ -120,4 +124,15 @@
   </style>
 
   <style name="TextAppearance.Hibi.MainMenuOption" parent="TextAppearance.MaterialComponents.Caption" />
+
+  <style name="TextAppearance.Hibi.LicenseTitle" parent="TextAppearance.MaterialComponents.Headline5">
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.LicenseDescription" parent="TextAppearance.MaterialComponents.Body1" />
+
+  <style name="TextAppearance.Hibi.LicenseLicense" parent="TextAppearance.MaterialComponents.Body2">
+    <item name="android:textStyle">italic</item>
+  </style>
+
 </resources>

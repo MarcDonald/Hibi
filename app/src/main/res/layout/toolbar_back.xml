@@ -6,14 +6,16 @@
   android:layout_height="?attr/actionBarSize"
   android:orientation="vertical"
   app:contentInsetEnd="0dp"
-  app:contentInsetStart="0dp">
+  app:contentInsetStart="0dp"
+  app:layout_scrollFlags="scroll|snap|enterAlways">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ImageView
-      android:id="@+id/img_add_entry_toolbar_back"
+      android:id="@+id/img_back_toolbar_back"
       android:layout_width="@dimen/toolbar_icon_size"
       android:layout_height="@dimen/toolbar_icon_size"
       android:layout_margin="@dimen/toolbar_icon_margin"
@@ -26,24 +28,15 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-      android:id="@+id/txt_add_toolbar_title"
-      style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+      android:id="@+id/txt_back_toolbar_title"
+      style="@style/TextAppearance.Hibi.ToolbarTitle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/add_entry"
+      android:text="@string/app_name"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-      android:id="@+id/btn_save"
-      android:layout_height="wrap_content"
-      android:layout_width="0dp"
-      android:layout_margin="@dimen/toolbar_icon_margin"
-      android:text="@string/save"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.appcompat.widget.Toolbar>

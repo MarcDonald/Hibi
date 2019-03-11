@@ -23,7 +23,7 @@
   <string name="go_back">Go Back</string>
   <string name="stay">Stay</string>
   <string name="settings">Settings</string>
-  <string name="open_source_licences">Open Source Licences</string>
+  <string name="open_source_licenses">Open Source Licenses</string>
   <string name="source_code">Source Code</string>
 
   <!--Tab Titles-->
@@ -91,5 +91,27 @@
   <string name="reading_with_output">Reading: %1$s</string>
   <string name="english_with_output">English: %1$s</string>
   <string name="notes_with_output">Notes: %1$s</string>
+  <string name="description">Description</string>
+  <string name="license">License</string>
+
+  <!--OSS Software Licenses-->
+  <string name="apache">Apache 2 License</string>
+  <string name="mit">MIT License</string>
+  <string name="ofl">Open Font License</string>
+
+  <string name="timber">Timber</string>
+  <string name="timber_description">Used for logging</string>
+
+  <string name="kodein">Kodein</string>
+  <string name="kodein_description">Used for dependency injection</string>
+
+  <string name="retrofit">Retrofit</string>
+  <string name="retrofit_description">Used for API calls</string>
+
+  <string name="gson">GSon</string>
+  <string name="gson_description">Used for converting API responses into Kotlin objects</string>
+
+  <string name="mplus">M PLUS Rounded 1c Bold</string>
+  <string name="mplus_description">Used as the icon font</string>
 
 </resources>

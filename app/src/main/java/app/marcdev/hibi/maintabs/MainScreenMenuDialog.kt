@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import app.marcdev.hibi.R
+import app.marcdev.hibi.maintabs.settings.OpenSourceLicencesActivity
 import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import timber.log.Timber
@@ -40,7 +41,8 @@ class MainScreenMenuDialog : HibiBottomSheetDialogFragment() {
   }
 
   private val openSourceClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), resources.getString(R.string.open_source_licences), Toast.LENGTH_SHORT).show()
+    val intent = Intent(requireContext(), OpenSourceLicencesActivity::class.java)
+    startActivity(intent)
     dismiss()
   }
 
