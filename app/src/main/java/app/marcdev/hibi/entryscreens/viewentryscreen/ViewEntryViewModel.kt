@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.repository.EntryRepository
+import app.marcdev.hibi.data.repository.NewWordRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 
-class ViewEntryViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class ViewEntryViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository, private val newWordRepository: NewWordRepository) : ViewModel() {
 
   suspend fun getEntry(id: Int): LiveData<Entry> {
     return entryRepository.getEntry(id)
@@ -18,5 +19,9 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
 
   suspend fun getTags(id: Int): LiveData<List<String>> {
     return tagEntryRelationRepository.getTagsWithEntry(id)
+  }
+
+  suspend fun hasNewWords(id: Int): Boolean {
+    return newWordRepository.getNewWordCountByEntryId(id) > 0
   }
 }

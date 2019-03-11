@@ -40,6 +40,12 @@ class NewWordRepositoryImpl private constructor(private val dao: DAO) : NewWordR
     }
   }
 
+  override suspend fun getNewWordCountByEntryId(entryId: Int): Int {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getNewWordCountByEntryId(entryId)
+    }
+  }
+
   companion object {
     @Volatile private var instance: NewWordRepositoryImpl? = null
 

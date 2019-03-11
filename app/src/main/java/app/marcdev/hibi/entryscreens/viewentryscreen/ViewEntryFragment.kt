@@ -45,6 +45,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var searchBar: SearchBar
   private lateinit var tagDisplay: ChipGroup
   private lateinit var tagDisplayHolder: LinearLayout
+  private lateinit var newWordsButton: MaterialButton
 
   // Other
   private var entryIdBeingViewed = 0
@@ -79,6 +80,11 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun fillData(entryId: Int) = launch {
+    if(viewModel.hasNewWords(entryId))
+      newWordsButton.visibility = View.VISIBLE
+    else
+      newWordsButton.visibility = View.GONE
+
     entryIdBeingViewed = entryId
     viewModel.getEntry(entryId).observe(this@ViewEntryFragment, Observer { entry ->
       contentDisplay.text = entry.content
@@ -127,7 +133,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
     val deleteButton: ImageView = view.findViewById(R.id.img_delete)
     deleteButton.setOnClickListener(deleteClickListener)
 
-    val newWordsButton: MaterialButton = view.findViewById(R.id.btn_view_new_words)
+    newWordsButton = view.findViewById(R.id.btn_view_new_words)
     newWordsButton.setOnClickListener(newWordsClickListener)
   }
 
@@ -187,6 +193,6 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
 
   private fun deleteEntry() = launch {
     viewModel.deleteEntry(entryIdBeingViewed)
-    Navigation.findNavController(view!!).popBackStack()
+    Navigation.findNavController(requireView()).popBackStack()
   }
 }

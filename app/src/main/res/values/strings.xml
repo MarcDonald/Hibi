@@ -43,7 +43,7 @@
   <string name="go_back_warning">Go back and lose all unsaved progress?</string>
   <string name="edit">Edit</string>
   <string name="delete">Delete</string>
-  <string name="view_new_words">New words in this entry</string>
+  <string name="view_new_words">View new words in this entry</string>
 
   <!--Search-->
   <string name="no_search_term_warning">Please enter something to search for</string>

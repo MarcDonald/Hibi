@@ -97,4 +97,7 @@ interface DAO {
 
   @Query("SELECT * FROM NewWord WHERE entryId = :entryId")
   fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>
+
+  @Query("SELECT COUNT(*) FROM NewWord WHERE entryId = :entryId")
+  fun getNewWordCountByEntryId(entryId: Int): Int
 }
