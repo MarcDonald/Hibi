@@ -18,7 +18,7 @@
       android:orientation="vertical">
 
       <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_settings"
+        android:id="@+id/btn_main_menu_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings"
@@ -29,24 +29,13 @@
         app:iconTint="@color/textOnPrimary" />
 
       <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_oss_licences"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/open_source_licenses"
-        android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
-        android:textAlignment="textStart"
-        app:icon="@drawable/ic_description_black_24dp"
-        app:iconPadding="@dimen/margin_standard"
-        app:iconTint="@color/textOnPrimary" />
-
-      <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_source_code"
+        android:id="@+id/btn_main_menu_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
-        android:text="@string/source_code"
+        android:text="@string/about"
         android:textAlignment="textStart"
-        app:icon="@drawable/ic_code_black_24dp"
+        app:icon="@drawable/ic_info_outline_black_24dp"
         app:iconPadding="@dimen/margin_standard"
         app:iconTint="@color/textOnPrimary" />
     </LinearLayout>

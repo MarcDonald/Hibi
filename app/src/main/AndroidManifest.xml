@@ -23,6 +23,7 @@
       </intent-filter>
     </activity>
     <activity android:name=".maintabs.settings.OpenSourceLicencesActivity" />
+    <activity android:name=".maintabs.settings.AboutActivity" />
   </application>
 
 </manifest>
