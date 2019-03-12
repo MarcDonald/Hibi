@@ -1,15 +1,18 @@
 package app.marcdev.hibi.maintabs.mainentries
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.PREF_MAIN_DIVIDERS
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.maintabs.mainentries.mainentriesrecycler.EntriesRecyclerAdapter
 import kotlinx.coroutines.launch
@@ -65,9 +68,11 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager
 
-//    TODO make this an option
-//    val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
-//    recycler.addItemDecoration(dividerItemDecoration)
+    val mainDividerPreference = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString(PREF_MAIN_DIVIDERS, resources.getString(R.string.yes))
+    if(mainDividerPreference != null && mainDividerPreference == resources.getString(R.string.yes)) {
+      val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
+      recycler.addItemDecoration(dividerItemDecoration)
+    }
 
     displayRecyclerData()
   }

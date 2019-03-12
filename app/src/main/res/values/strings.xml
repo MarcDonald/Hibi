@@ -97,6 +97,7 @@
   <string name="settings">Settings</string>
   <string name="appearance">Appearance</string>
   <string name="main_separators_pref_title">Include separators for main screen entries</string>
+  <string name="may_need_restart">You may need to restart the app for this setting to take effect</string>
 
   <!--About-->
   <string name="open_source_licenses">Open Source Licenses</string>
