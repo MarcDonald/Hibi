@@ -1,5 +1,7 @@
-﻿# Hibi 「日々」
-An Android app for learning Japanese by keeping a journal.
+﻿<img align="right" src="/.github/assets/logo.png?raw=true" width="192"/>
+
+# Hibi 「日々」
+An app for Android designed to aid your Japanese learning through keeping a journal.
 
 ## Open Source Libraries Used
 ### [Timber](https://github.com/JakeWharton/timber)
