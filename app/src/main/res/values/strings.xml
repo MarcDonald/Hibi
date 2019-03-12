@@ -22,6 +22,8 @@
   <string name="no_entries">You haven\'t made any entries yet</string>
   <string name="go_back">Go Back</string>
   <string name="stay">Stay</string>
+  <string name="yes">Yes</string>
+  <string name="no">No</string>
 
   <!--Tab Titles-->
   <string name="tab_entries">Entries</string>
@@ -93,6 +95,8 @@
 
   <!--Settings-->
   <string name="settings">Settings</string>
+  <string name="appearance">Appearance</string>
+  <string name="main_separators_pref_title">Include separators for main screen entries</string>
 
   <!--About-->
   <string name="open_source_licenses">Open Source Licenses</string>
@@ -125,4 +129,9 @@
 
   <string name="jisho_thanks">Search feature uses Jisho.org\'s API</string>
 
+  <!--Arrays-->
+  <string-array name="yes_or_no">
+    <item>@string/yes</item>
+    <item>@string/no</item>
+  </string-array>
 </resources>

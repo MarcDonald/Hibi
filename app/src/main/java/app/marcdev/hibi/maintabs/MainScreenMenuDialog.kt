@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import app.marcdev.hibi.R
 import app.marcdev.hibi.maintabs.settings.AboutActivity
+import app.marcdev.hibi.maintabs.settings.SettingsActivity
 import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import timber.log.Timber
@@ -32,7 +32,8 @@ class MainScreenMenuDialog : HibiBottomSheetDialogFragment() {
   }
 
   private val settingsClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), resources.getString(R.string.settings), Toast.LENGTH_SHORT).show()
+    val intent = Intent(requireContext(), SettingsActivity::class.java)
+    startActivity(intent)
     dismiss()
   }
 
