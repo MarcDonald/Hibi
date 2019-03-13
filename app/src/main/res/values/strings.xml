@@ -129,6 +129,9 @@
   <string name="mplus">M PLUS Rounded 1c Bold</string>
   <string name="mplus_description">Used as the icon font</string>
 
+  <string name="material_icons_title">Material Design Icons</string>
+  <string name="material_icons_description">Used throughout the application</string>
+
   <string name="jisho_thanks">Search powered by Jisho.org\'s API</string>
 
   <!--Arrays-->

@@ -29,57 +29,34 @@ class OpenSourceLicencesActivity : Activity() {
     toolbarBackButton.setOnClickListener(backClickListener)
 
     val timber: LicenseDisplay = findViewById(R.id.license_timber)
-    timber.setOnClickListener(timberClickListener)
+    timber.setOnClickListener(openURLClickListener("https://github.com/JakeWharton/timber"))
 
     val kodein: LicenseDisplay = findViewById(R.id.license_kodein)
-    kodein.setOnClickListener(kodeinClickListener)
+    kodein.setOnClickListener(openURLClickListener("https://github.com/Kodein-Framework/Kodein-DI"))
 
     val retrofit: LicenseDisplay = findViewById(R.id.license_retrofit)
-    retrofit.setOnClickListener(retrofitClickListener)
+    retrofit.setOnClickListener(openURLClickListener("https://github.com/square/retrofit"))
 
     val gson: LicenseDisplay = findViewById(R.id.license_gson)
-    gson.setOnClickListener(gsonClickListener)
+    gson.setOnClickListener(openURLClickListener("https://github.com/google/gson"))
 
     val mplus: LicenseDisplay = findViewById(R.id.license_mplus)
-    mplus.setOnClickListener(mplusClickListener)
+    mplus.setOnClickListener(openURLClickListener("https://fonts.google.com/specimen/M+PLUS+Rounded+1c"))
+
+    val materialIcons: LicenseDisplay = findViewById(R.id.license_material_icons)
+    materialIcons.setOnClickListener(openURLClickListener("https://material.io/tools/icons/"))
   }
 
   private val backClickListener = View.OnClickListener {
     onBackPressed()
   }
 
-  private val timberClickListener = View.OnClickListener {
-    val uriUrl = Uri.parse("https://github.com/JakeWharton/timber")
-    val launchBrowser = Intent(Intent.ACTION_VIEW)
-    launchBrowser.data = uriUrl
-    startActivity(launchBrowser)
-  }
-
-  private val kodeinClickListener = View.OnClickListener {
-    val uriUrl = Uri.parse("https://github.com/Kodein-Framework/Kodein-DI")
-    val launchBrowser = Intent(Intent.ACTION_VIEW)
-    launchBrowser.data = uriUrl
-    startActivity(launchBrowser)
-  }
-
-  private val retrofitClickListener = View.OnClickListener {
-    val uriUrl = Uri.parse("https://github.com/square/retrofit")
-    val launchBrowser = Intent(Intent.ACTION_VIEW)
-    launchBrowser.data = uriUrl
-    startActivity(launchBrowser)
-  }
-
-  private val gsonClickListener = View.OnClickListener {
-    val uriUrl = Uri.parse("https://github.com/google/gson")
-    val launchBrowser = Intent(Intent.ACTION_VIEW)
-    launchBrowser.data = uriUrl
-    startActivity(launchBrowser)
-  }
-
-  private val mplusClickListener = View.OnClickListener {
-    val uriUrl = Uri.parse("https://fonts.google.com/specimen/M+PLUS+Rounded+1c")
-    val launchBrowser = Intent(Intent.ACTION_VIEW)
-    launchBrowser.data = uriUrl
-    startActivity(launchBrowser)
+  private fun openURLClickListener(url: String): View.OnClickListener {
+    return View.OnClickListener {
+      val uriUrl = Uri.parse(url)
+      val launchBrowser = Intent(Intent.ACTION_VIEW)
+      launchBrowser.data = uriUrl
+      startActivity(launchBrowser)
+    }
   }
 }

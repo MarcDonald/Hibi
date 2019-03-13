@@ -79,6 +79,18 @@
         app:description="@string/mplus_description"
         app:license="@string/ofl"
         app:title="@string/mplus" />
+
+      <app.marcdev.hibi.uicomponents.LicenseDisplay
+        android:id="@+id/license_material_icons"
+        style="@style/Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/material_icons_description"
+        app:license="@string/apache"
+        app:title="@string/material_icons_title" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -28,3 +28,8 @@ Apache 2 License
 Used as the icon font
 
 Open Font License
+
+### [Material Design Icons](https://material.io/tools/icons/)
+Used throughout the application
+
+Apache 2 License
