@@ -46,6 +46,7 @@
   <string name="edit">Edit</string>
   <string name="delete">Delete</string>
   <string name="view_new_words">View new words in this entry</string>
+  <string name="copied_entry_to_clipboard">Copied entry to clipboard</string>
 
   <!--Search-->
   <string name="no_search_term_warning">Please enter something to search for</string>
@@ -103,7 +104,7 @@
   <string name="open_source_licenses">Open Source Licenses</string>
   <string name="about">About</string>
   <string name="app_info">App Info</string>
-  <string name="version">App Version</string>
+  <string name="version">Version</string>
   <string name="credits">Credits</string>
   <string name="author">Author</string>
   <string name="marc_donald">Marc Donald</string>
@@ -128,7 +129,7 @@
   <string name="mplus">M PLUS Rounded 1c Bold</string>
   <string name="mplus_description">Used as the icon font</string>
 
-  <string name="jisho_thanks">Search feature uses Jisho.org\'s API</string>
+  <string name="jisho_thanks">Search powered by Jisho.org\'s API</string>
 
   <!--Arrays-->
   <string-array name="yes_or_no">

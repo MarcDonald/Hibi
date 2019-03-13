@@ -1,6 +1,9 @@
 package app.marcdev.hibi.entryscreens.addentryscreen
 
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -118,8 +121,8 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val addMediaButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_option_media)
     addMediaButton.setOnClickListener(addMediaClickListener)
 
-    val addMoodButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_option_mood)
-    addMoodButton.setOnClickListener(addMoodClickListener)
+    val clipboardButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_option_clipboard)
+    clipboardButton.setOnClickListener(clipboardClickListener)
 
     val wordButton: ImageView = view.findViewById(app.marcdev.hibi.R.id.img_option_words)
     wordButton.setOnClickListener(wordClickListener)
@@ -209,8 +212,11 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     Toast.makeText(requireContext(), resources.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
   }
 
-  private val addMoodClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), resources.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
+  private val clipboardClickListener = View.OnClickListener {
+    val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip: ClipData = ClipData.newPlainText("Entry", contentInput.text.toString())
+    clipboard.primaryClip = clip
+    Toast.makeText(requireContext(), resources.getString(R.string.copied_entry_to_clipboard), Toast.LENGTH_SHORT).show()
   }
 
   private val wordClickListener = View.OnClickListener {
