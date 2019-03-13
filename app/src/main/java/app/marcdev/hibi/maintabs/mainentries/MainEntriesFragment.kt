@@ -78,16 +78,16 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun displayRecyclerData() = launch {
+    noResults.visibility = View.GONE
     loadingDisplay.visibility = View.VISIBLE
     val displayItems = viewModel.displayItems.await()
 
     displayItems.observe(this@MainEntriesFragment, Observer { items ->
-      noResults.visibility = View.GONE
-
-      if(items.isEmpty())
+      if(items.isEmpty()) {
         noResults.visibility = View.VISIBLE
-      else
+      } else {
         noResults.visibility = View.GONE
+      }
 
       recyclerAdapter.updateList(items)
       loadingDisplay.visibility = View.GONE
