@@ -1,6 +1,7 @@
 package app.marcdev.hibi.addtagdialog
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
     Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_new_tag, container, false)
     bindViews(view)
+    input.requestFocus()
     return view
   }
 
@@ -44,11 +46,20 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
     input = view.findViewById(R.id.edt_new_tag_input)
     val saveButton: MaterialButton = view.findViewById(R.id.btn_save_tags)
     saveButton.setOnClickListener(saveClickListener)
+    input.setOnKeyListener(saveOnEnterListener)
   }
 
   private val saveClickListener = View.OnClickListener {
     saveTag()
   }
+
+  private val saveOnEnterListener: View.OnKeyListener =
+    View.OnKeyListener { _: View, keyCode: Int, keyEvent: KeyEvent ->
+      if ((keyEvent.action == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
+        saveTag()
+      }
+      true
+    }
 
   private fun saveTag() = launch {
     val save = viewModel.addTag(input.text.toString())
