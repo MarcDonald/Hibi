@@ -16,4 +16,6 @@ interface EntryRepository {
   suspend fun getAmountOfEntries(): LiveData<Int>
 
   suspend fun getLastEntryId(): Int
+
+  suspend fun getEntryCount(): LiveData<Int>
 }

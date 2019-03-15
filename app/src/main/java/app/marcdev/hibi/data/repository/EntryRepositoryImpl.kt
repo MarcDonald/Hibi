@@ -52,6 +52,12 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
     }
   }
 
+  override suspend fun getEntryCount(): LiveData<Int> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getEntryCount()
+    }
+  }
+
   companion object {
     @Volatile private var instance: EntryRepositoryImpl? = null
 

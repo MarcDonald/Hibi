@@ -37,6 +37,9 @@ interface DAO {
   @Query("SELECT id FROM Entry ORDER BY id DESC LIMIT 1")
   fun getLastEntryId(): Int
 
+  @Query("SELECT COUNT(id) FROM Entry")
+  fun getEntryCount(): LiveData<Int>
+
   /* Tag */
   @Insert(onConflict = OnConflictStrategy.FAIL)
   fun insertTag(tag: Tag)

@@ -27,6 +27,10 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository, private
     return@lazyDeferred result
   }
 
+  val entryCount by lazyDeferred {
+    return@lazyDeferred entryRepository.getEntryCount()
+  }
+
   private fun combineData(entries: LiveData<List<Entry>>, tagEntryRelations: LiveData<List<TagEntryRelation>>): List<MainEntriesDisplayItem> {
     val itemList = ArrayList<MainEntriesDisplayItem>()
 

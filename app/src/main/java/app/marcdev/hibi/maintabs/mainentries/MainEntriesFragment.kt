@@ -21,7 +21,6 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-
 class MainEntriesFragment : ScopedFragment(), KodeinAware {
 
   // Kodein initialisation
@@ -80,16 +79,18 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
   private fun displayRecyclerData() = launch {
     noResults.visibility = View.GONE
     loadingDisplay.visibility = View.VISIBLE
-    val displayItems = viewModel.displayItems.await()
 
+    val entryCount = viewModel.entryCount.await()
+    entryCount.observe(this@MainEntriesFragment, Observer {
+      if(it > 0)
+        noResults.visibility = View.GONE
+      else
+        noResults.visibility = View.VISIBLE
+    })
+
+    val displayItems = viewModel.displayItems.await()
     displayItems.observe(this@MainEntriesFragment, Observer { items ->
       recyclerAdapter.updateList(items)
-
-      if(items.isEmpty()) {
-        noResults.visibility = View.VISIBLE
-      } else {
-        noResults.visibility = View.GONE
-      }
       loadingDisplay.visibility = View.GONE
     })
   }
