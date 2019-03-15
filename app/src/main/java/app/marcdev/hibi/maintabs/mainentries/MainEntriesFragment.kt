@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.PREF_MAIN_DIVIDERS
+import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.maintabs.mainentries.mainentriesrecycler.EntriesRecyclerAdapter
 import kotlinx.coroutines.launch
@@ -68,8 +68,8 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager
 
-    val mainDividerPreference = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString(PREF_MAIN_DIVIDERS, resources.getString(R.string.yes))
-    if(mainDividerPreference != null && mainDividerPreference == resources.getString(R.string.yes)) {
+    val includeEntryDividers = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_ENTRY_DIVIDERS, true)
+    if(includeEntryDividers) {
       val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
       recycler.addItemDecoration(dividerItemDecoration)
     }
@@ -83,13 +83,13 @@ class MainEntriesFragment : ScopedFragment(), KodeinAware {
     val displayItems = viewModel.displayItems.await()
 
     displayItems.observe(this@MainEntriesFragment, Observer { items ->
+      recyclerAdapter.updateList(items)
+
       if(items.isEmpty()) {
         noResults.visibility = View.VISIBLE
       } else {
         noResults.visibility = View.GONE
       }
-
-      recyclerAdapter.updateList(items)
       loadingDisplay.visibility = View.GONE
     })
   }

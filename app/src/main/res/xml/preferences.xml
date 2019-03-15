@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
   <PreferenceCategory android:title="@string/appearance">
-    <ListPreference
-      android:key="pref_main_dividers"
-      android:title="@string/main_separators_pref_title"
-      android:defaultValue="@string/yes"
-      android:entryValues="@array/yes_or_no"
-      android:entries="@array/yes_or_no"
+    <SwitchPreference
+      android:key="pref_entry_dividers"
+      android:title="@string/entry_dividers_pref_title"
+      android:defaultValue="true"
       android:icon="@drawable/ic_view_stream_black_24dp" />
   </PreferenceCategory>
 </PreferenceScreen>
