@@ -1,4 +1,4 @@
-package app.marcdev.hibi.entryscreens.addentryscreen.addnewworddialog
+package app.marcdev.hibi.uicomponents.addnewworddialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.NEW_WORD_ID_KEY
-import app.marcdev.hibi.uicomponents.HibiDialogFragment
+import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein

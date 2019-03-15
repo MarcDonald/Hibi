@@ -1,7 +1,6 @@
-package app.marcdev.hibi.uicomponents
+package app.marcdev.hibi.internal.base
 
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.base.ScopedDialogFragment
 
 abstract class HibiDialogFragment : ScopedDialogFragment() {
   override fun onStart() {

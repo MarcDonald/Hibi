@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
-import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein

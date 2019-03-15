@@ -105,6 +105,7 @@
   <string name="about">About</string>
   <string name="app_info">App Info</string>
   <string name="version">Version</string>
+  <string name="build_code_with_output">Build Code: %1$s</string>
   <string name="credits">Credits</string>
   <string name="author">Author</string>
   <string name="marc_donald">Marc Donald</string>

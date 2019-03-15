@@ -33,7 +33,8 @@ class AboutFragment : PreferenceFragmentCompat() {
     val version = findPreference("about_version")
     version.summary = BuildConfig.VERSION_NAME
     version.setOnPreferenceClickListener {
-      Toast.makeText(requireContext(), Integer.toString(BuildConfig.VERSION_CODE), Toast.LENGTH_SHORT).show()
+      val buildCodeString = Integer.toString(BuildConfig.VERSION_CODE)
+      Toast.makeText(requireContext(), resources.getString(R.string.build_code_with_output, buildCodeString), Toast.LENGTH_SHORT).show()
       true
     }
   }

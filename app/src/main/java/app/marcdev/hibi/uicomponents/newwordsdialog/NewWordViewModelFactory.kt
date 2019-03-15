@@ -1,4 +1,4 @@
-package app.marcdev.hibi.newwordsdialog
+package app.marcdev.hibi.uicomponents.newwordsdialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

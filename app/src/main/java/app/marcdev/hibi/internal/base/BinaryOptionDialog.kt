@@ -1,4 +1,4 @@
-package app.marcdev.hibi.uicomponents
+package app.marcdev.hibi.internal.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package app.marcdev.hibi.entryscreens.addentryscreen
+package app.marcdev.hibi.uicomponents
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TimePicker
 import app.marcdev.hibi.R
-import app.marcdev.hibi.uicomponents.HibiDialogFragment
+import app.marcdev.hibi.entryscreens.addentryscreen.DateTimeStore
+import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
 import timber.log.Timber
 

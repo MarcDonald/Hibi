@@ -1,4 +1,4 @@
-package app.marcdev.hibi.addtagdialog
+package app.marcdev.hibi.uicomponents.addtagdialog
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
-import app.marcdev.hibi.uicomponents.HibiDialogFragment
+import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein

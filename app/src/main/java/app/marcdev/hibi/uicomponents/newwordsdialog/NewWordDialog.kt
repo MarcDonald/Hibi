@@ -1,4 +1,4 @@
-package app.marcdev.hibi.newwordsdialog
+package app.marcdev.hibi.uicomponents.newwordsdialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.entryscreens.addentryscreen.NewWordsToSaveToNewEntry
-import app.marcdev.hibi.entryscreens.addentryscreen.addnewworddialog.AddNewWordDialog
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
-import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordDialog
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein

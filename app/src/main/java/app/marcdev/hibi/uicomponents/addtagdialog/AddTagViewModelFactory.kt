@@ -1,4 +1,4 @@
-package app.marcdev.hibi.addtagdialog
+package app.marcdev.hibi.uicomponents.addtagdialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

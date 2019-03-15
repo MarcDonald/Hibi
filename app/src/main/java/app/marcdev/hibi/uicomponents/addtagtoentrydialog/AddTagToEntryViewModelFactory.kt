@@ -1,4 +1,4 @@
-package app.marcdev.hibi.entryscreens.addentryscreen.addtagtoentrydialog
+package app.marcdev.hibi.uicomponents.addtagtoentrydialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

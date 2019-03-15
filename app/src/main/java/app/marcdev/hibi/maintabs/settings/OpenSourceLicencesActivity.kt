@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.uicomponents.LicenseDisplay
+import app.marcdev.hibi.uicomponents.views.LicenseDisplay
 import timber.log.Timber
 
 class OpenSourceLicencesActivity : Activity() {

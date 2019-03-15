@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
 import app.marcdev.hibi.maintabs.settings.AboutActivity
 import app.marcdev.hibi.maintabs.settings.SettingsActivity
-import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import timber.log.Timber
 

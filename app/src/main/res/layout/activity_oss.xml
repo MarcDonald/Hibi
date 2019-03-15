@@ -22,7 +22,7 @@
       android:layout_height="wrap_content"
       android:orientation="vertical">
 
-      <app.marcdev.hibi.uicomponents.LicenseDisplay
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_timber"
         style="@style/Hibi.CardView.Rounded"
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         app:license="@string/apache"
         app:title="@string/timber" />
 
-      <app.marcdev.hibi.uicomponents.LicenseDisplay
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_kodein"
         android:layout_width="match_parent"
         style="@style/Hibi.CardView.Rounded"
@@ -44,7 +44,7 @@
         app:license="@string/mit"
         app:title="@string/kodein" />
 
-      <app.marcdev.hibi.uicomponents.LicenseDisplay
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         style="@style/Hibi.CardView.Rounded"
         android:id="@+id/license_retrofit"
         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
         app:license="@string/apache"
         app:title="@string/retrofit" />
 
-      <app.marcdev.hibi.uicomponents.LicenseDisplay
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         style="@style/Hibi.CardView.Rounded"
         android:id="@+id/license_gson"
         android:layout_width="match_parent"
@@ -68,7 +68,7 @@
         app:license="@string/apache"
         app:title="@string/gson" />
 
-      <app.marcdev.hibi.uicomponents.LicenseDisplay
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_mplus"
         style="@style/Hibi.CardView.Rounded"
         android:layout_width="match_parent"
@@ -80,7 +80,7 @@
         app:license="@string/ofl"
         app:title="@string/mplus" />
 
-      <app.marcdev.hibi.uicomponents.LicenseDisplay
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_material_icons"
         style="@style/Hibi.CardView.Rounded"
         android:layout_width="match_parent"

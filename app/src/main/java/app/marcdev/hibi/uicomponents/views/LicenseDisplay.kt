@@ -1,4 +1,4 @@
-package app.marcdev.hibi.uicomponents
+package app.marcdev.hibi.uicomponents.views
 
 import android.content.Context
 import android.util.AttributeSet

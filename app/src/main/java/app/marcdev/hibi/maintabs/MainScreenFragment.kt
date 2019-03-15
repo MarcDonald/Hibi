@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import app.marcdev.hibi.R
-import app.marcdev.hibi.addtagdialog.AddTagDialog
 import app.marcdev.hibi.internal.BOOKS_TAB
 import app.marcdev.hibi.internal.CALENDAR_TAB
 import app.marcdev.hibi.internal.ENTRIES_TAB
@@ -19,6 +18,7 @@ import app.marcdev.hibi.maintabs.booksfragment.BooksFragment
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarFragment
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesFragment
 import app.marcdev.hibi.maintabs.tagsfragment.TagsFragment
+import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import timber.log.Timber

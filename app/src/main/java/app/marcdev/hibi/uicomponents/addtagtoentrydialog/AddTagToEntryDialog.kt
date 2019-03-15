@@ -1,4 +1,4 @@
-package app.marcdev.hibi.entryscreens.addentryscreen.addtagtoentrydialog
+package app.marcdev.hibi.uicomponents.addtagtoentrydialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,10 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
-import app.marcdev.hibi.addtagdialog.AddTagDialog
 import app.marcdev.hibi.entryscreens.addentryscreen.TagsToSaveToNewEntry
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
-import app.marcdev.hibi.uicomponents.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein

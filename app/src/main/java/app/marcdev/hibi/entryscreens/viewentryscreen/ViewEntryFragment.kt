@@ -14,13 +14,13 @@ import androidx.navigation.Navigation
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
+import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
-import app.marcdev.hibi.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
-import app.marcdev.hibi.uicomponents.BinaryOptionDialog
-import app.marcdev.hibi.uicomponents.SearchBar
+import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordDialog
+import app.marcdev.hibi.uicomponents.views.SearchBar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup

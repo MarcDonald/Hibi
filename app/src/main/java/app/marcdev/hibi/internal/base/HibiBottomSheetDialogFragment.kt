@@ -1,9 +1,8 @@
-package app.marcdev.hibi.uicomponents
+package app.marcdev.hibi.internal.base
 
 import android.app.Dialog
 import android.os.Bundle
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.base.ScopedBottomSheetDialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 abstract class HibiBottomSheetDialogFragment : ScopedBottomSheetDialogFragment() {
