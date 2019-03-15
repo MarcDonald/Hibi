@@ -15,7 +15,9 @@
     android:supportsRtl="true"
     android:theme="@style/Hibi.LightTheme"
     tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name="app.marcdev.hibi.MainActivity">
+    <activity
+      android:name="app.marcdev.hibi.MainActivity"
+      android:windowSoftInputMode="adjustResize">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
