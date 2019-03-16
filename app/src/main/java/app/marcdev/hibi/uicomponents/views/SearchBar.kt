@@ -8,7 +8,6 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import app.marcdev.hibi.R
 
@@ -43,28 +42,26 @@ class SearchBar(context: Context, attributeSet: AttributeSet?, defStyle: Int) : 
 
   fun setSearchAction(searchAction: (searchTerm: String) -> Unit) {
     val buttonClickListener = OnClickListener {
-      val input = editText.text.toString()
-      if(input.isNotBlank()) {
-        searchAction(input)
-        editText.setText("")
-      } else {
-        Toast.makeText(context, context.resources.getString(R.string.no_search_term_warning), Toast.LENGTH_SHORT).show()
-      }
+      search(searchAction)
     }
     searchButton.setOnClickListener(buttonClickListener)
 
     val searchOnEnterListener: View.OnKeyListener = View.OnKeyListener { _: View, keyCode: Int, keyEvent: KeyEvent ->
       if((keyEvent.action == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
-        val input = editText.text.toString()
-        if(input.isNotBlank()) {
-          searchAction(input)
-          editText.setText("")
-        } else {
-          Toast.makeText(context, context.resources.getString(R.string.no_search_term_warning), Toast.LENGTH_SHORT).show()
-        }
+        search(searchAction)
       }
       false
     }
     editText.setOnKeyListener(searchOnEnterListener)
+  }
+
+  fun search(searchAction: (searchTerm: String) -> Unit) {
+    val input = editText.text.toString()
+    if(input.isNotBlank()) {
+      searchAction(input)
+      editText.setText("")
+    } else {
+      editText.error = resources.getString(R.string.no_search_term_warning)
+    }
   }
 }
