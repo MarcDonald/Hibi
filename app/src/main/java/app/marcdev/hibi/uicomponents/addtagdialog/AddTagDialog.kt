@@ -31,7 +31,6 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
     Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_new_tag, container, false)
     bindViews(view)
-    input.requestFocus()
     return view
   }
 
@@ -58,7 +57,9 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
       if ((keyEvent.action == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
         saveTag()
       }
-      true
+      /* This is false so that the event isn't consumed and other buttons (such as the back button)
+       * can be pressed */
+      false
     }
 
   private fun saveTag() = launch {
