@@ -12,7 +12,7 @@ class AddEntryViewModel(private val entryRepository: EntryRepository, private va
 
   init {
     TagsToSaveToNewEntry.list.clear()
-    NewWordsToSaveToNewEntry.list.clear()
+    NewWordsToSaveToNewEntry.clearList()
   }
 
   suspend fun addEntry(day: Int, month: Int, year: Int, hour: Int, minute: Int, content: String) {
@@ -22,9 +22,11 @@ class AddEntryViewModel(private val entryRepository: EntryRepository, private va
       val tagEntryRelation = TagEntryRelation(it, id)
       tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
     }
-    NewWordsToSaveToNewEntry.list.forEach {
-      it.entryId = id
-      newWordRepository.addNewWord(it)
+    if(NewWordsToSaveToNewEntry.list.value != null) {
+      NewWordsToSaveToNewEntry.list.value!!.forEach {
+        it.entryId = id
+        newWordRepository.addNewWord(it)
+      }
     }
   }
 

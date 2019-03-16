@@ -18,7 +18,7 @@ class AddNewWordViewModel(private val newWordRepository: NewWordRepository) : Vi
       }
       newWordRepository.addNewWord(newWordToSave)
     } else {
-      NewWordsToSaveToNewEntry.list.add(newWordToSave)
+      NewWordsToSaveToNewEntry.addNewWordToList(newWordToSave)
     }
   }
 

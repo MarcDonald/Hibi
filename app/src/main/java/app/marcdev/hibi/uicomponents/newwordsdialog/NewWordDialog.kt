@@ -113,13 +113,14 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
       })
     } else {
       val list = NewWordsToSaveToNewEntry.list
-      recyclerAdapter.updateList(list)
-
-      if(list.isNotEmpty()) {
-        noResultsWarning.visibility = View.GONE
-      } else {
-        noResultsWarning.visibility = View.VISIBLE
-      }
+      list.observe(this@NewWordDialog, Observer {
+        recyclerAdapter.updateList(it)
+        if(it.isNotEmpty()) {
+          noResultsWarning.visibility = View.GONE
+        } else {
+          noResultsWarning.visibility = View.VISIBLE
+        }
+      })
     }
   }
 }
