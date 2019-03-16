@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.PREF_DARK_THEME
 import app.marcdev.hibi.uicomponents.views.LicenseDisplay
 import timber.log.Timber
 
@@ -16,8 +18,13 @@ class OpenSourceLicencesActivity : Activity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     Timber.v("Log: onCreate: Started")
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_oss)
 
+    if(PreferenceManager.getDefaultSharedPreferences(applicationContext).getBoolean(PREF_DARK_THEME, false))
+      setTheme(R.style.Hibi_DarkTheme)
+    else
+      setTheme(R.style.Hibi_LightTheme)
+
+    setContentView(R.layout.activity_oss)
     bindViews()
   }
 

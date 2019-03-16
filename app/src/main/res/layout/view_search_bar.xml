@@ -27,7 +27,7 @@
     android:layout_margin="@dimen/margin_standard"
     android:background="?selectableItemBackgroundBorderless"
     android:contentDescription="@string/search_bar_hint"
-    android:src="@drawable/ic_search_black_24dp"
+    android:src="@drawable/ic_search_24dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />

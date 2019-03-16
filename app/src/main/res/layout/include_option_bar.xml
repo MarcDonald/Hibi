@@ -4,7 +4,7 @@
   android:id="@+id/const_option_bar"
   android:layout_width="match_parent"
   android:layout_height="@dimen/option_bar_height"
-  android:background="@color/colorPrimary">
+  android:background="?colorPrimaryDark">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_gravity="center"
@@ -19,7 +19,7 @@
       android:clickable="true"
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_tag_black_24dp"
+      android:src="@drawable/ic_tag_24dp"
       android:contentDescription="@string/add_tags_to_entry_hint"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
       android:clickable="true"
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_location_on_black_24dp"
+      android:src="@drawable/ic_location_on_24dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toEndOf="@id/img_option_tag"
       app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +46,7 @@
       android:clickable="true"
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_image_black_24dp"
+      android:src="@drawable/ic_image_24dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toEndOf="@id/img_option_location"
       app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
       android:clickable="true"
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_content_copy_black_24dp"
+      android:src="@drawable/ic_content_copy_24dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toEndOf="@id/img_option_media"
       app:layout_constraintTop_toTopOf="parent" />

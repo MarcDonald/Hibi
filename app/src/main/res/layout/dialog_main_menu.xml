@@ -24,9 +24,9 @@
         android:text="@string/settings"
         android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
         android:textAlignment="textStart"
-        app:icon="@drawable/ic_settings_black_24dp"
+        app:icon="@drawable/ic_settings_24dp"
         app:iconPadding="@dimen/margin_standard"
-        app:iconTint="@color/textOnPrimary" />
+        app:iconTint="?textOnPrimary" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_main_menu_about"
@@ -35,9 +35,9 @@
         android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
         android:text="@string/about"
         android:textAlignment="textStart"
-        app:icon="@drawable/ic_info_outline_black_24dp"
+        app:icon="@drawable/ic_info_outline_24dp"
         app:iconPadding="@dimen/margin_standard"
-        app:iconTint="@color/textOnPrimary" />
+        app:iconTint="?textOnPrimary" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

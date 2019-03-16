@@ -2,24 +2,46 @@
 
   <!-- Base application theme. -->
   <style name="Hibi.LightTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorPrimary">@color/lightThemeColorPrimary</item>
+    <item name="colorPrimaryDark">@color/lightThemeColorPrimary</item>
     <item name="colorAccent">@color/colorAccent</item>
     <item name="colorError">@color/error</item>
+    <item name="textOnPrimary">@color/lightThemePrimaryText</item>
+    <item name="android:statusBarColor">?colorPrimary</item>
     <item name="android:windowLightStatusBar">true</item>
-    <item name="buttonStyle">@style/Hibi.Button.Text</item>
+    <item name="materialButtonStyle">@style/Hibi.Button.Text</item>
+  </style>
+
+  <style name="Hibi.DarkTheme" parent="Theme.MaterialComponents.NoActionBar">
+    <item name="colorPrimary">@color/darkThemeColorPrimary</item>
+    <item name="colorPrimaryDark">@color/darkThemeColorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorError">@color/error</item>
+    <item name="textOnPrimary">@color/darkThemePrimaryText</item>
+    <item name="android:navigationBarColor">?colorPrimaryDark</item>
+    <item name="android:statusBarColor">?colorPrimaryDark</item>
+    <item name="android:windowLightStatusBar">false</item>
     <item name="materialButtonStyle">@style/Hibi.Button.Text</item>
   </style>
 
   <!--UI Components-->
-  <style name="Hibi.LightTheme.BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-    <item name="bottomSheetStyle">@style/Hibi.BottomSheetStyle</item>
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+  <style name="Hibi.BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
     <item name="colorAccent">@color/colorAccent</item>
     <item name="android:windowLightStatusBar">true</item>
     <item name="buttonStyle">@style/Hibi.Button.Text</item>
     <item name="materialButtonStyle">@style/Hibi.Button.Text</item>
+    <item name="bottomSheetStyle">@style/Hibi.BottomSheetStyle</item>
+  </style>
+
+  <style name="Hibi.LightTheme.BottomSheetDialogTheme" parent="Hibi.BottomSheetDialogTheme">
+    <item name="colorPrimary">@color/lightThemeColorPrimary</item>
+    <item name="android:windowLightStatusBar">true</item>
+  </style>
+
+  <style name="Hibi.DarkTheme.BottomSheetDialogTheme" parent="Hibi.BottomSheetDialogTheme">
+    <item name="colorPrimary">@color/darkThemeColorPrimary</item>
+    <item name="android:windowLightStatusBar">false</item>
+    <item name="android:navigationBarColor">?colorPrimary</item>
   </style>
 
   <style name="Hibi.BottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
@@ -31,7 +53,7 @@
   </style>
 
   <style name="Hibi.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
-    <item name="android:textColor">@color/textOnPrimary</item>
+    <item name="android:textColor">?textOnPrimary</item>
     <item name="android:textAllCaps">false</item>
     <item name="android:textSize">16sp</item>
   </style>
