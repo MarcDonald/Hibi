@@ -14,8 +14,8 @@ android {
         applicationId "app.marcdev.hibi"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 11
-        versionName "0.11.0"
+        versionCode 12
+        versionName "0.12.0"
         setProperty("archivesBaseName", "Hibi-v$versionName")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

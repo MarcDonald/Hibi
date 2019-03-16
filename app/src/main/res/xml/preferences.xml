@@ -2,6 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
   <PreferenceCategory android:title="@string/appearance">
     <SwitchPreference
+      android:key="pref_dark_theme"
+      android:title="@string/theme_pref_title"
+      android:defaultValue="false"
+      android:icon="@drawable/ic_palette_black_24dp" />
+    <SwitchPreference
       android:key="pref_entry_dividers"
       android:title="@string/entry_dividers_pref_title"
       android:defaultValue="true"
