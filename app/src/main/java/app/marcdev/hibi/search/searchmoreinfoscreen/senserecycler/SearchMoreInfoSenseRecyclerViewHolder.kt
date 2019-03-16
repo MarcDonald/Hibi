@@ -42,6 +42,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
 
   init {
     seeAlsoDisplay.setOnClickListener(seeAlsoClickListener)
+    antonymsDisplay.setOnClickListener(antonymClickListener)
   }
 
   fun display(sense: Sense) {
