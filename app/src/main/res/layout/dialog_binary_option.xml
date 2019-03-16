@@ -5,46 +5,47 @@
   android:layout_height="match_parent">
 
   <TextView
-    android:id="@+id/txt_yes_no_title"
+    android:id="@+id/txt_binary_dialog_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
     android:text="@string/title"
     android:textAlignment="center"
-    android:textAppearance="@style/LightTheme.TextAppearance.YesNoDialogTitle"
+    android:textAppearance="@style/TextAppearance.Hibi.DialogTitle"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
-    android:id="@+id/txt_yes_no_message"
+    android:id="@+id/txt_binary_dialog_message"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
     android:text="@string/message"
-    android:textAppearance="@style/LightTheme.TextAppearance.YesNoDialogMessage"
+    android:textAppearance="@style/TextAppearance.Hibi.BinaryDialogMessage"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/txt_yes_no_title" />
+    app:layout_constraintTop_toBottomOf="@id/txt_binary_dialog_title" />
 
-  <app.marcdev.hibi.uicomponents.TransparentSquareButton
-    android:id="@+id/btn_yes_no_positive"
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_binary_dialog_negative"
     android:layout_width="wrap_content"
+    style="@style/Hibi.Button.Negative"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_standard"
     android:layout_margin="@dimen/margin_standard"
+    android:layout_marginBottom="@dimen/margin_standard"
+    android:text="@string/negative"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/txt_yes_no_message"
-    app:text="@string/positive" />
+    app:layout_constraintTop_toBottomOf="@id/txt_binary_dialog_message" />
 
-  <app.marcdev.hibi.uicomponents.TransparentSquareButton
-    android:id="@+id/btn_yes_no_negative"
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_binary_dialog_positive"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
+    android:text="@string/positive"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/btn_yes_no_positive"
-    app:layout_constraintTop_toBottomOf="@id/txt_yes_no_message"
-    app:text="@string/negative" />
+    app:layout_constraintEnd_toStartOf="@string/negative"
+    app:layout_constraintTop_toBottomOf="@id/txt_binary_dialog_message" />
 </androidx.constraintlayout.widget.ConstraintLayout>

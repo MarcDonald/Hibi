@@ -9,9 +9,15 @@
     android:id="@+id/txt_header_date"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/date"
     android:layout_margin="@dimen/margin_standard"
-    android:textAppearance="@style/LightTheme.TextAppearance.MainScreenRecyclerHeader"
-    app:layout_constraintStart_toStartOf="parent" />
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginTop="@dimen/margin_standard"
+    android:layout_marginBottom="@dimen/margin_standard"
+    android:text="@string/date"
+    android:textAppearance="@style/TextAppearance.Hibi.MainScreenRecyclerHeader"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,14 +52,14 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-      android:id="@+id/img_option_mood"
+      android:id="@+id/img_option_clipboard"
       android:layout_width="@dimen/option_bar_icon_width"
       android:layout_height="@dimen/option_bar_height"
       android:background="?selectableItemBackground"
       android:clickable="true"
       android:focusable="true"
       android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_mood_black_24dp"
+      android:src="@drawable/ic_content_copy_black_24dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toEndOf="@id/img_option_media"
       app:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +76,7 @@
       android:src="@drawable/ic_word"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@id/img_option_mood"
+      app:layout_constraintStart_toEndOf="@id/img_option_clipboard"
       app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </HorizontalScrollView>

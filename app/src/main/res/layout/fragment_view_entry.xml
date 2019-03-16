@@ -27,32 +27,34 @@
         android:id="@+id/const_view_date_and_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <app.marcdev.hibi.uicomponents.TransparentSquareButton
+        <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_view_date"
+          style="@style/Hibi.Button.Text"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
-          app:layout_constraintEnd_toStartOf="@id/gd_date_and_time_vert_50"
+          android:text="@string/date"
+          app:layout_constraintEnd_toStartOf="@id/gd_add_entry_50_vert"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:text="@string/date" />
+          app:layout_constraintTop_toTopOf="parent" />
 
-        <app.marcdev.hibi.uicomponents.TransparentSquareButton
+        <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_view_time"
+          style="@style/Hibi.Button.Text"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
+          android:text="@string/time"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@id/gd_date_and_time_vert_50"
-          app:layout_constraintTop_toTopOf="parent"
-          app:text="@string/time" />
+          app:layout_constraintStart_toEndOf="@id/gd_add_entry_50_vert"
+          app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
-          android:id="@+id/gd_date_and_time_vert_50"
+          android:id="@+id/gd_add_entry_50_vert"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:orientation="vertical"
@@ -66,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         android:hint="@string/content_hint"
-        android:textAppearance="@style/LightTheme.TextAppearance.ViewEntryContent"
+        android:textAppearance="@style/TextAppearance.Hibi.ViewEntryContent"
         android:textIsSelectable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,10 +78,10 @@
         android:id="@+id/lin_view_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_view_content"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@id/txt_view_content">
 
         <TextView
           android:layout_width="wrap_content"
@@ -98,13 +100,14 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_view_new_words"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_words"
         android:layout_margin="@dimen/margin_standard"
-        app:layout_constraintTop_toBottomOf="@id/lin_view_tags"
+        android:text="@string/view_new_words"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lin_view_tags" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 
@@ -115,7 +118,7 @@
     android:layout_gravity="bottom"
     android:background="@android:color/white">
 
-    <app.marcdev.hibi.uicomponents.SearchBar
+    <app.marcdev.hibi.uicomponents.views.SearchBar
       android:id="@+id/searchbar_view_entry"
       android:layout_width="match_parent"
       android:layout_height="@dimen/search_bar_height"

@@ -16,8 +16,11 @@ interface DAO {
      for all foreign keys
      See https://sqlite.org/lang_conflict.html
    */
-  @Insert(onConflict = OnConflictStrategy.IGNORE)
-  fun upsertEntry(entry: Entry)
+  @Insert(onConflict = OnConflictStrategy.FAIL)
+  fun insertEntry(entry: Entry)
+
+  @Update
+  fun updateEntry(entry: Entry)
 
   @Query("SELECT * FROM Entry WHERE id = :id")
   fun getEntry(id: Int): LiveData<Entry>
@@ -34,9 +37,15 @@ interface DAO {
   @Query("SELECT id FROM Entry ORDER BY id DESC LIMIT 1")
   fun getLastEntryId(): Int
 
+  @Query("SELECT COUNT(id) FROM Entry")
+  fun getEntryCount(): LiveData<Int>
+
   /* Tag */
-  @Insert(onConflict = OnConflictStrategy.IGNORE)
-  fun upsertTag(tag: Tag)
+  @Insert(onConflict = OnConflictStrategy.FAIL)
+  fun insertTag(tag: Tag)
+
+  @Update
+  fun updateTag(tag: Tag)
 
   @Query("SELECT * FROM Tag")
   fun getAllTags(): LiveData<List<Tag>>
@@ -48,8 +57,11 @@ interface DAO {
   fun deleteTag(tag: String)
 
   /* Tag Entry Relation */
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun upsertTagEntryRelation(tagEntryRelation: TagEntryRelation)
+  @Insert(onConflict = OnConflictStrategy.FAIL)
+  fun insertTagEntryRelation(tagEntryRelation: TagEntryRelation)
+
+  @Update
+  fun updateTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
   @Query("SELECT * FROM TagEntryRelation")
   fun getAllTagEntryRelations(): LiveData<List<TagEntryRelation>>
@@ -74,8 +86,11 @@ interface DAO {
   fun deleteTagEntryRelationByEntryId(entryId: Int)
 
   /* New Word */
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun upsertNewWord(newWord: NewWord)
+  @Insert(onConflict = OnConflictStrategy.FAIL)
+  fun insertNewWord(newWord: NewWord)
+
+  @Update
+  fun updateNewWord(newWord: NewWord)
 
   @Query("SELECT * FROM NewWord WHERE id = :id")
   fun getNewWord(id: Int): NewWord
@@ -85,4 +100,7 @@ interface DAO {
 
   @Query("SELECT * FROM NewWord WHERE entryId = :entryId")
   fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>
+
+  @Query("SELECT COUNT(*) FROM NewWord WHERE entryId = :entryId")
+  fun getNewWordCountByEntryId(entryId: Int): Int
 }

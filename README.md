@@ -1,5 +1,7 @@
-﻿# Hibi 「日々」
-An Android app for learning Japanese by keeping a journal.
+﻿<img align="right" src="/.github/assets/logo.png?raw=true" width="192"/>
+
+# Hibi 「日々」
+An app for Android designed to aid your Japanese learning through keeping a journal.
 
 ## Open Source Libraries Used
 ### [Timber](https://github.com/JakeWharton/timber)
@@ -19,5 +21,15 @@ Apache 2 License
 
 ### [Gson](https://github.com/google/gson)
 Used for converting API responses into Kotlin objects
+
+Apache 2 License
+
+### [M PLUS Rounded 1c Bold](https://fonts.google.com/specimen/M+PLUS+Rounded+1c)
+Used as the icon font
+
+Open Font License
+
+### [Material Design Icons](https://material.io/tools/icons/)
+Used throughout the application
 
 Apache 2 License

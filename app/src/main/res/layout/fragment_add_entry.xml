@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -8,10 +8,10 @@
   <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/app_bar_layout_add_entry"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize">
+    android:layout_height="wrap_content"
+    android:layout_gravity="top">
 
     <include layout="@layout/toolbar_add_entry" />
-
   </com.google.android.material.appbar.AppBarLayout>
 
   <androidx.core.widget.NestedScrollView
@@ -24,39 +24,34 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
-      <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/const_date_and_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_date"
+        style="@style/Hibi.Button.Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/date"
+        app:layout_constraintEnd_toStartOf="@id/gd_add_entry_50_vert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <app.marcdev.hibi.uicomponents.TransparentSquareButton
-          android:id="@+id/btn_date"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_margin="@dimen/margin_standard"
-          app:layout_constraintEnd_toStartOf="@id/gd_date_and_time_vert_50"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:text="@string/date" />
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_time"
+        style="@style/Hibi.Button.Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gd_add_entry_50_vert"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <app.marcdev.hibi.uicomponents.TransparentSquareButton
-          android:id="@+id/btn_time"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_margin="@dimen/margin_standard"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@id/gd_date_and_time_vert_50"
-          app:layout_constraintTop_toTopOf="parent"
-          app:text="@string/time" />
-
-        <androidx.constraintlayout.widget.Guideline
-          android:id="@+id/gd_date_and_time_vert_50"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          app:layout_constraintGuide_percent="0.5" />
-
-      </androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gd_add_entry_50_vert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
       <EditText
         android:id="@+id/edt_content"
@@ -67,18 +62,18 @@
         android:inputType="textCapSentences|textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/const_date_and_time" />
+        app:layout_constraintTop_toBottomOf="@id/btn_date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 
   <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/app_bar_layout_add_entry_option_bar"
-    android:background="@android:color/white"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/add_entry_bottom_bar_height"
-    android:layout_gravity="bottom">
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@color/colorPrimary">
 
     <include layout="@layout/include_add_entry_bottom_bar" />
   </com.google.android.material.appbar.AppBarLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

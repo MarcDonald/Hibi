@@ -4,7 +4,6 @@
   android:id="@+id/toolbar_main"
   android:layout_width="match_parent"
   android:layout_height="?attr/actionBarSize"
-  android:orientation="vertical"
   app:contentInsetEnd="0dp"
   app:contentInsetStart="0dp">
 
@@ -36,13 +35,12 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <app.marcdev.hibi.uicomponents.TransparentSquareButton
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/btn_save"
       android:layout_height="wrap_content"
       android:layout_width="0dp"
       android:layout_margin="@dimen/toolbar_icon_margin"
-      app:text="@string/save"
-      app:borderlessRipple="true"
+      android:text="@string/save"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent" />

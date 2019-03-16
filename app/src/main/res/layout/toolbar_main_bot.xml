@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/toolbar_main"
+  android:layout_width="match_parent"
+  android:layout_height="?attr/actionBarSize"
+  android:background="@color/colorPrimary"
+  app:contentInsetEnd="0dp"
+  app:contentInsetStart="0dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+      android:id="@+id/img_main_bot_left"
+      android:layout_width="@dimen/toolbar_icon_size"
+      android:layout_height="@dimen/toolbar_icon_size"
+      android:layout_margin="@dimen/toolbar_icon_margin"
+      android:background="?selectableItemBackgroundBorderless"
+      android:contentDescription="@string/back"
+      android:padding="@dimen/toolbar_icon_padding"
+      android:src="@drawable/ic_menu_black_24dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/img_main_bot_right"
+      android:layout_width="@dimen/toolbar_icon_size"
+      android:layout_height="@dimen/toolbar_icon_size"
+      android:src="@drawable/ic_search_black_24dp"
+      android:background="?selectableItemBackgroundBorderless"
+      android:contentDescription="@string/edit"
+      android:layout_margin="@dimen/toolbar_icon_margin"
+      android:padding="@dimen/toolbar_icon_padding"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.Toolbar>

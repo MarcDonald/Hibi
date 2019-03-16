@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/top_app_bar_layout_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top">
+
+    <include layout="@layout/toolbar_main" />
+
+    <com.google.android.material.tabs.TabLayout
+      android:id="@+id/tabs_main"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:tabIndicator="@drawable/tab_indicator"
+      app:tabIndicatorFullWidth="false"
+      app:tabTextAppearance="@style/TextAppearance.Hibi.Tab" />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.viewpager.widget.ViewPager
+    android:id="@+id/view_pager_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="?attr/actionBarSize"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+  <!--Temporary until an official extended FAB is released-->
+  <!--https://gist.github.com/simonesestito/edf434544ed8bf6ef23ae5e9af625149-->
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/fab_main"
+    style="@style/Hibi.Button.ExtendedFab"
+    android:layout_width="200dp"
+    android:layout_height="64dp"
+    android:text="@string/fab_create_entry"
+    app:icon="@drawable/ic_add_black_24dp"
+    app:layout_anchor="@+id/toolbar_main_bot"
+    app:layout_anchorGravity="top|center" />
+
+  <!--Show drop shadow for bottom app bar-->
+  <View
+    android:id="@+id/shadow_main_bot_app_bar"
+    android:layout_width="wrap_content"
+    android:layout_height="4dp"
+    android:background="@drawable/shadow"
+    android:layout_gravity="bottom"
+    android:layout_marginBottom="?attr/actionBarSize" />
+
+  <include
+    android:id="@+id/toolbar_main_bot"
+    layout="@layout/toolbar_main_bot"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="bottom" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

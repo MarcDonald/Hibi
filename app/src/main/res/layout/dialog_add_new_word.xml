@@ -18,24 +18,22 @@
 
       <TextView
         android:id="@+id/txt_add_new_word_title"
+        style="@style/TextAppearance.Hibi.DialogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         android:gravity="start"
         android:text="@string/add_new_word"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
       <EditText
         android:id="@+id/edt_new_word_word"
+        style="@style/Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        android:inputType="textCapSentences"
         android:hint="@string/word"
         app:layout_constraintTop_toBottomOf="@id/txt_add_new_word_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,10 +41,10 @@
 
       <EditText
         android:id="@+id/edt_new_word_reading"
+        style="@style/Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        android:inputType="textCapSentences"
         android:hint="@string/reading"
         app:layout_constraintTop_toBottomOf="@id/edt_new_word_word"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        android:inputType="textCapSentences"
+        style="@style/Hibi.EditText.AddNewWordDialog"
         android:hint="@string/part_of_speech"
         app:layout_constraintTop_toBottomOf="@id/edt_new_word_reading"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,10 +63,10 @@
 
       <EditText
         android:id="@+id/edt_new_word_english"
+        style="@style/Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        android:inputType="textCapSentences"
         android:hint="@string/english"
         app:layout_constraintTop_toBottomOf="@id/edt_new_word_type"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        android:inputType="textCapSentences"
+        style="@style/Hibi.EditText.AddNewWordDialog"
         android:hint="@string/notes"
         app:layout_constraintTop_toBottomOf="@id/edt_new_word_english"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,22 +90,23 @@
         app:layout_constraintGuide_percent="0.5"
         android:orientation="vertical" />
 
-      <app.marcdev.hibi.uicomponents.TransparentSquareButton
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_new_word"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:text="@string/save"
+        android:text="@string/save"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/edt_new_word_notes"
         app:layout_constraintStart_toStartOf="@id/gd_add_new_word_vert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-      <app.marcdev.hibi.uicomponents.TransparentSquareButton
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete_new_word"
+        style="@style/Hibi.Button.Negative"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:text="@string/delete"
+        android:text="@string/delete"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintTop_toBottomOf="@id/edt_new_word_notes"
         app:layout_constraintStart_toStartOf="parent"

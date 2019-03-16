@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/margin_standard">
+
+  <androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--Blocks descendant focusability so that it doesn't scroll to the bottom if it's too long-->
+    <LinearLayout
+      android:id="@+id/lin_main_menu"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_standard"
+      android:orientation="vertical">
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_main_menu_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_settings_black_24dp"
+        app:iconPadding="@dimen/margin_standard"
+        app:iconTint="@color/textOnPrimary" />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_main_menu_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
+        android:text="@string/about"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_info_outline_black_24dp"
+        app:iconPadding="@dimen/margin_standard"
+        app:iconTint="@color/textOnPrimary" />
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

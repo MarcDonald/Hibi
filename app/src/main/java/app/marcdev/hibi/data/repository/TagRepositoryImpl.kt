@@ -1,16 +1,24 @@
 package app.marcdev.hibi.data.repository
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Tag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class TagRepositoryImpl private constructor(private val dao: DAO) : TagRepository {
 
   override suspend fun addTag(tag: Tag) {
     withContext(Dispatchers.IO) {
-      dao.upsertTag(tag)
+      try {
+        Timber.d("Log: addTag: Tag doesn't exist, adding new")
+        dao.insertTag(tag)
+      } catch(exception: SQLiteConstraintException) {
+        Timber.d("Log: addTag: Tag already exists, updating existing")
+        dao.updateTag(tag)
+      }
     }
   }
 

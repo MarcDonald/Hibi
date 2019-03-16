@@ -1,17 +1,25 @@
 package app.marcdev.hibi.data.repository
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.TagEntryRelation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) : TagEntryRelationRepository {
 
   override suspend fun addTagEntryRelation(tagEntryRelation: TagEntryRelation) {
     withContext(Dispatchers.IO) {
-      dao.upsertTagEntryRelation(tagEntryRelation)
+      try {
+        Timber.d("Log: addTagEntryRelation: TagEntryRelation doesn't exist, adding new")
+        dao.insertTagEntryRelation(tagEntryRelation)
+      } catch(exception: SQLiteConstraintException) {
+        Timber.d("Log: addTagEntryRelation: TagEntryRelation already exists, updating existing")
+        dao.updateTagEntryRelation(tagEntryRelation)
+      }
     }
   }
 
