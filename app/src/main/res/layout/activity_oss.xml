@@ -7,7 +7,8 @@
   <com.google.android.material.appbar.AppBarLayout
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:layout_gravity="top">
+    android:layout_gravity="top"
+    android:backgroundTint="?colorPrimaryDark">
 
     <include layout="@layout/toolbar_back" />
   </com.google.android.material.appbar.AppBarLayout>

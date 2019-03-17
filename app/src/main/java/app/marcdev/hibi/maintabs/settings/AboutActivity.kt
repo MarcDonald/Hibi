@@ -5,12 +5,12 @@ import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_DARK_THEME
+import app.marcdev.hibi.internal.base.HibiActivity
 import timber.log.Timber
 
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : HibiActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     Timber.v("Log: onCreate: Started")

@@ -21,7 +21,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
     val mainDivider = findPreference(PREF_ENTRY_DIVIDERS)
     mainDivider.onPreferenceChangeListener = mayRequireRestartChangeListener
     val darkTheme = findPreference(PREF_DARK_THEME)
-    darkTheme.onPreferenceChangeListener = mayRequireRestartChangeListener
+    darkTheme.onPreferenceChangeListener = onThemeChangeListener
+  }
+
+  private val onThemeChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
+    requireActivity().recreate()
+    true
   }
 
   private val mayRequireRestartChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
