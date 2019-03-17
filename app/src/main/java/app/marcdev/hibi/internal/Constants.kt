@@ -13,11 +13,16 @@ const val ENTRY_ID_KEY = "entryId"
 const val NEW_WORD_ID_KEY = "newWordId"
 const val SEARCH_TERM_KEY = "searchTerm"
 const val IS_EDIT_MODE_KEY = "isEditMode"
-const val ADD_ENTRY_INTENT_KEY = "add_entry"
 
 // Preferences
 const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"
 const val PREF_DARK_THEME = "pref_dark_theme"
 
-// Notification channels
+// Notifications
+const val REMINDER_NOTIFICATION_ID = 1
 const val NOTIFICATION_CHANNEL_REMINDER_ID = "reminder"
+
+// Intent actions
+const val ADD_ENTRY_SHORTCUT_INTENT_ACTION = "app.marcdev.hibi.intent.ADD_ENTRY_SHORTCUT"
+const val ADD_ENTRY_NOTIFICATION_INTENT_ACTION = "app.marcdev.hibi.intent.ADD_ENTRY_NOTIFICATION"
+const val PACKAGE = "app.marcdev.hibi"
