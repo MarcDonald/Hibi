@@ -9,7 +9,8 @@
     android:id="@+id/app_bar_layout_add_entry"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="top">
+    android:layout_gravity="top"
+    android:backgroundTint="?colorPrimaryDark">
 
     <include layout="@layout/toolbar_add_entry" />
   </com.google.android.material.appbar.AppBarLayout>
@@ -72,7 +73,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:background="@color/colorPrimary">
+    android:background="?colorPrimaryDark">
 
     <include layout="@layout/include_add_entry_bottom_bar" />
   </com.google.android.material.appbar.AppBarLayout>

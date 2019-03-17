@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
@@ -11,6 +12,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
     android:paddingStart="@dimen/margin_standard"
+    android:textColor="?attr/hibiTextOnPrimary"
     android:paddingEnd="@dimen/margin_standard"
     android:text="@string/new_words"
     app:layout_constraintEnd_toStartOf="@id/btn_add_new_word"
@@ -23,8 +25,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
     android:text="@string/add_new_word"
-    app:icon="@drawable/ic_add_black_24dp"
-    app:iconTint="@color/textOnPrimary"
+    app:icon="@drawable/ic_add_24dp"
+    app:iconTint="?attr/hibiTextOnPrimary"
     app:layout_constraintBottom_toTopOf="@+id/recycler_new_words"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +49,8 @@
     app:layout_constraintTop_toBottomOf="@id/txt_new_words_title"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
+    app:layout_constraintStart_toStartOf="parent"
+    tools:ignore="UseCompoundDrawables">
 
     <ImageView
       android:layout_width="@dimen/search_warning_icon_size"
@@ -55,10 +58,10 @@
       android:layout_gravity="center"
       android:layout_margin="@dimen/margin_standard"
       android:contentDescription="@string/no_results"
-      android:src="@drawable/ic_sentiment_dissatisfied_black_24dp" />
+      android:src="@drawable/ic_sentiment_dissatisfied_24dp" />
 
     <TextView
-      style="@style/TextAppearance.MaterialComponents.Body1"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"

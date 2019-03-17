@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#FFFFFF</color>
-  <color name="colorPrimaryDark">#FFFFFF</color>
+  <!--Theme neutral-->
   <color name="colorAccent">#F57C00</color>
   <color name="error">#f44336</color>
-  <color name="textOnPrimary">#000000</color>
   <color name="textOnError">#FFFFFF</color>
+
+  <!--Light Theme Colors-->
+  <color name="lightThemeColorPrimary">@color/white</color>
+  <color name="lightThemeColorPrimaryLight">@color/white</color>
+  <color name="lightThemeColorPrimaryDark">#CCCCCC</color>
+  <color name="lightThemePrimaryText">@color/black</color>
+  <color name="lightThemeSecondaryText">@color/black70</color>
+  <color name="lightThemeHintText">@color/black50</color>
+
+  <!--Dark Theme Colors-->
+  <color name="darkThemeColorPrimary">#303030</color>
+  <color name="darkThemeColorPrimaryDark">#212121</color>
+  <color name="darkThemeColorPrimaryLight">#424242</color>
+  <color name="darkThemePrimaryText">@color/white</color>
+  <color name="darkThemeSecondaryText">@color/white70</color>
+  <color name="darkThemeHintText">@color/white50</color>
+
+  <!--Other colors-->
+  <color name="white">#FFFFFF</color>
+  <color name="white70">#B3FFFFFF</color>
+  <color name="white60">#99FFFFFF</color>
+  <color name="white50">#80FFFFFF</color>
+  <color name="black">#000000</color>
+  <color name="black70">#B3000000</color>
+  <color name="black50">#80000000</color>
 </resources>

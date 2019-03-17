@@ -98,6 +98,7 @@
   <string name="settings">Settings</string>
   <string name="appearance">Appearance</string>
   <string name="entry_dividers_pref_title">Entry Dividers</string>
+  <string name="theme_pref_title">Dark Theme</string>
   <string name="may_need_restart">You may need to restart the app for this setting to take effect</string>
 
   <!--About-->

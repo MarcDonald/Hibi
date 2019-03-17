@@ -8,7 +8,8 @@
   <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/app_bar_layout_view_entry"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize">
+    android:layout_height="?attr/actionBarSize"
+    android:backgroundTint="?colorPrimaryDark">
 
     <include layout="@layout/toolbar_view_entry" />
   </com.google.android.material.appbar.AppBarLayout>
@@ -116,7 +117,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/search_bar_height"
     android:layout_gravity="bottom"
-    android:background="@android:color/white">
+    android:backgroundTint="?colorPrimaryDark">
 
     <app.marcdev.hibi.uicomponents.views.SearchBar
       android:id="@+id/searchbar_view_entry"

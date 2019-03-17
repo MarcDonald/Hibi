@@ -21,11 +21,11 @@
 
     <TextView
       android:id="@+id/txt_entries_loading"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
       android:text="@string/loading_entries"
-      style="@style/TextAppearance.MaterialComponents.Body1"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/gd_entries_loading" />
@@ -48,19 +48,19 @@
       android:id="@+id/img_no_entries"
       android:layout_width="@dimen/main_screen_warning_image_size"
       android:layout_height="@dimen/main_screen_warning_image_size"
-      android:src="@drawable/ic_sentiment_dissatisfied_black_24dp"
       android:contentDescription="@string/no_entries"
+      android:src="@drawable/ic_sentiment_dissatisfied_24dp"
       app:layout_constraintBottom_toTopOf="@id/gd_no_entries"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
       android:id="@+id/txt_no_entries"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
       android:text="@string/no_entries"
-      style="@style/TextAppearance.MaterialComponents.Body1"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/gd_no_entries" />

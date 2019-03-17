@@ -8,7 +8,8 @@
     android:id="@+id/top_app_bar_layout_main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="top">
+    android:layout_gravity="top"
+    android:backgroundTint="?colorPrimaryDark">
 
     <include layout="@layout/toolbar_main" />
 
@@ -16,7 +17,9 @@
       android:id="@+id/tabs_main"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:backgroundTint="?colorPrimaryDark"
       app:tabIndicator="@drawable/tab_indicator"
+      app:tabIndicatorColor="@color/colorAccent"
       app:tabIndicatorFullWidth="false"
       app:tabTextAppearance="@style/TextAppearance.Hibi.Tab" />
   </com.google.android.material.appbar.AppBarLayout>
@@ -36,7 +39,7 @@
     android:layout_width="200dp"
     android:layout_height="64dp"
     android:text="@string/fab_create_entry"
-    app:icon="@drawable/ic_add_black_24dp"
+    app:icon="@drawable/ic_add_24dp"
     app:layout_anchor="@+id/toolbar_main_bot"
     app:layout_anchorGravity="top|center" />
 

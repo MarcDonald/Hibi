@@ -16,3 +16,4 @@ const val IS_EDIT_MODE_KEY = "isEditMode"
 
 // Preferences
 const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"
+const val PREF_DARK_THEME = "pref_dark_theme"
