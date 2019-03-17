@@ -46,6 +46,7 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
     val saveButton: MaterialButton = view.findViewById(R.id.btn_save_tags)
     saveButton.setOnClickListener(saveClickListener)
     input.setOnKeyListener(saveOnEnterListener)
+    input.requestFocus()
   }
 
   private val saveClickListener = View.OnClickListener {

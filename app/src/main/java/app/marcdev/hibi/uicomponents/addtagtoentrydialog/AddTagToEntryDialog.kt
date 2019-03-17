@@ -111,6 +111,11 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
 
         val displayTag = CheckBox(tagHolder.context)
         displayTag.text = it.name
+        if(theme == R.style.Hibi_DarkTheme_BottomSheetDialogTheme) {
+          displayTag.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
+        } else {
+          displayTag.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))
+        }
 
         // If the new tag is already displayed, don't add it
         // This stops it removing user progress before saving

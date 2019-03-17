@@ -26,7 +26,7 @@
         android:textAlignment="textStart"
         app:icon="@drawable/ic_settings_24dp"
         app:iconPadding="@dimen/margin_standard"
-        app:iconTint="?textOnPrimary" />
+        app:iconTint="?attr/hibiPrimaryIconTint" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_main_menu_about"
@@ -37,7 +37,7 @@
         android:textAlignment="textStart"
         app:icon="@drawable/ic_info_outline_24dp"
         app:iconPadding="@dimen/margin_standard"
-        app:iconTint="?textOnPrimary" />
+        app:iconTint="?attr/hibiPrimaryIconTint" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

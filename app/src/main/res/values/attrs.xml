@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <declare-styleable name="AppTheme">
-    <attr name="textOnPrimary" format="color" />
+    <attr name="hibiTextOnPrimary" format="color" />
+    <attr name="hibiSecondaryTextOnPrimary" format="color" />
+    <attr name="hibiHintTextOnPrimary" format="color" />
+    <attr name="hibiPrimaryIconTint" format="color" />
   </declare-styleable>
 
   <declare-styleable name="SearchBar">

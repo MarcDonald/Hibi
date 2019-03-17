@@ -12,7 +12,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_standard"
     android:paddingStart="@dimen/margin_standard"
-    android:textColor="?textOnPrimary"
+    android:textColor="?attr/hibiTextOnPrimary"
     android:paddingEnd="@dimen/margin_standard"
     android:text="@string/new_words"
     app:layout_constraintEnd_toStartOf="@id/btn_add_new_word"
@@ -26,7 +26,7 @@
     android:layout_margin="@dimen/margin_standard"
     android:text="@string/add_new_word"
     app:icon="@drawable/ic_add_24dp"
-    app:iconTint="?textOnPrimary"
+    app:iconTint="?attr/hibiTextOnPrimary"
     app:layout_constraintBottom_toTopOf="@+id/recycler_new_words"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
@@ -57,16 +57,14 @@
       android:layout_height="@dimen/search_warning_icon_size"
       android:layout_gravity="center"
       android:layout_margin="@dimen/margin_standard"
-      android:tint="?textOnPrimary"
       android:contentDescription="@string/no_results"
       android:src="@drawable/ic_sentiment_dissatisfied_24dp" />
 
     <TextView
-      style="@style/TextAppearance.MaterialComponents.Body1"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      android:textColor="?textOnPrimary"
       android:text="@string/no_new_words" />
   </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
