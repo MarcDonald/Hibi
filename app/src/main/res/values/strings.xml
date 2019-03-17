@@ -111,6 +111,9 @@
   <string name="entry_dividers_pref_title">Entry Dividers</string>
   <string name="theme_pref_title">Dark Theme</string>
   <string name="may_need_restart">You may need to restart the app for this setting to take effect</string>
+  <string name="reminder_pref_title">Daily Reminder</string>
+  <string name="reminder_time_pref_title">Reminder time</string>
+  <string name="reminder_not_set">No reminder set</string>
 
   <!--About-->
   <string name="open_source_licenses">Open Source Licenses</string>

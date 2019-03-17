@@ -12,4 +12,18 @@
       android:defaultValue="true"
       android:icon="@drawable/ic_view_stream_24dp" />
   </PreferenceCategory>
+
+  <PreferenceCategory android:title="Notifications">
+    <SwitchPreference
+      android:key="pref_reminder_notification"
+      android:title="@string/reminder_pref_title"
+      android:defaultValue="false"
+      android:icon="@drawable/ic_notifications_24dp" />
+    <Preference
+      android:key="pref_reminder_time"
+      android:summary="@string/reminder_not_set"
+      android:title="@string/reminder_time_pref_title"
+      android:icon="@drawable/ic_access_time_24dp"
+      android:dependency="pref_reminder_notification" />
+  </PreferenceCategory>
 </PreferenceScreen>

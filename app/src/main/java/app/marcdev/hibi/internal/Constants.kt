@@ -17,6 +17,8 @@ const val IS_EDIT_MODE_KEY = "isEditMode"
 // Preferences
 const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"
 const val PREF_DARK_THEME = "pref_dark_theme"
+const val PREF_REMINDER_NOTIFICATION = "pref_reminder_notification"
+const val PREF_REMINDER_TIME = "pref_reminder_time"
 
 // Notifications
 const val REMINDER_NOTIFICATION_ID = 1
@@ -26,3 +28,7 @@ const val NOTIFICATION_CHANNEL_REMINDER_ID = "reminder"
 const val ADD_ENTRY_SHORTCUT_INTENT_ACTION = "app.marcdev.hibi.intent.ADD_ENTRY_SHORTCUT"
 const val ADD_ENTRY_NOTIFICATION_INTENT_ACTION = "app.marcdev.hibi.intent.ADD_ENTRY_NOTIFICATION"
 const val PACKAGE = "app.marcdev.hibi"
+
+// Request Codes
+const val REMINDER_NOTIFICATION_REQUEST_CODE = 0
+const val ALERT_RECEIVER_REQUEST_CODE = 1

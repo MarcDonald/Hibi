@@ -1,20 +1,18 @@
 package app.marcdev.hibi.maintabs
 
-import android.app.PendingIntent
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
-import app.marcdev.hibi.MainActivity
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.*
+import app.marcdev.hibi.internal.BOOKS_TAB
+import app.marcdev.hibi.internal.CALENDAR_TAB
+import app.marcdev.hibi.internal.ENTRIES_TAB
+import app.marcdev.hibi.internal.TAGS_TAB
 import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.maintabs.booksfragment.BooksFragment
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarFragment
@@ -108,29 +106,5 @@ class MainScreenFragment : ScopedFragment() {
 
   private val bottomRightClickListener = View.OnClickListener {
     Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show()
-    sendNotification()
-  }
-
-  private fun sendNotification() {
-    val intent = Intent().apply {
-      action = ADD_ENTRY_NOTIFICATION_INTENT_ACTION
-      setPackage(PACKAGE)
-      setClass(requireContext(), MainActivity::class.java)
-    }
-    val pendingIntent = PendingIntent.getActivity(requireContext(), 0, intent, 0)
-
-    val notification = NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_REMINDER_ID)
-      .setPriority(NotificationCompat.PRIORITY_HIGH)
-      .setCategory(NotificationCompat.CATEGORY_REMINDER)
-      .setAutoCancel(true)
-      .setSmallIcon(R.drawable.ic_reminder_notification)
-      .setContentTitle(resources.getString(R.string.reminder_notification_title))
-      .setContentText(resources.getString(R.string.reminder_notification_description))
-      .addAction(R.drawable.ic_add_black_24dp, resources.getString(R.string.reminder_notification_add_action), pendingIntent)
-      .setContentIntent(pendingIntent)
-      .build()
-
-    val manager = NotificationManagerCompat.from(requireContext())
-    manager.notify(REMINDER_NOTIFICATION_ID, notification)
   }
 }

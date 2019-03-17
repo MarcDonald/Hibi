@@ -1,44 +1,41 @@
-package app.marcdev.hibi.uicomponents
+package app.marcdev.hibi.entryscreens.addentryscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TimePicker
+import android.widget.DatePicker
 import app.marcdev.hibi.R
-import app.marcdev.hibi.entryscreens.addentryscreen.DateTimeStore
 import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
 import timber.log.Timber
 
-class TimePickerDialog : HibiDialogFragment() {
+class EntryDatePickerDialog : HibiDialogFragment() {
   // Date/Time Store
   private var dateTimeStore: DateTimeStore? = null
 
   // UI Components
-  private lateinit var timePicker: TimePicker
+  private lateinit var datePicker: DatePicker
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
-    val view = inflater.inflate(R.layout.dialog_timepicker, container, false)
+    val view = inflater.inflate(R.layout.dialog_datepicker, container, false)
     bindViews(view)
     return view
   }
 
   private fun bindViews(view: View) {
-    this.timePicker = view.findViewById(R.id.timepicker)
-    timePicker.setIs24HourView(true)
+    this.datePicker = view.findViewById(R.id.datepicker)
     if(dateTimeStore != null) {
-      timePicker.hour = dateTimeStore!!.getHour()
-      timePicker.minute = dateTimeStore!!.getMinute()
+      datePicker.init(dateTimeStore!!.getYear(), dateTimeStore!!.getMonth(), dateTimeStore!!.getDay(), null)
     } else {
       Timber.e("Log: bindViews: dateTimeStore is null")
     }
 
-    val cancelButton: MaterialButton = view.findViewById(R.id.btn_timepicker_cancel)
+    val cancelButton: MaterialButton = view.findViewById(R.id.btn_datepicker_cancel)
     cancelButton.setOnClickListener(cancelOnClickListener)
 
-    val okButton: MaterialButton = view.findViewById(R.id.btn_timepicker_ok)
+    val okButton: MaterialButton = view.findViewById(R.id.btn_datepicker_ok)
     okButton.setOnClickListener(okOnClickListener)
   }
 
@@ -47,10 +44,11 @@ class TimePickerDialog : HibiDialogFragment() {
   }
 
   private val okOnClickListener = View.OnClickListener {
-    val hour = timePicker.hour
-    val minute = timePicker.minute
+    val day = datePicker.dayOfMonth
+    val month = datePicker.month
+    val year = datePicker.year
 
-    dateTimeStore?.setTime(hour, minute)
+    dateTimeStore?.setDate(day, month, year)
     dismiss()
   }
 
