@@ -13,7 +13,11 @@ const val ENTRY_ID_KEY = "entryId"
 const val NEW_WORD_ID_KEY = "newWordId"
 const val SEARCH_TERM_KEY = "searchTerm"
 const val IS_EDIT_MODE_KEY = "isEditMode"
+const val ADD_ENTRY_INTENT_KEY = "add_entry"
 
 // Preferences
 const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"
 const val PREF_DARK_THEME = "pref_dark_theme"
+
+// Notification channels
+const val NOTIFICATION_CHANNEL_REMINDER_ID = "reminder"

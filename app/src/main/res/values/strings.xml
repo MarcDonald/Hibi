@@ -94,6 +94,17 @@
   <string name="description">Description</string>
   <string name="license">License</string>
 
+  <!--Notifications-->
+  <string name="reminder_notification_channel_title">Reminder</string>
+  <string name="reminder_notification_channel_description">Daily reminder notification</string>
+  <string name="reminder_notification_title">Journal Reminder</string>
+  <string name="reminder_notification_description">Would you like to make a journal entry for today?</string>
+  <string name="reminder_notification_add_action">Add Entry</string>
+
+  <!--Shortcuts-->
+  <string name="shortcut_disabled">Shortcut Disabled</string>
+  <string name="shortcut_add">Add Entry</string>
+
   <!--Settings-->
   <string name="settings">Settings</string>
   <string name="appearance">Appearance</string>
