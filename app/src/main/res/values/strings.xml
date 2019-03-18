@@ -116,7 +116,12 @@
   <string name="reminder_not_set">No reminder set</string>
   <string name="backup_and_restore">Backup and Restore</string>
   <string name="backup">Backup</string>
+  <string name="backup_success">Backup Saved to Internal Storage</string>
+  <string name="backup_fail">Backup Failed</string>
   <string name="restore">Restore</string>
+  <string name="restore_warning">Replace ALL currently saved entries?</string>
+  <string name="restore_confirm">Continue with Restore</string>
+  <string name="restore_fail">Restore failed, ensure that the Hibi/backup folder contains all 3 db, shm, and wal files</string>
 
   <!--About-->
   <string name="open_source_licenses">Open Source Licenses</string>

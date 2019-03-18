@@ -41,7 +41,6 @@ class BackupUtils(private val database: AppDatabase) {
   }
 
   fun restore(context: Context): Boolean {
-    database.closeDB()
     val newDB = File(Environment.getExternalStorageDirectory().path + BACKUP_PATH + PRODUCTION_DATABASE_NAME)
     val newDBshm = File(Environment.getExternalStorageDirectory().path + BACKUP_PATH + PRODUCTION_DATABASE_NAME + "-shm")
     val newDBwal = File(Environment.getExternalStorageDirectory().path + BACKUP_PATH + PRODUCTION_DATABASE_NAME + "-wal")
@@ -53,6 +52,7 @@ class BackupUtils(private val database: AppDatabase) {
 
       if(toDB.compareTo(newDB) != 0) {
         try {
+          database.closeDB()
           newDB.copyTo(toDB, true)
           newDBshm.copyTo(toSHM, true)
           newDBwal.copyTo(toWAL, true)

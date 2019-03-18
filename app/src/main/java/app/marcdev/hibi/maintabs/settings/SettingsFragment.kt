@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.preference.ListPreference
 import android.preference.PreferenceManager
 import android.text.format.DateFormat
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.preference.Preference
@@ -14,6 +15,7 @@ import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.R
 import app.marcdev.hibi.data.BackupUtils
 import app.marcdev.hibi.internal.*
+import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.ReminderTimePickerDialog
 import com.google.android.material.snackbar.Snackbar
 import org.kodein.di.KodeinAware
@@ -118,9 +120,9 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
     } else {
       val backup = backupUtils.backup(requireContext())
       if(backup)
-        Snackbar.make(requireView(), "Backup Saved to Internal Storage", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(requireView(), resources.getString(R.string.backup_success), Snackbar.LENGTH_SHORT).show()
       else
-        Snackbar.make(requireView(), "Backup Failed", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(requireView(), resources.getString(R.string.backup_fail), Snackbar.LENGTH_SHORT).show()
     }
     true
   }
@@ -129,15 +131,22 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
     if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
     } else {
-      // TODO warn user
-      val restore = backupUtils.restore(requireContext())
-      if(restore) {
-        /* This is apparently bad practice but I can't find any other way of completely destroying
-         * the application so that the database can be opened again */
-        System.exit(1)
-      } else {
-        Snackbar.make(requireView(), "Restore Failed", Snackbar.LENGTH_SHORT).show()
-      }
+      val dialog = BinaryOptionDialog()
+      dialog.setTitle(resources.getString(R.string.warning_caps))
+      dialog.setMessage(resources.getString(R.string.restore_warning))
+      dialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { dialog.dismiss() })
+      dialog.setNegativeButton(resources.getString(R.string.restore_confirm), View.OnClickListener {
+        dialog.dismiss()
+        val restore = backupUtils.restore(requireContext())
+        if(restore) {
+          /* This is apparently bad practice but I can't find any other way of completely destroying
+           * the application so that the database can be opened again */
+          System.exit(1)
+        } else {
+          Snackbar.make(requireView(), resources.getString(R.string.restore_fail), Snackbar.LENGTH_LONG).show()
+        }
+      })
+      dialog.show(requireFragmentManager(), "Restore Confirm Dialog")
     }
     true
   }
