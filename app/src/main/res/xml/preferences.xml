@@ -2,28 +2,39 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
   <PreferenceCategory android:title="@string/appearance">
     <SwitchPreference
-      android:key="pref_dark_theme"
-      android:title="@string/theme_pref_title"
       android:defaultValue="false"
-      android:icon="@drawable/ic_brightness_3_24dp" />
+      android:icon="@drawable/ic_brightness_3_24dp"
+      android:key="pref_dark_theme"
+      android:title="@string/theme_pref_title" />
     <SwitchPreference
-      android:key="pref_entry_dividers"
-      android:title="@string/entry_dividers_pref_title"
       android:defaultValue="true"
-      android:icon="@drawable/ic_view_stream_24dp" />
+      android:icon="@drawable/ic_view_stream_24dp"
+      android:key="pref_entry_dividers"
+      android:title="@string/entry_dividers_pref_title" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="Notifications">
     <SwitchPreference
-      android:key="pref_reminder_notification"
-      android:title="@string/reminder_pref_title"
       android:defaultValue="false"
-      android:icon="@drawable/ic_notifications_24dp" />
+      android:icon="@drawable/ic_notifications_24dp"
+      android:key="pref_reminder_notification"
+      android:title="@string/reminder_pref_title" />
     <Preference
+      android:dependency="pref_reminder_notification"
+      android:icon="@drawable/ic_access_time_24dp"
       android:key="pref_reminder_time"
       android:summary="@string/reminder_not_set"
-      android:title="@string/reminder_time_pref_title"
-      android:icon="@drawable/ic_access_time_24dp"
-      android:dependency="pref_reminder_notification" />
+      android:title="@string/reminder_time_pref_title" />
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/backup_and_restore">
+    <Preference
+      android:icon="@drawable/ic_backup_24dp"
+      android:key="pref_backup"
+      android:title="@string/backup" />
+    <Preference
+      android:icon="@drawable/ic_settings_backup_restore_24dp"
+      android:key="pref_restore"
+      android:title="@string/restore" />
   </PreferenceCategory>
 </PreferenceScreen>

@@ -8,15 +8,24 @@ import android.text.format.DateFormat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.R
+import app.marcdev.hibi.data.BackupUtils
 import app.marcdev.hibi.internal.*
 import app.marcdev.hibi.uicomponents.ReminderTimePickerDialog
 import com.google.android.material.snackbar.Snackbar
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 import timber.log.Timber
 import java.util.*
 import java.util.Calendar.*
 
 
-class SettingsFragment : PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
+  // Kodein initialisation
+  override val kodein by closestKodein()
+
+  private val backupUtils: BackupUtils by instance()
+
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
     Timber.v("Log: onCreatePreferences: Started")
     setPreferencesFromResource(R.xml.preferences, rootKey)
@@ -36,6 +45,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
     val reminderTime = findPreference(PREF_REMINDER_TIME)
     reminderTime.onPreferenceClickListener = reminderTimeClickListener
     PreferenceManager.getDefaultSharedPreferences(requireContext()).registerOnSharedPreferenceChangeListener(reminderTimeChangeListener)
+
+    val backup = findPreference(PREF_BACKUP)
+    backup.setOnPreferenceClickListener {
+      backupUtils.backup(requireContext())
+      true
+    }
   }
 
   private val onThemeChangeListener = Preference.OnPreferenceChangeListener { _, _ ->

@@ -10,12 +10,21 @@ import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
+import app.marcdev.hibi.internal.PRODUCTION_DATABASE_NAME
 import app.marcdev.hibi.internal.PRODUCTION_DATABASE_VERSION
+import timber.log.Timber
 
 @Database(entities = [Entry::class, Tag::class, TagEntryRelation::class, NewWord::class], version = PRODUCTION_DATABASE_VERSION)
 
 abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
   abstract override fun dao(): DAO
+  override fun checkpoint() {
+    if(instance != null) {
+      instance?.query("pragma wal_checkpoint(full)", null)
+    } else {
+      Timber.e("Log: checkpoint: instance is null")
+    }
+  }
 
   companion object {
     @Volatile private var instance: ProductionAppDatabase? = null
@@ -30,7 +39,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
     private fun buildDatabase(context: Context) =
       Room.databaseBuilder(context.applicationContext,
         ProductionAppDatabase::class.java,
-        "ProductionAppDatabase.db")
+        PRODUCTION_DATABASE_NAME)
         .addMigrations(MIGRATION_3_TO_5())
         .addMigrations(MIGRATION_5_TO_6())
         .addMigrations(MIGRATION_6_TO_7())

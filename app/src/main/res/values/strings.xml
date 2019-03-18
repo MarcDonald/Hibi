@@ -114,6 +114,9 @@
   <string name="reminder_pref_title">Daily Reminder</string>
   <string name="reminder_time_pref_title">Reminder time</string>
   <string name="reminder_not_set">No reminder set</string>
+  <string name="backup_and_restore">Backup and Restore</string>
+  <string name="backup">Backup</string>
+  <string name="restore">Restore</string>
 
   <!--About-->
   <string name="open_source_licenses">Open Source Licenses</string>
