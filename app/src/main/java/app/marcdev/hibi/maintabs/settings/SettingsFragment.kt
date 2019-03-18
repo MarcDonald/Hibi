@@ -52,6 +52,9 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
 
     val backup = findPreference(PREF_BACKUP)
     backup.onPreferenceClickListener = backupClickListener
+
+    val restore = findPreference(PREF_RESTORE)
+    restore.onPreferenceClickListener = restoreClickListener
   }
 
   private val onThemeChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
@@ -118,6 +121,23 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
         Snackbar.make(requireView(), "Backup Saved to Internal Storage", Snackbar.LENGTH_SHORT).show()
       else
         Snackbar.make(requireView(), "Backup Failed", Snackbar.LENGTH_SHORT).show()
+    }
+    true
+  }
+
+  private val restoreClickListener = Preference.OnPreferenceClickListener {
+    if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+    } else {
+      // TODO warn user
+      val restore = backupUtils.restore(requireContext())
+      if(restore) {
+        /* This is apparently bad practice but I can't find any other way of completely destroying
+         * the application so that the database can be opened again */
+        System.exit(1)
+      } else {
+        Snackbar.make(requireView(), "Restore Failed", Snackbar.LENGTH_SHORT).show()
+      }
     }
     true
   }

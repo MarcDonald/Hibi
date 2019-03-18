@@ -39,4 +39,33 @@ class BackupUtils(private val database: AppDatabase) {
     }
     return false
   }
+
+  fun restore(context: Context): Boolean {
+    database.closeDB()
+    val newDB = File(Environment.getExternalStorageDirectory().path + BACKUP_PATH + PRODUCTION_DATABASE_NAME)
+    val newDBshm = File(Environment.getExternalStorageDirectory().path + BACKUP_PATH + PRODUCTION_DATABASE_NAME + "-shm")
+    val newDBwal = File(Environment.getExternalStorageDirectory().path + BACKUP_PATH + PRODUCTION_DATABASE_NAME + "-wal")
+
+    if(newDB.exists() && newDBshm.exists() && newDBwal.exists()) {
+      val toDB = context.getDatabasePath(PRODUCTION_DATABASE_NAME)
+      val toSHM = File(toDB.path + "-shm")
+      val toWAL = File(toDB.path + "-wal")
+
+      if(toDB.compareTo(newDB) != 0) {
+        try {
+          newDB.copyTo(toDB, true)
+          newDBshm.copyTo(toSHM, true)
+          newDBwal.copyTo(toWAL, true)
+          return true
+        } catch(e: NoSuchFileException) {
+          Timber.e("Log: backup: $e")
+        }
+      }
+    } else {
+      Timber.e("Log: backup: ogDB = ${newDB.exists()}")
+      Timber.e("Log: backup: ogDBshm = ${newDBshm.exists()}")
+      Timber.e("Log: backup: ogDBwal = ${newDBwal.exists()}")
+    }
+    return false
+  }
 }

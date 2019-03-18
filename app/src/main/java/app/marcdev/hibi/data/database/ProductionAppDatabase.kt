@@ -18,11 +18,20 @@ import timber.log.Timber
 
 abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
   abstract override fun dao(): DAO
+
   override fun checkpoint() {
     if(instance != null) {
       instance?.query("pragma wal_checkpoint(full)", null)
     } else {
       Timber.e("Log: checkpoint: instance is null")
+    }
+  }
+
+  override fun closeDB() {
+    if(instance != null) {
+      instance?.close()
+    } else {
+      Timber.e("Log: closeDB: instance is null")
     }
   }
 
