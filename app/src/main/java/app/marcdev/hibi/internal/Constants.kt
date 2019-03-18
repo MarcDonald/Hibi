@@ -2,6 +2,7 @@ package app.marcdev.hibi.internal
 
 const val PRODUCTION_DATABASE_VERSION = 7
 const val PRODUCTION_DATABASE_NAME = "ProductionAppDatabase.db"
+const val BACKUP_PATH = "/Hibi/backup/"
 
 // Main tab indices
 const val ENTRIES_TAB = 0

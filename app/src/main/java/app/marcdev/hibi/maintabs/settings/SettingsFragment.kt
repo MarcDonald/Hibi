@@ -1,10 +1,14 @@
 package app.marcdev.hibi.maintabs.settings
 
+import android.Manifest
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.preference.ListPreference
 import android.preference.PreferenceManager
 import android.text.format.DateFormat
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.R
@@ -47,10 +51,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
     PreferenceManager.getDefaultSharedPreferences(requireContext()).registerOnSharedPreferenceChangeListener(reminderTimeChangeListener)
 
     val backup = findPreference(PREF_BACKUP)
-    backup.setOnPreferenceClickListener {
-      backupUtils.backup(requireContext())
-      true
-    }
+    backup.onPreferenceClickListener = backupClickListener
   }
 
   private val onThemeChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
@@ -105,6 +106,19 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   private val reminderTimeClickListener = Preference.OnPreferenceClickListener {
     val dialog = ReminderTimePickerDialog()
     dialog.show(requireFragmentManager(), "Reminder Time Picker Dialog")
+    true
+  }
+
+  private val backupClickListener = Preference.OnPreferenceClickListener {
+    if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+    } else {
+      val backup = backupUtils.backup(requireContext())
+      if(backup)
+        Snackbar.make(requireView(), "Backup Saved to Internal Storage", Snackbar.LENGTH_SHORT).show()
+      else
+        Snackbar.make(requireView(), "Backup Failed", Snackbar.LENGTH_SHORT).show()
+    }
     true
   }
 
