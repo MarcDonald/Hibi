@@ -23,7 +23,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import timber.log.Timber
 
-
 class MainScreenFragment : ScopedFragment() {
 
   private lateinit var viewPager: ViewPager

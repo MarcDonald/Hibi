@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.mainentries.mainentriesrecycler
+package app.marcdev.hibi.maintabs.mainentriesrecycler
 
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.TagEntryRelation

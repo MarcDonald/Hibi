@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.mainentries.mainentriesrecycler
+package app.marcdev.hibi.maintabs.mainentriesrecycler
 
 import android.content.Context
 import android.view.LayoutInflater

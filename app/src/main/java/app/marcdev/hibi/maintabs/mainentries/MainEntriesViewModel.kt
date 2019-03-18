@@ -8,7 +8,7 @@ import app.marcdev.hibi.data.entity.TagEntryRelation
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.internal.lazyDeferred
-import app.marcdev.hibi.maintabs.mainentries.mainentriesrecycler.MainEntriesDisplayItem
+import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 
 class MainEntriesViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
 
@@ -16,6 +16,7 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository, private
     val allEntries = entryRepository.getAllEntries()
     val allTagEntryRelations = tagEntryRelationRepository.getAllTagEntryRelations()
 
+    // Adds both as sources so that observers get triggered when either are updated
     val result = MediatorLiveData<List<MainEntriesDisplayItem>>()
     result.addSource(allEntries) {
       result.value = combineData(allEntries, allTagEntryRelations)
