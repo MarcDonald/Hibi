@@ -3,7 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools">
   <shortcut
     android:enabled="true"
-    android:icon="@drawable/ic_add_black_24dp"
+    android:icon="@drawable/ic_shortcut_add"
     android:shortcutDisabledMessage="@string/shortcut_disabled"
     android:shortcutId="add_item"
     android:shortcutLongLabel="@string/shortcut_add"

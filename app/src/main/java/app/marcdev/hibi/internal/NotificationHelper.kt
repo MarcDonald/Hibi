@@ -27,7 +27,7 @@ class NotificationHelper {
       .setSmallIcon(R.drawable.ic_reminder_notification)
       .setContentTitle(context.resources.getString(R.string.reminder_notification_title))
       .setContentText(context.resources.getString(R.string.reminder_notification_description))
-      .addAction(R.drawable.ic_add_black_24dp, context.resources.getString(R.string.reminder_notification_add_action), pendingIntent)
+      .addAction(R.drawable.ic_shortcut_add, context.resources.getString(R.string.reminder_notification_add_action), pendingIntent)
       .setContentIntent(pendingIntent)
       .build()
 
