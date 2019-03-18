@@ -1,22 +1,37 @@
 package app.marcdev.hibi.maintabs.settings
 
+import android.Manifest
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.preference.ListPreference
 import android.preference.PreferenceManager
 import android.text.format.DateFormat
+import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.R
+import app.marcdev.hibi.data.BackupUtils
 import app.marcdev.hibi.internal.*
+import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.ReminderTimePickerDialog
 import com.google.android.material.snackbar.Snackbar
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 import timber.log.Timber
 import java.util.*
 import java.util.Calendar.*
 
 
-class SettingsFragment : PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
+  // Kodein initialisation
+  override val kodein by closestKodein()
+
+  private val backupUtils: BackupUtils by instance()
+
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
     Timber.v("Log: onCreatePreferences: Started")
     setPreferencesFromResource(R.xml.preferences, rootKey)
@@ -36,6 +51,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
     val reminderTime = findPreference(PREF_REMINDER_TIME)
     reminderTime.onPreferenceClickListener = reminderTimeClickListener
     PreferenceManager.getDefaultSharedPreferences(requireContext()).registerOnSharedPreferenceChangeListener(reminderTimeChangeListener)
+
+    val backup = findPreference(PREF_BACKUP)
+    backup.onPreferenceClickListener = backupClickListener
+
+    val restore = findPreference(PREF_RESTORE)
+    restore.onPreferenceClickListener = restoreClickListener
   }
 
   private val onThemeChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
@@ -90,6 +111,43 @@ class SettingsFragment : PreferenceFragmentCompat() {
   private val reminderTimeClickListener = Preference.OnPreferenceClickListener {
     val dialog = ReminderTimePickerDialog()
     dialog.show(requireFragmentManager(), "Reminder Time Picker Dialog")
+    true
+  }
+
+  private val backupClickListener = Preference.OnPreferenceClickListener {
+    if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+    } else {
+      val backup = backupUtils.backup(requireContext())
+      if(backup)
+        Snackbar.make(requireView(), resources.getString(R.string.backup_success), Snackbar.LENGTH_SHORT).show()
+      else
+        Snackbar.make(requireView(), resources.getString(R.string.backup_fail), Snackbar.LENGTH_SHORT).show()
+    }
+    true
+  }
+
+  private val restoreClickListener = Preference.OnPreferenceClickListener {
+    if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+    } else {
+      val dialog = BinaryOptionDialog()
+      dialog.setTitle(resources.getString(R.string.warning_caps))
+      dialog.setMessage(resources.getString(R.string.restore_warning))
+      dialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { dialog.dismiss() })
+      dialog.setNegativeButton(resources.getString(R.string.restore_confirm), View.OnClickListener {
+        dialog.dismiss()
+        val restore = backupUtils.restore(requireContext())
+        if(restore) {
+          /* This is apparently bad practice but I can't find any other way of completely destroying
+           * the application so that the database can be opened again */
+          System.exit(1)
+        } else {
+          Snackbar.make(requireView(), resources.getString(R.string.restore_fail), Snackbar.LENGTH_LONG).show()
+        }
+      })
+      dialog.show(requireFragmentManager(), "Restore Confirm Dialog")
+    }
     true
   }
 

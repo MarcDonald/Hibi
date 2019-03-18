@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import app.marcdev.hibi.data.BackupUtils
 import app.marcdev.hibi.data.database.AppDatabase
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.database.ProductionAppDatabase
@@ -52,6 +53,7 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddTagViewModelFactory(instance()) }
     bind() from provider { NewWordViewModelFactory(instance()) }
     bind() from provider { AddNewWordViewModelFactory(instance()) }
+    bind() from provider { BackupUtils(instance()) }
   }
 
   override fun onCreate() {

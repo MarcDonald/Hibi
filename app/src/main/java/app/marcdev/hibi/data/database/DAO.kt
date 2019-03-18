@@ -9,7 +9,6 @@ import app.marcdev.hibi.data.entity.TagEntryRelation
 
 @Dao
 interface DAO {
-
   /* Entry */
   /* When a constraint violation occurs, ignores the one row that is the constraint violation and
      continues with the rest. This stops the entity being replaced which triggered a delete cascade

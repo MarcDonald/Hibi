@@ -1,6 +1,8 @@
 package app.marcdev.hibi.internal
 
 const val PRODUCTION_DATABASE_VERSION = 7
+const val PRODUCTION_DATABASE_NAME = "ProductionAppDatabase.db"
+const val BACKUP_PATH = "/Hibi/backup/"
 
 // Main tab indices
 const val ENTRIES_TAB = 0
@@ -19,6 +21,8 @@ const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"
 const val PREF_DARK_THEME = "pref_dark_theme"
 const val PREF_REMINDER_NOTIFICATION = "pref_reminder_notification"
 const val PREF_REMINDER_TIME = "pref_reminder_time"
+const val PREF_BACKUP = "pref_backup"
+const val PREF_RESTORE = "pref_restore"
 
 // Notifications
 const val REMINDER_NOTIFICATION_ID = 1
