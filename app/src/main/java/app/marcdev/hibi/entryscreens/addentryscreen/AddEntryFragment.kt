@@ -25,8 +25,6 @@ import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
-import app.marcdev.hibi.uicomponents.DatePickerDialog
-import app.marcdev.hibi.uicomponents.TimePickerDialog
 import app.marcdev.hibi.uicomponents.addtagtoentrydialog.AddTagToEntryDialog
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.uicomponents.views.SearchBar
@@ -185,13 +183,13 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private val dateClickListener = View.OnClickListener {
-    val dateDialog = DatePickerDialog()
+    val dateDialog = EntryDatePickerDialog()
     dateDialog.bindDateTimeStore(dateTimeStore)
     dateDialog.show(requireFragmentManager(), "Date Picker")
   }
 
   private val timeClickListener = View.OnClickListener {
-    val timeDialog = TimePickerDialog()
+    val timeDialog = EntryTimePickerDialog()
     timeDialog.bindDateTimeStore(dateTimeStore)
     timeDialog.show(requireFragmentManager(), "Time Picker")
   }

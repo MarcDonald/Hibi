@@ -75,7 +75,7 @@ class MainScreenFragment : ScopedFragment() {
     }
 
     override fun onPageSelected(position: Int) {
-      when (position) {
+      when(position) {
         ENTRIES_TAB, CALENDAR_TAB -> fab.text = resources.getString(R.string.fab_create_entry)
         TAGS_TAB -> fab.text = resources.getString(R.string.fab_create_tag)
         BOOKS_TAB -> fab.text = resources.getString(R.string.fab_create_book)
@@ -87,7 +87,7 @@ class MainScreenFragment : ScopedFragment() {
   }
 
   private val fabClickListener = View.OnClickListener {
-    when (viewPager.currentItem) {
+    when(viewPager.currentItem) {
       ENTRIES_TAB, CALENDAR_TAB -> {
         val addEntryAction = MainScreenFragmentDirections.addEntryAction()
         Navigation.findNavController(it).navigate(addEntryAction)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
+  <shortcut
+    android:enabled="true"
+    android:icon="@drawable/ic_shortcut_add"
+    android:shortcutDisabledMessage="@string/shortcut_disabled"
+    android:shortcutId="add_item"
+    android:shortcutLongLabel="@string/shortcut_add"
+    android:shortcutShortLabel="@string/shortcut_add"
+    tools:targetApi="n_mr1">
+
+    <intent
+      android:action="app.marcdev.hibi.intent.ADD_ENTRY_SHORTCUT"
+      android:targetPackage="app.marcdev.hibi"
+      android:targetClass="app.marcdev.hibi.MainActivity" />
+  </shortcut>
+</shortcuts>
