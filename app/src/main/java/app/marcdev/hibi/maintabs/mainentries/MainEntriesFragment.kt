@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
 import app.marcdev.hibi.internal.base.ScopedFragment
-import app.marcdev.hibi.maintabs.mainentries.mainentriesrecycler.EntriesRecyclerAdapter
+import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein

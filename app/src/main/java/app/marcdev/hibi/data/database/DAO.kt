@@ -39,6 +39,9 @@ interface DAO {
   @Query("SELECT COUNT(id) FROM Entry")
   fun getEntryCount(): LiveData<Int>
 
+  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day")
+  fun getEntriesOnDate(year: Int, month: Int, day: Int): LiveData<List<Entry>>
+
   /* Tag */
   @Insert(onConflict = OnConflictStrategy.FAIL)
   fun insertTag(tag: Tag)

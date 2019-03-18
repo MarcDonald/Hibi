@@ -15,6 +15,7 @@ import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.entryscreens.addentryscreen.AddEntryViewModelFactory
 import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
 import app.marcdev.hibi.internal.NOTIFICATION_CHANNEL_REMINDER_ID
+import app.marcdev.hibi.maintabs.calendarfragment.CalendarTabViewModelFactory
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesViewModelFactory
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
 import app.marcdev.hibi.search.searchresults.SearchViewModelFactory
@@ -53,6 +54,7 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddTagViewModelFactory(instance()) }
     bind() from provider { NewWordViewModelFactory(instance()) }
     bind() from provider { AddNewWordViewModelFactory(instance()) }
+    bind() from provider { CalendarTabViewModelFactory(instance(), instance()) }
     bind() from provider { BackupUtils(instance()) }
   }
 
