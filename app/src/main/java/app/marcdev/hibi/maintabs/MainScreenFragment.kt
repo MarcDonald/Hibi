@@ -17,7 +17,7 @@ import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.maintabs.booksfragment.BooksFragment
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarFragment
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesFragment
-import app.marcdev.hibi.maintabs.tagsfragment.TagsFragment
+import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagsFragment
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout

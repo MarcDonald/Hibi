@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.tagsfragment
+package app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment
 
 import android.content.Context
 import android.view.LayoutInflater

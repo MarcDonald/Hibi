@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.tagsfragment
+package app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment
 
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository

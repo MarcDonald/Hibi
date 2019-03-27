@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.TagEntryRelation
-import app.marcdev.hibi.maintabs.tagsfragment.TagDisplayItem
+import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber

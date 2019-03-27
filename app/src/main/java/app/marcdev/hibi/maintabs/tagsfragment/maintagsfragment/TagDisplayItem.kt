@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.tagsfragment
+package app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment
 
 data class TagDisplayItem(
   val tagName: String,

@@ -6,7 +6,7 @@ import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
-import app.marcdev.hibi.maintabs.tagsfragment.TagDisplayItem
+import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
 
 @Dao
 interface DAO {
@@ -70,7 +70,7 @@ interface DAO {
   fun getAllTagEntryRelations(): LiveData<List<TagEntryRelation>>
 
   // This query may not work
-  @Query("SELECT * FROM Entry WHERE id = (SELECT entryId FROM TagEntryRelation WHERE tag = :tag)")
+  @Query("SELECT * FROM Entry as e INNER JOIN TagEntryRelation as ter ON e.id = ter.entryId WHERE ter.tag = :tag")
   fun getEntriesWithTag(tag: String): LiveData<List<Entry>>
 
   @Query("SELECT tag FROM TagEntryRelation WHERE entryId = :entryId")
