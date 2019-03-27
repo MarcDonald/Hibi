@@ -75,7 +75,7 @@
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <androidx.core.widget.NestedScrollView
-    android:id="@+id/scroll_main"
+    android:id="@+id/scroll_main_entries"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">

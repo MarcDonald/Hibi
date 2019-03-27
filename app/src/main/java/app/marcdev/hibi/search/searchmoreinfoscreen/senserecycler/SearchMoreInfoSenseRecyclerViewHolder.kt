@@ -27,7 +27,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
     val clip: ClipData = ClipData.newPlainText("See Also", seeAlsoContent)
     clipboard.primaryClip = clip
 
-    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard, seeAlsoContent)
+    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard_wc, seeAlsoContent)
     Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
   }
 
@@ -36,7 +36,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
     val clip: ClipData = ClipData.newPlainText("Antonym", antonymContent)
     clipboard.primaryClip = clip
 
-    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard, antonymContent)
+    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard_wc, antonymContent)
     Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
   }
 
@@ -108,7 +108,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
         else
           "${sense.restrictions[x]}; "
       }
-      val displayString = itemView.resources.getString(R.string.search_results_restrictions, restrictionsString)
+      val displayString = itemView.resources.getString(R.string.search_results_restrictions_wc, restrictionsString)
       restrictionsDisplay.text = displayString
     } else {
       restrictionsDisplay.visibility = View.GONE
@@ -124,7 +124,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
         else
           "${sense.antonyms[x]}; "
       }
-      val displayString = itemView.resources.getString(R.string.search_results_antonyms, antonymsString)
+      val displayString = itemView.resources.getString(R.string.search_results_antonyms_wc, antonymsString)
       antonymsDisplay.text = displayString
       // Set the antonym content that would be copied to clipboard if clicked
       antonymContent = antonymsString
@@ -142,7 +142,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewH
         else
           "${sense.seeAlso[x]}; "
       }
-      val displayString = itemView.resources.getString(R.string.search_results_see_also, seeAlsoString)
+      val displayString = itemView.resources.getString(R.string.search_results_see_also_wc, seeAlsoString)
       seeAlsoDisplay.text = displayString
       // Set the see also content that would be copied to clipboard if clicked
       seeAlsoContent = seeAlsoString

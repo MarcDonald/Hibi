@@ -6,6 +6,7 @@ import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
+import app.marcdev.hibi.maintabs.tagsfragment.TagDisplayItem
 
 @Dao
 interface DAO {
@@ -86,6 +87,9 @@ interface DAO {
 
   @Query("DELETE FROM TagEntryRelation WHERE entryId = :entryId")
   fun deleteTagEntryRelationByEntryId(entryId: Int)
+
+  @Query("SELECT tt.name as tagName, COUNT(ter.entryId) as useCount FROM Tag as tt LEFT OUTER JOIN TagEntryRelation as ter ON tt.name = ter.tag GROUP BY tt.name")
+  fun getTagsWithCount(): LiveData<List<TagDisplayItem>>
 
   /* New Word */
   @Insert(onConflict = OnConflictStrategy.FAIL)

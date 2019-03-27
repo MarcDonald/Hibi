@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.TagEntryRelation
+import app.marcdev.hibi.maintabs.tagsfragment.TagDisplayItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -62,6 +63,12 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
   override suspend fun deleteTagEntryRelationByTagId(tag: String) {
     withContext(Dispatchers.IO) {
       dao.deleteTagEntryRelationByTagId(tag)
+    }
+  }
+
+  override suspend fun getTagsWithCount(): LiveData<List<TagDisplayItem>> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getTagsWithCount()
     }
   }
 

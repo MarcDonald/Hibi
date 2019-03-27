@@ -24,7 +24,7 @@ class SearchMoreInfoAlternativesRecyclerViewHolder(itemView: View) : RecyclerVie
     val clip: ClipData = ClipData.newPlainText("Alternative Word", wordContent)
     clipboard.primaryClip = clip
 
-    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard, wordContent)
+    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard_wc, wordContent)
     Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
   }
 
@@ -33,7 +33,7 @@ class SearchMoreInfoAlternativesRecyclerViewHolder(itemView: View) : RecyclerVie
     val clip: ClipData = ClipData.newPlainText("Alternative Reading", readingContent)
     clipboard.primaryClip = clip
 
-    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard, readingContent)
+    val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard_wc, readingContent)
     Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
   }
 
@@ -53,16 +53,16 @@ class SearchMoreInfoAlternativesRecyclerViewHolder(itemView: View) : RecyclerVie
 
     if(reading != null) {
       if(word == null || word.isBlank()) {
-        wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, reading)
+        wordDisplay.text = itemView.resources.getString(R.string.japanese_word_wc, reading)
         readingDisplay.visibility = View.GONE
         wordContent = reading
       } else {
-        wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, word)
+        wordDisplay.text = itemView.resources.getString(R.string.japanese_word_wc, word)
         wordContent = word
         if(reading.isBlank()) {
           readingDisplay.visibility = View.GONE
         } else {
-          readingDisplay.text = itemView.resources.getString(R.string.reading_with_output, reading)
+          readingDisplay.text = itemView.resources.getString(R.string.reading_wc, reading)
           readingContent = reading
         }
       }

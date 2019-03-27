@@ -18,12 +18,14 @@
   <string name="delete_confirm_title">Delete Entry</string>
   <string name="delete_confirm">Are you sure you want to delete this entry?</string>
   <string name="close">Close</string>
-  <string name="copied_to_clipboard">Copied %1$s to clipboard</string>
+  <string name="copied_to_clipboard_wc">Copied %1$s to clipboard</string>
   <string name="no_entries">You haven\'t made any entries yet</string>
   <string name="go_back">Go Back</string>
   <string name="stay">Stay</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
+  <string name="description">Description</string>
+  <string name="license">License</string>
 
   <!--Tab Titles-->
   <string name="tab_entries">Entries</string>
@@ -60,9 +62,9 @@
   <string name="main_reading">Reading</string>
   <string name="information">Information</string>
   <string name="search_tags">Tags</string>
-  <string name="search_results_restrictions">Restrictions: %1$s</string>
-  <string name="search_results_antonyms">Antonyms: %1$s</string>
-  <string name="search_results_see_also">See Also: %1$s</string>
+  <string name="search_results_restrictions_wc">Restrictions: %1$s</string>
+  <string name="search_results_antonyms_wc">Antonyms: %1$s</string>
+  <string name="search_results_see_also_wc">See Also: %1$s</string>
   <string name="type">Type</string>
   <string name="english">English</string>
   <string name="alternatives">Alternatives</string>
@@ -74,6 +76,9 @@
   <string name="no_tags_found_warning">No Tags Found</string>
   <string name="create_tag">Create Tag</string>
   <string name="tag_name">Tag Name</string>
+  <string name="loading_tags">Loading Tags</string>
+  <string name="no_tags">You haven\'t tagged any entries yet</string>
+  <string name="tag_use_count_wc">Entries: %1$s</string>
 
   <!--New Words-->
   <string name="add_new_word">Add a New Word</string>
@@ -85,14 +90,10 @@
   <string name="notes">Notes</string>
   <string name="edit_or_delete_word_title">Edit or Delete Word</string>
   <string name="empty_input_new_word">Enter a word or reading before saving</string>
-
-  <!--Strings with wildcards-->
-  <string name="japanese_word_with_output">Japanese: %1$s</string>
-  <string name="reading_with_output">Reading: %1$s</string>
-  <string name="english_with_output">English: %1$s</string>
-  <string name="notes_with_output">Notes: %1$s</string>
-  <string name="description">Description</string>
-  <string name="license">License</string>
+  <string name="japanese_word_wc">Japanese: %1$s</string>
+  <string name="reading_wc">Reading: %1$s</string>
+  <string name="english_wc">English: %1$s</string>
+  <string name="notes_wc">Notes: %1$s</string>
 
   <!--Notifications-->
   <string name="reminder_notification_channel_title">Reminder</string>

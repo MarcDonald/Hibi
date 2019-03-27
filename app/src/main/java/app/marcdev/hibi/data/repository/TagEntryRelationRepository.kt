@@ -3,6 +3,7 @@ package app.marcdev.hibi.data.repository
 import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.TagEntryRelation
+import app.marcdev.hibi.maintabs.tagsfragment.TagDisplayItem
 
 interface TagEntryRelationRepository {
 
@@ -21,4 +22,6 @@ interface TagEntryRelationRepository {
   suspend fun deleteTagEntryRelationByTagId(tag: String)
 
   suspend fun deleteTagEntryRelationByEntryId(entryId: Int)
+
+  suspend fun getTagsWithCount(): LiveData<List<TagDisplayItem>>
 }
