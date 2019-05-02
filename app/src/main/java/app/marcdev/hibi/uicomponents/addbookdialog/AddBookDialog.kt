@@ -1,4 +1,4 @@
-package app.marcdev.hibi.uicomponents.addtagdialog
+package app.marcdev.hibi.uicomponents.addbookdialog
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.TAG_ID_KEY
+import app.marcdev.hibi.internal.BOOK_ID_KEY
 import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class AddTagDialog : HibiDialogFragment(), KodeinAware {
+class AddBookDialog : HibiDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
   // UI Components
@@ -27,12 +27,12 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
   private lateinit var title: TextView
 
   // Viewmodel
-  private val viewModelFactory: AddTagViewModelFactory by instance()
-  private lateinit var viewModel: AddTagViewModel
+  private val viewModelFactory: AddBookViewModelFactory by instance()
+  private lateinit var viewModel: AddBookViewModel
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
-    val view = inflater.inflate(R.layout.dialog_new_tag, container, false)
+    val view = inflater.inflate(R.layout.dialog_new_book, container, false)
     bindViews(view)
     return view
   }
@@ -41,38 +41,38 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
     super.onViewCreated(view, savedInstanceState)
     /* Normally viewmodel is instantiated in onActivityCreated but that seems to crash for this
      * screen so it's instantiated here instead */
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddTagViewModel::class.java)
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddBookViewModel::class.java)
 
     arguments?.let {
-      val tagId = arguments!!.getInt(TAG_ID_KEY, 0)
-      viewModel.tagId = tagId
-      if(tagId != 0)
-        title.text = resources.getString(R.string.edit_tag)
+      val bookId = arguments!!.getInt(BOOK_ID_KEY, 0)
+      viewModel.bookId = bookId
+      if(bookId != 0)
+        title.text = resources.getString(R.string.edit_book)
 
       launch {
-        input.setText(viewModel.getTagName())
+        input.setText(viewModel.getBookName())
       }
     }
   }
 
   private fun bindViews(view: View) {
-    title = view.findViewById(R.id.txt_add_tag_title)
-    input = view.findViewById(R.id.edt_new_tag_input)
-    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_tag)
+    title = view.findViewById(R.id.txt_add_book_title)
+    input = view.findViewById(R.id.edt_new_book_input)
+    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_book)
     saveButton.setOnClickListener(saveClickListener)
-    val deleteButton: MaterialButton = view.findViewById(R.id.btn_delete_tag)
+    val deleteButton: MaterialButton = view.findViewById(R.id.btn_delete_book)
     deleteButton.setOnClickListener(deleteClickListener)
     input.setOnKeyListener(saveOnEnterListener)
     input.requestFocus()
   }
 
   private val saveClickListener = View.OnClickListener {
-    saveTag()
+    saveBook()
   }
 
   private val deleteClickListener = View.OnClickListener {
     launch {
-      viewModel.deleteTag()
+      viewModel.deleteBook()
     }
     dismiss()
   }
@@ -80,20 +80,20 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
   private val saveOnEnterListener: View.OnKeyListener =
     View.OnKeyListener { _: View, keyCode: Int, keyEvent: KeyEvent ->
       if((keyEvent.action == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
-        saveTag()
+        saveBook()
       }
       /* This is false so that the event isn't consumed and other buttons (such as the back button)
        * can be pressed */
       false
     }
 
-  private fun saveTag() = launch {
+  private fun saveBook() = launch {
     if(input.text.toString().isBlank())
       input.error = resources.getString(R.string.empty_content_warning)
     else {
-      val save = viewModel.addTag(input.text.toString())
+      val save = viewModel.addBook(input.text.toString())
       if(!save) {
-        input.error = resources.getString(R.string.tag_already_exists)
+        input.error = resources.getString(R.string.book_already_exists)
       } else {
         dismiss()
       }

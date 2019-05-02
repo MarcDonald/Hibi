@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:clickable="true"
+  android:focusable="true"
+  android:background="?selectableItemBackground">
+
+  <TextView
+    android:id="@+id/book_item_name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="@string/book_name"
+    android:textAppearance="@style/TextAppearance.Hibi.MainEntryDate"
+    android:layout_margin="@dimen/margin_standard"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/book_item_count"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+  <TextView
+    android:id="@+id/book_item_count"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/book_use_count_wc"
+    android:textAppearance="@style/TextAppearance.Hibi.ViewEntryContent"
+    android:layout_margin="@dimen/margin_standard"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

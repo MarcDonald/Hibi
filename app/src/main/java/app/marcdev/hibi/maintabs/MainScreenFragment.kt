@@ -18,6 +18,7 @@ import app.marcdev.hibi.maintabs.booksfragment.BooksFragment
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarFragment
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesFragment
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagsFragment
+import app.marcdev.hibi.uicomponents.addbookdialog.AddBookDialog
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
@@ -32,7 +33,7 @@ class MainScreenFragment : ScopedFragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
-    return inflater.inflate(app.marcdev.hibi.R.layout.fragment_main, container, false)
+    return inflater.inflate(R.layout.fragment_main, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,11 +41,11 @@ class MainScreenFragment : ScopedFragment() {
 
     bindViews(view)
 
-    viewPager = view.findViewById(app.marcdev.hibi.R.id.view_pager_main)
+    viewPager = view.findViewById(R.id.view_pager_main)
     viewPager.addOnPageChangeListener(pageChangeListener)
     setupViewPager(viewPager)
 
-    val tabLayout: TabLayout = view.findViewById(app.marcdev.hibi.R.id.tabs_main)
+    val tabLayout: TabLayout = view.findViewById(R.id.tabs_main)
     tabLayout.setupWithViewPager(viewPager)
 
     mainMenu = MainScreenMenuDialog()
@@ -52,15 +53,15 @@ class MainScreenFragment : ScopedFragment() {
 
   private fun setupViewPager(viewPager: ViewPager) {
     val adapter = MainScreenPageAdapter(childFragmentManager)
-    adapter.addFragment(MainEntriesFragment(), resources.getString(app.marcdev.hibi.R.string.tab_entries))
-    adapter.addFragment(CalendarFragment(), resources.getString(app.marcdev.hibi.R.string.tab_calendar))
-    adapter.addFragment(TagsFragment(), resources.getString(app.marcdev.hibi.R.string.tab_tags))
-    adapter.addFragment(BooksFragment(), resources.getString(app.marcdev.hibi.R.string.tab_books))
+    adapter.addFragment(MainEntriesFragment(), resources.getString(R.string.tab_entries))
+    adapter.addFragment(CalendarFragment(), resources.getString(R.string.tab_calendar))
+    adapter.addFragment(TagsFragment(), resources.getString(R.string.tab_tags))
+    adapter.addFragment(BooksFragment(), resources.getString(R.string.tab_books))
     viewPager.adapter = adapter
   }
 
   private fun bindViews(view: View) {
-    fab = view.findViewById(app.marcdev.hibi.R.id.fab_main)
+    fab = view.findViewById(R.id.fab_main)
     fab.setOnClickListener(fabClickListener)
 
     val bottomLeftButton: ImageView = view.findViewById(R.id.img_main_bot_left)
@@ -95,7 +96,10 @@ class MainScreenFragment : ScopedFragment() {
         val dialog = AddTagDialog()
         dialog.show(requireFragmentManager(), "Add Tag Dialog")
       }
-      BOOKS_TAB -> Toast.makeText(requireContext(), resources.getString(R.string.fab_create_book), Toast.LENGTH_SHORT).show()
+      BOOKS_TAB -> {
+        val dialog = AddBookDialog()
+        dialog.show(requireFragmentManager(), "Add Book Dialog")
+      }
     }
   }
 

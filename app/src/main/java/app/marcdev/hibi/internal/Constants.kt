@@ -16,6 +16,7 @@ const val NEW_WORD_ID_KEY = "newWordId"
 const val SEARCH_TERM_KEY = "searchTerm"
 const val IS_EDIT_MODE_KEY = "isEditMode"
 const val TAG_ID_KEY = "tagId"
+const val BOOK_ID_KEY = "bookId"
 
 // Preferences
 const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"

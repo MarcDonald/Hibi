@@ -15,12 +15,14 @@ import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.entryscreens.addentryscreen.AddEntryViewModelFactory
 import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
 import app.marcdev.hibi.internal.NOTIFICATION_CHANNEL_REMINDER_ID
+import app.marcdev.hibi.maintabs.booksfragment.BooksFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarTabViewModelFactory
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagsFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesViewModelFactory
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
 import app.marcdev.hibi.search.searchresults.SearchViewModelFactory
+import app.marcdev.hibi.uicomponents.addbookdialog.AddBookViewModelFactory
 import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagtoentrydialog.AddTagToEntryViewModelFactory
@@ -61,6 +63,8 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { CalendarTabViewModelFactory(instance(), instance()) }
     bind() from provider { TagsFragmentViewModelFactory(instance()) }
     bind() from provider { TaggedEntriesViewModelFactory(instance(), instance()) }
+    bind() from provider { AddBookViewModelFactory(instance()) }
+    bind() from provider { BooksFragmentViewModelFactory(instance()) }
     bind() from provider { BackupUtils(instance()) }
   }
 
