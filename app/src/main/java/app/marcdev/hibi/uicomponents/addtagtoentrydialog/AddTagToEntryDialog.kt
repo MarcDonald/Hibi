@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -14,6 +13,7 @@ import app.marcdev.hibi.entryscreens.addentryscreen.TagsToSaveToNewEntry
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
+import app.marcdev.hibi.uicomponents.views.TagCheckBox
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -63,27 +63,27 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     val addButton: MaterialButton = view.findViewById(R.id.btn_add_tag)
     addButton.setOnClickListener(addClickListener)
 
-    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_tags)
+    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_tag)
     saveButton.setOnClickListener(saveClickListener)
   }
 
   private val saveClickListener = View.OnClickListener {
     for(x in 0 until tagHolder.childCount) {
-      val tag = tagHolder.getChildAt(x) as CheckBox
+      val tag = tagHolder.getChildAt(x) as TagCheckBox
       if(tag.isChecked) {
-        save(tag.text.toString())
+        save(tag.tagId)
       } else {
-        delete(tag.text.toString())
+        delete(tag.tagId)
       }
     }
     dismiss()
   }
 
-  private fun save(tag: String) = launch {
-    viewModel.saveTagEntryRelation(tag)
+  private fun save(tagId: Int) = launch {
+    viewModel.saveTagEntryRelation(tagId)
   }
 
-  private fun delete(tag: String) = launch {
+  private fun delete(tag: Int) = launch {
     viewModel.deleteTagEntryRelation(tag)
   }
 
@@ -103,14 +103,15 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     allTags.observe(this@AddTagToEntryDialog, Observer { tags ->
       tags.forEach { it ->
         // Gets list of all tags displayed
-        val alreadyDisplayedTags = ArrayList<CheckBox>()
+        val alreadyDisplayedTags = ArrayList<TagCheckBox>()
         for(x in 0 until tagHolder.childCount) {
-          val tag = tagHolder.getChildAt(x) as CheckBox
-          alreadyDisplayedTags.add(tag)
+          val tagCheckBox = tagHolder.getChildAt(x) as TagCheckBox
+          alreadyDisplayedTags.add(tagCheckBox)
         }
 
-        val displayTag = CheckBox(tagHolder.context)
+        val displayTag = TagCheckBox(tagHolder.context)
         displayTag.text = it.name
+        displayTag.tagId = it.id
         if(theme == R.style.Hibi_DarkTheme_BottomSheetDialogTheme) {
           displayTag.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
         } else {
@@ -127,7 +128,7 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
         }
 
         if(addIt) {
-          if(tagEntryRelations.contains(it.name)) {
+          if(tagEntryRelations.contains(it.id)) {
             displayTag.isChecked = true
           }
           tagHolder.addView(displayTag)

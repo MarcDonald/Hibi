@@ -36,18 +36,37 @@
         android:inputType="textCapSentences"
         android:hint="@string/tag_name"
         app:layout_constraintTop_toBottomOf="@id/txt_add_tag_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
       <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_save_tags"
-        android:layout_width="match_parent"
+        android:id="@+id/btn_delete_tag"
+        android:layout_width="0dp"
+        style="@style/Hibi.Button.Negative"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gd_add_tag_50_vert"
+        app:layout_constraintTop_toBottomOf="@id/edt_new_tag_input"
+        android:text="@string/delete" />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_tag"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gd_add_tag_50_vert"
         app:layout_constraintTop_toBottomOf="@id/edt_new_tag_input"
         android:text="@string/save" />
+
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gd_add_tag_50_vert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>

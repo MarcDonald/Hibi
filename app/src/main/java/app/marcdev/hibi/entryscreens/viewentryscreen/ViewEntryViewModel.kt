@@ -3,6 +3,7 @@ package app.marcdev.hibi.entryscreens.viewentryscreen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.NewWordRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
@@ -17,8 +18,8 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
     return entryRepository.deleteEntry(id)
   }
 
-  suspend fun getTags(id: Int): LiveData<List<String>> {
-    return tagEntryRelationRepository.getTagsWithEntry(id)
+  suspend fun getTags(entryId: Int): LiveData<List<Tag>> {
+    return tagEntryRelationRepository.getTagsWithEntry(entryId)
   }
 
   suspend fun hasNewWords(id: Int): Boolean {

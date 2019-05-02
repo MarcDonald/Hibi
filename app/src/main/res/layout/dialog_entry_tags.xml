@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@id/lin_tags_entry_tag_holder" />
 
       <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_save_tags"
+        android:id="@+id/btn_save_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"

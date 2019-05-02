@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 
 @Entity(tableName = "TagEntryRelation",
-  primaryKeys = ["tag", "entryId"],
+  primaryKeys = ["tagId", "entryId"],
   foreignKeys = [
     ForeignKey(
       entity = Entry::class,
@@ -15,13 +15,13 @@ import androidx.room.ForeignKey
     ),
     ForeignKey(
       entity = Tag::class,
-      parentColumns = ["name"],
-      childColumns = ["tag"],
+      parentColumns = ["id"],
+      childColumns = ["tagId"],
       onDelete = ForeignKey.CASCADE,
       onUpdate = ForeignKey.CASCADE
     )
   ])
 data class TagEntryRelation(
-  var tag: String,
+  var tagId: Int,
   var entryId: Int
 )

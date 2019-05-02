@@ -1,35 +1,33 @@
-package app.marcdev.hibi.maintabs.mainentries
+package app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.Entry
-import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
-import app.marcdev.hibi.internal.lazyDeferred
+import app.marcdev.hibi.data.repository.TagRepository
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 
-class MainEntriesViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class TaggedEntriesViewModel(private val tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
 
-  val displayItems by lazyDeferred {
-    val allEntries = entryRepository.getAllEntries()
+  var displayItems = MediatorLiveData<List<MainEntriesDisplayItem>>()
+
+  suspend fun updateList(tagId: Int) {
+    val newEntries = tagEntryRelationRepository.getEntriesWithTag(tagId)
     val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
 
     // Adds both as sources so that observers get triggered when either are updated
-    val result = MediatorLiveData<List<MainEntriesDisplayItem>>()
-    result.addSource(allEntries) {
-      result.value = combineData(allEntries, tagEntryDisplayItems)
+    displayItems.addSource(newEntries) {
+      displayItems.value = combineData(newEntries, tagEntryDisplayItems)
     }
-    result.addSource(tagEntryDisplayItems) {
-      result.value = combineData(allEntries, tagEntryDisplayItems)
+    displayItems.addSource(tagEntryDisplayItems) {
+      displayItems.value = combineData(newEntries, tagEntryDisplayItems)
     }
-
-    return@lazyDeferred result
   }
 
-  val entryCount by lazyDeferred {
-    return@lazyDeferred entryRepository.getEntryCount()
+  suspend fun getTagName(tagId: Int): String {
+    return tagRepository.getTagName(tagId)
   }
 
   private fun combineData(entries: LiveData<List<Entry>>, tagEntryDisplayItems: LiveData<List<TagEntryDisplayItem>>): List<MainEntriesDisplayItem> {

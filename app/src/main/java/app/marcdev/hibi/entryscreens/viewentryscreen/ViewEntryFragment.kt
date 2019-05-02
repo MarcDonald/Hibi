@@ -108,7 +108,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
         tagDisplayHolder.visibility = View.VISIBLE
         tags.forEach {
           val displayTag = Chip(tagDisplay.context)
-          displayTag.text = it
+          displayTag.text = it.name
           tagDisplay.addView(displayTag)
         }
       }

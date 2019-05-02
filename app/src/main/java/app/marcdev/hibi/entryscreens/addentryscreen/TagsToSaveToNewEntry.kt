@@ -1,5 +1,5 @@
 package app.marcdev.hibi.entryscreens.addentryscreen
 
 object TagsToSaveToNewEntry {
-  var list = ArrayList<String>()
+  var list = ArrayList<Int>()
 }

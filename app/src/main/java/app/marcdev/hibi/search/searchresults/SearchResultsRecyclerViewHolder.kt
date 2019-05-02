@@ -53,17 +53,17 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
 
     // If no mainWord is supplied, use the reading as the main word and hide the reading display
     if(word == null || word.isBlank()) {
-      wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, reading)
+      wordDisplay.text = itemView.resources.getString(R.string.japanese_word_wc, reading)
       readingDisplay.visibility = View.GONE
     } else {
       // If a mainWord is displayed, just it as the main word
-      wordDisplay.text = itemView.resources.getString(R.string.japanese_word_with_output, word)
+      wordDisplay.text = itemView.resources.getString(R.string.japanese_word_wc, word)
       if(reading == null || reading.isBlank()) {
         // If no mainReading is supplied then hide the reading field
         readingDisplay.visibility = View.GONE
       } else {
         // Otherwise use the reading
-        readingDisplay.text = itemView.resources.getString(R.string.reading_with_output, reading)
+        readingDisplay.text = itemView.resources.getString(R.string.reading_wc, reading)
       }
     }
   }

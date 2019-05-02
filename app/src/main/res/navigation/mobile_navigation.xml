@@ -21,6 +21,15 @@
         android:name="entryId"
         android:defaultValue="0" />
     </action>
+    <action
+      android:id="@+id/view_tagged_entries_action"
+      app:destination="@id/destination_tagged_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim">
+      <argument
+        android:name="tagID"
+        app:argType="integer" />
+    </action>
   </fragment>
 
   <fragment
@@ -46,5 +55,23 @@
       app:destination="@id/destination_add_entry"
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/destination_tagged_entries"
+    android:name="app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesFragment"
+    android:label="TaggedEntriesFragment">
+    <argument
+      android:name="tagID"
+      app:argType="integer" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
   </fragment>
 </navigation>

@@ -46,7 +46,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_standard"
     android:layout_marginEnd="@dimen/margin_standard"
-    android:text="@string/search_results_restrictions"
+    android:text="@string/search_results_restrictions_wc"
     app:layout_constraintBottom_toTopOf="@id/txt_search_more_info_sense_antonyms"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
@@ -57,7 +57,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_standard"
     android:layout_marginEnd="@dimen/margin_standard"
-    android:text="@string/search_results_antonyms"
+    android:text="@string/search_results_antonyms_wc"
     app:layout_constraintBottom_toTopOf="@id/txt_search_more_info_sense_see_also"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
@@ -68,7 +68,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_standard"
     android:layout_marginEnd="@dimen/margin_standard"
-    android:text="@string/search_results_see_also"
+    android:text="@string/search_results_see_also_wc"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />

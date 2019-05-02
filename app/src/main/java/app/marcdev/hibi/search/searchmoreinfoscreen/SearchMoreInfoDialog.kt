@@ -93,7 +93,7 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
     val clip: ClipData = ClipData.newPlainText("Main Word", mainWordContent)
     clipboard.primaryClip = clip
 
-    val toastMessage = resources.getString(R.string.copied_to_clipboard, mainWordContent)
+    val toastMessage = resources.getString(R.string.copied_to_clipboard_wc, mainWordContent)
     Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
   }
 
@@ -102,7 +102,7 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
     val clip: ClipData = ClipData.newPlainText("Main Reading", mainReadingContent)
     clipboard.primaryClip = clip
 
-    val toastMessage = resources.getString(R.string.copied_to_clipboard, mainReadingContent)
+    val toastMessage = resources.getString(R.string.copied_to_clipboard_wc, mainReadingContent)
     Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
   }
 
@@ -138,14 +138,14 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
 
         // If no mainWord is supplied, use the reading as the main word and hide the reading display
         if(mainWord == null || mainWord.isBlank()) {
-          mainWordDisplay.text = resources.getString(R.string.japanese_word_with_output, mainReading)
+          mainWordDisplay.text = resources.getString(R.string.japanese_word_wc, mainReading)
           mainReadingDisplay.visibility = View.GONE
           mainReading?.let {
             mainWordContent = mainReading
           }
         } else {
           // If a mainWord is displayed, just it as the main word
-          mainWordDisplay.text = resources.getString(R.string.japanese_word_with_output, mainWord)
+          mainWordDisplay.text = resources.getString(R.string.japanese_word_wc, mainWord)
           mainWordContent = mainWord
 
           if(mainReading == null || mainReading.isBlank()) {
@@ -153,7 +153,7 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
             mainReadingDisplay.visibility = View.GONE
           } else {
             // Otherwise use the reading
-            mainReadingDisplay.text = resources.getString(R.string.reading_with_output, mainReading)
+            mainReadingDisplay.text = resources.getString(R.string.reading_wc, mainReading)
             mainReadingContent = mainReading
           }
         }

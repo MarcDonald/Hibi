@@ -36,11 +36,11 @@ class EntriesRecyclerViewHolder(itemView: View) : BaseEntriesRecyclerViewHolder(
     dateTimeDisplay.text = dateTimeDisplayText
     contentDisplay.text = item.entry.content
 
-    if(item.tagEntryRelations.isNotEmpty()) {
+    if(item.tags.isNotEmpty()) {
       chipGroup.removeAllViews()
-      item.tagEntryRelations.forEach {
+      item.tags.forEach {
         val chip = Chip(itemView.context)
-        chip.text = it.tag
+        chip.text = it
         chipGroup.addView(chip)
       }
     }

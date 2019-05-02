@@ -4,7 +4,10 @@ import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
+import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
+import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -29,21 +32,27 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
-  override suspend fun getEntriesWithTag(tag: String): LiveData<List<Entry>> {
+  override suspend fun getEntriesWithTag(tagId: Int): LiveData<List<Entry>> {
     return withContext(Dispatchers.IO) {
-      return@withContext dao.getEntriesWithTag(tag)
+      return@withContext dao.getEntriesWithTag(tagId)
     }
   }
 
-  override suspend fun getTagsWithEntry(entryId: Int): LiveData<List<String>> {
+  override suspend fun getTagsWithEntry(entryId: Int): LiveData<List<Tag>> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getTagsWithEntry(entryId)
     }
   }
 
-  override suspend fun getTagsWithEntryNotLiveData(entryId: Int): List<String> {
+  override suspend fun getTagsWithEntryNotLiveData(entryId: Int): List<Tag> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getTagsWithEntryNotLiveData(entryId)
+    }
+  }
+
+  override suspend fun getTagIdsWithEntryNotLiveData(entryId: Int): List<Int> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getTagIdsWithEntryNotLiveData(entryId)
     }
   }
 
@@ -59,9 +68,21 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
-  override suspend fun deleteTagEntryRelationByTagId(tag: String) {
+  override suspend fun deleteTagEntryRelationByTagId(tagId: Int) {
     withContext(Dispatchers.IO) {
-      dao.deleteTagEntryRelationByTagId(tag)
+      dao.deleteTagEntryRelationByTagId(tagId)
+    }
+  }
+
+  override suspend fun getTagsWithCount(): LiveData<List<TagDisplayItem>> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getTagsWithCountOfEntries()
+    }
+  }
+
+  override suspend fun getTagEntryDisplayItems(): LiveData<List<TagEntryDisplayItem>> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getTagEntryDisplayItems()
     }
   }
 

@@ -52,6 +52,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
         .addMigrations(MIGRATION_3_TO_5())
         .addMigrations(MIGRATION_5_TO_6())
         .addMigrations(MIGRATION_6_TO_7())
+        .addMigrations(MIGRATION_7_TO_8())
         .build()
 
     class MIGRATION_3_TO_5 : Migration(3, 5) {
@@ -105,6 +106,20 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
                          "FOREIGN KEY(tag) REFERENCES Tag(name) ON DELETE CASCADE ON UPDATE CASCADE)")
         database.execSQL("INSERT INTO TagEntryRelation SELECT * FROM TagEntryRelationOLD")
         database.execSQL("DROP TABLE TagEntryRelationOLD")
+      }
+    }
+
+    class MIGRATION_7_TO_8 : Migration(7, 8) {
+      override fun migrate(database: SupportSQLiteDatabase) {
+        // This is destructive and will delete all tags and tag entry relations
+        database.execSQL("DROP TABLE Tag")
+        database.execSQL("DROP TABLE TagEntryRelation")
+        database.execSQL("CREATE TABLE Tag('name' TEXT NOT NULL, 'id' INTEGER NOT NULL, PRIMARY KEY(id))")
+        database.execSQL("CREATE TABLE TagEntryRelation(tagId INTEGER NOT NULL, " +
+                         "entryId INTEGER NOT NULL, " +
+                         "PRIMARY KEY(tagId, entryId), " +
+                         "FOREIGN KEY(entryId) REFERENCES Entry(id) ON DELETE CASCADE ON UPDATE CASCADE, " +
+                         "FOREIGN KEY(tagId) REFERENCES Tag(id) ON DELETE CASCADE ON UPDATE CASCADE)")
       }
     }
   }
