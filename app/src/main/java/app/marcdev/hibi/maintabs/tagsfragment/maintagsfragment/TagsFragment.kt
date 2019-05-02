@@ -58,7 +58,7 @@ class TagsFragment : ScopedFragment(), KodeinAware {
 
   private fun initRecycler(view: View) {
     val recycler: RecyclerView = view.findViewById(R.id.recycler_tags)
-    this.recyclerAdapter = TagsRecyclerAdapter(requireContext())
+    this.recyclerAdapter = TagsRecyclerAdapter(requireContext(), requireFragmentManager())
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager

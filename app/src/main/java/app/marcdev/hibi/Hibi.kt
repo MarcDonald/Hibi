@@ -58,7 +58,7 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddNewWordViewModelFactory(instance()) }
     bind() from provider { CalendarTabViewModelFactory(instance(), instance()) }
     bind() from provider { TagsFragmentViewModelFactory(instance()) }
-    bind() from provider { TaggedEntriesViewModelFactory(instance()) }
+    bind() from provider { TaggedEntriesViewModelFactory(instance(), instance()) }
     bind() from provider { BackupUtils(instance()) }
   }
 

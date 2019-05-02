@@ -4,43 +4,48 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.Entry
-import app.marcdev.hibi.data.entity.TagEntryRelation
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
+import app.marcdev.hibi.data.repository.TagRepository
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
+import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 
-class TaggedEntriesViewModel(private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class TaggedEntriesViewModel(private val tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
 
   var displayItems = MediatorLiveData<List<MainEntriesDisplayItem>>()
 
-  suspend fun updateList(tagName: String) {
-    val newEntries = tagEntryRelationRepository.getEntriesWithTag(tagName)
-    val allTagEntryRelations = tagEntryRelationRepository.getAllTagEntryRelations()
+  suspend fun updateList(tagId: Int) {
+    val newEntries = tagEntryRelationRepository.getEntriesWithTag(tagId)
+    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
 
     // Adds both as sources so that observers get triggered when either are updated
     displayItems.addSource(newEntries) {
-      displayItems.value = combineData(newEntries, allTagEntryRelations)
+      displayItems.value = combineData(newEntries, tagEntryDisplayItems)
     }
-    displayItems.addSource(allTagEntryRelations) {
-      displayItems.value = combineData(newEntries, allTagEntryRelations)
+    displayItems.addSource(tagEntryDisplayItems) {
+      displayItems.value = combineData(newEntries, tagEntryDisplayItems)
     }
   }
 
-  private fun combineData(entries: LiveData<List<Entry>>, tagEntryRelations: LiveData<List<TagEntryRelation>>): List<MainEntriesDisplayItem> {
+  suspend fun getTagName(tagId: Int): String {
+    return tagRepository.getTagName(tagId)
+  }
+
+  private fun combineData(entries: LiveData<List<Entry>>, tagEntryDisplayItems: LiveData<List<TagEntryDisplayItem>>): List<MainEntriesDisplayItem> {
     val itemList = ArrayList<MainEntriesDisplayItem>()
 
     entries.value?.forEach {
       val item = MainEntriesDisplayItem(it, listOf())
-      val listOfTags = ArrayList<TagEntryRelation>()
+      val listOfTags = ArrayList<String>()
 
-      if(tagEntryRelations.value != null && tagEntryRelations.value!!.isNotEmpty()) {
-        for(x in 0 until tagEntryRelations.value!!.size) {
-          if(tagEntryRelations.value!![x].entryId == it.id) {
-            listOfTags.add(tagEntryRelations.value!![x])
+      if(tagEntryDisplayItems.value != null && tagEntryDisplayItems.value!!.isNotEmpty()) {
+        for(x in 0 until tagEntryDisplayItems.value!!.size) {
+          if(tagEntryDisplayItems.value!![x].entryId == it.id) {
+            listOfTags.add(tagEntryDisplayItems.value!![x].tagName)
           }
         }
       }
 
-      item.tagEntryRelations = listOfTags
+      item.tags = listOfTags
 
       itemList.add(item)
     }

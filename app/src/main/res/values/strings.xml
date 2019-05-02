@@ -79,6 +79,11 @@
   <string name="loading_tags">Loading Tags</string>
   <string name="no_tags">You haven\'t tagged any entries yet</string>
   <string name="tag_use_count_wc">Entries: %1$s</string>
+  <string name="edit_or_delete_tag">Edit or Delete Tag</string>
+  <string name="edit_or_delete_tag_message">This will not affect any of your entries</string>
+  <string name="delete_tag">Delete Tag</string>
+  <string name="edit_tag">Edit Tag</string>
+  <string name="tag_already_exists">A tag already exists with that name</string>
 
   <!--New Words-->
   <string name="add_new_word">Add a New Word</string>

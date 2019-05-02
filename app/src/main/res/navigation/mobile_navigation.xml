@@ -27,8 +27,8 @@
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim">
       <argument
-        android:name="tagName"
-        app:argType="string" />
+        android:name="tagID"
+        app:argType="integer" />
     </action>
   </fragment>
 
@@ -62,8 +62,8 @@
     android:name="app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesFragment"
     android:label="TaggedEntriesFragment">
     <argument
-      android:name="tagName"
-      app:argType="string" />
+      android:name="tagID"
+      app:argType="integer" />
     <action
       android:id="@+id/view_entry_action"
       app:destination="@+id/destination_view_entry"

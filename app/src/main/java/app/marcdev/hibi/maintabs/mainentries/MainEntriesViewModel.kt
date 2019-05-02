@@ -4,25 +4,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.Entry
-import app.marcdev.hibi.data.entity.TagEntryRelation
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.internal.lazyDeferred
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
+import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 
 class MainEntriesViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
 
   val displayItems by lazyDeferred {
     val allEntries = entryRepository.getAllEntries()
-    val allTagEntryRelations = tagEntryRelationRepository.getAllTagEntryRelations()
+    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
 
     // Adds both as sources so that observers get triggered when either are updated
     val result = MediatorLiveData<List<MainEntriesDisplayItem>>()
     result.addSource(allEntries) {
-      result.value = combineData(allEntries, allTagEntryRelations)
+      result.value = combineData(allEntries, tagEntryDisplayItems)
     }
-    result.addSource(allTagEntryRelations) {
-      result.value = combineData(allEntries, allTagEntryRelations)
+    result.addSource(tagEntryDisplayItems) {
+      result.value = combineData(allEntries, tagEntryDisplayItems)
     }
 
     return@lazyDeferred result
@@ -32,22 +32,22 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository, private
     return@lazyDeferred entryRepository.getEntryCount()
   }
 
-  private fun combineData(entries: LiveData<List<Entry>>, tagEntryRelations: LiveData<List<TagEntryRelation>>): List<MainEntriesDisplayItem> {
+  private fun combineData(entries: LiveData<List<Entry>>, tagEntryDisplayItems: LiveData<List<TagEntryDisplayItem>>): List<MainEntriesDisplayItem> {
     val itemList = ArrayList<MainEntriesDisplayItem>()
 
     entries.value?.forEach {
       val item = MainEntriesDisplayItem(it, listOf())
-      val listOfTags = ArrayList<TagEntryRelation>()
+      val listOfTags = ArrayList<String>()
 
-      if(tagEntryRelations.value != null && tagEntryRelations.value!!.isNotEmpty()) {
-        for(x in 0 until tagEntryRelations.value!!.size) {
-          if(tagEntryRelations.value!![x].entryId == it.id) {
-            listOfTags.add(tagEntryRelations.value!![x])
+      if(tagEntryDisplayItems.value != null && tagEntryDisplayItems.value!!.isNotEmpty()) {
+        for(x in 0 until tagEntryDisplayItems.value!!.size) {
+          if(tagEntryDisplayItems.value!![x].entryId == it.id) {
+            listOfTags.add(tagEntryDisplayItems.value!![x].tagName)
           }
         }
       }
 
-      item.tagEntryRelations = listOfTags
+      item.tags = listOfTags
 
       itemList.add(item)
     }

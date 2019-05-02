@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 
-class TagsRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<TagsFragmentRecyclerViewHolder>() {
+class TagsRecyclerAdapter(private val context: Context, private val fragmentManager: FragmentManager) : RecyclerView.Adapter<TagsFragmentRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var items: List<TagDisplayItem> = listOf()
@@ -16,7 +17,7 @@ class TagsRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<T
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagsFragmentRecyclerViewHolder {
     val view = inflater.inflate(R.layout.item_tag, parent, false)
-    return TagsFragmentRecyclerViewHolder(view)
+    return TagsFragmentRecyclerViewHolder(view, fragmentManager)
   }
 
   override fun getItemCount(): Int {

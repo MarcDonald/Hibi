@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -56,14 +55,9 @@ class TaggedEntriesFragment : ScopedFragment(), KodeinAware {
 
     launch {
       arguments?.let {
-        val tagName: String = TaggedEntriesFragmentArgs.fromBundle(it).tagName
-        if(tagName.isBlank()) {
-          Toast.makeText(requireContext(), resources.getString(R.string.generic_error), Toast.LENGTH_SHORT).show()
-          Timber.e("Log: onViewCreated: View Entries with Tag started with empty string")
-        } else {
-          viewModel.updateList(tagName)
-          toolbarTitle.text = tagName
-        }
+        val tagID: Int = TaggedEntriesFragmentArgs.fromBundle(it).tagID
+        viewModel.updateList(tagID)
+        toolbarTitle.text = viewModel.getTagName(tagID)
       }
     }
 

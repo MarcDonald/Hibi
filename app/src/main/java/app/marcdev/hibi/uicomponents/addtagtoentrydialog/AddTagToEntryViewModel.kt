@@ -14,20 +14,20 @@ class AddTagToEntryViewModel(private val tagRepository: TagRepository, private v
     tagRepository.getAllTags()
   }
 
-  suspend fun getTagsForEntry(): List<String> {
-    return tagEntryRelationRepository.getTagsWithEntryNotLiveData(entryId)
+  suspend fun getTagsForEntry(): List<Int> {
+    return tagEntryRelationRepository.getTagIdsWithEntryNotLiveData(entryId)
   }
 
-  suspend fun saveTagEntryRelation(tag: String) {
+  suspend fun saveTagEntryRelation(tagId: Int) {
     if(entryId != 0) {
-      val tagEntryRelation = TagEntryRelation(tag, entryId)
+      val tagEntryRelation = TagEntryRelation(tagId, entryId)
       tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
     } else {
-      TagsToSaveToNewEntry.list.add(tag)
+      TagsToSaveToNewEntry.list.add(tagId)
     }
   }
 
-  suspend fun deleteTagEntryRelation(tag: String) {
+  suspend fun deleteTagEntryRelation(tag: Int) {
     if(entryId != 0) {
       val tagEntryRelation = TagEntryRelation(tag, entryId)
       tagEntryRelationRepository.deleteTagEntryRelation(tagEntryRelation)

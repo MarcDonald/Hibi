@@ -1,14 +1,17 @@
 package app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment
 
+import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.TAG_NAME_KEY
 import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
-import timber.log.Timber
+import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
 
-class TagsFragmentRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TagsFragmentRecyclerViewHolder(itemView: View, private val fragmentManager: FragmentManager) : RecyclerView.ViewHolder(itemView) {
 
   private var tagNameDisplay: TextView = itemView.findViewById(R.id.tag_item_name)
   private var tagCountDisplay: TextView = itemView.findViewById(R.id.tag_item_count)
@@ -17,15 +20,25 @@ class TagsFragmentRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 
   private val clickListener = View.OnClickListener {
     if(displayedItem != null) {
-      val tagName = displayedItem!!.tagName
-      val viewEntryAction = MainScreenFragmentDirections.viewTaggedEntriesAction(tagName)
+      val tagID = displayedItem!!.tagID
+      val viewEntryAction = MainScreenFragmentDirections.viewTaggedEntriesAction(tagID)
       Navigation.findNavController(it).navigate(viewEntryAction)
     }
   }
 
   private val longClickListener = View.OnLongClickListener {
-    Timber.i("Log: longClickListener: Long Click")
+    initEditOrDeleteDialog()
     true
+  }
+
+  private fun initEditOrDeleteDialog() {
+    val editTagDialog = AddTagDialog()
+    if(displayedItem != null) {
+      val arguments = Bundle()
+      arguments.putString(TAG_NAME_KEY, displayedItem!!.tagName)
+      editTagDialog.arguments = arguments
+    }
+    editTagDialog.show(fragmentManager, "Edit or Delete Tag Dialog")
   }
 
   init {
