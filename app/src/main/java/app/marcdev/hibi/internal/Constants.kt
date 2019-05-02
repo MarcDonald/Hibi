@@ -15,7 +15,7 @@ const val ENTRY_ID_KEY = "entryId"
 const val NEW_WORD_ID_KEY = "newWordId"
 const val SEARCH_TERM_KEY = "searchTerm"
 const val IS_EDIT_MODE_KEY = "isEditMode"
-const val TAG_NAME_KEY = "tagName"
+const val TAG_ID_KEY = "tagId"
 
 // Preferences
 const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"

@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.TAG_NAME_KEY
+import app.marcdev.hibi.internal.TAG_ID_KEY
 import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
 
@@ -35,7 +35,7 @@ class TagsFragmentRecyclerViewHolder(itemView: View, private val fragmentManager
     val editTagDialog = AddTagDialog()
     if(displayedItem != null) {
       val arguments = Bundle()
-      arguments.putString(TAG_NAME_KEY, displayedItem!!.tagName)
+      arguments.putInt(TAG_ID_KEY, displayedItem!!.tagID)
       editTagDialog.arguments = arguments
     }
     editTagDialog.show(fragmentManager, "Edit or Delete Tag Dialog")

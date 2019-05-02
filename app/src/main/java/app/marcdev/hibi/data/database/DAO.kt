@@ -60,8 +60,8 @@ interface DAO {
   @Query("SELECT * FROM Tag WHERE name = :tag")
   fun getTagByName(tag: String): LiveData<Tag>
 
-  @Query("DELETE FROM Tag WHERE name = :tag")
-  fun deleteTag(tag: String)
+  @Query("DELETE FROM Tag WHERE id = :tagId")
+  fun deleteTag(tagId: Int)
 
   @Query("SELECT COUNT(*) From Tag WHERE name = :tag")
   fun getCountTagsWithName(tag: String): Int

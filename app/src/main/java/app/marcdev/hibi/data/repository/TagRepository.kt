@@ -13,7 +13,7 @@ interface TagRepository {
 
   suspend fun getAllTags(): LiveData<List<Tag>>
 
-  suspend fun deleteTag(tag: String)
+  suspend fun deleteTag(tagId: Int)
 
   suspend fun isTagInUse(tag: String): Boolean
 

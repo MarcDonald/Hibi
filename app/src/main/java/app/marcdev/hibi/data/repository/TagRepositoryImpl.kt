@@ -40,9 +40,9 @@ class TagRepositoryImpl private constructor(private val dao: DAO) : TagRepositor
     }
   }
 
-  override suspend fun deleteTag(tag: String) {
+  override suspend fun deleteTag(tagId: Int) {
     withContext(Dispatchers.IO) {
-      dao.deleteTag(tag)
+      dao.deleteTag(tagId)
     }
   }
 

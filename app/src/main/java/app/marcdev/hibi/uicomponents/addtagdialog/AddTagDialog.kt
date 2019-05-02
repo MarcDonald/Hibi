@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.TAG_NAME_KEY
+import app.marcdev.hibi.internal.TAG_ID_KEY
 import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
@@ -42,9 +42,11 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddTagViewModel::class.java)
 
     arguments?.let {
-      val tagName = arguments!!.getString(TAG_NAME_KEY)
-      viewModel.tagName = tagName
-      input.setText(tagName)
+      val tagId = arguments!!.getInt(TAG_ID_KEY)
+      viewModel.tagId = tagId
+      launch {
+        input.setText(viewModel.getTagName())
+      }
     }
   }
 
