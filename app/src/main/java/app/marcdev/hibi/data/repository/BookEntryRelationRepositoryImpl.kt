@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.BookEntryRelation
 import app.marcdev.hibi.data.entity.Entry
-import app.marcdev.hibi.maintabs.booksfragment.BookDisplayItem
+import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BookDisplayItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber

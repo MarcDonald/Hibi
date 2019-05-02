@@ -3,7 +3,7 @@ package app.marcdev.hibi.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import app.marcdev.hibi.data.entity.*
-import app.marcdev.hibi.maintabs.booksfragment.BookDisplayItem
+import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BookDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
 

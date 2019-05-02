@@ -1,12 +1,14 @@
-package app.marcdev.hibi.maintabs.booksfragment
+package app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment
 
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.BOOK_ID_KEY
+import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
 import app.marcdev.hibi.uicomponents.addbookdialog.AddBookDialog
 
 class BooksFragmentRecyclerViewHolder(itemView: View, private val fragmentManager: FragmentManager) : RecyclerView.ViewHolder(itemView) {
@@ -17,12 +19,11 @@ class BooksFragmentRecyclerViewHolder(itemView: View, private val fragmentManage
   private var displayedItem: BookDisplayItem? = null
 
   private val clickListener = View.OnClickListener {
-    // TODO
-//    if(displayedItem != null) {
-//      val bookID = displayedItem!!.bookID
-//      val viewEntryAction = MainScreenFragmentDirections.viewBookEntriesAction(bookID)
-//      Navigation.findNavController(it).navigate(viewEntryAction)
-//    }
+    if(displayedItem != null) {
+      val bookID = displayedItem!!.bookId
+      val viewEntryAction = MainScreenFragmentDirections.viewBookEntriesAction(bookID)
+      Navigation.findNavController(it).navigate(viewEntryAction)
+    }
   }
 
   private val longClickListener = View.OnLongClickListener {

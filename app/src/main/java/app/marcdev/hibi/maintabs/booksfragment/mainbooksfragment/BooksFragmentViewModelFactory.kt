@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.booksfragment
+package app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

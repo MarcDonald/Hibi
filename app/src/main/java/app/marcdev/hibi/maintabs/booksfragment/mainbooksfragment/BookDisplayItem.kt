@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.booksfragment
+package app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment
 
 data class BookDisplayItem(
   val bookId: Int,

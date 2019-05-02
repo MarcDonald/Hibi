@@ -14,7 +14,7 @@ import app.marcdev.hibi.internal.CALENDAR_TAB
 import app.marcdev.hibi.internal.ENTRIES_TAB
 import app.marcdev.hibi.internal.TAGS_TAB
 import app.marcdev.hibi.internal.base.ScopedFragment
-import app.marcdev.hibi.maintabs.booksfragment.BooksFragment
+import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BooksFragment
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarFragment
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesFragment
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagsFragment

@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.booksfragment
+package app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment
 
 import android.content.Context
 import android.view.LayoutInflater
