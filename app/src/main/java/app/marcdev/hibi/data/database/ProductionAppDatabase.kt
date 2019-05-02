@@ -6,15 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import app.marcdev.hibi.data.entity.Entry
-import app.marcdev.hibi.data.entity.NewWord
-import app.marcdev.hibi.data.entity.Tag
-import app.marcdev.hibi.data.entity.TagEntryRelation
+import app.marcdev.hibi.data.entity.*
 import app.marcdev.hibi.internal.PRODUCTION_DATABASE_NAME
 import app.marcdev.hibi.internal.PRODUCTION_DATABASE_VERSION
 import timber.log.Timber
 
-@Database(entities = [Entry::class, Tag::class, TagEntryRelation::class, NewWord::class], version = PRODUCTION_DATABASE_VERSION)
+@Database(entities = [Entry::class, Tag::class, TagEntryRelation::class, NewWord::class, Book::class, BookEntryRelation::class], version = PRODUCTION_DATABASE_VERSION)
 
 abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
   abstract override fun dao(): DAO
@@ -53,6 +50,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
         .addMigrations(MIGRATION_5_TO_6())
         .addMigrations(MIGRATION_6_TO_7())
         .addMigrations(MIGRATION_7_TO_8())
+        .addMigrations(MIGRATION_8_TO_9())
         .build()
 
     class MIGRATION_3_TO_5 : Migration(3, 5) {
@@ -120,6 +118,20 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
                          "PRIMARY KEY(tagId, entryId), " +
                          "FOREIGN KEY(entryId) REFERENCES Entry(id) ON DELETE CASCADE ON UPDATE CASCADE, " +
                          "FOREIGN KEY(tagId) REFERENCES Tag(id) ON DELETE CASCADE ON UPDATE CASCADE)")
+      }
+    }
+
+    class MIGRATION_8_TO_9 : Migration(8, 9) {
+      override fun migrate(database: SupportSQLiteDatabase) {
+        // Create Book table
+        database.execSQL("CREATE TABLE Book('name' TEXT NOT NULL, 'id' INTEGER NOT NULL, PRIMARY KEY(id))")
+
+        // Create BookEntryRelation table
+        database.execSQL("CREATE TABLE BookEntryRelation(bookId INTEGER NOT NULL, " +
+                         "entryId INTEGER NOT NULL, " +
+                         "PRIMARY KEY(bookId, entryId), " +
+                         "FOREIGN KEY(entryId) REFERENCES Entry(id) ON DELETE CASCADE ON UPDATE CASCADE, " +
+                         "FOREIGN KEY(bookId) REFERENCES Book(id) ON DELETE CASCADE ON UPDATE CASCADE)")
       }
     }
   }

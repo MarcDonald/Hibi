@@ -45,6 +45,8 @@ class Hibi : Application(), KodeinAware {
     bind<TagRepository>() with singleton { TagRepositoryImpl.getInstance(instance()) }
     bind<TagEntryRelationRepository>() with singleton { TagEntryRelationRepositoryImpl.getInstance(instance()) }
     bind<NewWordRepository>() with singleton { NewWordRepositoryImpl.getInstance(instance()) }
+    bind<BookRepository>() with singleton { BookRepositoryImpl.getInstance(instance()) }
+    bind<BookEntryRelationRepository>() with singleton { BookEntryRelationRepositoryImpl.getInstance(instance()) }
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
     bind() from provider { MainEntriesViewModelFactory(instance(), instance()) }

@@ -2,10 +2,8 @@ package app.marcdev.hibi.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import app.marcdev.hibi.data.entity.Entry
-import app.marcdev.hibi.data.entity.NewWord
-import app.marcdev.hibi.data.entity.Tag
-import app.marcdev.hibi.data.entity.TagEntryRelation
+import app.marcdev.hibi.data.entity.*
+import app.marcdev.hibi.maintabs.booksfragment.BookDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
 
@@ -124,4 +122,51 @@ interface DAO {
 
   @Query("SELECT COUNT(*) FROM NewWord WHERE entryId = :entryId")
   fun getNewWordCountByEntryId(entryId: Int): Int
+
+  /* Book */
+  @Insert(onConflict = OnConflictStrategy.FAIL)
+  fun insertBook(book: Book)
+
+  @Update
+  fun updateBook(book: Book)
+
+  @Query("SELECT * FROM Book")
+  fun getAllBooks(): LiveData<List<Book>>
+
+  @Query("SELECT * FROM Book WHERE id = :id")
+  fun getBookById(id: Int): Book
+
+  @Query("DELETE FROM Book WHERE id = :bookId")
+  fun deleteBook(bookId: Int)
+
+  @Query("SELECT COUNT(*) From Book WHERE name = :tag")
+  fun getCountBooksWithName(tag: String): Int
+
+  @Query("SELECT name FROM Book WHERE id = :bookId")
+  fun getBookName(bookId: Int): String
+
+  /* Book Entry Relation */
+  @Insert(onConflict = OnConflictStrategy.FAIL)
+  fun insertBookEntryRelation(bookEntryRelation: BookEntryRelation)
+
+  @Update
+  fun updateBookEntryRelation(bookEntryRelation: BookEntryRelation)
+
+  @Delete
+  fun deleteBookEntryRelation(bookEntryRelation: BookEntryRelation)
+
+  @Query("DELETE FROM BookEntryRelation WHERE bookId= :bookId")
+  fun deleteBookEntryRelationByBookId(bookId: Int)
+
+  @Query("DELETE FROM BookEntryRelation WHERE entryId = :entryId")
+  fun deleteBookEntryRelationByEntryId(entryId: Int)
+
+  @Query("SELECT * FROM BookEntryRelation")
+  fun getAllBookEntryRelations(): LiveData<List<BookEntryRelation>>
+
+  @Query("SELECT * FROM Entry as e INNER JOIN BookEntryRelation as ber ON e.id = ber.entryId WHERE ber.bookId = :bookId")
+  fun getEntriesWithBook(bookId: Int): LiveData<List<Entry>>
+
+  @Query("SELECT b.id as bookId, b.name as bookName, COUNT(ber.entryId) as useCount FROM Book as b LEFT OUTER JOIN BookEntryRelation as ber ON b.id = ber.bookId GROUP BY b.name")
+  fun getBooksWithCountOfEntries(): LiveData<List<BookDisplayItem>>
 }
