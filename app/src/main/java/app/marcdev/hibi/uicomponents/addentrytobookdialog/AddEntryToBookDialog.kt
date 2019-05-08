@@ -1,4 +1,4 @@
-package app.marcdev.hibi.uicomponents.addtagtoentrydialog
+package app.marcdev.hibi.uicomponents.addentrytobookdialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,21 +22,21 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
+class AddEntryToBookDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
   // UI Components
   private lateinit var title: TextView
-  private lateinit var tagHolder: LinearLayout
+  private lateinit var bookHolder: LinearLayout
   private lateinit var noTagsWarning: TextView
 
   // Viewmodel
-  private val viewModelFactory: AddTagToEntryViewModelFactory by instance()
-  private lateinit var viewModel: AddTagToEntryViewModel
+  private val viewModelFactory: AddEntryToBookViewModelFactory by instance()
+  private lateinit var viewModel: AddEntryToBookViewModel
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
-    val view = inflater.inflate(R.layout.dialog_entry_tags, container, false)
+    val view = inflater.inflate(R.layout.dialog_entry_books, container, false)
     bindViews(view)
     return view
   }
@@ -45,7 +45,7 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     super.onViewCreated(view, savedInstanceState)
     /* Normally viewmodel is instantiated in onActivityCreated but that seems to crash for this
      * screen so it's instantiated here instead */
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddTagToEntryViewModel::class.java)
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEntryToBookViewModel::class.java)
 
     arguments?.let {
       val entryId = arguments!!.getInt(ENTRY_ID_KEY)
@@ -56,60 +56,60 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   }
 
   private fun bindViews(view: View) {
-    title = view.findViewById(R.id.txt_add_tags_title)
-    tagHolder = view.findViewById(R.id.lin_tags_entry_tag_holder)
-    noTagsWarning = view.findViewById(R.id.txt_no_tags_warning)
+    title = view.findViewById(R.id.txt_add_entry_to_book_title)
+    bookHolder = view.findViewById(R.id.lin_add_entry_to_book_book_holder)
+    noTagsWarning = view.findViewById(R.id.txt_no_books_warning)
 
-    val addButton: MaterialButton = view.findViewById(R.id.btn_add_tag)
+    val addButton: MaterialButton = view.findViewById(R.id.btn_create_book)
     addButton.setOnClickListener(addClickListener)
 
-    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_tag)
+    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_book)
     saveButton.setOnClickListener(saveClickListener)
   }
 
   private val saveClickListener = View.OnClickListener {
-    for(x in 0 until tagHolder.childCount) {
-      val tag = tagHolder.getChildAt(x) as CheckBoxWithId
-      if(tag.isChecked) {
-        save(tag.itemId)
+    for(x in 0 until bookHolder.childCount) {
+      val checkBox = bookHolder.getChildAt(x) as CheckBoxWithId
+      if(checkBox.isChecked) {
+        save(checkBox.itemId)
       } else {
-        delete(tag.itemId)
+        delete(checkBox.itemId)
       }
     }
     dismiss()
   }
 
   private fun save(tagId: Int) = launch {
-    viewModel.saveTagEntryRelation(tagId)
+    viewModel.saveBookEntryRelation(tagId)
   }
 
   private fun delete(tag: Int) = launch {
-    viewModel.deleteTagEntryRelation(tag)
+    viewModel.deleteBookEntryRelation(tag)
   }
 
   private val addClickListener = View.OnClickListener {
     val dialog = AddTagDialog()
-    dialog.show(requireFragmentManager(), "Tag Manager Dialog")
+    dialog.show(requireFragmentManager(), "Book Manager Dialog")
   }
 
   private fun displayTags() = launch {
     val tagEntryRelations = if(viewModel.entryId == 0) {
       TagsToSaveToNewEntry.list
     } else {
-      viewModel.getTagsForEntry()
+      viewModel.getBooksForEntry()
     }
 
-    val allTags = viewModel.allTags.await()
-    allTags.observe(this@AddTagToEntryDialog, Observer { tags ->
-      tags.forEach { it ->
+    val allTags = viewModel.allBooks.await()
+    allTags.observe(this@AddEntryToBookDialog, Observer { books ->
+      books.forEach { it ->
         // Gets list of all tags displayed
         val alreadyDisplayedTags = ArrayList<CheckBoxWithId>()
-        for(x in 0 until tagHolder.childCount) {
-          val tagCheckBox = tagHolder.getChildAt(x) as CheckBoxWithId
+        for(x in 0 until bookHolder.childCount) {
+          val tagCheckBox = bookHolder.getChildAt(x) as CheckBoxWithId
           alreadyDisplayedTags.add(tagCheckBox)
         }
 
-        val displayTag = CheckBoxWithId(tagHolder.context)
+        val displayTag = CheckBoxWithId(bookHolder.context)
         displayTag.text = it.name
         displayTag.itemId = it.id
         if(theme == R.style.Hibi_DarkTheme_BottomSheetDialogTheme) {
@@ -131,11 +131,11 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
           if(tagEntryRelations.contains(it.id)) {
             displayTag.isChecked = true
           }
-          tagHolder.addView(displayTag)
+          bookHolder.addView(displayTag)
         }
       }
 
-      if(tagHolder.childCount == 0) {
+      if(bookHolder.childCount == 0) {
         noTagsWarning.visibility = View.VISIBLE
       } else {
         noTagsWarning.visibility = View.GONE

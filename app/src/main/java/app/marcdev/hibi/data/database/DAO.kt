@@ -169,4 +169,7 @@ interface DAO {
 
   @Query("SELECT b.id as bookId, b.name as bookName, COUNT(ber.entryId) as useCount FROM Book as b LEFT OUTER JOIN BookEntryRelation as ber ON b.id = ber.bookId GROUP BY b.name")
   fun getBooksWithCountOfEntries(): LiveData<List<BookDisplayItem>>
+
+  @Query("SELECT id FROM Book INNER JOIN BookEntryRelation ON Book.id = BookEntryRelation.bookId WHERE entryId = :entryId")
+  fun getBookIdsWithEntryNotLiveData(entryId: Int): List<Int>
 }

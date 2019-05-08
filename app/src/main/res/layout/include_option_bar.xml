@@ -1,82 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/const_option_bar"
   android:layout_width="match_parent"
   android:layout_height="@dimen/option_bar_height"
-  android:background="?colorPrimaryDark">
+  android:background="?colorPrimaryDark"
+  android:orientation="horizontal">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_gravity="center"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+  <ImageView
+    android:id="@+id/img_option_tag"
+    android:layout_width="@dimen/option_bar_icon_width"
+    android:layout_height="@dimen/option_bar_height"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:contentDescription="@string/add_tags_to_entry_hint"
+    android:focusable="true"
+    android:padding="@dimen/option_bar_icon_padding"
+    android:layout_weight="1"
+    android:src="@drawable/ic_tag_24dp" />
 
-    <ImageView
-      android:id="@+id/img_option_tag"
-      android:layout_width="@dimen/option_bar_icon_width"
-      android:layout_height="@dimen/option_bar_height"
-      android:background="?selectableItemBackground"
-      android:clickable="true"
-      android:focusable="true"
-      android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_tag_24dp"
-      android:contentDescription="@string/add_tags_to_entry_hint"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+  <ImageView
+    android:id="@+id/img_option_book"
+    android:layout_width="@dimen/option_bar_icon_width"
+    android:layout_height="@dimen/option_bar_height"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:contentDescription="@string/add_entry_to_book_hint"
+    android:focusable="true"
+    android:padding="@dimen/option_bar_icon_padding"
+    android:layout_weight="1"
+    android:src="@drawable/ic_book_24dp" />
 
-    <ImageView
-      android:id="@+id/img_option_location"
-      android:layout_width="@dimen/option_bar_icon_width"
-      android:layout_height="@dimen/option_bar_height"
-      android:background="?selectableItemBackground"
-      android:clickable="true"
-      android:focusable="true"
-      android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_location_on_24dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toEndOf="@id/img_option_tag"
-      app:layout_constraintTop_toTopOf="parent" />
+  <ImageView
+    android:id="@+id/img_option_location"
+    android:layout_width="@dimen/option_bar_icon_width"
+    android:layout_height="@dimen/option_bar_height"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="@dimen/option_bar_icon_padding"
+    android:layout_weight="1"
+    android:src="@drawable/ic_location_on_24dp" />
 
-    <ImageView
-      android:id="@+id/img_option_media"
-      android:layout_width="@dimen/option_bar_icon_width"
-      android:layout_height="@dimen/option_bar_height"
-      android:background="?selectableItemBackground"
-      android:clickable="true"
-      android:focusable="true"
-      android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_image_24dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toEndOf="@id/img_option_location"
-      app:layout_constraintTop_toTopOf="parent" />
+  <ImageView
+    android:id="@+id/img_option_media"
+    android:layout_width="@dimen/option_bar_icon_width"
+    android:layout_height="@dimen/option_bar_height"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="@dimen/option_bar_icon_padding"
+    android:layout_weight="1"
+    android:src="@drawable/ic_image_24dp" />
 
-    <ImageView
-      android:id="@+id/img_option_clipboard"
-      android:layout_width="@dimen/option_bar_icon_width"
-      android:layout_height="@dimen/option_bar_height"
-      android:background="?selectableItemBackground"
-      android:clickable="true"
-      android:focusable="true"
-      android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_content_copy_24dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toEndOf="@id/img_option_media"
-      app:layout_constraintTop_toTopOf="parent" />
+  <ImageView
+    android:id="@+id/img_option_clipboard"
+    android:layout_width="@dimen/option_bar_icon_width"
+    android:layout_height="@dimen/option_bar_height"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="@dimen/option_bar_icon_padding"
+    android:layout_weight="1"
+    android:src="@drawable/ic_content_copy_24dp" />
 
-    <ImageView
-      android:id="@+id/img_option_words"
-      android:layout_width="@dimen/option_bar_icon_width"
-      android:layout_height="@dimen/option_bar_height"
-      android:layout_marginEnd="8dp"
-      android:background="?selectableItemBackground"
-      android:clickable="true"
-      android:focusable="true"
-      android:padding="@dimen/option_bar_icon_padding"
-      android:src="@drawable/ic_word"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@id/img_option_clipboard"
-      app:layout_constraintTop_toTopOf="parent" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</HorizontalScrollView>
+  <ImageView
+    android:id="@+id/img_option_words"
+    android:layout_width="@dimen/option_bar_icon_width"
+    android:layout_height="@dimen/option_bar_height"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="@dimen/option_bar_icon_padding"
+    android:src="@drawable/ic_word" />
+</LinearLayout>

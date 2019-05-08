@@ -24,6 +24,7 @@ import app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntrie
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
 import app.marcdev.hibi.search.searchresults.SearchViewModelFactory
 import app.marcdev.hibi.uicomponents.addbookdialog.AddBookViewModelFactory
+import app.marcdev.hibi.uicomponents.addentrytobookdialog.AddEntryToBookViewModelFactory
 import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagtoentrydialog.AddTagToEntryViewModelFactory
@@ -53,7 +54,7 @@ class Hibi : Application(), KodeinAware {
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
     bind() from provider { MainEntriesViewModelFactory(instance(), instance()) }
-    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance()) }
+    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance()) }
     bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
@@ -67,6 +68,7 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddBookViewModelFactory(instance()) }
     bind() from provider { BooksFragmentViewModelFactory(instance()) }
     bind() from provider { BookEntriesViewModelFactory(instance(), instance(), instance()) }
+    bind() from provider { AddEntryToBookViewModelFactory(instance(), instance()) }
     bind() from provider { BackupUtils(instance()) }
   }
 

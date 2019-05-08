@@ -109,6 +109,7 @@
   <string name="no_books">You haven\'t created any books yet</string>
   <string name="no_book_entries">You haven\'t added any entries to this book yet</string>
   <string name="book_use_count_wc">Chapters: %1$s</string>
+  <string name="add_entry_to_book_hint">Add Entry to Book</string>
 
   <!--Notifications-->
   <string name="reminder_notification_channel_title">Reminder</string>
