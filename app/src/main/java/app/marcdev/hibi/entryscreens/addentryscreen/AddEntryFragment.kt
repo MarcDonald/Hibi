@@ -13,7 +13,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -70,7 +69,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     initBackConfirmDialog()
     focusInput()
 
-    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback { onBackPress() })
+    requireActivity().onBackPressedDispatcher.addCallback { onBackPress() }
 
     return view
   }
