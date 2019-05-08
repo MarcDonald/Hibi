@@ -24,6 +24,11 @@ Used for converting API responses into Kotlin objects
 
 Apache 2 License
 
+### [Android File Picker](https://github.com/DroidNinja/Android-FilePicker)
+Used for selecting file to restore from
+
+Apache 2 License
+
 ### [M PLUS Rounded 1c Bold](https://fonts.google.com/specimen/M+PLUS+Rounded+1c)
 Used as the icon font
 

@@ -1,6 +1,7 @@
 package app.marcdev.hibi.maintabs.settings
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -20,6 +21,8 @@ import app.marcdev.hibi.internal.*
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.ReminderTimePickerDialog
 import com.google.android.material.snackbar.Snackbar
+import droidninja.filepicker.FilePickerBuilder
+import droidninja.filepicker.FilePickerConst
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -80,7 +83,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
     displayReminderTimeSummary(calendar)
   }
 
-  private val reminderChangeListener = Preference.OnPreferenceChangeListener { pref, isActive ->
+  private val reminderChangeListener = Preference.OnPreferenceChangeListener { _, isActive ->
     val helper = NotificationHelper()
     if(isActive == true) {
       val calendar = getInstance()
@@ -132,7 +135,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
 
   private val shareBackup = View.OnClickListener {
     val db = File(requireContext().filesDir.path + INTERNAL_BACKUP_PATH + PRODUCTION_DATABASE_NAME)
-    val uri = FileProvider.getUriForFile(requireContext(), "app.marcdev.hibi.FileProvider", db)
+    val uri = FileProvider.getUriForFile(requireContext(), "$PACKAGE.FileProvider", db)
     val shareIntent = Intent(Intent.ACTION_SEND)
     shareIntent.type = "application/octet-stream"
     shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
@@ -143,24 +146,46 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
     if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
     } else {
-      val dialog = BinaryOptionDialog()
-      dialog.setTitle(resources.getString(R.string.warning_caps))
-      dialog.setMessage(resources.getString(R.string.restore_warning))
-      dialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { dialog.dismiss() })
-      dialog.setNegativeButton(resources.getString(R.string.restore_confirm), View.OnClickListener {
-        dialog.dismiss()
-        val restore = backupUtils.restore(requireContext())
-        if(restore) {
-          /* This is apparently bad practice but I can't find any other way of completely destroying
-           * the application so that the database can be opened again */
-          System.exit(1)
-        } else {
-          Snackbar.make(requireView(), resources.getString(R.string.restore_fail), Snackbar.LENGTH_LONG).show()
-        }
-      })
-      dialog.show(requireFragmentManager(), "Restore Confirm Dialog")
+      FilePickerBuilder.instance
+        .setMaxCount(1)
+        .setActivityTheme(R.style.Hibi_DarkTheme)
+        .setActivityTitle("Choose a file to restore from")
+        .enableDocSupport(false)
+        .addFileSupport("Backup", Array(1) { ".db" })
+        .pickFile(this, CHOOSE_RESTORE_FILE_REQUEST_CODE)
     }
     true
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    if(requestCode == CHOOSE_RESTORE_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+      if(data != null) {
+        val filePathArray = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS)
+        val filePath = filePathArray[0]
+        if(filePath != null)
+          displayRestoreWarning(filePath)
+      }
+    } else
+      super.onActivityResult(requestCode, resultCode, data)
+  }
+
+  private fun displayRestoreWarning(path: String) {
+    val dialog = BinaryOptionDialog()
+    dialog.setTitle(resources.getString(R.string.warning_caps))
+    dialog.setMessage(resources.getString(R.string.restore_warning))
+    dialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { dialog.dismiss() })
+    dialog.setNegativeButton(resources.getString(R.string.restore_confirm), View.OnClickListener {
+      dialog.dismiss()
+      val restore = backupUtils.restore(requireContext(), path)
+      if(restore) {
+        /* This is apparently bad practice but I can't find any other way of completely destroying
+         * the application so that the database can be opened again */
+        System.exit(1)
+      } else {
+        Snackbar.make(requireView(), resources.getString(R.string.restore_fail), Snackbar.LENGTH_LONG).show()
+      }
+    })
+    dialog.show(requireFragmentManager(), "Restore Confirm Dialog")
   }
 
   private val mayRequireRestartChangeListener = Preference.OnPreferenceChangeListener { _, _ ->

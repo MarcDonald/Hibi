@@ -35,8 +35,10 @@ class BackupUtils(private val database: AppDatabase) {
     return false
   }
 
-  fun restore(context: Context): Boolean {
-    val newDB = File(Environment.getExternalStorageDirectory().path + EXTERNAL_BACKUP_PATH + PRODUCTION_DATABASE_NAME)
+  fun restore(context: Context, path: String): Boolean {
+    val newDB = File(path)
+    if(newDB.extension != "db")
+      return false
 
     if(newDB.exists()) {
       val toDB = context.getDatabasePath(PRODUCTION_DATABASE_NAME)
@@ -51,7 +53,7 @@ class BackupUtils(private val database: AppDatabase) {
         }
       }
     } else {
-      Timber.e("Log: backup: ogDB = ${newDB.exists()}")
+      Timber.e("Log: restore: newDB = ${newDB.exists()}")
     }
     return false
   }
