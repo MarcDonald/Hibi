@@ -3,7 +3,8 @@ package app.marcdev.hibi.data
 import android.content.Context
 import android.os.Environment
 import app.marcdev.hibi.data.database.AppDatabase
-import app.marcdev.hibi.internal.BACKUP_PATH
+import app.marcdev.hibi.internal.EXTERNAL_BACKUP_PATH
+import app.marcdev.hibi.internal.INTERNAL_BACKUP_PATH
 import app.marcdev.hibi.internal.PRODUCTION_DATABASE_NAME
 import timber.log.Timber
 import java.io.File
@@ -16,11 +17,13 @@ class BackupUtils(private val database: AppDatabase) {
     val ogDB = context.getDatabasePath(PRODUCTION_DATABASE_NAME)
 
     if(ogDB.exists()) {
-      val toDB = File(Environment.getExternalStorageDirectory().path + BACKUP_PATH + ogDB.name)
+      val toDBExternal = File(Environment.getExternalStorageDirectory().path + EXTERNAL_BACKUP_PATH + ogDB.name)
+      val toDBInternal = File(context.filesDir.path + INTERNAL_BACKUP_PATH + ogDB.name)
 
-      if(toDB.compareTo(ogDB) != 0) {
+      if(toDBExternal.compareTo(ogDB) != 0) {
         try {
-          ogDB.copyTo(toDB, true)
+          ogDB.copyTo(toDBExternal, true)
+          ogDB.copyTo(toDBInternal, true)
           return true
         } catch(e: NoSuchFileException) {
           Timber.e("Log: backup: $e")
@@ -33,7 +36,7 @@ class BackupUtils(private val database: AppDatabase) {
   }
 
   fun restore(context: Context): Boolean {
-    val newDB = File(Environment.getExternalStorageDirectory().path + BACKUP_PATH + PRODUCTION_DATABASE_NAME)
+    val newDB = File(Environment.getExternalStorageDirectory().path + EXTERNAL_BACKUP_PATH + PRODUCTION_DATABASE_NAME)
 
     if(newDB.exists()) {
       val toDB = context.getDatabasePath(PRODUCTION_DATABASE_NAME)

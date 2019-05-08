@@ -33,6 +33,16 @@
     <activity android:name=".maintabs.settings.SettingsActivity" />
 
     <receiver android:name=".internal.AlertReceiver" />
+    <provider
+      android:authorities="app.marcdev.hibi.FileProvider"
+      android:name="androidx.core.content.FileProvider"
+      android:enabled="true"
+      android:grantUriPermissions="true"
+      android:exported="false">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/filepaths" />
+    </provider>
   </application>
 
 </manifest>
