@@ -15,12 +15,16 @@ import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.entryscreens.addentryscreen.AddEntryViewModelFactory
 import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
 import app.marcdev.hibi.internal.NOTIFICATION_CHANNEL_REMINDER_ID
+import app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment.BookEntriesViewModelFactory
+import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BooksFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarTabViewModelFactory
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagsFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesViewModelFactory
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
 import app.marcdev.hibi.search.searchresults.SearchViewModelFactory
+import app.marcdev.hibi.uicomponents.addbookdialog.AddBookViewModelFactory
+import app.marcdev.hibi.uicomponents.addentrytobookdialog.AddEntryToBookViewModelFactory
 import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagtoentrydialog.AddTagToEntryViewModelFactory
@@ -45,10 +49,12 @@ class Hibi : Application(), KodeinAware {
     bind<TagRepository>() with singleton { TagRepositoryImpl.getInstance(instance()) }
     bind<TagEntryRelationRepository>() with singleton { TagEntryRelationRepositoryImpl.getInstance(instance()) }
     bind<NewWordRepository>() with singleton { NewWordRepositoryImpl.getInstance(instance()) }
+    bind<BookRepository>() with singleton { BookRepositoryImpl.getInstance(instance()) }
+    bind<BookEntryRelationRepository>() with singleton { BookEntryRelationRepositoryImpl.getInstance(instance()) }
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
     bind() from provider { MainEntriesViewModelFactory(instance(), instance()) }
-    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance()) }
+    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance()) }
     bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
@@ -59,6 +65,10 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { CalendarTabViewModelFactory(instance(), instance()) }
     bind() from provider { TagsFragmentViewModelFactory(instance()) }
     bind() from provider { TaggedEntriesViewModelFactory(instance(), instance()) }
+    bind() from provider { AddBookViewModelFactory(instance()) }
+    bind() from provider { BooksFragmentViewModelFactory(instance()) }
+    bind() from provider { BookEntriesViewModelFactory(instance(), instance(), instance()) }
+    bind() from provider { AddEntryToBookViewModelFactory(instance(), instance()) }
     bind() from provider { BackupUtils(instance()) }
   }
 
