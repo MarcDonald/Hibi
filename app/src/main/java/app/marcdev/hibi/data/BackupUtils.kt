@@ -37,7 +37,7 @@ class BackupUtils(private val database: AppDatabase) {
 
   fun restore(context: Context, path: String): Boolean {
     val newDB = File(path)
-    if(newDB.extension != "db")
+    if(newDB.extension != "hibi")
       return false
 
     if(newDB.exists()) {

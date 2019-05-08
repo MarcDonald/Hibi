@@ -1,7 +1,7 @@
 package app.marcdev.hibi.internal
 
 const val PRODUCTION_DATABASE_VERSION = 9
-const val PRODUCTION_DATABASE_NAME = "ProductionAppDatabase.db"
+const val PRODUCTION_DATABASE_NAME = "Database.hibi"
 const val EXTERNAL_BACKUP_PATH = "/Hibi/backup/"
 const val INTERNAL_BACKUP_PATH = "/backup/"
 

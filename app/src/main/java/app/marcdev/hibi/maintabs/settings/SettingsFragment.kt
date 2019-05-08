@@ -149,9 +149,9 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
       FilePickerBuilder.instance
         .setMaxCount(1)
         .setActivityTheme(R.style.Hibi_DarkTheme)
-        .setActivityTitle("Choose a file to restore from")
+        .setActivityTitle(resources.getString(R.string.restore_title))
         .enableDocSupport(false)
-        .addFileSupport("Backup", Array(1) { ".db" })
+        .addFileSupport(resources.getString(R.string.backup_file), Array(1) { ".hibi" })
         .pickFile(this, CHOOSE_RESTORE_FILE_REQUEST_CODE)
     }
     true
