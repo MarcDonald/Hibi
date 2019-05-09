@@ -14,10 +14,9 @@ import androidx.navigation.Navigation
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
+import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.internal.base.ScopedFragment
-import app.marcdev.hibi.internal.formatDateForDisplay
-import app.marcdev.hibi.internal.formatTimeForDisplay
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.uicomponents.views.SearchBar
@@ -49,12 +48,8 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var newWordsButton: MaterialButton
   // </editor-fold>
 
-  // <editor-fold desc="Other">
-  private var entryIdBeingViewed = 0
-  // </editor-fold>
-
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(ViewEntryViewModel::class.java)
   }
 
@@ -64,6 +59,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
 
     bindViews(view)
     initDeleteConfirmDialog()
+    setupObservers()
 
     return view
   }
@@ -72,50 +68,8 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
     super.onViewCreated(view, savedInstanceState)
 
     arguments?.let {
-      val entryId = ViewEntryFragmentArgs.fromBundle(it).entryId
-      if(entryId == 0) {
-        Toast.makeText(requireContext(), resources.getString(R.string.generic_error), Toast.LENGTH_SHORT).show()
-        Timber.e("Log: onViewCreated: View Entry With Id 0")
-      } else {
-        fillData(entryId)
-      }
+      viewModel.passArguments(ViewEntryFragmentArgs.fromBundle(it).entryId)
     }
-  }
-
-  private fun fillData(entryId: Int) = launch {
-    if(viewModel.hasNewWords(entryId))
-      newWordsButton.visibility = View.VISIBLE
-    else
-      newWordsButton.visibility = View.GONE
-
-    entryIdBeingViewed = entryId
-    viewModel.getEntry(entryId).observe(this@ViewEntryFragment, Observer { entry ->
-      contentDisplay.text = entry.content
-
-      val day = entry.day
-      val month = entry.month
-      val year = entry.year
-      val hour = entry.hour
-      val minute = entry.minute
-
-      dateButton.text = formatDateForDisplay(day, month, year)
-      timeButton.text = formatTimeForDisplay(hour, minute)
-    })
-
-    viewModel.getTags(entryId).observe(this@ViewEntryFragment, Observer { tags ->
-      tagDisplay.removeAllViews()
-
-      if(tags.isEmpty()) {
-        tagDisplayHolder.visibility = View.GONE
-      } else {
-        tagDisplayHolder.visibility = View.VISIBLE
-        tags.forEach {
-          val displayTag = Chip(tagDisplay.context)
-          displayTag.text = it.name
-          tagDisplay.addView(displayTag)
-        }
-      }
-    })
   }
 
   private fun bindViews(view: View) {
@@ -140,14 +94,60 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
     newWordsButton.setOnClickListener(newWordsClickListener)
   }
 
+  private fun setupObservers() {
+    viewModel.displayErrorToast.observe(this, Observer { value ->
+      value?.let { show ->
+        if(show)
+          Toast.makeText(requireContext(), resources.getString(R.string.generic_error), Toast.LENGTH_SHORT).show()
+      }
+    })
+
+    viewModel.content.observe(this, Observer { value ->
+      value?.let { content ->
+        contentDisplay.text = content
+      }
+    })
+
+    viewModel.readableDate.observe(this, Observer { value ->
+      value?.let { date ->
+        dateButton.text = date
+      }
+    })
+
+    viewModel.readableTime.observe(this, Observer { value ->
+      value?.let { time ->
+        timeButton.text = time
+      }
+    })
+
+    viewModel.tags.observe(this, Observer { value ->
+      tagDisplay.removeAllViews()
+
+      value?.let { tags ->
+        tagDisplayHolder.visibility = if(tags.isEmpty()) View.GONE else View.VISIBLE
+        tags.forEach { tag ->
+          val displayTag = Chip(tagDisplay.context)
+          displayTag.text = tag.name
+          tagDisplay.addView(displayTag)
+        }
+      }
+    })
+
+    viewModel.displayNewWordButton.observe(this, Observer { value ->
+      value?.let { show ->
+        newWordsButton.visibility = if(show) View.VISIBLE else View.GONE
+      }
+    })
+  }
+
   private val backClickListener = View.OnClickListener {
     Navigation.findNavController(view!!).popBackStack()
   }
 
   private val editClickListener = View.OnClickListener {
     val editEntryAction = ViewEntryFragmentDirections.editEntryAction()
-    if(entryIdBeingViewed != 0) {
-      editEntryAction.entryId = entryIdBeingViewed
+    if(viewModel.entryId != 0) {
+      editEntryAction.entryId = viewModel.entryId
     }
     Navigation.findNavController(it).navigate(editEntryAction)
   }
@@ -160,7 +160,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
     val dialog = NewWordDialog()
 
     val bundle = Bundle()
-    bundle.putInt(ENTRY_ID_KEY, entryIdBeingViewed)
+    bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
     bundle.putBoolean(IS_EDIT_MODE_KEY, false)
     dialog.arguments = bundle
 
@@ -169,7 +169,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
 
   private fun search(searchTerm: String) {
     val args = Bundle()
-    args.putString("searchTerm", searchTerm)
+    args.putString(SEARCH_TERM_KEY, searchTerm)
 
     val searchDialog = SearchResultsDialog()
     searchDialog.arguments = args
@@ -195,7 +195,7 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun deleteEntry() = launch {
-    viewModel.deleteEntry(entryIdBeingViewed)
+    viewModel.deleteEntry(viewModel.entryId)
     Navigation.findNavController(requireView()).popBackStack()
   }
 }
