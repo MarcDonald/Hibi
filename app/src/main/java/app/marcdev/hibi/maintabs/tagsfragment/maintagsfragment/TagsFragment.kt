@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
 import app.marcdev.hibi.internal.base.ScopedFragment
-import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -35,8 +34,8 @@ class TagsFragment : ScopedFragment(), KodeinAware {
   private lateinit var recyclerAdapter: TagsRecyclerAdapter
   // </editor-fold>
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(TagsFragmentViewModel::class.java)
   }
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,6 +44,8 @@ class TagsFragment : ScopedFragment(), KodeinAware {
 
     bindViews(view)
     initRecycler(view)
+    setupObservers()
+    viewModel.loadData()
 
     return view
   }
@@ -66,22 +67,25 @@ class TagsFragment : ScopedFragment(), KodeinAware {
       val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
       recycler.addItemDecoration(dividerItemDecoration)
     }
-
-    displayRecyclerData()
   }
 
-  private fun displayRecyclerData() = launch {
-    noResults.visibility = View.GONE
-    loadingDisplay.visibility = View.VISIBLE
+  private fun setupObservers() {
+    viewModel.entries.observe(this, Observer { value ->
+      value?.let { list ->
+        recyclerAdapter.updateList(list)
+      }
+    })
 
-    val displayItems = viewModel.displayItems.await()
-    displayItems.observe(this@TagsFragment, Observer { items ->
-      recyclerAdapter.updateList(items)
-      loadingDisplay.visibility = View.GONE
-      if(items.isEmpty())
-        noResults.visibility = View.VISIBLE
-      else
-        noResults.visibility = View.GONE
+    viewModel.displayLoading.observe(this, Observer { value ->
+      value?.let { show ->
+        loadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      }
+    })
+
+    viewModel.displayNoResults.observe(this, Observer { value ->
+      value?.let { show ->
+        noResults.visibility = if(show) View.VISIBLE else View.GONE
+      }
     })
   }
 }

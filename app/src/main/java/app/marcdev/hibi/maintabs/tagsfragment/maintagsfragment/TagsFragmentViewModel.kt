@@ -1,12 +1,32 @@
 package app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
-import app.marcdev.hibi.internal.lazyDeferred
+import kotlinx.coroutines.launch
 
 class TagsFragmentViewModel(private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
 
-  val displayItems by lazyDeferred {
-    return@lazyDeferred tagEntryRelationRepository.getTagsWithCount()
+  private val _entries = MutableLiveData<List<TagDisplayItem>>()
+  val entries: LiveData<List<TagDisplayItem>>
+    get() = _entries
+
+  private val _displayLoading = MutableLiveData<Boolean>()
+  val displayLoading: LiveData<Boolean>
+    get() = _displayLoading
+
+  private val _displayNoResults = MutableLiveData<Boolean>()
+  val displayNoResults: LiveData<Boolean>
+    get() = _displayNoResults
+
+  fun loadData() {
+    viewModelScope.launch {
+      _displayLoading.value = true
+      _entries.value = tagEntryRelationRepository.getTagsWithCountNonLiveData()
+      _displayLoading.value = false
+      _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
+    }
   }
 }

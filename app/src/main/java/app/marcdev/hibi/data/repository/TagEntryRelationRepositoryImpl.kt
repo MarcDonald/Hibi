@@ -80,6 +80,12 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
+  override suspend fun getTagsWithCountNonLiveData(): List<TagDisplayItem> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getTagsWithCountOfEntriesNonLiveData()
+    }
+  }
+
   override suspend fun getTagEntryDisplayItems(): LiveData<List<TagEntryDisplayItem>> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getTagEntryDisplayItems()

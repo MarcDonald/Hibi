@@ -109,6 +109,9 @@ interface DAO {
   @Query("SELECT t.id as tagID, t.name as tagName, COUNT(ter.entryId) as useCount FROM Tag as t LEFT OUTER JOIN TagEntryRelation as ter ON t.id = ter.tagId GROUP BY t.name")
   fun getTagsWithCountOfEntries(): LiveData<List<TagDisplayItem>>
 
+  @Query("SELECT t.id as tagID, t.name as tagName, COUNT(ter.entryId) as useCount FROM Tag as t LEFT OUTER JOIN TagEntryRelation as ter ON t.id = ter.tagId GROUP BY t.name")
+  fun getTagsWithCountOfEntriesNonLiveData(): List<TagDisplayItem>
+
   @Query("SELECT ter.entryId as entryId, t.name as tagName FROM TagEntryRelation as ter LEFT OUTER JOIN Tag as t ON ter.tagId = t.id")
   fun getTagEntryDisplayItems(): LiveData<List<TagEntryDisplayItem>>
 
