@@ -24,6 +24,9 @@ interface DAO {
   @Query("SELECT * FROM Entry WHERE id = :id")
   fun getEntry(id: Int): LiveData<Entry>
 
+  @Query("SELECT * FROM Entry WHERE id = :id")
+  fun getEntryNonLiveData(id: Int): Entry
+
   @Query("SELECT * FROM Entry ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
   fun getAllEntries(): LiveData<List<Entry>>
 
