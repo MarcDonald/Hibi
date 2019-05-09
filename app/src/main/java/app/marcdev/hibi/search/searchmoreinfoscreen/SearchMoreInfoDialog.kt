@@ -27,25 +27,29 @@ import timber.log.Timber
 class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: SearchMoreInfoViewModelFactory by instance()
   private lateinit var viewModel: SearchMoreInfoViewModel
+  // </editor-fold>
 
-  // UI Components
+  // <editor-fold desc="UI Components">
   private lateinit var mainWordDisplay: TextView
   private lateinit var mainReadingDisplay: TextView
   private lateinit var senseTitle: TextView
   private lateinit var alternativeTitle: TextView
+  // </editor-fold>
 
-  // Recycler Views
+  // <editor-fold desc="Recycler Views">
   private lateinit var alternativeRecycler: RecyclerView
   private lateinit var alternativesRecyclerAdapter: SearchMoreInfoAlternativesRecyclerAdapter
   private lateinit var senseRecycler: RecyclerView
   private lateinit var senseRecyclerAdapter: SearchMoreInfoSenseRecyclerAdapter
+  // </editor-fold>
 
-  // Other
+  // <editor-fold desc="Other">
   private var mainWordContent = ""
   private var mainReadingContent = ""
+  // </editor-fold>
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")

@@ -26,10 +26,11 @@ import timber.log.Timber
 
 class MainScreenFragment : ScopedFragment() {
 
+  // <editor-fold desc="UI Components">
   private lateinit var viewPager: ViewPager
-
   private lateinit var fab: MaterialButton
   private lateinit var mainMenu: MainScreenMenuDialog
+  // </editor-fold>
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")

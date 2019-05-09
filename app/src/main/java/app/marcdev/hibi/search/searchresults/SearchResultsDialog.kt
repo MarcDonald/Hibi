@@ -22,22 +22,20 @@ import org.kodein.di.generic.instance
 import timber.log.Timber
 
 class SearchResultsDialog : HibiBottomSheetDialogFragment(), KodeinAware {
-
-  // Kodein initialisation
   override val kodein by closestKodein()
 
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: SearchViewModelFactory by instance()
   private lateinit var viewModel: SearchViewModel
+  // </editor-fold>
 
-  // UI Components
+  // <editor-fold desc="UI Components">
   private lateinit var progressBar: ProgressBar
   private lateinit var noConnectionWarning: LinearLayout
   private lateinit var noResultsWarning: LinearLayout
-
-  // Recycler
   private lateinit var recyclerAdapter: SearchResultsRecyclerAdapter
   private lateinit var recycler: RecyclerView
+  // </editor-fold>
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)

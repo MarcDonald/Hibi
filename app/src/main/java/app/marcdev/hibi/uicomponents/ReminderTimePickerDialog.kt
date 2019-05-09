@@ -12,14 +12,15 @@ import app.marcdev.hibi.internal.PREF_REMINDER_TIME
 import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
 import timber.log.Timber
-import java.util.*
 import java.util.Calendar.*
 
 class ReminderTimePickerDialog : HibiDialogFragment() {
-  // UI Components
+
+  // <editor-fold desc="UI Components">
   private lateinit var timePicker: TimePicker
   private lateinit var cancelButton: MaterialButton
   private lateinit var okButton: MaterialButton
+  // </editor-fold>
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
@@ -33,7 +34,7 @@ class ReminderTimePickerDialog : HibiDialogFragment() {
     timePicker.setIs24HourView(true)
 
     val currentSetTime = PreferenceManager.getDefaultSharedPreferences(requireContext()).getLong(PREF_REMINDER_TIME, 0)
-    val calendar = Calendar.getInstance()
+    val calendar = getInstance()
     calendar.timeInMillis = currentSetTime
     timePicker.hour = calendar.get(HOUR_OF_DAY)
     timePicker.minute = calendar.get(MINUTE)
@@ -50,7 +51,7 @@ class ReminderTimePickerDialog : HibiDialogFragment() {
   }
 
   private val okClickListener = View.OnClickListener {
-    val calendar = Calendar.getInstance()
+    val calendar = getInstance()
     calendar.set(HOUR_OF_DAY, timePicker.hour)
     calendar.set(MINUTE, timePicker.minute)
     calendar.set(SECOND, 0)

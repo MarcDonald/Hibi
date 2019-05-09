@@ -27,20 +27,21 @@ import timber.log.Timber
 class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
-  // UI Components
-  private lateinit var noResultsWarning: LinearLayout
-  private lateinit var addButton: MaterialButton
-
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: NewWordViewModelFactory by instance()
   private lateinit var viewModel: NewWordViewModel
+  // </editor-fold>
 
-  // Recycler
+  // <editor-fold desc="UI Components">
+  private lateinit var noResultsWarning: LinearLayout
+  private lateinit var addButton: MaterialButton
   private lateinit var recyclerAdapter: NewWordsRecyclerAdapter
   private lateinit var recycler: RecyclerView
+  // </editor-fold>
 
-  // Other
+  // <editor-fold desc="Other">
   private var isEditMode = true
+  // </editor-fold>
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")

@@ -9,11 +9,11 @@ import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
 
 @Dao
 interface DAO {
-  /* Entry */
+  // <editor-fold desc="Entry">
   /* When a constraint violation occurs, ignores the one row that is the constraint violation and
-     continues with the rest. This stops the entity being replaced which triggered a delete cascade
-     for all foreign keys
-     See https://sqlite.org/lang_conflict.html
+   * continues with the rest. This stops the entity being replaced which triggered a delete cascade
+   * for all foreign keys
+   * See https://sqlite.org/lang_conflict.html
    */
   @Insert(onConflict = OnConflictStrategy.FAIL)
   fun insertEntry(entry: Entry)
@@ -41,8 +41,9 @@ interface DAO {
 
   @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day")
   fun getEntriesOnDate(year: Int, month: Int, day: Int): LiveData<List<Entry>>
+  // </editor-fold>
 
-  /* Tag */
+  // <editor-fold desc="Tag">
   @Insert(onConflict = OnConflictStrategy.FAIL)
   fun insertTag(tag: Tag)
 
@@ -66,8 +67,9 @@ interface DAO {
 
   @Query("SELECT name FROM Tag WHERE id = :tagId")
   fun getTagName(tagId: Int): String
+  // </editor-fold>
 
-  /* Tag Entry Relation */
+  // <editor-fold desc="Tag Entry Relation">
   @Insert(onConflict = OnConflictStrategy.FAIL)
   fun insertTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
@@ -103,8 +105,9 @@ interface DAO {
 
   @Query("SELECT ter.entryId as entryId, t.name as tagName FROM TagEntryRelation as ter LEFT OUTER JOIN Tag as t ON ter.tagId = t.id")
   fun getTagEntryDisplayItems(): LiveData<List<TagEntryDisplayItem>>
+  // </editor-fold>
 
-  /* New Word */
+  // <editor-fold desc="New Word">
   @Insert(onConflict = OnConflictStrategy.FAIL)
   fun insertNewWord(newWord: NewWord)
 
@@ -122,8 +125,9 @@ interface DAO {
 
   @Query("SELECT COUNT(*) FROM NewWord WHERE entryId = :entryId")
   fun getNewWordCountByEntryId(entryId: Int): Int
+  // </editor-fold>
 
-  /* Book */
+  // <editor-fold desc="Book">
   @Insert(onConflict = OnConflictStrategy.FAIL)
   fun insertBook(book: Book)
 
@@ -144,8 +148,9 @@ interface DAO {
 
   @Query("SELECT name FROM Book WHERE id = :bookId")
   fun getBookName(bookId: Int): String
+  // </editor-fold>
 
-  /* Book Entry Relation */
+  // <editor-fold desc="Book Entry Relation">
   @Insert(onConflict = OnConflictStrategy.FAIL)
   fun insertBookEntryRelation(bookEntryRelation: BookEntryRelation)
 
@@ -172,4 +177,5 @@ interface DAO {
 
   @Query("SELECT id FROM Book INNER JOIN BookEntryRelation ON Book.id = BookEntryRelation.bookId WHERE entryId = :entryId")
   fun getBookIdsWithEntryNotLiveData(entryId: Int): List<Int>
+  // </editor-fold>
 }

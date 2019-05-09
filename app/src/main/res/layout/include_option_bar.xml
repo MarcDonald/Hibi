@@ -61,6 +61,7 @@
     android:focusable="true"
     android:padding="@dimen/option_bar_icon_padding"
     android:layout_weight="1"
+    android:contentDescription="@string/copy_to_clipboard"
     android:src="@drawable/ic_content_copy_24dp" />
 
   <ImageView
@@ -71,5 +72,6 @@
     android:clickable="true"
     android:focusable="true"
     android:padding="@dimen/option_bar_icon_padding"
+    android:contentDescription="@string/new_words"
     android:src="@drawable/ic_word" />
 </LinearLayout>

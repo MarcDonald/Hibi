@@ -22,20 +22,18 @@ import timber.log.Timber
 
 
 class TagsFragment : ScopedFragment(), KodeinAware {
-
-  // Kodein initialisation
   override val kodein by closestKodein()
 
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: TagsFragmentViewModelFactory by instance()
   private lateinit var viewModel: TagsFragmentViewModel
+  // </editor-fold>
 
-  // UI Components
+  // <editor-fold desc="UI Components">
   private lateinit var loadingDisplay: ConstraintLayout
   private lateinit var noResults: ConstraintLayout
-
-  // Recycler view
   private lateinit var recyclerAdapter: TagsRecyclerAdapter
+  // </editor-fold>
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)

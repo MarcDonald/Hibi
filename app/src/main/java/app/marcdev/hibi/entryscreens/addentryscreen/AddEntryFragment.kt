@@ -36,25 +36,26 @@ import org.kodein.di.generic.instance
 import timber.log.Timber
 
 class AddEntryFragment : ScopedFragment(), KodeinAware {
-
-  // Kodein initialisation
   override val kodein by closestKodein()
 
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: AddEntryViewModelFactory by instance()
   private lateinit var viewModel: AddEntryViewModel
+  // </editor-fold>
 
-  // UI Components
+  // <editor-fold desc="UI Components">
   private lateinit var dateButton: MaterialButton
   private lateinit var timeButton: MaterialButton
   private lateinit var contentInput: EditText
   private lateinit var backConfirmDialog: BinaryOptionDialog
   private lateinit var toolbarTitle: TextView
   private lateinit var searchBar: SearchBar
+  // </editor-fold>
 
-  // Other
+  // <editor-fold desc="Other">
   private val dateTimeStore = DateTimeStore()
   private var entryIdBeingEdited = 0
+  // </editor-fold>
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
@@ -286,6 +287,6 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private fun popBackStack() {
-    Navigation.findNavController(view!!).popBackStack()
+    Navigation.findNavController(requireView()).popBackStack()
   }
 }

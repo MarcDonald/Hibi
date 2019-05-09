@@ -25,14 +25,16 @@ import timber.log.Timber
 class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
-  // UI Components
+  // <editor-fold desc="View Model">
+  private val viewModelFactory: AddTagToEntryViewModelFactory by instance()
+  private lateinit var viewModel: AddTagToEntryViewModel
+  // </editor-fold>
+
+  // <editor-fold desc="UI Components">
   private lateinit var title: TextView
   private lateinit var tagHolder: LinearLayout
   private lateinit var noTagsWarning: TextView
-
-  // Viewmodel
-  private val viewModelFactory: AddTagToEntryViewModelFactory by instance()
-  private lateinit var viewModel: AddTagToEntryViewModel
+  // </editor-fold>
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")

@@ -25,21 +25,19 @@ import org.kodein.di.generic.instance
 import timber.log.Timber
 
 class TaggedEntriesFragment : ScopedFragment(), KodeinAware {
-
-  // Kodein initialisation
   override val kodein by closestKodein()
 
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: TaggedEntriesViewModelFactory by instance()
   private lateinit var viewModel: TaggedEntriesViewModel
+  // </editor-fold>
 
-  // UI
+  // <editor-fold desc="UI Components">
   private lateinit var loadingDisplay: ConstraintLayout
   private lateinit var noResults: ConstraintLayout
   private lateinit var toolbarTitle: TextView
-
-  // RecyclerView
   private lateinit var recyclerAdapter: EntriesRecyclerAdapter
+  // </editor-fold>
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)

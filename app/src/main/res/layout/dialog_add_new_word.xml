@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:layout_margin="@dimen/margin_standard">
+  android:layout_margin="@dimen/margin_standard"
+  tools:ignore="UnusedAttribute">
 
   <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
@@ -12,7 +14,8 @@
     android:scrollbarSize="@dimen/scroll_bar_size"
     android:scrollbars="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+      android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
@@ -23,10 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         android:gravity="start"
-        android:text="@string/add_new_word"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/add_new_word" />
 
       <EditText
         android:id="@+id/edt_new_word_word"
@@ -34,10 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        android:hint="@string/word"
-        app:layout_constraintTop_toBottomOf="@id/txt_add_new_word_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:autofillHints="@string/word"
+        android:hint="@string/word" />
 
       <EditText
         android:id="@+id/edt_new_word_reading"
@@ -45,21 +43,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        android:hint="@string/reading"
-        app:layout_constraintTop_toBottomOf="@id/edt_new_word_word"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:autofillHints="@string/reading"
+        android:hint="@string/reading" />
 
       <EditText
         android:id="@+id/edt_new_word_type"
+        style="@style/Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        style="@style/Hibi.EditText.AddNewWordDialog"
-        android:hint="@string/part_of_speech"
-        app:layout_constraintTop_toBottomOf="@id/edt_new_word_reading"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:autofillHints="@string/part_of_speech"
+        android:hint="@string/part_of_speech" />
 
       <EditText
         android:id="@+id/edt_new_word_english"
@@ -67,21 +61,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        android:hint="@string/english"
-        app:layout_constraintTop_toBottomOf="@id/edt_new_word_type"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:autofillHints="@string/english"
+        android:hint="@string/english" />
 
       <EditText
         android:id="@+id/edt_new_word_notes"
+        style="@style/Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        style="@style/Hibi.EditText.AddNewWordDialog"
-        android:hint="@string/notes"
-        app:layout_constraintTop_toBottomOf="@id/edt_new_word_english"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:autofillHints="@string/notes"
+        android:hint="@string/notes" />
+
+      <!--region Buttons-->
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
       <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gd_add_new_word_vert"
@@ -96,7 +91,7 @@
         android:layout_width="0dp"
         android:text="@string/save"
         android:layout_margin="@dimen/margin_standard"
-        app:layout_constraintTop_toBottomOf="@id/edt_new_word_notes"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/gd_add_new_word_vert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -108,10 +103,12 @@
         android:layout_width="0dp"
         android:text="@string/delete"
         android:layout_margin="@dimen/margin_standard"
-        app:layout_constraintTop_toBottomOf="@id/edt_new_word_notes"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@id/gd_add_new_word_vert"
         app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      <!--endregion-->
+    </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

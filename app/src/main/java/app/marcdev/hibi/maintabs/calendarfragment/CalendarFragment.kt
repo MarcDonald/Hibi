@@ -23,19 +23,17 @@ import timber.log.Timber
 import java.util.*
 
 class CalendarFragment : ScopedFragment(), KodeinAware {
-
-  // Kodein initialisation
   override val kodein by closestKodein()
 
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: CalendarTabViewModelFactory by instance()
   private lateinit var viewModel: CalendarTabViewModel
+  // </editor-fold>
 
-  // UI
+  // <editor-fold desc="UI Components">
   private lateinit var calendarView: CalendarView
-
-  // RecyclerView
   private lateinit var recyclerAdapter: EntriesRecyclerAdapter
+  // </editor-fold>
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)

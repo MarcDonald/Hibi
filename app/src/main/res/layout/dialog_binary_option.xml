@@ -46,6 +46,6 @@
     android:layout_margin="@dimen/margin_standard"
     android:text="@string/positive"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@string/negative"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/txt_binary_dialog_message" />
 </androidx.constraintlayout.widget.ConstraintLayout>

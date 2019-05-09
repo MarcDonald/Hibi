@@ -3,23 +3,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/mobile_navigation"
   app:startDestination="@id/destination_main_screen">
-  <fragment
-    android:id="@+id/destination_book_entries"
-    android:name="app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment.BookEntriesFragment"
-    android:label="BookEntriesFragment">
-    <argument
-      android:name="bookID"
-      app:argType="integer" />
-    <action
-      android:id="@+id/view_entry_action"
-      app:destination="@+id/destination_view_entry"
-      app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim">
-      <argument
-        android:name="entryId"
-        android:defaultValue="0" />
-    </action>
-  </fragment>
+
+  <!--region Main Screen-->
   <fragment
     android:id="@+id/destination_main_screen"
     android:name="app.marcdev.hibi.maintabs.MainScreenFragment"
@@ -57,7 +42,9 @@
         app:argType="integer" />
     </action>
   </fragment>
+  <!--endregion -->
 
+  <!--region Add Entry-->
   <fragment
     android:id="@+id/destination_add_entry"
     android:name="app.marcdev.hibi.entryscreens.addentryscreen.AddEntryFragment"
@@ -67,7 +54,9 @@
       android:defaultValue="0"
       app:argType="integer" />
   </fragment>
+  <!--endregion-->
 
+  <!--region View Entry-->
   <fragment
     android:id="@+id/destination_view_entry"
     android:name="app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryFragment"
@@ -82,7 +71,9 @@
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim" />
   </fragment>
+  <!--endregion-->
 
+  <!--region Tagged Entries-->
   <fragment
     android:id="@+id/destination_tagged_entries"
     android:name="app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesFragment"
@@ -100,4 +91,25 @@
         android:defaultValue="0" />
     </action>
   </fragment>
+  <!--endregion-->
+
+  <!--region Book Entries-->
+  <fragment
+    android:id="@+id/destination_book_entries"
+    android:name="app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment.BookEntriesFragment"
+    android:label="BookEntriesFragment">
+    <argument
+      android:name="bookID"
+      app:argType="integer" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <!--endregion-->
 </navigation>

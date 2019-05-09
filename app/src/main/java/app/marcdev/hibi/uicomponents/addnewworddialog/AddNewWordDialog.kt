@@ -20,17 +20,18 @@ import timber.log.Timber
 
 class AddNewWordDialog : HibiDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
+  // <editor-fold desc="View Model">
+  private val viewModelFactory: AddNewWordViewModelFactory by instance()
+  private lateinit var viewModel: AddNewWordViewModel
+  // </editor-fold>
 
-  // UI Components
+  // <editor-fold desc="UI Components">
   private lateinit var wordInput: EditText
   private lateinit var readingInput: EditText
   private lateinit var typeInput: EditText
   private lateinit var englishInput: EditText
   private lateinit var notesInput: EditText
-
-  // Viewmodel
-  private val viewModelFactory: AddNewWordViewModelFactory by instance()
-  private lateinit var viewModel: AddNewWordViewModel
+  // </editor-fold>
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")

@@ -22,13 +22,15 @@ import timber.log.Timber
 class AddBookDialog : HibiDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
-  // UI Components
-  private lateinit var input: EditText
-  private lateinit var title: TextView
-
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: AddBookViewModelFactory by instance()
   private lateinit var viewModel: AddBookViewModel
+  // </editor-fold>
+
+  // <editor-fold desc="UI Components">
+  private lateinit var input: EditText
+  private lateinit var title: TextView
+  // </editor-fold>
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")

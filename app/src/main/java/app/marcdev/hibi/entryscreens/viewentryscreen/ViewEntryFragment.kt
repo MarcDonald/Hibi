@@ -33,11 +33,12 @@ import timber.log.Timber
 class ViewEntryFragment : ScopedFragment(), KodeinAware {
   override val kodein by closestKodein()
 
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: ViewEntryViewModelFactory by instance()
   private lateinit var viewModel: ViewEntryViewModel
+  // </editor-fold>
 
-  // UI Components
+  // <editor-fold desc="UI Components">
   private lateinit var dateButton: MaterialButton
   private lateinit var timeButton: MaterialButton
   private lateinit var contentDisplay: TextView
@@ -46,9 +47,11 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   private lateinit var tagDisplay: ChipGroup
   private lateinit var tagDisplayHolder: LinearLayout
   private lateinit var newWordsButton: MaterialButton
+  // </editor-fold>
 
-  // Other
+  // <editor-fold desc="Other">
   private var entryIdBeingViewed = 0
+  // </editor-fold>
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
