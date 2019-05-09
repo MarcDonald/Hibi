@@ -179,8 +179,11 @@ interface DAO {
   @Query("SELECT * FROM BookEntryRelation")
   fun getAllBookEntryRelations(): LiveData<List<BookEntryRelation>>
 
-  @Query("SELECT * FROM Entry as e INNER JOIN BookEntryRelation as ber ON e.id = ber.entryId WHERE ber.bookId = :bookId")
+  @Query("SELECT * FROM Entry as e INNER JOIN BookEntryRelation as ber ON e.id = ber.entryId WHERE ber.bookId = :bookId ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
   fun getEntriesWithBook(bookId: Int): LiveData<List<Entry>>
+
+  @Query("SELECT * FROM Entry as e INNER JOIN BookEntryRelation as ber ON e.id = ber.entryId WHERE ber.bookId = :bookId ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
+  fun getEntriesWithBookNonLiveData(bookId: Int): List<Entry>
 
   @Query("SELECT b.id as bookId, b.name as bookName, COUNT(ber.entryId) as useCount FROM Book as b LEFT OUTER JOIN BookEntryRelation as ber ON b.id = ber.bookId GROUP BY b.name")
   fun getBooksWithCountOfEntries(): LiveData<List<BookDisplayItem>>

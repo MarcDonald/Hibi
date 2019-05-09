@@ -42,6 +42,11 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
   val displayNewWordButton: LiveData<Boolean>
     get() = _displayNewWordButton
 
+  private val _popBackStack = MutableLiveData<Boolean>()
+  val popBackStack: LiveData<Boolean>
+    get() = _popBackStack
+
+
   fun passArguments(entryIdArg: Int) {
     _entryId = entryIdArg
     if(entryIdArg == 0) {
@@ -71,7 +76,10 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
     _displayNewWordButton.value = newWordRepository.getNewWordCountByEntryId(entryId) > 0
   }
 
-  suspend fun deleteEntry(id: Int) {
-    return entryRepository.deleteEntry(id)
+  fun deleteEntry() {
+    viewModelScope.launch {
+      entryRepository.deleteEntry(entryId)
+      _popBackStack.value = true
+    }
   }
 }

@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -16,20 +17,18 @@ import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
-import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.uicomponents.views.SearchBar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class ViewEntryFragment : ScopedFragment(), KodeinAware {
+class ViewEntryFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
 
   // <editor-fold desc="View Model">
@@ -66,7 +65,6 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     arguments?.let {
       viewModel.passArguments(ViewEntryFragmentArgs.fromBundle(it).entryId)
     }
@@ -138,6 +136,13 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
         newWordsButton.visibility = if(show) View.VISIBLE else View.GONE
       }
     })
+
+    viewModel.popBackStack.observe(this, Observer { value ->
+      value?.let { pop ->
+        if(pop)
+          Navigation.findNavController(requireView()).popBackStack()
+      }
+    })
   }
 
   private val backClickListener = View.OnClickListener {
@@ -186,16 +191,11 @@ class ViewEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private val okDeleteClickListener = View.OnClickListener {
-    deleteEntry()
+    viewModel.deleteEntry()
     deleteConfirmDialog.dismiss()
   }
 
   private val cancelDeleteClickListener = View.OnClickListener {
     deleteConfirmDialog.dismiss()
-  }
-
-  private fun deleteEntry() = launch {
-    viewModel.deleteEntry(viewModel.entryId)
-    Navigation.findNavController(requireView()).popBackStack()
   }
 }

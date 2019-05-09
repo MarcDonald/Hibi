@@ -1,73 +1,76 @@
 package app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.BookRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
+import kotlinx.coroutines.launch
 
 class BookEntriesViewModel(private val bookRepository: BookRepository, private val bookEntryRelationRepository: BookEntryRelationRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
 
   var displayItems = MediatorLiveData<List<MainEntriesDisplayItem>>()
 
-  suspend fun updateList(bookId: Int) {
-    val newEntries = bookEntryRelationRepository.getEntriesWithBook(bookId)
-    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
+  private var _bookId = 0
+  val bookId: Int
+    get() = _bookId
 
-    // Adds both as sources so that observers get triggered when either are updated
-    displayItems.addSource(newEntries) {
-      displayItems.value = combineData(newEntries, tagEntryDisplayItems)
-    }
-    displayItems.addSource(tagEntryDisplayItems) {
-      displayItems.value = combineData(newEntries, tagEntryDisplayItems)
+  private val _toolbarTitle = MutableLiveData<String>()
+  val toolbarTitle: LiveData<String>
+    get() = _toolbarTitle
+
+  private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
+  val entries: LiveData<List<MainEntriesDisplayItem>>
+    get() = _entries
+
+  private val _displayLoading = MutableLiveData<Boolean>()
+  val displayLoading: LiveData<Boolean>
+    get() = _displayLoading
+
+  private val _displayNoResults = MutableLiveData<Boolean>()
+  val displayNoResults: LiveData<Boolean>
+    get() = _displayNoResults
+
+  fun passArguments(bookIdArg: Int) {
+    _bookId = bookIdArg
+    getBookName()
+  }
+
+  fun loadEntries() {
+    viewModelScope.launch {
+      _displayLoading.value = true
+      getMainEntryDisplayItems()
+      _displayLoading.value = false
+      _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
     }
   }
 
-  suspend fun getBookName(bookId: Int): String {
-    return bookRepository.getBookName(bookId)
+  private suspend fun getMainEntryDisplayItems() {
+    val entries = bookEntryRelationRepository.getEntriesWithBookNonLiveData(bookId)
+    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItemsNonLiveData()
+    _entries.value = combineData(entries, tagEntryDisplayItems)
   }
 
-  private fun combineData(entries: LiveData<List<Entry>>, tagEntryDisplayItems: LiveData<List<TagEntryDisplayItem>>): List<MainEntriesDisplayItem> {
+  private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>): List<MainEntriesDisplayItem> {
     val itemList = ArrayList<MainEntriesDisplayItem>()
 
-    entries.value?.forEach {
-      val item = MainEntriesDisplayItem(it, listOf())
+    entries.forEach { entry ->
+      val item = MainEntriesDisplayItem(entry, listOf())
       val listOfTags = ArrayList<String>()
 
-      if(tagEntryDisplayItems.value != null && tagEntryDisplayItems.value!!.isNotEmpty()) {
-        for(x in 0 until tagEntryDisplayItems.value!!.size) {
-          if(tagEntryDisplayItems.value!![x].entryId == it.id) {
-            listOfTags.add(tagEntryDisplayItems.value!![x].tagName)
-          }
+      tagEntryDisplayItems.forEach { tagEntryDisplayItem ->
+        if(tagEntryDisplayItem.entryId == entry.id) {
+          listOfTags.add(tagEntryDisplayItem.tagName)
         }
       }
 
       item.tags = listOfTags
-
       itemList.add(item)
     }
 
-    return sortEntries(itemList)
-  }
-
-  private fun sortEntries(items: List<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
-    val entriesMutable = items.toMutableList()
-    val sortedEntries = entriesMutable.sortedWith(
-      compareBy(
-        { -it.entry.year },
-        { -it.entry.month },
-        { -it.entry.day },
-        { -it.entry.hour },
-        { -it.entry.minute },
-        { -it.entry.id }
-      )
-    ).toMutableList()
-
-    return addListHeaders(sortedEntries)
+    return addListHeaders(itemList)
   }
 
   private fun addListHeaders(allItems: MutableList<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
@@ -102,4 +105,11 @@ class BookEntriesViewModel(private val bookRepository: BookRepository, private v
 
     return listWithHeaders
   }
+
+  private fun getBookName() {
+    viewModelScope.launch {
+      _toolbarTitle.value = bookRepository.getBookName(bookId)
+    }
+  }
+
 }
