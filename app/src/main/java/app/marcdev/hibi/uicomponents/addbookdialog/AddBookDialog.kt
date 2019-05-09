@@ -47,7 +47,6 @@ class AddBookDialog : HibiDialogFragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     arguments?.let {
       viewModel.passArguments(arguments!!.getInt(BOOK_ID_KEY, 0))
     }
