@@ -66,6 +66,12 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
     }
   }
 
+  override suspend fun getBooksWithCountNonLiveData(): List<BookDisplayItem> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getBooksWithCountOfEntriesNonLiveData()
+    }
+  }
+
   override suspend fun getBookIdsWithEntryNotLiveData(entryId: Int): List<Int> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getBookIdsWithEntryNotLiveData(entryId)
