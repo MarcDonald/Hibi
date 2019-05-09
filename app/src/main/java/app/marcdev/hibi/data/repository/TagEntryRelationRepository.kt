@@ -15,6 +15,8 @@ interface TagEntryRelationRepository {
 
   suspend fun getEntriesWithTag(tagId: Int): LiveData<List<Entry>>
 
+  suspend fun getEntriesWithTagNonLiveData(tagId: Int): List<Entry>
+
   suspend fun getTagsWithEntry(entryId: Int): LiveData<List<Tag>>
 
   suspend fun getTagsWithEntryNotLiveData(entryId: Int): List<Tag>

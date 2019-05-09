@@ -88,6 +88,9 @@ interface DAO {
   @Query("SELECT * FROM Entry as e INNER JOIN TagEntryRelation as ter ON e.id = ter.entryId WHERE ter.tagId = :tagId")
   fun getEntriesWithTag(tagId: Int): LiveData<List<Entry>>
 
+  @Query("SELECT * FROM Entry as e INNER JOIN TagEntryRelation as ter ON e.id = ter.entryId WHERE ter.tagId = :tagId")
+  fun getEntriesWithTagNonLiveData(tagId: Int): List<Entry>
+
   @Query("SELECT * FROM Tag INNER JOIN TagEntryRelation ON Tag.id = TagEntryRelation.tagId WHERE entryId = :entryId")
   fun getTagsWithEntry(entryId: Int): LiveData<List<Tag>>
 

@@ -1,6 +1,9 @@
 package app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.BookRepository
@@ -10,8 +13,6 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import kotlinx.coroutines.launch
 
 class BookEntriesViewModel(private val bookRepository: BookRepository, private val bookEntryRelationRepository: BookEntryRelationRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
-
-  var displayItems = MediatorLiveData<List<MainEntriesDisplayItem>>()
 
   private var _bookId = 0
   val bookId: Int
@@ -111,5 +112,4 @@ class BookEntriesViewModel(private val bookRepository: BookRepository, private v
       _toolbarTitle.value = bookRepository.getBookName(bookId)
     }
   }
-
 }
