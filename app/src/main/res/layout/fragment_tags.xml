@@ -74,22 +74,9 @@
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
-  <androidx.core.widget.NestedScrollView
-    android:id="@+id/scroll_tags"
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_tags"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_tags"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    </LinearLayout>
-  </androidx.core.widget.NestedScrollView>
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
