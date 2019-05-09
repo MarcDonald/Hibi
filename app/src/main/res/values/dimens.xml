@@ -17,4 +17,5 @@
   <dimen name="option_bar_icon_width">80dp</dimen>
   <dimen name="option_bar_icon_padding">8dp</dimen>
   <dimen name="main_screen_warning_image_size">150dp</dimen>
+  <dimen name="smaller_warning_image_size">120dp</dimen>
 </resources>

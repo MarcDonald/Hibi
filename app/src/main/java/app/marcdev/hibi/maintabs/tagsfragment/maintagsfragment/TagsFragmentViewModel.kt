@@ -24,6 +24,7 @@ class TagsFragmentViewModel(private val tagEntryRelationRepository: TagEntryRela
   fun loadData() {
     viewModelScope.launch {
       _displayLoading.value = true
+      _displayNoResults.value = false
       _entries.value = tagEntryRelationRepository.getTagsWithCountNonLiveData()
       _displayLoading.value = false
       _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()

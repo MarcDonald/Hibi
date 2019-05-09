@@ -42,6 +42,7 @@ class BookEntriesViewModel(private val bookRepository: BookRepository, private v
   fun loadEntries() {
     viewModelScope.launch {
       _displayLoading.value = true
+      _displayNoResults.value = false
       getMainEntryDisplayItems()
       _displayLoading.value = false
       _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()

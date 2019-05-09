@@ -53,6 +53,7 @@
   <string name="delete_confirm_title">Delete Entry</string>
   <string name="delete_confirm">Are you sure you want to delete this entry?</string>
   <string name="no_entries">You haven\'t made any entries yet</string>
+  <string name="no_entries_for_date">No Entries found for Date</string>
   <!--endregion-->
 
   <!--region Search-->

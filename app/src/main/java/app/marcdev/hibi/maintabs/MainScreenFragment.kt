@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import app.marcdev.hibi.R
@@ -13,7 +14,6 @@ import app.marcdev.hibi.internal.BOOKS_TAB
 import app.marcdev.hibi.internal.CALENDAR_TAB
 import app.marcdev.hibi.internal.ENTRIES_TAB
 import app.marcdev.hibi.internal.TAGS_TAB
-import app.marcdev.hibi.internal.base.ScopedFragment
 import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BooksFragment
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarFragment
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesFragment
@@ -24,7 +24,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import timber.log.Timber
 
-class MainScreenFragment : ScopedFragment() {
+class MainScreenFragment : Fragment() {
 
   // <editor-fold desc="UI Components">
   private lateinit var viewPager: ViewPager

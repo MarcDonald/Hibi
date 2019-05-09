@@ -24,4 +24,6 @@ interface EntryRepository {
   suspend fun getEntryCount(): LiveData<Int>
 
   suspend fun getEntriesOnDate(year: Int, month: Int, day: Int): LiveData<List<Entry>>
+
+  suspend fun getEntriesOnDateNonLiveData(year: Int, month: Int, day: Int): List<Entry>
 }

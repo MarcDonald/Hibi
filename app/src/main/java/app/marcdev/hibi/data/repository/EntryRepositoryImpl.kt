@@ -76,6 +76,12 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
     }
   }
 
+  override suspend fun getEntriesOnDateNonLiveData(year: Int, month: Int, day: Int): List<Entry> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getEntriesOnDateNonLiveData(year, month, day)
+    }
+  }
+
   companion object {
     @Volatile private var instance: EntryRepositoryImpl? = null
 

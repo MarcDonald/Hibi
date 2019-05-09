@@ -47,6 +47,10 @@ interface DAO {
 
   @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day")
   fun getEntriesOnDate(year: Int, month: Int, day: Int): LiveData<List<Entry>>
+
+  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day")
+  fun getEntriesOnDateNonLiveData(year: Int, month: Int, day: Int): List<Entry>
+
   // </editor-fold>
 
   // <editor-fold desc="Tag">
