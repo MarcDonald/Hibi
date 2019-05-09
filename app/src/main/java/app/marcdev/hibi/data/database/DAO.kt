@@ -24,8 +24,11 @@ interface DAO {
   @Query("SELECT * FROM Entry WHERE id = :id")
   fun getEntry(id: Int): LiveData<Entry>
 
-  @Query("SELECT * FROM Entry")
+  @Query("SELECT * FROM Entry ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
   fun getAllEntries(): LiveData<List<Entry>>
+
+  @Query("SELECT * FROM Entry ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
+  fun getAllEntriesNonLiveData(): List<Entry>
 
   @Query("DELETE FROM Entry WHERE id = :id")
   fun deleteEntry(id: Int)
@@ -105,6 +108,10 @@ interface DAO {
 
   @Query("SELECT ter.entryId as entryId, t.name as tagName FROM TagEntryRelation as ter LEFT OUTER JOIN Tag as t ON ter.tagId = t.id")
   fun getTagEntryDisplayItems(): LiveData<List<TagEntryDisplayItem>>
+
+  @Query("SELECT ter.entryId as entryId, t.name as tagName FROM TagEntryRelation as ter LEFT OUTER JOIN Tag as t ON ter.tagId = t.id")
+  fun getTagEntryDisplayItemsNonLiveData(): List<TagEntryDisplayItem>
+
   // </editor-fold>
 
   // <editor-fold desc="New Word">

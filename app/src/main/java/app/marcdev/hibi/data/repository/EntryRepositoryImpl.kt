@@ -34,6 +34,12 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
     }
   }
 
+  override suspend fun getAllEntriesNonLiveData(): List<Entry> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getAllEntriesNonLiveData()
+    }
+  }
+
   override suspend fun deleteEntry(id: Int) {
     withContext(Dispatchers.IO) {
       dao.deleteEntry(id)

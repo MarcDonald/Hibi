@@ -86,6 +86,12 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
+  override suspend fun getTagEntryDisplayItemsNonLiveData(): List<TagEntryDisplayItem> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getTagEntryDisplayItemsNonLiveData()
+    }
+  }
+
   companion object {
     @Volatile private var instance: TagEntryRelationRepositoryImpl? = null
 

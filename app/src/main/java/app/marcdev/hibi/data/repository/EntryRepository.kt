@@ -11,6 +11,8 @@ interface EntryRepository {
 
   suspend fun getAllEntries(): LiveData<List<Entry>>
 
+  suspend fun getAllEntriesNonLiveData(): List<Entry>
+
   suspend fun deleteEntry(id: Int)
 
   suspend fun getAmountOfEntries(): LiveData<Int>
