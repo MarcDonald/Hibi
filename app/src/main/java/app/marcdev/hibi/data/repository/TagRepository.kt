@@ -18,4 +18,8 @@ interface TagRepository {
   suspend fun isTagInUse(tag: String): Boolean
 
   suspend fun getTagName(tagId: Int): String
+
+  val allTags: LiveData<List<Tag>>
+
+  suspend fun getCountOfTags(): Int
 }

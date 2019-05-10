@@ -2,6 +2,7 @@ package app.marcdev.hibi.data.repository
 
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Tag
 import kotlinx.coroutines.Dispatchers
@@ -55,6 +56,16 @@ class TagRepositoryImpl private constructor(private val dao: DAO) : TagRepositor
   override suspend fun getTagName(tagId: Int): String {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getTagName(tagId)
+    }
+  }
+
+  override val allTags: LiveData<List<Tag>>by lazy<LiveData<List<Tag>>>(LazyThreadSafetyMode.NONE) {
+    Transformations.map(dao.getAllTags()) { it }
+  }
+
+  override suspend fun getCountOfTags(): Int {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getCountOfTags()
     }
   }
 

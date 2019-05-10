@@ -77,6 +77,9 @@ interface DAO {
 
   @Query("SELECT name FROM Tag WHERE id = :tagId")
   fun getTagName(tagId: Int): String
+
+  @Query("SELECT COUNT(id) FROM Tag")
+  fun getCountOfTags(): Int
   // </editor-fold>
 
   // <editor-fold desc="Tag Entry Relation">

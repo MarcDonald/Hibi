@@ -71,35 +71,37 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   }
 
   private fun setupObservers() {
-    viewModel.allBooks.observe(this, Observer { books ->
-      books.forEach { book ->
-        // Gets list of all books currently displayed
-        val alreadyDisplayedBooks = ArrayList<CheckBoxWithId>()
-        for(x in 0 until bookHolder.childCount) {
-          val bookCheckBox = bookHolder.getChildAt(x) as CheckBoxWithId
-          alreadyDisplayedBooks.add(bookCheckBox)
-        }
-
-        val displayBook = CheckBoxWithId(bookHolder.context)
-        displayBook.text = book.name
-        displayBook.itemId = book.id
-        if(theme == R.style.Hibi_DarkTheme_BottomSheetDialogTheme) {
-          displayBook.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
-        } else {
-          displayBook.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))
-        }
-
-        // If the new book is already displayed, don't add it
-        // This stops it removing user progress before saving
-        var addIt = true
-        alreadyDisplayedBooks.forEach { alreadyDisplayedBook ->
-          if(alreadyDisplayedBook.itemId == displayBook.itemId) {
-            addIt = false
+    viewModel.allBooks.observe(this, Observer { value ->
+      value?.let { books ->
+        books.forEach { book ->
+          // Gets list of all books currently displayed
+          val alreadyDisplayedBooks = ArrayList<CheckBoxWithId>()
+          for(x in 0 until bookHolder.childCount) {
+            val bookCheckBox = bookHolder.getChildAt(x) as CheckBoxWithId
+            alreadyDisplayedBooks.add(bookCheckBox)
           }
-        }
 
-        if(addIt)
-          bookHolder.addView(displayBook)
+          val displayBook = CheckBoxWithId(bookHolder.context)
+          displayBook.text = book.name
+          displayBook.itemId = book.id
+          if(theme == R.style.Hibi_DarkTheme_BottomSheetDialogTheme) {
+            displayBook.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
+          } else {
+            displayBook.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))
+          }
+
+          // If the new book is already displayed, don't add it
+          // This stops it removing user progress before saving
+          var addIt = true
+          alreadyDisplayedBooks.forEach { alreadyDisplayedBook ->
+            if(alreadyDisplayedBook.itemId == displayBook.itemId) {
+              addIt = false
+            }
+          }
+
+          if(addIt)
+            bookHolder.addView(displayBook)
+        }
       }
     })
 
