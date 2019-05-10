@@ -168,6 +168,9 @@ interface DAO {
 
   @Query("SELECT name FROM Book WHERE id = :bookId")
   fun getBookName(bookId: Int): String
+
+  @Query("SELECT COUNT(id) FROM Book")
+  fun getCountOfBooks(): Int
   // </editor-fold>
 
   // <editor-fold desc="Book Entry Relation">

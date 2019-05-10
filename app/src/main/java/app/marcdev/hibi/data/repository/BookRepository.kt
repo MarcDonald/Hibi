@@ -16,4 +16,8 @@ interface BookRepository {
   suspend fun isBookNameInUse(name: String): Boolean
 
   suspend fun getBookName(bookId: Int): String
+
+  val allBooks: LiveData<List<Book>>
+
+  suspend fun getCountOfBooks(): Int
 }

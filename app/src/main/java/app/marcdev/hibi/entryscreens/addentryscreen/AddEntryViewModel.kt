@@ -37,6 +37,7 @@ class AddEntryViewModel(private val entryRepository: EntryRepository, private va
     get() = _entry
 
   init {
+    BooksToSaveToNewEntry.list.clear()
     TagsToSaveToNewEntry.list.clear()
     NewWordsToSaveToNewEntry.clearList()
   }
