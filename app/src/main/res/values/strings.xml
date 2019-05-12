@@ -57,6 +57,7 @@
   <!--endregion-->
 
   <!--region Search-->
+  <string name="search">Search</string>
   <string name="no_search_term_warning">Please enter something to search for</string>
   <string name="search_bar_hint">Search on Jisho.org</string>
   <string name="no_connection_warning">No Internet Connection</string>
@@ -85,7 +86,8 @@
   <string name="create_tag">Create Tag</string>
   <string name="tag_name">Tag Name</string>
   <string name="loading_tags">Loading Tags</string>
-  <string name="no_tags">You haven\'t tagged any entries yet</string>
+  <string name="no_tags">You haven\'t made any tags yet</string>
+  <string name="no_tagged_entries">You haven\'t tagged any entries yet</string>
   <string name="tag_use_count_wc">Entries: %1$s</string>
   <string name="edit_or_delete_tag">Edit or Delete Tag</string>
   <string name="edit_or_delete_tag_message">This will not affect any of your entries</string>
@@ -183,6 +185,9 @@
 
   <string name="gson">GSon</string>
   <string name="gson_description">Used for converting API responses into Kotlin objects</string>
+
+  <string name="android_file_picker">Android File Picker</string>
+  <string name="android_file_picker_description">Used for selecting file to restore from</string>
 
   <string name="mplus">M PLUS Rounded 1c Bold</string>
   <string name="mplus_description">Used as the icon font</string>

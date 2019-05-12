@@ -48,7 +48,7 @@
       android:id="@+id/img_no_tags"
       android:layout_width="@dimen/main_screen_warning_image_size"
       android:layout_height="@dimen/main_screen_warning_image_size"
-      android:contentDescription="@string/no_entries"
+      android:contentDescription="@string/no_tags"
       android:src="@drawable/ic_sentiment_dissatisfied_24dp"
       app:layout_constraintBottom_toTopOf="@id/gd_no_tags"
       app:layout_constraintEnd_toEndOf="parent"
