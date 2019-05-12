@@ -11,13 +11,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.entryscreens.addentryscreen.NewWordsToSaveToNewEntry
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
 import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordDialog
 import com.google.android.material.button.MaterialButton
-import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -43,31 +41,20 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   private var isEditMode = true
   // </editor-fold>
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewWordViewModel::class.java)
+  }
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_new_word, container, false)
-    bindViews(view)
-    return view
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    /* Normally viewmodel is instantiated in onActivityCreated but that seems to crash for this
-     * screen so it's instantiated here instead */
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewWordViewModel::class.java)
-
     arguments?.let {
-      val entryId = arguments!!.getInt(ENTRY_ID_KEY)
-      viewModel.entryId = entryId
-
-      isEditMode = arguments!!.getBoolean(IS_EDIT_MODE_KEY, true)
-      recyclerAdapter.isEditMode = isEditMode
+      viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0), arguments!!.getBoolean(IS_EDIT_MODE_KEY, true))
     }
-
-    if(!isEditMode)
-      addButton.visibility = View.INVISIBLE
-
-    displayData()
+    bindViews(view)
+    setupObservers()
+    return view
   }
 
   private fun bindViews(view: View) {
@@ -78,6 +65,33 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     addButton.setOnClickListener(addClickListener)
 
     initRecycler()
+  }
+
+  private fun setupObservers() {
+    viewModel.displayAddButton.observe(this, Observer { value ->
+      value?.let { show ->
+        addButton.visibility = if(show) View.VISIBLE else View.GONE
+      }
+    })
+
+    viewModel.allowEdits.observe(this, Observer { value ->
+      value?.let { allow ->
+        recyclerAdapter.isEditMode = allow
+      }
+    })
+
+    viewModel.displayNoWords.observe(this, Observer { value ->
+      value?.let { show ->
+        noResultsWarning.visibility = if(show) View.VISIBLE else View.GONE
+      }
+    })
+
+    viewModel.getNewWords().observe(this, Observer { value ->
+      value?.let { list ->
+        viewModel.listReceived(list.isEmpty())
+        recyclerAdapter.updateList(list)
+      }
+    })
   }
 
   private val addClickListener = View.OnClickListener {
@@ -98,30 +112,5 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
 
     val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
     recycler.addItemDecoration(dividerItemDecoration)
-  }
-
-  private fun displayData() = launch {
-    if(viewModel.entryId != 0) {
-      val newWords = viewModel.newWords.await()
-      newWords.observe(this@NewWordDialog, Observer {
-        recyclerAdapter.updateList(it)
-
-        if(it.isNotEmpty()) {
-          noResultsWarning.visibility = View.GONE
-        } else {
-          noResultsWarning.visibility = View.VISIBLE
-        }
-      })
-    } else {
-      val list = NewWordsToSaveToNewEntry.list
-      list.observe(this@NewWordDialog, Observer {
-        recyclerAdapter.updateList(it)
-        if(it.isNotEmpty()) {
-          noResultsWarning.visibility = View.GONE
-        } else {
-          noResultsWarning.visibility = View.VISIBLE
-        }
-      })
-    }
   }
 }

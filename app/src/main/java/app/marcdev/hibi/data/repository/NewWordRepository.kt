@@ -11,7 +11,7 @@ interface NewWordRepository {
 
   suspend fun deleteNewWord(id: Int)
 
-  suspend fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>
+  fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>
 
   suspend fun getNewWordCountByEntryId(entryId: Int): Int
 }

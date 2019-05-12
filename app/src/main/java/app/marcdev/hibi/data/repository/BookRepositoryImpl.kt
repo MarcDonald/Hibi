@@ -2,7 +2,6 @@ package app.marcdev.hibi.data.repository
 
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Book
 import kotlinx.coroutines.Dispatchers
@@ -53,8 +52,8 @@ class BookRepositoryImpl private constructor(private val dao: DAO) : BookReposit
     }
   }
 
-  override val allBooks: LiveData<List<Book>> by lazy<LiveData<List<Book>>>(LazyThreadSafetyMode.NONE) {
-    Transformations.map(dao.getAllBooks()) { it }
+  override val allBooks: LiveData<List<Book>> by lazy {
+    dao.getAllBooks()
   }
 
   override suspend fun getCountOfBooks(): Int {
