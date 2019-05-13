@@ -46,36 +46,81 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
   private lateinit var senseRecyclerAdapter: SearchMoreInfoSenseRecyclerAdapter
   // </editor-fold>
 
-  // <editor-fold desc="Other">
-  private var mainWordContent = ""
-  private var mainReadingContent = ""
-  // </editor-fold>
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchMoreInfoViewModel::class.java)
+
+    arguments?.let {
+      val japaneseListJson = requireArguments().getStringArrayList("japaneseList")
+      val sensesListJson = requireArguments().getStringArrayList("sensesList")
+      viewModel.passArguments(japaneseListJson as ArrayList<String>, sensesListJson as ArrayList<String>)
+    }
+  }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
-    /* Normally viewmodel is instantiated in onActivityCreated but that seems to crash for this
-     * screen so it's instantiated here instead */
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchMoreInfoViewModel::class.java)
     val view = inflater.inflate(R.layout.dialog_search_more_info, container, false)
     bindViews(view)
+    initAlternativesRecycler()
+    initSenseRecycler()
+    setupObservers()
     return view
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+  private fun setupObservers() {
+    viewModel.mainWord.observe(this, Observer { value ->
+      value?.let { word ->
+        mainWordDisplay.text = resources.getString(R.string.japanese_word_wc, word)
+      }
+    })
 
-    arguments?.let {
-      val japaneseListJson = arguments!!.getStringArrayList("japaneseList")
-      val sensesListJson = arguments!!.getStringArrayList("sensesList")
+    viewModel.mainReading.observe(this, Observer { value ->
+      value?.let { reading ->
+        mainReadingDisplay.text = resources.getString(R.string.japanese_word_wc, reading)
+      }
+    })
 
-      viewModel.japaneseJsonList = japaneseListJson as ArrayList<String>
-      viewModel.senseJsonList = sensesListJson as ArrayList<String>
-    }
-    initAlternativesRecycler()
-    initSenseRecycler()
+    viewModel.displayMainReading.observe(this, Observer { value ->
+      value?.let { show ->
+        mainReadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      }
+    })
 
-    observeSense()
-    observeJapanese()
+    viewModel.displayAlternatives.observe(this, Observer { value ->
+      value?.let { show ->
+        if(show) {
+          alternativeRecycler.visibility = View.VISIBLE
+          alternativeTitle.visibility = View.VISIBLE
+        } else {
+          alternativeRecycler.visibility = View.GONE
+          alternativeTitle.visibility = View.GONE
+        }
+      }
+    })
+
+    viewModel.alternatives.observe(this, Observer { value ->
+      value?.let { list ->
+        alternativesRecyclerAdapter.updateList(list)
+      }
+    })
+
+    viewModel.displaySense.observe(this, Observer { value ->
+      value?.let { show ->
+        if(show) {
+          senseRecycler.visibility = View.VISIBLE
+          senseTitle.visibility = View.VISIBLE
+        } else {
+          senseRecycler.visibility = View.GONE
+          senseTitle.visibility = View.GONE
+        }
+      }
+    })
+
+    viewModel.senseList.observe(this, Observer { value ->
+      value?.let { list ->
+        senseRecyclerAdapter.updateList(list)
+      }
+    })
   }
 
   private fun bindViews(view: View) {
@@ -93,21 +138,25 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
   }
 
   private val mainWordClickListener = View.OnClickListener {
-    val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clip: ClipData = ClipData.newPlainText("Main Word", mainWordContent)
-    clipboard.primaryClip = clip
+    viewModel.mainWord.value?.let {
+      val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+      val clip: ClipData = ClipData.newPlainText("Main Word", viewModel.mainWord.value)
+      clipboard.primaryClip = clip
 
-    val toastMessage = resources.getString(R.string.copied_to_clipboard_wc, mainWordContent)
-    Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+      val toastMessage = resources.getString(R.string.copied_to_clipboard_wc, viewModel.mainWord.value)
+      Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+    }
   }
 
   private val mainReadingClickListener = View.OnClickListener {
-    val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clip: ClipData = ClipData.newPlainText("Main Reading", mainReadingContent)
-    clipboard.primaryClip = clip
+    viewModel.mainReading.value?.let {
+      val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+      val clip: ClipData = ClipData.newPlainText("Main Reading", viewModel.mainReading.value)
+      clipboard.primaryClip = clip
 
-    val toastMessage = resources.getString(R.string.copied_to_clipboard_wc, mainReadingContent)
-    Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+      val toastMessage = resources.getString(R.string.copied_to_clipboard_wc, viewModel.mainReading.value)
+      Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+    }
   }
 
   private fun initAlternativesRecycler() {
@@ -130,60 +179,5 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
     val dividerItemDecoration = DividerItemDecoration(senseRecycler.context, layoutManager.orientation)
     dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_standard, null))
     senseRecycler.addItemDecoration(dividerItemDecoration)
-  }
-
-  private fun observeJapanese() {
-    val japanese = viewModel.japaneseList
-    japanese.observe(this@SearchMoreInfoDialog, Observer { list ->
-
-      if(list.isNotEmpty()) {
-        val mainWord: String? = list[0].word
-        val mainReading: String? = list[0].reading
-
-        // If no mainWord is supplied, use the reading as the main word and hide the reading display
-        if(mainWord == null || mainWord.isBlank()) {
-          mainWordDisplay.text = resources.getString(R.string.japanese_word_wc, mainReading)
-          mainReadingDisplay.visibility = View.GONE
-          mainReading?.let {
-            mainWordContent = mainReading
-          }
-        } else {
-          // If a mainWord is displayed, just it as the main word
-          mainWordDisplay.text = resources.getString(R.string.japanese_word_wc, mainWord)
-          mainWordContent = mainWord
-
-          if(mainReading == null || mainReading.isBlank()) {
-            // If no mainReading is supplied then hide the reading field
-            mainReadingDisplay.visibility = View.GONE
-          } else {
-            // Otherwise use the reading
-            mainReadingDisplay.text = resources.getString(R.string.reading_wc, mainReading)
-            mainReadingContent = mainReading
-          }
-        }
-      }
-
-      // If there is more than one result then display all the others as alternatives
-      if(list.size > 1) {
-        val listExcludingMainResult = list.subList(1, list.size)
-        alternativesRecyclerAdapter.updateList(listExcludingMainResult)
-      } else {
-        // Otherwise hide the alternative UI components
-        alternativeRecycler.visibility = View.GONE
-        alternativeTitle.visibility = View.GONE
-      }
-    })
-  }
-
-  private fun observeSense() {
-    val sense = viewModel.senseList
-    sense.observe(this@SearchMoreInfoDialog, Observer { list ->
-      if(list.isNotEmpty()) {
-        senseRecyclerAdapter.updateList(list)
-      } else {
-        senseRecycler.visibility = View.GONE
-        senseTitle.visibility = View.GONE
-      }
-    })
   }
 }
