@@ -22,24 +22,6 @@ class TagRepositoryImpl private constructor(private val dao: DAO) : TagRepositor
     }
   }
 
-  override suspend fun getTagByName(tag: String): LiveData<Tag> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getTagByName(tag)
-    }
-  }
-
-  override suspend fun getTagById(id: Int): Tag {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getTagById(id)
-    }
-  }
-
-  override suspend fun getAllTags(): LiveData<List<Tag>> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getAllTags()
-    }
-  }
-
   override suspend fun deleteTag(tagId: Int) {
     withContext(Dispatchers.IO) {
       dao.deleteTag(tagId)
@@ -58,14 +40,8 @@ class TagRepositoryImpl private constructor(private val dao: DAO) : TagRepositor
     }
   }
 
-  override val allTags: LiveData<List<Tag>>by lazy {
-    dao.getAllTags()
-  }
-
-  override suspend fun getCountOfTags(): Int {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getCountOfTags()
-    }
+  override fun getAllTags(): LiveData<List<Tag>> {
+    return dao.getAllTags()
   }
 
   companion object {

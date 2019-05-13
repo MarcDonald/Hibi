@@ -41,8 +41,8 @@ class CalendarTabViewModel(private val entryRepository: EntryRepository, private
   }
 
   private suspend fun getMainEntryDisplayItems(year: Int, month: Int, day: Int) {
-    val allEntries = entryRepository.getEntriesOnDateNonLiveData(year, month, day)
-    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItemsNonLiveData()
+    val allEntries = entryRepository.getEntriesOnDate(year, month, day)
+    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
     _entries.value = combineData(allEntries, tagEntryDisplayItems)
   }
 

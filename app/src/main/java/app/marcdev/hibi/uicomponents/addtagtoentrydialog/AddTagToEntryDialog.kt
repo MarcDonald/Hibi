@@ -37,6 +37,9 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddTagToEntryViewModel::class.java)
+    arguments?.let {
+      viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0))
+    }
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,15 +47,7 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     val view = inflater.inflate(R.layout.dialog_entry_tags, container, false)
     bindViews(view)
     setupObservers()
-    viewModel.loadData()
     return view
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    arguments?.let {
-      viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0))
-    }
   }
 
   private fun bindViews(view: View) {
@@ -73,6 +68,8 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   private fun setupObservers() {
     viewModel.allTags.observe(this, Observer { value ->
       value?.let { tags ->
+        viewModel.listReceived(tags.isEmpty())
+
         tags.forEach { tag ->
           // Gets list of all tags currently displayed
           val alreadyDisplayedTags = ArrayList<CheckBoxWithId>()

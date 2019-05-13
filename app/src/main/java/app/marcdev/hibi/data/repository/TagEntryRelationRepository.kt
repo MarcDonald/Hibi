@@ -13,28 +13,15 @@ interface TagEntryRelationRepository {
 
   suspend fun getAllTagEntryRelations(): LiveData<List<TagEntryRelation>>
 
-  suspend fun getEntriesWithTag(tagId: Int): LiveData<List<Entry>>
+  suspend fun getEntriesWithTag(tagId: Int): List<Entry>
 
-  suspend fun getEntriesWithTagNonLiveData(tagId: Int): List<Entry>
+  suspend fun getTagsWithEntry(entryId: Int): List<Tag>
 
-  suspend fun getTagsWithEntry(entryId: Int): LiveData<List<Tag>>
-
-  suspend fun getTagsWithEntryNotLiveData(entryId: Int): List<Tag>
-
-  suspend fun getTagIdsWithEntryNotLiveData(entryId: Int): List<Int>
+  suspend fun getTagIdsWithEntry(entryId: Int): List<Int>
 
   suspend fun deleteTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
-  suspend fun deleteTagEntryRelationByTagId(tagId: Int)
+  val allTagDisplayItems: LiveData<List<TagDisplayItem>>
 
-  suspend fun deleteTagEntryRelationByEntryId(entryId: Int)
-
-  suspend fun getTagsWithCount(): LiveData<List<TagDisplayItem>>
-
-  suspend fun getTagsWithCountNonLiveData(): List<TagDisplayItem>
-
-  suspend fun getTagEntryDisplayItems(): LiveData<List<TagEntryDisplayItem>>
-
-  suspend fun getTagEntryDisplayItemsNonLiveData(): List<TagEntryDisplayItem>
-
+  suspend fun getTagEntryDisplayItems(): List<TagEntryDisplayItem>
 }

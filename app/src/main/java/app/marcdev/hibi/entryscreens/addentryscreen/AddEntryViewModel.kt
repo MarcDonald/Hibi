@@ -94,7 +94,7 @@ class AddEntryViewModel(private val entryRepository: EntryRepository, private va
   }
 
   private suspend fun getEntry(id: Int) {
-    val entry = entryRepository.getEntryNonLiveData(id)
+    val entry = entryRepository.getEntry(id)
     _entry.value = entry
     dateTimeStore.setDate(entry.day, entry.month, entry.year)
     dateTimeStore.setTime(entry.hour, entry.minute)

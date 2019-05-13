@@ -9,15 +9,9 @@ interface BookRepository {
 
   suspend fun deleteBook(bookId: Int)
 
-  suspend fun getAllBooks(): LiveData<List<Book>>
-
-  suspend fun getBookById(id: Int): Book
-
   suspend fun isBookNameInUse(name: String): Boolean
 
   suspend fun getBookName(bookId: Int): String
 
-  val allBooks: LiveData<List<Book>>
-
-  suspend fun getCountOfBooks(): Int
+  fun getAllBooks(): LiveData<List<Book>>
 }

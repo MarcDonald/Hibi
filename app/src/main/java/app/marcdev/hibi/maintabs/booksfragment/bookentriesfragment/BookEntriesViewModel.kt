@@ -50,8 +50,8 @@ class BookEntriesViewModel(private val bookRepository: BookRepository, private v
   }
 
   private suspend fun getMainEntryDisplayItems() {
-    val entries = bookEntryRelationRepository.getEntriesWithBookNonLiveData(bookId)
-    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItemsNonLiveData()
+    val entries = bookEntryRelationRepository.getEntriesWithBook(bookId)
+    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
     _entries.value = combineData(entries, tagEntryDisplayItems)
   }
 

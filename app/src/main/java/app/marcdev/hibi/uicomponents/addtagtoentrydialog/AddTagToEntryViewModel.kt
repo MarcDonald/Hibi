@@ -11,10 +11,10 @@ import app.marcdev.hibi.data.repository.TagRepository
 import app.marcdev.hibi.entryscreens.addentryscreen.TagsToSaveToNewEntry
 import kotlinx.coroutines.launch
 
-class AddTagToEntryViewModel(private val tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class AddTagToEntryViewModel(tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
   private var entryId = 0
 
-  val allTags: LiveData<List<Tag>> = tagRepository.allTags
+  val allTags: LiveData<List<Tag>> = tagRepository.getAllTags()
 
   private var _dismiss = MutableLiveData<Boolean>()
   val dismiss: LiveData<Boolean>
@@ -30,17 +30,16 @@ class AddTagToEntryViewModel(private val tagRepository: TagRepository, private v
 
   fun passArguments(entryIdArg: Int) {
     entryId = entryIdArg
-  }
-
-  fun loadData() {
     viewModelScope.launch {
       if(entryId == 0)
         _tagEntryRelations.value = TagsToSaveToNewEntry.list
       else
-        _tagEntryRelations.value = tagEntryRelationRepository.getTagIdsWithEntryNotLiveData(entryId)
-
-      _displayNoTagsWarning.value = tagRepository.getCountOfTags() == 0
+        _tagEntryRelations.value = tagEntryRelationRepository.getTagIdsWithEntry(entryId)
     }
+  }
+
+  fun listReceived(isEmpty: Boolean) {
+    _displayNoTagsWarning.value = isEmpty
   }
 
   fun onSaveClick(list: ArrayList<Pair<Int, Boolean>>) {

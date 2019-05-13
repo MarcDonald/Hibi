@@ -49,8 +49,8 @@ class TaggedEntriesViewModel(private val tagRepository: TagRepository, private v
   }
 
   private suspend fun getMainEntryDisplayItems() {
-    val entries = tagEntryRelationRepository.getEntriesWithTagNonLiveData(tagId)
-    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItemsNonLiveData()
+    val entries = tagEntryRelationRepository.getEntriesWithTag(tagId)
+    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
     _entries.value = combineData(entries, tagEntryDisplayItems)
   }
 

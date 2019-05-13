@@ -11,10 +11,10 @@ import app.marcdev.hibi.data.repository.BookRepository
 import app.marcdev.hibi.entryscreens.addentryscreen.BooksToSaveToNewEntry
 import kotlinx.coroutines.launch
 
-class AddEntryToBookViewModel(private val bookRepository: BookRepository, private val bookEntryRelationRepository: BookEntryRelationRepository) : ViewModel() {
+class AddEntryToBookViewModel(bookRepository: BookRepository, private val bookEntryRelationRepository: BookEntryRelationRepository) : ViewModel() {
   private var entryId = 0
 
-  val allBooks: LiveData<List<Book>> = bookRepository.allBooks
+  val allBooks: LiveData<List<Book>> = bookRepository.getAllBooks()
 
   private var _dismiss = MutableLiveData<Boolean>()
   val dismiss: LiveData<Boolean>
@@ -30,17 +30,16 @@ class AddEntryToBookViewModel(private val bookRepository: BookRepository, privat
 
   fun passArguments(entryIdArg: Int) {
     entryId = entryIdArg
-  }
-
-  fun loadData() {
     viewModelScope.launch {
       if(entryId == 0)
         _bookEntryRelations.value = BooksToSaveToNewEntry.list
       else
-        _bookEntryRelations.value = bookEntryRelationRepository.getBookIdsWithEntryNotLiveData(entryId)
-
-      _displayNoBookWarning.value = bookRepository.getCountOfBooks() == 0
+        _bookEntryRelations.value = bookEntryRelationRepository.getBookIdsWithEntry(entryId)
     }
+  }
+
+  fun listReceived(isEmpty: Boolean) {
+    _displayNoBookWarning.value = isEmpty
   }
 
   fun onSaveClick(list: ArrayList<Pair<Int, Boolean>>) {

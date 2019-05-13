@@ -37,6 +37,9 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEntryToBookViewModel::class.java)
+    arguments?.let {
+      viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0))
+    }
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,15 +47,7 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     val view = inflater.inflate(R.layout.dialog_entry_books, container, false)
     bindViews(view)
     setupObservers()
-    viewModel.loadData()
     return view
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    arguments?.let {
-      viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0))
-    }
   }
 
   private fun bindViews(view: View) {
@@ -73,6 +68,8 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   private fun setupObservers() {
     viewModel.allBooks.observe(this, Observer { value ->
       value?.let { books ->
+        viewModel.listReceived(books.isEmpty())
+
         books.forEach { book ->
           // Gets list of all books currently displayed
           val alreadyDisplayedBooks = ArrayList<CheckBoxWithId>()

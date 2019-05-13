@@ -3,15 +3,11 @@ package app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.repository.BookEntryRelationRepository
-import kotlinx.coroutines.launch
 
-class BooksFragmentViewModel(private val bookEntryRelationRepository: BookEntryRelationRepository) : ViewModel() {
+class BooksFragmentViewModel(bookEntryRelationRepository: BookEntryRelationRepository) : ViewModel() {
 
-  private val _entries = MutableLiveData<List<BookDisplayItem>>()
-  val entries: LiveData<List<BookDisplayItem>>
-    get() = _entries
+  val books = bookEntryRelationRepository.bookDisplayItems
 
   private val _displayLoading = MutableLiveData<Boolean>()
   val displayLoading: LiveData<Boolean>
@@ -21,13 +17,12 @@ class BooksFragmentViewModel(private val bookEntryRelationRepository: BookEntryR
   val displayNoResults: LiveData<Boolean>
     get() = _displayNoResults
 
-  fun loadData() {
-    viewModelScope.launch {
-      _displayLoading.value = true
-      _displayNoResults.value = false
-      _entries.value = bookEntryRelationRepository.getBooksWithCountNonLiveData()
-      _displayLoading.value = false
-      _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
-    }
+  init {
+    _displayLoading.value = true
+  }
+
+  fun listReceived(isEmpty: Boolean) {
+    _displayLoading.value = false
+    _displayNoResults.value = isEmpty
   }
 }

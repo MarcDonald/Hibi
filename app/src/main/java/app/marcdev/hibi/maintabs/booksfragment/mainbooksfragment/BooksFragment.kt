@@ -41,12 +41,9 @@ class BooksFragment : Fragment(), KodeinAware {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_books, container, false)
-
     bindViews(view)
     initRecycler(view)
     setupObservers()
-    viewModel.loadData()
-
     return view
   }
 
@@ -70,8 +67,9 @@ class BooksFragment : Fragment(), KodeinAware {
   }
 
   private fun setupObservers() {
-    viewModel.entries.observe(this, Observer { value ->
+    viewModel.books.observe(this, Observer { value ->
       value?.let { list ->
+        viewModel.listReceived(list.isEmpty())
         recyclerAdapter.updateList(list)
       }
     })

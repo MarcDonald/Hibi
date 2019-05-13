@@ -62,14 +62,14 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
   }
 
   private suspend fun getEntry() {
-    val entry = entryRepository.getEntryNonLiveData(entryId)
+    val entry = entryRepository.getEntry(entryId)
     _content.value = entry.content
     _readableDate.value = formatDateForDisplay(entry.day, entry.month, entry.year)
     _readableTime.value = formatTimeForDisplay(entry.hour, entry.minute)
   }
 
   private suspend fun getTags() {
-    _tags.value = tagEntryRelationRepository.getTagsWithEntryNotLiveData(entryId)
+    _tags.value = tagEntryRelationRepository.getTagsWithEntry(entryId)
   }
 
   private suspend fun getNewWords() {

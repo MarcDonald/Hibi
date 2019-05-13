@@ -22,34 +22,19 @@ interface DAO {
   fun updateEntry(entry: Entry)
 
   @Query("SELECT * FROM Entry WHERE id = :id")
-  fun getEntry(id: Int): LiveData<Entry>
-
-  @Query("SELECT * FROM Entry WHERE id = :id")
-  fun getEntryNonLiveData(id: Int): Entry
+  fun getEntry(id: Int): Entry
 
   @Query("SELECT * FROM Entry ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
-  fun getAllEntries(): LiveData<List<Entry>>
-
-  @Query("SELECT * FROM Entry ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
-  fun getAllEntriesNonLiveData(): List<Entry>
+  fun getAllEntries(): List<Entry>
 
   @Query("DELETE FROM Entry WHERE id = :id")
   fun deleteEntry(id: Int)
 
-  @Query("SELECT COUNT(*) FROM Entry")
-  fun getAmountOfEntries(): LiveData<Int>
-
   @Query("SELECT id FROM Entry ORDER BY id DESC LIMIT 1")
   fun getLastEntryId(): Int
 
-  @Query("SELECT COUNT(id) FROM Entry")
-  fun getEntryCount(): LiveData<Int>
-
   @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day")
-  fun getEntriesOnDate(year: Int, month: Int, day: Int): LiveData<List<Entry>>
-
-  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day")
-  fun getEntriesOnDateNonLiveData(year: Int, month: Int, day: Int): List<Entry>
+  fun getEntriesOnDate(year: Int, month: Int, day: Int): List<Entry>
 
   // </editor-fold>
 
@@ -63,12 +48,6 @@ interface DAO {
   @Query("SELECT * FROM Tag")
   fun getAllTags(): LiveData<List<Tag>>
 
-  @Query("SELECT * FROM Tag WHERE id = :id")
-  fun getTagById(id: Int): Tag
-
-  @Query("SELECT * FROM Tag WHERE name = :tag")
-  fun getTagByName(tag: String): LiveData<Tag>
-
   @Query("DELETE FROM Tag WHERE id = :tagId")
   fun deleteTag(tagId: Int)
 
@@ -77,9 +56,6 @@ interface DAO {
 
   @Query("SELECT name FROM Tag WHERE id = :tagId")
   fun getTagName(tagId: Int): String
-
-  @Query("SELECT COUNT(id) FROM Tag")
-  fun getCountOfTags(): Int
   // </editor-fold>
 
   // <editor-fold desc="Tag Entry Relation">
@@ -93,41 +69,22 @@ interface DAO {
   fun getAllTagEntryRelations(): LiveData<List<TagEntryRelation>>
 
   @Query("SELECT * FROM Entry as e INNER JOIN TagEntryRelation as ter ON e.id = ter.entryId WHERE ter.tagId = :tagId")
-  fun getEntriesWithTag(tagId: Int): LiveData<List<Entry>>
-
-  @Query("SELECT * FROM Entry as e INNER JOIN TagEntryRelation as ter ON e.id = ter.entryId WHERE ter.tagId = :tagId")
-  fun getEntriesWithTagNonLiveData(tagId: Int): List<Entry>
+  fun getEntriesWithTag(tagId: Int): List<Entry>
 
   @Query("SELECT * FROM Tag INNER JOIN TagEntryRelation ON Tag.id = TagEntryRelation.tagId WHERE entryId = :entryId")
-  fun getTagsWithEntry(entryId: Int): LiveData<List<Tag>>
-
-  @Query("SELECT * FROM Tag INNER JOIN TagEntryRelation ON Tag.id = TagEntryRelation.tagId WHERE entryId = :entryId")
-  fun getTagsWithEntryNotLiveData(entryId: Int): List<Tag>
+  fun getTagsWithEntry(entryId: Int): List<Tag>
 
   @Query("SELECT id FROM Tag INNER JOIN TagEntryRelation ON Tag.id = TagEntryRelation.tagId WHERE entryId = :entryId")
-  fun getTagIdsWithEntryNotLiveData(entryId: Int): List<Int>
+  fun getTagIdsWithEntry(entryId: Int): List<Int>
 
   @Delete
   fun deleteTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
-  @Query("DELETE FROM TagEntryRelation WHERE tagId= :tagId")
-  fun deleteTagEntryRelationByTagId(tagId: Int)
-
-  @Query("DELETE FROM TagEntryRelation WHERE entryId = :entryId")
-  fun deleteTagEntryRelationByEntryId(entryId: Int)
-
   @Query("SELECT t.id as tagID, t.name as tagName, COUNT(ter.entryId) as useCount FROM Tag as t LEFT OUTER JOIN TagEntryRelation as ter ON t.id = ter.tagId GROUP BY t.name")
-  fun getTagsWithCountOfEntries(): LiveData<List<TagDisplayItem>>
-
-  @Query("SELECT t.id as tagID, t.name as tagName, COUNT(ter.entryId) as useCount FROM Tag as t LEFT OUTER JOIN TagEntryRelation as ter ON t.id = ter.tagId GROUP BY t.name")
-  fun getTagsWithCountOfEntriesNonLiveData(): List<TagDisplayItem>
+  fun getTagDisplayItems(): LiveData<List<TagDisplayItem>>
 
   @Query("SELECT ter.entryId as entryId, t.name as tagName FROM TagEntryRelation as ter LEFT OUTER JOIN Tag as t ON ter.tagId = t.id")
-  fun getTagEntryDisplayItems(): LiveData<List<TagEntryDisplayItem>>
-
-  @Query("SELECT ter.entryId as entryId, t.name as tagName FROM TagEntryRelation as ter LEFT OUTER JOIN Tag as t ON ter.tagId = t.id")
-  fun getTagEntryDisplayItemsNonLiveData(): List<TagEntryDisplayItem>
-
+  fun getTagEntryDisplayItems(): List<TagEntryDisplayItem>
   // </editor-fold>
 
   // <editor-fold desc="New Word">
@@ -160,9 +117,6 @@ interface DAO {
   @Query("SELECT * FROM Book")
   fun getAllBooks(): LiveData<List<Book>>
 
-  @Query("SELECT * FROM Book WHERE id = :id")
-  fun getBookById(id: Int): Book
-
   @Query("DELETE FROM Book WHERE id = :bookId")
   fun deleteBook(bookId: Int)
 
@@ -171,9 +125,6 @@ interface DAO {
 
   @Query("SELECT name FROM Book WHERE id = :bookId")
   fun getBookName(bookId: Int): String
-
-  @Query("SELECT COUNT(id) FROM Book")
-  fun getCountOfBooks(): Int
   // </editor-fold>
 
   // <editor-fold desc="Book Entry Relation">
@@ -186,28 +137,13 @@ interface DAO {
   @Delete
   fun deleteBookEntryRelation(bookEntryRelation: BookEntryRelation)
 
-  @Query("DELETE FROM BookEntryRelation WHERE bookId= :bookId")
-  fun deleteBookEntryRelationByBookId(bookId: Int)
-
-  @Query("DELETE FROM BookEntryRelation WHERE entryId = :entryId")
-  fun deleteBookEntryRelationByEntryId(entryId: Int)
-
-  @Query("SELECT * FROM BookEntryRelation")
-  fun getAllBookEntryRelations(): LiveData<List<BookEntryRelation>>
-
   @Query("SELECT * FROM Entry as e INNER JOIN BookEntryRelation as ber ON e.id = ber.entryId WHERE ber.bookId = :bookId ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
-  fun getEntriesWithBook(bookId: Int): LiveData<List<Entry>>
-
-  @Query("SELECT * FROM Entry as e INNER JOIN BookEntryRelation as ber ON e.id = ber.entryId WHERE ber.bookId = :bookId ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
-  fun getEntriesWithBookNonLiveData(bookId: Int): List<Entry>
+  fun getEntriesWithBook(bookId: Int): List<Entry>
 
   @Query("SELECT b.id as bookId, b.name as bookName, COUNT(ber.entryId) as useCount FROM Book as b LEFT OUTER JOIN BookEntryRelation as ber ON b.id = ber.bookId GROUP BY b.name")
-  fun getBooksWithCountOfEntries(): LiveData<List<BookDisplayItem>>
-
-  @Query("SELECT b.id as bookId, b.name as bookName, COUNT(ber.entryId) as useCount FROM Book as b LEFT OUTER JOIN BookEntryRelation as ber ON b.id = ber.bookId GROUP BY b.name")
-  fun getBooksWithCountOfEntriesNonLiveData(): List<BookDisplayItem>
+  fun getBookDisplayItems(): LiveData<List<BookDisplayItem>>
 
   @Query("SELECT id FROM Book INNER JOIN BookEntryRelation ON Book.id = BookEntryRelation.bookId WHERE entryId = :entryId")
-  fun getBookIdsWithEntryNotLiveData(entryId: Int): List<Int>
+  fun getBookIdsWithEntry(entryId: Int): List<Int>
   // </editor-fold>
 }
