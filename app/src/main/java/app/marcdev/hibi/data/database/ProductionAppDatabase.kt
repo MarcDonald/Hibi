@@ -52,6 +52,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
         .addMigrations(MIGRATION_6_TO_7())
         .addMigrations(MIGRATION_7_TO_8())
         .addMigrations(MIGRATION_8_TO_9())
+        .addMigrations(MIGRATION_9_TO_10())
         .build()
 
     class MIGRATION_3_TO_5 : Migration(3, 5) {
@@ -133,6 +134,25 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
                          "PRIMARY KEY(bookId, entryId), " +
                          "FOREIGN KEY(entryId) REFERENCES Entry(id) ON DELETE CASCADE ON UPDATE CASCADE, " +
                          "FOREIGN KEY(bookId) REFERENCES Book(id) ON DELETE CASCADE ON UPDATE CASCADE)")
+      }
+    }
+
+    class MIGRATION_9_TO_10 : Migration(9, 10) {
+      override fun migrate(database: SupportSQLiteDatabase) {
+        // Add locationId to Entry table
+        database.execSQL("ALTER TABLE Entry RENAME TO EntryOLD")
+        database.execSQL("CREATE TABLE Entry(id INTEGER PRIMARY KEY NOT NULL, " +
+                         "day INTEGER NOT NULL," +
+                         "month INTEGER NOT NULL," +
+                         "year INTEGER NOT NULL," +
+                         "hour INTEGER NOT NULL," +
+                         "minute INTEGER NOT NULL," +
+                         "content TEXT NOT NULL," +
+                         "location TEXT NOT NULL DEFAULT '')")
+        database.execSQL("INSERT INTO Entry(id, day, month, year, hour, minute, content) " +
+                         "SELECT id, day, month, year, hour, minute, content " +
+                         "FROM EntryOLD")
+        database.execSQL("DROP TABLE EntryOLD")
       }
     }
   }
