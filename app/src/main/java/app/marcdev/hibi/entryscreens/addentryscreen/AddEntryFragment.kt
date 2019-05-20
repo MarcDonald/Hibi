@@ -61,14 +61,16 @@ class AddEntryFragment : Fragment(), KodeinAware {
     bindViews(view)
     initBackConfirmDialog()
     focusInput()
-    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback { onBackPress() })
+    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback {
+      viewModel.backPress(contentInput.text.toString().isEmpty())
+      false
+    })
     setupObservers()
     return view
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     arguments?.let {
       viewModel.passArgument(AddEntryFragmentArgs.fromBundle(it).entryId)
     }
@@ -158,6 +160,15 @@ class AddEntryFragment : Fragment(), KodeinAware {
         contentInput.setText(entry.content)
       }
     })
+
+    viewModel.displayBackWarning.observe(this, Observer { value ->
+      value?.let { display ->
+        if(display)
+          backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
+        else
+          backConfirmDialog.dismiss()
+      }
+    })
   }
 
   private fun initBackConfirmDialog() {
@@ -169,25 +180,15 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private val saveClickListener = View.OnClickListener {
-    viewModel.save(contentInput.text.toString())
+    viewModel.save(contentInput.text.toString(), true)
   }
 
   private val backClickListener = View.OnClickListener {
-    onBackPress()
-  }
-
-  private fun onBackPress(): Boolean {
-    if(contentInput.text.toString().isBlank()) {
-      popBackStack()
-    } else {
-      backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
-    }
-    return true
+    viewModel.backPress(contentInput.text.toString().isBlank())
   }
 
   private val confirmBackClickListener = View.OnClickListener {
-    backConfirmDialog.dismiss()
-    popBackStack()
+    viewModel.confirmBack()
   }
 
   private val cancelBackClickListener = View.OnClickListener {
@@ -269,5 +270,10 @@ class AddEntryFragment : Fragment(), KodeinAware {
 
   private fun popBackStack() {
     Navigation.findNavController(requireView()).popBackStack()
+  }
+
+  override fun onPause() {
+    viewModel.pause(contentInput.text.toString())
+    super.onPause()
   }
 }

@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.data.repository.NewWordRepository
-import app.marcdev.hibi.entryscreens.addentryscreen.NewWordsToSaveToNewEntry
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class AddNewWordViewModel(private val newWordRepository: NewWordRepository) : ViewModel() {
   private var entryId = 0
@@ -54,7 +54,7 @@ class AddNewWordViewModel(private val newWordRepository: NewWordRepository) : Vi
           }
           newWordRepository.addNewWord(newWordToSave)
         } else {
-          NewWordsToSaveToNewEntry.addNewWordToList(newWordToSave)
+          Timber.e("Log: saveNewWord: entryId = 0")
         }
         _dismiss.value = true
       }

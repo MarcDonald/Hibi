@@ -8,8 +8,8 @@ import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.data.repository.TagRepository
-import app.marcdev.hibi.entryscreens.addentryscreen.TagsToSaveToNewEntry
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class AddTagToEntryViewModel(tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
   private var entryId = 0
@@ -31,10 +31,10 @@ class AddTagToEntryViewModel(tagRepository: TagRepository, private val tagEntryR
   fun passArguments(entryIdArg: Int) {
     entryId = entryIdArg
     viewModelScope.launch {
-      if(entryId == 0)
-        _tagEntryRelations.value = TagsToSaveToNewEntry.list
-      else
+      if(entryId != 0)
         _tagEntryRelations.value = tagEntryRelationRepository.getTagIdsWithEntry(entryId)
+      else
+        Timber.e("Log: passArguments: entryId = 0")
     }
   }
 
@@ -59,7 +59,7 @@ class AddTagToEntryViewModel(tagRepository: TagRepository, private val tagEntryR
         val tagEntryRelation = TagEntryRelation(tagId, entryId)
         tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
       } else {
-        TagsToSaveToNewEntry.list.add(tagId)
+        Timber.e("Log: save: entryId = 0")
       }
     }
   }
@@ -70,7 +70,7 @@ class AddTagToEntryViewModel(tagRepository: TagRepository, private val tagEntryR
         val tagEntryRelation = TagEntryRelation(tagId, entryId)
         tagEntryRelationRepository.deleteTagEntryRelation(tagEntryRelation)
       } else {
-        TagsToSaveToNewEntry.list.remove(tagId)
+        Timber.e("Log: delete: entryId = 0")
       }
     }
   }

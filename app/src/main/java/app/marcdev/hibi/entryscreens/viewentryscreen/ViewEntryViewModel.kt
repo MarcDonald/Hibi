@@ -53,27 +53,31 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
       _displayErrorToast.value = true
       Timber.e("Log: passArguments: entryId is 0")
     } else {
-      viewModelScope.launch {
-        getEntry()
-        getTags()
-        getNewWords()
-      }
+      getEntry()
+      getTags()
+      getNewWords()
     }
   }
 
-  private suspend fun getEntry() {
-    val entry = entryRepository.getEntry(entryId)
-    _content.value = entry.content
-    _readableDate.value = formatDateForDisplay(entry.day, entry.month, entry.year)
-    _readableTime.value = formatTimeForDisplay(entry.hour, entry.minute)
+  private fun getEntry() {
+    viewModelScope.launch {
+      val entry = entryRepository.getEntry(entryId)
+      _content.value = entry.content
+      _readableDate.value = formatDateForDisplay(entry.day, entry.month, entry.year)
+      _readableTime.value = formatTimeForDisplay(entry.hour, entry.minute)
+    }
   }
 
-  private suspend fun getTags() {
-    _tags.value = tagEntryRelationRepository.getTagsWithEntry(entryId)
+  private fun getTags() {
+    viewModelScope.launch {
+      _tags.value = tagEntryRelationRepository.getTagsWithEntry(entryId)
+    }
   }
 
-  private suspend fun getNewWords() {
-    _displayNewWordButton.value = newWordRepository.getNewWordCountByEntryId(entryId) > 0
+  private fun getNewWords() {
+    viewModelScope.launch {
+      _displayNewWordButton.value = newWordRepository.getNewWordCountByEntryId(entryId) > 0
+    }
   }
 
   fun deleteEntry() {

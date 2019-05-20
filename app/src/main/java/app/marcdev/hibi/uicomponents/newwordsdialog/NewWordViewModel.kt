@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.data.repository.NewWordRepository
-import app.marcdev.hibi.entryscreens.addentryscreen.NewWordsToSaveToNewEntry
 import timber.log.Timber
 
 class NewWordViewModel(private val newWordRepository: NewWordRepository) : ViewModel() {
@@ -39,7 +38,11 @@ class NewWordViewModel(private val newWordRepository: NewWordRepository) : ViewM
   fun getNewWords(): LiveData<List<NewWord>> {
     return if(entryId != 0)
       newWordRepository.getNewWordsByEntryId(entryId)
-    else
-      NewWordsToSaveToNewEntry.list
+    else {
+      Timber.e("Log: getNewWords: entryId = 0")
+      val emptyLD = MutableLiveData<List<NewWord>>()
+      emptyLD.value = listOf()
+      return emptyLD
+    }
   }
 }

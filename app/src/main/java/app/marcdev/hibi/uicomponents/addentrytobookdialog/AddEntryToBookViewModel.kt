@@ -8,8 +8,8 @@ import app.marcdev.hibi.data.entity.Book
 import app.marcdev.hibi.data.entity.BookEntryRelation
 import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.BookRepository
-import app.marcdev.hibi.entryscreens.addentryscreen.BooksToSaveToNewEntry
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class AddEntryToBookViewModel(bookRepository: BookRepository, private val bookEntryRelationRepository: BookEntryRelationRepository) : ViewModel() {
   private var entryId = 0
@@ -31,10 +31,10 @@ class AddEntryToBookViewModel(bookRepository: BookRepository, private val bookEn
   fun passArguments(entryIdArg: Int) {
     entryId = entryIdArg
     viewModelScope.launch {
-      if(entryId == 0)
-        _bookEntryRelations.value = BooksToSaveToNewEntry.list
-      else
+      if(entryId != 0)
         _bookEntryRelations.value = bookEntryRelationRepository.getBookIdsWithEntry(entryId)
+      else
+        Timber.e("Log: passArguments: entryId = 0")
     }
   }
 
@@ -58,9 +58,8 @@ class AddEntryToBookViewModel(bookRepository: BookRepository, private val bookEn
       if(entryId != 0) {
         val bookEntryRelation = BookEntryRelation(bookId, entryId)
         bookEntryRelationRepository.addBookEntryRelation(bookEntryRelation)
-      } else {
-        BooksToSaveToNewEntry.list.add(bookId)
-      }
+      } else
+        Timber.e("Log: save: entryId = 0")
     }
   }
 
@@ -69,9 +68,8 @@ class AddEntryToBookViewModel(bookRepository: BookRepository, private val bookEn
       if(entryId != 0) {
         val bookEntryRelation = BookEntryRelation(bookId, entryId)
         bookEntryRelationRepository.deleteBookEntryRelation(bookEntryRelation)
-      } else {
-        BooksToSaveToNewEntry.list.remove(bookId)
-      }
+      } else
+        Timber.e("Log: delete: entryId = 0")
     }
   }
 }
