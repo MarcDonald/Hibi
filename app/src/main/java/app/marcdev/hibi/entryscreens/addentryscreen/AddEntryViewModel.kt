@@ -38,20 +38,19 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
     get() = _entry
 
   fun save(content: String, exit: Boolean) {
-    viewModelScope.launch {
-      if(content.isBlank()) {
-        _displayEmptyContentWarning.value = true
-      } else {
+    if(content.isBlank()) {
+      _displayEmptyContentWarning.value = true
+    } else {
+      viewModelScope.launch {
         val day = dateTimeStore.getDay()
         val month = dateTimeStore.getMonth()
         val year = dateTimeStore.getYear()
         val hour = dateTimeStore.getHour()
         val minute = dateTimeStore.getMinute()
         entryRepository.saveEntry(entryId, day, month, year, hour, minute, content)
-
-        if(exit)
-          _popBackStack.value = true
       }
+      if(exit)
+        _popBackStack.value = true
     }
   }
 

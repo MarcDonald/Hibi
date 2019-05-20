@@ -54,24 +54,24 @@ class AddTagToEntryViewModel(tagRepository: TagRepository, private val tagEntryR
   }
 
   private fun save(tagId: Int) {
-    viewModelScope.launch {
-      if(entryId != 0) {
-        val tagEntryRelation = TagEntryRelation(tagId, entryId)
+    if(entryId != 0) {
+      val tagEntryRelation = TagEntryRelation(tagId, entryId)
+      viewModelScope.launch {
         tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
-      } else {
-        Timber.e("Log: save: entryId = 0")
       }
+    } else {
+      Timber.e("Log: save: entryId = 0")
     }
   }
 
   private fun delete(tagId: Int) {
-    viewModelScope.launch {
-      if(entryId != 0) {
-        val tagEntryRelation = TagEntryRelation(tagId, entryId)
+    if(entryId != 0) {
+      val tagEntryRelation = TagEntryRelation(tagId, entryId)
+      viewModelScope.launch {
         tagEntryRelationRepository.deleteTagEntryRelation(tagEntryRelation)
-      } else {
-        Timber.e("Log: delete: entryId = 0")
       }
+    } else {
+      Timber.e("Log: delete: entryId = 0")
     }
   }
 }
