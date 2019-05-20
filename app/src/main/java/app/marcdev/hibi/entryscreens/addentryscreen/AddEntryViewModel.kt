@@ -47,7 +47,7 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
         val year = dateTimeStore.getYear()
         val hour = dateTimeStore.getHour()
         val minute = dateTimeStore.getMinute()
-        updateEntry(day, month, year, hour, minute, content, entryId)
+        entryRepository.saveEntry(entryId, day, month, year, hour, minute, content)
 
         if(exit)
           _popBackStack.value = true
@@ -112,12 +112,6 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
     _entry.value = entry
     dateTimeStore.setDate(entry.day, entry.month, entry.year)
     dateTimeStore.setTime(entry.hour, entry.minute)
-  }
-
-  private suspend fun updateEntry(day: Int, month: Int, year: Int, hour: Int, minute: Int, content: String, entryId: Int) {
-    val entryToUpdate = Entry(day, month, year, hour, minute, content)
-    entryToUpdate.id = entryId
-    entryRepository.addEntry(entryToUpdate)
   }
 
   private suspend fun deleteEntry() {

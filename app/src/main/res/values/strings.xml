@@ -125,6 +125,11 @@
   <string name="add_entry_to_book_hint">Add Entry to Book</string>
   <!--endregion-->
 
+  <!--region Location-->
+  <string name="add_location_to_entry">Add Location</string>
+  <string name="location">Location</string>
+  <!--endregion-->
+
   <!--region Notifications-->
   <string name="reminder_notification_channel_title">Reminder</string>
   <string name="reminder_notification_channel_description">Daily reminder notification</string>
