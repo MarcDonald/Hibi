@@ -44,7 +44,10 @@ class ViewEntryFragment : Fragment(), KodeinAware {
   private lateinit var searchBar: SearchBar
   private lateinit var tagDisplay: ChipGroup
   private lateinit var tagDisplayHolder: LinearLayout
+  private lateinit var bookDisplay: ChipGroup
+  private lateinit var bookDisplayHolder: LinearLayout
   private lateinit var newWordsButton: MaterialButton
+  private lateinit var locationDisplay: TextView
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,8 +79,12 @@ class ViewEntryFragment : Fragment(), KodeinAware {
     contentDisplay = view.findViewById(R.id.txt_view_content)
     tagDisplay = view.findViewById(R.id.cg_view_tags)
     tagDisplayHolder = view.findViewById(R.id.lin_view_tags)
+    bookDisplay = view.findViewById(R.id.cg_view_books)
+    bookDisplayHolder = view.findViewById(R.id.lin_view_books)
+
     searchBar = view.findViewById(R.id.searchbar_view_entry)
     searchBar.setSearchAction(this::search)
+    locationDisplay = view.findViewById(R.id.txt_view_location)
 
     val backButton: ImageView = view.findViewById(R.id.img_view_entry_toolbar_back)
     backButton.setOnClickListener(backClickListener)
@@ -131,6 +138,19 @@ class ViewEntryFragment : Fragment(), KodeinAware {
       }
     })
 
+    viewModel.books.observe(this, Observer { value ->
+      bookDisplay.removeAllViews()
+
+      value?.let { books ->
+        bookDisplayHolder.visibility = if(books.isEmpty()) View.GONE else View.VISIBLE
+        books.forEach { book ->
+          val displayBook = Chip(bookDisplay.context)
+          displayBook.text = book.name
+          bookDisplay.addView(displayBook)
+        }
+      }
+    })
+
     viewModel.displayNewWordButton.observe(this, Observer { value ->
       value?.let { show ->
         newWordsButton.visibility = if(show) View.VISIBLE else View.GONE
@@ -141,6 +161,13 @@ class ViewEntryFragment : Fragment(), KodeinAware {
       value?.let { pop ->
         if(pop)
           Navigation.findNavController(requireView()).popBackStack()
+      }
+    })
+
+    viewModel.location.observe(this, Observer { value ->
+      value?.let { location ->
+        locationDisplay.visibility = if(location.isBlank()) View.GONE else View.VISIBLE
+        locationDisplay.text = location
       }
     })
   }

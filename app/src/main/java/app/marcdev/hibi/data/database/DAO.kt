@@ -153,5 +153,8 @@ interface DAO {
 
   @Query("SELECT id FROM Book INNER JOIN BookEntryRelation ON Book.id = BookEntryRelation.bookId WHERE entryId = :entryId")
   fun getBookIdsWithEntry(entryId: Int): List<Int>
+
+  @Query("SELECT * FROM Book INNER JOIN BookEntryRelation ON Book.id = BookEntryRelation.bookId WHERE entryId = :entryId")
+  fun getBooksWithEntry(entryId: Int): List<Book>
   // </editor-fold>
 }
