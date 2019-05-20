@@ -28,18 +28,6 @@ class BookRepositoryImpl private constructor(private val dao: DAO) : BookReposit
     }
   }
 
-  override suspend fun getAllBooks(): LiveData<List<Book>> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getAllBooks()
-    }
-  }
-
-  override suspend fun getBookById(id: Int): Book {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getBookById(id)
-    }
-  }
-
   override suspend fun isBookNameInUse(name: String): Boolean {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getCountBooksWithName(name) > 0
@@ -50,6 +38,10 @@ class BookRepositoryImpl private constructor(private val dao: DAO) : BookReposit
     return withContext(Dispatchers.IO) {
       return@withContext dao.getBookName(bookId)
     }
+  }
+
+  override fun getAllBooks(): LiveData<List<Book>> {
+    return dao.getAllBooks()
   }
 
   companion object {

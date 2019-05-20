@@ -1,72 +1,77 @@
 package app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.data.repository.TagRepository
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
+import kotlinx.coroutines.launch
 
 class TaggedEntriesViewModel(private val tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
 
-  var displayItems = MediatorLiveData<List<MainEntriesDisplayItem>>()
+  private var _tagId = 0
+  val tagId: Int
+    get() = _tagId
 
-  suspend fun updateList(tagId: Int) {
-    val newEntries = tagEntryRelationRepository.getEntriesWithTag(tagId)
+  private val _toolbarTitle = MutableLiveData<String>()
+  val toolbarTitle: LiveData<String>
+    get() = _toolbarTitle
+
+  private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
+  val entries: LiveData<List<MainEntriesDisplayItem>>
+    get() = _entries
+
+  private val _displayLoading = MutableLiveData<Boolean>()
+  val displayLoading: LiveData<Boolean>
+    get() = _displayLoading
+
+  private val _displayNoResults = MutableLiveData<Boolean>()
+  val displayNoResults: LiveData<Boolean>
+    get() = _displayNoResults
+
+  fun passArguments(tagIdArg: Int) {
+    _tagId = tagIdArg
+    getTagName()
+  }
+
+  fun loadEntries() {
+    viewModelScope.launch {
+      _displayLoading.value = true
+      _displayNoResults.value = false
+      getMainEntryDisplayItems()
+      _displayLoading.value = false
+      _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
+    }
+  }
+
+  private suspend fun getMainEntryDisplayItems() {
+    val entries = tagEntryRelationRepository.getEntriesWithTag(tagId)
     val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
-
-    // Adds both as sources so that observers get triggered when either are updated
-    displayItems.addSource(newEntries) {
-      displayItems.value = combineData(newEntries, tagEntryDisplayItems)
-    }
-    displayItems.addSource(tagEntryDisplayItems) {
-      displayItems.value = combineData(newEntries, tagEntryDisplayItems)
-    }
+    _entries.value = combineData(entries, tagEntryDisplayItems)
   }
 
-  suspend fun getTagName(tagId: Int): String {
-    return tagRepository.getTagName(tagId)
-  }
-
-  private fun combineData(entries: LiveData<List<Entry>>, tagEntryDisplayItems: LiveData<List<TagEntryDisplayItem>>): List<MainEntriesDisplayItem> {
+  private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>): List<MainEntriesDisplayItem> {
     val itemList = ArrayList<MainEntriesDisplayItem>()
 
-    entries.value?.forEach {
-      val item = MainEntriesDisplayItem(it, listOf())
+    entries.forEach { entry ->
+      val item = MainEntriesDisplayItem(entry, listOf())
       val listOfTags = ArrayList<String>()
 
-      if(tagEntryDisplayItems.value != null && tagEntryDisplayItems.value!!.isNotEmpty()) {
-        for(x in 0 until tagEntryDisplayItems.value!!.size) {
-          if(tagEntryDisplayItems.value!![x].entryId == it.id) {
-            listOfTags.add(tagEntryDisplayItems.value!![x].tagName)
-          }
+      tagEntryDisplayItems.forEach { tagEntryDisplayItem ->
+        if(tagEntryDisplayItem.entryId == entry.id) {
+          listOfTags.add(tagEntryDisplayItem.tagName)
         }
       }
 
       item.tags = listOfTags
-
       itemList.add(item)
     }
 
-    return sortEntries(itemList)
-  }
-
-  private fun sortEntries(items: List<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
-    val entriesMutable = items.toMutableList()
-    val sortedEntries = entriesMutable.sortedWith(
-      compareBy(
-        { -it.entry.year },
-        { -it.entry.month },
-        { -it.entry.day },
-        { -it.entry.hour },
-        { -it.entry.minute },
-        { -it.entry.id }
-      )
-    ).toMutableList()
-
-    return addListHeaders(sortedEntries)
+    return addListHeaders(itemList)
   }
 
   private fun addListHeaders(allItems: MutableList<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
@@ -100,5 +105,11 @@ class TaggedEntriesViewModel(private val tagRepository: TagRepository, private v
     }
 
     return listWithHeaders
+  }
+
+  private fun getTagName() {
+    viewModelScope.launch {
+      _toolbarTitle.value = tagRepository.getTagName(tagId)
+    }
   }
 }

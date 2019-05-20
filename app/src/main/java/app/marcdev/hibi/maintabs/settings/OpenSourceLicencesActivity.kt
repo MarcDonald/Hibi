@@ -47,6 +47,9 @@ class OpenSourceLicencesActivity : HibiActivity() {
     val gson: LicenseDisplay = findViewById(R.id.license_gson)
     gson.setOnClickListener(openURLClickListener("https://github.com/google/gson"))
 
+    val androidFilePicker: LicenseDisplay = findViewById(R.id.license_android_file_picker)
+    androidFilePicker.setOnClickListener(openURLClickListener("https://github.com/DroidNinja/Android-FilePicker"))
+
     val mplus: LicenseDisplay = findViewById(R.id.license_mplus)
     mplus.setOnClickListener(openURLClickListener("https://fonts.google.com/specimen/M+PLUS+Rounded+1c"))
 

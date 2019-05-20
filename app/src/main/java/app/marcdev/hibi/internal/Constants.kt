@@ -1,8 +1,9 @@
 package app.marcdev.hibi.internal
 
 const val PRODUCTION_DATABASE_VERSION = 9
-const val PRODUCTION_DATABASE_NAME = "ProductionAppDatabase.db"
-const val BACKUP_PATH = "/Hibi/backup/"
+const val PRODUCTION_DATABASE_NAME = "Database.hibi"
+const val EXTERNAL_BACKUP_PATH = "/Hibi/backup/"
+const val INTERNAL_BACKUP_PATH = "/backup/"
 
 // Main tab indices
 const val ENTRIES_TAB = 0
@@ -38,3 +39,4 @@ const val PACKAGE = "app.marcdev.hibi"
 // Request Codes
 const val REMINDER_NOTIFICATION_REQUEST_CODE = 0
 const val ALERT_RECEIVER_REQUEST_CODE = 1
+const val CHOOSE_RESTORE_FILE_REQUEST_CODE = 2

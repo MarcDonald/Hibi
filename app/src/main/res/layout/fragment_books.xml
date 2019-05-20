@@ -48,7 +48,7 @@
       android:id="@+id/img_no_books"
       android:layout_width="@dimen/main_screen_warning_image_size"
       android:layout_height="@dimen/main_screen_warning_image_size"
-      android:contentDescription="@string/no_entries"
+      android:contentDescription="@string/no_books"
       android:src="@drawable/ic_sentiment_dissatisfied_24dp"
       app:layout_constraintBottom_toTopOf="@id/gd_no_books"
       app:layout_constraintEnd_toEndOf="parent"
@@ -74,22 +74,9 @@
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
-  <androidx.core.widget.NestedScrollView
-    android:id="@+id/scroll_books"
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_books"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_books"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    </LinearLayout>
-  </androidx.core.widget.NestedScrollView>
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,74 +1,64 @@
 package app.marcdev.hibi.maintabs.mainentries
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
-import app.marcdev.hibi.internal.lazyDeferred
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
+import kotlinx.coroutines.launch
 
 class MainEntriesViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
 
-  val displayItems by lazyDeferred {
+  private val _displayLoading = MutableLiveData<Boolean>()
+  val displayLoading: LiveData<Boolean>
+    get() = _displayLoading
+
+  private val _displayNoResults = MutableLiveData<Boolean>()
+  val displayNoResults: LiveData<Boolean>
+    get() = _displayNoResults
+
+  private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
+  val entries: LiveData<List<MainEntriesDisplayItem>>
+    get() = _entries
+
+  fun loadEntries() {
+    viewModelScope.launch {
+      _displayLoading.value = true
+      _displayNoResults.value = false
+      getMainEntryDisplayItems()
+      _displayLoading.value = false
+      _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
+    }
+  }
+
+  private suspend fun getMainEntryDisplayItems() {
     val allEntries = entryRepository.getAllEntries()
     val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
-
-    // Adds both as sources so that observers get triggered when either are updated
-    val result = MediatorLiveData<List<MainEntriesDisplayItem>>()
-    result.addSource(allEntries) {
-      result.value = combineData(allEntries, tagEntryDisplayItems)
-    }
-    result.addSource(tagEntryDisplayItems) {
-      result.value = combineData(allEntries, tagEntryDisplayItems)
-    }
-
-    return@lazyDeferred result
+    _entries.value = combineData(allEntries, tagEntryDisplayItems)
   }
 
-  val entryCount by lazyDeferred {
-    return@lazyDeferred entryRepository.getEntryCount()
-  }
-
-  private fun combineData(entries: LiveData<List<Entry>>, tagEntryDisplayItems: LiveData<List<TagEntryDisplayItem>>): List<MainEntriesDisplayItem> {
+  private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>): List<MainEntriesDisplayItem> {
     val itemList = ArrayList<MainEntriesDisplayItem>()
 
-    entries.value?.forEach {
-      val item = MainEntriesDisplayItem(it, listOf())
+    entries.forEach { entry ->
+      val item = MainEntriesDisplayItem(entry, listOf())
       val listOfTags = ArrayList<String>()
 
-      if(tagEntryDisplayItems.value != null && tagEntryDisplayItems.value!!.isNotEmpty()) {
-        for(x in 0 until tagEntryDisplayItems.value!!.size) {
-          if(tagEntryDisplayItems.value!![x].entryId == it.id) {
-            listOfTags.add(tagEntryDisplayItems.value!![x].tagName)
-          }
+      tagEntryDisplayItems.forEach { tagEntryDisplayItem ->
+        if(tagEntryDisplayItem.entryId == entry.id) {
+          listOfTags.add(tagEntryDisplayItem.tagName)
         }
       }
 
       item.tags = listOfTags
-
       itemList.add(item)
     }
 
-    return sortEntries(itemList)
-  }
-
-  private fun sortEntries(items: List<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
-    val entriesMutable = items.toMutableList()
-    val sortedEntries = entriesMutable.sortedWith(
-      compareBy(
-        { -it.entry.year },
-        { -it.entry.month },
-        { -it.entry.day },
-        { -it.entry.hour },
-        { -it.entry.minute },
-        { -it.entry.id }
-      )
-    ).toMutableList()
-
-    return addListHeaders(sortedEntries)
+    return addListHeaders(itemList)
   }
 
   private fun addListHeaders(allItems: MutableList<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {

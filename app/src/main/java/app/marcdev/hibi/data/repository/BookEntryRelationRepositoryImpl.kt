@@ -30,39 +30,19 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
     }
   }
 
-  override suspend fun deleteBookEntryRelationByBookId(bookId: Int) {
-    withContext(Dispatchers.IO) {
-      dao.deleteBookEntryRelationByBookId(bookId)
-    }
-  }
-
-  override suspend fun deleteBookEntryRelationByEntryId(entryId: Int) {
-    withContext(Dispatchers.IO) {
-      dao.deleteBookEntryRelationByEntryId(entryId)
-    }
-  }
-
-  override suspend fun getAllBookEntryRelations(): LiveData<List<BookEntryRelation>> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getAllBookEntryRelations()
-    }
-  }
-
-  override suspend fun getEntriesWithBook(bookId: Int): LiveData<List<Entry>> {
+  override suspend fun getEntriesWithBook(bookId: Int): List<Entry> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getEntriesWithBook(bookId)
     }
   }
 
-  override suspend fun getBooksWithCount(): LiveData<List<BookDisplayItem>> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getBooksWithCountOfEntries()
-    }
+  override val bookDisplayItems: LiveData<List<BookDisplayItem>> by lazy {
+    dao.getBookDisplayItems()
   }
 
-  override suspend fun getBookIdsWithEntryNotLiveData(entryId: Int): List<Int> {
+  override suspend fun getBookIdsWithEntry(entryId: Int): List<Int> {
     return withContext(Dispatchers.IO) {
-      return@withContext dao.getBookIdsWithEntryNotLiveData(entryId)
+      return@withContext dao.getBookIdsWithEntry(entryId)
     }
   }
 

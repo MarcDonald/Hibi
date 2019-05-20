@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <dimen name="fab_margin">16dp</dimen>
+  <dimen name="margin_fab">16dp</dimen>
   <dimen name="margin_standard">8dp</dimen>
   <dimen name="margin_half">4dp</dimen>
   <dimen name="rounded_corner_radius">8dp</dimen>
@@ -17,4 +17,5 @@
   <dimen name="option_bar_icon_width">80dp</dimen>
   <dimen name="option_bar_icon_padding">8dp</dimen>
   <dimen name="main_screen_warning_image_size">150dp</dimen>
+  <dimen name="smaller_warning_image_size">120dp</dimen>
 </resources>

@@ -70,6 +70,18 @@
         app:title="@string/gson" />
 
       <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_android_file_picker"
+        style="@style/Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/android_file_picker_description"
+        app:license="@string/apache"
+        app:title="@string/android_file_picker" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_mplus"
         style="@style/Hibi.CardView.Rounded"
         android:layout_width="match_parent"

@@ -1,6 +1,6 @@
 <resources>
 
-  <!-- Base application theme. -->
+  <!--region Base Themes-->
   <style name="Hibi.LightTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
     <item name="colorPrimary">@color/lightThemeColorPrimary</item>
     <item name="colorPrimaryDark">@color/lightThemeColorPrimary</item>
@@ -30,8 +30,9 @@
     <item name="materialButtonStyle">@style/Hibi.Button.Text</item>
     <item name="chipStyle">@style/Hibi.DarkTheme.Chip</item>
   </style>
+  <!--endregion-->
 
-  <!--UI Components-->
+  <!--region UI Components-->
   <style name="Hibi.BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
     <item name="colorAccent">@color/colorAccent</item>
     <item name="android:windowLightStatusBar">true</item>
@@ -94,14 +95,16 @@
     <item name="iconTint">@android:color/white</item>
     <item name="iconPadding">12dp</item>
   </style>
+  <!--endregion-->
 
-  <!--Edit Texts-->
+  <!--region Edit Texts-->
   <style name="Hibi.EditText.AddNewWordDialog" parent="ThemeOverlay.MaterialComponents.TextInputEditText">
     <item name="android:inputType">textCapSentences|textMultiLine</item>
     <item name="android:maxLines">3</item>
   </style>
+  <!--endregion-->
 
-  <!--Text Appearances-->
+  <!--region Text Appearances-->
   <style name="TextAppearance.Hibi.DateTimeAddEntry" parent="TextAppearance.MaterialComponents.Headline6">
     <item name="android:textSize">16sp</item>
     <item name="android:textColor">?attr/hibiTextOnPrimary</item>
@@ -193,5 +196,6 @@
   <style name="TextAppearance.Hibi.WarningDisplay" parent="TextAppearance.MaterialComponents.Body1">
     <item name="android:textColor">?hibiSecondaryTextOnPrimary</item>
   </style>
+  <!--endregion-->
 
 </resources>

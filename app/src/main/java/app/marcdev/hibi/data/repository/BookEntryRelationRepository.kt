@@ -11,15 +11,9 @@ interface BookEntryRelationRepository {
 
   suspend fun deleteBookEntryRelation(bookEntryRelation: BookEntryRelation)
 
-  suspend fun deleteBookEntryRelationByBookId(bookId: Int)
+  suspend fun getEntriesWithBook(bookId: Int): List<Entry>
 
-  suspend fun deleteBookEntryRelationByEntryId(entryId: Int)
+  val bookDisplayItems: LiveData<List<BookDisplayItem>>
 
-  suspend fun getAllBookEntryRelations(): LiveData<List<BookEntryRelation>>
-
-  suspend fun getEntriesWithBook(bookId: Int): LiveData<List<Entry>>
-
-  suspend fun getBooksWithCount(): LiveData<List<BookDisplayItem>>
-
-  suspend fun getBookIdsWithEntryNotLiveData(entryId: Int): List<Int>
+  suspend fun getBookIdsWithEntry(entryId: Int): List<Int>
 }

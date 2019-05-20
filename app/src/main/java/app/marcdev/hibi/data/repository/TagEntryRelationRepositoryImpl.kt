@@ -32,27 +32,21 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
-  override suspend fun getEntriesWithTag(tagId: Int): LiveData<List<Entry>> {
+  override suspend fun getEntriesWithTag(tagId: Int): List<Entry> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getEntriesWithTag(tagId)
     }
   }
 
-  override suspend fun getTagsWithEntry(entryId: Int): LiveData<List<Tag>> {
+  override suspend fun getTagsWithEntry(entryId: Int): List<Tag> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getTagsWithEntry(entryId)
     }
   }
 
-  override suspend fun getTagsWithEntryNotLiveData(entryId: Int): List<Tag> {
+  override suspend fun getTagIdsWithEntry(entryId: Int): List<Int> {
     return withContext(Dispatchers.IO) {
-      return@withContext dao.getTagsWithEntryNotLiveData(entryId)
-    }
-  }
-
-  override suspend fun getTagIdsWithEntryNotLiveData(entryId: Int): List<Int> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getTagIdsWithEntryNotLiveData(entryId)
+      return@withContext dao.getTagIdsWithEntry(entryId)
     }
   }
 
@@ -62,25 +56,11 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
-  override suspend fun deleteTagEntryRelationByEntryId(entryId: Int) {
-    withContext(Dispatchers.IO) {
-      dao.deleteTagEntryRelationByEntryId(entryId)
-    }
+  override val allTagDisplayItems: LiveData<List<TagDisplayItem>> by lazy {
+    dao.getTagDisplayItems()
   }
 
-  override suspend fun deleteTagEntryRelationByTagId(tagId: Int) {
-    withContext(Dispatchers.IO) {
-      dao.deleteTagEntryRelationByTagId(tagId)
-    }
-  }
-
-  override suspend fun getTagsWithCount(): LiveData<List<TagDisplayItem>> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getTagsWithCountOfEntries()
-    }
-  }
-
-  override suspend fun getTagEntryDisplayItems(): LiveData<List<TagEntryDisplayItem>> {
+  override suspend fun getTagEntryDisplayItems(): List<TagEntryDisplayItem> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getTagEntryDisplayItems()
     }

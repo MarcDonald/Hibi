@@ -34,10 +34,8 @@ class NewWordRepositoryImpl private constructor(private val dao: DAO) : NewWordR
     }
   }
 
-  override suspend fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getNewWordsByEntryId(entryId)
-    }
+  override fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>> {
+    return dao.getNewWordsByEntryId(entryId)
   }
 
   override suspend fun getNewWordCountByEntryId(entryId: Int): Int {

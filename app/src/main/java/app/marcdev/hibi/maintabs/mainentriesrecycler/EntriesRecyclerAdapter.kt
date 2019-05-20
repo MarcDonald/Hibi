@@ -20,19 +20,16 @@ class EntriesRecyclerAdapter(private val context: Context) : RecyclerView.Adapte
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseEntriesRecyclerViewHolder {
-    val viewHolder = when (viewType) {
+    return when(viewType) {
       0 -> {
         val view = inflater.inflate(R.layout.item_main_screen_header, parent, false)
         EntriesRecyclerViewHolderHeader(view)
       }
-
       else -> {
         val view = inflater.inflate(R.layout.item_main_screen_entry, parent, false)
         EntriesRecyclerViewHolder(view)
       }
     }
-
-    return viewHolder
   }
 
   override fun getItemCount(): Int {

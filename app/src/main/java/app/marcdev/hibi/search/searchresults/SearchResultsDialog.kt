@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,51 +16,48 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
-import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
 class SearchResultsDialog : HibiBottomSheetDialogFragment(), KodeinAware {
-
-  // Kodein initialisation
   override val kodein by closestKodein()
 
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: SearchViewModelFactory by instance()
   private lateinit var viewModel: SearchViewModel
+  // </editor-fold>
 
-  // UI Components
+  // <editor-fold desc="UI Components">
   private lateinit var progressBar: ProgressBar
   private lateinit var noConnectionWarning: LinearLayout
   private lateinit var noResultsWarning: LinearLayout
-
-  // Recycler
   private lateinit var recyclerAdapter: SearchResultsRecyclerAdapter
   private lateinit var recycler: RecyclerView
+  // </editor-fold>
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_search, container, false)
-
     bindViews(view)
     initRecycler()
-
+    setupObservers()
     return view
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     arguments?.let {
       val searchTerm = arguments!!.getString(SEARCH_TERM_KEY, "")
-      search(searchTerm)
+      val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+      imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+      viewModel.search(searchTerm)
     }
   }
 
@@ -87,47 +85,31 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     recycler.addItemDecoration(dividerItemDecoration)
   }
 
-  private fun search(searchTerm: String) = launch {
-    val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(view!!.windowToken, 0)
-
-    displayLoading(true)
-
-    val response = viewModel.searchTerm(searchTerm)
-
-    if(response == null) {
-      displayNoConnection()
-    } else {
-      if(response.data.isNotEmpty()) {
-        recyclerAdapter.updateList(response.data)
-        recycler.scrollToPosition(0)
-        displayLoading(false)
-      } else {
-        displayNoResults()
+  private fun setupObservers() {
+    viewModel.displayLoading.observe(this, Observer { value ->
+      value?.let { show ->
+        progressBar.visibility = if(show) View.VISIBLE else View.GONE
       }
-    }
-  }
+    })
 
-  private fun displayLoading(isLoading: Boolean) {
-    if(isLoading) {
-      progressBar.visibility = View.VISIBLE
-      recycler.visibility = View.GONE
-      noConnectionWarning.visibility = View.GONE
-    } else {
-      progressBar.visibility = View.GONE
-      recycler.visibility = View.VISIBLE
-    }
-  }
+    viewModel.displayNoConnection.observe(this, Observer { value ->
+      value?.let { show ->
+        noConnectionWarning.visibility = if(show) View.VISIBLE else View.GONE
+      }
+    })
 
-  private fun displayNoConnection() {
-    progressBar.visibility = View.GONE
-    recycler.visibility = View.GONE
-    noConnectionWarning.visibility = View.VISIBLE
-  }
+    viewModel.displayNoResults.observe(this, Observer { value ->
+      value?.let { show ->
+        noResultsWarning.visibility = if(show) View.VISIBLE else View.GONE
+      }
+    })
 
-  private fun displayNoResults() {
-    progressBar.visibility = View.GONE
-    recycler.visibility = View.GONE
-    noResultsWarning.visibility = View.VISIBLE
+    viewModel.searchResults.observe(this, Observer { value ->
+      value?.let { searchResult ->
+        recyclerAdapter.updateList(searchResult)
+        recycler.scrollToPosition(0)
+        recycler.visibility = View.VISIBLE
+      }
+    })
   }
 }

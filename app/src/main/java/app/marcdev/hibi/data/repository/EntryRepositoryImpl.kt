@@ -1,7 +1,6 @@
 package app.marcdev.hibi.data.repository
 
 import android.database.sqlite.SQLiteConstraintException
-import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Entry
 import kotlinx.coroutines.Dispatchers
@@ -22,15 +21,15 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
     }
   }
 
-  override suspend fun getEntry(id: Int): LiveData<Entry> {
+  override suspend fun getAllEntries(): List<Entry> {
     return withContext(Dispatchers.IO) {
-      return@withContext dao.getEntry(id)
+      return@withContext dao.getAllEntries()
     }
   }
 
-  override suspend fun getAllEntries(): LiveData<List<Entry>> {
+  override suspend fun getEntry(id: Int): Entry {
     return withContext(Dispatchers.IO) {
-      return@withContext dao.getAllEntries()
+      return@withContext dao.getEntry(id)
     }
   }
 
@@ -40,25 +39,13 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
     }
   }
 
-  override suspend fun getAmountOfEntries(): LiveData<Int> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getAmountOfEntries()
-    }
-  }
-
   override suspend fun getLastEntryId(): Int {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getLastEntryId()
     }
   }
 
-  override suspend fun getEntryCount(): LiveData<Int> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getEntryCount()
-    }
-  }
-
-  override suspend fun getEntriesOnDate(year: Int, month: Int, day: Int): LiveData<List<Entry>> {
+  override suspend fun getEntriesOnDate(year: Int, month: Int, day: Int): List<Entry> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getEntriesOnDate(year, month, day)
     }

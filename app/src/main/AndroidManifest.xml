@@ -10,6 +10,7 @@
 
   <application
     android:name="app.marcdev.hibi.Hibi"
+    tools:replace="android:allowBackup"
     android:allowBackup="false"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
@@ -33,6 +34,16 @@
     <activity android:name=".maintabs.settings.SettingsActivity" />
 
     <receiver android:name=".internal.AlertReceiver" />
+    <provider
+      android:authorities="app.marcdev.hibi.FileProvider"
+      android:name="androidx.core.content.FileProvider"
+      android:enabled="true"
+      android:grantUriPermissions="true"
+      android:exported="false">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/filepaths" />
+    </provider>
   </application>
 
 </manifest>

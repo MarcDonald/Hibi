@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -21,68 +22,57 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
-import app.marcdev.hibi.internal.base.ScopedFragment
-import app.marcdev.hibi.internal.formatDateForDisplay
-import app.marcdev.hibi.internal.formatTimeForDisplay
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.addentrytobookdialog.AddEntryToBookDialog
 import app.marcdev.hibi.uicomponents.addtagtoentrydialog.AddTagToEntryDialog
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.uicomponents.views.SearchBar
 import com.google.android.material.button.MaterialButton
-import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class AddEntryFragment : ScopedFragment(), KodeinAware {
-
-  // Kodein initialisation
+class AddEntryFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
 
-  // Viewmodel
+  // <editor-fold desc="View Model">
   private val viewModelFactory: AddEntryViewModelFactory by instance()
   private lateinit var viewModel: AddEntryViewModel
+  // </editor-fold>
 
-  // UI Components
+  // <editor-fold desc="UI Components">
   private lateinit var dateButton: MaterialButton
   private lateinit var timeButton: MaterialButton
   private lateinit var contentInput: EditText
   private lateinit var backConfirmDialog: BinaryOptionDialog
   private lateinit var toolbarTitle: TextView
   private lateinit var searchBar: SearchBar
+  // </editor-fold>
 
-  // Other
-  private val dateTimeStore = DateTimeStore()
-  private var entryIdBeingEdited = 0
-
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    Timber.v("Log: onCreate: Started")
+    super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEntryViewModel::class.java)
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_add_entry, container, false)
-
     bindViews(view)
     initBackConfirmDialog()
     focusInput()
-
-    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback { onBackPress() })
-
+    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback {
+      viewModel.backPress(contentInput.text.toString().isEmpty())
+      false
+    })
+    setupObservers()
     return view
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     arguments?.let {
-      val entryId = AddEntryFragmentArgs.fromBundle(it).entryId
-      if(entryId != 0) {
-        convertToEditMode(entryId)
-      }
+      viewModel.passArgument(AddEntryFragmentArgs.fromBundle(it).entryId)
     }
   }
 
@@ -94,11 +84,9 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
     dateButton = view.findViewById(R.id.btn_date)
     dateButton.setOnClickListener(dateClickListener)
-    initDateButton()
 
     timeButton = view.findViewById(R.id.btn_time)
     timeButton.setOnClickListener(timeClickListener)
-    initTimeButton()
 
     contentInput = view.findViewById(R.id.edt_content)
 
@@ -108,7 +96,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val backButton: ImageView = view.findViewById(R.id.img_add_entry_toolbar_back)
     backButton.setOnClickListener(backClickListener)
 
-    // Option bar icons
+    // <editor-fold desc="Option Bar Buttons">
     val addTagButton: ImageView = view.findViewById(R.id.img_option_tag)
     addTagButton.setOnClickListener(addTagClickListener)
 
@@ -126,6 +114,61 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
     val wordButton: ImageView = view.findViewById(R.id.img_option_words)
     wordButton.setOnClickListener(wordClickListener)
+    // </editor-fold>
+  }
+
+  private fun setupObservers() {
+    viewModel.displayEmptyContentWarning.observe(this, Observer { value ->
+      value?.let { show ->
+        if(show)
+          contentInput.error = resources.getString(R.string.empty_content_warning)
+      }
+    })
+
+    viewModel.dateTimeStore.readableDate.observe(this, Observer { date ->
+      date?.let {
+        dateButton.text = date
+      }
+    })
+
+    viewModel.dateTimeStore.readableTime.observe(this, Observer { time ->
+      time?.let {
+        timeButton.text = time
+      }
+    })
+
+    viewModel.popBackStack.observe(this, Observer { pop ->
+      pop?.let {
+        if(pop)
+          popBackStack()
+      }
+    })
+
+    viewModel.isEditMode.observe(this, Observer { value ->
+      value?.let { isEditMode ->
+        if(isEditMode)
+          toolbarTitle.text =
+            if(isEditMode)
+              resources.getString(R.string.edit_entry)
+            else
+              resources.getString(R.string.add_entry)
+      }
+    })
+
+    viewModel.entry.observe(this, Observer { entry ->
+      entry?.let {
+        contentInput.setText(entry.content)
+      }
+    })
+
+    viewModel.displayBackWarning.observe(this, Observer { value ->
+      value?.let { display ->
+        if(display)
+          backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
+        else
+          backConfirmDialog.dismiss()
+      }
+    })
   }
 
   private fun initBackConfirmDialog() {
@@ -137,45 +180,15 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
   }
 
   private val saveClickListener = View.OnClickListener {
-    launch {
-      val content = contentInput.text.toString()
-
-      if(content.isBlank()) {
-        contentInput.error = resources.getString(R.string.empty_content_warning)
-      } else {
-        val day = dateTimeStore.getDay()
-        val month = dateTimeStore.getMonth()
-        val year = dateTimeStore.getYear()
-        val hour = dateTimeStore.getHour()
-        val minute = dateTimeStore.getMinute()
-
-        if(entryIdBeingEdited == 0) {
-          viewModel.addEntry(day, month, year, hour, minute, content)
-        } else {
-          viewModel.updateEntry(day, month, year, hour, minute, content, entryIdBeingEdited)
-        }
-
-        popBackStack()
-      }
-    }
+    viewModel.save(contentInput.text.toString(), true)
   }
 
   private val backClickListener = View.OnClickListener {
-    onBackPress()
-  }
-
-  private fun onBackPress(): Boolean {
-    if(contentInput.text.toString().isBlank()) {
-      popBackStack()
-    } else {
-      backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
-    }
-    return true
+    viewModel.backPress(contentInput.text.toString().isBlank())
   }
 
   private val confirmBackClickListener = View.OnClickListener {
-    backConfirmDialog.dismiss()
-    popBackStack()
+    viewModel.confirmBack()
   }
 
   private val cancelBackClickListener = View.OnClickListener {
@@ -184,13 +197,13 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
 
   private val dateClickListener = View.OnClickListener {
     val dateDialog = EntryDatePickerDialog()
-    dateDialog.bindDateTimeStore(dateTimeStore)
+    dateDialog.bindDateTimeStore(viewModel.dateTimeStore)
     dateDialog.show(requireFragmentManager(), "Date Picker")
   }
 
   private val timeClickListener = View.OnClickListener {
     val timeDialog = EntryTimePickerDialog()
-    timeDialog.bindDateTimeStore(dateTimeStore)
+    timeDialog.bindDateTimeStore(viewModel.dateTimeStore)
     timeDialog.show(requireFragmentManager(), "Time Picker")
   }
 
@@ -198,7 +211,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val dialog = AddTagToEntryDialog()
 
     val bundle = Bundle()
-    bundle.putInt(ENTRY_ID_KEY, entryIdBeingEdited)
+    bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
     dialog.arguments = bundle
 
     dialog.show(requireFragmentManager(), "Add Tag Dialog")
@@ -208,7 +221,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val dialog = AddEntryToBookDialog()
 
     val bundle = Bundle()
-    bundle.putInt(ENTRY_ID_KEY, entryIdBeingEdited)
+    bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
     dialog.arguments = bundle
 
     dialog.show(requireFragmentManager(), "Add To Book Dialog")
@@ -233,7 +246,7 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     val dialog = NewWordDialog()
 
     val bundle = Bundle()
-    bundle.putInt(ENTRY_ID_KEY, entryIdBeingEdited)
+    bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
     dialog.arguments = bundle
 
     dialog.show(requireFragmentManager(), "New Words Dialog")
@@ -255,38 +268,12 @@ class AddEntryFragment : ScopedFragment(), KodeinAware {
     searchDialog.show(requireFragmentManager(), "Add Entry Search")
   }
 
-  private fun initDateButton() {
-    dateTimeStore.readableDate.observe(this@AddEntryFragment, Observer { date ->
-      dateButton.text = date
-    })
-  }
-
-  private fun initTimeButton() {
-    dateTimeStore.readableTime.observe(this@AddEntryFragment, Observer { time ->
-      timeButton.text = time
-    })
-  }
-
-  private fun convertToEditMode(entryId: Int) = launch {
-    toolbarTitle.text = resources.getString(R.string.edit_entry)
-    entryIdBeingEdited = entryId
-    viewModel.getEntry(entryId).observe(this@AddEntryFragment, Observer { entry ->
-      contentInput.setText(entry.content)
-
-      val day = entry.day
-      val month = entry.month
-      val year = entry.year
-      val hour = entry.hour
-      val minute = entry.minute
-
-      dateTimeStore.setDate(day, month, year)
-      dateTimeStore.setTime(hour, minute)
-      dateButton.text = formatDateForDisplay(day, month, year)
-      timeButton.text = formatTimeForDisplay(hour, minute)
-    })
-  }
-
   private fun popBackStack() {
-    Navigation.findNavController(view!!).popBackStack()
+    Navigation.findNavController(requireView()).popBackStack()
+  }
+
+  override fun onPause() {
+    viewModel.pause(contentInput.text.toString())
+    super.onPause()
   }
 }

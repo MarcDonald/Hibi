@@ -19,12 +19,12 @@ class EntriesRecyclerViewHolder(itemView: View) : BaseEntriesRecyclerViewHolder(
   private var contentDisplay: TextView = itemView.findViewById(R.id.item_content)
   private var chipGroup: ChipGroup = itemView.findViewById(R.id.cg_main_tags)
 
-  private val clickListener = View.OnClickListener {
+  private val clickListener = View.OnClickListener { view ->
     val viewEntryAction = MainScreenFragmentDirections.viewEntryAction()
     if(displayedItem != null) {
       viewEntryAction.entryId = displayedItem!!.entry.id
     }
-    Navigation.findNavController(it).navigate(viewEntryAction)
+    Navigation.findNavController(view).navigate(viewEntryAction)
   }
 
   init {
@@ -36,8 +36,8 @@ class EntriesRecyclerViewHolder(itemView: View) : BaseEntriesRecyclerViewHolder(
     dateTimeDisplay.text = dateTimeDisplayText
     contentDisplay.text = item.entry.content
 
+    chipGroup.removeAllViews()
     if(item.tags.isNotEmpty()) {
-      chipGroup.removeAllViews()
       item.tags.forEach {
         val chip = Chip(itemView.context)
         chip.text = it

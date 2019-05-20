@@ -43,6 +43,7 @@ class Hibi : Application(), KodeinAware {
   override val kodein = Kodein.lazy {
     import(androidXModule(this@Hibi))
 
+    // <editor-fold desc="Database">
     bind<AppDatabase>() with singleton { ProductionAppDatabase.invoke(applicationContext) }
     bind<DAO>() with singleton { instance<AppDatabase>().dao() }
     bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance()) }
@@ -51,10 +52,14 @@ class Hibi : Application(), KodeinAware {
     bind<NewWordRepository>() with singleton { NewWordRepositoryImpl.getInstance(instance()) }
     bind<BookRepository>() with singleton { BookRepositoryImpl.getInstance(instance()) }
     bind<BookEntryRelationRepository>() with singleton { BookEntryRelationRepositoryImpl.getInstance(instance()) }
+    // </editor-fold>
+    // <editor-fold desc="Connectivity and Jisho API">
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
+    // </editor-fold>
+    // <editor-fold desc="View models">
     bind() from provider { MainEntriesViewModelFactory(instance(), instance()) }
-    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance()) }
+    bind() from provider { AddEntryViewModelFactory(instance()) }
     bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
@@ -70,6 +75,7 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { BookEntriesViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { AddEntryToBookViewModelFactory(instance(), instance()) }
     bind() from provider { BackupUtils(instance()) }
+    // </editor-fold>
   }
 
   override fun onCreate() {
@@ -86,7 +92,7 @@ class Hibi : Application(), KodeinAware {
       val reminderChannel = NotificationChannel(
         NOTIFICATION_CHANNEL_REMINDER_ID,
         resources.getString(R.string.reminder_notification_channel_title),
-        NotificationManager.IMPORTANCE_HIGH)
+        NotificationManager.IMPORTANCE_DEFAULT)
       reminderChannel.description = resources.getString(R.string.reminder_notification_channel_description)
 
       val manager: NotificationManager = getSystemService(NotificationManager::class.java)
