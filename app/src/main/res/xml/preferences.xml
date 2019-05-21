@@ -13,7 +13,7 @@
       android:title="@string/entry_dividers_pref_title" />
   </PreferenceCategory>
 
-  <PreferenceCategory android:title="Notifications">
+  <PreferenceCategory android:title="@string/notifications">
     <SwitchPreference
       android:defaultValue="false"
       android:icon="@drawable/ic_notifications_24dp"

@@ -145,6 +145,7 @@
 
   <!--region Settings-->
   <string name="settings">Settings</string>
+  <string name="notifications">Notifications</string>
   <string name="appearance">Appearance</string>
   <string name="entry_dividers_pref_title">Entry Dividers</string>
   <string name="theme_pref_title">Dark Theme</string>
