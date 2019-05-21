@@ -3,6 +3,7 @@ package app.marcdev.hibi.data.repository
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
+import app.marcdev.hibi.data.entity.Book
 import app.marcdev.hibi.data.entity.BookEntryRelation
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BookDisplayItem
@@ -43,6 +44,12 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
   override suspend fun getBookIdsWithEntry(entryId: Int): List<Int> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getBookIdsWithEntry(entryId)
+    }
+  }
+
+  override suspend fun getBooksWithEntry(entryId: Int): List<Book> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getBooksWithEntry(entryId)
     }
   }
 

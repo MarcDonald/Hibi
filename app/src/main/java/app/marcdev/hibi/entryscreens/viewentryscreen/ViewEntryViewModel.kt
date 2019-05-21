@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.marcdev.hibi.data.entity.Book
 import app.marcdev.hibi.data.entity.Tag
+import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.NewWordRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
@@ -13,7 +15,7 @@ import app.marcdev.hibi.internal.formatTimeForDisplay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class ViewEntryViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository, private val newWordRepository: NewWordRepository) : ViewModel() {
+class ViewEntryViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository, private val newWordRepository: NewWordRepository, private val bookEntryRelationRepository: BookEntryRelationRepository) : ViewModel() {
   private var _entryId = 0
   val entryId: Int
     get() = _entryId
@@ -38,6 +40,10 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
   val tags: LiveData<List<Tag>>
     get() = _tags
 
+  private var _books = MutableLiveData<List<Book>>()
+  val books: LiveData<List<Book>>
+    get() = _books
+
   private var _displayNewWordButton = MutableLiveData<Boolean>()
   val displayNewWordButton: LiveData<Boolean>
     get() = _displayNewWordButton
@@ -46,6 +52,9 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
   val popBackStack: LiveData<Boolean>
     get() = _popBackStack
 
+  private var _location = MutableLiveData<String>()
+  val location: LiveData<String>
+    get() = _location
 
   fun passArguments(entryIdArg: Int) {
     _entryId = entryIdArg
@@ -56,6 +65,7 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
       getEntry()
       getTags()
       getNewWords()
+      getBooks()
     }
   }
 
@@ -65,6 +75,7 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
       _content.value = entry.content
       _readableDate.value = formatDateForDisplay(entry.day, entry.month, entry.year)
       _readableTime.value = formatTimeForDisplay(entry.hour, entry.minute)
+      _location.value = entry.location
     }
   }
 
@@ -77,6 +88,12 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
   private fun getNewWords() {
     viewModelScope.launch {
       _displayNewWordButton.value = newWordRepository.getNewWordCountByEntryId(entryId) > 0
+    }
+  }
+
+  private fun getBooks() {
+    viewModelScope.launch {
+      _books.value = bookEntryRelationRepository.getBooksWithEntry(entryId)
     }
   }
 

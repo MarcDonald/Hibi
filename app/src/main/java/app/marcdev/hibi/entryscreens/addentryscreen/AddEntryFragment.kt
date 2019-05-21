@@ -25,6 +25,7 @@ import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.addentrytobookdialog.AddEntryToBookDialog
 import app.marcdev.hibi.uicomponents.addtagtoentrydialog.AddTagToEntryDialog
+import app.marcdev.hibi.uicomponents.locationdialog.AddLocationToEntryDialog
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.uicomponents.views.SearchBar
 import com.google.android.material.button.MaterialButton
@@ -180,7 +181,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private val saveClickListener = View.OnClickListener {
-    viewModel.save(contentInput.text.toString(), true)
+    viewModel.savePress(contentInput.text.toString())
   }
 
   private val backClickListener = View.OnClickListener {
@@ -228,7 +229,13 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private val addLocationClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), resources.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
+    val dialog = AddLocationToEntryDialog()
+
+    val bundle = Bundle()
+    bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
+    dialog.arguments = bundle
+
+    dialog.show(requireFragmentManager(), "Add Location to Entry Dialog")
   }
 
   private val addMediaClickListener = View.OnClickListener {

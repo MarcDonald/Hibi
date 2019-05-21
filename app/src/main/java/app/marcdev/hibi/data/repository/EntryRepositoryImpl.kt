@@ -21,6 +21,12 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
     }
   }
 
+  override suspend fun saveEntry(id: Int, day: Int, month: Int, year: Int, hour: Int, minute: Int, content: String) {
+    withContext(Dispatchers.IO) {
+      dao.saveEntry(id, day, month, year, hour, minute, content)
+    }
+  }
+
   override suspend fun getAllEntries(): List<Entry> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getAllEntries()
@@ -48,6 +54,18 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
   override suspend fun getEntriesOnDate(year: Int, month: Int, day: Int): List<Entry> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getEntriesOnDate(year, month, day)
+    }
+  }
+
+  override suspend fun saveLocation(entryId: Int, location: String) {
+    withContext(Dispatchers.IO) {
+      dao.setLocation(entryId, location)
+    }
+  }
+
+  override suspend fun getLocation(entryId: Int): String {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getLocation(entryId)
     }
   }
 

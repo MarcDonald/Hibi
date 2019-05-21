@@ -77,29 +77,71 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/const_view_date_and_time" />
 
+      <TextView
+        android:id="@+id/txt_view_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/location"
+        android:textAppearance="@style/TextAppearance.Hibi.ViewEntryContent"
+        android:gravity="start|center"
+        android:drawableStart="@drawable/ic_location_on_24dp"
+        android:drawablePadding="@dimen/margin_standard"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin_standard" />
+
       <!--region Tags-->
       <LinearLayout
         android:id="@+id/lin_view_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/margin_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_view_content">
+        app:layout_constraintTop_toBottomOf="@id/txt_view_location">
 
-        <TextView
+        <ImageView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginStart="@dimen/margin_standard"
-          android:layout_marginTop="@dimen/margin_standard"
-          android:layout_marginEnd="@dimen/margin_standard"
-          android:text="@string/entry_tags" />
+          android:layout_gravity="center"
+          android:src="@drawable/ic_tag_24dp"
+          android:contentDescription="@string/entry_tags" />
 
         <com.google.android.material.chip.ChipGroup
           android:id="@+id/cg_view_tags"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_margin="@dimen/margin_standard" />
+          android:layout_gravity="center"
+          android:layout_marginStart="@dimen/margin_standard" />
+      </LinearLayout>
+      <!--endregion-->
+
+      <!--region Books-->
+      <LinearLayout
+        android:id="@+id/lin_view_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lin_view_tags">
+
+        <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:src="@drawable/ic_book_24dp"
+          android:contentDescription="@string/entry_tags" />
+
+        <com.google.android.material.chip.ChipGroup
+          android:id="@+id/cg_view_books"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginStart="@dimen/margin_standard" />
       </LinearLayout>
       <!--endregion-->
 
@@ -112,7 +154,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lin_view_tags" />
+        app:layout_constraintTop_toBottomOf="@id/lin_view_books" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 

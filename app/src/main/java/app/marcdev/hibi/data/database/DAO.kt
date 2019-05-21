@@ -21,6 +21,9 @@ interface DAO {
   @Update
   fun updateEntry(entry: Entry)
 
+  @Query("UPDATE Entry SET day = :day, month = :month, year = :year, hour = :hour, minute = :minute, content = :content WHERE id = :id")
+  fun saveEntry(id: Int, day: Int, month: Int, year: Int, hour: Int, minute: Int, content: String)
+
   @Query("SELECT * FROM Entry WHERE id = :id")
   fun getEntry(id: Int): Entry
 
@@ -36,6 +39,11 @@ interface DAO {
   @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day")
   fun getEntriesOnDate(year: Int, month: Int, day: Int): List<Entry>
 
+  @Query("UPDATE Entry SET location = :location WHERE id = :entryId")
+  fun setLocation(entryId: Int, location: String)
+
+  @Query("SELECT location FROM Entry WHERE id = :entryId")
+  fun getLocation(entryId: Int): String
   // </editor-fold>
 
   // <editor-fold desc="Tag">
@@ -145,5 +153,8 @@ interface DAO {
 
   @Query("SELECT id FROM Book INNER JOIN BookEntryRelation ON Book.id = BookEntryRelation.bookId WHERE entryId = :entryId")
   fun getBookIdsWithEntry(entryId: Int): List<Int>
+
+  @Query("SELECT * FROM Book INNER JOIN BookEntryRelation ON Book.id = BookEntryRelation.bookId WHERE entryId = :entryId")
+  fun getBooksWithEntry(entryId: Int): List<Book>
   // </editor-fold>
 }
