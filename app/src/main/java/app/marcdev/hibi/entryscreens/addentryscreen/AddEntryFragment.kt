@@ -64,7 +64,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
     focusInput()
     requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback {
       viewModel.backPress(contentInput.text.toString().isEmpty())
-      false
+      true
     })
     setupObservers()
     return view
