@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/margin_standard">
+
+  <androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fadeScrollbars="false"
+    android:scrollbarSize="@dimen/scroll_bar_size"
+    android:scrollbars="vertical">
+
+    <!--Blocks descendant focusability so that it doesn't scroll to the bottom if it's too long-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:id="@+id/txt_search_entries_title"
+        style="@style/TextAppearance.Hibi.BottomSheetTitle"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:text="@string/search_entries"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <!--region Date-->
+      <LinearLayout
+        android:id="@+id/lin_search_entries_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="0.9"
+        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_search_entries_beginning"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/margin_standard"
+          android:layout_weight="0.3"
+          android:text="@string/beginning" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/margin_standard"
+          android:layout_weight="0.3"
+          android:gravity="center"
+          android:text="@string/until" />
+
+        <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_search_entries_end"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/margin_standard"
+          android:layout_weight="0.3"
+          android:text="@string/end" />
+      </LinearLayout>
+      <!--endregion-->
+
+      <!--region Containing-->
+      <TextView
+        android:id="@+id/txt_search_entries_containing_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:gravity="center"
+        android:text="@string/containing"
+        app:layout_constraintTop_toBottomOf="@id/lin_search_entries_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+      <EditText
+        android:id="@+id/edt_search_entries_containing_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:inputType="textCapSentences"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:hint="@string/content"
+        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_containing_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+      <!--endregion-->
+
+      <!--region Location-->
+      <TextView
+        android:id="@+id/txt_search_entries_location_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:gravity="center"
+        android:text="@string/at"
+        app:layout_constraintTop_toBottomOf="@id/edt_search_entries_containing_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+      <EditText
+        android:id="@+id/edt_search_entries_location_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:inputType="textCapSentences"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:hint="@string/location"
+        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_location_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+      <!--endregion-->
+
+      <!--region Tags-->
+      <TextView
+        android:id="@+id/txt_search_entries_tags_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:gravity="center"
+        android:text="@string/with_tags"
+        app:layout_constraintTop_toBottomOf="@id/edt_search_entries_location_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_search_entries_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_tags_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.Chip
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checkable="true"
+          android:text="@string/tag_name" />
+      </com.google.android.material.chip.ChipGroup>
+      <!--endregion-->
+
+      <!--region Books-->
+      <TextView
+        android:id="@+id/txt_search_entries_books_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:gravity="center"
+        android:text="@string/in"
+        app:layout_constraintTop_toBottomOf="@id/cg_search_entries_tags"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_search_entries_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_books_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.Chip
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checkable="true"
+          android:text="@string/book_name" />
+      </com.google.android.material.chip.ChipGroup>
+      <!--endregion-->
+
+      <!--region Buttons-->
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_search_entries_reset"
+        android:layout_width="0dp"
+        style="@style/Hibi.Button.Negative"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gd_search_entries_50_vert"
+        app:layout_constraintTop_toBottomOf="@id/cg_search_entries_books"
+        android:text="@string/reset" />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_search_entries_go"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gd_search_entries_50_vert"
+        app:layout_constraintTop_toBottomOf="@id/cg_search_entries_books"
+        android:text="@string/search" />
+
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gd_search_entries_50_vert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+      <!--endregion-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

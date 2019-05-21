@@ -138,6 +138,18 @@
   <string name="reminder_notification_add_action">Add Entry</string>
   <!--endregion-->
 
+  <!--region Entry Search-->
+  <string name="search_entries">Search Entries</string>
+  <string name="beginning">Beginning</string>
+  <string name="until">until</string>
+  <string name="end">End</string>
+  <string name="containing">containing</string>
+  <string name="at">at</string>
+  <string name="with_tags">with tags</string>
+  <string name="in">in</string>
+  <string name="reset">Reset</string>
+  <!--endregion-->
+
   <!--region Shortcuts-->
   <string name="shortcut_disabled">Shortcut Disabled</string>
   <string name="shortcut_add">Add Entry</string>
