@@ -12,6 +12,7 @@ import timber.log.Timber
 class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewModel() {
   val dateTimeStore = DateTimeStore()
   private var isNewEntry: Boolean = false
+  private var needsArgs = true
 
   private var _entryId = 0
   val entryId: Int
@@ -37,34 +38,22 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
   val entry: LiveData<Entry>
     get() = _entry
 
-  fun save(content: String, exit: Boolean) {
-    if(content.isBlank()) {
-      _displayEmptyContentWarning.value = true
-    } else {
-      viewModelScope.launch {
-        val day = dateTimeStore.getDay()
-        val month = dateTimeStore.getMonth()
-        val year = dateTimeStore.getYear()
-        val hour = dateTimeStore.getHour()
-        val minute = dateTimeStore.getMinute()
-        entryRepository.saveEntry(entryId, day, month, year, hour, minute, content)
-      }
-      if(exit)
-        _popBackStack.value = true
+  fun passArgument(entryIdArg: Int) {
+    if(needsArgs) {
+      _entryId = entryIdArg
+      _isEditMode.value = entryId != 0
+      loadData()
+      needsArgs = false
     }
   }
 
-  fun passArgument(entryIdArg: Int) {
-    _entryId = entryIdArg
-    _isEditMode.value = entryId != 0
-    viewModelScope.launch {
-      if(entryId != 0) {
-        getEntry(entryId)
-      } else {
-        isNewEntry = true
-        initialAdd()
-      }
+  fun savePress(content: String) {
+    if(content.isBlank()) {
+      _displayEmptyContentWarning.value = true
+    } else {
+      save(content)
     }
+    _popBackStack.value = true
   }
 
   fun backPress(contentIsEmpty: Boolean) {
@@ -91,26 +80,52 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
   }
 
   fun pause(content: String) {
-    // Saves user input when app is put into the background, in case it is killed by the OS
-    Timber.w("Log: pause: onPause called, saving so user input isn't lost")
-    save(content, false)
+    if(content.isNotBlank()) {
+      // Saves user input when app is put into the background, in case it is killed by the OS
+      Timber.w("Log: pause: onPause called, saving so user input isn't lost")
+      save(content)
+    }
   }
 
-  private suspend fun initialAdd() {
-    val day = dateTimeStore.getDay()
-    val month = dateTimeStore.getMonth()
-    val year = dateTimeStore.getYear()
-    val hour = dateTimeStore.getHour()
-    val minute = dateTimeStore.getMinute()
-    entryRepository.addEntry(Entry(day, month, year, hour, minute, ""))
-    _entryId = entryRepository.getLastEntryId()
+  private fun loadData() {
+    if(entryId != 0) {
+      getEntry(entryId)
+    } else {
+      isNewEntry = true
+      initialAdd()
+    }
   }
 
-  private suspend fun getEntry(id: Int) {
-    val entry = entryRepository.getEntry(id)
-    _entry.value = entry
-    dateTimeStore.setDate(entry.day, entry.month, entry.year)
-    dateTimeStore.setTime(entry.hour, entry.minute)
+  private fun getEntry(id: Int) {
+    viewModelScope.launch {
+      val entry = entryRepository.getEntry(id)
+      _entry.value = entry
+      dateTimeStore.setDate(entry.day, entry.month, entry.year)
+      dateTimeStore.setTime(entry.hour, entry.minute)
+    }
+  }
+
+  private fun initialAdd() {
+    viewModelScope.launch {
+      val day = dateTimeStore.getDay()
+      val month = dateTimeStore.getMonth()
+      val year = dateTimeStore.getYear()
+      val hour = dateTimeStore.getHour()
+      val minute = dateTimeStore.getMinute()
+      entryRepository.addEntry(Entry(day, month, year, hour, minute, ""))
+      _entryId = entryRepository.getLastEntryId()
+    }
+  }
+
+  private fun save(content: String) {
+    viewModelScope.launch {
+      val day = dateTimeStore.getDay()
+      val month = dateTimeStore.getMonth()
+      val year = dateTimeStore.getYear()
+      val hour = dateTimeStore.getHour()
+      val minute = dateTimeStore.getMinute()
+      entryRepository.saveEntry(entryId, day, month, year, hour, minute, content)
+    }
   }
 
   private suspend fun deleteEntry() {

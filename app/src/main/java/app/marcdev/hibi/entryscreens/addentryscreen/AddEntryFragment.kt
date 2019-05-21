@@ -181,7 +181,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private val saveClickListener = View.OnClickListener {
-    viewModel.save(contentInput.text.toString(), true)
+    viewModel.savePress(contentInput.text.toString())
   }
 
   private val backClickListener = View.OnClickListener {
