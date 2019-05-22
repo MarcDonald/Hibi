@@ -5,23 +5,32 @@
   android:layout_height="match_parent"
   android:orientation="vertical">
 
-  <!--region Loading-->
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar_layout_view_entry"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:backgroundTint="?colorPrimaryDark">
+
+    <include layout="@layout/toolbar_back" />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <!--region Search Results Loading-->
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/const_entries_loading"
+    android:id="@+id/const_search_entries_loading"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ProgressBar
-      android:id="@+id/prog_entries"
+      android:id="@+id/prog_search_entries"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
-      app:layout_constraintBottom_toTopOf="@id/gd_entries_loading"
+      app:layout_constraintBottom_toTopOf="@id/gd_search_entries_loading"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-      android:id="@+id/txt_entries_loading"
+      android:id="@+id/txt_search_entries_loading"
       style="@style/TextAppearance.Hibi.WarningDisplay"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -29,10 +38,10 @@
       android:text="@string/loading_entries"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/gd_entries_loading" />
+      app:layout_constraintTop_toBottomOf="@id/gd_search_entries_loading" />
 
     <androidx.constraintlayout.widget.Guideline
-      android:id="@+id/gd_entries_loading"
+      android:id="@+id/gd_search_entries_loading"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -40,9 +49,9 @@
   </androidx.constraintlayout.widget.ConstraintLayout>
   <!--endregion-->
 
-  <!--region No Entries-->
+  <!--region No Search Results-->
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/const_no_entries"
+    android:id="@+id/const_no_search_entries_results"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -50,25 +59,25 @@
       android:id="@+id/img_no_entries"
       android:layout_width="@dimen/main_screen_warning_image_size"
       android:layout_height="@dimen/main_screen_warning_image_size"
-      android:contentDescription="@string/no_entries"
+      android:contentDescription="@string/no_tagged_entries"
       android:src="@drawable/ic_sentiment_dissatisfied_24dp"
-      app:layout_constraintBottom_toTopOf="@id/gd_no_entries"
+      app:layout_constraintBottom_toTopOf="@id/gd_no_search_entries_results"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-      android:id="@+id/txt_no_entries"
+      android:id="@+id/txt_no_search_entries_results"
       style="@style/TextAppearance.Hibi.WarningDisplay"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
-      android:text="@string/no_entries"
+      android:text="@string/no_tagged_entries"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/gd_no_entries" />
+      app:layout_constraintTop_toBottomOf="@id/gd_no_search_entries_results" />
 
     <androidx.constraintlayout.widget.Guideline
-      android:id="@+id/gd_no_entries"
+      android:id="@+id/gd_no_search_entries_results"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -77,8 +86,38 @@
   <!--endregion-->
 
   <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recycler_entries"
+    android:id="@+id/recycler_search_entries"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/fab_search_entries"
+    style="@style/Hibi.Button.ExtendedFab"
+    android:layout_width="200dp"
+    android:layout_height="64dp"
+    android:contentDescription="@string/search_entries"
+    android:text="@string/search"
+    app:icon="@drawable/ic_search_24dp"
+    app:layout_anchor="@+id/toolbar_bot_search_entries"
+    app:layout_anchorGravity="top|center" />
+
+  <!--Show drop shadow for bottom app bar-->
+  <View
+    android:id="@+id/shadow_search_entries_bot_app_bar"
+    android:layout_width="wrap_content"
+    android:layout_height="4dp"
+    android:background="@drawable/shadow"
+    android:layout_gravity="bottom"
+    android:layout_marginBottom="?attr/actionBarSize" />
+
+  <androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar_bot_search_entries"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?colorPrimaryDark"
+    android:layout_gravity="bottom"
+    app:contentInsetEnd="0dp"
+    app:contentInsetStart="0dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

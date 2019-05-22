@@ -19,6 +19,8 @@ import app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment.BookEntriesVi
 import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BooksFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarTabViewModelFactory
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesViewModelFactory
+import app.marcdev.hibi.maintabs.searchentries.searchentriescriteriadialog.SearchEntriesCriteriaDialogViewModelFactory
+import app.marcdev.hibi.maintabs.searchentries.searchentriesscreen.SearchEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagsFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesViewModelFactory
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
@@ -76,6 +78,8 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { BookEntriesViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { AddEntryToBookViewModelFactory(instance(), instance()) }
     bind() from provider { AddLocationToEntryViewModelFactory(instance()) }
+    bind() from provider { SearchEntriesCriteriaDialogViewModelFactory() }
+    bind() from provider { SearchEntriesViewModelFactory(instance(), instance()) }
     bind() from provider { BackupUtils(instance()) }
     // </editor-fold>
   }

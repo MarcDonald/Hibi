@@ -42,27 +42,27 @@
 
         <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_search_entries_beginning"
-          android:layout_width="wrap_content"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:padding="@dimen/margin_standard"
           android:layout_weight="0.3"
-          android:text="@string/beginning" />
+          android:text="@string/start" />
 
         <TextView
-          android:layout_width="wrap_content"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:padding="@dimen/margin_standard"
           android:layout_weight="0.3"
           android:gravity="center"
-          android:text="@string/until" />
+          android:text="@string/to" />
 
         <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_search_entries_end"
-          android:layout_width="wrap_content"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:padding="@dimen/margin_standard"
           android:layout_weight="0.3"
-          android:text="@string/end" />
+          android:text="@string/finish" />
       </LinearLayout>
       <!--endregion-->
 
