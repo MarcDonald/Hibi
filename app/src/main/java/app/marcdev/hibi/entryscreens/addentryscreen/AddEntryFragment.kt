@@ -23,6 +23,8 @@ import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
+import app.marcdev.hibi.uicomponents.DatePickerDialog
+import app.marcdev.hibi.uicomponents.TimePickerDialog
 import app.marcdev.hibi.uicomponents.addentrytobookdialog.AddEntryToBookDialog
 import app.marcdev.hibi.uicomponents.addtagtoentrydialog.AddTagToEntryDialog
 import app.marcdev.hibi.uicomponents.locationdialog.AddLocationToEntryDialog
@@ -49,6 +51,8 @@ class AddEntryFragment : Fragment(), KodeinAware {
   private lateinit var backConfirmDialog: BinaryOptionDialog
   private lateinit var toolbarTitle: TextView
   private lateinit var searchBar: SearchBar
+  private lateinit var dateDialog: DatePickerDialog
+  private lateinit var timeDialog: TimePickerDialog
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -197,15 +201,49 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private val dateClickListener = View.OnClickListener {
-    val dateDialog = EntryDatePickerDialog()
-    dateDialog.bindDateTimeStore(viewModel.dateTimeStore)
+    dateDialog = DatePickerDialog
+      .Builder()
+      .setOkClickListener(dateOkOnClickListener)
+      .setCancelClickListener(dateCancelOnClickListener)
+      .initDatePicker(
+        viewModel.dateTimeStore.year,
+        viewModel.dateTimeStore.month,
+        viewModel.dateTimeStore.day,
+        null)
+      .build()
     dateDialog.show(requireFragmentManager(), "Date Picker")
   }
 
+  private val dateCancelOnClickListener = View.OnClickListener {
+    dateDialog.dismiss()
+  }
+
+  private val dateOkOnClickListener = View.OnClickListener {
+    val day = dateDialog.day
+    val month = dateDialog.month
+    val year = dateDialog.year
+
+    viewModel.dateTimeStore.setDate(day, month, year)
+    dateDialog.dismiss()
+  }
+
   private val timeClickListener = View.OnClickListener {
-    val timeDialog = EntryTimePickerDialog()
-    timeDialog.bindDateTimeStore(viewModel.dateTimeStore)
+    timeDialog = TimePickerDialog.Builder()
+      .setIs24HourView(true)
+      .setOkClickListener(timeOkClickListener)
+      .setCancelClickListener(timeCancelClickListener)
+      .initTimePicker(viewModel.dateTimeStore.hour, viewModel.dateTimeStore.minute, null)
+      .build()
     timeDialog.show(requireFragmentManager(), "Time Picker")
+  }
+
+  private val timeOkClickListener = View.OnClickListener {
+    viewModel.dateTimeStore.setTime(timeDialog.hour, timeDialog.minute)
+    timeDialog.dismiss()
+  }
+
+  private val timeCancelClickListener = View.OnClickListener {
+    timeDialog.dismiss()
   }
 
   private val addTagClickListener = View.OnClickListener {

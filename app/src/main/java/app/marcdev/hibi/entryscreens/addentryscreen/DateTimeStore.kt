@@ -6,8 +6,9 @@ import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.internal.formatTimeForDisplay
 import java.util.*
 
-
 class DateTimeStore {
+  private var calendar = Calendar.getInstance()
+
   private val _readableDate = MutableLiveData<String>()
   val readableDate: LiveData<String>
     get() = _readableDate
@@ -16,7 +17,20 @@ class DateTimeStore {
   val readableTime: LiveData<String>
     get() = _readableTime
 
-  private var calendar = Calendar.getInstance()
+  val day: Int
+    get() = calendar.get(Calendar.DAY_OF_MONTH)
+
+  val month: Int
+    get() = calendar.get(Calendar.MONTH)
+
+  val year: Int
+    get() = calendar.get(Calendar.YEAR)
+
+  val hour: Int
+    get() = calendar.get(Calendar.HOUR_OF_DAY)
+
+  val minute: Int
+    get() = calendar.get(Calendar.MINUTE)
 
   init {
     _readableDate.value = formatDateForDisplay(calendar)
@@ -36,25 +50,5 @@ class DateTimeStore {
     calendar.set(Calendar.MINUTE, minute)
 
     _readableTime.value = formatTimeForDisplay(calendar)
-  }
-
-  fun getDay(): Int {
-    return calendar.get(Calendar.DAY_OF_MONTH)
-  }
-
-  fun getMonth(): Int {
-    return calendar.get(Calendar.MONTH)
-  }
-
-  fun getYear(): Int {
-    return calendar.get(Calendar.YEAR)
-  }
-
-  fun getHour(): Int {
-    return calendar.get(Calendar.HOUR_OF_DAY)
-  }
-
-  fun getMinute(): Int {
-    return calendar.get(Calendar.MINUTE)
   }
 }

@@ -19,7 +19,7 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.data.BackupUtils
 import app.marcdev.hibi.internal.*
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
-import app.marcdev.hibi.uicomponents.ReminderTimePickerDialog
+import app.marcdev.hibi.uicomponents.TimePickerDialog
 import com.google.android.material.snackbar.Snackbar
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
@@ -37,6 +37,10 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   override val kodein by closestKodein()
 
   private val backupUtils: BackupUtils by instance()
+
+  // <editor-fold desc="UI Components">
+  private lateinit var reminderTimePickerDialog: TimePickerDialog
+  // </editor-fold>
 
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
     Timber.v("Log: onCreatePreferences: Started")
@@ -115,9 +119,36 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   }
 
   private val reminderTimeClickListener = Preference.OnPreferenceClickListener {
-    val dialog = ReminderTimePickerDialog()
-    dialog.show(requireFragmentManager(), "Reminder Time Picker Dialog")
+    val currentSetTime = PreferenceManager.getDefaultSharedPreferences(requireContext()).getLong(PREF_REMINDER_TIME, 0)
+    val calendar = getInstance()
+    calendar.timeInMillis = currentSetTime
+    val hour = calendar.get(HOUR_OF_DAY)
+    val minute = calendar.get(MINUTE)
+
+    reminderTimePickerDialog = TimePickerDialog.Builder()
+      .setOkClickListener(reminderTimeDialogOkClickListener)
+      .setCancelClickListener(reminderTimeDialogCancelClickListener)
+      .initTimePicker(hour, minute, null)
+      .build()
+    reminderTimePickerDialog.show(requireFragmentManager(), "Reminder Time Picker Dialog")
     true
+  }
+
+  private val reminderTimeDialogOkClickListener = View.OnClickListener {
+    val calendar = getInstance()
+    calendar.set(HOUR_OF_DAY, reminderTimePickerDialog.hour)
+    calendar.set(MINUTE, reminderTimePickerDialog.minute)
+    calendar.set(SECOND, 0)
+    PreferenceManager.getDefaultSharedPreferences(requireContext()).edit().putLong(PREF_REMINDER_TIME, calendar.timeInMillis).apply()
+    val helper = NotificationHelper()
+    // Cancel previously set alarm and set the new one with the new time
+    helper.cancelAlarm(requireContext())
+    helper.startAlarm(requireContext())
+    reminderTimePickerDialog.dismiss()
+  }
+
+  private val reminderTimeDialogCancelClickListener = View.OnClickListener {
+    reminderTimePickerDialog.dismiss()
   }
 
   private val backupClickListener = Preference.OnPreferenceClickListener {

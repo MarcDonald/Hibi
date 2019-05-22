@@ -26,7 +26,6 @@ class NewWordViewModel(private val newWordRepository: NewWordRepository) : ViewM
 
   fun passArguments(entryIdArg: Int, isEditModeArg: Boolean) {
     _entryId = entryIdArg
-    Timber.i("Log: passArguments: set entryId")
     _displayAddButton.value = isEditModeArg
     _allowEdits.value = isEditModeArg
   }
