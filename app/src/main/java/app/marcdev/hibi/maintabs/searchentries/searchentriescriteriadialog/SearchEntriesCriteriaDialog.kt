@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiDialogFragment
 import app.marcdev.hibi.maintabs.searchentries.SearchCriteriaChangeListener
+import app.marcdev.hibi.uicomponents.DatePickerDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.ChipGroup
 import org.kodein.di.Kodein
@@ -36,6 +37,8 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
   private lateinit var bookChipGroup: ChipGroup
   private lateinit var searchButton: MaterialButton
   private lateinit var resetButton: MaterialButton
+  private lateinit var startDateDialog: DatePickerDialog
+  private lateinit var endDateDialog: DatePickerDialog
   // </editor-fold>
 
   // <editor-fold desc="Other">
@@ -60,6 +63,7 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
   }
 
   private fun bindViews(view: View) {
+    initDateDialogs()
     contentInput = view.findViewById(R.id.edt_search_entries_containing_input)
     locationInput = view.findViewById(R.id.edt_search_entries_location_input)
     tagChipGroup = view.findViewById(R.id.cg_search_entries_tags)
@@ -67,21 +71,49 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
 
     beginningDateButton = view.findViewById(R.id.btn_search_entries_beginning)
     beginningDateButton.setOnClickListener {
-      // TODO open date picker dialog
-      viewModel.setStartDate(1970, 0, 1)
+      startDateDialog.show(requireFragmentManager(), "Start Date Dialog")
     }
 
     endDateButton = view.findViewById(R.id.btn_search_entries_end)
     endDateButton.setOnClickListener {
-      // TODO open time picker dialog
-      viewModel.setEndDate(2018, 7, 28)
+      endDateDialog.show(requireFragmentManager(), "End Date Dialog")
     }
 
     searchButton = view.findViewById(R.id.btn_search_entries_go)
     searchButton.setOnClickListener { viewModel.search() }
 
     resetButton = view.findViewById(R.id.btn_search_entries_reset)
-    resetButton.setOnClickListener { viewModel.reset(true) }
+    resetButton.setOnClickListener { viewModel.reset() }
+  }
+
+  private fun initDateDialogs() {
+    startDateDialog = DatePickerDialog.Builder()
+      .setOkClickListener(View.OnClickListener {
+        viewModel.setStartDate(startDateDialog.year, startDateDialog.month, startDateDialog.day)
+        startDateDialog.dismiss()
+      })
+      .setCancelClickListener(View.OnClickListener {
+        startDateDialog.dismiss()
+      })
+      .showExtraButton(resources.getString(R.string.start), View.OnClickListener {
+        viewModel.resetStartDate()
+        startDateDialog.dismiss()
+      })
+      .build()
+
+    endDateDialog = DatePickerDialog.Builder()
+      .setOkClickListener(View.OnClickListener {
+        viewModel.setEndDate(endDateDialog.year, endDateDialog.month, endDateDialog.day)
+        endDateDialog.dismiss()
+      })
+      .setCancelClickListener(View.OnClickListener {
+        endDateDialog.dismiss()
+      })
+      .showExtraButton(resources.getString(R.string.finish), View.OnClickListener {
+        viewModel.resetEndDate()
+        endDateDialog.dismiss()
+      })
+      .build()
   }
 
   private fun setupObservers() {

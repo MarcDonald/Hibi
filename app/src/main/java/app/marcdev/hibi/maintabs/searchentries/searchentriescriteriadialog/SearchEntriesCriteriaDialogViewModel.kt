@@ -27,12 +27,9 @@ class SearchEntriesCriteriaDialogViewModel : ViewModel() {
     _listener = criteriaChangeListener
   }
 
-  fun reset(shouldDismiss: Boolean) {
-    resetDate()
-    if(shouldDismiss) {
-      _dismiss.value = true
-      _listener?.onSearchCriteriaChange(_criteria)
-    }
+  fun reset() {
+    resetStartDate()
+    resetEndDate()
   }
 
   fun setStartDate(year: Int, month: Int, day: Int) {
@@ -54,12 +51,14 @@ class SearchEntriesCriteriaDialogViewModel : ViewModel() {
     _dismiss.value = true
   }
 
-  private fun resetDate() {
+  fun resetStartDate() {
     _criteria.startYear = 0
     _criteria.startDay = 1
     _criteria.startMonth = 0
     _beginningDisplay.value = ""
+  }
 
+  fun resetEndDate() {
     _criteria.endYear = 9999
     _criteria.endDay = 31
     _criteria.endMonth = 11

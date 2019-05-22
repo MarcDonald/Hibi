@@ -11,10 +11,12 @@ import com.google.android.material.button.MaterialButton
 import timber.log.Timber
 
 class TimePickerDialog : HibiDialogFragment() {
+
   // <editor-fold desc="UI Components">
   private lateinit var timePicker: TimePicker
   private lateinit var okButton: MaterialButton
   private lateinit var cancelButton: MaterialButton
+  private lateinit var extraButton: MaterialButton
   // </editor-fold>
 
   // <editor-fold desc="To Set">
@@ -24,6 +26,10 @@ class TimePickerDialog : HibiDialogFragment() {
   private var timePickerHourToSet: Int? = null
   private var timePickerMinuteToSet: Int? = null
   private var _is24Hour: Boolean = true
+  private var showExtraButtonToSet = false
+  private var extraButtonTextToSet = ""
+  private var extraButtonClickListener: View.OnClickListener? = null
+
   // </editor-fold>
 
   val hour: Int
@@ -53,6 +59,11 @@ class TimePickerDialog : HibiDialogFragment() {
 
     okButton = view.findViewById(R.id.btn_timepicker_ok)
     okButton.setOnClickListener(okClickListenerToSet)
+
+    extraButton = view.findViewById(R.id.btn_timepicker_extra)
+    extraButton.text = extraButtonTextToSet
+    extraButton.setOnClickListener(extraButtonClickListener)
+    extraButton.visibility = if(showExtraButtonToSet) View.VISIBLE else View.GONE
   }
 
   private fun setOkClickListener(listener: View.OnClickListener) {
@@ -73,6 +84,12 @@ class TimePickerDialog : HibiDialogFragment() {
     _is24Hour = is24Hour
   }
 
+  private fun showExtraButton(show: Boolean, text: String, clickListener: View.OnClickListener?) {
+    showExtraButtonToSet = show
+    extraButtonTextToSet = text
+    extraButtonClickListener = clickListener
+  }
+
   class Builder {
     private var _cancelClickListener: View.OnClickListener? = null
     private var _okClickListener: View.OnClickListener? = null
@@ -80,6 +97,9 @@ class TimePickerDialog : HibiDialogFragment() {
     private var _hour: Int? = null
     private var _minute: Int? = null
     private var _is24Hour: Boolean = true
+    private var _showExtraButton = false
+    private var _extraButtonText: String = ""
+    private var _extraButtonClickListener: View.OnClickListener? = null
 
     fun setOkClickListener(listener: View.OnClickListener): Builder {
       _okClickListener = listener
@@ -103,6 +123,13 @@ class TimePickerDialog : HibiDialogFragment() {
       return this
     }
 
+    fun showExtraButton(text: String, clickListener: View.OnClickListener): Builder {
+      _extraButtonText = text
+      _extraButtonClickListener = clickListener
+      _showExtraButton = true
+      return this
+    }
+
     fun build(): TimePickerDialog {
       val dialog = TimePickerDialog()
       if(_okClickListener != null)
@@ -112,6 +139,7 @@ class TimePickerDialog : HibiDialogFragment() {
       if(_hour != null && _minute != null)
         dialog.initTimePicker(_hour!!, _minute!!, _onTimeChangedListener)
       dialog.setIs24HourView(_is24Hour)
+      dialog.showExtraButton(_showExtraButton, _extraButtonText, _extraButtonClickListener)
       return dialog
     }
   }

@@ -11,10 +11,12 @@ import com.google.android.material.button.MaterialButton
 import timber.log.Timber
 
 class DatePickerDialog : HibiDialogFragment() {
+
   // <editor-fold desc="UI Components">
   private lateinit var datePicker: DatePicker
   private lateinit var okButton: MaterialButton
   private lateinit var cancelButton: MaterialButton
+  private lateinit var extraButton: MaterialButton
   // </editor-fold>
 
   // <editor-fold desc="To Set">
@@ -24,6 +26,9 @@ class DatePickerDialog : HibiDialogFragment() {
   private var datePickerYearToSet: Int? = null
   private var datePickerMonthToSet: Int? = null
   private var datePickerDayToSet: Int? = null
+  private var showExtraButtonToSet = false
+  private var extraButtonTextToSet = ""
+  private var extraButtonClickListener: View.OnClickListener? = null
   // </editor-fold>
 
   val year: Int
@@ -52,6 +57,11 @@ class DatePickerDialog : HibiDialogFragment() {
 
     okButton = view.findViewById(R.id.btn_datepicker_ok)
     okButton.setOnClickListener(okClickListenerToSet)
+
+    extraButton = view.findViewById(R.id.btn_datepicker_extra)
+    extraButton.text = extraButtonTextToSet
+    extraButton.setOnClickListener(extraButtonClickListener)
+    extraButton.visibility = if(showExtraButtonToSet) View.VISIBLE else View.GONE
   }
 
   private fun setOkClickListener(listener: View.OnClickListener) {
@@ -69,6 +79,12 @@ class DatePickerDialog : HibiDialogFragment() {
     datePickerDateChangedListenerToSet = onDateChangedListener
   }
 
+  private fun showExtraButton(show: Boolean, text: String, clickListener: View.OnClickListener?) {
+    showExtraButtonToSet = show
+    extraButtonTextToSet = text
+    extraButtonClickListener = clickListener
+  }
+
   class Builder {
     private var _cancelClickListener: View.OnClickListener? = null
     private var _okClickListener: View.OnClickListener? = null
@@ -76,6 +92,9 @@ class DatePickerDialog : HibiDialogFragment() {
     private var _year: Int? = null
     private var _month: Int? = null
     private var _day: Int? = null
+    private var _showExtraButton = false
+    private var _extraButtonText: String = ""
+    private var _extraButtonClickListener: View.OnClickListener? = null
 
     fun setOkClickListener(listener: View.OnClickListener): Builder {
       _okClickListener = listener
@@ -95,6 +114,13 @@ class DatePickerDialog : HibiDialogFragment() {
       return this
     }
 
+    fun showExtraButton(text: String, clickListener: View.OnClickListener): Builder {
+      _extraButtonText = text
+      _extraButtonClickListener = clickListener
+      _showExtraButton = true
+      return this
+    }
+
     fun build(): DatePickerDialog {
       val dialog = DatePickerDialog()
       if(_okClickListener != null)
@@ -103,6 +129,7 @@ class DatePickerDialog : HibiDialogFragment() {
         dialog.setCancelClickListener(_cancelClickListener!!)
       if(_year != null && _month != null && _day != null)
         dialog.initDatePicker(_year!!, _month!!, _day!!, _onDateChangedListener)
+      dialog.showExtraButton(_showExtraButton, _extraButtonText, _extraButtonClickListener)
       return dialog
     }
   }
