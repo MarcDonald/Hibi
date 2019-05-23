@@ -51,7 +51,8 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
     val allEntries = entryRepository.getAllEntries()
     val filteredByDate = filterByDate(allEntries, searchCriteria)
     val filteredByContent = filterByContent(filteredByDate, searchCriteria)
-    return filteredByContent
+    val filteredByLocation = filterByLocation(filteredByContent, searchCriteria)
+    return filteredByLocation
   }
 
   private fun filterByDate(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
@@ -73,6 +74,21 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
     if(searchCriteria.content.isNotBlank()) {
       for(entry in entries) {
         if(entry.content.contains(searchCriteria.content, true))
+          returnList.add(entry)
+      }
+    } else {
+      return entries
+    }
+
+    return returnList
+  }
+
+  private fun filterByLocation(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
+    val returnList = mutableListOf<Entry>()
+
+    if(searchCriteria.location.isNotBlank()) {
+      for(entry in entries) {
+        if(entry.location.contains(searchCriteria.location, true))
           returnList.add(entry)
       }
     } else {

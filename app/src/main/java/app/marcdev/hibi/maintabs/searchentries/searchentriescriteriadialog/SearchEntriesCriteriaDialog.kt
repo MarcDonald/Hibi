@@ -81,7 +81,10 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
 
     searchButton = view.findViewById(R.id.btn_search_entries_go)
     searchButton.setOnClickListener {
-      viewModel.search(contentInput.text.toString())
+      viewModel.search(
+        contentInput.text.toString(),
+        locationInput.text.toString()
+      )
     }
 
     resetButton = view.findViewById(R.id.btn_search_entries_reset)

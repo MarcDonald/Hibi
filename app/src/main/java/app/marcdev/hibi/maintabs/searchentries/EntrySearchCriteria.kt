@@ -53,6 +53,8 @@ class EntrySearchCriteria {
 
   var content: String = ""
 
+  var location: String = ""
+
   override fun toString(): String {
     return "Start Date: $startYear $startMonth $startDay End Date: $endYear $endMonth $endDay Containing: $content"
   }
