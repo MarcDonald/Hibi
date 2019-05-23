@@ -3,11 +3,16 @@ package app.marcdev.hibi.maintabs.searchentries.searchentriescriteriadialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import app.marcdev.hibi.data.entity.Book
+import app.marcdev.hibi.data.entity.Tag
+import app.marcdev.hibi.data.repository.TagRepository
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.maintabs.searchentries.EntrySearchCriteria
 import app.marcdev.hibi.maintabs.searchentries.SearchCriteriaChangeListener
+import kotlinx.coroutines.launch
 
-class SearchEntriesCriteriaDialogViewModel : ViewModel() {
+class SearchEntriesCriteriaDialogViewModel(private val tagRepository: TagRepository) : ViewModel() {
   private var _listener: SearchCriteriaChangeListener? = null
   private val _criteria = EntrySearchCriteria()
 
@@ -23,8 +28,24 @@ class SearchEntriesCriteriaDialogViewModel : ViewModel() {
   val dismiss: LiveData<Boolean>
     get() = _dismiss
 
+  private val _tags = MutableLiveData<List<Tag>>()
+  val tags: LiveData<List<Tag>>
+    get() = _tags
+
+  private val _displayNoTagsWarning = MutableLiveData<Boolean>()
+  val displayNoTagsWarning: LiveData<Boolean>
+    get() = _displayNoTagsWarning
+
+  private val _books = MutableLiveData<List<Book>>()
+  val books: LiveData<List<Book>>
+    get() = _books
+
   fun setCriteriaChangeListener(criteriaChangeListener: SearchCriteriaChangeListener) {
     _listener = criteriaChangeListener
+  }
+
+  init {
+    getTags()
   }
 
   fun reset() {
@@ -46,9 +67,10 @@ class SearchEntriesCriteriaDialogViewModel : ViewModel() {
     _endDisplay.value = formatDateForDisplay(day, month, year)
   }
 
-  fun search(contentArg: String, locationArg: String) {
+  fun search(contentArg: String, locationArg: String, tagsArg: List<Int>) {
     _criteria.content = contentArg
     _criteria.location = locationArg
+    _criteria.tags = tagsArg
     _listener?.onSearchCriteriaChange(_criteria)
     _dismiss.value = true
   }
@@ -65,5 +87,13 @@ class SearchEntriesCriteriaDialogViewModel : ViewModel() {
     _criteria.endDay = 31
     _criteria.endMonth = 11
     _endDisplay.value = ""
+  }
+
+  private fun getTags() {
+    viewModelScope.launch {
+      val allTags = tagRepository.getAllTags()
+      _tags.value = allTags
+      _displayNoTagsWarning.value = allTags.isEmpty()
+    }
   }
 }

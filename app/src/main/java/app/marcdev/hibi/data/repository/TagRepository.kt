@@ -13,5 +13,7 @@ interface TagRepository {
 
   suspend fun getTagName(tagId: Int): String
 
-  fun getAllTags(): LiveData<List<Tag>>
+  fun getAllTagsLD(): LiveData<List<Tag>>
+
+  suspend fun getAllTags(): List<Tag>
 }

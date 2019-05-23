@@ -54,7 +54,10 @@ interface DAO {
   fun updateTag(tag: Tag)
 
   @Query("SELECT * FROM Tag")
-  fun getAllTags(): LiveData<List<Tag>>
+  fun getAllTagsLD(): LiveData<List<Tag>>
+
+  @Query("SELECT * FROM Tag")
+  fun getAllTags(): List<Tag>
 
   @Query("DELETE FROM Tag WHERE id = :tagId")
   fun deleteTag(tagId: Int)
@@ -73,8 +76,8 @@ interface DAO {
   @Update
   fun updateTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
-  @Query("SELECT * FROM TagEntryRelation")
-  fun getAllTagEntryRelations(): LiveData<List<TagEntryRelation>>
+  @Query("SELECT * FROM TagEntryRelation WHERE tagId IN (:ids)")
+  fun getAllTagEntryRelationsWithIds(ids: List<Int>): List<TagEntryRelation>
 
   @Query("SELECT * FROM Entry as e INNER JOIN TagEntryRelation as ter ON e.id = ter.entryId WHERE ter.tagId = :tagId ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
   fun getEntriesWithTag(tagId: Int): List<Entry>

@@ -145,6 +145,17 @@
           android:checkable="true"
           android:text="@string/tag_name" />
       </com.google.android.material.chip.ChipGroup>
+
+      <TextView
+        android:id="@+id/txt_search_entries_no_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:gravity="center"
+        android:text="@string/no_tags"
+        app:layout_constraintTop_toBottomOf="@id/cg_search_entries_tags"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
       <!--endregion-->
 
       <!--region Books-->
@@ -155,7 +166,7 @@
         android:padding="@dimen/margin_standard"
         android:gravity="center"
         android:text="@string/in"
-        app:layout_constraintTop_toBottomOf="@id/cg_search_entries_tags"
+        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_no_tags"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -52,7 +52,8 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
     val filteredByDate = filterByDate(allEntries, searchCriteria)
     val filteredByContent = filterByContent(filteredByDate, searchCriteria)
     val filteredByLocation = filterByLocation(filteredByContent, searchCriteria)
-    return filteredByLocation
+    val filteredByTag = filterByTag(filteredByLocation, searchCriteria)
+    return filterByBook(filteredByTag, searchCriteria)
   }
 
   private fun filterByDate(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
@@ -96,6 +97,28 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
     }
 
     return returnList
+  }
+
+  private suspend fun filterByTag(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
+    val returnList = mutableListOf<Entry>()
+    val tagEntryRelations = tagEntryRelationRepository.getAllTagEntryRelationsWithIds(searchCriteria.tags)
+
+    if(searchCriteria.tags.isNotEmpty()) {
+      entries.forEach { entry ->
+        tagEntryRelations.forEach { tagEntryRelation ->
+          if(tagEntryRelation.entryId == entry.id && !returnList.contains(entry))
+            returnList.add(entry)
+        }
+      }
+    } else {
+      return entries
+    }
+    return returnList
+  }
+
+  private fun filterByBook(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
+    // TODO
+    return entries
   }
 
   private fun getCompleteDate(day: Int, month: Int, year: Int): Int {

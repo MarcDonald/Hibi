@@ -55,6 +55,8 @@ class EntrySearchCriteria {
 
   var location: String = ""
 
+  var tags: List<Int> = listOf()
+
   override fun toString(): String {
     return "Start Date: $startYear $startMonth $startDay End Date: $endYear $endMonth $endDay Containing: $content"
   }
