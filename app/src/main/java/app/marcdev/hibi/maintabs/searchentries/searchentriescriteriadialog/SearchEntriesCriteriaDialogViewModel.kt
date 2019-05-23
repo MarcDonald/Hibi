@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.entity.Book
 import app.marcdev.hibi.data.entity.Tag
+import app.marcdev.hibi.data.repository.BookRepository
 import app.marcdev.hibi.data.repository.TagRepository
 import app.marcdev.hibi.internal.formatDateForDisplay
 import app.marcdev.hibi.maintabs.searchentries.EntrySearchCriteria
 import app.marcdev.hibi.maintabs.searchentries.SearchCriteriaChangeListener
 import kotlinx.coroutines.launch
 
-class SearchEntriesCriteriaDialogViewModel(private val tagRepository: TagRepository) : ViewModel() {
+class SearchEntriesCriteriaDialogViewModel(private val tagRepository: TagRepository, private val bookRepository: BookRepository) : ViewModel() {
   private var _listener: SearchCriteriaChangeListener? = null
   private val _criteria = EntrySearchCriteria()
 
@@ -40,12 +41,17 @@ class SearchEntriesCriteriaDialogViewModel(private val tagRepository: TagReposit
   val books: LiveData<List<Book>>
     get() = _books
 
+  private val _displayNoBooksWarning = MutableLiveData<Boolean>()
+  val displayNoBooksWarning: LiveData<Boolean>
+    get() = _displayNoBooksWarning
+
   fun setCriteriaChangeListener(criteriaChangeListener: SearchCriteriaChangeListener) {
     _listener = criteriaChangeListener
   }
 
   init {
     getTags()
+    getBooks()
   }
 
   fun reset() {
@@ -67,10 +73,11 @@ class SearchEntriesCriteriaDialogViewModel(private val tagRepository: TagReposit
     _endDisplay.value = formatDateForDisplay(day, month, year)
   }
 
-  fun search(contentArg: String, locationArg: String, tagsArg: List<Int>) {
+  fun search(contentArg: String, locationArg: String, tagsArg: List<Int>, booksArg: List<Int>) {
     _criteria.content = contentArg
     _criteria.location = locationArg
     _criteria.tags = tagsArg
+    _criteria.books = booksArg
     _listener?.onSearchCriteriaChange(_criteria)
     _dismiss.value = true
   }
@@ -94,6 +101,14 @@ class SearchEntriesCriteriaDialogViewModel(private val tagRepository: TagReposit
       val allTags = tagRepository.getAllTags()
       _tags.value = allTags
       _displayNoTagsWarning.value = allTags.isEmpty()
+    }
+  }
+
+  private fun getBooks() {
+    viewModelScope.launch {
+      val allBooks = bookRepository.getAllBooks()
+      _books.value = allBooks
+      _displayNoBooksWarning.value = allBooks.isEmpty()
     }
   }
 }

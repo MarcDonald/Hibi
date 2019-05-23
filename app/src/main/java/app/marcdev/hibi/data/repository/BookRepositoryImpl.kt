@@ -40,8 +40,14 @@ class BookRepositoryImpl private constructor(private val dao: DAO) : BookReposit
     }
   }
 
-  override fun getAllBooks(): LiveData<List<Book>> {
-    return dao.getAllBooks()
+  override fun getAllBooksLD(): LiveData<List<Book>> {
+    return dao.getAllBooksLD()
+  }
+
+  override suspend fun getAllBooks(): List<Book> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getAllBooks()
+    }
   }
 
   companion object {

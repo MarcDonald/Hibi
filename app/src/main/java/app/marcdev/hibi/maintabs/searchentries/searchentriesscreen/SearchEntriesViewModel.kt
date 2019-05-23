@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
@@ -12,7 +13,7 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import app.marcdev.hibi.maintabs.searchentries.EntrySearchCriteria
 import kotlinx.coroutines.launch
 
-class SearchEntriesViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class SearchEntriesViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository, private val bookEntryRelationRepository: BookEntryRelationRepository) : ViewModel() {
 
   private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
   val entries: LiveData<List<MainEntriesDisplayItem>>
@@ -116,9 +117,21 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
     return returnList
   }
 
-  private fun filterByBook(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
-    // TODO
-    return entries
+  private suspend fun filterByBook(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
+    val returnList = mutableListOf<Entry>()
+    val bookEntryRelations = bookEntryRelationRepository.getAllBookEntryRelationsWithIds(searchCriteria.books)
+
+    if(searchCriteria.books.isNotEmpty()) {
+      entries.forEach { entry ->
+        bookEntryRelations.forEach { bookEntryRelation ->
+          if(bookEntryRelation.entryId == entry.id && !returnList.contains(entry))
+            returnList.add(entry)
+        }
+      }
+    } else {
+      return entries
+    }
+    return returnList
   }
 
   private fun getCompleteDate(day: Int, month: Int, year: Int): Int {

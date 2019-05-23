@@ -38,6 +38,7 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
   private lateinit var tagChipGroup: ChipGroup
   private lateinit var noTagsWarning: TextView
   private lateinit var bookChipGroup: ChipGroup
+  private lateinit var noBooksWarning: TextView
   private lateinit var searchButton: MaterialButton
   private lateinit var resetButton: MaterialButton
   private lateinit var startDateDialog: DatePickerDialog
@@ -72,6 +73,7 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
     tagChipGroup = view.findViewById(R.id.cg_search_entries_tags)
     noTagsWarning = view.findViewById(R.id.txt_search_entries_no_tags)
     bookChipGroup = view.findViewById(R.id.cg_search_entries_books)
+    noBooksWarning = view.findViewById(R.id.txt_search_entries_no_books)
 
     beginningDateButton = view.findViewById(R.id.btn_search_entries_beginning)
     beginningDateButton.setOnClickListener {
@@ -88,7 +90,8 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
       viewModel.search(
         contentInput.text.toString(),
         locationInput.text.toString(),
-        getCheckedTags()
+        getCheckedTags(),
+        getCheckedBooks()
       )
     }
 
@@ -148,8 +151,8 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
     viewModel.tags.observe(this, Observer { value ->
       tagChipGroup.removeAllViews()
 
-      value?.let { tags ->
-        tags.forEach { tag ->
+      value?.let { list ->
+        list.forEach { tag ->
           val displayTag = ChipWithId(tagChipGroup.context)
           displayTag.text = tag.name
           displayTag.itemId = tag.id
@@ -172,8 +175,28 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
     })
 
     viewModel.books.observe(this, Observer { value ->
+      bookChipGroup.removeAllViews()
+
       value?.let { list ->
-        // TODO
+        list.forEach { book ->
+          val displayBook = ChipWithId(bookChipGroup.context)
+          displayBook.text = book.name
+          displayBook.itemId = book.id
+          displayBook.isCheckable = true
+          bookChipGroup.addView(displayBook)
+        }
+      }
+    })
+
+    viewModel.displayNoBooksWarning.observe(this, Observer { value ->
+      value?.let { display ->
+        if(display) {
+          noBooksWarning.visibility = View.VISIBLE
+          bookChipGroup.visibility = View.GONE
+        } else {
+          noBooksWarning.visibility = View.GONE
+          bookChipGroup.visibility = View.VISIBLE
+        }
       }
     })
 
@@ -195,6 +218,16 @@ class SearchEntriesCriteriaDialog : HibiDialogFragment(), KodeinAware {
     val returnList = mutableListOf<Int>()
     for(i in 0 until tagChipGroup.childCount) {
       val chip = tagChipGroup.getChildAt(i) as ChipWithId
+      if(chip.isChecked)
+        returnList.add(chip.itemId)
+    }
+    return returnList
+  }
+
+  private fun getCheckedBooks(): List<Int> {
+    val returnList = mutableListOf<Int>()
+    for(i in 0 until bookChipGroup.childCount) {
+      val chip = bookChipGroup.getChildAt(i) as ChipWithId
       if(chip.isChecked)
         returnList.add(chip.itemId)
     }

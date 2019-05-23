@@ -13,5 +13,7 @@ interface BookRepository {
 
   suspend fun getBookName(bookId: Int): String
 
-  fun getAllBooks(): LiveData<List<Book>>
+  fun getAllBooksLD(): LiveData<List<Book>>
+
+  suspend fun getAllBooks(): List<Book>
 }

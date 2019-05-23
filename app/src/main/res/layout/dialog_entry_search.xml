@@ -185,6 +185,17 @@
           android:checkable="true"
           android:text="@string/book_name" />
       </com.google.android.material.chip.ChipGroup>
+
+      <TextView
+        android:id="@+id/txt_search_entries_no_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_standard"
+        android:gravity="center"
+        android:text="@string/no_books"
+        app:layout_constraintTop_toBottomOf="@id/cg_search_entries_books"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
       <!--endregion-->
 
       <!--region Buttons-->
@@ -197,7 +208,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/gd_search_entries_50_vert"
-        app:layout_constraintTop_toBottomOf="@id/cg_search_entries_books"
+        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_no_books"
         android:text="@string/reset" />
 
       <com.google.android.material.button.MaterialButton
@@ -208,7 +219,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/gd_search_entries_50_vert"
-        app:layout_constraintTop_toBottomOf="@id/cg_search_entries_books"
+        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_no_books"
         android:text="@string/search" />
 
       <androidx.constraintlayout.widget.Guideline

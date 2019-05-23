@@ -78,8 +78,8 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { BookEntriesViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { AddEntryToBookViewModelFactory(instance(), instance()) }
     bind() from provider { AddLocationToEntryViewModelFactory(instance()) }
-    bind() from provider { SearchEntriesCriteriaDialogViewModelFactory(instance()) }
-    bind() from provider { SearchEntriesViewModelFactory(instance(), instance()) }
+    bind() from provider { SearchEntriesCriteriaDialogViewModelFactory(instance(), instance()) }
+    bind() from provider { SearchEntriesViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { BackupUtils(instance()) }
     // </editor-fold>
   }

@@ -126,7 +126,10 @@ interface DAO {
   fun updateBook(book: Book)
 
   @Query("SELECT * FROM Book")
-  fun getAllBooks(): LiveData<List<Book>>
+  fun getAllBooksLD(): LiveData<List<Book>>
+
+  @Query("SELECT * FROM Book")
+  fun getAllBooks(): List<Book>
 
   @Query("DELETE FROM Book WHERE id = :bookId")
   fun deleteBook(bookId: Int)
@@ -159,5 +162,8 @@ interface DAO {
 
   @Query("SELECT * FROM Book INNER JOIN BookEntryRelation ON Book.id = BookEntryRelation.bookId WHERE entryId = :entryId")
   fun getBooksWithEntry(entryId: Int): List<Book>
+
+  @Query("SELECT * FROM BookEntryRelation WHERE bookId IN (:ids)")
+  fun getAllBookEntryRelationsWithIds(ids: List<Int>): List<BookEntryRelation>
   // </editor-fold>
 }
