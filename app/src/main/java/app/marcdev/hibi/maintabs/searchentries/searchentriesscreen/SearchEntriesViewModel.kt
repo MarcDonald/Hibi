@@ -11,7 +11,6 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import app.marcdev.hibi.maintabs.searchentries.EntrySearchCriteria
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class SearchEntriesViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
 
@@ -37,9 +36,50 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
     }
   }
 
-  // TODO
-  fun onCriteriaChange(entrySearchCriteria: EntrySearchCriteria) {
-    Timber.i("Log: onCriteriaChange: $entrySearchCriteria")
+  fun onCriteriaChange(searchCriteria: EntrySearchCriteria) {
+    viewModelScope.launch {
+      _displayLoading.value = true
+      _displayNoResults.value = false
+      val allEntries = entryRepository.getAllEntries()
+      val filteredByDate = filterByDate(allEntries, searchCriteria)
+      getMainEntryDisplayItems(filteredByDate)
+      _displayLoading.value = false
+      _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
+    }
+  }
+
+  private fun filterByDate(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
+    val returnList = mutableListOf<Entry>()
+    val completeStartDate = getCompleteDate(searchCriteria.startDay, searchCriteria.startMonth, searchCriteria.startYear)
+    val completeEndDate = getCompleteDate(searchCriteria.endDay, searchCriteria.endMonth, searchCriteria.endYear)
+
+    for(entry in entries) {
+      val entryCompleteDate = getCompleteDate(entry.day, entry.month, entry.year)
+      if(entryCompleteDate in completeStartDate..completeEndDate)
+        returnList.add(entry)
+    }
+    return returnList
+  }
+
+  private fun getCompleteDate(day: Int, month: Int, year: Int): Int {
+    val dayTwoDigit = if(day < 10)
+      "0$day"
+    else {
+      "$day"
+    }
+
+    val monthTwoDigit = if(month < 10)
+      "0$month"
+    else {
+      "$month"
+    }
+
+    return "$year$monthTwoDigit$dayTwoDigit".toInt()
+  }
+
+  private suspend fun getMainEntryDisplayItems(entries: List<Entry>) {
+    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
+    _entries.value = combineData(entries, tagEntryDisplayItems)
   }
 
   private suspend fun getMainEntryDisplayItems() {

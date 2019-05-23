@@ -148,6 +148,7 @@
   <string name="with_tags">with tags</string>
   <string name="in">in</string>
   <string name="reset">Reset</string>
+  <string name="no_search_entry_results">No results found for that criteria</string>
   <!--endregion-->
 
   <!--region Shortcuts-->
