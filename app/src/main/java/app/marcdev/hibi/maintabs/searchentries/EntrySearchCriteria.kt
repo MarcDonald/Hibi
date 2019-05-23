@@ -51,7 +51,9 @@ class EntrySearchCriteria {
         Timber.e("Log: setEndDay: $value is out of the 1..31 bounds")
     }
 
+  var content: String = ""
+
   override fun toString(): String {
-    return "Start Date: $startYear $startMonth $startDay End Date: $endYear $endMonth $endDay"
+    return "Start Date: $startYear $startMonth $startDay End Date: $endYear $endMonth $endDay Containing: $content"
   }
 }

@@ -46,7 +46,8 @@ class SearchEntriesCriteriaDialogViewModel : ViewModel() {
     _endDisplay.value = formatDateForDisplay(day, month, year)
   }
 
-  fun search() {
+  fun search(contentArg: String) {
+    _criteria.content = contentArg
     _listener?.onSearchCriteriaChange(_criteria)
     _dismiss.value = true
   }

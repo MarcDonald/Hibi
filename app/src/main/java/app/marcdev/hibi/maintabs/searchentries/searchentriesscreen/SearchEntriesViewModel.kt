@@ -40,12 +40,18 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
     viewModelScope.launch {
       _displayLoading.value = true
       _displayNoResults.value = false
-      val allEntries = entryRepository.getAllEntries()
-      val filteredByDate = filterByDate(allEntries, searchCriteria)
-      getMainEntryDisplayItems(filteredByDate)
+      val filteredResults = filterEntries(searchCriteria)
+      getMainEntryDisplayItems(filteredResults)
       _displayLoading.value = false
       _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
     }
+  }
+
+  private suspend fun filterEntries(searchCriteria: EntrySearchCriteria): List<Entry> {
+    val allEntries = entryRepository.getAllEntries()
+    val filteredByDate = filterByDate(allEntries, searchCriteria)
+    val filteredByContent = filterByContent(filteredByDate, searchCriteria)
+    return filteredByContent
   }
 
   private fun filterByDate(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
@@ -58,6 +64,21 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
       if(entryCompleteDate in completeStartDate..completeEndDate)
         returnList.add(entry)
     }
+    return returnList
+  }
+
+  private fun filterByContent(entries: List<Entry>, searchCriteria: EntrySearchCriteria): List<Entry> {
+    val returnList = mutableListOf<Entry>()
+
+    if(searchCriteria.content.isNotBlank()) {
+      for(entry in entries) {
+        if(entry.content.contains(searchCriteria.content, true))
+          returnList.add(entry)
+      }
+    } else {
+      return entries
+    }
+
     return returnList
   }
 
