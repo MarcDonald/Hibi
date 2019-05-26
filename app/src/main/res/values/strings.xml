@@ -140,6 +140,7 @@
 
   <!--region Entry Search-->
   <string name="search_entries">Search Entries</string>
+  <string name="search_criteria">Search Criteria</string>
   <string name="start">Start</string>
   <string name="to">to</string>
   <string name="finish">Finish</string>

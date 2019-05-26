@@ -89,35 +89,8 @@
     android:id="@+id/recycler_search_entries"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="?attr/actionBarSize"
+    android:layout_marginBottom="@dimen/search_entries_recycler_bottom_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-  <com.google.android.material.button.MaterialButton
-    android:id="@+id/fab_search_entries"
-    style="@style/Hibi.Button.ExtendedFab"
-    android:layout_width="200dp"
-    android:layout_height="64dp"
-    android:contentDescription="@string/search_entries"
-    android:text="@string/search"
-    app:icon="@drawable/ic_search_24dp"
-    app:layout_anchor="@+id/toolbar_bot_search_entries"
-    app:layout_anchorGravity="top|center" />
-
-  <!--Show drop shadow for bottom app bar-->
-  <View
-    android:id="@+id/shadow_search_entries_bot_app_bar"
-    android:layout_width="wrap_content"
-    android:layout_height="4dp"
-    android:background="@drawable/shadow"
-    android:layout_gravity="bottom"
-    android:layout_marginBottom="?attr/actionBarSize" />
-
-  <androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbar_bot_search_entries"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="?colorPrimaryDark"
-    android:layout_gravity="bottom"
-    app:contentInsetEnd="0dp"
-    app:contentInsetStart="0dp" />
+  <include layout="@layout/dialog_entry_search" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

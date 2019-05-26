@@ -19,4 +19,7 @@
   <dimen name="option_bar_icon_padding">8dp</dimen>
   <dimen name="main_screen_warning_image_size">150dp</dimen>
   <dimen name="smaller_warning_image_size">120dp</dimen>
+  <dimen name="search_criteria_bottom_sheet_peek">70dp</dimen>
+  <!--  Should be toolbar size + search criteria bottom sheet peek-->
+  <dimen name="search_entries_recycler_bottom_margin">126dp</dimen>
 </resources>

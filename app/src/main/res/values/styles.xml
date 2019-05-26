@@ -4,6 +4,7 @@
   <style name="Hibi.LightTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
     <item name="colorPrimary">@color/lightThemeColorPrimary</item>
     <item name="colorPrimaryDark">@color/lightThemeColorPrimary</item>
+    <item name="colorPrimaryLight">@color/lightThemeColorPrimaryLight</item>
     <item name="colorAccent">@color/colorAccent</item>
     <item name="colorError">@color/error</item>
     <item name="hibiTextOnPrimary">@color/lightThemePrimaryText</item>
@@ -18,6 +19,7 @@
   <style name="Hibi.DarkTheme" parent="Theme.MaterialComponents.NoActionBar">
     <item name="colorPrimary">@color/darkThemeColorPrimary</item>
     <item name="colorPrimaryDark">@color/darkThemeColorPrimaryDark</item>
+    <item name="colorPrimaryLight">@color/darkThemeColorPrimaryLight</item>
     <item name="colorAccent">@color/colorAccent</item>
     <item name="colorError">@color/error</item>
     <item name="hibiTextOnPrimary">@color/darkThemePrimaryText</item>
