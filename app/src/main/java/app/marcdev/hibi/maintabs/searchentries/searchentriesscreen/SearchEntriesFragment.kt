@@ -39,6 +39,7 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
   private lateinit var loadingDisplay: ConstraintLayout
   private lateinit var noResults: ConstraintLayout
   private lateinit var toolbarTitle: TextView
+  private lateinit var recycler: RecyclerView
   private lateinit var recyclerAdapter: EntriesRecyclerAdapter
   private lateinit var searchEntriesCriteriaDialog: SearchEntriesCriteriaDialog
   // </editor-fold>
@@ -98,14 +99,20 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
 
     viewModel.displayNoResults.observe(this, Observer { value ->
       value?.let { show ->
-        noResults.visibility = if(show) View.VISIBLE else View.GONE
+        if(show) {
+          noResults.visibility = View.VISIBLE
+          recycler.visibility = View.GONE
+        } else {
+          noResults.visibility = View.GONE
+          recycler.visibility = View.VISIBLE
+        }
       }
     })
   }
 
   private fun initRecycler(view: View) {
-    val recycler: RecyclerView = view.findViewById(R.id.recycler_search_entries)
-    this.recyclerAdapter = EntriesRecyclerAdapter(requireContext())
+    recycler = view.findViewById(R.id.recycler_search_entries)
+    recyclerAdapter = EntriesRecyclerAdapter(requireContext())
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager
