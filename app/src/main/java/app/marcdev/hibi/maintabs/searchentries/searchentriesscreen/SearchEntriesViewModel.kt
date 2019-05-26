@@ -27,22 +27,19 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
   val displayNoResults: LiveData<Boolean>
     get() = _displayNoResults
 
-  fun loadAllEntries() {
-    viewModelScope.launch {
-      _displayLoading.value = true
-      _displayNoResults.value = false
-      getMainEntryDisplayItems()
-      _displayLoading.value = false
-      _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
-    }
+  private val _countResults = MutableLiveData<Int>()
+  val countResults: LiveData<Int>
+    get() = _countResults
+
+  init {
+    _displayLoading.value = false
   }
 
   fun onCriteriaChange(searchCriteria: EntrySearchCriteria) {
     viewModelScope.launch {
       _displayLoading.value = true
       _displayNoResults.value = false
-      val filteredResults = filterEntries(searchCriteria)
-      getMainEntryDisplayItems(filteredResults)
+      displayResults(searchCriteria)
       _displayLoading.value = false
       _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
     }
@@ -150,15 +147,11 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository, priva
     return "$year$monthTwoDigit$dayTwoDigit".toInt()
   }
 
-  private suspend fun getMainEntryDisplayItems(entries: List<Entry>) {
+  private suspend fun displayResults(searchCriteria: EntrySearchCriteria) {
+    val filteredResults = filterEntries(searchCriteria)
     val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
-    _entries.value = combineData(entries, tagEntryDisplayItems)
-  }
-
-  private suspend fun getMainEntryDisplayItems() {
-    val entries = entryRepository.getAllEntries()
-    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
-    _entries.value = combineData(entries, tagEntryDisplayItems)
+    _entries.value = combineData(filteredResults, tagEntryDisplayItems)
+    _countResults.value = filteredResults.size
   }
 
   private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>): List<MainEntriesDisplayItem> {

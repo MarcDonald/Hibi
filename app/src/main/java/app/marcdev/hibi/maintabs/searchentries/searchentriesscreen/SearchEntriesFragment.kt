@@ -56,7 +56,6 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     bindViews(view)
     initRecycler(view)
     setupObservers()
-    viewModel.loadAllEntries()
 
     return view
   }
@@ -94,6 +93,12 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     viewModel.displayLoading.observe(this, Observer { value ->
       value?.let { show ->
         loadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      }
+    })
+
+    viewModel.countResults.observe(this, Observer { value ->
+      value?.let { amount ->
+        toolbarTitle.text = resources.getQuantityString(R.plurals.count_results, amount, amount)
       }
     })
 

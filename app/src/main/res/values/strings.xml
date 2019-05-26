@@ -226,4 +226,12 @@
     <item>@string/no</item>
   </string-array>
   <!--endregion-->
+
+  <!--region Plurals-->
+  <plurals name="count_results">
+    <item quantity="one">%d Result</item>
+    <item quantity="other">%d Results</item>
+  </plurals>
+  <!--endregion-->
+
 </resources>
