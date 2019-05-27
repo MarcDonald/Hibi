@@ -40,8 +40,14 @@ class TagRepositoryImpl private constructor(private val dao: DAO) : TagRepositor
     }
   }
 
-  override fun getAllTags(): LiveData<List<Tag>> {
-    return dao.getAllTags()
+  override fun getAllTagsLD(): LiveData<List<Tag>> {
+    return dao.getAllTagsLD()
+  }
+
+  override suspend fun getAllTags(): List<Tag> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getAllTags()
+    }
   }
 
   companion object {

@@ -14,7 +14,7 @@ import timber.log.Timber
 class AddEntryToBookViewModel(bookRepository: BookRepository, private val bookEntryRelationRepository: BookEntryRelationRepository) : ViewModel() {
   private var entryId = 0
 
-  val allBooks: LiveData<List<Book>> = bookRepository.getAllBooks()
+  val allBooks: LiveData<List<Book>> = bookRepository.getAllBooksLD()
 
   private var _dismiss = MutableLiveData<Boolean>()
   val dismiss: LiveData<Boolean>

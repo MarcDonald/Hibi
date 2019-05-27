@@ -107,11 +107,11 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
 
   private fun initialAdd() {
     viewModelScope.launch {
-      val day = dateTimeStore.getDay()
-      val month = dateTimeStore.getMonth()
-      val year = dateTimeStore.getYear()
-      val hour = dateTimeStore.getHour()
-      val minute = dateTimeStore.getMinute()
+      val day = dateTimeStore.day
+      val month = dateTimeStore.month
+      val year = dateTimeStore.year
+      val hour = dateTimeStore.hour
+      val minute = dateTimeStore.minute
       entryRepository.addEntry(Entry(day, month, year, hour, minute, ""))
       _entryId = entryRepository.getLastEntryId()
     }
@@ -119,11 +119,11 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
 
   private fun save(content: String) {
     viewModelScope.launch {
-      val day = dateTimeStore.getDay()
-      val month = dateTimeStore.getMonth()
-      val year = dateTimeStore.getYear()
-      val hour = dateTimeStore.getHour()
-      val minute = dateTimeStore.getMinute()
+      val day = dateTimeStore.day
+      val month = dateTimeStore.month
+      val year = dateTimeStore.year
+      val hour = dateTimeStore.hour
+      val minute = dateTimeStore.minute
       entryRepository.saveEntry(entryId, day, month, year, hour, minute, content)
     }
   }

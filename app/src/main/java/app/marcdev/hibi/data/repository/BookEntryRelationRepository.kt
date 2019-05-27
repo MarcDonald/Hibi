@@ -19,4 +19,6 @@ interface BookEntryRelationRepository {
   suspend fun getBookIdsWithEntry(entryId: Int): List<Int>
 
   suspend fun getBooksWithEntry(entryId: Int): List<Book>
+
+  suspend fun getAllBookEntryRelationsWithIds(ids: List<Int>): List<BookEntryRelation>
 }

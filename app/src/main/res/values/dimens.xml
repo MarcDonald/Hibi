@@ -2,6 +2,7 @@
 <resources>
   <dimen name="margin_fab">16dp</dimen>
   <dimen name="margin_standard">8dp</dimen>
+  <dimen name="margin_double">16dp</dimen>
   <dimen name="margin_half">4dp</dimen>
   <dimen name="rounded_corner_radius">8dp</dimen>
   <dimen name="background_rounded_corner_radius">16dp</dimen>
@@ -18,4 +19,7 @@
   <dimen name="option_bar_icon_padding">8dp</dimen>
   <dimen name="main_screen_warning_image_size">150dp</dimen>
   <dimen name="smaller_warning_image_size">120dp</dimen>
+  <dimen name="search_criteria_bottom_sheet_peek">70dp</dimen>
+  <!--  Should be toolbar size + search criteria bottom sheet peek-->
+  <dimen name="search_entries_recycler_bottom_margin">126dp</dimen>
 </resources>

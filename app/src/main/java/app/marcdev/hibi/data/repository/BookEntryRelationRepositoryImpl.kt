@@ -53,6 +53,12 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
     }
   }
 
+  override suspend fun getAllBookEntryRelationsWithIds(ids: List<Int>): List<BookEntryRelation> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getAllBookEntryRelationsWithIds(ids)
+    }
+  }
+
   companion object {
     @Volatile private var instance: BookEntryRelationRepositoryImpl? = null
 

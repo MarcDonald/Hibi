@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
@@ -109,6 +108,7 @@ class MainScreenFragment : Fragment() {
   }
 
   private val bottomRightClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show()
+    val searchEntriesAction = MainScreenFragmentDirections.searchEntriesAction()
+    Navigation.findNavController(it).navigate(searchEntriesAction)
   }
 }

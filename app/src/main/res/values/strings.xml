@@ -138,6 +138,22 @@
   <string name="reminder_notification_add_action">Add Entry</string>
   <!--endregion-->
 
+  <!--region Entry Search-->
+  <string name="search_entries">Search Entries</string>
+  <string name="search_criteria">Search Criteria</string>
+  <string name="start">Start</string>
+  <string name="to">to</string>
+  <string name="finish">Finish</string>
+  <string name="containing">Containing: %1$s</string>
+  <string name="any_text">Any Text</string>
+  <string name="at">At: %1$s</string>
+  <string name="any_location">Any Location</string>
+  <string name="with_tags">with tags</string>
+  <string name="in">in</string>
+  <string name="reset">Reset</string>
+  <string name="no_search_entry_results">No results found for that criteria</string>
+  <!--endregion-->
+
   <!--region Shortcuts-->
   <string name="shortcut_disabled">Shortcut Disabled</string>
   <string name="shortcut_add">Add Entry</string>
@@ -213,4 +229,12 @@
     <item>@string/no</item>
   </string-array>
   <!--endregion-->
+
+  <!--region Plurals-->
+  <plurals name="count_results">
+    <item quantity="one">%d Result</item>
+    <item quantity="other">%d Results</item>
+  </plurals>
+  <!--endregion-->
+
 </resources>

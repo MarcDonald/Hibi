@@ -41,6 +41,11 @@
         android:name="bookID"
         app:argType="integer" />
     </action>
+    <action
+      android:id="@+id/search_entries_action"
+      app:destination="@+id/destination_search_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim" />
   </fragment>
   <!--endregion -->
 
@@ -101,6 +106,23 @@
     <argument
       android:name="bookID"
       app:argType="integer" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <!--endregion-->
+
+  <!--region Search Entries-->
+  <fragment
+    android:id="@+id/destination_search_entries"
+    android:name="app.marcdev.hibi.maintabs.searchentries.searchentriesscreen.SearchEntriesFragment"
+    android:label="SearchEntriesFragment">
     <action
       android:id="@+id/view_entry_action"
       app:destination="@+id/destination_view_entry"

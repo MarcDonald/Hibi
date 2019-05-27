@@ -14,7 +14,7 @@ import timber.log.Timber
 class AddTagToEntryViewModel(tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
   private var entryId = 0
 
-  val allTags: LiveData<List<Tag>> = tagRepository.getAllTags()
+  val allTags: LiveData<List<Tag>> = tagRepository.getAllTagsLD()
 
   private var _dismiss = MutableLiveData<Boolean>()
   val dismiss: LiveData<Boolean>

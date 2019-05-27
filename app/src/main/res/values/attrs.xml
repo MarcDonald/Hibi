@@ -5,6 +5,7 @@
     <attr name="hibiSecondaryTextOnPrimary" format="color" />
     <attr name="hibiHintTextOnPrimary" format="color" />
     <attr name="hibiPrimaryIconTint" format="color" />
+    <attr name="colorPrimaryLight" format="color" />
   </declare-styleable>
 
   <declare-styleable name="SearchBar">

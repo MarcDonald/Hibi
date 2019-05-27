@@ -26,6 +26,18 @@
     app:layout_constraintTop_toBottomOf="@id/datepicker" />
 
   <com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_datepicker_extra"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:layout_marginBottom="@dimen/margin_standard"
+    android:text="@string/date"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/btn_datepicker_ok"
+    app:layout_constraintStart_toEndOf="@id/btn_datepicker_cancel"
+    app:layout_constraintTop_toBottomOf="@id/datepicker" />
+
+  <com.google.android.material.button.MaterialButton
     android:id="@+id/btn_datepicker_cancel"
     style="@style/Hibi.Button.Negative"
     android:layout_width="wrap_content"
