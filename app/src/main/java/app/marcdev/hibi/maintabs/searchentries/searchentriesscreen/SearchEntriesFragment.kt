@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -78,6 +79,14 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     initRecycler(view)
     setupMainObservers()
     setupBottomSheetObservers()
+
+    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback {
+      if(criteriaBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
+        criteriaBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+      else
+        Navigation.findNavController(requireView()).popBackStack()
+      true
+    })
 
     return view
   }
