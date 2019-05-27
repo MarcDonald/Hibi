@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
+import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -110,5 +111,8 @@ class TaggedEntriesFragment : Fragment(), KodeinAware {
       val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
       recycler.addItemDecoration(dividerItemDecoration)
     }
+
+    val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
+    recycler.addItemDecoration(decoration)
   }
 }

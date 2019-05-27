@@ -19,6 +19,10 @@ class EntriesRecyclerAdapter(private val context: Context) : RecyclerView.Adapte
     return items[position].entry.day
   }
 
+  fun isHeader(itemPosition: Int): Boolean {
+    return items[itemPosition].entry.day == 0
+  }
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseEntriesRecyclerViewHolder {
     return when(viewType) {
       0 -> {
