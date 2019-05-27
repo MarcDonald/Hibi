@@ -53,6 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
         android:weightSum="0.9"
         app:layout_constraintTop_toBottomOf="@id/txt_search_entries_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +72,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:padding="@dimen/margin_standard"
+          android:textAppearance="@style/TextAppearance.Hibi.SearchEntrySheetSubtitle"
           android:layout_weight="0.3"
           android:gravity="center"
           android:text="@string/to" />
@@ -85,53 +88,29 @@
       <!--endregion-->
 
       <!--region Containing-->
-      <TextView
-        android:id="@+id/txt_search_entries_containing_title"
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_containing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_standard"
-        android:gravity="center"
         android:text="@string/containing"
-        app:layout_constraintTop_toBottomOf="@id/lin_search_entries_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-      <EditText
-        android:id="@+id/edt_search_entries_containing_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_standard"
-        android:inputType="textCapSentences"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:hint="@string/content"
-        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_containing_title"
+        android:textAlignment="textStart"
+        app:layout_constraintTop_toBottomOf="@id/lin_search_entries_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
       <!--endregion-->
 
       <!--region Location-->
-      <TextView
-        android:id="@+id/txt_search_entries_location_title"
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_standard"
-        android:gravity="center"
         android:text="@string/at"
-        app:layout_constraintTop_toBottomOf="@id/edt_search_entries_containing_input"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-      <EditText
-        android:id="@+id/edt_search_entries_location_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_standard"
         android:layout_marginStart="@dimen/margin_standard"
-        android:inputType="textCapSentences"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:hint="@string/location"
-        app:layout_constraintTop_toBottomOf="@id/txt_search_entries_location_title"
+        android:textAlignment="textStart"
+        app:layout_constraintTop_toBottomOf="@id/btn_containing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
       <!--endregion-->
@@ -141,12 +120,13 @@
         android:id="@+id/txt_search_entries_tags_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_standard"
         android:gravity="center"
+        android:padding="@dimen/margin_standard"
         android:text="@string/with_tags"
-        app:layout_constraintTop_toBottomOf="@id/edt_search_entries_location_input"
+        android:textAppearance="@style/TextAppearance.Hibi.SearchEntrySheetSubtitle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btn_location" />
 
       <com.google.android.material.chip.ChipGroup
         android:id="@+id/cg_search_entries_tags"
@@ -184,6 +164,7 @@
         android:padding="@dimen/margin_standard"
         android:gravity="center"
         android:text="@string/in"
+        android:textAppearance="@style/TextAppearance.Hibi.SearchEntrySheetSubtitle"
         app:layout_constraintTop_toBottomOf="@id/txt_search_entries_no_tags"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

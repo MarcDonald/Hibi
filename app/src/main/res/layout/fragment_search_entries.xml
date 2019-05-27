@@ -92,5 +92,5 @@
     android:layout_marginBottom="@dimen/search_entries_recycler_bottom_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-  <include layout="@layout/dialog_entry_search" />
+  <include layout="@layout/sheet_entry_search" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,7 +5,6 @@ import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -21,6 +20,7 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.uicomponents.DatePickerDialog
+import app.marcdev.hibi.uicomponents.TextInputDialog
 import app.marcdev.hibi.uicomponents.views.ChipWithId
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
@@ -51,8 +51,8 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
   // <editor-fold desc="Bottom Sheet UI Components">
   private lateinit var beginningDateButton: MaterialButton
   private lateinit var endDateButton: MaterialButton
-  private lateinit var contentInput: EditText
-  private lateinit var locationInput: EditText
+  private lateinit var containingButton: MaterialButton
+  private lateinit var locationButton: MaterialButton
   private lateinit var tagChipGroup: ChipGroup
   private lateinit var noTagsWarning: TextView
   private lateinit var bookChipGroup: ChipGroup
@@ -61,6 +61,8 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
   private lateinit var resetButton: MaterialButton
   private lateinit var startDateDialog: DatePickerDialog
   private lateinit var endDateDialog: DatePickerDialog
+  private lateinit var containingDialog: TextInputDialog
+  private lateinit var locationDialog: TextInputDialog
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -141,9 +143,6 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
   }
 
   private fun initBottomSheet(view: View) {
-    initDateDialogs()
-    contentInput = view.findViewById(R.id.edt_search_entries_containing_input)
-    locationInput = view.findViewById(R.id.edt_search_entries_location_input)
     tagChipGroup = view.findViewById(R.id.cg_search_entries_tags)
     noTagsWarning = view.findViewById(R.id.txt_search_entries_no_tags)
     bookChipGroup = view.findViewById(R.id.cg_search_entries_books)
@@ -151,22 +150,50 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
 
     beginningDateButton = view.findViewById(R.id.btn_search_entries_beginning)
     beginningDateButton.setOnClickListener {
+      initStartDateDialog()
       startDateDialog.show(requireFragmentManager(), "Start Date Dialog")
+    }
+    beginningDateButton.setOnLongClickListener {
+      viewModel.resetStartDate()
+      true
     }
 
     endDateButton = view.findViewById(R.id.btn_search_entries_end)
     endDateButton.setOnClickListener {
+      initEndDateDialog()
       endDateDialog.show(requireFragmentManager(), "End Date Dialog")
+    }
+    endDateButton.setOnLongClickListener {
+      viewModel.resetEndDate()
+      true
     }
 
     searchButton = view.findViewById(R.id.btn_search_entries_go)
     searchButton.setOnClickListener {
       viewModel.search(
-        contentInput.text.toString(),
-        locationInput.text.toString(),
         getCheckedTags(),
         getCheckedBooks()
       )
+    }
+
+    containingButton = view.findViewById(R.id.btn_containing)
+    containingButton.setOnClickListener {
+      initContainingDialog()
+      containingDialog.show(requireFragmentManager(), "Containing Input Dialog")
+    }
+    containingButton.setOnLongClickListener {
+      viewModel.resetContaining()
+      true
+    }
+
+    locationButton = view.findViewById(R.id.btn_location)
+    locationButton.setOnClickListener {
+      initLocationDialog()
+      locationDialog.show(requireFragmentManager(), "Location Input Dialog")
+    }
+    locationButton.setOnLongClickListener {
+      viewModel.resetLocation()
+      true
     }
 
     val dragHandle: ImageView = view.findViewById(R.id.img_search_entries_drag_handle)
@@ -181,8 +208,9 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     resetButton.setOnClickListener { viewModel.reset() }
   }
 
-  private fun initDateDialogs() {
-    startDateDialog = DatePickerDialog.Builder()
+  private fun initStartDateDialog() {
+    val builder = DatePickerDialog.Builder()
+    builder
       .setOkClickListener(View.OnClickListener {
         viewModel.setStartDate(startDateDialog.year, startDateDialog.month, startDateDialog.day)
         startDateDialog.dismiss()
@@ -194,9 +222,15 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
         viewModel.resetStartDate()
         startDateDialog.dismiss()
       })
-      .build()
+    if(!viewModel.startIsBeginning())
+      builder.initDatePicker(viewModel.startYear, viewModel.startMonth, viewModel.startDay, null)
 
-    endDateDialog = DatePickerDialog.Builder()
+    startDateDialog = builder.build()
+  }
+
+  private fun initEndDateDialog() {
+    val builder = DatePickerDialog.Builder()
+    builder
       .setOkClickListener(View.OnClickListener {
         viewModel.setEndDate(endDateDialog.year, endDateDialog.month, endDateDialog.day)
         endDateDialog.dismiss()
@@ -208,7 +242,57 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
         viewModel.resetEndDate()
         endDateDialog.dismiss()
       })
-      .build()
+    if(!viewModel.endIsFinish())
+      builder.initDatePicker(viewModel.endYear, viewModel.endMonth, viewModel.endDay, null)
+
+    endDateDialog = builder.build()
+  }
+
+
+  private fun initContainingDialog() {
+    val builder = TextInputDialog.Builder()
+    builder
+      .setSaveClickListener(containingSaveListener)
+      .setDeleteClickListener(View.OnClickListener {
+        viewModel.resetContaining()
+        containingDialog.dismiss()
+      })
+      .setHint(resources.getString(R.string.content))
+      .setTitle(resources.getString(R.string.content))
+    viewModel.containingDisplay.value?.let { currentContent ->
+      builder.setContent(currentContent)
+    }
+    containingDialog = builder.build()
+  }
+
+  private fun initLocationDialog() {
+    val builder = TextInputDialog.Builder()
+    builder
+      .setSaveClickListener(locationSaveListener)
+      .setDeleteClickListener(View.OnClickListener {
+        viewModel.resetLocation()
+        locationDialog.dismiss()
+      })
+      .setHint(resources.getString(R.string.location))
+      .setTitle(resources.getString(R.string.location))
+    viewModel.locationDisplay.value?.let { currentLocation ->
+      builder.setContent(currentLocation)
+    }
+    locationDialog = builder.build()
+  }
+
+  private val containingSaveListener = object : TextInputDialog.TextInputDialogSaveListener {
+    override fun onSave(text: String) {
+      viewModel.setContaining(text)
+      containingDialog.dismiss()
+    }
+  }
+
+  private val locationSaveListener = object : TextInputDialog.TextInputDialogSaveListener {
+    override fun onSave(text: String) {
+      viewModel.setLocation(text)
+      locationDialog.dismiss()
+    }
   }
 
   private fun setupBottomSheetObservers() {
@@ -227,6 +311,20 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
           endDateButton.text = resources.getString(R.string.finish)
         else
           endDateButton.text = endText
+      }
+    })
+
+    viewModel.containingDisplay.observe(this, Observer { value ->
+      value?.let { contentText ->
+        val fillText = if(contentText.isBlank()) resources.getString(R.string.any_text) else contentText
+        containingButton.text = resources.getString(R.string.containing, fillText)
+      }
+    })
+
+    viewModel.locationDisplay.observe(this, Observer { value ->
+      value?.let { locationText ->
+        val fillText = if(locationText.isBlank()) resources.getString(R.string.any_location) else locationText
+        locationButton.text = resources.getString(R.string.at, fillText)
       }
     })
 
@@ -289,11 +387,9 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
       }
     })
 
-    viewModel.clearDisplays.observe(this, Observer { value ->
+    viewModel.clearChipTicks.observe(this, Observer { value ->
       value?.let { clear ->
         if(clear) {
-          contentInput.setText("")
-          locationInput.setText("")
           for(i in 0 until tagChipGroup.childCount) {
             val chip = tagChipGroup.getChildAt(i) as ChipWithId
             chip.isChecked = false

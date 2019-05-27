@@ -144,8 +144,10 @@
   <string name="start">Start</string>
   <string name="to">to</string>
   <string name="finish">Finish</string>
-  <string name="containing">containing</string>
-  <string name="at">at</string>
+  <string name="containing">Containing: %1$s</string>
+  <string name="any_text">Any Text</string>
+  <string name="at">At: %1$s</string>
+  <string name="any_location">Any Location</string>
   <string name="with_tags">with tags</string>
   <string name="in">in</string>
   <string name="reset">Reset</string>

@@ -47,16 +47,38 @@ class SearchEntriesViewModel(
   val beginningDisplay: LiveData<String>
     get() = _beginningDisplay
 
+  val startDay: Int
+    get() = _criteria.startDay
+  val startMonth: Int
+    get() = _criteria.startMonth
+  val startYear: Int
+    get() = _criteria.startYear
+
+  val endDay: Int
+    get() = _criteria.endDay
+  val endMonth: Int
+    get() = _criteria.endMonth
+  val endYear: Int
+    get() = _criteria.endYear
+
   private val _endDisplay = MutableLiveData<String>()
   val endDisplay: LiveData<String>
     get() = _endDisplay
+
+  private val _containingDisplay = MutableLiveData<String>()
+  val containingDisplay: LiveData<String>
+    get() = _containingDisplay
+
+  private val _locationDisplay = MutableLiveData<String>()
+  val locationDisplay: LiveData<String>
+    get() = _locationDisplay
 
   private val _dismissBottomSheet = MutableLiveData<Boolean>()
   val dismissBottomSheet: LiveData<Boolean>
     get() = _dismissBottomSheet
 
   private val _clearDisplays = MutableLiveData<Boolean>()
-  val clearDisplays: LiveData<Boolean>
+  val clearChipTicks: LiveData<Boolean>
     get() = _clearDisplays
 
   private val _tags = MutableLiveData<List<Tag>>()
@@ -88,6 +110,8 @@ class SearchEntriesViewModel(
     _displayLoading.value = false
     getTags()
     getBooks()
+    _locationDisplay.value = _criteria.location
+    _containingDisplay.value = _criteria.content
   }
 
   private fun onCriteriaChange() {
@@ -256,8 +280,8 @@ class SearchEntriesViewModel(
   fun reset() {
     resetStartDate()
     resetEndDate()
-    _criteria.content = ""
-    _criteria.location = ""
+    resetContaining()
+    resetLocation()
     _criteria.tags = listOf()
     _criteria.books = listOf()
     _checkedBooks.value = listOf()
@@ -272,6 +296,14 @@ class SearchEntriesViewModel(
     _beginningDisplay.value = formatDateForDisplay(day, month, year)
   }
 
+  fun startIsBeginning(): Boolean {
+    return (_criteria.startYear == 0 && _criteria.startDay == 1 && _criteria.startMonth == 0)
+  }
+
+  fun endIsFinish(): Boolean {
+    return (_criteria.endYear == 9999 && _criteria.endDay == 31 && _criteria.endMonth == 11)
+  }
+
   fun setEndDate(year: Int, month: Int, day: Int) {
     _criteria.endYear = year
     _criteria.endMonth = month
@@ -279,9 +311,17 @@ class SearchEntriesViewModel(
     _endDisplay.value = formatDateForDisplay(day, month, year)
   }
 
-  fun search(contentArg: String, locationArg: String, tagsArg: List<Int>, booksArg: List<Int>) {
+  fun setContaining(contentArg: String) {
     _criteria.content = contentArg
+    _containingDisplay.value = contentArg
+  }
+
+  fun setLocation(locationArg: String) {
     _criteria.location = locationArg
+    _locationDisplay.value = locationArg
+  }
+
+  fun search(tagsArg: List<Int>, booksArg: List<Int>) {
     _criteria.tags = tagsArg
     _criteria.books = booksArg
     onCriteriaChange()
@@ -300,6 +340,16 @@ class SearchEntriesViewModel(
     _criteria.endDay = 31
     _criteria.endMonth = 11
     _endDisplay.value = ""
+  }
+
+  fun resetContaining() {
+    _criteria.content = ""
+    _containingDisplay.value = _criteria.content
+  }
+
+  fun resetLocation() {
+    _criteria.location = ""
+    _locationDisplay.value = _criteria.location
   }
 
   private fun getTags() {
