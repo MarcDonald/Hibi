@@ -2,6 +2,8 @@ package app.marcdev.hibi.maintabs.mainentriesrecycler
 
 import android.graphics.Canvas
 import android.graphics.Rect
+import android.view.MotionEvent
+import android.view.MotionEvent.ACTION_DOWN
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +27,14 @@ class MainEntriesHeaderItemDecoration(parent: RecyclerView, private val adapter:
     parent.doOnEachNextLayout {
       currentHeader = null
     }
+
+    parent.addOnItemTouchListener(object : RecyclerView.SimpleOnItemTouchListener() {
+      override fun onInterceptTouchEvent(recyclerView: RecyclerView, motionEvent: MotionEvent): Boolean {
+        return if(motionEvent.action == ACTION_DOWN) {
+          motionEvent.y <= currentHeader?.second?.itemView?.bottom ?: 0
+        } else false
+      }
+    })
   }
 
   private var stickyHeaderHeight = 0
