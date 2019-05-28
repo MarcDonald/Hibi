@@ -164,6 +164,7 @@
 
   <!--region Settings-->
   <string name="settings">Settings</string>
+  <string name="behaviour">Behaviour</string>
   <string name="notifications">Notifications</string>
   <string name="appearance">Appearance</string>
   <string name="entry_dividers_pref_title">Entry Dividers</string>
@@ -180,6 +181,10 @@
   <string name="restore_warning">Replace ALL currently saved entries?</string>
   <string name="restore_confirm">Continue with Restore</string>
   <string name="restore_fail">Restore failed, ensure that you selected an appropriate .hibi file</string>
+  <string name="clipboard_behaviour">Clipboard Behaviour</string>
+  <string name="long_press_copy">Long Press to Copy</string>
+  <string name="long_press_paste">Long Press to Paste</string>
+  <string name="display_menu">Display Menu</string>
   <!--endregion-->
 
   <!--region About-->
@@ -226,13 +231,6 @@
   <string name="share">Share</string>
   <string name="restore_title">Select a file to restore from</string>
   <string name="backup_file">Backup</string>
-  <!--endregion-->
-
-  <!--region Arrays-->
-  <string-array name="yes_or_no">
-    <item>@string/yes</item>
-    <item>@string/no</item>
-  </string-array>
   <!--endregion-->
 
   <!--region Plurals-->

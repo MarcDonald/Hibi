@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
+import app.marcdev.hibi.internal.PREF_CLIPBOARD_BEHAVIOR
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
@@ -88,6 +90,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private fun bindViews(view: View) {
+    initClipboardButton(view)
     toolbarTitle = view.findViewById(R.id.txt_add_toolbar_title)
 
     searchBar = view.findViewById(R.id.searchbar_add_entry)
@@ -120,12 +123,30 @@ class AddEntryFragment : Fragment(), KodeinAware {
     addMediaButton = view.findViewById(R.id.img_option_media)
     addMediaButton.setOnClickListener(addMediaClickListener)
 
-    clipboardButton = view.findViewById(R.id.img_option_clipboard)
-    clipboardButton.setOnClickListener(clipboardClickListener)
-
     wordButton = view.findViewById(R.id.img_option_words)
     wordButton.setOnClickListener(wordClickListener)
     // </editor-fold>
+  }
+
+  private fun initClipboardButton(view: View) {
+    clipboardButton = view.findViewById(R.id.img_option_clipboard)
+    @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    when(PreferenceManager.getDefaultSharedPreferences(requireContext()).getString(PREF_CLIPBOARD_BEHAVIOR, "0").toInt()) {
+      0 -> {
+        clipboardButton.setImageResource(R.drawable.ic_clipboard_plus)
+        clipboardButton.setOnClickListener { showClipBoardMenu() }
+      }
+      1 -> {
+        clipboardButton.setImageResource(R.drawable.ic_content_copy_24dp)
+        clipboardButton.setOnClickListener { copyToClipboard() }
+        clipboardButton.setOnLongClickListener { pasteFromClipboard(); true }
+      }
+      2 -> {
+        clipboardButton.setImageResource(R.drawable.ic_content_paste_24dp)
+        clipboardButton.setOnClickListener { pasteFromClipboard() }
+        clipboardButton.setOnLongClickListener { copyToClipboard(); true }
+      }
+    }
   }
 
   private fun setupObservers() {
@@ -334,10 +355,6 @@ class AddEntryFragment : Fragment(), KodeinAware {
     Toast.makeText(requireContext(), resources.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
   }
 
-  private val clipboardClickListener = View.OnClickListener {
-    showClipBoardMenu()
-  }
-
   private fun showClipBoardMenu() {
     val popupMenu = PopupMenu(context, clipboardButton)
     popupMenu.menuInflater.inflate(R.menu.menu_clipboard, popupMenu.menu)
@@ -359,6 +376,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
     val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip: ClipData = ClipData.newPlainText("Entry", contentInput.text.toString())
     clipboard.primaryClip = clip
+    Toast.makeText(requireContext(), resources.getString(R.string.copied_entry_to_clipboard), Toast.LENGTH_SHORT).show()
   }
 
   private fun pasteFromClipboard() {

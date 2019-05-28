@@ -13,6 +13,17 @@
       android:title="@string/entry_dividers_pref_title" />
   </PreferenceCategory>
 
+  <PreferenceCategory android:title="@string/behaviour">
+    <ListPreference
+      android:key="pref_clipboard_behavior"
+      android:title="@string/clipboard_behaviour"
+      android:icon="@drawable/ic_clipboard_plus"
+      android:entries="@array/clipboard_behaviors"
+      android:entryValues="@array/clipboard_behaviors_values"
+      android:defaultValue="0"
+      android:summary="@string/display_menu" />
+  </PreferenceCategory>
+
   <PreferenceCategory android:title="@string/notifications">
     <SwitchPreference
       android:defaultValue="false"

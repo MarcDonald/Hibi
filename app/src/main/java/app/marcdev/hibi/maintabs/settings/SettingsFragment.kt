@@ -6,13 +6,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.preference.ListPreference
 import android.preference.PreferenceManager
 import android.text.format.DateFormat
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.R
@@ -49,18 +49,26 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   }
 
   private fun bindViews() {
+    val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
     val mainDivider = findPreference(PREF_ENTRY_DIVIDERS)
     mainDivider.onPreferenceChangeListener = mayRequireRestartChangeListener
+
     val darkTheme = findPreference(PREF_DARK_THEME)
     darkTheme.onPreferenceChangeListener = onThemeChangeListener
+
     val reminder = findPreference(PREF_REMINDER_NOTIFICATION)
     reminder.onPreferenceChangeListener = reminderChangeListener
-    if(PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_REMINDER_NOTIFICATION, false)) {
+    if(sharedPreferences.getBoolean(PREF_REMINDER_NOTIFICATION, false)) {
       displayReminderTimeSummary()
     }
     val reminderTime = findPreference(PREF_REMINDER_TIME)
     reminderTime.onPreferenceClickListener = reminderTimeClickListener
-    PreferenceManager.getDefaultSharedPreferences(requireContext()).registerOnSharedPreferenceChangeListener(reminderTimeChangeListener)
+    sharedPreferences.registerOnSharedPreferenceChangeListener(reminderTimeChangeListener)
+
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    matchSummaryToSelection(findPreference(PREF_CLIPBOARD_BEHAVIOR), sharedPreferences.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
+    sharedPreferences.registerOnSharedPreferenceChangeListener(clipboardBehaviorChangeListener)
 
     val backup = findPreference(PREF_BACKUP)
     backup.onPreferenceClickListener = backupClickListener
@@ -116,6 +124,11 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
       displayReminderTimeSummary()
     else
       matchSummaryToSelection(findPreference(PREF_REMINDER_TIME), resources.getString(R.string.reminder_not_set))
+  }
+
+  private val clipboardBehaviorChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, _ ->
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    matchSummaryToSelection(findPreference(PREF_CLIPBOARD_BEHAVIOR), prefs.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
   }
 
   private val reminderTimeClickListener = Preference.OnPreferenceClickListener {
@@ -232,7 +245,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
         if(index >= 0) {
           preference.entries[index]
         } else {
-          Timber.w("Log: BindPreferenceSummaryToValue: Index < 0")
+          Timber.w("Log: matchSummaryToSelection: Index < 0")
           null
         })
 
@@ -244,5 +257,6 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   override fun onDestroy() {
     super.onDestroy()
     PreferenceManager.getDefaultSharedPreferences(requireContext()).unregisterOnSharedPreferenceChangeListener(reminderTimeChangeListener)
+    PreferenceManager.getDefaultSharedPreferences(requireContext()).unregisterOnSharedPreferenceChangeListener(clipboardBehaviorChangeListener)
   }
 }
