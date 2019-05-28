@@ -1,22 +1,28 @@
 package app.marcdev.hibi.entryscreens.addentryscreen
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.EntryRepository
+import app.marcdev.hibi.data.repository.NewWordRepository
+import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewModel() {
+class AddEntryViewModel(
+  private val entryRepository: EntryRepository,
+  private val tagEntryRelationRepository: TagEntryRelationRepository,
+  private val bookEntryRelationRepository: BookEntryRelationRepository,
+  private val newWordRepository: NewWordRepository)
+  : ViewModel() {
+
   val dateTimeStore = DateTimeStore()
   private var isNewEntry: Boolean = false
   private var needsArgs = true
 
-  private var _entryId = 0
+  private val _entryId = MutableLiveData<Int>()
   val entryId: Int
-    get() = _entryId
+    get() = getEntryIdNonNull()
 
   private var _isEditMode = MutableLiveData<Boolean>()
   val isEditMode: LiveData<Boolean>
@@ -38,11 +44,25 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
   val entry: LiveData<Entry>
     get() = _entry
 
+  val colorTagIcon: LiveData<Boolean>
+    get() = Transformations.switchMap(tagEntryRelationRepository.getCountTagsWithEntry(entryId), ::greaterThanZero)
+
+  val colorBookIcon: LiveData<Boolean>
+    get() = Transformations.switchMap(bookEntryRelationRepository.getCountBooksWithEntryLD(entryId), ::greaterThanZero)
+
+  val colorLocationIcon: LiveData<Boolean>
+    get() = Transformations.switchMap(entryRepository.getLocationLD(entryId), ::isNotBlank)
+
+  val colorNewWordIcon: LiveData<Boolean>
+    get() = Transformations.switchMap(newWordRepository.getNewWordCountByEntryIdLD(entryId), ::greaterThanZero)
+
+  private val _startObservingEntrySpecificItems = MutableLiveData<Boolean>()
+  val startObservingEntrySpecificItems: LiveData<Boolean>
+    get() = _startObservingEntrySpecificItems
+
   fun passArgument(entryIdArg: Int) {
     if(needsArgs) {
-      _entryId = entryIdArg
-      _isEditMode.value = entryId != 0
-      loadData()
+      loadData(entryIdArg)
       needsArgs = false
     }
   }
@@ -87,13 +107,11 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
     }
   }
 
-  private fun loadData() {
-    if(entryId != 0) {
-      getEntry(entryId)
-    } else {
-      isNewEntry = true
+  private fun loadData(entryIdArg: Int) {
+    if(entryIdArg != 0)
+      getEntry(entryIdArg)
+    else
       initialAdd()
-    }
   }
 
   private fun getEntry(id: Int) {
@@ -102,6 +120,9 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
       _entry.value = entry
       dateTimeStore.setDate(entry.day, entry.month, entry.year)
       dateTimeStore.setTime(entry.hour, entry.minute)
+      _isEditMode.value = true
+      _entryId.value = id
+      _startObservingEntrySpecificItems.value = true
     }
   }
 
@@ -113,7 +134,10 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
       val hour = dateTimeStore.hour
       val minute = dateTimeStore.minute
       entryRepository.addEntry(Entry(day, month, year, hour, minute, ""))
-      _entryId = entryRepository.getLastEntryId()
+      _entryId.value = entryRepository.getLastEntryId()
+      _isEditMode.value = false
+      isNewEntry = true
+      _startObservingEntrySpecificItems.value = true
     }
   }
 
@@ -130,5 +154,21 @@ class AddEntryViewModel(private val entryRepository: EntryRepository) : ViewMode
 
   private suspend fun deleteEntry() {
     entryRepository.deleteEntry(entryId)
+  }
+
+  private fun getEntryIdNonNull(): Int {
+    return _entryId.value ?: 0
+  }
+
+  private fun greaterThanZero(amount: Int): LiveData<Boolean> {
+    val ld = MutableLiveData<Boolean>()
+    ld.value = amount > 0
+    return ld
+  }
+
+  private fun isNotBlank(string: String): LiveData<Boolean> {
+    val ld = MutableLiveData<Boolean>()
+    ld.value = string.isNotBlank()
+    return ld
   }
 }

@@ -44,6 +44,9 @@ interface DAO {
 
   @Query("SELECT location FROM Entry WHERE id = :entryId")
   fun getLocation(entryId: Int): String
+
+  @Query("SELECT location FROM Entry WHERE id = :entryId")
+  fun getLocationLD(entryId: Int): LiveData<String>
   // </editor-fold>
 
   // <editor-fold desc="Tag">
@@ -96,6 +99,9 @@ interface DAO {
 
   @Query("SELECT ter.entryId as entryId, t.name as tagName FROM TagEntryRelation as ter LEFT OUTER JOIN Tag as t ON ter.tagId = t.id")
   fun getTagEntryDisplayItems(): List<TagEntryDisplayItem>
+
+  @Query("SELECT COUNT(*) FROM TagEntryRelation WHERE entryId = :entryId")
+  fun getTagCountByEntryId(entryId: Int): LiveData<Int>
   // </editor-fold>
 
   // <editor-fold desc="New Word">
@@ -116,6 +122,9 @@ interface DAO {
 
   @Query("SELECT COUNT(*) FROM NewWord WHERE entryId = :entryId")
   fun getNewWordCountByEntryId(entryId: Int): Int
+
+  @Query("SELECT COUNT(*) FROM NewWord WHERE entryId = :entryId")
+  fun getNewWordCountByEntryIdLD(entryId: Int): LiveData<Int>
   // </editor-fold>
 
   // <editor-fold desc="Book">
@@ -165,5 +174,8 @@ interface DAO {
 
   @Query("SELECT * FROM BookEntryRelation WHERE bookId IN (:ids)")
   fun getAllBookEntryRelationsWithIds(ids: List<Int>): List<BookEntryRelation>
+
+  @Query("SELECT COUNT(*) FROM BookEntryRelation WHERE entryId = :entryId")
+  fun getCountBooksWithEntry(entryId: Int): LiveData<Int>
   // </editor-fold>
 }

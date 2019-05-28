@@ -53,6 +53,14 @@ class AddEntryFragment : Fragment(), KodeinAware {
   private lateinit var searchBar: SearchBar
   private lateinit var dateDialog: DatePickerDialog
   private lateinit var timeDialog: TimePickerDialog
+
+  // <editor-fold desc="Option Bar Buttons">
+  private lateinit var addTagButton: ImageView
+  private lateinit var addToBookButton: ImageView
+  private lateinit var addMediaButton: ImageView
+  private lateinit var addLocationButton: ImageView
+  private lateinit var wordButton: ImageView
+  // </editor-fold>
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,22 +110,22 @@ class AddEntryFragment : Fragment(), KodeinAware {
     backButton.setOnClickListener(backClickListener)
 
     // <editor-fold desc="Option Bar Buttons">
-    val addTagButton: ImageView = view.findViewById(R.id.img_option_tag)
+    addTagButton = view.findViewById(R.id.img_option_tag)
     addTagButton.setOnClickListener(addTagClickListener)
 
-    val addToBookButton: ImageView = view.findViewById(R.id.img_option_book)
+    addToBookButton = view.findViewById(R.id.img_option_book)
     addToBookButton.setOnClickListener(addToBookClickListener)
 
-    val addLocationButton: ImageView = view.findViewById(R.id.img_option_location)
+    addLocationButton = view.findViewById(R.id.img_option_location)
     addLocationButton.setOnClickListener(addLocationClickListener)
 
-    val addMediaButton: ImageView = view.findViewById(R.id.img_option_media)
+    addMediaButton = view.findViewById(R.id.img_option_media)
     addMediaButton.setOnClickListener(addMediaClickListener)
 
     val clipboardButton: ImageView = view.findViewById(R.id.img_option_clipboard)
     clipboardButton.setOnClickListener(clipboardClickListener)
 
-    val wordButton: ImageView = view.findViewById(R.id.img_option_words)
+    wordButton = view.findViewById(R.id.img_option_words)
     wordButton.setOnClickListener(wordClickListener)
     // </editor-fold>
   }
@@ -172,6 +180,54 @@ class AddEntryFragment : Fragment(), KodeinAware {
           backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
         else
           backConfirmDialog.dismiss()
+      }
+    })
+
+    viewModel.startObservingEntrySpecificItems.observe(this, Observer { entry ->
+      entry?.let { observe ->
+        if(observe)
+          setupEntrySpecificObservers()
+      }
+    })
+  }
+
+  /**
+   * This has to be called after the original because the entryId isn't always provided immediately
+   */
+  private fun setupEntrySpecificObservers() {
+    viewModel.colorTagIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        if(shouldColor)
+          addTagButton.setColorFilter(resources.getColor(R.color.colorAccent, null))
+        else
+          addTagButton.clearColorFilter()
+      }
+    })
+
+    viewModel.colorBookIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        if(shouldColor)
+          addToBookButton.setColorFilter(resources.getColor(R.color.colorAccent, null))
+        else
+          addToBookButton.clearColorFilter()
+      }
+    })
+
+    viewModel.colorLocationIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        if(shouldColor)
+          addLocationButton.setColorFilter(resources.getColor(R.color.colorAccent, null))
+        else
+          addLocationButton.clearColorFilter()
+      }
+    })
+
+    viewModel.colorNewWordIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        if(shouldColor)
+          wordButton.setColorFilter(resources.getColor(R.color.colorAccent, null))
+        else
+          wordButton.clearColorFilter()
       }
     })
   }

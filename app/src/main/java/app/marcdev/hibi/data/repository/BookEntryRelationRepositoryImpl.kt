@@ -59,6 +59,10 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
     }
   }
 
+  override fun getCountBooksWithEntryLD(entryId: Int): LiveData<Int> {
+    return dao.getCountBooksWithEntry(entryId)
+  }
+
   companion object {
     @Volatile private var instance: BookEntryRelationRepositoryImpl? = null
 
