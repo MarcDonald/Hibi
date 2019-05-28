@@ -15,10 +15,10 @@
   </com.google.android.material.appbar.AppBarLayout>
 
   <androidx.core.widget.NestedScrollView
+    android:id="@+id/scroll_view_entry"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="?attr/actionBarSize"
-    android:layout_marginBottom="@dimen/search_bar_height">
+    android:layout_marginTop="?attr/actionBarSize">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -151,19 +151,29 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         android:text="@string/view_new_words"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lin_view_books" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/fab_view_copy"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:src="@drawable/ic_content_copy_24dp"
+    android:tint="@color/black"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:layout_marginBottom="@dimen/view_entry_fab_bottom_margin" />
+
   <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/app_bar_layout_add_entry_option_bar"
+    android:id="@+id/app_bar_layout_view_entry_option_bar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/search_bar_height"
     android:layout_gravity="bottom"
-    android:backgroundTint="?colorPrimaryDark">
+    android:backgroundTint="?colorPrimaryDark"
+    app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
 
     <app.marcdev.hibi.uicomponents.views.SearchBar
       android:id="@+id/searchbar_view_entry"

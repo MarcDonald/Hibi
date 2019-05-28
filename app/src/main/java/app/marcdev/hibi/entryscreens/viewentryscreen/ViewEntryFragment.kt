@@ -1,5 +1,8 @@
 package app.marcdev.hibi.entryscreens.viewentryscreen
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -23,6 +27,7 @@ import app.marcdev.hibi.uicomponents.views.SearchBar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -48,6 +53,8 @@ class ViewEntryFragment : Fragment(), KodeinAware {
   private lateinit var bookDisplayHolder: LinearLayout
   private lateinit var newWordsButton: MaterialButton
   private lateinit var locationDisplay: TextView
+  private lateinit var copyButton: FloatingActionButton
+  private lateinit var scrollView: NestedScrollView
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +88,10 @@ class ViewEntryFragment : Fragment(), KodeinAware {
     tagDisplayHolder = view.findViewById(R.id.lin_view_tags)
     bookDisplay = view.findViewById(R.id.cg_view_books)
     bookDisplayHolder = view.findViewById(R.id.lin_view_books)
+    scrollView = view.findViewById(R.id.scroll_view_entry)
+    scrollView.setOnScrollChangeListener(scrollListener)
+    copyButton = view.findViewById(R.id.fab_view_copy)
+    copyButton.setOnClickListener { copyToClipboard() }
 
     searchBar = view.findViewById(R.id.searchbar_view_entry)
     searchBar.setSearchAction(this::search)
@@ -224,5 +235,20 @@ class ViewEntryFragment : Fragment(), KodeinAware {
 
   private val cancelDeleteClickListener = View.OnClickListener {
     deleteConfirmDialog.dismiss()
+  }
+
+  private val scrollListener = NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+    if(scrollY > oldScrollY) {
+      copyButton.hide()
+    } else {
+      copyButton.show()
+    }
+  }
+
+  private fun copyToClipboard() {
+    val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip: ClipData = ClipData.newPlainText("Entry", contentDisplay.text.toString())
+    clipboard.primaryClip = clip
+    Toast.makeText(requireContext(), resources.getString(R.string.copied_entry_to_clipboard), Toast.LENGTH_SHORT).show()
   }
 }
