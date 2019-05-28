@@ -53,8 +53,11 @@ class OpenSourceLicencesActivity : HibiActivity() {
     val mplus: LicenseDisplay = findViewById(R.id.license_mplus)
     mplus.setOnClickListener(openURLClickListener("https://fonts.google.com/specimen/M+PLUS+Rounded+1c"))
 
+    val googleMaterialIcons: LicenseDisplay = findViewById(R.id.license_google_material_icons)
+    googleMaterialIcons.setOnClickListener(openURLClickListener("https://material.io/tools/icons/"))
+
     val materialIcons: LicenseDisplay = findViewById(R.id.license_material_icons)
-    materialIcons.setOnClickListener(openURLClickListener("https://material.io/tools/icons/"))
+    materialIcons.setOnClickListener(openURLClickListener("https://materialdesignicons.com/"))
   }
 
   private val backClickListener = View.OnClickListener {

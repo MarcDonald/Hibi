@@ -94,7 +94,7 @@
         app:title="@string/mplus" />
 
       <app.marcdev.hibi.uicomponents.views.LicenseDisplay
-        android:id="@+id/license_material_icons"
+        android:id="@+id/license_google_material_icons"
         style="@style/Hibi.CardView.Rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,6 +103,18 @@
         android:layout_marginBottom="@dimen/margin_standard"
         app:description="@string/material_icons_description"
         app:license="@string/apache"
+        app:title="@string/google_material_icons_title" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_material_icons"
+        style="@style/Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/material_icons_description"
+        app:license="@string/sil"
         app:title="@string/material_icons_title" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>

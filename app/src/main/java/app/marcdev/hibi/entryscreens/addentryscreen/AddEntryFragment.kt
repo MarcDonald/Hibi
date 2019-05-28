@@ -9,10 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -60,6 +57,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
   private lateinit var addMediaButton: ImageView
   private lateinit var addLocationButton: ImageView
   private lateinit var wordButton: ImageView
+  private lateinit var clipboardButton: ImageView
   // </editor-fold>
   // </editor-fold>
 
@@ -122,7 +120,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
     addMediaButton = view.findViewById(R.id.img_option_media)
     addMediaButton.setOnClickListener(addMediaClickListener)
 
-    val clipboardButton: ImageView = view.findViewById(R.id.img_option_clipboard)
+    clipboardButton = view.findViewById(R.id.img_option_clipboard)
     clipboardButton.setOnClickListener(clipboardClickListener)
 
     wordButton = view.findViewById(R.id.img_option_words)
@@ -337,10 +335,42 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private val clipboardClickListener = View.OnClickListener {
+    showClipBoardMenu()
+  }
+
+  private fun showClipBoardMenu() {
+    val popupMenu = PopupMenu(context, clipboardButton)
+    popupMenu.menuInflater.inflate(R.menu.menu_clipboard, popupMenu.menu)
+    popupMenu.setOnMenuItemClickListener { menuItem ->
+      when(menuItem.itemId) {
+        popupMenu.menu.getItem(0).itemId -> {
+          copyToClipboard()
+          Toast.makeText(requireContext(), resources.getString(R.string.copied_entry_to_clipboard), Toast.LENGTH_SHORT).show()
+        }
+
+        popupMenu.menu.getItem(1).itemId -> pasteFromClipboard()
+      }
+      return@setOnMenuItemClickListener true
+    }
+    popupMenu.show()
+  }
+
+  private fun copyToClipboard() {
     val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip: ClipData = ClipData.newPlainText("Entry", contentInput.text.toString())
     clipboard.primaryClip = clip
-    Toast.makeText(requireContext(), resources.getString(R.string.copied_entry_to_clipboard), Toast.LENGTH_SHORT).show()
+  }
+
+  private fun pasteFromClipboard() {
+    val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip = clipboard.primaryClip
+    if(clip != null) {
+      val clipText = clip.getItemAt(0).text
+      val cursorPoint = contentInput.selectionStart
+      contentInput.text.insert(cursorPoint, clipText)
+    } else {
+      Toast.makeText(requireContext(), resources.getString(R.string.nothing_in_clipboard), Toast.LENGTH_SHORT).show()
+    }
   }
 
   private val wordClickListener = View.OnClickListener {

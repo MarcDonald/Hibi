@@ -20,6 +20,9 @@
   <string name="no">No</string>
   <string name="description">Description</string>
   <string name="copy_to_clipboard">Copy to Clipboard</string>
+  <string name="copy">Copy</string>
+  <string name="paste">Paste</string>
+  <string name="nothing_in_clipboard">Nothing in Clipboard</string>
   <!--endregion-->
 
   <!--region Tab Titles-->
@@ -195,6 +198,7 @@
   <string name="apache">Apache 2 License</string>
   <string name="mit">MIT License</string>
   <string name="ofl">Open Font License</string>
+  <string name="sil">SIL Open Font License 1.1</string>
 
   <string name="timber">Timber</string>
   <string name="timber_description">Used for logging</string>
@@ -214,6 +218,7 @@
   <string name="mplus">M PLUS Rounded 1c Bold</string>
   <string name="mplus_description">Used as the icon font</string>
 
+  <string name="google_material_icons_title">Material Design Icons</string>
   <string name="material_icons_title">Material Design Icons</string>
   <string name="material_icons_description">Used throughout the application</string>
 
