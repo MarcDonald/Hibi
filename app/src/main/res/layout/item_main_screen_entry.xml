@@ -45,6 +45,8 @@
     app:layout_constraintTop_toBottomOf="@id/item_content"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
+    android:maxLines="1"
+    android:ellipsize="end"
     android:paddingStart="@dimen/margin_standard"
     android:paddingEnd="@dimen/margin_standard"
     android:paddingBottom="@dimen/margin_standard" />
