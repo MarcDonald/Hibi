@@ -72,8 +72,8 @@ class AddEntryViewModel(
       _displayEmptyContentWarning.value = true
     } else {
       save(content)
+      _popBackStack.value = true
     }
-    _popBackStack.value = true
   }
 
   fun backPress(contentIsEmpty: Boolean) {
