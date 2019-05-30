@@ -185,6 +185,8 @@
   <string name="long_press_copy">Long Press to Copy</string>
   <string name="long_press_paste">Long Press to Paste</string>
   <string name="display_menu">Display Menu</string>
+  <string name="save_on_lose_focus">Save when app loses focus</string>
+  <string name="save_on_lose_focus_summary">Can protect input in case of a crash while in the background, but can save over entries you are currently editing without you explicitly saving</string>
   <!--endregion-->
 
   <!--region About-->

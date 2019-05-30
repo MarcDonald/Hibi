@@ -27,6 +27,7 @@ const val PREF_REMINDER_TIME = "pref_reminder_time"
 const val PREF_BACKUP = "pref_backup"
 const val PREF_RESTORE = "pref_restore"
 const val PREF_CLIPBOARD_BEHAVIOR = "pref_clipboard_behavior"
+const val PREF_SAVE_ON_PAUSE = "pref_save_on_pause"
 
 // Notifications
 const val REMINDER_NOTIFICATION_ID = 1

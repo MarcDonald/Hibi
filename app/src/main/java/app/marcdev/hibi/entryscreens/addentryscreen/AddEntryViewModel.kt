@@ -1,20 +1,24 @@
 package app.marcdev.hibi.entryscreens.addentryscreen
 
+import android.app.Application
+import android.preference.PreferenceManager
 import androidx.lifecycle.*
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.NewWordRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
+import app.marcdev.hibi.internal.PREF_SAVE_ON_PAUSE
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class AddEntryViewModel(
+  application: Application,
   private val entryRepository: EntryRepository,
   private val tagEntryRelationRepository: TagEntryRelationRepository,
   private val bookEntryRelationRepository: BookEntryRelationRepository,
   private val newWordRepository: NewWordRepository)
-  : ViewModel() {
+  : AndroidViewModel(application) {
 
   val dateTimeStore = DateTimeStore()
   private var isNewEntry: Boolean = false
@@ -100,10 +104,12 @@ class AddEntryViewModel(
   }
 
   fun pause(content: String) {
-    if(content.isNotBlank()) {
-      // Saves user input when app is put into the background, in case it is killed by the OS
-      Timber.w("Log: pause: onPause called, saving so user input isn't lost")
-      save(content)
+    if(PreferenceManager.getDefaultSharedPreferences(getApplication()).getBoolean(PREF_SAVE_ON_PAUSE, false)) {
+      if(content.isNotBlank()) {
+        // Saves user input when app is put into the background, in case it is killed by the OS
+        Timber.w("Log: pause: onPause called, saving so user input isn't lost")
+        save(content)
+      }
     }
   }
 
