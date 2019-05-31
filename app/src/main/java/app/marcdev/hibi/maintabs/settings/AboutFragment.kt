@@ -27,6 +27,8 @@ class AboutFragment : PreferenceFragmentCompat() {
     val jisho = findPreference("about_jisho")
     jisho.onPreferenceClickListener = jishoClickListener
 
+    val privacy = findPreference("about_privacy")
+    privacy.onPreferenceClickListener = privacyClickListener
   }
 
   private fun initVersion() {
@@ -50,6 +52,12 @@ class AboutFragment : PreferenceFragmentCompat() {
     val launchBrowser = Intent(Intent.ACTION_VIEW)
     launchBrowser.data = uriUrl
     startActivity(launchBrowser)
+    true
+  }
+
+  private val privacyClickListener = Preference.OnPreferenceClickListener {
+    val dialog = PrivacyDialog()
+    dialog.show(requireFragmentManager(), "Privacy Dialog")
     true
   }
 }

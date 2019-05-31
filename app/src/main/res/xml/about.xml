@@ -14,6 +14,11 @@
 
   <PreferenceCategory android:title="@string/app_info">
     <Preference
+      android:key="about_privacy"
+      android:title="@string/privacy_policy"
+      android:icon="@drawable/ic_visibility_24dp" />
+
+    <Preference
       android:key="about_version"
       android:icon="@drawable/ic_build_24dp"
       android:title="@string/version"
