@@ -20,9 +20,9 @@ class OpenSourceLicencesActivity : HibiActivity() {
     super.onCreate(savedInstanceState)
 
     if(PreferenceManager.getDefaultSharedPreferences(applicationContext).getBoolean(PREF_DARK_THEME, false))
-      setTheme(R.style.Hibi_DarkTheme)
+      setTheme(R.style.AppTheme_Dark)
     else
-      setTheme(R.style.Hibi_LightTheme)
+      setTheme(R.style.AppTheme_Light)
 
     setContentView(R.layout.activity_oss)
     bindViews()
@@ -52,6 +52,9 @@ class OpenSourceLicencesActivity : HibiActivity() {
 
     val mplus: LicenseDisplay = findViewById(R.id.license_mplus)
     mplus.setOnClickListener(openURLClickListener("https://fonts.google.com/specimen/M+PLUS+Rounded+1c"))
+
+    val openSans: LicenseDisplay = findViewById(R.id.license_open_sans)
+    openSans.setOnClickListener(openURLClickListener("https://fonts.google.com/specimen/Open+Sans"))
 
     val googleMaterialIcons: LicenseDisplay = findViewById(R.id.license_google_material_icons)
     googleMaterialIcons.setOnClickListener(openURLClickListener("https://material.io/tools/icons/"))

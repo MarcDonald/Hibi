@@ -13,7 +13,7 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:text="@string/book_name"
-    android:textAppearance="@style/TextAppearance.Hibi.MainEntryDate"
+    android:textAppearance="@style/TextAppearance.Hibi.MainEntryDateTime"
     android:layout_margin="@dimen/margin_standard"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/book_item_count"

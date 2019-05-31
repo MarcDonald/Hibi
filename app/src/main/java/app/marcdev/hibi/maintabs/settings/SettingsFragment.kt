@@ -192,7 +192,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
     } else {
       FilePickerBuilder.instance
         .setMaxCount(1)
-        .setActivityTheme(R.style.Hibi_DarkTheme)
+        .setActivityTheme(R.style.AppTheme_Dark)
         .setActivityTitle(resources.getString(R.string.restore_title))
         .enableDocSupport(false)
         .addFileSupport(resources.getString(R.string.backup_file), Array(1) { ".hibi" })
@@ -215,7 +215,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
 
   private fun displayRestoreWarning(path: String) {
     val dialog = BinaryOptionDialog()
-    dialog.setTitle(resources.getString(R.string.warning_caps))
+    dialog.setTitle(resources.getString(R.string.warning))
     dialog.setMessage(resources.getString(R.string.restore_warning))
     dialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { dialog.dismiss() })
     dialog.setNegativeButton(resources.getString(R.string.restore_confirm), View.OnClickListener {

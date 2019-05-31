@@ -37,6 +37,7 @@
         android:layout_margin="@dimen/margin_standard"
         android:inputType="textCapSentences"
         android:hint="@string/content"
+        style="@style/ThemeOverlay.Hibi.EditText"
         android:autofillHints="@string/content"
         app:layout_constraintTop_toBottomOf="@id/txt_text_input_title"
         app:layout_constraintStart_toStartOf="parent" />
@@ -44,7 +45,7 @@
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_text_input_delete"
         android:layout_width="0dp"
-        style="@style/Hibi.Button.Negative"
+        style="@style/Widget.Hibi.Button.Negative"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,6 +56,7 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_text_input_save"
+        style="@style/Widget.Hibi.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"

@@ -11,7 +11,7 @@
     android:layout_height="?attr/actionBarSize"
     android:backgroundTint="?colorPrimaryDark">
 
-    <include layout="@layout/toolbar_back" />
+    <include layout="@layout/toolbar_back_scrolling" />
   </com.google.android.material.appbar.AppBarLayout>
 
   <!--region Search Results Loading-->
@@ -89,6 +89,7 @@
     android:id="@+id/recycler_search_entries"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
     android:layout_marginBottom="@dimen/search_entries_recycler_bottom_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

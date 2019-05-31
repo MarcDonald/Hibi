@@ -19,7 +19,8 @@
     android:inputType="text"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@id/img_search_button"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintStart_toStartOf="parent"
+    style="@style/ThemeOverlay.Hibi.EditText" />
 
   <ImageView
     android:id="@+id/img_search_button"

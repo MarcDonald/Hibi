@@ -10,7 +10,7 @@
   <string name="message">Message</string>
   <string name="positive">Positive</string>
   <string name="negative">Negative</string>
-  <string name="warning_caps">WARNING</string>
+  <string name="warning">Warning</string>
   <string name="generic_error">An error occurred</string>
   <string name="close">Close</string>
   <string name="copied_to_clipboard_wc">Copied %1$s to clipboard</string>
@@ -23,6 +23,8 @@
   <string name="copy">Copy</string>
   <string name="paste">Paste</string>
   <string name="nothing_in_clipboard">Nothing in Clipboard</string>
+  <string name="japanese_word_wc">Japanese: %1$s</string>
+  <string name="reading_wc">Reading: %1$s</string>
   <!--endregion-->
 
   <!--region Tab Titles-->
@@ -45,7 +47,7 @@
   <string name="content">Content</string>
   <string name="content_hint">What did you do today?</string>
   <string name="empty_content_warning">Please enter something before saving</string>
-  <string name="go_back_warning">Go back and lose all unsaved progress?</string>
+  <string name="go_back_warning">Go back and lose unsaved progress?</string>
   <string name="edit">Edit</string>
   <string name="delete">Delete</string>
   <string name="view_new_words">View new words in this entry</string>
@@ -55,8 +57,8 @@
   <string name="view_entry">View Entry</string>
   <string name="delete_confirm_title">Delete Entry</string>
   <string name="delete_confirm">Are you sure you want to delete this entry?</string>
-  <string name="no_entries">You haven\'t made any entries yet</string>
-  <string name="no_entries_for_date">No Entries found for Date</string>
+  <string name="no_entries">Entries you create will show up here</string>
+  <string name="no_entries_for_date">No entries found for date</string>
   <!--endregion-->
 
   <!--region Search-->
@@ -89,7 +91,7 @@
   <string name="create_tag">Create Tag</string>
   <string name="tag_name">Tag Name</string>
   <string name="loading_tags">Loading Tags</string>
-  <string name="no_tags">You haven\'t made any tags yet</string>
+  <string name="no_tags">Tags you create will show up here</string>
   <string name="no_tagged_entries">You haven\'t tagged any entries yet</string>
   <string name="tag_use_count_wc">Entries: %1$s</string>
   <string name="edit_or_delete_tag">Edit or Delete Tag</string>
@@ -110,8 +112,6 @@
   <string name="notes">Notes</string>
   <string name="edit_or_delete_word_title">Edit or Delete Word</string>
   <string name="empty_input_new_word">Enter a word or reading before saving</string>
-  <string name="japanese_word_wc">Japanese: %1$s</string>
-  <string name="reading_wc">Reading: %1$s</string>
   <string name="english_wc">English: %1$s</string>
   <string name="notes_wc">Notes: %1$s</string>
   <!--endregion-->
@@ -122,7 +122,8 @@
   <string name="create_book">Create Book</string>
   <string name="edit_book">Edit Book</string>
   <string name="loading_books">Loading Books</string>
-  <string name="no_books">You haven\'t created any books yet</string>
+  <string name="no_books">Books you create will show up here</string>
+  <string name="no_books_found_warning">No Books Found</string>
   <string name="no_book_entries">You haven\'t added any entries to this book yet</string>
   <string name="book_use_count_wc">Chapters: %1$s</string>
   <string name="add_entry_to_book_hint">Add Entry to Book</string>
@@ -224,6 +225,9 @@
 
   <string name="mplus">M PLUS Rounded 1c Bold</string>
   <string name="mplus_description">Used as the icon font</string>
+
+  <string name="open_sans">Open Sans</string>
+  <string name="open_sans_description">Used throughout the application</string>
 
   <string name="google_material_icons_title">Google Material Design Icons</string>
   <string name="material_icons_title">Material Design Icons</string>

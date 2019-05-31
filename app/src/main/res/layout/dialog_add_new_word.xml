@@ -30,7 +30,7 @@
 
       <EditText
         android:id="@+id/edt_new_word_word"
-        style="@style/Hibi.EditText.AddNewWordDialog"
+        style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -39,7 +39,7 @@
 
       <EditText
         android:id="@+id/edt_new_word_reading"
-        style="@style/Hibi.EditText.AddNewWordDialog"
+        style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -48,7 +48,7 @@
 
       <EditText
         android:id="@+id/edt_new_word_type"
-        style="@style/Hibi.EditText.AddNewWordDialog"
+        style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -57,7 +57,7 @@
 
       <EditText
         android:id="@+id/edt_new_word_english"
-        style="@style/Hibi.EditText.AddNewWordDialog"
+        style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -66,7 +66,7 @@
 
       <EditText
         android:id="@+id/edt_new_word_notes"
-        style="@style/Hibi.EditText.AddNewWordDialog"
+        style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -87,6 +87,7 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_new_word"
+        style="@style/Widget.Hibi.Button.Borderless"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:text="@string/save"
@@ -98,7 +99,7 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete_new_word"
-        style="@style/Hibi.Button.Negative"
+        style="@style/Widget.Hibi.Button.Negative"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:text="@string/delete"

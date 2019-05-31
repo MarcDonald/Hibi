@@ -19,7 +19,7 @@
       android:layout_height="wrap_content"
       android:backgroundTint="?colorPrimaryDark"
       app:tabIndicator="@drawable/tab_indicator"
-      app:tabIndicatorColor="@color/colorAccent"
+      app:tabIndicatorColor="?colorAccent"
       app:tabIndicatorFullWidth="false"
       app:tabTextAppearance="@style/TextAppearance.Hibi.Tab" />
   </com.google.android.material.appbar.AppBarLayout>
@@ -31,11 +31,10 @@
     android:layout_marginBottom="?attr/actionBarSize"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-  <!--Temporary until an official extended FAB is released-->
   <!--https://gist.github.com/simonesestito/edf434544ed8bf6ef23ae5e9af625149-->
   <com.google.android.material.button.MaterialButton
     android:id="@+id/fab_main"
-    style="@style/Hibi.Button.ExtendedFab"
+    style="@style/Widget.Hibi.Button.ExtendedFab"
     android:layout_width="200dp"
     android:layout_height="64dp"
     android:text="@string/fab_create_entry"

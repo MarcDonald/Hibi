@@ -51,7 +51,7 @@
       android:layout_width="@dimen/main_screen_warning_image_size"
       android:layout_height="@dimen/main_screen_warning_image_size"
       android:contentDescription="@string/no_entries"
-      android:src="@drawable/ic_sentiment_dissatisfied_24dp"
+      android:src="@drawable/ic_subject_24dp"
       app:layout_constraintBottom_toTopOf="@id/gd_no_entries"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent" />
@@ -80,5 +80,6 @@
     android:id="@+id/recycler_entries"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

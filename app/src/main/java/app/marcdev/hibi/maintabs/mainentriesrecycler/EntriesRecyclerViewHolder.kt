@@ -5,7 +5,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.formatDateTimeForDisplay
+import app.marcdev.hibi.internal.formatDateForDisplay
+import app.marcdev.hibi.internal.formatTimeForDisplay
 import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -13,7 +14,8 @@ import com.google.android.material.chip.ChipGroup
 class EntriesRecyclerViewHolder(itemView: View) : BaseEntriesRecyclerViewHolder(itemView) {
 
   // <editor-fold desc="UI Components">
-  private var dateTimeDisplay: TextView = itemView.findViewById(R.id.item_date_time)
+  private var dateDisplay: TextView = itemView.findViewById(R.id.item_date)
+  private var timeDisplay: TextView = itemView.findViewById(R.id.item_time)
   private var contentDisplay: TextView = itemView.findViewById(R.id.item_content)
   private var tagChipGroup: ChipGroup = itemView.findViewById(R.id.cg_main_tags)
   private var tagDisplay: LinearLayout = itemView.findViewById(R.id.lin_main_tags)
@@ -38,8 +40,10 @@ class EntriesRecyclerViewHolder(itemView: View) : BaseEntriesRecyclerViewHolder(
 
   override fun display(item: MainEntriesDisplayItem) {
     this.displayedItem = item
-    val dateTimeDisplayText = formatDateTimeForDisplay(item.entry.day, item.entry.month, item.entry.year, item.entry.hour, item.entry.minute)
-    dateTimeDisplay.text = dateTimeDisplayText
+    val dateDisplayText = formatDateForDisplay(item.entry.day, item.entry.month, item.entry.year)
+    dateDisplay.text = dateDisplayText
+    val timeDisplayText = formatTimeForDisplay(item.entry.hour, item.entry.minute)
+    timeDisplay.text = timeDisplayText
     contentDisplay.text = item.entry.content
     displayLocation()
     displayTags()
@@ -65,6 +69,8 @@ class EntriesRecyclerViewHolder(itemView: View) : BaseEntriesRecyclerViewHolder(
         item.tags.forEach {
           val chip = Chip(itemView.context)
           chip.text = it
+          chip.scaleX = 0.9f
+          chip.scaleY = 0.9f
           tagChipGroup.addView(chip)
         }
       }

@@ -29,7 +29,7 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_date"
-        style="@style/Hibi.Button.Text"
+        style="@style/Widget.Hibi.Button.EntryDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -40,7 +40,7 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_time"
-        style="@style/Hibi.Button.Text"
+        style="@style/Widget.Hibi.Button.EntryDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -58,6 +58,7 @@
 
       <EditText
         android:id="@+id/edt_content"
+        style="@style/ThemeOverlay.Hibi.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"

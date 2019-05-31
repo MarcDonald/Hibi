@@ -81,7 +81,7 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment(), KodeinAware {
           val displayBook = CheckBoxWithId(bookHolder.context)
           displayBook.text = book.name
           displayBook.itemId = book.id
-          if(theme == R.style.Hibi_DarkTheme_BottomSheetDialogTheme) {
+          if(theme == R.style.Theme_Hibi_BottomSheetDialog_Dark) {
             displayBook.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
           } else {
             displayBook.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))

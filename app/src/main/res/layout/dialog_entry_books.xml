@@ -20,7 +20,7 @@
 
       <TextView
         android:id="@+id/txt_add_entry_to_book_title"
-        style="@style/TextAppearance.Hibi.BottomSheetTitle"
+        android:textAppearance="@style/TextAppearance.Hibi.BottomSheetTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -35,12 +35,12 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_create_book"
+        style="@style/Widget.Hibi.Button.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         android:text="@string/create_book"
         app:icon="@drawable/ic_add_24dp"
-        app:iconTint="?hibiTextOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +59,7 @@
         style="@style/TextAppearance.Hibi.WarningDisplay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_books"
+        android:text="@string/no_books_found_warning"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +67,7 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_book"
+        style="@style/Widget.Hibi.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"

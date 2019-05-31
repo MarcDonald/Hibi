@@ -81,7 +81,7 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
           val displayTag = CheckBoxWithId(tagHolder.context)
           displayTag.text = tag.name
           displayTag.itemId = tag.id
-          if(theme == R.style.Hibi_DarkTheme_BottomSheetDialogTheme) {
+          if(theme == R.style.Theme_Hibi_BottomSheetDialog_Dark) {
             displayTag.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
           } else {
             displayTag.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))

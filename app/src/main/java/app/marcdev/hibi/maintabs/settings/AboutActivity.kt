@@ -17,9 +17,9 @@ class AboutActivity : HibiActivity() {
     super.onCreate(savedInstanceState)
 
     if(PreferenceManager.getDefaultSharedPreferences(applicationContext).getBoolean(PREF_DARK_THEME, false))
-      setTheme(R.style.Hibi_DarkTheme)
+      setTheme(R.style.AppTheme_Dark)
     else
-      setTheme(R.style.Hibi_LightTheme)
+      setTheme(R.style.AppTheme_Light)
 
     setContentView(R.layout.activity_empty_scroll_with_toolbar)
     bindViews()

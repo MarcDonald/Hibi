@@ -10,7 +10,7 @@
     android:layout_height="wrap_content"
     android:backgroundTint="?colorPrimaryDark">
 
-    <include layout="@layout/toolbar_back" />
+    <include layout="@layout/toolbar_back_scrolling" />
   </com.google.android.material.appbar.AppBarLayout>
 
   <androidx.core.widget.NestedScrollView

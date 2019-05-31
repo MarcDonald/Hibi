@@ -19,6 +19,7 @@ import androidx.navigation.Navigation
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.PREF_CLIPBOARD_BEHAVIOR
+import app.marcdev.hibi.internal.PREF_DARK_THEME
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
@@ -214,10 +215,15 @@ class AddEntryFragment : Fragment(), KodeinAware {
    * This has to be called after the original because the entryId isn't always provided immediately
    */
   private fun setupEntrySpecificObservers() {
+    val accentColor = if(PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_DARK_THEME, false))
+      resources.getColor(R.color.darkThemeColorAccent, null)
+    else
+      resources.getColor(R.color.lightThemeColorAccent, null)
+
     viewModel.colorTagIcon.observe(this, Observer { entry ->
       entry?.let { shouldColor ->
         if(shouldColor)
-          addTagButton.setColorFilter(resources.getColor(R.color.colorAccent, null))
+          addTagButton.setColorFilter(accentColor)
         else
           addTagButton.clearColorFilter()
       }
@@ -226,7 +232,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
     viewModel.colorBookIcon.observe(this, Observer { entry ->
       entry?.let { shouldColor ->
         if(shouldColor)
-          addToBookButton.setColorFilter(resources.getColor(R.color.colorAccent, null))
+          addToBookButton.setColorFilter(accentColor)
         else
           addToBookButton.clearColorFilter()
       }
@@ -235,7 +241,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
     viewModel.colorLocationIcon.observe(this, Observer { entry ->
       entry?.let { shouldColor ->
         if(shouldColor)
-          addLocationButton.setColorFilter(resources.getColor(R.color.colorAccent, null))
+          addLocationButton.setColorFilter(accentColor)
         else
           addLocationButton.clearColorFilter()
       }
@@ -244,7 +250,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
     viewModel.colorNewWordIcon.observe(this, Observer { entry ->
       entry?.let { shouldColor ->
         if(shouldColor)
-          wordButton.setColorFilter(resources.getColor(R.color.colorAccent, null))
+          wordButton.setColorFilter(accentColor)
         else
           wordButton.clearColorFilter()
       }
@@ -253,7 +259,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
 
   private fun initBackConfirmDialog() {
     backConfirmDialog = BinaryOptionDialog()
-    backConfirmDialog.setTitle(resources.getString(R.string.warning_caps))
+    backConfirmDialog.setTitle(resources.getString(R.string.warning))
     backConfirmDialog.setMessage(resources.getString(R.string.go_back_warning))
     backConfirmDialog.setNegativeButton(resources.getString(R.string.go_back), confirmBackClickListener)
     backConfirmDialog.setPositiveButton(resources.getString(R.string.stay), cancelBackClickListener)

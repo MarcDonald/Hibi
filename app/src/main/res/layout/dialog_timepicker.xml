@@ -17,6 +17,7 @@
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/btn_timepicker_ok"
+    style="@style/Widget.Hibi.Button.Borderless"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/margin_standard"
@@ -32,6 +33,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/margin_standard"
     android:layout_marginBottom="@dimen/margin_standard"
+    android:layout_marginStart="@dimen/margin_standard"
     android:text="@string/time"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@id/btn_timepicker_ok"
@@ -40,7 +42,7 @@
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/btn_timepicker_cancel"
-    style="@style/Hibi.Button.Negative"
+    style="@style/Widget.Hibi.Button.Negative"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_standard"

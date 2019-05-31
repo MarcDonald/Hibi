@@ -6,5 +6,5 @@
     android:topRightRadius="@dimen/rounded_corner_radius"
     android:bottomLeftRadius="@dimen/rounded_corner_radius"
     android:bottomRightRadius="@dimen/rounded_corner_radius" />
-  <solid android:color="@color/colorAccent" />
+  <solid android:color="?colorAccent" />
 </shape>

@@ -31,11 +31,12 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="@dimen/margin_standard">
 
         <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_view_date"
-          style="@style/Hibi.Button.Text"
+          style="@style/Widget.Hibi.Button.EntryDate"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
@@ -46,7 +47,7 @@
 
         <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_view_time"
-          style="@style/Hibi.Button.Text"
+          style="@style/Widget.Hibi.Button.EntryDate"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_standard"
@@ -61,7 +62,6 @@
           android:layout_height="wrap_content"
           android:orientation="vertical"
           app:layout_constraintGuide_percent="0.5" />
-
       </androidx.constraintlayout.widget.ConstraintLayout>
       <!--endregion-->
 
@@ -69,10 +69,12 @@
         android:id="@+id/txt_view_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_standard"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
         android:hint="@string/content_hint"
         android:textAppearance="@style/TextAppearance.Hibi.ViewEntryContent"
         android:textIsSelectable="true"
+        android:paddingBottom="@dimen/margin_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/const_view_date_and_time" />
@@ -89,7 +91,9 @@
         app:layout_constraintTop_toBottomOf="@id/txt_view_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="@dimen/margin_standard" />
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:paddingBottom="@dimen/margin_standard" />
 
       <!--region Tags-->
       <LinearLayout
@@ -97,7 +101,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="@dimen/margin_standard"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:paddingBottom="@dimen/margin_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_view_location">
@@ -124,7 +130,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="@dimen/margin_standard"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:paddingBottom="@dimen/margin_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lin_view_tags">
@@ -149,7 +157,9 @@
         android:id="@+id/btn_view_new_words"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_standard"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:paddingBottom="@dimen/margin_standard"
         android:text="@string/view_new_words"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

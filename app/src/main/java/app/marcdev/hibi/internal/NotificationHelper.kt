@@ -29,7 +29,7 @@ class NotificationHelper {
       .setContentText(context.resources.getString(R.string.reminder_notification_description))
       .addAction(R.drawable.ic_shortcut_add, context.resources.getString(R.string.reminder_notification_add_action), pendingIntent)
       .setContentIntent(pendingIntent)
-    builder.color = context.resources.getColor(R.color.colorAccent, null)
+    builder.color = context.resources.getColor(R.color.lightThemeColorAccent, null)
     val notification = builder.build()
 
     val manager = NotificationManagerCompat.from(context)
