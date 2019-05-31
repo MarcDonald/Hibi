@@ -2,6 +2,7 @@
 <resources>
   <!--region Theme Neutral-->
   <color name="textOnError">#FFFFFF</color>
+  <color name="shortcutBackground">#F5F5F5</color>
   <!--endregion-->
 
   <!--region Light Theme-->
