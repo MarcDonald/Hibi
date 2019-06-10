@@ -19,6 +19,7 @@ fun formatDateForDisplay(day: Int, month: Int, year: Int): String {
 
 fun formatDateForHeader(month: Int, year: Int): String {
   val calendar = Calendar.getInstance()
+  calendar.set(Calendar.DAY_OF_MONTH, 1)
   calendar.set(Calendar.MONTH, month)
   calendar.set(Calendar.YEAR, year)
 

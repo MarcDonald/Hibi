@@ -76,7 +76,7 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
 
     viewModel.mainReading.observe(this, Observer { value ->
       value?.let { reading ->
-        mainReadingDisplay.text = resources.getString(R.string.japanese_word_wc, reading)
+        mainReadingDisplay.text = resources.getString(R.string.reading_wc, reading)
       }
     })
 

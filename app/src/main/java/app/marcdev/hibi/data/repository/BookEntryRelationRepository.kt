@@ -21,4 +21,6 @@ interface BookEntryRelationRepository {
   suspend fun getBooksWithEntry(entryId: Int): List<Book>
 
   suspend fun getAllBookEntryRelationsWithIds(ids: List<Int>): List<BookEntryRelation>
+
+  fun getCountBooksWithEntryLD(entryId: Int): LiveData<Int>
 }

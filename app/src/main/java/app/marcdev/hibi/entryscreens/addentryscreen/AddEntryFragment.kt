@@ -5,14 +5,12 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +18,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
+import app.marcdev.hibi.internal.PREF_CLIPBOARD_BEHAVIOR
+import app.marcdev.hibi.internal.PREF_DARK_THEME
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
@@ -53,6 +53,15 @@ class AddEntryFragment : Fragment(), KodeinAware {
   private lateinit var searchBar: SearchBar
   private lateinit var dateDialog: DatePickerDialog
   private lateinit var timeDialog: TimePickerDialog
+
+  // <editor-fold desc="Option Bar Buttons">
+  private lateinit var addTagButton: ImageView
+  private lateinit var addToBookButton: ImageView
+  private lateinit var addMediaButton: ImageView
+  private lateinit var addLocationButton: ImageView
+  private lateinit var wordButton: ImageView
+  private lateinit var clipboardButton: ImageView
+  // </editor-fold>
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,6 +91,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private fun bindViews(view: View) {
+    initClipboardButton(view)
     toolbarTitle = view.findViewById(R.id.txt_add_toolbar_title)
 
     searchBar = view.findViewById(R.id.searchbar_add_entry)
@@ -102,24 +112,42 @@ class AddEntryFragment : Fragment(), KodeinAware {
     backButton.setOnClickListener(backClickListener)
 
     // <editor-fold desc="Option Bar Buttons">
-    val addTagButton: ImageView = view.findViewById(R.id.img_option_tag)
+    addTagButton = view.findViewById(R.id.img_option_tag)
     addTagButton.setOnClickListener(addTagClickListener)
 
-    val addToBookButton: ImageView = view.findViewById(R.id.img_option_book)
+    addToBookButton = view.findViewById(R.id.img_option_book)
     addToBookButton.setOnClickListener(addToBookClickListener)
 
-    val addLocationButton: ImageView = view.findViewById(R.id.img_option_location)
+    addLocationButton = view.findViewById(R.id.img_option_location)
     addLocationButton.setOnClickListener(addLocationClickListener)
 
-    val addMediaButton: ImageView = view.findViewById(R.id.img_option_media)
+    addMediaButton = view.findViewById(R.id.img_option_media)
     addMediaButton.setOnClickListener(addMediaClickListener)
 
-    val clipboardButton: ImageView = view.findViewById(R.id.img_option_clipboard)
-    clipboardButton.setOnClickListener(clipboardClickListener)
-
-    val wordButton: ImageView = view.findViewById(R.id.img_option_words)
+    wordButton = view.findViewById(R.id.img_option_words)
     wordButton.setOnClickListener(wordClickListener)
     // </editor-fold>
+  }
+
+  private fun initClipboardButton(view: View) {
+    clipboardButton = view.findViewById(R.id.img_option_clipboard)
+    @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    when(PreferenceManager.getDefaultSharedPreferences(requireContext()).getString(PREF_CLIPBOARD_BEHAVIOR, "0").toInt()) {
+      0 -> {
+        clipboardButton.setImageResource(R.drawable.ic_clipboard_plus)
+        clipboardButton.setOnClickListener { showClipBoardMenu() }
+      }
+      1 -> {
+        clipboardButton.setImageResource(R.drawable.ic_content_copy_24dp)
+        clipboardButton.setOnClickListener { copyToClipboard() }
+        clipboardButton.setOnLongClickListener { pasteFromClipboard(); true }
+      }
+      2 -> {
+        clipboardButton.setImageResource(R.drawable.ic_content_paste_24dp)
+        clipboardButton.setOnClickListener { pasteFromClipboard() }
+        clipboardButton.setOnLongClickListener { copyToClipboard(); true }
+      }
+    }
   }
 
   private fun setupObservers() {
@@ -174,11 +202,64 @@ class AddEntryFragment : Fragment(), KodeinAware {
           backConfirmDialog.dismiss()
       }
     })
+
+    viewModel.startObservingEntrySpecificItems.observe(this, Observer { entry ->
+      entry?.let { observe ->
+        if(observe)
+          setupEntrySpecificObservers()
+      }
+    })
+  }
+
+  /**
+   * This has to be called after the original because the entryId isn't always provided immediately
+   */
+  private fun setupEntrySpecificObservers() {
+    val accentColor = if(PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_DARK_THEME, false))
+      resources.getColor(R.color.darkThemeColorAccent, null)
+    else
+      resources.getColor(R.color.lightThemeColorAccent, null)
+
+    viewModel.colorTagIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        if(shouldColor)
+          addTagButton.setColorFilter(accentColor)
+        else
+          addTagButton.clearColorFilter()
+      }
+    })
+
+    viewModel.colorBookIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        if(shouldColor)
+          addToBookButton.setColorFilter(accentColor)
+        else
+          addToBookButton.clearColorFilter()
+      }
+    })
+
+    viewModel.colorLocationIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        if(shouldColor)
+          addLocationButton.setColorFilter(accentColor)
+        else
+          addLocationButton.clearColorFilter()
+      }
+    })
+
+    viewModel.colorNewWordIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        if(shouldColor)
+          wordButton.setColorFilter(accentColor)
+        else
+          wordButton.clearColorFilter()
+      }
+    })
   }
 
   private fun initBackConfirmDialog() {
     backConfirmDialog = BinaryOptionDialog()
-    backConfirmDialog.setTitle(resources.getString(R.string.warning_caps))
+    backConfirmDialog.setTitle(resources.getString(R.string.warning))
     backConfirmDialog.setMessage(resources.getString(R.string.go_back_warning))
     backConfirmDialog.setNegativeButton(resources.getString(R.string.go_back), confirmBackClickListener)
     backConfirmDialog.setPositiveButton(resources.getString(R.string.stay), cancelBackClickListener)
@@ -280,11 +361,40 @@ class AddEntryFragment : Fragment(), KodeinAware {
     Toast.makeText(requireContext(), resources.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
   }
 
-  private val clipboardClickListener = View.OnClickListener {
+  private fun showClipBoardMenu() {
+    val popupMenu = PopupMenu(context, clipboardButton)
+    popupMenu.menuInflater.inflate(R.menu.menu_clipboard, popupMenu.menu)
+    popupMenu.setOnMenuItemClickListener { menuItem ->
+      when(menuItem.itemId) {
+        popupMenu.menu.getItem(0).itemId -> {
+          copyToClipboard()
+          Toast.makeText(requireContext(), resources.getString(R.string.copied_entry_to_clipboard), Toast.LENGTH_SHORT).show()
+        }
+
+        popupMenu.menu.getItem(1).itemId -> pasteFromClipboard()
+      }
+      return@setOnMenuItemClickListener true
+    }
+    popupMenu.show()
+  }
+
+  private fun copyToClipboard() {
     val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clip: ClipData = ClipData.newPlainText("Entry", contentInput.text.toString())
     clipboard.primaryClip = clip
     Toast.makeText(requireContext(), resources.getString(R.string.copied_entry_to_clipboard), Toast.LENGTH_SHORT).show()
+  }
+
+  private fun pasteFromClipboard() {
+    val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip = clipboard.primaryClip
+    if(clip != null) {
+      val clipText = clip.getItemAt(0).text
+      val cursorPoint = contentInput.selectionStart
+      contentInput.text.insert(cursorPoint, clipText)
+    } else {
+      Toast.makeText(requireContext(), resources.getString(R.string.nothing_in_clipboard), Toast.LENGTH_SHORT).show()
+    }
   }
 
   private val wordClickListener = View.OnClickListener {

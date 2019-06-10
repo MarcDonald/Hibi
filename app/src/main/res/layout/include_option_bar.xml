@@ -62,7 +62,7 @@
     android:padding="@dimen/option_bar_icon_padding"
     android:layout_weight="1"
     android:contentDescription="@string/copy_to_clipboard"
-    android:src="@drawable/ic_content_copy_24dp" />
+    android:src="@drawable/ic_clipboard_plus" />
 
   <ImageView
     android:id="@+id/img_option_words"

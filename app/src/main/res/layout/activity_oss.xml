@@ -10,7 +10,7 @@
     android:layout_gravity="top"
     android:backgroundTint="?colorPrimaryDark">
 
-    <include layout="@layout/toolbar_back" />
+    <include layout="@layout/toolbar_back_scrolling" />
   </com.google.android.material.appbar.AppBarLayout>
 
   <androidx.core.widget.NestedScrollView
@@ -25,7 +25,7 @@
 
       <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_timber"
-        style="@style/Hibi.CardView.Rounded"
+        style="@style/Widget.Hibi.CardView.Rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
@@ -36,7 +36,7 @@
       <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_kodein"
         android:layout_width="match_parent"
-        style="@style/Hibi.CardView.Rounded"
+        style="@style/Widget.Hibi.CardView.Rounded"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
@@ -46,7 +46,7 @@
         app:title="@string/kodein" />
 
       <app.marcdev.hibi.uicomponents.views.LicenseDisplay
-        style="@style/Hibi.CardView.Rounded"
+        style="@style/Widget.Hibi.CardView.Rounded"
         android:id="@+id/license_retrofit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         app:title="@string/retrofit" />
 
       <app.marcdev.hibi.uicomponents.views.LicenseDisplay
-        style="@style/Hibi.CardView.Rounded"
+        style="@style/Widget.Hibi.CardView.Rounded"
         android:id="@+id/license_gson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
 
       <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_android_file_picker"
-        style="@style/Hibi.CardView.Rounded"
+        style="@style/Widget.Hibi.CardView.Rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_standard"
@@ -83,7 +83,7 @@
 
       <app.marcdev.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_mplus"
-        style="@style/Hibi.CardView.Rounded"
+        style="@style/Widget.Hibi.CardView.Rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_standard"
@@ -94,8 +94,20 @@
         app:title="@string/mplus" />
 
       <app.marcdev.hibi.uicomponents.views.LicenseDisplay
-        android:id="@+id/license_material_icons"
-        style="@style/Hibi.CardView.Rounded"
+        android:id="@+id/license_open_sans"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/open_sans_description"
+        app:license="@string/apache"
+        app:title="@string/open_sans" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_google_material_icons"
+        style="@style/Widget.Hibi.CardView.Rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_standard"
@@ -103,6 +115,18 @@
         android:layout_marginBottom="@dimen/margin_standard"
         app:description="@string/material_icons_description"
         app:license="@string/apache"
+        app:title="@string/google_material_icons_title" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_material_icons"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/material_icons_description"
+        app:license="@string/sil"
         app:title="@string/material_icons_title" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>

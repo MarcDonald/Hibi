@@ -10,7 +10,7 @@
   <string name="message">Message</string>
   <string name="positive">Positive</string>
   <string name="negative">Negative</string>
-  <string name="warning_caps">WARNING</string>
+  <string name="warning">Warning</string>
   <string name="generic_error">An error occurred</string>
   <string name="close">Close</string>
   <string name="copied_to_clipboard_wc">Copied %1$s to clipboard</string>
@@ -20,6 +20,12 @@
   <string name="no">No</string>
   <string name="description">Description</string>
   <string name="copy_to_clipboard">Copy to Clipboard</string>
+  <string name="copy">Copy</string>
+  <string name="paste">Paste</string>
+  <string name="nothing_in_clipboard">Nothing in Clipboard</string>
+  <string name="japanese_word_wc">Japanese: %1$s</string>
+  <string name="reading_wc">Reading: %1$s</string>
+  <string name="dismiss">Dismiss</string>
   <!--endregion-->
 
   <!--region Tab Titles-->
@@ -42,7 +48,7 @@
   <string name="content">Content</string>
   <string name="content_hint">What did you do today?</string>
   <string name="empty_content_warning">Please enter something before saving</string>
-  <string name="go_back_warning">Go back and lose all unsaved progress?</string>
+  <string name="go_back_warning">Go back and lose unsaved progress?</string>
   <string name="edit">Edit</string>
   <string name="delete">Delete</string>
   <string name="view_new_words">View new words in this entry</string>
@@ -52,8 +58,8 @@
   <string name="view_entry">View Entry</string>
   <string name="delete_confirm_title">Delete Entry</string>
   <string name="delete_confirm">Are you sure you want to delete this entry?</string>
-  <string name="no_entries">You haven\'t made any entries yet</string>
-  <string name="no_entries_for_date">No Entries found for Date</string>
+  <string name="no_entries">Entries you create will show up here</string>
+  <string name="no_entries_for_date">No entries found for date</string>
   <!--endregion-->
 
   <!--region Search-->
@@ -86,7 +92,7 @@
   <string name="create_tag">Create Tag</string>
   <string name="tag_name">Tag Name</string>
   <string name="loading_tags">Loading Tags</string>
-  <string name="no_tags">You haven\'t made any tags yet</string>
+  <string name="no_tags">Tags you create will show up here</string>
   <string name="no_tagged_entries">You haven\'t tagged any entries yet</string>
   <string name="tag_use_count_wc">Entries: %1$s</string>
   <string name="edit_or_delete_tag">Edit or Delete Tag</string>
@@ -107,8 +113,6 @@
   <string name="notes">Notes</string>
   <string name="edit_or_delete_word_title">Edit or Delete Word</string>
   <string name="empty_input_new_word">Enter a word or reading before saving</string>
-  <string name="japanese_word_wc">Japanese: %1$s</string>
-  <string name="reading_wc">Reading: %1$s</string>
   <string name="english_wc">English: %1$s</string>
   <string name="notes_wc">Notes: %1$s</string>
   <!--endregion-->
@@ -119,7 +123,8 @@
   <string name="create_book">Create Book</string>
   <string name="edit_book">Edit Book</string>
   <string name="loading_books">Loading Books</string>
-  <string name="no_books">You haven\'t created any books yet</string>
+  <string name="no_books">Books you create will show up here</string>
+  <string name="no_books_found_warning">No Books Found</string>
   <string name="no_book_entries">You haven\'t added any entries to this book yet</string>
   <string name="book_use_count_wc">Chapters: %1$s</string>
   <string name="add_entry_to_book_hint">Add Entry to Book</string>
@@ -161,6 +166,7 @@
 
   <!--region Settings-->
   <string name="settings">Settings</string>
+  <string name="behaviour">Behaviour</string>
   <string name="notifications">Notifications</string>
   <string name="appearance">Appearance</string>
   <string name="entry_dividers_pref_title">Entry Dividers</string>
@@ -177,6 +183,12 @@
   <string name="restore_warning">Replace ALL currently saved entries?</string>
   <string name="restore_confirm">Continue with Restore</string>
   <string name="restore_fail">Restore failed, ensure that you selected an appropriate .hibi file</string>
+  <string name="clipboard_behaviour">Clipboard Behaviour</string>
+  <string name="long_press_copy">Long Press to Copy</string>
+  <string name="long_press_paste">Long Press to Paste</string>
+  <string name="display_menu">Display Menu</string>
+  <string name="save_on_lose_focus">Save when app loses focus</string>
+  <string name="save_on_lose_focus_summary">Can protect input in case of a crash while in the background, but can save over entries you are currently editing without you explicitly saving</string>
   <!--endregion-->
 
   <!--region About-->
@@ -188,6 +200,15 @@
   <string name="credits">Credits</string>
   <string name="author">Author</string>
   <string name="marc_donald">Marc Donald</string>
+  <string name="privacy_policy">Privacy Policy</string>
+  <string name="privacy_content">This app stores all user data on device and does not send analytics, user data etc. off-device
+    except when searching for a word using the Jisho.org API.
+    \nThis app also uses some Open Source Libraries which may
+    collect information. Please see the Open Source Licenses section for more information about which libraries are used.
+    \nFor more information about Jisho.org, click the button below.
+    \nIf you have any more questions or concerns about this app, you can look at the code on Github or contact marcsdeveloperemail@gmail.com.</string>
+  <string name="visit_jisho">Visit Jisho.org</string>
+
   <!--endregion-->
 
   <!--region OSS Licenses-->
@@ -195,6 +216,7 @@
   <string name="apache">Apache 2 License</string>
   <string name="mit">MIT License</string>
   <string name="ofl">Open Font License</string>
+  <string name="sil">SIL Open Font License 1.1</string>
 
   <string name="timber">Timber</string>
   <string name="timber_description">Used for logging</string>
@@ -214,6 +236,10 @@
   <string name="mplus">M PLUS Rounded 1c Bold</string>
   <string name="mplus_description">Used as the icon font</string>
 
+  <string name="open_sans">Open Sans</string>
+  <string name="open_sans_description">Used throughout the application</string>
+
+  <string name="google_material_icons_title">Google Material Design Icons</string>
   <string name="material_icons_title">Material Design Icons</string>
   <string name="material_icons_description">Used throughout the application</string>
 
@@ -221,13 +247,6 @@
   <string name="share">Share</string>
   <string name="restore_title">Select a file to restore from</string>
   <string name="backup_file">Backup</string>
-  <!--endregion-->
-
-  <!--region Arrays-->
-  <string-array name="yes_or_no">
-    <item>@string/yes</item>
-    <item>@string/no</item>
-  </string-array>
   <!--endregion-->
 
   <!--region Plurals-->

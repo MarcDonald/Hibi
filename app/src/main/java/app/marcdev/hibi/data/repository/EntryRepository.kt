@@ -1,5 +1,6 @@
 package app.marcdev.hibi.data.repository
 
+import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.entity.Entry
 
 interface EntryRepository {
@@ -21,4 +22,6 @@ interface EntryRepository {
   suspend fun saveLocation(entryId: Int, location: String)
 
   suspend fun getLocation(entryId: Int): String
+
+  fun getLocationLD(entryId: Int): LiveData<String>
 }

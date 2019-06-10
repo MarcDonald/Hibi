@@ -34,7 +34,17 @@ Used as the icon font
 
 Open Font License
 
-### [Material Design Icons](https://material.io/tools/icons/)
+### [Open Sans](https://fonts.google.com/specimen/Open+Sans)
 Used throughout the application
 
 Apache 2 License
+
+### [Google Material Design Icons](https://material.io/tools/icons/)
+Used throughout the application
+
+Apache 2 License
+
+### [Material Design Icons](https://materialdesignicons.com/)
+Used throughout the application
+
+SIL Open Font License 1.1

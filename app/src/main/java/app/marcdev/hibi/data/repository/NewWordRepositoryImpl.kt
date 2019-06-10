@@ -44,6 +44,10 @@ class NewWordRepositoryImpl private constructor(private val dao: DAO) : NewWordR
     }
   }
 
+  override fun getNewWordCountByEntryIdLD(entryId: Int): LiveData<Int> {
+    return dao.getNewWordCountByEntryIdLD(entryId)
+  }
+
   companion object {
     @Volatile private var instance: NewWordRepositoryImpl? = null
 

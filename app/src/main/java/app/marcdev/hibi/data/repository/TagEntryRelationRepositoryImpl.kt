@@ -66,6 +66,10 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
     }
   }
 
+  override fun getCountTagsWithEntry(entryId: Int): LiveData<Int> {
+    return dao.getTagCountByEntryId(entryId)
+  }
+
   companion object {
     @Volatile private var instance: TagEntryRelationRepositoryImpl? = null
 

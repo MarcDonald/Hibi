@@ -1,6 +1,7 @@
 package app.marcdev.hibi.data.repository
 
 import android.database.sqlite.SQLiteConstraintException
+import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Entry
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +68,10 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
     return withContext(Dispatchers.IO) {
       return@withContext dao.getLocation(entryId)
     }
+  }
+
+  override fun getLocationLD(entryId: Int): LiveData<String> {
+    return dao.getLocationLD(entryId)
   }
 
   companion object {

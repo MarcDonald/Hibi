@@ -16,10 +16,10 @@ abstract class HibiActivity : AppCompatActivity() {
 
   private fun updateTheme() {
     isDarkTheme = if(PreferenceManager.getDefaultSharedPreferences(applicationContext).getBoolean(PREF_DARK_THEME, false)) {
-      setTheme(R.style.Hibi_DarkTheme)
+      setTheme(R.style.AppTheme_Dark)
       true
     } else {
-      setTheme(R.style.Hibi_LightTheme)
+      setTheme(R.style.AppTheme_Light)
       false
     }
   }

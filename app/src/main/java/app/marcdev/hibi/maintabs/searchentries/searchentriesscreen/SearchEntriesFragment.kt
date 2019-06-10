@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
+import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import app.marcdev.hibi.uicomponents.DatePickerDialog
 import app.marcdev.hibi.uicomponents.TextInputDialog
 import app.marcdev.hibi.uicomponents.views.ChipWithId
@@ -149,6 +150,9 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
       val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
       recycler.addItemDecoration(dividerItemDecoration)
     }
+
+    val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
+    recycler.addItemDecoration(decoration)
   }
 
   private fun initBottomSheet(view: View) {

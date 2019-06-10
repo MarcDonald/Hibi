@@ -31,6 +31,7 @@
       <EditText
         android:id="@+id/edt_new_book_input"
         android:layout_width="match_parent"
+        style="@style/ThemeOverlay.Hibi.EditText"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         android:inputType="textCapSentences"
@@ -41,7 +42,7 @@
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete_book"
         android:layout_width="0dp"
-        style="@style/Hibi.Button.Negative"
+        style="@style/Widget.Hibi.Button.Negative"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,6 +53,7 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_book"
+        style="@style/Widget.Hibi.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"

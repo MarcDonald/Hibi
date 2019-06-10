@@ -9,10 +9,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 abstract class HibiBottomSheetDialogFragment : ScopedBottomSheetDialogFragment() {
   override fun getTheme(): Int {
-    if(PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_DARK_THEME, false))
-      return R.style.Hibi_DarkTheme_BottomSheetDialogTheme
+    return if(PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_DARK_THEME, false))
+      R.style.Theme_Hibi_BottomSheetDialog_Dark
     else
-      return R.style.Hibi_LightTheme_BottomSheetDialogTheme
+      R.style.Theme_Hibi_BottomSheetDialog_Light
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
