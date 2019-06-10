@@ -38,7 +38,7 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddTagToEntryViewModel::class.java)
     arguments?.let {
-      viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0))
+      viewModel.passArguments(requireArguments().getInt(ENTRY_ID_KEY, 0))
     }
   }
 

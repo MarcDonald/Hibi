@@ -48,7 +48,7 @@ class AddTagDialog : HibiDialogFragment(), KodeinAware {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     arguments?.let {
-      viewModel.passArguments(arguments!!.getInt(TAG_ID_KEY, 0))
+      viewModel.passArguments(requireArguments().getInt(TAG_ID_KEY, 0))
     }
   }
 

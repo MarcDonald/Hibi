@@ -66,9 +66,9 @@ class EntriesRecyclerViewHolder(itemView: View) : BaseEntriesRecyclerViewHolder(
 
       tagChipGroup.removeAllViews()
       if(item.tags.isNotEmpty()) {
-        item.tags.forEach {
+        item.tags.forEach { tagName ->
           val chip = Chip(itemView.context)
-          chip.text = it
+          chip.text = tagName
           chip.scaleX = 0.9f
           chip.scaleY = 0.9f
           tagChipGroup.addView(chip)

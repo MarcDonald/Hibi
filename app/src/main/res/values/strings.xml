@@ -202,7 +202,7 @@
   <string name="marc_donald">Marc Donald</string>
   <string name="privacy_policy">Privacy Policy</string>
   <string name="privacy_content">This app stores all user data on device and does not send analytics, user data etc. off-device
-    except in the case of searching for a word using the Jisho.org API.
+    except when searching for a word using the Jisho.org API.
     \nThis app also uses some Open Source Libraries which may
     collect information. Please see the Open Source Licenses section for more information about which libraries are used.
     \nFor more information about Jisho.org, click the button below.

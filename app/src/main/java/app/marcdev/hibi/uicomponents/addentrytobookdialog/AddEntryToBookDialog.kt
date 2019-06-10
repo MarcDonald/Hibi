@@ -38,7 +38,7 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEntryToBookViewModel::class.java)
     arguments?.let {
-      viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0))
+      viewModel.passArguments(requireArguments().getInt(ENTRY_ID_KEY, 0))
     }
   }
 

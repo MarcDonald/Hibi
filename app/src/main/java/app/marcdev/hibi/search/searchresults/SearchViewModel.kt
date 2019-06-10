@@ -30,7 +30,7 @@ class SearchViewModel(private val apiService: JishoAPIService) : ViewModel() {
     _displayLoading.value = true
     viewModelScope.launch {
       try {
-        val searchResponse = apiService.searchTerm(searchTerm).await()
+        val searchResponse = apiService.searchTerm(searchTerm)
         if(searchResponse.data.isNotEmpty()) {
           _searchResults.value = searchResponse.data
           _displayLoading.value = false

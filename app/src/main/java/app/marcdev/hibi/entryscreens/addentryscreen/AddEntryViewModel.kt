@@ -107,7 +107,7 @@ class AddEntryViewModel(
     if(PreferenceManager.getDefaultSharedPreferences(getApplication()).getBoolean(PREF_SAVE_ON_PAUSE, false)) {
       if(content.isNotBlank()) {
         // Saves user input when app is put into the background, in case it is killed by the OS
-        Timber.w("Log: pause: onPause called, saving so user input isn't lost")
+        Timber.i("Log: pause: onPause called, saving so user input isn't lost")
         save(content)
       }
     }

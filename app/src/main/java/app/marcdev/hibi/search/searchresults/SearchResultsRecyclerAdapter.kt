@@ -2,9 +2,7 @@ package app.marcdev.hibi.search.searchresults
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
@@ -27,19 +25,10 @@ class SearchResultsRecyclerAdapter(private val context: Context, private val fra
 
   override fun onBindViewHolder(holder: SearchResultsRecyclerViewHolder, position: Int) {
     holder.display(dataList[position])
-    setAnimation(holder.itemView, position)
   }
 
   fun updateList(list: List<Data>) {
     dataList = list
     notifyDataSetChanged()
-  }
-
-  private fun setAnimation(viewToAnimate: View, position: Int) {
-    if(position > lastPosition) {
-      val animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in)
-      viewToAnimate.startAnimation(animation)
-      lastPosition = position
-    }
   }
 }
