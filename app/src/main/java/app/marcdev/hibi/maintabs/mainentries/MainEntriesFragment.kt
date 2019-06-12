@@ -60,7 +60,7 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 
   private fun initRecycler(view: View) {
     val recycler: RecyclerView = view.findViewById(R.id.recycler_entries)
-    this.recyclerAdapter = EntriesRecyclerAdapter(requireContext())
+    this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), true, requireActivity().theme)
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager

@@ -1,18 +1,25 @@
 package app.marcdev.hibi.maintabs.mainentriesrecycler
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 
-class EntriesRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<BaseEntriesRecyclerViewHolder>() {
+class EntriesRecyclerAdapter(private val context: Context, private val theme: Resources.Theme) : RecyclerView.Adapter<BaseEntriesRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var items: List<MainEntriesDisplayItem> = listOf()
   private var lastPosition = -1
+  private var itemsSelectable = false
+
+  constructor(context: Context, itemsSelectable: Boolean, theme: Resources.Theme) : this(context, theme) {
+    this.itemsSelectable = itemsSelectable
+  }
 
   override fun getItemViewType(position: Int): Int {
     // Use day as the view type, if the day is 0 then it's a header, since a day 0 can't be added normally
@@ -23,6 +30,15 @@ class EntriesRecyclerAdapter(private val context: Context) : RecyclerView.Adapte
     return items[itemPosition].entry.day == 0
   }
 
+  fun getSelectedEntryIds(): List<Int> {
+    val list = mutableListOf<Int>()
+    items.forEach { item ->
+      if(item.isSelected)
+        list.add(item.entry.id)
+    }
+    return list.toList()
+  }
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseEntriesRecyclerViewHolder {
     return when(viewType) {
       0 -> {
@@ -31,7 +47,7 @@ class EntriesRecyclerAdapter(private val context: Context) : RecyclerView.Adapte
       }
       else -> {
         val view = inflater.inflate(R.layout.item_main_screen_entry, parent, false)
-        EntriesRecyclerViewHolder(view)
+        EntriesRecyclerViewHolder(view, theme)
       }
     }
   }
@@ -42,6 +58,15 @@ class EntriesRecyclerAdapter(private val context: Context) : RecyclerView.Adapte
 
   override fun onBindViewHolder(holder: BaseEntriesRecyclerViewHolder, position: Int) {
     holder.display(items[position])
+    if(itemsSelectable) {
+      if(!isHeader(position)) {
+        holder.itemView.findViewById<ConstraintLayout>(R.id.const_item_main_recycler).setOnLongClickListener {
+          items[position].isSelected = !items[position].isSelected
+          notifyItemChanged(position)
+          true
+        }
+      }
+    }
     setAnimation(holder.itemView, position)
   }
 

@@ -15,6 +15,7 @@
   <color name="lightThemeIconTint">@color/black</color>
   <color name="lightThemeColorAccent">#F57C00</color>
   <color name="lightThemeError">#F44336</color>
+  <color name="lightThemeSelectedItem">#26000000</color>
   <!--endregion-->
 
   <!--region Dark Theme-->
@@ -27,6 +28,7 @@
   <color name="darkThemeIconTint">@color/white60</color>
   <color name="darkThemeColorAccent">#FF9700</color>
   <color name="darkThemeError">#F44336</color>
+  <color name="darkThemeSelectedItem">#26FFFFFF</color>
   <!--endregion-->
 
   <!--region Other-->
