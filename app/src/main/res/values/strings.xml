@@ -269,6 +269,11 @@
     <item quantity="one">Add Location to %d Entry</item>
     <item quantity="other">Add Location to %d Entries</item>
   </plurals>
+
+  <plurals name="multi_tag_title">
+    <item quantity="one">Set Tags of %d Entry</item>
+    <item quantity="other">Set Tags of %d Entries</item>
+  </plurals>
   <!--endregion-->
 
 </resources>

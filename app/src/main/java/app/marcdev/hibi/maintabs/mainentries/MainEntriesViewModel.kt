@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.entity.TagEntryRelation
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
@@ -92,6 +93,21 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository, private
     }
 
     return listWithHeaders
+  }
+
+  fun addTagsToSelectedEntries(deleteMode: Boolean, tagIds: List<Int>, entryIds: List<Int>) {
+    viewModelScope.launch {
+      entryIds.forEach { entryId ->
+        tagIds.forEach { tagId ->
+          val tagEntryRelation = TagEntryRelation(tagId, entryId)
+          if(deleteMode)
+            tagEntryRelationRepository.deleteTagEntryRelation(tagEntryRelation)
+          else
+            tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
+        }
+      }
+      getMainEntryDisplayItems()
+    }
   }
 
   fun deleteSelectedEntries(idList: List<Int>) {

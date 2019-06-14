@@ -6,7 +6,7 @@ import android.widget.ImageView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiDialogFragment
 
-class MultiSelectMenu(private val listener: MultiSelectMenuItemSelectedListener?) : HibiDialogFragment() {
+class MultiSelectMenu(private val listener: ItemSelectedListener?) : HibiDialogFragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val view = inflater.inflate(R.layout.dialog_select_menu, container, false)
@@ -51,7 +51,7 @@ class MultiSelectMenu(private val listener: MultiSelectMenuItemSelectedListener?
     const val DELETE = 3
   }
 
-  interface MultiSelectMenuItemSelectedListener {
+  interface ItemSelectedListener {
     fun itemSelected(item: Int)
   }
 }

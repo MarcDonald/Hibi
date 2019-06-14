@@ -19,6 +19,7 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import app.marcdev.hibi.uicomponents.TextInputDialog
 import app.marcdev.hibi.uicomponents.multiselectdialog.MultiSelectMenu
+import app.marcdev.hibi.uicomponents.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryDialog
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -102,48 +103,58 @@ class MainEntriesFragment : Fragment(), KodeinAware {
     menu.show(requireFragmentManager(), "Select Menu")
   }
 
-  private val onMultiSelectMenuItemSelected = object : MultiSelectMenu.MultiSelectMenuItemSelectedListener {
+  private val onMultiSelectMenuItemSelected = object : MultiSelectMenu.ItemSelectedListener {
     override fun itemSelected(item: Int) {
       when(item) {
-        MultiSelectMenu.TAG -> {
-
-        }
-
-        MultiSelectMenu.BOOK -> {
-
-        }
-
-        MultiSelectMenu.LOCATION -> {
-          val locationDialog = TextInputDialog()
-          val selectedAmount = recyclerAdapter.getSelectedEntryIds().size
-          locationDialog.setTitle(resources.getQuantityString(R.plurals.multi_location_title, selectedAmount, selectedAmount))
-          locationDialog.setHint(resources.getString(R.string.location))
-          locationDialog.setDeleteClickListener(View.OnClickListener {
-            viewModel.addLocationToSelectedEntries("", recyclerAdapter.getSelectedEntryIds())
-            locationDialog.dismiss()
-          })
-          locationDialog.setSaveClickListener(object : TextInputDialog.TextInputDialogSaveListener {
-            override fun onSave(text: String) {
-              viewModel.addLocationToSelectedEntries(text, recyclerAdapter.getSelectedEntryIds())
-              locationDialog.dismiss()
-            }
-          })
-          locationDialog.show(requireFragmentManager(), "Set Multi Location Dialog")
-        }
-
-        MultiSelectMenu.DELETE -> {
-          val deleteConfirmDialog = BinaryOptionDialog()
-          val selectedAmount = recyclerAdapter.getSelectedEntryIds().size
-          deleteConfirmDialog.setTitle(resources.getQuantityString(R.plurals.multi_delete_title, selectedAmount, selectedAmount))
-          deleteConfirmDialog.setMessage(resources.getQuantityString(R.plurals.multi_delete_message, selectedAmount, selectedAmount))
-          deleteConfirmDialog.setNegativeButton(resources.getString(R.string.delete), View.OnClickListener {
-            viewModel.deleteSelectedEntries(recyclerAdapter.getSelectedEntryIds())
-            deleteConfirmDialog.dismiss()
-          })
-          deleteConfirmDialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { deleteConfirmDialog.dismiss() })
-          deleteConfirmDialog.show(requireFragmentManager(), "Confirm Multi Delete Dialog")
-        }
+        MultiSelectMenu.TAG -> initMultiTagDialog()
+        MultiSelectMenu.BOOK -> initMultiBookDialog()
+        MultiSelectMenu.LOCATION -> initMultiLocationSetDialog()
+        MultiSelectMenu.DELETE -> initMultiDeleteDialog()
       }
     }
+  }
+
+  private fun initMultiTagDialog() {
+    val dialog = AddTagToMultiEntryDialog(recyclerAdapter.getSelectedEntryIds().size, ::onSaveTagsToMultiEntryClick)
+    dialog.show(requireFragmentManager(), "Set Multi Entry Tags")
+  }
+
+  private fun onSaveTagsToMultiEntryClick(deleteMode: Boolean, tagIds: List<Int>) {
+    viewModel.addTagsToSelectedEntries(deleteMode, tagIds, recyclerAdapter.getSelectedEntryIds())
+  }
+
+  private fun initMultiBookDialog() {
+    // TODO
+  }
+
+  private fun initMultiLocationSetDialog() {
+    val locationDialog = TextInputDialog()
+    val selectedAmount = recyclerAdapter.getSelectedEntryIds().size
+    locationDialog.setTitle(resources.getQuantityString(R.plurals.multi_location_title, selectedAmount, selectedAmount))
+    locationDialog.setHint(resources.getString(R.string.location))
+    locationDialog.setDeleteClickListener(View.OnClickListener {
+      viewModel.addLocationToSelectedEntries("", recyclerAdapter.getSelectedEntryIds())
+      locationDialog.dismiss()
+    })
+    locationDialog.setSaveClickListener(object : TextInputDialog.TextInputDialogSaveListener {
+      override fun onSave(text: String) {
+        viewModel.addLocationToSelectedEntries(text, recyclerAdapter.getSelectedEntryIds())
+        locationDialog.dismiss()
+      }
+    })
+    locationDialog.show(requireFragmentManager(), "Set Multi Location Dialog")
+  }
+
+  private fun initMultiDeleteDialog() {
+    val deleteConfirmDialog = BinaryOptionDialog()
+    val selectedAmount = recyclerAdapter.getSelectedEntryIds().size
+    deleteConfirmDialog.setTitle(resources.getQuantityString(R.plurals.multi_delete_title, selectedAmount, selectedAmount))
+    deleteConfirmDialog.setMessage(resources.getQuantityString(R.plurals.multi_delete_message, selectedAmount, selectedAmount))
+    deleteConfirmDialog.setNegativeButton(resources.getString(R.string.delete), View.OnClickListener {
+      viewModel.deleteSelectedEntries(recyclerAdapter.getSelectedEntryIds())
+      deleteConfirmDialog.dismiss()
+    })
+    deleteConfirmDialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { deleteConfirmDialog.dismiss() })
+    deleteConfirmDialog.show(requireFragmentManager(), "Confirm Multi Delete Dialog")
   }
 }

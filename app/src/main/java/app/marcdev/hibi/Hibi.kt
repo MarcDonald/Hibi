@@ -30,6 +30,7 @@ import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagtoentrydialog.AddTagToEntryViewModelFactory
 import app.marcdev.hibi.uicomponents.locationdialog.AddLocationToEntryViewModelFactory
+import app.marcdev.hibi.uicomponents.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryViewModelFactory
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -79,6 +80,7 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddLocationToEntryViewModelFactory(instance()) }
     bind() from provider { SearchEntriesViewModelFactory(instance(), instance(), instance(), instance(), instance()) }
     bind() from provider { BackupUtils(instance()) }
+    bind() from provider { AddTagToMultiEntryViewModelFactory(instance()) }
     // </editor-fold>
   }
 
