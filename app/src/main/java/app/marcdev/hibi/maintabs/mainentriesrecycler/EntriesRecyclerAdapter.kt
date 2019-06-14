@@ -16,9 +16,11 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
   private var items: List<MainEntriesDisplayItem> = listOf()
   private var lastPosition = -1
   private var itemsSelectable = false
+  private var onSelectClick: View.OnClickListener? = null
 
-  constructor(context: Context, itemsSelectable: Boolean, theme: Resources.Theme) : this(context, theme) {
+  constructor(context: Context, itemsSelectable: Boolean, onSelectClick: View.OnClickListener, theme: Resources.Theme) : this(context, theme) {
     this.itemsSelectable = itemsSelectable
+    this.onSelectClick = onSelectClick
   }
 
   override fun getItemViewType(position: Int): Int {
@@ -47,7 +49,7 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
       }
       else -> {
         val view = inflater.inflate(R.layout.item_main_screen_entry, parent, false)
-        EntriesRecyclerViewHolder(view, theme)
+        EntriesRecyclerViewHolder(onSelectClick, view, theme)
       }
     }
   }

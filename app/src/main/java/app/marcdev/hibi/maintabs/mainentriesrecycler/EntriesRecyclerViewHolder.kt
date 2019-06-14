@@ -15,7 +15,7 @@ import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-class EntriesRecyclerViewHolder(itemView: View, private val theme: Resources.Theme) : BaseEntriesRecyclerViewHolder(itemView) {
+class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?, itemView: View, private val theme: Resources.Theme) : BaseEntriesRecyclerViewHolder(itemView) {
 
   // <editor-fold desc="UI Components">
   private var dateDisplay: TextView = itemView.findViewById(R.id.item_date)
@@ -58,7 +58,9 @@ class EntriesRecyclerViewHolder(itemView: View, private val theme: Resources.The
     } else {
       itemView.background = null
     }
-    itemView.findViewById<ImageView>(R.id.img_item_selected).visibility = if(item.isSelected) View.VISIBLE else View.GONE
+    val selectedIcon: ImageView = itemView.findViewById(R.id.img_item_selected)
+    selectedIcon.visibility = if(item.isSelected) View.VISIBLE else View.GONE
+    selectedIcon.setOnClickListener(onSelectClick)
   }
 
   private fun displayLocation() {

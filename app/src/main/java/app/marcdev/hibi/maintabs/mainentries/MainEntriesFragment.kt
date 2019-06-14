@@ -16,6 +16,7 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
+import app.marcdev.hibi.uicomponents.multiselectdialog.MultiSelectMenu
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -60,7 +61,7 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 
   private fun initRecycler(view: View) {
     val recycler: RecyclerView = view.findViewById(R.id.recycler_entries)
-    this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), true, requireActivity().theme)
+    this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), true, onSelectClick, requireActivity().theme)
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager
@@ -92,5 +93,10 @@ class MainEntriesFragment : Fragment(), KodeinAware {
         recyclerAdapter.updateList(items)
       }
     })
+  }
+
+  private val onSelectClick = View.OnClickListener {
+    val menu = MultiSelectMenu(recyclerAdapter.getSelectedEntryIds())
+    menu.show(requireFragmentManager(), "Select Menu")
   }
 }
