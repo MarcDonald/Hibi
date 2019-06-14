@@ -16,6 +16,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.*
+import app.marcdev.hibi.internal.notification.NotificationHelper
 import app.marcdev.hibi.maintabs.settings.backupdialog.BackupDialog
 import app.marcdev.hibi.maintabs.settings.restoredialog.RestoreDialog
 import app.marcdev.hibi.uicomponents.TimePickerDialog

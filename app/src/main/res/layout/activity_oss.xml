@@ -128,6 +128,18 @@
         app:description="@string/material_icons_description"
         app:license="@string/sil"
         app:title="@string/material_icons_title" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_glide"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/glide_description"
+        app:license="@string/glide_license"
+        app:title="@string/glide" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -10,8 +10,8 @@ import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.NewWordRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
-import app.marcdev.hibi.internal.formatDateForDisplay
-import app.marcdev.hibi.internal.formatTimeForDisplay
+import app.marcdev.hibi.internal.utils.formatDateForDisplay
+import app.marcdev.hibi.internal.utils.formatTimeForDisplay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 

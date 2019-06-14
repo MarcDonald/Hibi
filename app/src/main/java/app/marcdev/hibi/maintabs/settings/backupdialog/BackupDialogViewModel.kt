@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.marcdev.hibi.internal.FileUtils
 import app.marcdev.hibi.internal.PRODUCTION_DATABASE_NAME
+import app.marcdev.hibi.internal.utils.FileUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.*

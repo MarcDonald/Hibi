@@ -13,9 +13,9 @@ import app.marcdev.hibi.data.network.JishoAPIService
 import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.entryscreens.addentryscreen.AddEntryViewModelFactory
 import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
-import app.marcdev.hibi.internal.FileUtils
-import app.marcdev.hibi.internal.FileUtilsImpl
 import app.marcdev.hibi.internal.NOTIFICATION_CHANNEL_REMINDER_ID
+import app.marcdev.hibi.internal.utils.FileUtils
+import app.marcdev.hibi.internal.utils.FileUtilsImpl
 import app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment.BookEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BooksFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarTabViewModelFactory

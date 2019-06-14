@@ -33,7 +33,7 @@
     <activity android:name=".maintabs.settings.AboutActivity" />
     <activity android:name=".maintabs.settings.SettingsActivity" />
 
-    <receiver android:name=".internal.AlertReceiver" />
+    <receiver android:name=".internal.notification.AlertReceiver" />
     <provider
       android:authorities="app.marcdev.hibi.FileProvider"
       android:name="androidx.core.content.FileProvider"

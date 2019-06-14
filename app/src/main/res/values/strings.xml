@@ -221,6 +221,7 @@
   <string name="mit">MIT License</string>
   <string name="ofl">Open Font License</string>
   <string name="sil">SIL Open Font License 1.1</string>
+  <string name="glide_license">BSD, part MIT and Apache 2.0. See the LICENSE file for details</string>
 
   <string name="timber">Timber</string>
   <string name="timber_description">Used for logging</string>
@@ -246,6 +247,9 @@
   <string name="google_material_icons_title">Google Material Design Icons</string>
   <string name="material_icons_title">Material Design Icons</string>
   <string name="material_icons_description">Used throughout the application</string>
+
+  <string name="glide">Glide</string>
+  <string name="glide_description">Used for displaying images</string>
 
   <string name="jisho_thanks">Search powered by Jisho.org\'s API</string>
   <string name="share">Share</string>

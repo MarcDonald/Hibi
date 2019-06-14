@@ -1,4 +1,4 @@
-package app.marcdev.hibi.internal
+package app.marcdev.hibi.internal.utils
 
 import android.text.format.DateFormat
 import java.util.*

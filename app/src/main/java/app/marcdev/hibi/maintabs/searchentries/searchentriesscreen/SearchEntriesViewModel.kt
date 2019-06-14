@@ -8,7 +8,7 @@ import app.marcdev.hibi.data.entity.Book
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.repository.*
-import app.marcdev.hibi.internal.formatDateForDisplay
+import app.marcdev.hibi.internal.utils.formatDateForDisplay
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import app.marcdev.hibi.maintabs.searchentries.EntrySearchCriteria

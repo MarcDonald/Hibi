@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.formatDateForDisplay
-import app.marcdev.hibi.internal.formatTimeForDisplay
+import app.marcdev.hibi.internal.utils.formatDateForDisplay
+import app.marcdev.hibi.internal.utils.formatTimeForDisplay
 import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup

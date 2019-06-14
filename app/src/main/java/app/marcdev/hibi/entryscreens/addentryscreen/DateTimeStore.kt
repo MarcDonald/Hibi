@@ -2,8 +2,8 @@ package app.marcdev.hibi.entryscreens.addentryscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import app.marcdev.hibi.internal.formatDateForDisplay
-import app.marcdev.hibi.internal.formatTimeForDisplay
+import app.marcdev.hibi.internal.utils.formatDateForDisplay
+import app.marcdev.hibi.internal.utils.formatTimeForDisplay
 import java.util.*
 
 class DateTimeStore {

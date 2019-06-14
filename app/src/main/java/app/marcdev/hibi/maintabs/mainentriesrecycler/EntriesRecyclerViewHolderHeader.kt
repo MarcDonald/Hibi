@@ -3,7 +3,7 @@ package app.marcdev.hibi.maintabs.mainentriesrecycler
 import android.view.View
 import android.widget.TextView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.formatDateForHeader
+import app.marcdev.hibi.internal.utils.formatDateForHeader
 
 class EntriesRecyclerViewHolderHeader(itemView: View) : BaseEntriesRecyclerViewHolder(itemView) {
 
