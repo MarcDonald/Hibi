@@ -1,7 +1,7 @@
 package app.marcdev.hibi.internal
 
 const val PRODUCTION_DATABASE_VERSION = 11
-const val PRODUCTION_DATABASE_NAME = "Database.hibi"
+const val PRODUCTION_DATABASE_NAME = "Database.db"
 
 // Main tab indices
 const val ENTRIES_TAB = 0
