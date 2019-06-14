@@ -75,6 +75,13 @@
       app:destination="@id/destination_add_entry"
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim" />
+    <action
+      android:id="@+id/fullscreen_image_action"
+      app:destination="@id/destination_fullscreen_image"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
   <!--endregion-->
 
@@ -132,6 +139,14 @@
         android:name="entryId"
         android:defaultValue="0" />
     </action>
+  </fragment>
+  <fragment
+    android:id="@+id/destination_fullscreen_image"
+    android:name="app.marcdev.hibi.entryscreens.viewentryscreen.FullscreenImageFragment"
+    android:label="FullscreenImageFragment">
+    <argument
+      android:name="image_path"
+      app:argType="string" />
   </fragment>
   <!--endregion-->
 </navigation>
