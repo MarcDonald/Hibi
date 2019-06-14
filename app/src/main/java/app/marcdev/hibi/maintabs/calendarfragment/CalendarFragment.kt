@@ -70,7 +70,7 @@ class CalendarFragment : Fragment(), KodeinAware {
 
   private fun initRecycler(view: View) {
     val recycler: RecyclerView = view.findViewById(R.id.calendar_entries)
-    this.recyclerAdapter = EntriesRecyclerAdapter(requireContext())
+    this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager

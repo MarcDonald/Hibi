@@ -30,6 +30,8 @@ import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagViewModelFactory
 import app.marcdev.hibi.uicomponents.addtagtoentrydialog.AddTagToEntryViewModelFactory
 import app.marcdev.hibi.uicomponents.locationdialog.AddLocationToEntryViewModelFactory
+import app.marcdev.hibi.uicomponents.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookViewModelFactory
+import app.marcdev.hibi.uicomponents.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryViewModelFactory
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -60,7 +62,7 @@ class Hibi : Application(), KodeinAware {
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
     // </editor-fold>
     // <editor-fold desc="View models">
-    bind() from provider { MainEntriesViewModelFactory(instance(), instance()) }
+    bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance(), instance()) }
     bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
@@ -79,6 +81,8 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddLocationToEntryViewModelFactory(instance()) }
     bind() from provider { SearchEntriesViewModelFactory(instance(), instance(), instance(), instance(), instance()) }
     bind() from provider { BackupUtils(instance()) }
+    bind() from provider { AddTagToMultiEntryViewModelFactory(instance()) }
+    bind() from provider { AddMultiEntryToBookViewModelFactory(instance()) }
     // </editor-fold>
   }
 

@@ -61,23 +61,23 @@ class TextInputDialog : HibiDialogFragment(), KodeinAware {
     deleteButton.setOnClickListener(deleteClickListenerToSet)
   }
 
-  private fun setSaveClickListener(listener: TextInputDialogSaveListener?) {
+  fun setSaveClickListener(listener: TextInputDialogSaveListener?) {
     saveClickListenerToSet = listener
   }
 
-  private fun setDeleteClickListener(listener: View.OnClickListener?) {
+  fun setDeleteClickListener(listener: View.OnClickListener?) {
     deleteClickListenerToSet = listener
   }
 
-  private fun setContent(contentArg: String) {
+  fun setContent(contentArg: String) {
     _contentToSet = contentArg
   }
 
-  private fun setHint(hintArg: String) {
+  fun setHint(hintArg: String) {
     _hintToSet = hintArg
   }
 
-  private fun setTitle(titleArg: String) {
+  fun setTitle(titleArg: String) {
     _titleToSet = titleArg
   }
 

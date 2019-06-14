@@ -254,6 +254,31 @@
     <item quantity="one">%d Result</item>
     <item quantity="other">%d Results</item>
   </plurals>
+
+  <plurals name="multi_delete_title">
+    <item quantity="one">Delete %d Entry</item>
+    <item quantity="other">Delete %d Entries</item>
+  </plurals>
+
+  <plurals name="multi_delete_message">
+    <item quantity="one">Are you sure you want to delete %d entry?</item>
+    <item quantity="other">Are you sure you want to delete %d entries?</item>
+  </plurals>
+
+  <plurals name="multi_location_title">
+    <item quantity="one">Add Location to %d Entry</item>
+    <item quantity="other">Add Location to %d Entries</item>
+  </plurals>
+
+  <plurals name="multi_tag_title">
+    <item quantity="one">Set Tags of %d Entry</item>
+    <item quantity="other">Set Tags of %d Entries</item>
+  </plurals>
+
+  <plurals name="multi_book_title">
+    <item quantity="one">Add %d Entry To Books</item>
+    <item quantity="other">Add %d Entries To Books</item>
+  </plurals>
   <!--endregion-->
 
 </resources>

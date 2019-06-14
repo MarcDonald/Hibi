@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/margin_standard">
+
+  <androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fadeScrollbars="false"
+    android:scrollbarSize="@dimen/scroll_bar_size"
+    android:scrollbars="vertical">
+
+    <!--Blocks descendant focusability so that it doesn't scroll to the bottom if it's too long-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:descendantFocusability="blocksDescendants">
+
+      <TextView
+        android:id="@+id/txt_add_books_multi_title"
+        android:textAppearance="@style/TextAppearance.Hibi.BottomSheetTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:gravity="start"
+        android:paddingStart="@dimen/margin_standard"
+        android:paddingEnd="@dimen/margin_standard"
+        android:text="@string/add_entry_to_book_hint"
+        app:layout_constraintBottom_toTopOf="@id/lin_books_entry_multi_books_holder"
+        app:layout_constraintEnd_toStartOf="@id/btn_add_book_multi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_book_multi"
+        style="@style/Widget.Hibi.Button.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/create_book"
+        app:icon="@drawable/ic_add_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <LinearLayout
+        android:id="@+id/lin_books_entry_multi_books_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_add_book_multi" />
+
+      <TextView
+        android:id="@+id/txt_no_books_multi_warning"
+        style="@style/TextAppearance.Hibi.WarningDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_books_found_warning"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lin_books_entry_multi_books_holder" />
+
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gd_multi_entry_book_vert_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete_books_multi"
+        style="@style/Widget.Hibi.Button.Negative"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gd_multi_entry_book_vert_50"
+        app:layout_constraintTop_toBottomOf="@id/txt_no_books_multi_warning" />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_books_multi"
+        style="@style/Widget.Hibi.Button.Borderless"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gd_multi_entry_book_vert_50"
+        app:layout_constraintTop_toBottomOf="@id/txt_no_books_multi_warning" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

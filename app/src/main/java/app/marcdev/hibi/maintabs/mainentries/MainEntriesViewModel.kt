@@ -4,14 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.marcdev.hibi.data.entity.BookEntryRelation
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.entity.TagEntryRelation
+import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import kotlinx.coroutines.launch
 
-class MainEntriesViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class MainEntriesViewModel(private val entryRepository: EntryRepository,
+                           private val tagEntryRelationRepository: TagEntryRelationRepository,
+                           private val bookEntryRelationRepository: BookEntryRelationRepository)
+  : ViewModel() {
 
   private val _displayLoading = MutableLiveData<Boolean>()
   val displayLoading: LiveData<Boolean>
@@ -92,5 +98,53 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository, private
     }
 
     return listWithHeaders
+  }
+
+  fun setTagsOfSelectedEntries(deleteMode: Boolean, tagIds: List<Int>, entryIds: List<Int>) {
+    viewModelScope.launch {
+      entryIds.forEach { entryId ->
+        tagIds.forEach { tagId ->
+          val tagEntryRelation = TagEntryRelation(tagId, entryId)
+          if(deleteMode)
+            tagEntryRelationRepository.deleteTagEntryRelation(tagEntryRelation)
+          else
+            tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
+        }
+      }
+      getMainEntryDisplayItems()
+    }
+  }
+
+  fun setBooksOfSelectedEntries(deleteMode: Boolean, bookIds: List<Int>, entryIds: List<Int>) {
+    viewModelScope.launch {
+      entryIds.forEach { entryId ->
+        bookIds.forEach { bookId ->
+          val bookEntryRelation = BookEntryRelation(bookId, entryId)
+          if(deleteMode)
+            bookEntryRelationRepository.deleteBookEntryRelation(bookEntryRelation)
+          else
+            bookEntryRelationRepository.addBookEntryRelation(bookEntryRelation)
+        }
+      }
+      getMainEntryDisplayItems()
+    }
+  }
+
+  fun deleteSelectedEntries(idList: List<Int>) {
+    viewModelScope.launch {
+      idList.forEach { id ->
+        entryRepository.deleteEntry(id)
+      }
+      getMainEntryDisplayItems()
+    }
+  }
+
+  fun addLocationToSelectedEntries(location: String, idList: List<Int>) {
+    viewModelScope.launch {
+      idList.forEach { id ->
+        entryRepository.saveLocation(id, location)
+      }
+      getMainEntryDisplayItems()
+    }
   }
 }

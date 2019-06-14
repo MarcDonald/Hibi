@@ -140,7 +140,7 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
 
   private fun initRecycler(view: View) {
     recycler = view.findViewById(R.id.recycler_search_entries)
-    recyclerAdapter = EntriesRecyclerAdapter(requireContext())
+    recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager
