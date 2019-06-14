@@ -102,4 +102,13 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository, private
       getMainEntryDisplayItems()
     }
   }
+
+  fun addLocationToSelectedEntries(location: String, idList: List<Int>) {
+    viewModelScope.launch {
+      idList.forEach { id ->
+        entryRepository.saveLocation(id, location)
+      }
+      getMainEntryDisplayItems()
+    }
+  }
 }

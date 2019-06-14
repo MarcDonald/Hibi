@@ -264,6 +264,11 @@
     <item quantity="one">Are you sure you want to delete %d entry?</item>
     <item quantity="other">Are you sure you want to delete %d entries?</item>
   </plurals>
+
+  <plurals name="multi_location_title">
+    <item quantity="one">Add Location to %d Entry</item>
+    <item quantity="other">Add Location to %d Entries</item>
+  </plurals>
   <!--endregion-->
 
 </resources>
