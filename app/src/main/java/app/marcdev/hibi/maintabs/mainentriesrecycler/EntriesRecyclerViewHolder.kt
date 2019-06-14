@@ -35,7 +35,7 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
     if(displayedItem != null) {
       viewEntryAction.entryId = displayedItem!!.entry.id
     }
-    Navigation.findNavController(view).navigate(viewEntryAction)
+    Navigation.findNavController(itemView).navigate(viewEntryAction)
   }
 
   init {

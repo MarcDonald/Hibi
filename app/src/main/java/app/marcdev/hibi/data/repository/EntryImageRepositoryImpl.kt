@@ -28,7 +28,11 @@ class EntryImageRepositoryImpl(private val dao: DAO) : EntryImageRepository {
   }
 
   override fun getImagesForEntry(entryId: Int): LiveData<List<EntryImage>> {
-    return dao.getImagesForEntry(entryId)
+    return dao.getImagesForEntryLD(entryId)
+  }
+
+  override suspend fun countUsesOfImage(imageName: String): Int {
+    return dao.countUsesOfImage(imageName)
   }
 
   companion object {

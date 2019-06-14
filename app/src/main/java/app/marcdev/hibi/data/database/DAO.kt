@@ -190,6 +190,12 @@ interface DAO {
   fun deleteEntryImage(entryImage: EntryImage)
 
   @Query("SELECT * FROM EntryImage WHERE entryId = :entryId")
-  fun getImagesForEntry(entryId: Int): LiveData<List<EntryImage>>
+  fun getImagesForEntry(entryId: Int): List<EntryImage>
+
+  @Query("SELECT * FROM EntryImage WHERE entryId = :entryId")
+  fun getImagesForEntryLD(entryId: Int): LiveData<List<EntryImage>>
+
+  @Query("SELECT COUNT(*) FROM EntryImage WHERE imageName = :imageName")
+  fun countUsesOfImage(imageName: String): Int
   // </editor-fold>
 }

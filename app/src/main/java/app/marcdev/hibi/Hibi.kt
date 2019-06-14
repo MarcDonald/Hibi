@@ -53,7 +53,7 @@ class Hibi : Application(), KodeinAware {
     // <editor-fold desc="Database">
     bind<AppDatabase>() with singleton { ProductionAppDatabase.invoke(applicationContext) }
     bind<DAO>() with singleton { instance<AppDatabase>().dao() }
-    bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance()) }
+    bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance(), instance()) }
     bind<TagRepository>() with singleton { TagRepositoryImpl.getInstance(instance()) }
     bind<TagEntryRelationRepository>() with singleton { TagEntryRelationRepositoryImpl.getInstance(instance()) }
     bind<NewWordRepository>() with singleton { NewWordRepositoryImpl.getInstance(instance()) }
