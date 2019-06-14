@@ -3,11 +3,10 @@ package app.marcdev.hibi.uicomponents.multiselectdialog
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
-import android.widget.Toast
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiDialogFragment
 
-class MultiSelectMenu(private val idList: List<Int>) : HibiDialogFragment() {
+class MultiSelectMenu(private val listener: MultiSelectMenuItemSelectedListener?) : HibiDialogFragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val view = inflater.inflate(R.layout.dialog_select_menu, container, false)
@@ -28,24 +27,31 @@ class MultiSelectMenu(private val idList: List<Int>) : HibiDialogFragment() {
 
   private fun bindViews(view: View) {
     view.findViewById<ImageView>(R.id.img_select_tag).setOnClickListener {
-      // TODO
-      Toast.makeText(requireContext(), "Tag $idList", Toast.LENGTH_SHORT).show()
+      listener?.itemSelected(TAG)
       dismiss()
     }
     view.findViewById<ImageView>(R.id.img_select_book).setOnClickListener {
-      // TODO
-      Toast.makeText(requireContext(), "Book $idList", Toast.LENGTH_SHORT).show()
+      listener?.itemSelected(BOOK)
       dismiss()
     }
     view.findViewById<ImageView>(R.id.img_select_location).setOnClickListener {
-      // TODO
-      Toast.makeText(requireContext(), "Location $idList", Toast.LENGTH_SHORT).show()
+      listener?.itemSelected(LOCATION)
       dismiss()
     }
     view.findViewById<ImageView>(R.id.img_select_delete).setOnClickListener {
-      // TODO
-      Toast.makeText(requireContext(), "Delete $idList", Toast.LENGTH_SHORT).show()
+      listener?.itemSelected(DELETE)
       dismiss()
     }
+  }
+
+  companion object {
+    const val TAG = 0
+    const val BOOK = 1
+    const val LOCATION = 2
+    const val DELETE = 3
+  }
+
+  interface MultiSelectMenuItemSelectedListener {
+    fun itemSelected(item: Int)
   }
 }

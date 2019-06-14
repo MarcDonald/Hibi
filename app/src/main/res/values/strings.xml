@@ -254,6 +254,16 @@
     <item quantity="one">%d Result</item>
     <item quantity="other">%d Results</item>
   </plurals>
+
+  <plurals name="multi_delete_title">
+    <item quantity="one">Delete %d Entry</item>
+    <item quantity="other">Delete %d Entries</item>
+  </plurals>
+
+  <plurals name="multi_delete_message">
+    <item quantity="one">Are you sure you want to delete %d entry?</item>
+    <item quantity="other">Are you sure you want to delete %d entries?</item>
+  </plurals>
   <!--endregion-->
 
 </resources>

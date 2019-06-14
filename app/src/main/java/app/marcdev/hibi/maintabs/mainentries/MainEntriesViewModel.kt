@@ -93,4 +93,13 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository, private
 
     return listWithHeaders
   }
+
+  fun deleteSelectedEntries(idList: List<Int>) {
+    viewModelScope.launch {
+      idList.forEach { id ->
+        entryRepository.deleteEntry(id)
+      }
+      getMainEntryDisplayItems()
+    }
+  }
 }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
+import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import app.marcdev.hibi.uicomponents.multiselectdialog.MultiSelectMenu
@@ -96,7 +97,35 @@ class MainEntriesFragment : Fragment(), KodeinAware {
   }
 
   private val onSelectClick = View.OnClickListener {
-    val menu = MultiSelectMenu(recyclerAdapter.getSelectedEntryIds())
+    val menu = MultiSelectMenu(onMultiSelectMenuItemSelected)
     menu.show(requireFragmentManager(), "Select Menu")
+  }
+
+  private val onMultiSelectMenuItemSelected = object : MultiSelectMenu.MultiSelectMenuItemSelectedListener {
+    override fun itemSelected(item: Int) {
+      when(item) {
+        MultiSelectMenu.TAG -> {
+
+        }
+        MultiSelectMenu.BOOK -> {
+
+        }
+        MultiSelectMenu.LOCATION -> {
+
+        }
+        MultiSelectMenu.DELETE -> {
+          val deleteConfirmDialog = BinaryOptionDialog()
+          val selectedAmount = recyclerAdapter.getSelectedEntryIds().size
+          deleteConfirmDialog.setTitle(resources.getQuantityString(R.plurals.multi_delete_title, selectedAmount, selectedAmount))
+          deleteConfirmDialog.setMessage(resources.getQuantityString(R.plurals.multi_delete_message, selectedAmount, selectedAmount))
+          deleteConfirmDialog.setNegativeButton(resources.getString(R.string.delete), View.OnClickListener {
+            viewModel.deleteSelectedEntries(recyclerAdapter.getSelectedEntryIds())
+            deleteConfirmDialog.dismiss()
+          })
+          deleteConfirmDialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { deleteConfirmDialog.dismiss() })
+          deleteConfirmDialog.show(requireFragmentManager(), "Confirm Multi Delete Dialog")
+        }
+      }
+    }
   }
 }
