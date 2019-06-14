@@ -11,7 +11,6 @@ import android.text.format.DateFormat
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -19,6 +18,7 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.data.BackupUtils
 import app.marcdev.hibi.internal.*
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
+import app.marcdev.hibi.maintabs.settings.backupdialog.BackupDialog
 import app.marcdev.hibi.uicomponents.TimePickerDialog
 import com.google.android.material.snackbar.Snackbar
 import droidninja.filepicker.FilePickerBuilder
@@ -27,7 +27,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import timber.log.Timber
-import java.io.File
 import java.util.*
 import java.util.Calendar.*
 
@@ -168,22 +167,10 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
     if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
     } else {
-      val backup = backupUtils.backup(requireContext())
-      if(backup)
-        Snackbar.make(requireView(), resources.getString(R.string.backup_success), Snackbar.LENGTH_SHORT).setAction(resources.getString(R.string.share), shareBackup).show()
-      else
-        Snackbar.make(requireView(), resources.getString(R.string.backup_fail), Snackbar.LENGTH_SHORT).show()
+      val dialog = BackupDialog()
+      dialog.show(requireFragmentManager(), "Backup Dialog")
     }
     true
-  }
-
-  private val shareBackup = View.OnClickListener {
-    val db = File(requireContext().filesDir.path + INTERNAL_BACKUP_PATH + PRODUCTION_DATABASE_NAME)
-    val uri = FileProvider.getUriForFile(requireContext(), "$PACKAGE.FileProvider", db)
-    val shareIntent = Intent(Intent.ACTION_SEND)
-    shareIntent.type = "application/octet-stream"
-    shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
-    startActivity(shareIntent)
   }
 
   private val restoreClickListener = Preference.OnPreferenceClickListener {
