@@ -13,12 +13,16 @@
       android:id="@+id/add_entry_action"
       app:destination="@id/destination_add_entry"
       app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim" />
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     <action
       android:id="@+id/view_entry_action"
       app:destination="@id/destination_view_entry"
       app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim">
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
       <argument
         android:name="entryId"
         android:defaultValue="0" />
@@ -27,7 +31,9 @@
       android:id="@+id/view_tagged_entries_action"
       app:destination="@id/destination_tagged_entries"
       app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim">
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
       <argument
         android:name="tagID"
         app:argType="integer" />
@@ -36,7 +42,9 @@
       android:id="@+id/view_book_entries_action"
       app:destination="@id/destination_book_entries"
       app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim">
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
       <argument
         android:name="bookID"
         app:argType="integer" />
@@ -45,7 +53,9 @@
       android:id="@+id/search_entries_action"
       app:destination="@+id/destination_search_entries"
       app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim" />
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
   <!--endregion -->
 
@@ -74,7 +84,9 @@
       android:id="@+id/edit_entry_action"
       app:destination="@id/destination_add_entry"
       app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim" />
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     <action
       android:id="@+id/fullscreen_image_action"
       app:destination="@id/destination_fullscreen_image"
@@ -97,7 +109,9 @@
       android:id="@+id/view_entry_action"
       app:destination="@+id/destination_view_entry"
       app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim">
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
       <argument
         android:name="entryId"
         android:defaultValue="0" />
@@ -117,7 +131,9 @@
       android:id="@+id/view_entry_action"
       app:destination="@+id/destination_view_entry"
       app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim">
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
       <argument
         android:name="entryId"
         android:defaultValue="0" />
@@ -134,7 +150,9 @@
       android:id="@+id/view_entry_action"
       app:destination="@+id/destination_view_entry"
       app:enterAnim="@anim/nav_default_enter_anim"
-      app:exitAnim="@anim/nav_default_exit_anim">
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
       <argument
         android:name="entryId"
         android:defaultValue="0" />
