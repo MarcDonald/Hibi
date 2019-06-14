@@ -1,21 +1,22 @@
 package app.marcdev.hibi.entryscreens.viewentryscreen
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import app.marcdev.hibi.data.entity.Book
 import app.marcdev.hibi.data.entity.Tag
-import app.marcdev.hibi.data.repository.BookEntryRelationRepository
-import app.marcdev.hibi.data.repository.EntryRepository
-import app.marcdev.hibi.data.repository.NewWordRepository
-import app.marcdev.hibi.data.repository.TagEntryRelationRepository
+import app.marcdev.hibi.data.repository.*
+import app.marcdev.hibi.internal.utils.FileUtils
 import app.marcdev.hibi.internal.utils.formatDateForDisplay
 import app.marcdev.hibi.internal.utils.formatTimeForDisplay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class ViewEntryViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository, private val newWordRepository: NewWordRepository, private val bookEntryRelationRepository: BookEntryRelationRepository) : ViewModel() {
+class ViewEntryViewModel(private val entryRepository: EntryRepository,
+                         private val tagEntryRelationRepository: TagEntryRelationRepository,
+                         private val newWordRepository: NewWordRepository,
+                         private val bookEntryRelationRepository: BookEntryRelationRepository,
+                         private val entryImageRepository: EntryImageRepository,
+                         private val fileUtils: FileUtils)
+  : ViewModel() {
   private var _entryId = 0
   val entryId: Int
     get() = _entryId
@@ -55,6 +56,15 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository, private v
   private var _location = MutableLiveData<String>()
   val location: LiveData<String>
     get() = _location
+
+  val images: LiveData<List<String>>
+    get() = Transformations.switchMap(entryImageRepository.getImagesForEntry(entryId)) { list ->
+      val returnList = mutableListOf<String>()
+      list.forEach { entryImage ->
+        returnList.add(fileUtils.imagesDirectory + entryImage.imageName)
+      }
+      return@switchMap MutableLiveData<List<String>>(returnList) as LiveData<List<String>>
+    }
 
   fun passArguments(entryIdArg: Int) {
     _entryId = entryIdArg

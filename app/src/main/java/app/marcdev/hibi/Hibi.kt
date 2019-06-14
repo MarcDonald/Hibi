@@ -71,7 +71,7 @@ class Hibi : Application(), KodeinAware {
     // <editor-fold desc="View models">
     bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
-    bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance(), instance()) }
+    bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
     bind() from provider { AddTagToEntryViewModelFactory(instance(), instance()) }
