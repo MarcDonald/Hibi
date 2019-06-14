@@ -19,6 +19,7 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import app.marcdev.hibi.uicomponents.TextInputDialog
 import app.marcdev.hibi.uicomponents.multiselectdialog.MultiSelectMenu
+import app.marcdev.hibi.uicomponents.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
 import app.marcdev.hibi.uicomponents.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryDialog
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -115,16 +116,17 @@ class MainEntriesFragment : Fragment(), KodeinAware {
   }
 
   private fun initMultiTagDialog() {
-    val dialog = AddTagToMultiEntryDialog(recyclerAdapter.getSelectedEntryIds().size, ::onSaveTagsToMultiEntryClick)
+    val dialog = AddTagToMultiEntryDialog(recyclerAdapter.getSelectedEntryIds().size) { deleteMode: Boolean, tagIds: List<Int> ->
+      viewModel.setTagsOfSelectedEntries(deleteMode, tagIds, recyclerAdapter.getSelectedEntryIds())
+    }
     dialog.show(requireFragmentManager(), "Set Multi Entry Tags")
   }
 
-  private fun onSaveTagsToMultiEntryClick(deleteMode: Boolean, tagIds: List<Int>) {
-    viewModel.addTagsToSelectedEntries(deleteMode, tagIds, recyclerAdapter.getSelectedEntryIds())
-  }
-
   private fun initMultiBookDialog() {
-    // TODO
+    val dialog = AddMultiEntryToBookDialog(recyclerAdapter.getSelectedEntryIds().size) { deleteMode: Boolean, bookIds: List<Int> ->
+      viewModel.setBooksOfSelectedEntries(deleteMode, bookIds, recyclerAdapter.getSelectedEntryIds())
+    }
+    dialog.show(requireFragmentManager(), "Set Multi Entry Books")
   }
 
   private fun initMultiLocationSetDialog() {
