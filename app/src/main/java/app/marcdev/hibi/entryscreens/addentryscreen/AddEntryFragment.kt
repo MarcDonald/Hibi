@@ -55,7 +55,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
   private lateinit var dateButton: MaterialButton
   private lateinit var timeButton: MaterialButton
   private lateinit var contentInput: EditText
-  private lateinit var deleteImageConfirmDialog: BinaryOptionDialog
+  private lateinit var backConfirmDialog: BinaryOptionDialog
   private lateinit var toolbarTitle: TextView
   private lateinit var searchBar: SearchBar
   private lateinit var dateDialog: DatePickerDialog
@@ -205,9 +205,9 @@ class AddEntryFragment : Fragment(), KodeinAware {
     viewModel.displayBackWarning.observe(this, Observer { value ->
       value?.let { display ->
         if(display)
-          deleteImageConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
+          backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
         else
-          deleteImageConfirmDialog.dismiss()
+          backConfirmDialog.dismiss()
       }
     })
 
@@ -280,7 +280,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private fun onImageLongClick(imagePath: String) {
-    deleteImageConfirmDialog = BinaryOptionDialog()
+    val deleteImageConfirmDialog = BinaryOptionDialog()
     deleteImageConfirmDialog.setTitle(resources.getString(R.string.warning))
     deleteImageConfirmDialog.setMessage(resources.getString(R.string.delete_image))
     deleteImageConfirmDialog.setNegativeButton(resources.getString(R.string.delete), View.OnClickListener {
@@ -294,11 +294,11 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private fun initBackConfirmDialog() {
-    deleteImageConfirmDialog = BinaryOptionDialog()
-    deleteImageConfirmDialog.setTitle(resources.getString(R.string.warning))
-    deleteImageConfirmDialog.setMessage(resources.getString(R.string.go_back_warning))
-    deleteImageConfirmDialog.setNegativeButton(resources.getString(R.string.go_back), View.OnClickListener { viewModel.confirmBack() })
-    deleteImageConfirmDialog.setPositiveButton(resources.getString(R.string.stay), View.OnClickListener { deleteImageConfirmDialog.dismiss() })
+    backConfirmDialog = BinaryOptionDialog()
+    backConfirmDialog.setTitle(resources.getString(R.string.warning))
+    backConfirmDialog.setMessage(resources.getString(R.string.go_back_warning))
+    backConfirmDialog.setNegativeButton(resources.getString(R.string.go_back), View.OnClickListener { viewModel.confirmBack() })
+    backConfirmDialog.setPositiveButton(resources.getString(R.string.stay), View.OnClickListener { backConfirmDialog.dismiss() })
   }
 
   private val saveClickListener = View.OnClickListener {
