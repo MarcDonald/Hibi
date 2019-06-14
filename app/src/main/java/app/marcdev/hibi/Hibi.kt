@@ -4,7 +4,6 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
-import app.marcdev.hibi.data.BackupUtils
 import app.marcdev.hibi.data.database.AppDatabase
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.database.ProductionAppDatabase
@@ -14,12 +13,16 @@ import app.marcdev.hibi.data.network.JishoAPIService
 import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.entryscreens.addentryscreen.AddEntryViewModelFactory
 import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
+import app.marcdev.hibi.internal.FileUtils
+import app.marcdev.hibi.internal.FileUtilsImpl
 import app.marcdev.hibi.internal.NOTIFICATION_CHANNEL_REMINDER_ID
 import app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment.BookEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BooksFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarTabViewModelFactory
 import app.marcdev.hibi.maintabs.mainentries.MainEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.searchentries.searchentriesscreen.SearchEntriesViewModelFactory
+import app.marcdev.hibi.maintabs.settings.backupdialog.BackupDialogViewModelFactory
+import app.marcdev.hibi.maintabs.settings.restoredialog.RestoreDialogViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagsFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesViewModelFactory
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
@@ -57,6 +60,9 @@ class Hibi : Application(), KodeinAware {
     bind<BookRepository>() with singleton { BookRepositoryImpl.getInstance(instance()) }
     bind<BookEntryRelationRepository>() with singleton { BookEntryRelationRepositoryImpl.getInstance(instance()) }
     // </editor-fold>
+    // <editor-fold desc="Utils">
+    bind<FileUtils>() with provider { FileUtilsImpl(instance()) }
+    // </editor-fold>
     // <editor-fold desc="Connectivity and Jisho API">
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
@@ -80,9 +86,10 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddEntryToBookViewModelFactory(instance(), instance()) }
     bind() from provider { AddLocationToEntryViewModelFactory(instance()) }
     bind() from provider { SearchEntriesViewModelFactory(instance(), instance(), instance(), instance(), instance()) }
-    bind() from provider { BackupUtils(instance()) }
     bind() from provider { AddTagToMultiEntryViewModelFactory(instance()) }
     bind() from provider { AddMultiEntryToBookViewModelFactory(instance()) }
+    bind() from provider { BackupDialogViewModelFactory(instance()) }
+    bind() from provider { RestoreDialogViewModelFactory(instance(), instance()) }
     // </editor-fold>
   }
 

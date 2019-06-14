@@ -2,8 +2,6 @@ package app.marcdev.hibi.internal
 
 const val PRODUCTION_DATABASE_VERSION = 10
 const val PRODUCTION_DATABASE_NAME = "Database.hibi"
-const val EXTERNAL_BACKUP_PATH = "/Hibi/backup/"
-const val INTERNAL_BACKUP_PATH = "/backup/"
 
 // Main tab indices
 const val ENTRIES_TAB = 0
@@ -18,6 +16,7 @@ const val SEARCH_TERM_KEY = "searchTerm"
 const val IS_EDIT_MODE_KEY = "isEditMode"
 const val TAG_ID_KEY = "tagId"
 const val BOOK_ID_KEY = "bookId"
+const val RESTORE_FILE_PATH_KEY = "restore_file_path"
 
 // Preferences
 const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"
