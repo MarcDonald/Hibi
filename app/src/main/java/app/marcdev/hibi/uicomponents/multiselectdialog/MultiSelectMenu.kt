@@ -16,12 +16,10 @@ class MultiSelectMenu(private val listener: ItemSelectedListener?) : HibiDialogF
   }
 
   private fun setupDialog() {
-    requireDialog().window?.setDimAmount(0f)
     val layoutParams: WindowManager.LayoutParams? = requireDialog().window?.attributes
     if(layoutParams != null) {
-      layoutParams.gravity = Gravity.BOTTOM or Gravity.END
-      layoutParams.x = 16
-      layoutParams.y = 160
+      layoutParams.gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+      layoutParams.y = 500
     }
   }
 
