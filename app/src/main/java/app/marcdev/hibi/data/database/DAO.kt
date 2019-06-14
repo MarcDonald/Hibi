@@ -197,5 +197,8 @@ interface DAO {
 
   @Query("SELECT COUNT(*) FROM EntryImage WHERE imageName = :imageName")
   fun countUsesOfImage(imageName: String): Int
+
+  @Query("SELECT COUNT(*) FROM EntryImage WHERE entryId = :entryId")
+  fun getCountImagesForEntry(entryId: Int): LiveData<Int>
   // </editor-fold>
 }

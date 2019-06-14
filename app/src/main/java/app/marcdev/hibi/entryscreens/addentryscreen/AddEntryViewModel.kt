@@ -62,6 +62,9 @@ class AddEntryViewModel(
   val colorNewWordIcon: LiveData<Boolean>
     get() = Transformations.switchMap(newWordRepository.getNewWordCountByEntryIdLD(entryId), ::greaterThanZero)
 
+  val colorImagesIcon: LiveData<Boolean>
+    get() = Transformations.switchMap(entryImageRepository.getCountImagesForEntry(entryId), ::greaterThanZero)
+
   val images: LiveData<List<String>>
     get() = Transformations.switchMap(entryImageRepository.getImagesForEntry(entryId)) { list ->
       val returnList = mutableListOf<String>()

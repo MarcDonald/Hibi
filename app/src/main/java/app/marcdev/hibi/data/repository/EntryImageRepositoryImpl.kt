@@ -37,6 +37,10 @@ class EntryImageRepositoryImpl(private val dao: DAO) : EntryImageRepository {
     }
   }
 
+  override fun getCountImagesForEntry(entryId: Int): LiveData<Int> {
+    return dao.getCountImagesForEntry(entryId)
+  }
+
   companion object {
     @Volatile private var instance: EntryImageRepositoryImpl? = null
 

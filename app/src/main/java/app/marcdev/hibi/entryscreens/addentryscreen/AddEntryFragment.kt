@@ -269,6 +269,15 @@ class AddEntryFragment : Fragment(), KodeinAware {
         imageRecyclerAdapter.updateItems(imagePaths)
       }
     })
+
+    viewModel.colorImagesIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        if(shouldColor)
+          addMediaButton.setColorFilter(accentColor)
+        else
+          addMediaButton.clearColorFilter()
+      }
+    })
   }
 
   private fun setupImageRecycler(view: View) {

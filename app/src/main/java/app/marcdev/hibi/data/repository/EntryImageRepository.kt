@@ -12,4 +12,6 @@ interface EntryImageRepository {
   fun getImagesForEntry(entryId: Int): LiveData<List<EntryImage>>
 
   suspend fun countUsesOfImage(imageName: String): Int
+
+  fun getCountImagesForEntry(entryId: Int): LiveData<Int>
 }
