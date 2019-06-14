@@ -14,8 +14,8 @@ android {
         applicationId "app.marcdev.hibi"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 22
-        versionName "0.22.0"
+        versionCode 23
+        versionName "0.23.0"
         setProperty("archivesBaseName", "Hibi-v$versionName")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -59,9 +59,9 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Room
-    implementation 'androidx.room:room-runtime:2.0.0'
-    kapt 'androidx.room:room-compiler:2.0.0'
-    androidTestImplementation 'androidx.room:room-testing:2.0.0'
+    implementation 'androidx.room:room-runtime:2.1.0'
+    kapt 'androidx.room:room-compiler:2.1.0'
+    androidTestImplementation 'androidx.room:room-testing:2.1.0'
 
     // Kodein
     implementation 'org.kodein.di:kodein-di-generic-jvm:6.0.1'
