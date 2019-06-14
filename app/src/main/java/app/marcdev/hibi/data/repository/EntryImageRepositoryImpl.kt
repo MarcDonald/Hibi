@@ -1,6 +1,7 @@
 package app.marcdev.hibi.data.repository
 
 import android.database.sqlite.SQLiteConstraintException
+import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.EntryImage
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,10 @@ class EntryImageRepositoryImpl(private val dao: DAO) : EntryImageRepository {
     withContext(Dispatchers.IO) {
       dao.deleteEntryImage(entryImage)
     }
+  }
+
+  override fun getImagesForEntry(entryId: Int): LiveData<List<EntryImage>> {
+    return dao.getImagesForEntry(entryId)
   }
 
   companion object {

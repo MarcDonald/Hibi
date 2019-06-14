@@ -21,7 +21,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
+import app.marcdev.hibi.entryscreens.ImageRecyclerAdapter
 import app.marcdev.hibi.internal.*
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
@@ -57,7 +60,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
   private lateinit var searchBar: SearchBar
   private lateinit var dateDialog: DatePickerDialog
   private lateinit var timeDialog: TimePickerDialog
-
+  private lateinit var imageRecyclerAdapter: ImageRecyclerAdapter
   // <editor-fold desc="Option Bar Buttons">
   private lateinit var addTagButton: ImageView
   private lateinit var addToBookButton: ImageView
@@ -84,6 +87,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
       true
     })
     setupObservers()
+    setupImageRecycler(view)
     return view
   }
 
@@ -259,6 +263,20 @@ class AddEntryFragment : Fragment(), KodeinAware {
           wordButton.clearColorFilter()
       }
     })
+
+    viewModel.images.observe(this, Observer { entry ->
+      entry?.let { imagePaths ->
+        imageRecyclerAdapter.updateItems(imagePaths)
+      }
+    })
+  }
+
+  private fun setupImageRecycler(view: View) {
+    val recycler: RecyclerView = view.findViewById(R.id.recycler_add_item_images)
+    this.imageRecyclerAdapter = ImageRecyclerAdapter(requireContext(), requireActivity().theme)
+    val layoutManager = GridLayoutManager(context, 3)
+    recycler.adapter = imageRecyclerAdapter
+    recycler.layoutManager = layoutManager
   }
 
   private fun initBackConfirmDialog() {
@@ -368,6 +386,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
       FilePickerBuilder.instance
         .setActivityTheme(R.style.AppTheme_Dark)
         .setActivityTitle(resources.getString(R.string.add_images))
+        .setSelectedFiles(arrayListOf())
         .pickPhoto(this, CHOOSE_IMAGE_TO_ADD_REQUEST_CODE)
     }
   }
