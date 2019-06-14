@@ -53,6 +53,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
         .addMigrations(MIGRATION_7_TO_8())
         .addMigrations(MIGRATION_8_TO_9())
         .addMigrations(MIGRATION_9_TO_10())
+        .addMigrations(MIGRATION_10_TO_11())
         .build()
 
     class MIGRATION_3_TO_5 : Migration(3, 5) {
@@ -153,6 +154,16 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
                          "SELECT id, day, month, year, hour, minute, content " +
                          "FROM EntryOLD")
         database.execSQL("DROP TABLE EntryOLD")
+      }
+    }
+
+    class MIGRATION_10_TO_11 : Migration(10, 11) {
+      override fun migrate(database: SupportSQLiteDatabase) {
+        // Add EntryImage table
+        database.execSQL("CREATE TABLE EntryImage(imageName TEXT NOT NULL, " +
+                         "entryId INTEGER NOT NULL, " +
+                         "PRIMARY KEY(imageName, entryId), " +
+                         "FOREIGN KEY(entryId) REFERENCES Entry(id) ON DELETE CASCADE ON UPDATE CASCADE)")
       }
     }
   }
