@@ -16,6 +16,7 @@ const val SEARCH_TERM_KEY = "searchTerm"
 const val IS_EDIT_MODE_KEY = "isEditMode"
 const val TAG_ID_KEY = "tagId"
 const val BOOK_ID_KEY = "bookId"
+const val RESTORE_FILE_PATH_KEY = "restore_file_path"
 
 // Preferences
 const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"

@@ -15,17 +15,15 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.R
-import app.marcdev.hibi.data.BackupUtils
 import app.marcdev.hibi.internal.*
-import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.maintabs.settings.backupdialog.BackupDialog
+import app.marcdev.hibi.maintabs.settings.restoredialog.RestoreDialog
 import app.marcdev.hibi.uicomponents.TimePickerDialog
 import com.google.android.material.snackbar.Snackbar
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 import timber.log.Timber
 import java.util.*
 import java.util.Calendar.*
@@ -34,8 +32,6 @@ import java.util.Calendar.*
 class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   // Kodein initialisation
   override val kodein by closestKodein()
-
-  private val backupUtils: BackupUtils by instance()
 
   // <editor-fold desc="UI Components">
   private lateinit var reminderTimePickerDialog: TimePickerDialog
@@ -194,29 +190,18 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
         val filePathArray = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS)
         val filePath = filePathArray[0]
         if(filePath != null)
-          displayRestoreWarning(filePath)
+          displayRestoreDialog(filePath)
       }
     } else
       super.onActivityResult(requestCode, resultCode, data)
   }
 
-  private fun displayRestoreWarning(path: String) {
-    val dialog = BinaryOptionDialog()
-    dialog.setTitle(resources.getString(R.string.warning))
-    dialog.setMessage(resources.getString(R.string.restore_warning))
-    dialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { dialog.dismiss() })
-    dialog.setNegativeButton(resources.getString(R.string.restore_confirm), View.OnClickListener {
-      dialog.dismiss()
-      val restore = backupUtils.restore(requireContext(), path)
-      if(restore) {
-        /* This is apparently bad practice but I can't find any other way of completely destroying
-         * the application so that the database can be opened again */
-        System.exit(1)
-      } else {
-        Snackbar.make(requireView(), resources.getString(R.string.restore_fail), Snackbar.LENGTH_LONG).show()
-      }
-    })
-    dialog.show(requireFragmentManager(), "Restore Confirm Dialog")
+  private fun displayRestoreDialog(path: String) {
+    val dialog = RestoreDialog()
+    val bundle = Bundle()
+    bundle.putString(RESTORE_FILE_PATH_KEY, path)
+    dialog.arguments = bundle
+    dialog.show(requireFragmentManager(), "Restore Dialog")
   }
 
   private val mayRequireRestartChangeListener = Preference.OnPreferenceChangeListener { _, _ ->

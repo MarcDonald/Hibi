@@ -181,9 +181,12 @@
   <string name="backup_success">Backup Successful</string>
   <string name="backup_fail">Backup Failed</string>
   <string name="restore">Restore</string>
-  <string name="restore_warning">Replace ALL currently saved entries?</string>
   <string name="restore_confirm">Continue with Restore</string>
-  <string name="restore_fail">Restore failed, ensure that you selected an appropriate .hibi file</string>
+  <string name="restore_confirm_title">Restore from Backup?</string>
+  <string name="restore_confirm_message">Are you sure you want to restore from a backup? \nThis will replace all current data</string>
+  <string name="restore_error_title">An Error Occurred</string>
+  <string name="restore_error_message">Ensure you are restoring from a valid .hibi file</string>
+  <string name="restoring">Restoring</string>
   <string name="clipboard_behaviour">Clipboard Behaviour</string>
   <string name="long_press_copy">Long Press to Copy</string>
   <string name="long_press_paste">Long Press to Paste</string>
