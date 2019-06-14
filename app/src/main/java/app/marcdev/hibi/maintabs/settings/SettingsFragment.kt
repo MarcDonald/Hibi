@@ -172,7 +172,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
 
   private val restoreClickListener = Preference.OnPreferenceClickListener {
     if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-      ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+      ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
     } else {
       FilePickerBuilder.instance
         .setMaxCount(1)

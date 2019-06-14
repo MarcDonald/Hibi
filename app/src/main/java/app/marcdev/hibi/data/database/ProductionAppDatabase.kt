@@ -11,7 +11,7 @@ import app.marcdev.hibi.internal.PRODUCTION_DATABASE_NAME
 import app.marcdev.hibi.internal.PRODUCTION_DATABASE_VERSION
 import timber.log.Timber
 
-@Database(entities = [Entry::class, Tag::class, TagEntryRelation::class, NewWord::class, Book::class, BookEntryRelation::class], version = PRODUCTION_DATABASE_VERSION)
+@Database(entities = [Entry::class, Tag::class, TagEntryRelation::class, NewWord::class, Book::class, BookEntryRelation::class, EntryImage::class], version = PRODUCTION_DATABASE_VERSION)
 
 abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
   abstract override fun dao(): DAO
@@ -54,6 +54,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
         .addMigrations(MIGRATION_8_TO_9())
         .addMigrations(MIGRATION_9_TO_10())
         .addMigrations(MIGRATION_10_TO_11())
+        .addMigrations(MIGRATION_11_TO_12())
         .build()
 
     class MIGRATION_3_TO_5 : Migration(3, 5) {
@@ -165,6 +166,11 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
                          "PRIMARY KEY(imageName, entryId), " +
                          "FOREIGN KEY(entryId) REFERENCES Entry(id) ON DELETE CASCADE ON UPDATE CASCADE)")
       }
+    }
+
+    class MIGRATION_11_TO_12 : Migration(11, 12) {
+      // This is here because I forgot to add the EntryImage entity to the database in the last version
+      override fun migrate(database: SupportSQLiteDatabase) {}
     }
   }
 }

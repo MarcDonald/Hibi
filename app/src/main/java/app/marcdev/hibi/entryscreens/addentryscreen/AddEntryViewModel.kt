@@ -4,20 +4,22 @@ import android.app.Application
 import android.preference.PreferenceManager
 import androidx.lifecycle.*
 import app.marcdev.hibi.data.entity.Entry
-import app.marcdev.hibi.data.repository.BookEntryRelationRepository
-import app.marcdev.hibi.data.repository.EntryRepository
-import app.marcdev.hibi.data.repository.NewWordRepository
-import app.marcdev.hibi.data.repository.TagEntryRelationRepository
+import app.marcdev.hibi.data.entity.EntryImage
+import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.internal.PREF_SAVE_ON_PAUSE
+import app.marcdev.hibi.internal.utils.FileUtils
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.io.File
 
 class AddEntryViewModel(
   application: Application,
   private val entryRepository: EntryRepository,
   private val tagEntryRelationRepository: TagEntryRelationRepository,
   private val bookEntryRelationRepository: BookEntryRelationRepository,
-  private val newWordRepository: NewWordRepository)
+  private val newWordRepository: NewWordRepository,
+  private val entryImageRepository: EntryImageRepository,
+  private val fileUtils: FileUtils)
   : AndroidViewModel(application) {
 
   val dateTimeStore = DateTimeStore()
@@ -176,5 +178,16 @@ class AddEntryViewModel(
     val ld = MutableLiveData<Boolean>()
     ld.value = string.isNotBlank()
     return ld
+  }
+
+  fun addImages(pathList: List<String>) {
+    viewModelScope.launch {
+      pathList.forEach { path ->
+        val file = File(path)
+        val entryImage = EntryImage(file.name, entryId)
+        entryImageRepository.addEntryImage(entryImage)
+        fileUtils.saveImage(file)
+      }
+    }
   }
 }

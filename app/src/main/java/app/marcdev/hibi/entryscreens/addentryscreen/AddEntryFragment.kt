@@ -1,9 +1,12 @@
 package app.marcdev.hibi.entryscreens.addentryscreen
 
+import android.Manifest
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
@@ -12,15 +15,14 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.ENTRY_ID_KEY
-import app.marcdev.hibi.internal.PREF_CLIPBOARD_BEHAVIOR
-import app.marcdev.hibi.internal.PREF_DARK_THEME
-import app.marcdev.hibi.internal.SEARCH_TERM_KEY
+import app.marcdev.hibi.internal.*
 import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.DatePickerDialog
@@ -31,6 +33,8 @@ import app.marcdev.hibi.uicomponents.locationdialog.AddLocationToEntryDialog
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.uicomponents.views.SearchBar
 import com.google.android.material.button.MaterialButton
+import droidninja.filepicker.FilePickerBuilder
+import droidninja.filepicker.FilePickerConst
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -358,7 +362,27 @@ class AddEntryFragment : Fragment(), KodeinAware {
   }
 
   private val addMediaClickListener = View.OnClickListener {
-    Toast.makeText(requireContext(), resources.getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
+    if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+      askForStoragePermissions()
+    } else {
+      FilePickerBuilder.instance
+        .setActivityTheme(R.style.AppTheme_Dark)
+        .setActivityTitle(resources.getString(R.string.add_images))
+        .pickPhoto(this, CHOOSE_IMAGE_TO_ADD_REQUEST_CODE)
+    }
+  }
+
+  private fun askForStoragePermissions() {
+    ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+
+    if(requestCode == CHOOSE_IMAGE_TO_ADD_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+      val photoPathArray = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA)
+      viewModel.addImages(photoPathArray)
+    }
   }
 
   private fun showClipBoardMenu() {

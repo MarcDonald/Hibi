@@ -59,6 +59,7 @@ class Hibi : Application(), KodeinAware {
     bind<NewWordRepository>() with singleton { NewWordRepositoryImpl.getInstance(instance()) }
     bind<BookRepository>() with singleton { BookRepositoryImpl.getInstance(instance()) }
     bind<BookEntryRelationRepository>() with singleton { BookEntryRelationRepositoryImpl.getInstance(instance()) }
+    bind<EntryImageRepository>() with singleton { EntryImageRepositoryImpl.getInstance(instance()) }
     // </editor-fold>
     // <editor-fold desc="Utils">
     bind<FileUtils>() with provider { FileUtilsImpl(instance()) }
@@ -69,7 +70,7 @@ class Hibi : Application(), KodeinAware {
     // </editor-fold>
     // <editor-fold desc="View models">
     bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }
-    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance(), instance()) }
+    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
     bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
