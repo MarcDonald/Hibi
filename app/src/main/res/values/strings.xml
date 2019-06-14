@@ -61,6 +61,7 @@
   <string name="no_entries">Entries you create will show up here</string>
   <string name="no_entries_for_date">No entries found for date</string>
   <string name="add_images">Add Images</string>
+  <string name="delete_image">Remove image from this entry?</string>
   <!--endregion-->
 
   <!--region Search-->
