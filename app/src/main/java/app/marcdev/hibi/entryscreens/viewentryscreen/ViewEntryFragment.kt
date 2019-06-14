@@ -197,7 +197,7 @@ class ViewEntryFragment : Fragment(), KodeinAware {
 
   private fun setupImageRecycler(view: View) {
     val recycler: RecyclerView = view.findViewById(R.id.recycler_view_entry_images)
-    this.imageRecyclerAdapter = ImageRecyclerAdapter(::onImageClick, requireContext(), requireActivity().theme)
+    this.imageRecyclerAdapter = ImageRecyclerAdapter(::onImageClick, {}, requireContext(), requireActivity().theme)
     val layoutManager = GridLayoutManager(context, 3)
     recycler.adapter = imageRecyclerAdapter
     recycler.layoutManager = layoutManager

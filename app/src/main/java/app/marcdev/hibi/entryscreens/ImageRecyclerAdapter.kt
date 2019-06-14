@@ -12,13 +12,18 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.BaseEntriesRecyclerViewHold
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class ImageRecyclerAdapter(private val onItemClick: (String) -> Unit, context: Context, private val theme: Resources.Theme) : RecyclerView.Adapter<ImageRecyclerViewHolder>() {
+class ImageRecyclerAdapter(private val onItemClick: (String) -> Unit,
+                           private val onItemLongClick: (String) -> Unit,
+                           context: Context,
+                           private val theme: Resources.Theme)
+  : RecyclerView.Adapter<ImageRecyclerViewHolder>() {
+
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var items: List<String> = listOf()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageRecyclerViewHolder {
     val view = inflater.inflate(R.layout.item_image, parent, false)
-    return ImageRecyclerViewHolder(view, onItemClick, theme)
+    return ImageRecyclerViewHolder(view, onItemClick, onItemLongClick, theme)
   }
 
   override fun onBindViewHolder(holder: ImageRecyclerViewHolder, position: Int) {
@@ -35,13 +40,22 @@ class ImageRecyclerAdapter(private val onItemClick: (String) -> Unit, context: C
   }
 }
 
-class ImageRecyclerViewHolder(itemView: View, onItemClick: (String) -> Unit, private val theme: Resources.Theme) : BaseEntriesRecyclerViewHolder(itemView) {
+class ImageRecyclerViewHolder(itemView: View,
+                              onItemClick: (String) -> Unit,
+                              onItemLongClick: (String) -> Unit,
+                              private val theme: Resources.Theme)
+  : BaseEntriesRecyclerViewHolder(itemView) {
+
   private val imageDisplay: ImageView = itemView.findViewById(R.id.img_image)
   private var imagePath = ""
 
   init {
     itemView.setOnClickListener {
       onItemClick(imagePath)
+    }
+    itemView.setOnLongClickListener {
+      onItemLongClick(imagePath)
+      true
     }
   }
 

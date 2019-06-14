@@ -32,7 +32,9 @@ class EntryImageRepositoryImpl(private val dao: DAO) : EntryImageRepository {
   }
 
   override suspend fun countUsesOfImage(imageName: String): Int {
-    return dao.countUsesOfImage(imageName)
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.countUsesOfImage(imageName)
+    }
   }
 
   companion object {

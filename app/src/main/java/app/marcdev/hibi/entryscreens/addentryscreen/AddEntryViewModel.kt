@@ -199,4 +199,16 @@ class AddEntryViewModel(
       }
     }
   }
+
+  fun removeImage(imagePath: String) {
+    val file = File(imagePath)
+    viewModelScope.launch {
+      val entryImage = EntryImage(file.name, entryId)
+      entryImageRepository.deleteEntryImage(entryImage)
+      val count = entryImageRepository.countUsesOfImage(file.name)
+      if(count == 0) {
+        fileUtils.deleteImage(file.name)
+      }
+    }
+  }
 }
