@@ -99,8 +99,32 @@ class RestoreDialogViewModel(private val fileUtils: FileUtils, private val datab
   }
 
   private fun performRestore() {
+    File(fileUtils.imagesDirectory).mkdirs()
+    clearCurrentImages()
+    moveImagesFromBackupToCurrent()
     clearCurrentDatabase()
     moveDatabase()
+  }
+
+  private fun clearCurrentImages() {
+    val artworkDirectory = File(fileUtils.imagesDirectory)
+    for(file in artworkDirectory.listFiles()) {
+      file.delete()
+    }
+  }
+
+  private fun moveImagesFromBackupToCurrent() {
+    val file = ZipFile(restoreFilePath)
+    file.entries().asSequence().forEach { entry ->
+      if(entry.toString() != PRODUCTION_DATABASE_NAME) {
+        val inputStream = file.getInputStream(entry)
+        val outFile = File(fileUtils.imagesDirectory + entry.toString())
+        val outputStream = FileOutputStream(outFile)
+        inputStream.copyTo(outputStream)
+        inputStream.close()
+        outputStream.close()
+      }
+    }
   }
 
   private fun clearCurrentDatabase() {
