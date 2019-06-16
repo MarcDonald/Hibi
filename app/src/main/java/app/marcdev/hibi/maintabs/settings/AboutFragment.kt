@@ -12,21 +12,38 @@ import app.marcdev.hibi.R
 class AboutFragment : PreferenceFragmentCompat() {
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
     setPreferencesFromResource(R.xml.about, rootKey)
-
     bindViews()
   }
 
   private fun bindViews() {
     initVersion()
 
-    val oss = findPreference("about_oss")
-    oss.onPreferenceClickListener = ossClickListener
+    findPreference("about_oss").onPreferenceClickListener = Preference.OnPreferenceClickListener {
+      val intent = Intent(requireContext(), OpenSourceLicencesActivity::class.java)
+      startActivity(intent)
+      true
+    }
 
-    val jisho = findPreference("about_jisho")
-    jisho.onPreferenceClickListener = jishoClickListener
+    findPreference("about_jisho").onPreferenceClickListener = Preference.OnPreferenceClickListener {
+      launchURL("https://jisho.org/")
+      true
+    }
 
-    val privacy = findPreference("about_privacy")
-    privacy.onPreferenceClickListener = privacyClickListener
+    findPreference("about_privacy").onPreferenceClickListener = Preference.OnPreferenceClickListener {
+      val dialog = PrivacyDialog()
+      dialog.show(requireFragmentManager(), "Privacy Dialog")
+      true
+    }
+
+    findPreference("about_code").onPreferenceClickListener = Preference.OnPreferenceClickListener {
+      launchURL("https://github.com/MarcDonald/Hibi")
+      true
+    }
+
+    findPreference("about_author").onPreferenceClickListener = Preference.OnPreferenceClickListener {
+      launchURL("https://github.com/MarcDonald/")
+      true
+    }
   }
 
   private fun initVersion() {
@@ -39,23 +56,11 @@ class AboutFragment : PreferenceFragmentCompat() {
     }
   }
 
-  private val ossClickListener = Preference.OnPreferenceClickListener {
-    val intent = Intent(requireContext(), OpenSourceLicencesActivity::class.java)
-    startActivity(intent)
-    true
-  }
-
-  private val jishoClickListener = Preference.OnPreferenceClickListener {
-    val uriUrl = Uri.parse("https://jisho.org/")
+  private fun launchURL(url: String) {
+    val uriUrl = Uri.parse(url)
     val launchBrowser = Intent(Intent.ACTION_VIEW)
     launchBrowser.data = uriUrl
     startActivity(launchBrowser)
-    true
-  }
 
-  private val privacyClickListener = Preference.OnPreferenceClickListener {
-    val dialog = PrivacyDialog()
-    dialog.show(requireFragmentManager(), "Privacy Dialog")
-    true
   }
 }

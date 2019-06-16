@@ -19,15 +19,20 @@
       android:icon="@drawable/ic_visibility_24dp" />
 
     <Preference
-      android:key="about_version"
-      android:icon="@drawable/ic_build_24dp"
-      android:title="@string/version"
-      android:summary="@string/version" />
+      android:key="about_code"
+      android:icon="@drawable/ic_code_24dp"
+      android:title="@string/view_source_code" />
 
     <Preference
       android:key="about_author"
       android:icon="@drawable/ic_person_24dp"
       android:title="@string/author"
       android:summary="@string/marc_donald" />
+
+    <Preference
+      android:key="about_version"
+      android:icon="@drawable/ic_build_24dp"
+      android:title="@string/version"
+      android:summary="@string/version" />
   </PreferenceCategory>
 </PreferenceScreen>

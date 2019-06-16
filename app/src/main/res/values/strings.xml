@@ -200,6 +200,7 @@
   <!--region About-->
   <string name="open_source_licenses">Open Source Licenses</string>
   <string name="about">About</string>
+  <string name="view_source_code">View Source Code</string>
   <string name="app_info">App Info</string>
   <string name="version">Version</string>
   <string name="build_code_with_output">Build Code: %1$s</string>
