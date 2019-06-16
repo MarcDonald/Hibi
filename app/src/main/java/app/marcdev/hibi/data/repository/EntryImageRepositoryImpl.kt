@@ -12,8 +12,8 @@ class EntryImageRepositoryImpl(private val dao: DAO) : EntryImageRepository {
   override suspend fun addEntryImage(entryImage: EntryImage) {
     withContext(Dispatchers.IO) {
       try {
-        Timber.d("Log: addEntryImage: EntryImage doesn't exist, adding new")
         dao.insertEntryImage(entryImage)
+        Timber.d("Log: addEntryImage: EntryImage doesn't exist, added new")
       } catch(exception: SQLiteConstraintException) {
         Timber.d("Log: addEntryImage: EntryImage already exists, updating existing")
         dao.updateEntryImage(entryImage)

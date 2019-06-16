@@ -16,8 +16,8 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
   override suspend fun addBookEntryRelation(bookEntryRelation: BookEntryRelation) {
     withContext(Dispatchers.IO) {
       try {
-        Timber.d("Log: addBookEntryRelation: BookEntryRelation doesn't exist, adding new")
         dao.insertBookEntryRelation(bookEntryRelation)
+        Timber.d("Log: addBookEntryRelation: BookEntryRelation doesn't exist, added new")
       } catch(exception: SQLiteConstraintException) {
         Timber.d("Log: addBookEntryRelation: BookEntryRelation already exists, updating existing")
         dao.updateBookEntryRelation(bookEntryRelation)

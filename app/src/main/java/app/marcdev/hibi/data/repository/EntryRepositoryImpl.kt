@@ -14,8 +14,8 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
   override suspend fun addEntry(entry: Entry) {
     withContext(Dispatchers.IO) {
       try {
-        Timber.d("Log: addEntry: Entry doesn't exist, adding new")
         dao.insertEntry(entry)
+        Timber.d("Log: addEntry: Entry doesn't exist, added new")
       } catch(exception: SQLiteConstraintException) {
         Timber.d("Log: addEntry: Entry already exists, updating existing")
         dao.updateEntry(entry)

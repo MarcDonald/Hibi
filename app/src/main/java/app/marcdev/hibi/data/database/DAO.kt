@@ -10,12 +10,12 @@ import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
 @Dao
 interface DAO {
   // <editor-fold desc="Entry">
-  /* When a constraint violation occurs, ignores the one row that is the constraint violation and
-   * continues with the rest. This stops the entity being replaced which triggered a delete cascade
+  /* Aborting causes a SQLiteConstraintException which is then caught in the repositories and an
+   * update occurs instead. This stops the entity being replaced which triggered a delete cascade
    * for all foreign keys
    * See https://sqlite.org/lang_conflict.html
    */
-  @Insert(onConflict = OnConflictStrategy.FAIL)
+  @Insert(onConflict = OnConflictStrategy.ABORT)
   fun insertEntry(entry: Entry)
 
   @Update
@@ -50,7 +50,7 @@ interface DAO {
   // </editor-fold>
 
   // <editor-fold desc="Tag">
-  @Insert(onConflict = OnConflictStrategy.FAIL)
+  @Insert(onConflict = OnConflictStrategy.ABORT)
   fun insertTag(tag: Tag)
 
   @Update
@@ -73,7 +73,7 @@ interface DAO {
   // </editor-fold>
 
   // <editor-fold desc="Tag Entry Relation">
-  @Insert(onConflict = OnConflictStrategy.FAIL)
+  @Insert(onConflict = OnConflictStrategy.ABORT)
   fun insertTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
   @Update
@@ -105,7 +105,7 @@ interface DAO {
   // </editor-fold>
 
   // <editor-fold desc="New Word">
-  @Insert(onConflict = OnConflictStrategy.FAIL)
+  @Insert(onConflict = OnConflictStrategy.ABORT)
   fun insertNewWord(newWord: NewWord)
 
   @Update
@@ -128,7 +128,7 @@ interface DAO {
   // </editor-fold>
 
   // <editor-fold desc="Book">
-  @Insert(onConflict = OnConflictStrategy.FAIL)
+  @Insert(onConflict = OnConflictStrategy.ABORT)
   fun insertBook(book: Book)
 
   @Update
@@ -151,7 +151,7 @@ interface DAO {
   // </editor-fold>
 
   // <editor-fold desc="Book Entry Relation">
-  @Insert(onConflict = OnConflictStrategy.FAIL)
+  @Insert(onConflict = OnConflictStrategy.ABORT)
   fun insertBookEntryRelation(bookEntryRelation: BookEntryRelation)
 
   @Update
@@ -180,7 +180,7 @@ interface DAO {
   // </editor-fold>
 
   // <editor-fold desc="Entry Image">
-  @Insert(onConflict = OnConflictStrategy.FAIL)
+  @Insert(onConflict = OnConflictStrategy.ABORT)
   fun insertEntryImage(entryImage: EntryImage)
 
   @Update
