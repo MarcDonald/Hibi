@@ -12,7 +12,10 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import kotlinx.coroutines.launch
 
-class BookEntriesViewModel(private val bookRepository: BookRepository, private val bookEntryRelationRepository: BookEntryRelationRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class BookEntriesViewModel(private val bookRepository: BookRepository,
+                           private val bookEntryRelationRepository: BookEntryRelationRepository,
+                           private val tagEntryRelationRepository: TagEntryRelationRepository)
+  : ViewModel() {
 
   private var _bookId = 0
   val bookId: Int

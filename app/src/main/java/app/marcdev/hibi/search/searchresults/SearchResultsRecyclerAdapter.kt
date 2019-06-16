@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.data.network.apiresponse.Data
 
-class SearchResultsRecyclerAdapter(private val context: Context, private val fragmentManager: FragmentManager) : RecyclerView.Adapter<SearchResultsRecyclerViewHolder>() {
+class SearchResultsRecyclerAdapter(context: Context, private val fragmentManager: FragmentManager) : RecyclerView.Adapter<SearchResultsRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var dataList: List<Data> = listOf()
-  private var lastPosition = -1
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultsRecyclerViewHolder {
     val view = inflater.inflate(R.layout.item_search_result, parent, false)

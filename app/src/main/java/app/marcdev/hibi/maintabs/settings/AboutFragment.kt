@@ -8,11 +8,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.BuildConfig
 import app.marcdev.hibi.R
-import timber.log.Timber
 
 class AboutFragment : PreferenceFragmentCompat() {
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-    Timber.v("Log: onCreatePreferences: Started")
     setPreferencesFromResource(R.xml.about, rootKey)
 
     bindViews()

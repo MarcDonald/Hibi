@@ -19,7 +19,6 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class CalendarFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -42,7 +41,6 @@ class CalendarFragment : Fragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_calendar, container, false)
 
     bindViews(view)

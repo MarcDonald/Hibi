@@ -11,7 +11,9 @@ import app.marcdev.hibi.internal.TAG_ID_KEY
 import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
 
-class TagsFragmentRecyclerViewHolder(itemView: View, private val fragmentManager: FragmentManager) : RecyclerView.ViewHolder(itemView) {
+class TagsFragmentRecyclerViewHolder(itemView: View,
+                                     private val fragmentManager: FragmentManager)
+  : RecyclerView.ViewHolder(itemView) {
 
   private var tagNameDisplay: TextView = itemView.findViewById(R.id.tag_item_name)
   private var tagCountDisplay: TextView = itemView.findViewById(R.id.tag_item_count)
@@ -22,7 +24,7 @@ class TagsFragmentRecyclerViewHolder(itemView: View, private val fragmentManager
     if(displayedItem != null) {
       val tagID = displayedItem!!.tagID
       val viewEntryAction = MainScreenFragmentDirections.viewTaggedEntriesAction(tagID)
-      Navigation.findNavController(it).navigate(viewEntryAction)
+      Navigation.findNavController(itemView).navigate(viewEntryAction)
     }
   }
 

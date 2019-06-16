@@ -11,12 +11,10 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_DARK_THEME
 import app.marcdev.hibi.internal.base.HibiActivity
 import app.marcdev.hibi.uicomponents.views.LicenseDisplay
-import timber.log.Timber
 
 class OpenSourceLicencesActivity : HibiActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    Timber.v("Log: onCreate: Started")
     super.onCreate(savedInstanceState)
 
     if(PreferenceManager.getDefaultSharedPreferences(applicationContext).getBoolean(PREF_DARK_THEME, false))

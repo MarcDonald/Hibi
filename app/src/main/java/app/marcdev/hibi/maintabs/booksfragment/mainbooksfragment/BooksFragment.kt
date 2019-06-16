@@ -17,8 +17,6 @@ import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
-
 
 class BooksFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -39,7 +37,6 @@ class BooksFragment : Fragment(), KodeinAware {
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(BooksFragmentViewModel::class.java)
   }
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_books, container, false)
     bindViews(view)
     initRecycler(view)

@@ -12,7 +12,10 @@ import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.NEW_WORD_ID_KEY
 import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordDialog
 
-class NewWordsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManager, isEditMode: Boolean) : RecyclerView.ViewHolder(itemView) {
+class NewWordsRecyclerViewHolder(itemView: View,
+                                 fragmentManager: FragmentManager,
+                                 isEditMode: Boolean)
+  : RecyclerView.ViewHolder(itemView) {
 
   private val wordDisplay: TextView = itemView.findViewById(R.id.txt_new_word_word)
   private val typeDisplay: TextView = itemView.findViewById(R.id.txt_new_word_part)

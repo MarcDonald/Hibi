@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
-import app.marcdev.hibi.internal.base.BinaryOptionDialog
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
+import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.TextInputDialog
 import app.marcdev.hibi.uicomponents.multiselectdialog.MultiSelectMenu
 import app.marcdev.hibi.uicomponents.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
@@ -24,7 +24,6 @@ import app.marcdev.hibi.uicomponents.multiselectdialog.addtagtomultientrydialog.
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class MainEntriesFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -41,7 +40,6 @@ class MainEntriesFragment : Fragment(), KodeinAware {
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    Timber.v("Log: onCreate: Started")
     super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainEntriesViewModel::class.java)
   }

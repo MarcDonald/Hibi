@@ -17,9 +17,7 @@ class MainScreenMenuDialog : HibiBottomSheetDialogFragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_main_menu, container, false)
-
     bindViews(view)
-
     return view
   }
 

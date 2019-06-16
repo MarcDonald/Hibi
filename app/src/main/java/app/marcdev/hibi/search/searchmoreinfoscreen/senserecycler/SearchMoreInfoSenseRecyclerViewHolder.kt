@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.data.network.apiresponse.Sense
 
-class SearchMoreInfoSenseRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
+  : RecyclerView.ViewHolder(itemView) {
 
   private val typeDisplay: TextView = itemView.findViewById(R.id.txt_search_more_info_sense_type)
   private val tagDisplay: TextView = itemView.findViewById(R.id.txt_search_more_info_sense_tags)

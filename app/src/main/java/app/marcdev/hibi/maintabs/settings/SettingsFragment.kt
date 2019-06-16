@@ -39,7 +39,6 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   // </editor-fold>
 
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-    Timber.v("Log: onCreatePreferences: Started")
     setPreferencesFromResource(R.xml.preferences, rootKey)
     bindViews()
   }

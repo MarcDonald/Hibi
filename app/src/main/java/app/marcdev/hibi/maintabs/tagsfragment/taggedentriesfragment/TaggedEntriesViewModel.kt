@@ -11,7 +11,9 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import kotlinx.coroutines.launch
 
-class TaggedEntriesViewModel(private val tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class TaggedEntriesViewModel(private val tagRepository: TagRepository,
+                             private val tagEntryRelationRepository: TagEntryRelationRepository)
+  : ViewModel() {
 
   private var _tagId = 0
   val tagId: Int

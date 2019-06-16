@@ -33,8 +33,8 @@ class DateTimeStore {
     get() = calendar.get(Calendar.MINUTE)
 
   init {
-    _readableDate.value = formatDateForDisplay(calendar)
-    _readableTime.value = formatTimeForDisplay(calendar)
+    _readableDate.postValue(formatDateForDisplay(calendar))
+    _readableTime.postValue(formatTimeForDisplay(calendar))
   }
 
   fun setDate(day: Int, month: Int, year: Int) {
@@ -42,13 +42,13 @@ class DateTimeStore {
     calendar.set(Calendar.MONTH, month)
     calendar.set(Calendar.YEAR, year)
 
-    _readableDate.value = formatDateForDisplay(calendar)
+    _readableDate.postValue(formatDateForDisplay(calendar))
   }
 
   fun setTime(hour: Int, minute: Int) {
     calendar.set(Calendar.HOUR_OF_DAY, hour)
     calendar.set(Calendar.MINUTE, minute)
 
-    _readableTime.value = formatTimeForDisplay(calendar)
+    _readableTime.postValue(formatTimeForDisplay(calendar))
   }
 }

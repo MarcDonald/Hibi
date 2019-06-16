@@ -12,7 +12,10 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import kotlinx.coroutines.launch
 import java.util.*
 
-class CalendarTabViewModel(private val entryRepository: EntryRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
+class CalendarTabViewModel(private val entryRepository: EntryRepository,
+                           private val tagEntryRelationRepository: TagEntryRelationRepository)
+  : ViewModel() {
+
   private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
   val entries: LiveData<List<MainEntriesDisplayItem>>
     get() = _entries

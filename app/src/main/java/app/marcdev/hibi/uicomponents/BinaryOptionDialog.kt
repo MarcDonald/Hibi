@@ -1,4 +1,4 @@
-package app.marcdev.hibi.internal.base
+package app.marcdev.hibi.uicomponents
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,17 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
 
 class BinaryOptionDialog : HibiDialogFragment() {
 
-  // UI Components
+  // <editor-fold desc="UI Components">
   private lateinit var negativeButton: MaterialButton
   private lateinit var positiveButton: MaterialButton
   private lateinit var titleDisplay: TextView
   private lateinit var messageDisplay: TextView
+  // </editor-fold>
 
-  // To set
+  // <editor-fold desc="To Set">
   private var negativeButtonText = ""
   private var positiveButtonText = ""
   private var titleText = ""
@@ -25,6 +27,7 @@ class BinaryOptionDialog : HibiDialogFragment() {
   private var positiveButtonClickListener: View.OnClickListener? = null
   private var isTitleVisible = true
   private var isMessageVisible = true
+  // </editor-fold>
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val view = inflater.inflate(R.layout.dialog_binary_option, container, false)

@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 import app.marcdev.hibi.data.repository.TagRepository
 
-class TaggedEntriesViewModelFactory(private val tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository)
+class TaggedEntriesViewModelFactory(private val tagRepository: TagRepository,
+                                    private val tagEntryRelationRepository: TagEntryRelationRepository)
   : ViewModelProvider.NewInstanceFactory() {
 
   @Suppress("UNCHECKED_CAST")

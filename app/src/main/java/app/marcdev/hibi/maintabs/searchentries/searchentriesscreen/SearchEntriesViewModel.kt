@@ -14,12 +14,11 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import app.marcdev.hibi.maintabs.searchentries.EntrySearchCriteria
 import kotlinx.coroutines.launch
 
-class SearchEntriesViewModel(
-  private val entryRepository: EntryRepository,
-  private val tagRepository: TagRepository,
-  private val tagEntryRelationRepository: TagEntryRelationRepository,
-  private val bookRepository: BookRepository,
-  private val bookEntryRelationRepository: BookEntryRelationRepository)
+class SearchEntriesViewModel(private val entryRepository: EntryRepository,
+                             private val tagRepository: TagRepository,
+                             private val tagEntryRelationRepository: TagEntryRelationRepository,
+                             private val bookRepository: BookRepository,
+                             private val bookEntryRelationRepository: BookEntryRelationRepository)
   : ViewModel() {
 
   private val _criteria = EntrySearchCriteria()

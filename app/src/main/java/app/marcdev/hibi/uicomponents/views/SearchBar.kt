@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.View.OnKeyListener
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -46,7 +47,7 @@ class SearchBar(context: Context, attributeSet: AttributeSet?, defStyle: Int) : 
     }
     searchButton.setOnClickListener(buttonClickListener)
 
-    val searchOnEnterListener: View.OnKeyListener = View.OnKeyListener { _: View, keyCode: Int, keyEvent: KeyEvent ->
+    val searchOnEnterListener = OnKeyListener { _: View, keyCode: Int, keyEvent: KeyEvent ->
       if((keyEvent.action == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER) {
         search(searchAction)
       }

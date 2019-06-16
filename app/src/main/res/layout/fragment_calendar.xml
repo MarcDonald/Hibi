@@ -12,9 +12,6 @@
       android:id="@+id/calendar_calendarview"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="top|center"
-      android:datePickerMode="calendar"
-      android:headerBackground="@drawable/rounded_datepicker_background"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent" />

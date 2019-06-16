@@ -22,7 +22,6 @@ import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecora
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class BookEntriesFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -45,7 +44,6 @@ class BookEntriesFragment : Fragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_book_entries, container, false)
 
     bindViews(view)
@@ -57,8 +55,8 @@ class BookEntriesFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    arguments?.let {
-      viewModel.passArguments(BookEntriesFragmentArgs.fromBundle(it).bookID)
+    arguments?.let { arguments ->
+      viewModel.passArguments(BookEntriesFragmentArgs.fromBundle(arguments).bookID)
     }
   }
 

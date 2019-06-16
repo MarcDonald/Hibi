@@ -58,8 +58,8 @@ class TaggedEntriesFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    arguments?.let {
-      viewModel.passArguments(TaggedEntriesFragmentArgs.fromBundle(it).tagID)
+    arguments?.let { arguments ->
+      viewModel.passArguments(TaggedEntriesFragmentArgs.fromBundle(arguments).tagID)
     }
   }
 

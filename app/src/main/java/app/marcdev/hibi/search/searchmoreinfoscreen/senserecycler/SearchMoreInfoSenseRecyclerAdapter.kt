@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.data.network.apiresponse.Sense
 
-class SearchMoreInfoSenseRecyclerAdapter(context: Context) : RecyclerView.Adapter<SearchMoreInfoSenseRecyclerViewHolder>() {
+class SearchMoreInfoSenseRecyclerAdapter(context: Context)
+  : RecyclerView.Adapter<SearchMoreInfoSenseRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var list: List<Sense> = listOf()

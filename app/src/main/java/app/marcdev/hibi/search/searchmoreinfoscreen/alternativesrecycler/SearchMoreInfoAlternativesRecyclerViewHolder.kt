@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.data.network.apiresponse.Japanese
 
-class SearchMoreInfoAlternativesRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class SearchMoreInfoAlternativesRecyclerViewHolder(itemView: View)
+  : RecyclerView.ViewHolder(itemView) {
 
   private val wordDisplay: TextView = itemView.findViewById(R.id.txt_search_more_info_alternative_word)
   private val readingDisplay: TextView = itemView.findViewById(R.id.txt_search_more_info_alternative_reading)

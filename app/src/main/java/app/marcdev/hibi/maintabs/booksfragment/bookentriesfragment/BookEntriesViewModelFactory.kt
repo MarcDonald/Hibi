@@ -6,7 +6,9 @@ import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.BookRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
 
-class BookEntriesViewModelFactory(private val bookRepository: BookRepository, private val bookEntryRelationRepository: BookEntryRelationRepository, private val tagEntryRelationRepository: TagEntryRelationRepository)
+class BookEntriesViewModelFactory(private val bookRepository: BookRepository,
+                                  private val bookEntryRelationRepository: BookEntryRelationRepository,
+                                  private val tagEntryRelationRepository: TagEntryRelationRepository)
   : ViewModelProvider.NewInstanceFactory() {
 
   @Suppress("UNCHECKED_CAST")

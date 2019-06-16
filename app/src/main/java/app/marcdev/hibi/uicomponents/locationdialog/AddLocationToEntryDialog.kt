@@ -16,7 +16,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class AddLocationToEntryDialog : HibiDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
@@ -39,7 +38,6 @@ class AddLocationToEntryDialog : HibiDialogFragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_entry_location, container, false)
     bindViews(view)
     setupObservers()
