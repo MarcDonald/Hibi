@@ -48,3 +48,8 @@ Apache 2 License
 Used throughout the application
 
 SIL Open Font License 1.1
+
+### [Glide](https://github.com/bumptech/glide)
+Used for image loading and caching
+
+[License](https://github.com/bumptech/glide/blob/master/LICENSE)

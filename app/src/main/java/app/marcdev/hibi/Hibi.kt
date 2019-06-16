@@ -13,9 +13,9 @@ import app.marcdev.hibi.data.network.JishoAPIService
 import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.entryscreens.addentryscreen.AddEntryViewModelFactory
 import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
-import app.marcdev.hibi.internal.FileUtils
-import app.marcdev.hibi.internal.FileUtilsImpl
 import app.marcdev.hibi.internal.NOTIFICATION_CHANNEL_REMINDER_ID
+import app.marcdev.hibi.internal.utils.FileUtils
+import app.marcdev.hibi.internal.utils.FileUtilsImpl
 import app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment.BookEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BooksFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarTabViewModelFactory
@@ -53,12 +53,13 @@ class Hibi : Application(), KodeinAware {
     // <editor-fold desc="Database">
     bind<AppDatabase>() with singleton { ProductionAppDatabase.invoke(applicationContext) }
     bind<DAO>() with singleton { instance<AppDatabase>().dao() }
-    bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance()) }
+    bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance(), instance()) }
     bind<TagRepository>() with singleton { TagRepositoryImpl.getInstance(instance()) }
     bind<TagEntryRelationRepository>() with singleton { TagEntryRelationRepositoryImpl.getInstance(instance()) }
     bind<NewWordRepository>() with singleton { NewWordRepositoryImpl.getInstance(instance()) }
     bind<BookRepository>() with singleton { BookRepositoryImpl.getInstance(instance()) }
     bind<BookEntryRelationRepository>() with singleton { BookEntryRelationRepositoryImpl.getInstance(instance()) }
+    bind<EntryImageRepository>() with singleton { EntryImageRepositoryImpl.getInstance(instance()) }
     // </editor-fold>
     // <editor-fold desc="Utils">
     bind<FileUtils>() with provider { FileUtilsImpl(instance()) }
@@ -69,8 +70,8 @@ class Hibi : Application(), KodeinAware {
     // </editor-fold>
     // <editor-fold desc="View models">
     bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }
-    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance(), instance()) }
-    bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance(), instance()) }
+    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
+    bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance()) }
     bind() from provider { SearchViewModelFactory(instance()) }
     bind() from provider { SearchMoreInfoViewModelFactory() }
     bind() from provider { AddTagToEntryViewModelFactory(instance(), instance()) }

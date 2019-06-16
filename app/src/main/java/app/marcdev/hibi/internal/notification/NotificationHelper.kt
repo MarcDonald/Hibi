@@ -1,4 +1,4 @@
-package app.marcdev.hibi.internal
+package app.marcdev.hibi.internal.notification
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -9,6 +9,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import app.marcdev.hibi.MainActivity
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.*
 
 class NotificationHelper {
 

@@ -61,6 +61,9 @@ class OpenSourceLicencesActivity : HibiActivity() {
 
     val materialIcons: LicenseDisplay = findViewById(R.id.license_material_icons)
     materialIcons.setOnClickListener(openURLClickListener("https://materialdesignicons.com/"))
+
+    val glide: LicenseDisplay = findViewById(R.id.license_glide)
+    glide.setOnClickListener(openURLClickListener("https://github.com/bumptech/glide"))
   }
 
   private val backClickListener = View.OnClickListener {

@@ -2,7 +2,7 @@ package app.marcdev.hibi.maintabs.settings.backupdialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import app.marcdev.hibi.internal.FileUtils
+import app.marcdev.hibi.internal.utils.FileUtils
 
 class BackupDialogViewModelFactory(private val fileUtils: FileUtils)
   : ViewModelProvider.NewInstanceFactory() {

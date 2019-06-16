@@ -16,6 +16,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.*
+import app.marcdev.hibi.internal.notification.NotificationHelper
 import app.marcdev.hibi.maintabs.settings.backupdialog.BackupDialog
 import app.marcdev.hibi.maintabs.settings.restoredialog.RestoreDialog
 import app.marcdev.hibi.uicomponents.TimePickerDialog
@@ -171,7 +172,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
 
   private val restoreClickListener = Preference.OnPreferenceClickListener {
     if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-      ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+      ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
     } else {
       FilePickerBuilder.instance
         .setMaxCount(1)

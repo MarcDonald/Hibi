@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.marcdev.hibi.internal.FileUtils
 import app.marcdev.hibi.internal.PRODUCTION_DATABASE_NAME
+import app.marcdev.hibi.internal.utils.FileUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.*
@@ -61,6 +61,7 @@ class BackupDialogViewModel(private val fileUtils: FileUtils) : ViewModel() {
 
     val zipOutputStream = ZipOutputStream(BufferedOutputStream(FileOutputStream(file)))
     backupDatabase(zipOutputStream)
+    backupImages(zipOutputStream)
     zipOutputStream.close()
 
     _localBackupUri = fileUtils.getUriForFilePath(filePath)
@@ -74,5 +75,17 @@ class BackupDialogViewModel(private val fileUtils: FileUtils) : ViewModel() {
     databaseBufferedInputStream.copyTo(zipOutputStream, 1024)
     zipOutputStream.closeEntry()
     databaseBufferedInputStream.close()
+  }
+
+  private fun backupImages(zipOutputStream: ZipOutputStream) {
+    for(fileName in File(fileUtils.imagesDirectory).list()) {
+      val fileInputStream = FileInputStream(fileUtils.imagesDirectory + fileName)
+      val origin = BufferedInputStream(fileInputStream)
+      val entry = ZipEntry(fileName)
+      zipOutputStream.putNextEntry(entry)
+      origin.copyTo(zipOutputStream, 1024)
+      zipOutputStream.closeEntry()
+      origin.close()
+    }
   }
 }

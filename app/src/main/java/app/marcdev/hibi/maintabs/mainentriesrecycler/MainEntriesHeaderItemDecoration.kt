@@ -129,5 +129,5 @@ class MainEntriesHeaderItemDecoration(parent: RecyclerView, private val adapter:
 }
 
 inline fun View.doOnEachNextLayout(crossinline action: (view: View) -> Unit) {
-  addOnLayoutChangeListener { view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom -> action(view) }
+  addOnLayoutChangeListener { view, _, _, _, _, _, _, _, _ -> action(view) }
 }

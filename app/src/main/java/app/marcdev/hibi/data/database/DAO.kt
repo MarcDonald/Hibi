@@ -178,4 +178,27 @@ interface DAO {
   @Query("SELECT COUNT(*) FROM BookEntryRelation WHERE entryId = :entryId")
   fun getCountBooksWithEntry(entryId: Int): LiveData<Int>
   // </editor-fold>
+
+  // <editor-fold desc="Entry Image">
+  @Insert(onConflict = OnConflictStrategy.FAIL)
+  fun insertEntryImage(entryImage: EntryImage)
+
+  @Update
+  fun updateEntryImage(entryImage: EntryImage)
+
+  @Delete
+  fun deleteEntryImage(entryImage: EntryImage)
+
+  @Query("SELECT * FROM EntryImage WHERE entryId = :entryId")
+  fun getImagesForEntry(entryId: Int): List<EntryImage>
+
+  @Query("SELECT * FROM EntryImage WHERE entryId = :entryId")
+  fun getImagesForEntryLD(entryId: Int): LiveData<List<EntryImage>>
+
+  @Query("SELECT COUNT(*) FROM EntryImage WHERE imageName = :imageName")
+  fun countUsesOfImage(imageName: String): Int
+
+  @Query("SELECT COUNT(*) FROM EntryImage WHERE entryId = :entryId")
+  fun getCountImagesForEntry(entryId: Int): LiveData<Int>
+  // </editor-fold>
 }

@@ -79,6 +79,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/const_view_date_and_time" />
 
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_entry_images"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/txt_view_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_content" />
+
       <TextView
         android:id="@+id/txt_view_location"
         android:layout_width="match_parent"
@@ -88,7 +97,7 @@
         android:gravity="start|center"
         android:drawableStart="@drawable/ic_location_on_24dp"
         android:drawablePadding="@dimen/margin_standard"
-        app:layout_constraintTop_toBottomOf="@id/txt_view_content"
+        app:layout_constraintTop_toBottomOf="@id/recycler_view_entry_images"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="@dimen/margin_standard"

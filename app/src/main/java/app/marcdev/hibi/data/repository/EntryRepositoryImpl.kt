@@ -4,11 +4,12 @@ import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.internal.utils.FileUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepository {
+class EntryRepositoryImpl private constructor(private val dao: DAO, private val fileUtils: FileUtils) : EntryRepository {
 
   override suspend fun addEntry(entry: Entry) {
     withContext(Dispatchers.IO) {
@@ -42,6 +43,14 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
 
   override suspend fun deleteEntry(id: Int) {
     withContext(Dispatchers.IO) {
+      val entryImages = dao.getImagesForEntry(id)
+      entryImages.forEach { entryImage ->
+        val count = dao.countUsesOfImage(entryImage.imageName)
+        Timber.i("Log: deleteEntry: $count")
+        if(count <= 1) {
+          fileUtils.deleteImage(entryImage.imageName)
+        }
+      }
       dao.deleteEntry(id)
     }
   }
@@ -77,9 +86,9 @@ class EntryRepositoryImpl private constructor(private val dao: DAO) : EntryRepos
   companion object {
     @Volatile private var instance: EntryRepositoryImpl? = null
 
-    fun getInstance(dao: DAO) =
+    fun getInstance(dao: DAO, fileUtils: FileUtils) =
       instance ?: synchronized(this) {
-        instance ?: EntryRepositoryImpl(dao).also { instance = it }
+        instance ?: EntryRepositoryImpl(dao, fileUtils).also { instance = it }
       }
   }
 }
