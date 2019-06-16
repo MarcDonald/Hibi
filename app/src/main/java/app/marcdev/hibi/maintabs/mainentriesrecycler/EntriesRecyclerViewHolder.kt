@@ -30,7 +30,7 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
   private var displayedItem: MainEntriesDisplayItem? = null
   // </editor-fold>
 
-  private val clickListener = View.OnClickListener { view ->
+  private val clickListener = View.OnClickListener { _ ->
     val viewEntryAction = MainScreenFragmentDirections.viewEntryAction()
     if(displayedItem != null) {
       viewEntryAction.entryId = displayedItem!!.entry.id
