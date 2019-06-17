@@ -7,6 +7,7 @@ import app.marcdev.hibi.data.entity.Book
 import app.marcdev.hibi.data.entity.BookEntryRelation
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BookDisplayItem
+import app.marcdev.hibi.maintabs.mainentriesrecycler.BookEntryDisplayItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -61,6 +62,12 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
 
   override fun getCountBooksWithEntryLD(entryId: Int): LiveData<Int> {
     return dao.getCountBooksWithEntry(entryId)
+  }
+
+  override suspend fun getBookEntryDisplayItems(): List<BookEntryDisplayItem> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getBookEntryDisplayItems()
+    }
   }
 
   companion object {

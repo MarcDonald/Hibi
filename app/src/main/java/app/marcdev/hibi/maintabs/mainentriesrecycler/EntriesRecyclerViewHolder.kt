@@ -16,14 +16,17 @@ import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?, itemView: View, private val theme: Resources.Theme) : BaseEntriesRecyclerViewHolder(itemView) {
+class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?,
+                                itemView: View,
+                                private val theme: Resources.Theme)
+  : BaseEntriesRecyclerViewHolder(itemView) {
 
   // <editor-fold desc="UI Components">
   private var dateDisplay: TextView = itemView.findViewById(R.id.item_date)
   private var timeDisplay: TextView = itemView.findViewById(R.id.item_time)
   private var contentDisplay: TextView = itemView.findViewById(R.id.item_content)
-  private var tagChipGroup: ChipGroup = itemView.findViewById(R.id.cg_main_tags)
   private var tagDisplay: LinearLayout = itemView.findViewById(R.id.lin_main_tags)
+  private var bookDisplay: LinearLayout = itemView.findViewById(R.id.lin_main_books)
   private var locationDisplay: TextView = itemView.findViewById(R.id.txt_item_location)
   // </editor-fold>
 
@@ -52,6 +55,7 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
     contentDisplay.text = item.entry.content
     displayLocation()
     displayTags()
+    displayBooks()
     if(item.isSelected) {
       val typedValue = TypedValue()
       theme.resolveAttribute(R.attr.hibiSelectedItemColor, typedValue, true)
@@ -77,7 +81,8 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 
   private fun displayTags() {
     displayedItem?.let { item ->
-      tagDisplay.visibility = if(item.tags.isEmpty()) View.GONE else View.VISIBLE
+      tagDisplay.show(item.tags.isNotEmpty())
+      val tagChipGroup = itemView.findViewById<ChipGroup>(R.id.cg_main_tags)
 
       tagChipGroup.removeAllViews()
       if(item.tags.isNotEmpty()) {
@@ -87,6 +92,24 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
           chip.scaleX = 0.9f
           chip.scaleY = 0.9f
           tagChipGroup.addView(chip)
+        }
+      }
+    }
+  }
+
+  private fun displayBooks() {
+    displayedItem?.let { item ->
+      bookDisplay.show(item.books.isNotEmpty())
+      val bookChipGroup = itemView.findViewById<ChipGroup>(R.id.cg_main_books)
+
+      bookChipGroup.removeAllViews()
+      if(item.books.isNotEmpty()) {
+        item.books.forEach { bookName ->
+          val chip = Chip(itemView.context)
+          chip.text = bookName
+          chip.scaleX = 0.9f
+          chip.scaleY = 0.9f
+          bookChipGroup.addView(chip)
         }
       }
     }

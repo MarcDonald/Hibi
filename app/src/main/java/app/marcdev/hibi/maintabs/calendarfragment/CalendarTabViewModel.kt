@@ -5,15 +5,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.marcdev.hibi.data.entity.Entry
+import app.marcdev.hibi.data.repository.BookEntryRelationRepository
 import app.marcdev.hibi.data.repository.EntryRepository
 import app.marcdev.hibi.data.repository.TagEntryRelationRepository
+import app.marcdev.hibi.maintabs.mainentriesrecycler.BookEntryDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import kotlinx.coroutines.launch
 import java.util.*
 
 class CalendarTabViewModel(private val entryRepository: EntryRepository,
-                           private val tagEntryRelationRepository: TagEntryRelationRepository)
+                           private val tagEntryRelationRepository: TagEntryRelationRepository,
+                           private val bookEntryRelationRepository: BookEntryRelationRepository)
   : ViewModel() {
 
   private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
@@ -46,15 +49,17 @@ class CalendarTabViewModel(private val entryRepository: EntryRepository,
   private suspend fun getMainEntryDisplayItems(year: Int, month: Int, day: Int) {
     val allEntries = entryRepository.getEntriesOnDate(year, month, day)
     val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
-    _entries.value = combineData(allEntries, tagEntryDisplayItems)
+    val bookEntryDisplayItems = bookEntryRelationRepository.getBookEntryDisplayItems()
+    _entries.value = combineData(allEntries, tagEntryDisplayItems, bookEntryDisplayItems)
   }
 
-  private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>): List<MainEntriesDisplayItem> {
+  private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>, bookEntryDisplayItems: List<BookEntryDisplayItem>): List<MainEntriesDisplayItem> {
     val itemList = ArrayList<MainEntriesDisplayItem>()
 
     entries.forEach { entry ->
-      val item = MainEntriesDisplayItem(entry, listOf())
+      val item = MainEntriesDisplayItem(entry, listOf(), listOf())
       val listOfTags = ArrayList<String>()
+      val listOfBooks = ArrayList<String>()
 
       tagEntryDisplayItems.forEach { tagEntryDisplayItem ->
         if(tagEntryDisplayItem.entryId == entry.id) {
@@ -62,7 +67,14 @@ class CalendarTabViewModel(private val entryRepository: EntryRepository,
         }
       }
 
+      bookEntryDisplayItems.forEach { bookEntryDisplayItem ->
+        if(bookEntryDisplayItem.entryId == entry.id) {
+          listOfBooks.add(bookEntryDisplayItem.bookName)
+        }
+      }
+
       item.tags = listOfTags
+      item.books = listOfBooks
       itemList.add(item)
     }
 

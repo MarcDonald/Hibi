@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -50,6 +51,13 @@ class MainEntriesFragment : Fragment(), KodeinAware {
     bindViews(view)
     initRecycler(view)
     setupObservers()
+    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback {
+      if(recyclerAdapter.getSelectedEntryIds().isNotEmpty()) {
+        recyclerAdapter.clearSelectedEntries()
+        return@OnBackPressedCallback true
+      }
+      return@OnBackPressedCallback false
+    })
     viewModel.loadEntries()
     return view
   }

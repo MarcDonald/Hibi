@@ -9,6 +9,7 @@ import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.internal.utils.formatDateForDisplay
+import app.marcdev.hibi.maintabs.mainentriesrecycler.BookEntryDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import app.marcdev.hibi.maintabs.searchentries.EntrySearchCriteria
@@ -217,16 +218,18 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository,
   private suspend fun displayResults(searchCriteria: EntrySearchCriteria) {
     val filteredResults = filterEntries(searchCriteria)
     val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
-    _entries.value = combineData(filteredResults, tagEntryDisplayItems)
+    val bookEntryDisplayItems = bookEntryRelationRepository.getBookEntryDisplayItems()
+    _entries.value = combineData(filteredResults, tagEntryDisplayItems, bookEntryDisplayItems)
     _countResults.value = filteredResults.size
   }
 
-  private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>): List<MainEntriesDisplayItem> {
+  private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>, bookEntryDisplayItems: List<BookEntryDisplayItem>): List<MainEntriesDisplayItem> {
     val itemList = ArrayList<MainEntriesDisplayItem>()
 
     entries.forEach { entry ->
-      val item = MainEntriesDisplayItem(entry, listOf())
+      val item = MainEntriesDisplayItem(entry, listOf(), listOf())
       val listOfTags = ArrayList<String>()
+      val listOfBooks = ArrayList<String>()
 
       tagEntryDisplayItems.forEach { tagEntryDisplayItem ->
         if(tagEntryDisplayItem.entryId == entry.id) {
@@ -234,7 +237,14 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository,
         }
       }
 
+      bookEntryDisplayItems.forEach { bookEntryDisplayItem ->
+        if(bookEntryDisplayItem.entryId == entry.id) {
+          listOfBooks.add(bookEntryDisplayItem.bookName)
+        }
+      }
+
       item.tags = listOfTags
+      item.books = listOfBooks
       itemList.add(item)
     }
 
@@ -260,7 +270,7 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository,
          || (allItems[x].entry.year < lastYear)
       ) {
         val header = Entry(0, allItems[x].entry.month, allItems[x].entry.year, 0, 0, "")
-        val headerItem = MainEntriesDisplayItem(header, listOf())
+        val headerItem = MainEntriesDisplayItem(header, listOf(), listOf())
         lastMonth = allItems[x].entry.month
         lastYear = allItems[x].entry.year
         headersToAdd.add(Pair(x, headerItem))

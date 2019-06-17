@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import app.marcdev.hibi.data.entity.*
 import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BookDisplayItem
+import app.marcdev.hibi.maintabs.mainentriesrecycler.BookEntryDisplayItem
 import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
 
@@ -177,6 +178,9 @@ interface DAO {
 
   @Query("SELECT COUNT(*) FROM BookEntryRelation WHERE entryId = :entryId")
   fun getCountBooksWithEntry(entryId: Int): LiveData<Int>
+
+  @Query("SELECT ber.entryId as entryId, b.name as bookName FROM BookEntryRelation as ber LEFT OUTER JOIN Book as b ON ber.bookId = b.id")
+  fun getBookEntryDisplayItems(): List<BookEntryDisplayItem>
   // </editor-fold>
 
   // <editor-fold desc="Entry Image">

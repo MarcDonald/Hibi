@@ -81,9 +81,9 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddTagViewModelFactory(instance()) }
     bind() from provider { NewWordViewModelFactory(instance()) }
     bind() from provider { AddNewWordViewModelFactory(instance()) }
-    bind() from provider { CalendarTabViewModelFactory(instance(), instance()) }
+    bind() from provider { CalendarTabViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { TagsFragmentViewModelFactory(instance()) }
-    bind() from provider { TaggedEntriesViewModelFactory(instance(), instance()) }
+    bind() from provider { TaggedEntriesViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { AddBookViewModelFactory(instance()) }
     bind() from provider { BooksFragmentViewModelFactory(instance()) }
     bind() from provider { BookEntriesViewModelFactory(instance(), instance(), instance()) }
