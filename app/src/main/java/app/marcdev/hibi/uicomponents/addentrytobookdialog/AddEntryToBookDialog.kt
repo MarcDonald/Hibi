@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.uicomponents.addbookdialog.AddBookDialog
 import app.marcdev.hibi.uicomponents.views.CheckBoxWithId
 import com.google.android.material.button.MaterialButton
@@ -101,8 +102,8 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     })
 
     viewModel.displayNoBookWarning.observe(this, Observer { value ->
-      value?.let { show ->
-        noBooksWarning.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noBooksWarning.show(shouldShow)
       }
     })
 

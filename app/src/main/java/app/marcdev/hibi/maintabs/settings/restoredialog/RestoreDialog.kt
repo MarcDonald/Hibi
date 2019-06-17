@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.RESTORE_FILE_PATH_KEY
 import app.marcdev.hibi.internal.base.HibiDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import com.google.android.material.button.MaterialButton
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -75,44 +76,44 @@ class RestoreDialog : HibiDialogFragment(), KodeinAware {
   private fun setupObservers() {
     viewModel.displayButtons.observe(this, Observer { value ->
       value?.let { display ->
-        cancelButton.visibility = if(display) View.VISIBLE else View.GONE
-        confirmButton.visibility = if(display) View.VISIBLE else View.GONE
+        cancelButton.show(display)
+        confirmButton.show(display)
       }
     })
 
     viewModel.displayLoading.observe(this, Observer { value ->
       value?.let { display ->
         if(display) {
-          loadingProgressBar.visibility = View.VISIBLE
+          loadingProgressBar.show(true)
           title.text = resources.getString(R.string.restoring)
         } else {
-          loadingProgressBar.visibility = View.GONE
+          loadingProgressBar.show(false)
         }
       }
     })
 
     viewModel.displayMessage.observe(this, Observer { value ->
       value?.let { display ->
-        messageDisplay.visibility = if(display) View.VISIBLE else View.GONE
+        messageDisplay.show(display)
       }
     })
 
     viewModel.displayError.observe(this, Observer { value ->
       value?.let { display ->
         if(display) {
-          errorDisplay.visibility = View.VISIBLE
+          errorDisplay.show(true)
           title.text = resources.getString(R.string.restore_error_title)
           messageDisplay.text = resources.getString(R.string.restore_error_message)
-          messageDisplay.visibility = View.VISIBLE
+          messageDisplay.show(true)
         } else {
-          errorDisplay.visibility = View.GONE
+          errorDisplay.show(false)
         }
       }
     })
 
     viewModel.displayDismiss.observe(this, Observer { value ->
       value?.let { display ->
-        dismissButton.visibility = if(display) View.VISIBLE else View.GONE
+        dismissButton.show(display)
       }
     })
 

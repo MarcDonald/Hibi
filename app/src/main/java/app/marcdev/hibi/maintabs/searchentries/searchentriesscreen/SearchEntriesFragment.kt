@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.internal.utils.ThemeUtils
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
@@ -117,8 +118,8 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     })
 
     viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { show ->
-        loadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        loadingDisplay.show(shouldShow)
       }
     })
 
@@ -131,11 +132,11 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     viewModel.displayNoResults.observe(this, Observer { value ->
       value?.let { show ->
         if(show) {
-          noResults.visibility = View.VISIBLE
-          recycler.visibility = View.GONE
+          noResults.show(true)
+          recycler.show(false)
         } else {
-          noResults.visibility = View.GONE
-          recycler.visibility = View.VISIBLE
+          noResults.show(false)
+          recycler.show(true)
         }
       }
     })
@@ -364,11 +365,11 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     viewModel.displayNoTagsWarning.observe(this, Observer { value ->
       value?.let { display ->
         if(display) {
-          noTagsWarning.visibility = View.VISIBLE
-          tagChipGroup.visibility = View.GONE
+          noTagsWarning.show(true)
+          tagChipGroup.show(false)
         } else {
-          noTagsWarning.visibility = View.GONE
-          tagChipGroup.visibility = View.VISIBLE
+          noTagsWarning.show(false)
+          tagChipGroup.show(true)
         }
       }
     })
@@ -393,11 +394,11 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     viewModel.displayNoBooksWarning.observe(this, Observer { value ->
       value?.let { display ->
         if(display) {
-          noBooksWarning.visibility = View.VISIBLE
-          bookChipGroup.visibility = View.GONE
+          noBooksWarning.show(true)
+          bookChipGroup.show(false)
         } else {
-          noBooksWarning.visibility = View.GONE
-          bookChipGroup.visibility = View.VISIBLE
+          noBooksWarning.show(false)
+          bookChipGroup.show(true)
         }
       }
     })

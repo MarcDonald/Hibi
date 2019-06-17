@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -63,16 +64,16 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment(), KodeinAware {
 
   private fun bindViews(view: View) {
     recycler = view.findViewById(R.id.recycler_search_results)
-    recycler.visibility = View.GONE
+    recycler.show(false)
 
     progressBar = view.findViewById(R.id.prog_search_results)
-    progressBar.visibility = View.GONE
+    progressBar.show(false)
 
     noConnectionWarning = view.findViewById(R.id.lin_search_no_connection)
-    noConnectionWarning.visibility = View.GONE
+    noConnectionWarning.show(false)
 
     noResultsWarning = view.findViewById(R.id.lin_search_no_results)
-    noResultsWarning.visibility = View.GONE
+    noResultsWarning.show(false)
   }
 
   private fun initRecycler() {
@@ -87,20 +88,20 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment(), KodeinAware {
 
   private fun setupObservers() {
     viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { show ->
-        progressBar.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        progressBar.show(shouldShow)
       }
     })
 
     viewModel.displayNoConnection.observe(this, Observer { value ->
-      value?.let { show ->
-        noConnectionWarning.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noConnectionWarning.show(shouldShow)
       }
     })
 
     viewModel.displayNoResults.observe(this, Observer { value ->
-      value?.let { show ->
-        noResultsWarning.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noResultsWarning.show(shouldShow)
       }
     })
 
@@ -108,7 +109,7 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment(), KodeinAware {
       value?.let { searchResult ->
         recyclerAdapter.updateList(searchResult)
         recycler.scrollToPosition(0)
-        recycler.visibility = View.VISIBLE
+        recycler.show(true)
       }
     })
   }

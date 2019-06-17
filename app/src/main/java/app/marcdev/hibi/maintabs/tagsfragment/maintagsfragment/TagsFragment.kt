@@ -14,10 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
+import app.marcdev.hibi.internal.extension.show
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 
 class TagsFragment : Fragment(), KodeinAware {
@@ -39,7 +39,6 @@ class TagsFragment : Fragment(), KodeinAware {
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(TagsFragmentViewModel::class.java)
   }
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_tags, container, false)
     bindViews(view)
     initRecycler(view)
@@ -75,14 +74,14 @@ class TagsFragment : Fragment(), KodeinAware {
     })
 
     viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { show ->
-        loadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        loadingDisplay.show(shouldShow)
       }
     })
 
     viewModel.displayNoResults.observe(this, Observer { value ->
-      value?.let { show ->
-        noResults.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noResults.show(shouldShow)
       }
     })
   }

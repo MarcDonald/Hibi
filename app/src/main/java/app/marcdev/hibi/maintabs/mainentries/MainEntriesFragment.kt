@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import app.marcdev.hibi.uicomponents.BinaryOptionDialog
@@ -55,10 +56,10 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 
   private fun bindViews(view: View) {
     loadingDisplay = view.findViewById(R.id.const_entries_loading)
-    loadingDisplay.visibility = View.GONE
+    loadingDisplay.show(false)
 
     noResults = view.findViewById(R.id.const_no_entries)
-    noResults.visibility = View.GONE
+    noResults.show(false)
   }
 
   private fun initRecycler(view: View) {
@@ -79,14 +80,14 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 
   private fun setupObservers() {
     viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { show ->
-        loadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        loadingDisplay.show(shouldShow)
       }
     })
 
     viewModel.displayNoResults.observe(this, Observer { value ->
-      value?.let { show ->
-        noResults.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noResults.show(shouldShow)
       }
     })
 

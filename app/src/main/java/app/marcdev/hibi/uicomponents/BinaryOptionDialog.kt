@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import com.google.android.material.button.MaterialButton
 
 class BinaryOptionDialog : HibiDialogFragment() {
@@ -73,15 +74,8 @@ class BinaryOptionDialog : HibiDialogFragment() {
       positiveButton.setOnClickListener(defaultClickListener)
     }
 
-    if(isTitleVisible)
-      titleDisplay.visibility = View.VISIBLE
-    else
-      titleDisplay.visibility = View.GONE
-
-    if(isMessageVisible)
-      messageDisplay.visibility = View.VISIBLE
-    else
-      messageDisplay.visibility = View.GONE
+    titleDisplay.show(isTitleVisible)
+    messageDisplay.show(isMessageVisible)
   }
 
   fun setNegativeButton(text: String, clickListener: View.OnClickListener) {

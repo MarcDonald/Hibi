@@ -14,6 +14,7 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordDialog
 import com.google.android.material.button.MaterialButton
 import org.kodein.di.Kodein
@@ -67,8 +68,8 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
 
   private fun setupObservers() {
     viewModel.displayAddButton.observe(this, Observer { value ->
-      value?.let { show ->
-        addButton.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        addButton.show(shouldShow)
       }
     })
 
@@ -79,8 +80,8 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     })
 
     viewModel.displayNoWords.observe(this, Observer { value ->
-      value?.let { show ->
-        noResultsWarning.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noResultsWarning.show(shouldShow)
       }
     })
 

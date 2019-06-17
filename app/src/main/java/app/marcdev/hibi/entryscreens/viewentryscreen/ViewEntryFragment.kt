@@ -23,6 +23,7 @@ import app.marcdev.hibi.entryscreens.ImageRecyclerAdapter
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordDialog
@@ -150,7 +151,7 @@ class ViewEntryFragment : Fragment(), KodeinAware {
       tagDisplay.removeAllViews()
 
       value?.let { tags ->
-        tagDisplayHolder.visibility = if(tags.isEmpty()) View.GONE else View.VISIBLE
+        tagDisplayHolder.show(tags.isNotEmpty())
         tags.forEach { tag ->
           val displayTag = Chip(tagDisplay.context)
           displayTag.text = tag.name
@@ -163,7 +164,7 @@ class ViewEntryFragment : Fragment(), KodeinAware {
       bookDisplay.removeAllViews()
 
       value?.let { books ->
-        bookDisplayHolder.visibility = if(books.isEmpty()) View.GONE else View.VISIBLE
+        bookDisplayHolder.show(books.isNotEmpty())
         books.forEach { book ->
           val displayBook = Chip(bookDisplay.context)
           displayBook.text = book.name
@@ -173,8 +174,8 @@ class ViewEntryFragment : Fragment(), KodeinAware {
     })
 
     viewModel.displayNewWordButton.observe(this, Observer { value ->
-      value?.let { show ->
-        newWordsButton.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        newWordsButton.show(shouldShow)
       }
     })
 
@@ -187,7 +188,7 @@ class ViewEntryFragment : Fragment(), KodeinAware {
 
     viewModel.location.observe(this, Observer { value ->
       value?.let { location ->
-        locationDisplay.visibility = if(location.isBlank()) View.GONE else View.VISIBLE
+        locationDisplay.show(location.isNotBlank())
         locationDisplay.text = location
       }
     })

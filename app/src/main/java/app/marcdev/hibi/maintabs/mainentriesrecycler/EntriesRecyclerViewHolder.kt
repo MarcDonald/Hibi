@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.internal.utils.formatDateForDisplay
 import app.marcdev.hibi.internal.utils.formatTimeForDisplay
 import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
@@ -59,7 +60,7 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
       itemView.background = null
     }
     val selectedIcon: ImageView = itemView.findViewById(R.id.img_item_selected)
-    selectedIcon.visibility = if(item.isSelected) View.VISIBLE else View.GONE
+    selectedIcon.show(item.isSelected)
     selectedIcon.setOnClickListener(onSelectClick)
   }
 
@@ -67,9 +68,9 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
     displayedItem?.let { item ->
       if(item.entry.location.isNotBlank()) {
         locationDisplay.text = item.entry.location
-        locationDisplay.visibility = View.VISIBLE
+        locationDisplay.show(true)
       } else {
-        locationDisplay.visibility = View.GONE
+        locationDisplay.show(false)
       }
     }
   }

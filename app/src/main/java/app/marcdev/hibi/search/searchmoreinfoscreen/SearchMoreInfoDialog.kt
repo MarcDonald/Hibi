@@ -16,13 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.search.searchmoreinfoscreen.alternativesrecycler.SearchMoreInfoAlternativesRecyclerAdapter
 import app.marcdev.hibi.search.searchmoreinfoscreen.senserecycler.SearchMoreInfoSenseRecyclerAdapter
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
@@ -58,7 +58,6 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_search_more_info, container, false)
     bindViews(view)
     initAlternativesRecycler()
@@ -81,20 +80,15 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
     })
 
     viewModel.displayMainReading.observe(this, Observer { value ->
-      value?.let { show ->
-        mainReadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        mainReadingDisplay.show(shouldShow)
       }
     })
 
     viewModel.displayAlternatives.observe(this, Observer { value ->
-      value?.let { show ->
-        if(show) {
-          alternativeRecycler.visibility = View.VISIBLE
-          alternativeTitle.visibility = View.VISIBLE
-        } else {
-          alternativeRecycler.visibility = View.GONE
-          alternativeTitle.visibility = View.GONE
-        }
+      value?.let { shouldShow ->
+        alternativeRecycler.show(shouldShow)
+        alternativeTitle.show(shouldShow)
       }
     })
 
@@ -105,14 +99,9 @@ class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
     })
 
     viewModel.displaySense.observe(this, Observer { value ->
-      value?.let { show ->
-        if(show) {
-          senseRecycler.visibility = View.VISIBLE
-          senseTitle.visibility = View.VISIBLE
-        } else {
-          senseRecycler.visibility = View.GONE
-          senseTitle.visibility = View.GONE
-        }
+      value?.let { shouldShow ->
+        senseRecycler.show(shouldShow)
+        senseTitle.show(shouldShow)
       }
     })
 

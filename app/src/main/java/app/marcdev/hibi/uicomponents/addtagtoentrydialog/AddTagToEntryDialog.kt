@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
 import app.marcdev.hibi.uicomponents.views.CheckBoxWithId
 import com.google.android.material.button.MaterialButton
@@ -101,8 +102,8 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     })
 
     viewModel.displayNoTagsWarning.observe(this, Observer { value ->
-      value?.let { show ->
-        noTagsWarning.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noTagsWarning.show(shouldShow)
       }
     })
 
