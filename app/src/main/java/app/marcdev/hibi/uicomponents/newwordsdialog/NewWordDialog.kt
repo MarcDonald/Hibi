@@ -14,13 +14,13 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordDialog
 import com.google.android.material.button.MaterialButton
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
@@ -47,10 +47,9 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_new_word, container, false)
-    arguments?.let {
-      viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0), arguments!!.getBoolean(IS_EDIT_MODE_KEY, true))
+    arguments?.let { arguments ->
+      viewModel.passArguments(arguments.getInt(ENTRY_ID_KEY, 0), arguments.getBoolean(IS_EDIT_MODE_KEY, true))
     }
     bindViews(view)
     setupObservers()
@@ -69,8 +68,8 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
 
   private fun setupObservers() {
     viewModel.displayAddButton.observe(this, Observer { value ->
-      value?.let { show ->
-        addButton.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        addButton.show(shouldShow)
       }
     })
 
@@ -81,8 +80,8 @@ class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     })
 
     viewModel.displayNoWords.observe(this, Observer { value ->
-      value?.let { show ->
-        noResultsWarning.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noResultsWarning.show(shouldShow)
       }
     })
 

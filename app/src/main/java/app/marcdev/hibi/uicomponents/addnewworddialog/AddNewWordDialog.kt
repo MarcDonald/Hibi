@@ -17,7 +17,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class AddNewWordDialog : HibiDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
@@ -41,7 +40,6 @@ class AddNewWordDialog : HibiDialogFragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_add_new_word, container, false)
     bindViews(view)
     setupObservers()

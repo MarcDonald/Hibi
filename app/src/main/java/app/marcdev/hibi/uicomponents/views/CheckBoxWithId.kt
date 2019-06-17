@@ -1,8 +1,8 @@
 package app.marcdev.hibi.uicomponents.views
 
 import android.content.Context
-import android.preference.PreferenceManager
 import android.widget.CheckBox
+import androidx.preference.PreferenceManager
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_DARK_THEME
 

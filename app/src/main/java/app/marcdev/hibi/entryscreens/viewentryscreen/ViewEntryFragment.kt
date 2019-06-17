@@ -23,8 +23,9 @@ import app.marcdev.hibi.entryscreens.ImageRecyclerAdapter
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.IS_EDIT_MODE_KEY
 import app.marcdev.hibi.internal.SEARCH_TERM_KEY
-import app.marcdev.hibi.internal.base.BinaryOptionDialog
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
+import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.newwordsdialog.NewWordDialog
 import app.marcdev.hibi.uicomponents.views.SearchBar
 import com.google.android.material.button.MaterialButton
@@ -34,7 +35,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class ViewEntryFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -67,7 +67,6 @@ class ViewEntryFragment : Fragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_view_entry, container, false)
 
     bindViews(view)
@@ -80,8 +79,8 @@ class ViewEntryFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    arguments?.let {
-      viewModel.passArguments(ViewEntryFragmentArgs.fromBundle(it).entryId)
+    arguments?.let { arguments ->
+      viewModel.passArguments(ViewEntryFragmentArgs.fromBundle(arguments).entryId)
     }
 
     // Has to start observing here since the argument needs to be passed first
@@ -152,7 +151,7 @@ class ViewEntryFragment : Fragment(), KodeinAware {
       tagDisplay.removeAllViews()
 
       value?.let { tags ->
-        tagDisplayHolder.visibility = if(tags.isEmpty()) View.GONE else View.VISIBLE
+        tagDisplayHolder.show(tags.isNotEmpty())
         tags.forEach { tag ->
           val displayTag = Chip(tagDisplay.context)
           displayTag.text = tag.name
@@ -165,7 +164,7 @@ class ViewEntryFragment : Fragment(), KodeinAware {
       bookDisplay.removeAllViews()
 
       value?.let { books ->
-        bookDisplayHolder.visibility = if(books.isEmpty()) View.GONE else View.VISIBLE
+        bookDisplayHolder.show(books.isNotEmpty())
         books.forEach { book ->
           val displayBook = Chip(bookDisplay.context)
           displayBook.text = book.name
@@ -175,8 +174,8 @@ class ViewEntryFragment : Fragment(), KodeinAware {
     })
 
     viewModel.displayNewWordButton.observe(this, Observer { value ->
-      value?.let { show ->
-        newWordsButton.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        newWordsButton.show(shouldShow)
       }
     })
 
@@ -189,7 +188,7 @@ class ViewEntryFragment : Fragment(), KodeinAware {
 
     viewModel.location.observe(this, Observer { value ->
       value?.let { location ->
-        locationDisplay.visibility = if(location.isBlank()) View.GONE else View.VISIBLE
+        locationDisplay.show(location.isNotBlank())
         locationDisplay.text = location
       }
     })

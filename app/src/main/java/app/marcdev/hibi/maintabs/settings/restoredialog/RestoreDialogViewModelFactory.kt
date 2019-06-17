@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import app.marcdev.hibi.data.database.AppDatabase
 import app.marcdev.hibi.internal.utils.FileUtils
 
-class RestoreDialogViewModelFactory(private val fileUtils: FileUtils, private val database: AppDatabase)
+class RestoreDialogViewModelFactory(private val fileUtils: FileUtils,
+                                    private val database: AppDatabase)
   : ViewModelProvider.NewInstanceFactory() {
 
   @Suppress("UNCHECKED_CAST")

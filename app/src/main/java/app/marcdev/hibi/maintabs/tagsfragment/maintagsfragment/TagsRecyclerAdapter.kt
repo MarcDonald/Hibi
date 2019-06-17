@@ -9,7 +9,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 
-class TagsRecyclerAdapter(private val context: Context, private val fragmentManager: FragmentManager) : RecyclerView.Adapter<TagsFragmentRecyclerViewHolder>() {
+class TagsRecyclerAdapter(private val context: Context,
+                          private val fragmentManager: FragmentManager)
+  : RecyclerView.Adapter<TagsFragmentRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var items: List<TagDisplayItem> = listOf()

@@ -39,7 +39,6 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   // </editor-fold>
 
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-    Timber.v("Log: onCreatePreferences: Started")
     setPreferencesFromResource(R.xml.preferences, rootKey)
     bindViews()
   }
@@ -47,30 +46,24 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   private fun bindViews() {
     val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
-    val mainDivider = findPreference(PREF_ENTRY_DIVIDERS)
-    mainDivider.onPreferenceChangeListener = mayRequireRestartChangeListener
-
-    val darkTheme = findPreference(PREF_DARK_THEME)
-    darkTheme.onPreferenceChangeListener = onThemeChangeListener
-
-    val reminder = findPreference(PREF_REMINDER_NOTIFICATION)
-    reminder.onPreferenceChangeListener = reminderChangeListener
+    findPreference(PREF_ENTRY_DIVIDERS).onPreferenceChangeListener = mayRequireRestartChangeListener
+    findPreference(PREF_DARK_THEME).onPreferenceChangeListener = onThemeChangeListener
+    findPreference(PREF_REMINDER_NOTIFICATION).onPreferenceChangeListener = reminderChangeListener
     if(sharedPreferences.getBoolean(PREF_REMINDER_NOTIFICATION, false)) {
       displayReminderTimeSummary()
     }
-    val reminderTime = findPreference(PREF_REMINDER_TIME)
-    reminderTime.onPreferenceClickListener = reminderTimeClickListener
+    findPreference(PREF_REMINDER_TIME).onPreferenceClickListener = reminderTimeClickListener
     sharedPreferences.registerOnSharedPreferenceChangeListener(reminderTimeChangeListener)
 
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     matchSummaryToSelection(findPreference(PREF_CLIPBOARD_BEHAVIOR), sharedPreferences.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
     sharedPreferences.registerOnSharedPreferenceChangeListener(clipboardBehaviorChangeListener)
 
-    val backup = findPreference(PREF_BACKUP)
-    backup.onPreferenceClickListener = backupClickListener
+    findPreference(PREF_BACKUP).onPreferenceClickListener = backupClickListener
+    findPreference(PREF_RESTORE).onPreferenceClickListener = restoreClickListener
 
-    val restore = findPreference(PREF_RESTORE)
-    restore.onPreferenceClickListener = restoreClickListener
+    val mainEntryDisplayItems = findPreference(PREF_MAIN_ENTRY_DISPLAY_ITEMS)
+    mainEntryDisplayItems.onPreferenceClickListener = mainEntryDisplayItemsClickListener
   }
 
   private val onThemeChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
@@ -206,8 +199,19 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
   }
 
   private val mayRequireRestartChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
-    Snackbar.make(requireView(), resources.getString(R.string.may_need_restart), Snackbar.LENGTH_SHORT).show()
+    displayMayRequireRestart()
     true
+  }
+
+  private val mainEntryDisplayItemsClickListener = Preference.OnPreferenceClickListener {
+    val dialog = MainEntriesDisplayPreferenceDialog(::onMainEntryDisplayItemOnClick)
+    dialog.show(requireFragmentManager(), "Main Entries Display Preference Dialog")
+    true
+  }
+
+  private fun onMainEntryDisplayItemOnClick(show: Boolean) {
+    if(show)
+      displayMayRequireRestart()
   }
 
   private fun matchSummaryToSelection(preference: Preference, value: String) {
@@ -225,6 +229,10 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
     } else {
       preference.summary = value
     }
+  }
+
+  private fun displayMayRequireRestart() {
+    Snackbar.make(requireView(), resources.getString(R.string.may_need_restart), Snackbar.LENGTH_SHORT).show()
   }
 
   override fun onDestroy() {

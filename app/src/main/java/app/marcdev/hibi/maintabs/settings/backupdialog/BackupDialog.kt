@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import com.google.android.material.button.MaterialButton
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -66,10 +67,10 @@ class BackupDialog : HibiDialogFragment(), KodeinAware {
     viewModel.displayDismiss.observe(this, Observer { value ->
       value?.let { display ->
         if(display) {
-          dismissButton.visibility = View.VISIBLE
+          dismissButton.show(true)
           isCancelable = true
         } else {
-          dismissButton.visibility = View.GONE
+          dismissButton.show(false)
           isCancelable = false
         }
       }
@@ -77,23 +78,23 @@ class BackupDialog : HibiDialogFragment(), KodeinAware {
 
     viewModel.displayLoading.observe(this, Observer { value ->
       value?.let { display ->
-        loadingProgressBar.visibility = if(display) View.VISIBLE else View.GONE
+        loadingProgressBar.show(display)
       }
     })
 
     viewModel.displayShareButton.observe(this, Observer { value ->
       value?.let { display ->
-        shareButton.visibility = if(display) View.VISIBLE else View.GONE
+        shareButton.show(display)
       }
     })
 
     viewModel.displaySuccess.observe(this, Observer { value ->
       value?.let { display ->
         if(display) {
-          successDisplay.visibility = View.VISIBLE
+          successDisplay.show(true)
           title.text = resources.getString(R.string.backup_success)
         } else {
-          successDisplay.visibility = View.GONE
+          successDisplay.show(false)
           title.text = resources.getString(R.string.backing_up)
         }
       }

@@ -17,12 +17,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class TaggedEntriesFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -45,7 +45,6 @@ class TaggedEntriesFragment : Fragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_tagged_entries, container, false)
 
     bindViews(view)
@@ -58,8 +57,8 @@ class TaggedEntriesFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    arguments?.let {
-      viewModel.passArguments(TaggedEntriesFragmentArgs.fromBundle(it).tagID)
+    arguments?.let { arguments ->
+      viewModel.passArguments(TaggedEntriesFragmentArgs.fromBundle(arguments).tagID)
     }
   }
 
@@ -87,14 +86,14 @@ class TaggedEntriesFragment : Fragment(), KodeinAware {
     })
 
     viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { show ->
-        loadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        loadingDisplay.show(shouldShow)
       }
     })
 
     viewModel.displayNoResults.observe(this, Observer { value ->
-      value?.let { show ->
-        noResults.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noResults.show(shouldShow)
       }
     })
   }

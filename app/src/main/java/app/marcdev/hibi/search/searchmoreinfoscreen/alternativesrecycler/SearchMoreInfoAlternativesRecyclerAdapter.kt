@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.data.network.apiresponse.Japanese
 
-class SearchMoreInfoAlternativesRecyclerAdapter(context: Context) : RecyclerView.Adapter<SearchMoreInfoAlternativesRecyclerViewHolder>() {
+class SearchMoreInfoAlternativesRecyclerAdapter(context: Context)
+  : RecyclerView.Adapter<SearchMoreInfoAlternativesRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var japaneseList: List<Japanese> = listOf()

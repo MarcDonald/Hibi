@@ -26,8 +26,9 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.entryscreens.ImageRecyclerAdapter
 import app.marcdev.hibi.internal.*
-import app.marcdev.hibi.internal.base.BinaryOptionDialog
+import app.marcdev.hibi.internal.utils.ThemeUtils
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
+import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.DatePickerDialog
 import app.marcdev.hibi.uicomponents.TimePickerDialog
 import app.marcdev.hibi.uicomponents.addentrytobookdialog.AddEntryToBookDialog
@@ -41,7 +42,6 @@ import droidninja.filepicker.FilePickerConst
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class AddEntryFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -71,8 +71,11 @@ class AddEntryFragment : Fragment(), KodeinAware {
   // </editor-fold>
   // </editor-fold>
 
+  // <editor-fold desc="Other">
+  private val themeUtils: ThemeUtils by instance()
+  // </editor-fold>
+
   override fun onCreate(savedInstanceState: Bundle?) {
-    Timber.v("Log: onCreate: Started")
     super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEntryViewModel::class.java)
   }
@@ -93,8 +96,8 @@ class AddEntryFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    arguments?.let {
-      viewModel.passArgument(AddEntryFragmentArgs.fromBundle(it).entryId)
+    arguments?.let { arguments ->
+      viewModel.passArgument(AddEntryFragmentArgs.fromBundle(arguments).entryId)
     }
   }
 
@@ -223,44 +226,33 @@ class AddEntryFragment : Fragment(), KodeinAware {
    * This has to be called after the original because the entryId isn't always provided immediately
    */
   private fun setupEntrySpecificObservers() {
-    val accentColor = if(PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_DARK_THEME, false))
-      resources.getColor(R.color.darkThemeColorAccent, null)
-    else
-      resources.getColor(R.color.lightThemeColorAccent, null)
-
     viewModel.colorTagIcon.observe(this, Observer { entry ->
       entry?.let { shouldColor ->
-        if(shouldColor)
-          addTagButton.setColorFilter(accentColor)
-        else
-          addTagButton.clearColorFilter()
+        colorImageDrawable(addTagButton, shouldColor)
       }
     })
 
     viewModel.colorBookIcon.observe(this, Observer { entry ->
       entry?.let { shouldColor ->
-        if(shouldColor)
-          addToBookButton.setColorFilter(accentColor)
-        else
-          addToBookButton.clearColorFilter()
+        colorImageDrawable(addToBookButton, shouldColor)
       }
     })
 
     viewModel.colorLocationIcon.observe(this, Observer { entry ->
       entry?.let { shouldColor ->
-        if(shouldColor)
-          addLocationButton.setColorFilter(accentColor)
-        else
-          addLocationButton.clearColorFilter()
+        colorImageDrawable(addLocationButton, shouldColor)
       }
     })
 
     viewModel.colorNewWordIcon.observe(this, Observer { entry ->
       entry?.let { shouldColor ->
-        if(shouldColor)
-          wordButton.setColorFilter(accentColor)
-        else
-          wordButton.clearColorFilter()
+        colorImageDrawable(wordButton, shouldColor)
+      }
+    })
+
+    viewModel.colorImagesIcon.observe(this, Observer { entry ->
+      entry?.let { shouldColor ->
+        colorImageDrawable(addMediaButton, shouldColor)
       }
     })
 
@@ -269,15 +261,14 @@ class AddEntryFragment : Fragment(), KodeinAware {
         imageRecyclerAdapter.updateItems(imagePaths)
       }
     })
+  }
 
-    viewModel.colorImagesIcon.observe(this, Observer { entry ->
-      entry?.let { shouldColor ->
-        if(shouldColor)
-          addMediaButton.setColorFilter(accentColor)
-        else
-          addMediaButton.clearColorFilter()
-      }
-    })
+  private fun colorImageDrawable(imageView: ImageView, shouldColor: Boolean) {
+    if(shouldColor) {
+      imageView.setColorFilter(themeUtils.getAccentColor())
+    } else {
+      imageView.clearColorFilter()
+    }
   }
 
   private fun setupImageRecycler(view: View) {

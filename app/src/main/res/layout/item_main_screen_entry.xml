@@ -11,7 +11,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:background="?selectableItemBackground">
+    android:foreground="?selectableItemBackground">
 
     <TextView
       android:id="@+id/item_date"
@@ -115,6 +115,40 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/tag_name" />
+      </com.google.android.material.chip.ChipGroup>
+    </LinearLayout>
+    <!--endregion-->
+
+    <!--region Books-->
+    <LinearLayout
+      android:id="@+id/lin_main_books"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingStart="@dimen/margin_standard"
+      android:paddingEnd="@dimen/margin_standard"
+      android:paddingBottom="@dimen/margin_standard"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/lin_main_tags">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_book_24dp"
+        android:contentDescription="@string/entry_tags" />
+
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_main_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <com.google.android.material.chip.Chip
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/book_name" />
       </com.google.android.material.chip.ChipGroup>
     </LinearLayout>
     <!--endregion-->

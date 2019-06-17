@@ -16,6 +16,8 @@ import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
 import app.marcdev.hibi.internal.NOTIFICATION_CHANNEL_REMINDER_ID
 import app.marcdev.hibi.internal.utils.FileUtils
 import app.marcdev.hibi.internal.utils.FileUtilsImpl
+import app.marcdev.hibi.internal.utils.ThemeUtils
+import app.marcdev.hibi.internal.utils.ThemeUtilsImpl
 import app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment.BookEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BooksFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.calendarfragment.CalendarTabViewModelFactory
@@ -63,6 +65,7 @@ class Hibi : Application(), KodeinAware {
     // </editor-fold>
     // <editor-fold desc="Utils">
     bind<FileUtils>() with provider { FileUtilsImpl(instance()) }
+    bind<ThemeUtils>() with provider { ThemeUtilsImpl(instance()) }
     // </editor-fold>
     // <editor-fold desc="Connectivity and Jisho API">
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
@@ -78,9 +81,9 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddTagViewModelFactory(instance()) }
     bind() from provider { NewWordViewModelFactory(instance()) }
     bind() from provider { AddNewWordViewModelFactory(instance()) }
-    bind() from provider { CalendarTabViewModelFactory(instance(), instance()) }
+    bind() from provider { CalendarTabViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { TagsFragmentViewModelFactory(instance()) }
-    bind() from provider { TaggedEntriesViewModelFactory(instance(), instance()) }
+    bind() from provider { TaggedEntriesViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { AddBookViewModelFactory(instance()) }
     bind() from provider { BooksFragmentViewModelFactory(instance()) }
     bind() from provider { BookEntriesViewModelFactory(instance(), instance(), instance()) }

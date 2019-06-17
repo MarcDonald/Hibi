@@ -13,8 +13,8 @@ class NewWordRepositoryImpl private constructor(private val dao: DAO) : NewWordR
   override suspend fun addNewWord(newWord: NewWord) {
     withContext(Dispatchers.IO) {
       try {
-        Timber.d("Log: addNewWord: NewWord doesn't exist, adding new")
         dao.insertNewWord(newWord)
+        Timber.d("Log: addNewWord: NewWord doesn't exist, added new")
       } catch(exception: SQLiteConstraintException) {
         Timber.d("Log: addNewWord: NewWord already exists, updating existing")
         dao.updateNewWord(newWord)

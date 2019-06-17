@@ -13,8 +13,8 @@ class BookRepositoryImpl private constructor(private val dao: DAO) : BookReposit
   override suspend fun addBook(book: Book) {
     withContext(Dispatchers.IO) {
       try {
-        Timber.d("Log: addBook: Book doesn't exist, adding new")
         dao.insertBook(book)
+        Timber.d("Log: addBook: Book doesn't exist, added new")
       } catch(exception: SQLiteConstraintException) {
         Timber.d("Log: addBook: Book already exists, updating existing")
         dao.updateBook(book)

@@ -17,8 +17,8 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
   override suspend fun addTagEntryRelation(tagEntryRelation: TagEntryRelation) {
     withContext(Dispatchers.IO) {
       try {
-        Timber.d("Log: addTagEntryRelation: TagEntryRelation doesn't exist, adding new")
         dao.insertTagEntryRelation(tagEntryRelation)
+        Timber.d("Log: addTagEntryRelation: TagEntryRelation doesn't exist, added new")
       } catch(exception: SQLiteConstraintException) {
         Timber.d("Log: addTagEntryRelation: TagEntryRelation already exists, updating existing")
         dao.updateTagEntryRelation(tagEntryRelation)

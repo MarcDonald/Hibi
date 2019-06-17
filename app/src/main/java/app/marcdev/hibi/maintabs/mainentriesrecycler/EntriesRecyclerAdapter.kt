@@ -41,6 +41,13 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
     return list.toList()
   }
 
+  fun clearSelectedEntries() {
+    items.forEach { item ->
+      item.isSelected = false
+    }
+    notifyDataSetChanged()
+  }
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseEntriesRecyclerViewHolder {
     return when(viewType) {
       0 -> {

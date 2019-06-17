@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.uicomponents.addtagdialog.AddTagDialog
 import app.marcdev.hibi.uicomponents.views.CheckBoxWithId
 import com.google.android.material.button.MaterialButton
@@ -18,7 +19,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
@@ -43,7 +43,6 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_entry_tags, container, false)
     bindViews(view)
     setupObservers()
@@ -103,8 +102,8 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment(), KodeinAware {
     })
 
     viewModel.displayNoTagsWarning.observe(this, Observer { value ->
-      value?.let { show ->
-        noTagsWarning.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noTagsWarning.show(shouldShow)
       }
     })
 

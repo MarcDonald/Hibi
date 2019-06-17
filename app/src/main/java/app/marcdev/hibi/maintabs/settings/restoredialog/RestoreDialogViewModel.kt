@@ -15,7 +15,10 @@ import java.io.FileOutputStream
 import java.util.zip.ZipException
 import java.util.zip.ZipFile
 
-class RestoreDialogViewModel(private val fileUtils: FileUtils, private val database: AppDatabase) : ViewModel() {
+class RestoreDialogViewModel(private val fileUtils: FileUtils,
+                             private val database: AppDatabase)
+  : ViewModel() {
+
   private var restoreFilePath = ""
   private val _displayMessage = MutableLiveData<Boolean>()
   val displayMessage: LiveData<Boolean>

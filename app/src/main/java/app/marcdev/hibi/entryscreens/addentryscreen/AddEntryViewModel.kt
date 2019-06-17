@@ -12,14 +12,13 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
 
-class AddEntryViewModel(
-  application: Application,
-  private val entryRepository: EntryRepository,
-  private val tagEntryRelationRepository: TagEntryRelationRepository,
-  private val bookEntryRelationRepository: BookEntryRelationRepository,
-  private val newWordRepository: NewWordRepository,
-  private val entryImageRepository: EntryImageRepository,
-  private val fileUtils: FileUtils)
+class AddEntryViewModel(application: Application,
+                        private val entryRepository: EntryRepository,
+                        private val tagEntryRelationRepository: TagEntryRelationRepository,
+                        private val bookEntryRelationRepository: BookEntryRelationRepository,
+                        private val newWordRepository: NewWordRepository,
+                        private val entryImageRepository: EntryImageRepository,
+                        private val fileUtils: FileUtils)
   : AndroidViewModel(application) {
 
   val dateTimeStore = DateTimeStore()
@@ -95,26 +94,22 @@ class AddEntryViewModel(
   }
 
   fun backPress(contentIsEmpty: Boolean) {
-    viewModelScope.launch {
-      // If it's a new entry and there's no content, delete it, otherwise confirm the user wants to exit
-      if(contentIsEmpty && isNewEntry) {
-        deleteEntry()
-        _popBackStack.value = true
-      } else {
-        _displayBackWarning.value = true
-      }
+    // If it's a new entry and there's no content, delete it, otherwise confirm the user wants to exit
+    if(contentIsEmpty && isNewEntry) {
+      deleteEntry()
+      _popBackStack.value = true
+    } else {
+      _displayBackWarning.value = true
     }
   }
 
   fun confirmBack() {
-    viewModelScope.launch {
-      _displayBackWarning.value = false
-      // If it's a new entry, delete it, otherwise just exit without saving
-      if(isNewEntry) {
-        deleteEntry()
-      }
-      _popBackStack.value = true
+    _displayBackWarning.value = false
+    // If it's a new entry, delete it, otherwise just exit without saving
+    if(isNewEntry) {
+      deleteEntry()
     }
+    _popBackStack.value = true
   }
 
   fun pause(content: String) {
@@ -172,8 +167,10 @@ class AddEntryViewModel(
     }
   }
 
-  private suspend fun deleteEntry() {
-    entryRepository.deleteEntry(entryId)
+  private fun deleteEntry() {
+    viewModelScope.launch {
+      entryRepository.deleteEntry(entryId)
+    }
   }
 
   private fun getEntryIdNonNull(): Int {

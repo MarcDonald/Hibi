@@ -13,8 +13,8 @@ class TagRepositoryImpl private constructor(private val dao: DAO) : TagRepositor
   override suspend fun addTag(tag: Tag) {
     withContext(Dispatchers.IO) {
       try {
-        Timber.d("Log: addTag: Tag doesn't exist, adding new")
         dao.insertTag(tag)
+        Timber.d("Log: addTag: Tag doesn't exist, added new")
       } catch(exception: SQLiteConstraintException) {
         Timber.d("Log: addTag: Tag already exists, updating existing")
         dao.updateTag(tag)

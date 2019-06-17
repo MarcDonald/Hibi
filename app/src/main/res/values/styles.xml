@@ -76,10 +76,10 @@
     <item name="android:textAppearance">@style/TextAppearance.Hibi.Chip</item>
   </style>
 
-  <style name="Widget.Hibi.Chip.Dark" parent="Base.Widget.MaterialComponents.Chip">
-    <item name="chipBackgroundColor">@color/white50</item>
-    <item name="closeIconVisible">false</item>
-    <item name="android:textAppearance">@style/TextAppearance.Hibi.Chip</item>
+  <style name="Widget.Hibi.Chip.Dark" parent="Widget.Hibi.Chip.Light">
+    <item name="chipBackgroundColor">@color/darkThemeChipBackground</item>
+    <item name="android:textColor">@color/darkThemePrimaryText</item>
+    <item name="rippleColor">@color/darkThemeSelectedItem</item>
   </style>
 
   <style name="Widget.Hibi.CardView.Rounded" parent="Widget.MaterialComponents.CardView">

@@ -10,9 +10,13 @@ import app.marcdev.hibi.R
 import app.marcdev.hibi.data.entity.NewWord
 import app.marcdev.hibi.internal.ENTRY_ID_KEY
 import app.marcdev.hibi.internal.NEW_WORD_ID_KEY
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.uicomponents.addnewworddialog.AddNewWordDialog
 
-class NewWordsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManager, isEditMode: Boolean) : RecyclerView.ViewHolder(itemView) {
+class NewWordsRecyclerViewHolder(itemView: View,
+                                 fragmentManager: FragmentManager,
+                                 isEditMode: Boolean)
+  : RecyclerView.ViewHolder(itemView) {
 
   private val wordDisplay: TextView = itemView.findViewById(R.id.txt_new_word_word)
   private val typeDisplay: TextView = itemView.findViewById(R.id.txt_new_word_part)
@@ -45,28 +49,28 @@ class NewWordsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManage
       wordDisplay.text = itemView.resources.getString(R.string.japanese_word_wc, newWord.word)
     }
     else
-      wordDisplay.visibility = View.GONE
+      wordDisplay.show(false)
 
     if(newWord.partOfSpeech.isNotBlank())
       typeDisplay.text = newWord.partOfSpeech
     else
-      typeDisplay.visibility = View.GONE
+      typeDisplay.show(false)
 
     if(newWord.reading.isNotBlank()) {
       readingDisplay.text = itemView.resources.getString(R.string.reading_wc, newWord.reading)
     }
     else
-      readingDisplay.visibility = View.GONE
+      readingDisplay.show(false)
 
     if(newWord.english.isNotBlank())
       englishDisplay.text = newWord.english
     else
-      englishDisplay.visibility = View.GONE
+      englishDisplay.show(false)
 
     if(newWord.notes.isNotBlank()) {
       notesDisplay.text = itemView.resources.getString(R.string.notes_wc, newWord.notes)
     }
     else
-      notesDisplay.visibility = View.GONE
+      notesDisplay.show(false)
   }
 }

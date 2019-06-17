@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <TextView
+    android:id="@+id/txt_checkbox_dialog_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/parts_to_display"
+    android:layout_margin="@dimen/margin_standard"
+    android:textAppearance="@style/TextAppearance.Hibi.DialogTitle"
+    android:textAlignment="center"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+  <LinearLayout
+    android:id="@+id/lin_checkbox_dialog"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintTop_toBottomOf="@id/txt_checkbox_dialog_title"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_margin="@dimen/margin_standard">
+
+    <CheckBox
+      android:id="@+id/chk_location"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/location" />
+
+    <CheckBox
+      android:id="@+id/chk_tags"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/tab_tags" />
+
+    <CheckBox
+      android:id="@+id/chk_books"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/tab_books" />
+  </LinearLayout>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_checkbox_dialog_ok"
+    style="@style/Widget.Hibi.Button.Borderless"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:text="@string/ok"
+    app:layout_constraintTop_toBottomOf="@id/lin_checkbox_dialog"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

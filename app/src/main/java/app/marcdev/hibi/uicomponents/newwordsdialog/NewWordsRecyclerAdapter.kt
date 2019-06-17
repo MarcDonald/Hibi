@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.data.entity.NewWord
 
-class NewWordsRecyclerAdapter(private val context: Context, private val fragmentManager: FragmentManager) : RecyclerView.Adapter<NewWordsRecyclerViewHolder>() {
+class NewWordsRecyclerAdapter(private val context: Context,
+                              private val fragmentManager: FragmentManager)
+  : RecyclerView.Adapter<NewWordsRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var dataList: List<NewWord> = listOf()

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.uicomponents.addbookdialog.AddBookDialog
 import app.marcdev.hibi.uicomponents.views.CheckBoxWithId
 import com.google.android.material.button.MaterialButton
@@ -17,7 +18,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class AddMultiEntryToBookDialog(private val selectedCount: Int, private val onSaveClick: (Boolean, List<Int>) -> Unit) : HibiBottomSheetDialogFragment(), KodeinAware {
   override val kodein: Kodein by closestKodein()
@@ -39,7 +39,6 @@ class AddMultiEntryToBookDialog(private val selectedCount: Int, private val onSa
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_multi_entry_books, container, false)
     bindViews(view)
     setupObservers()
@@ -104,8 +103,8 @@ class AddMultiEntryToBookDialog(private val selectedCount: Int, private val onSa
     })
 
     viewModel.displayNoBooksWarning.observe(this, Observer { value ->
-      value?.let { show ->
-        noBooksWarning.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noBooksWarning.show(shouldShow)
       }
     })
   }

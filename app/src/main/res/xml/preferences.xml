@@ -29,6 +29,11 @@
       android:summary="@string/save_on_lose_focus_summary"
       android:icon="@drawable/ic_save_24dp"
       android:defaultValue="false" />
+
+    <Preference
+      android:key="pref_main_entry_display_items"
+      android:title="@string/parts_to_display_on_main_screen"
+      android:icon="@drawable/ic_format_list_bulleted_24dp" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/notifications">

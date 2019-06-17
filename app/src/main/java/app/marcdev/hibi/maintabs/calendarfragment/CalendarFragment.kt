@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class CalendarFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -42,7 +42,6 @@ class CalendarFragment : Fragment(), KodeinAware {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_calendar, container, false)
 
     bindViews(view)
@@ -58,10 +57,10 @@ class CalendarFragment : Fragment(), KodeinAware {
     calendarView.setOnDateChangeListener(calendarViewDateChangeListener)
 
     loadingDisplay = view.findViewById(R.id.const_calendar_entries_loading)
-    loadingDisplay.visibility = View.GONE
+    loadingDisplay.show(false)
 
     noResults = view.findViewById(R.id.const_no_calendar_entries)
-    noResults.visibility = View.GONE
+    noResults.show(false)
   }
 
   private val calendarViewDateChangeListener = CalendarView.OnDateChangeListener { _, year, month, day ->
@@ -84,14 +83,14 @@ class CalendarFragment : Fragment(), KodeinAware {
 
   private fun setupObservers() {
     viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { show ->
-        loadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        loadingDisplay.show(shouldShow)
       }
     })
 
     viewModel.displayNoResults.observe(this, Observer { value ->
-      value?.let { show ->
-        noResults.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noResults.show(shouldShow)
       }
     })
 

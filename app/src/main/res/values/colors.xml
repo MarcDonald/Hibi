@@ -29,6 +29,8 @@
   <color name="darkThemeColorAccent">#FF9700</color>
   <color name="darkThemeError">#F44336</color>
   <color name="darkThemeSelectedItem">#26FFFFFF</color>
+  <color name="darkThemeChipBackground">#424242</color>
+  <color name="darkThemeDarkChipBackground">#2B2B2B</color>
   <!--endregion-->
 
   <!--region Other-->

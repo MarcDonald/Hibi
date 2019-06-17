@@ -9,11 +9,9 @@ import android.view.ViewGroup
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
-import timber.log.Timber
 
 class PrivacyDialog : HibiDialogFragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.dialog_privacy, container, false)
     bindViews(view)
     return view

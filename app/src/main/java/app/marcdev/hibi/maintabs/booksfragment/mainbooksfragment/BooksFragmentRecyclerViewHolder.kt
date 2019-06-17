@@ -22,7 +22,7 @@ class BooksFragmentRecyclerViewHolder(itemView: View, private val fragmentManage
     if(displayedItem != null) {
       val bookID = displayedItem!!.bookId
       val viewEntryAction = MainScreenFragmentDirections.viewBookEntriesAction(bookID)
-      Navigation.findNavController(it).navigate(viewEntryAction)
+      Navigation.findNavController(itemView).navigate(viewEntryAction)
     }
   }
 

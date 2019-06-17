@@ -9,7 +9,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 
-class BooksRecyclerAdapter(private val context: Context, private val fragmentManager: FragmentManager) : RecyclerView.Adapter<BooksFragmentRecyclerViewHolder>() {
+class BooksRecyclerAdapter(private val context: Context, private val fragmentManager: FragmentManager)
+  : RecyclerView.Adapter<BooksFragmentRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var items: List<BookDisplayItem> = listOf()

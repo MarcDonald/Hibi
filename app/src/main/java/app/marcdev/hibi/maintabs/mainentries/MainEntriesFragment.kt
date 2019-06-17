@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,9 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
-import app.marcdev.hibi.internal.base.BinaryOptionDialog
+import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
+import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.TextInputDialog
 import app.marcdev.hibi.uicomponents.multiselectdialog.MultiSelectMenu
 import app.marcdev.hibi.uicomponents.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
@@ -24,7 +26,6 @@ import app.marcdev.hibi.uicomponents.multiselectdialog.addtagtomultientrydialog.
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class MainEntriesFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -41,7 +42,6 @@ class MainEntriesFragment : Fragment(), KodeinAware {
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    Timber.v("Log: onCreate: Started")
     super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainEntriesViewModel::class.java)
   }
@@ -51,16 +51,23 @@ class MainEntriesFragment : Fragment(), KodeinAware {
     bindViews(view)
     initRecycler(view)
     setupObservers()
+    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback {
+      if(recyclerAdapter.getSelectedEntryIds().isNotEmpty()) {
+        recyclerAdapter.clearSelectedEntries()
+        return@OnBackPressedCallback true
+      }
+      return@OnBackPressedCallback false
+    })
     viewModel.loadEntries()
     return view
   }
 
   private fun bindViews(view: View) {
     loadingDisplay = view.findViewById(R.id.const_entries_loading)
-    loadingDisplay.visibility = View.GONE
+    loadingDisplay.show(false)
 
     noResults = view.findViewById(R.id.const_no_entries)
-    noResults.visibility = View.GONE
+    noResults.show(false)
   }
 
   private fun initRecycler(view: View) {
@@ -81,14 +88,14 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 
   private fun setupObservers() {
     viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { show ->
-        loadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        loadingDisplay.show(shouldShow)
       }
     })
 
     viewModel.displayNoResults.observe(this, Observer { value ->
-      value?.let { show ->
-        noResults.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        noResults.show(shouldShow)
       }
     })
 

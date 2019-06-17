@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TimePicker
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiDialogFragment
+import app.marcdev.hibi.internal.extension.show
 import com.google.android.material.button.MaterialButton
 import timber.log.Timber
 
@@ -63,7 +64,7 @@ class TimePickerDialog : HibiDialogFragment() {
     extraButton = view.findViewById(R.id.btn_timepicker_extra)
     extraButton.text = extraButtonTextToSet
     extraButton.setOnClickListener(extraButtonClickListener)
-    extraButton.visibility = if(showExtraButtonToSet) View.VISIBLE else View.GONE
+    extraButton.show(showExtraButtonToSet)
   }
 
   private fun setOkClickListener(listener: View.OnClickListener) {

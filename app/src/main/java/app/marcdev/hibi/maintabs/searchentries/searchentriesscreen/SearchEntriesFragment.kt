@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
+import app.marcdev.hibi.internal.extension.show
+import app.marcdev.hibi.internal.utils.ThemeUtils
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import app.marcdev.hibi.uicomponents.DatePickerDialog
@@ -30,7 +32,6 @@ import com.google.android.material.chip.ChipGroup
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class SearchEntriesFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
@@ -67,13 +68,16 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
   private lateinit var locationDialog: TextInputDialog
   // </editor-fold>
 
+  // <editor-fold desc="Other">
+  private val themeUtils: ThemeUtils by instance()
+  // </editor-fold>
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchEntriesViewModel::class.java)
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
     val view = inflater.inflate(R.layout.fragment_search_entries, container, false)
 
     bindViews(view)
@@ -114,8 +118,8 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     })
 
     viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { show ->
-        loadingDisplay.visibility = if(show) View.VISIBLE else View.GONE
+      value?.let { shouldShow ->
+        loadingDisplay.show(shouldShow)
       }
     })
 
@@ -128,11 +132,11 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     viewModel.displayNoResults.observe(this, Observer { value ->
       value?.let { show ->
         if(show) {
-          noResults.visibility = View.VISIBLE
-          recycler.visibility = View.GONE
+          noResults.show(true)
+          recycler.show(false)
         } else {
-          noResults.visibility = View.GONE
-          recycler.visibility = View.VISIBLE
+          noResults.show(false)
+          recycler.show(true)
         }
       }
     })
@@ -350,6 +354,9 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
           displayTag.text = tag.name
           displayTag.itemId = tag.id
           displayTag.isCheckable = true
+          if(themeUtils.isDarkMode()) {
+            displayTag.setChipBackgroundColorResource(R.color.darkThemeDarkChipBackground)
+          }
           tagChipGroup.addView(displayTag)
         }
       }
@@ -358,11 +365,11 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     viewModel.displayNoTagsWarning.observe(this, Observer { value ->
       value?.let { display ->
         if(display) {
-          noTagsWarning.visibility = View.VISIBLE
-          tagChipGroup.visibility = View.GONE
+          noTagsWarning.show(true)
+          tagChipGroup.show(false)
         } else {
-          noTagsWarning.visibility = View.GONE
-          tagChipGroup.visibility = View.VISIBLE
+          noTagsWarning.show(false)
+          tagChipGroup.show(true)
         }
       }
     })
@@ -376,6 +383,9 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
           displayBook.text = book.name
           displayBook.itemId = book.id
           displayBook.isCheckable = true
+          if(themeUtils.isDarkMode()) {
+            displayBook.setChipBackgroundColorResource(R.color.darkThemeDarkChipBackground)
+          }
           bookChipGroup.addView(displayBook)
         }
       }
@@ -384,11 +394,11 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     viewModel.displayNoBooksWarning.observe(this, Observer { value ->
       value?.let { display ->
         if(display) {
-          noBooksWarning.visibility = View.VISIBLE
-          bookChipGroup.visibility = View.GONE
+          noBooksWarning.show(true)
+          bookChipGroup.show(false)
         } else {
-          noBooksWarning.visibility = View.GONE
-          bookChipGroup.visibility = View.VISIBLE
+          noBooksWarning.show(false)
+          bookChipGroup.show(true)
         }
       }
     })

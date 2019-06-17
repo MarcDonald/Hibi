@@ -26,6 +26,8 @@
   <string name="japanese_word_wc">Japanese: %1$s</string>
   <string name="reading_wc">Reading: %1$s</string>
   <string name="dismiss">Dismiss</string>
+  <string name="add">Add</string>
+  <string name="remove">Remove</string>
   <!--endregion-->
 
   <!--region Tab Titles-->
@@ -195,11 +197,14 @@
   <string name="display_menu">Display Menu</string>
   <string name="save_on_lose_focus">Save when app loses focus</string>
   <string name="save_on_lose_focus_summary">Can protect input in case of a crash while in the background, but can save over entries you are currently editing without you explicitly saving</string>
+  <string name="parts_to_display_on_main_screen">Parts to Display on Main Screen</string>
+  <string name="parts_to_display">Parts to Display</string>
   <!--endregion-->
 
   <!--region About-->
   <string name="open_source_licenses">Open Source Licenses</string>
   <string name="about">About</string>
+  <string name="view_source_code">View Source Code</string>
   <string name="app_info">App Info</string>
   <string name="version">Version</string>
   <string name="build_code_with_output">Build Code: %1$s</string>
@@ -253,7 +258,7 @@
   <string name="glide">Glide</string>
   <string name="glide_description">Used for displaying images</string>
 
-  <string name="jisho_thanks">Search powered by Jisho.org\'s API</string>
+  <string name="jisho_thanks">Search Powered by Jisho.org\'s API</string>
   <string name="share">Share</string>
   <string name="restore_title">Select a file to restore from</string>
   <string name="backup_file">Backup</string>
