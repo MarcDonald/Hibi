@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.PREF_ENTRY_DIVIDERS
+import app.marcdev.hibi.internal.utils.ThemeUtils
 import app.marcdev.hibi.maintabs.mainentriesrecycler.EntriesRecyclerAdapter
 import app.marcdev.hibi.maintabs.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import app.marcdev.hibi.uicomponents.DatePickerDialog
@@ -64,6 +65,10 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
   private lateinit var endDateDialog: DatePickerDialog
   private lateinit var containingDialog: TextInputDialog
   private lateinit var locationDialog: TextInputDialog
+  // </editor-fold>
+
+  // <editor-fold desc="Other">
+  private val themeUtils: ThemeUtils by instance()
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -348,6 +353,9 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
           displayTag.text = tag.name
           displayTag.itemId = tag.id
           displayTag.isCheckable = true
+          if(themeUtils.isDarkMode()) {
+            displayTag.setChipBackgroundColorResource(R.color.darkThemeDarkChipBackground)
+          }
           tagChipGroup.addView(displayTag)
         }
       }
@@ -374,6 +382,9 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
           displayBook.text = book.name
           displayBook.itemId = book.id
           displayBook.isCheckable = true
+          if(themeUtils.isDarkMode()) {
+            displayBook.setChipBackgroundColorResource(R.color.darkThemeDarkChipBackground)
+          }
           bookChipGroup.addView(displayBook)
         }
       }

@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 import app.marcdev.hibi.entryscreens.ImageRecyclerAdapter
 import app.marcdev.hibi.internal.*
+import app.marcdev.hibi.internal.utils.ThemeUtils
 import app.marcdev.hibi.search.searchresults.SearchResultsDialog
 import app.marcdev.hibi.uicomponents.BinaryOptionDialog
 import app.marcdev.hibi.uicomponents.DatePickerDialog
@@ -68,6 +69,10 @@ class AddEntryFragment : Fragment(), KodeinAware {
   private lateinit var wordButton: ImageView
   private lateinit var clipboardButton: ImageView
   // </editor-fold>
+  // </editor-fold>
+
+  // <editor-fold desc="Other">
+  private val themeUtils: ThemeUtils by instance()
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -260,12 +265,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
 
   private fun colorImageDrawable(imageView: ImageView, shouldColor: Boolean) {
     if(shouldColor) {
-      val accentColor = if(PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_DARK_THEME, false))
-        resources.getColor(R.color.darkThemeColorAccent, null)
-      else
-        resources.getColor(R.color.lightThemeColorAccent, null)
-
-      imageView.setColorFilter(accentColor)
+      imageView.setColorFilter(themeUtils.getAccentColor())
     } else {
       imageView.clearColorFilter()
     }

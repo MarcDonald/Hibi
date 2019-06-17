@@ -47,5 +47,4 @@ class FileUtilsImpl(private val context: Context) : FileUtils {
 
   override val databaseDirectory: String
     get() = context.getDatabasePath(PRODUCTION_DATABASE_NAME).path
-
 }

@@ -3,12 +3,10 @@ package app.marcdev.hibi.maintabs.settings
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.internal.PREF_DARK_THEME
 import app.marcdev.hibi.internal.base.HibiActivity
 import app.marcdev.hibi.uicomponents.views.LicenseDisplay
 
@@ -16,12 +14,6 @@ class OpenSourceLicencesActivity : HibiActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
-    if(PreferenceManager.getDefaultSharedPreferences(applicationContext).getBoolean(PREF_DARK_THEME, false))
-      setTheme(R.style.AppTheme_Dark)
-    else
-      setTheme(R.style.AppTheme_Light)
-
     setContentView(R.layout.activity_oss)
     bindViews()
   }
