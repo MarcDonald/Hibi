@@ -31,6 +31,10 @@ const val PREF_BACKUP = "pref_backup"
 const val PREF_RESTORE = "pref_restore"
 const val PREF_CLIPBOARD_BEHAVIOR = "pref_clipboard_behavior"
 const val PREF_SAVE_ON_PAUSE = "pref_save_on_pause"
+const val PREF_MAIN_ENTRY_DISPLAY_ITEMS = "pref_main_entry_display_items"
+const val PREF_MAIN_ENTRY_DISPLAY_LOCATION = "pref_main_entry_display_location"
+const val PREF_MAIN_ENTRY_DISPLAY_TAGS = "pref_main_entry_display_tags"
+const val PREF_MAIN_ENTRY_DISPLAY_BOOKS = "pref_main_entry_display_books"
 // </editor-fold>
 
 // <editor-fold desc="Notifications">

@@ -1,6 +1,7 @@
 package app.marcdev.hibi.maintabs.mainentriesrecycler
 
 import android.content.res.Resources
+import android.preference.PreferenceManager
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -9,6 +10,9 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
+import app.marcdev.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_BOOKS
+import app.marcdev.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_LOCATION
+import app.marcdev.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_TAGS
 import app.marcdev.hibi.internal.extension.show
 import app.marcdev.hibi.internal.utils.formatDateForDisplay
 import app.marcdev.hibi.internal.utils.formatTimeForDisplay
@@ -32,6 +36,7 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 
   // <editor-fold desc="Other">
   private var displayedItem: MainEntriesDisplayItem? = null
+  private val prefs = PreferenceManager.getDefaultSharedPreferences(itemView.context)
   // </editor-fold>
 
   private val clickListener = View.OnClickListener {
@@ -69,49 +74,61 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
   }
 
   private fun displayLocation() {
-    displayedItem?.let { item ->
-      if(item.entry.location.isNotBlank()) {
-        locationDisplay.text = item.entry.location
-        locationDisplay.show(true)
-      } else {
-        locationDisplay.show(false)
+    if(prefs.getBoolean(PREF_MAIN_ENTRY_DISPLAY_LOCATION, true)) {
+      displayedItem?.let { item ->
+        if(item.entry.location.isNotBlank()) {
+          locationDisplay.text = item.entry.location
+          locationDisplay.show(true)
+        } else {
+          locationDisplay.show(false)
+        }
       }
+    } else {
+      locationDisplay.show(false)
     }
   }
 
   private fun displayTags() {
-    displayedItem?.let { item ->
-      tagDisplay.show(item.tags.isNotEmpty())
-      val tagChipGroup = itemView.findViewById<ChipGroup>(R.id.cg_main_tags)
+    if(prefs.getBoolean(PREF_MAIN_ENTRY_DISPLAY_TAGS, true)) {
+      displayedItem?.let { item ->
+        tagDisplay.show(item.tags.isNotEmpty())
+        val tagChipGroup = itemView.findViewById<ChipGroup>(R.id.cg_main_tags)
 
-      tagChipGroup.removeAllViews()
-      if(item.tags.isNotEmpty()) {
-        item.tags.forEach { tagName ->
-          val chip = Chip(itemView.context)
-          chip.text = tagName
-          chip.scaleX = 0.9f
-          chip.scaleY = 0.9f
-          tagChipGroup.addView(chip)
+        tagChipGroup.removeAllViews()
+        if(item.tags.isNotEmpty()) {
+          item.tags.forEach { tagName ->
+            val chip = Chip(itemView.context)
+            chip.text = tagName
+            chip.scaleX = 0.9f
+            chip.scaleY = 0.9f
+            tagChipGroup.addView(chip)
+          }
         }
       }
+    } else {
+      tagDisplay.show(false)
     }
   }
 
   private fun displayBooks() {
-    displayedItem?.let { item ->
-      bookDisplay.show(item.books.isNotEmpty())
-      val bookChipGroup = itemView.findViewById<ChipGroup>(R.id.cg_main_books)
+    if(prefs.getBoolean(PREF_MAIN_ENTRY_DISPLAY_BOOKS, true)) {
+      displayedItem?.let { item ->
+        bookDisplay.show(item.books.isNotEmpty())
+        val bookChipGroup = itemView.findViewById<ChipGroup>(R.id.cg_main_books)
 
-      bookChipGroup.removeAllViews()
-      if(item.books.isNotEmpty()) {
-        item.books.forEach { bookName ->
-          val chip = Chip(itemView.context)
-          chip.text = bookName
-          chip.scaleX = 0.9f
-          chip.scaleY = 0.9f
-          bookChipGroup.addView(chip)
+        bookChipGroup.removeAllViews()
+        if(item.books.isNotEmpty()) {
+          item.books.forEach { bookName ->
+            val chip = Chip(itemView.context)
+            chip.text = bookName
+            chip.scaleX = 0.9f
+            chip.scaleY = 0.9f
+            bookChipGroup.addView(chip)
+          }
         }
       }
+    } else {
+      bookDisplay.show(false)
     }
   }
 }

@@ -197,6 +197,8 @@
   <string name="display_menu">Display Menu</string>
   <string name="save_on_lose_focus">Save when app loses focus</string>
   <string name="save_on_lose_focus_summary">Can protect input in case of a crash while in the background, but can save over entries you are currently editing without you explicitly saving</string>
+  <string name="parts_to_display_on_main_screen">Parts to Display on Main Screen</string>
+  <string name="parts_to_display">Parts to Display</string>
   <!--endregion-->
 
   <!--region About-->
