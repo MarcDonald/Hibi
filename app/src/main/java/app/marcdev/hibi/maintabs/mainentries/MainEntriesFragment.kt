@@ -41,6 +41,13 @@ class MainEntriesFragment : Fragment(), KodeinAware {
   private lateinit var recyclerAdapter: EntriesRecyclerAdapter
   // </editor-fold>
 
+  private val backPressCallback = object : OnBackPressedCallback(false) {
+    override fun handleOnBackPressed() {
+      if(recyclerAdapter.getSelectedEntryIds().isNotEmpty())
+        recyclerAdapter.clearSelectedEntries()
+    }
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainEntriesViewModel::class.java)
@@ -51,13 +58,7 @@ class MainEntriesFragment : Fragment(), KodeinAware {
     bindViews(view)
     initRecycler(view)
     setupObservers()
-    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback {
-      if(recyclerAdapter.getSelectedEntryIds().isNotEmpty()) {
-        recyclerAdapter.clearSelectedEntries()
-        return@OnBackPressedCallback true
-      }
-      return@OnBackPressedCallback false
-    })
+    requireActivity().onBackPressedDispatcher.addCallback(this, backPressCallback)
     viewModel.loadEntries()
     return view
   }
@@ -102,6 +103,12 @@ class MainEntriesFragment : Fragment(), KodeinAware {
     viewModel.entries.observe(this, Observer { items ->
       items?.let {
         recyclerAdapter.updateList(items)
+      }
+    })
+
+    recyclerAdapter.hasSelectedItems.observe(this, Observer { value ->
+      value?.let { hasSelectedItems ->
+        backPressCallback.isEnabled = hasSelectedItems
       }
     })
   }

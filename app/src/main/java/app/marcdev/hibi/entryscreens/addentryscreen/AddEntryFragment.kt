@@ -85,10 +85,12 @@ class AddEntryFragment : Fragment(), KodeinAware {
     bindViews(view)
     initBackConfirmDialog()
     focusInput()
-    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback {
+    val backPressCallback = object : OnBackPressedCallback(true) {
+      override fun handleOnBackPressed() {
       viewModel.backPress(contentInput.text.toString().isEmpty())
-      true
-    })
+      }
+    }
+    requireActivity().onBackPressedDispatcher.addCallback(this, backPressCallback)
     setupObservers()
     setupImageRecycler(view)
     return view
