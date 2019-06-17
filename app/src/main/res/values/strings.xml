@@ -26,6 +26,8 @@
   <string name="japanese_word_wc">Japanese: %1$s</string>
   <string name="reading_wc">Reading: %1$s</string>
   <string name="dismiss">Dismiss</string>
+  <string name="add">Add</string>
+  <string name="remove">Remove</string>
   <!--endregion-->
 
   <!--region Tab Titles-->
@@ -254,7 +256,7 @@
   <string name="glide">Glide</string>
   <string name="glide_description">Used for displaying images</string>
 
-  <string name="jisho_thanks">Search powered by Jisho.org\'s API</string>
+  <string name="jisho_thanks">Search Powered by Jisho.org\'s API</string>
   <string name="share">Share</string>
   <string name="restore_title">Select a file to restore from</string>
   <string name="backup_file">Backup</string>
