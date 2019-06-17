@@ -85,13 +85,15 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
     setupMainObservers()
     setupBottomSheetObservers()
 
-    requireActivity().addOnBackPressedCallback(this, OnBackPressedCallback {
-      if(criteriaBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
-        criteriaBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-      else
-        Navigation.findNavController(requireView()).popBackStack()
-      true
-    })
+    val backPressCallback = object : OnBackPressedCallback(true) {
+      override fun handleOnBackPressed() {
+        if(criteriaBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
+          criteriaBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        else
+          Navigation.findNavController(requireView()).popBackStack()
+      }
+    }
+    requireActivity().onBackPressedDispatcher.addCallback(this, backPressCallback)
 
     return view
   }

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
 
@@ -17,6 +19,10 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
   private var lastPosition = -1
   private var itemsSelectable = false
   private var onSelectClick: View.OnClickListener? = null
+
+  private var _hasSelectedItems = MutableLiveData<Boolean>()
+  val hasSelectedItems: LiveData<Boolean>
+    get() = _hasSelectedItems
 
   constructor(context: Context, itemsSelectable: Boolean, onSelectClick: View.OnClickListener, theme: Resources.Theme) : this(context, theme) {
     this.itemsSelectable = itemsSelectable
@@ -45,6 +51,7 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
     items.forEach { item ->
       item.isSelected = false
     }
+    _hasSelectedItems.value = false
     notifyDataSetChanged()
   }
 
@@ -71,6 +78,7 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
       if(!isHeader(position)) {
         holder.itemView.findViewById<ConstraintLayout>(R.id.const_item_main_recycler).setOnLongClickListener {
           items[position].isSelected = !items[position].isSelected
+          _hasSelectedItems.value = getSelectedEntryIds().isNotEmpty()
           notifyItemChanged(position)
           true
         }
