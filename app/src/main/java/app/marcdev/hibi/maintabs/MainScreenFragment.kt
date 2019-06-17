@@ -90,7 +90,7 @@ class MainScreenFragment : Fragment() {
     when(viewPager.currentItem) {
       ENTRIES_TAB, CALENDAR_TAB -> {
         val addEntryAction = MainScreenFragmentDirections.addEntryAction()
-        Navigation.findNavController(it).navigate(addEntryAction)
+        Navigation.findNavController(requireView()).navigate(addEntryAction)
       }
       TAGS_TAB -> {
         val dialog = AddTagDialog()
@@ -109,6 +109,6 @@ class MainScreenFragment : Fragment() {
 
   private val bottomRightClickListener = View.OnClickListener {
     val searchEntriesAction = MainScreenFragmentDirections.searchEntriesAction()
-    Navigation.findNavController(it).navigate(searchEntriesAction)
+    Navigation.findNavController(requireView()).navigate(searchEntriesAction)
   }
 }
