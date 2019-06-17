@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--region Theme Neutral-->
+  <color name="textOnError">#FFFFFF</color>
+  <color name="shortcutBackground">#F5F5F5</color>
+  <!--endregion-->
+
+  <!--region Light Theme-->
+  <color name="lightThemeColorPrimary">@color/white</color>
+  <color name="lightThemeColorPrimaryLight">@color/white</color>
+  <color name="lightThemeColorPrimaryDark">#CCCCCC</color>
+  <color name="lightThemePrimaryText">@color/black</color>
+  <color name="lightThemeSecondaryText">@color/black70</color>
+  <color name="lightThemeHintText">@color/black50</color>
+  <color name="lightThemeIconTint">@color/black</color>
+  <color name="lightThemeColorAccent">#F57C00</color>
+  <color name="lightThemeError">#F44336</color>
+  <color name="lightThemeSelectedItem">#26000000</color>
+  <!--endregion-->
+
+  <!--region Dark Theme-->
+  <color name="darkThemeColorPrimary">#303030</color>
+  <color name="darkThemeColorPrimaryDark">#212121</color>
+  <color name="darkThemeColorPrimaryLight">#424242</color>
+  <color name="darkThemePrimaryText">@color/white</color>
+  <color name="darkThemeSecondaryText">@color/white70</color>
+  <color name="darkThemeHintText">@color/white50</color>
+  <color name="darkThemeIconTint">@color/white60</color>
+  <color name="darkThemeColorAccent">#FF9700</color>
+  <color name="darkThemeError">#F44336</color>
+  <color name="darkThemeSelectedItem">#26FFFFFF</color>
+  <color name="darkThemeChipBackground">#424242</color>
+  <color name="darkThemeDarkChipBackground">#2B2B2B</color>
+  <!--endregion-->
+
+  <!--region Other-->
+  <color name="white">#FFFFFF</color>
+  <color name="white70">#B3FFFFFF</color>
+  <color name="white60">#99FFFFFF</color>
+  <color name="white50">#80FFFFFF</color>
+  <color name="black">#000000</color>
+  <color name="black70">#B3000000</color>
+  <color name="black50">#80000000</color>
+  <!--endregion-->
+</resources>

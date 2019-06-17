@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_margin="@dimen/margin_standard"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  app:cardCornerRadius="@dimen/rounded_corner_radius">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/const_search_result"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?selectableItemBackground"
+    android:padding="@dimen/margin_standard"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/txt_search_result_word"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/japanese_word_wc"
+      android:textAppearance="@style/TextAppearance.Hibi.ResultItemPrimary"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/txt_search_result_type"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/txt_search_result_type"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/type"
+      android:textStyle="italic"
+      style="@style/TextAppearance.Hibi.ResultItemTertiary"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/txt_search_result_reading"
+      android:layout_width="0dp"
+      android:layout_height="24dp"
+      android:text="@string/reading_wc"
+      android:textAppearance="@style/TextAppearance.Hibi.ResultItemPrimary"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/txt_search_result_word" />
+
+    <TextView
+      android:id="@+id/txt_search_result_english"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/english"
+      android:textAppearance="@style/TextAppearance.Hibi.ResultItemSecondary"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/txt_search_result_reading" />
+
+    <TextView
+      android:id="@+id/txt_search_result_other_forms"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/search_results_other"
+      android:gravity="end"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/txt_search_result_english"
+      app:layout_constraintBottom_toBottomOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

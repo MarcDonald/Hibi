@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory android:title="@string/appearance">
+    <SwitchPreference
+      android:defaultValue="false"
+      android:icon="@drawable/ic_brightness_3_24dp"
+      android:key="pref_dark_theme"
+      android:title="@string/theme_pref_title" />
+    <SwitchPreference
+      android:defaultValue="true"
+      android:icon="@drawable/ic_view_stream_24dp"
+      android:key="pref_entry_dividers"
+      android:title="@string/entry_dividers_pref_title" />
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/behaviour">
+    <ListPreference
+      android:key="pref_clipboard_behavior"
+      android:title="@string/clipboard_behaviour"
+      android:icon="@drawable/ic_clipboard_plus"
+      android:entries="@array/clipboard_behaviors"
+      android:entryValues="@array/clipboard_behaviors_values"
+      android:defaultValue="0"
+      android:summary="@string/display_menu" />
+
+    <SwitchPreference
+      android:key="pref_save_on_pause"
+      android:title="@string/save_on_lose_focus"
+      android:summary="@string/save_on_lose_focus_summary"
+      android:icon="@drawable/ic_save_24dp"
+      android:defaultValue="false" />
+
+    <Preference
+      android:key="pref_main_entry_display_items"
+      android:title="@string/parts_to_display_on_main_screen"
+      android:icon="@drawable/ic_format_list_bulleted_24dp" />
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/notifications">
+    <SwitchPreference
+      android:defaultValue="false"
+      android:icon="@drawable/ic_notifications_24dp"
+      android:key="pref_reminder_notification"
+      android:title="@string/reminder_pref_title" />
+    <Preference
+      android:dependency="pref_reminder_notification"
+      android:icon="@drawable/ic_access_time_24dp"
+      android:key="pref_reminder_time"
+      android:summary="@string/reminder_not_set"
+      android:title="@string/reminder_time_pref_title" />
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/backup_and_restore">
+    <Preference
+      android:icon="@drawable/ic_backup_24dp"
+      android:key="pref_backup"
+      android:title="@string/backup" />
+    <Preference
+      android:icon="@drawable/ic_settings_backup_restore_24dp"
+      android:key="pref_restore"
+      android:title="@string/restore" />
+  </PreferenceCategory>
+</PreferenceScreen>

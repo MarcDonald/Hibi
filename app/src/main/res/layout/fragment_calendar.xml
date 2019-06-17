@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CalendarView
+      android:id="@+id/calendar_calendarview"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+    <!--region Loading-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/const_calendar_entries_loading"
+      android:layout_margin="@dimen/margin_standard"
+      android:layout_width="match_parent"
+      app:layout_constraintTop_toBottomOf="@id/calendar_calendarview"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_height="wrap_content">
+
+      <ProgressBar
+        android:id="@+id/prog_entries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+      <TextView
+        android:id="@+id/txt_entries_loading"
+        style="@style/TextAppearance.Hibi.WarningDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/loading_entries"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/prog_entries"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--endregion-->
+
+    <!--region No Results-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/const_no_calendar_entries"
+      android:layout_width="match_parent"
+      app:layout_constraintTop_toBottomOf="@id/calendar_calendarview"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_height="wrap_content">
+
+      <ImageView
+        android:id="@+id/img_no_entries"
+        android:layout_width="@dimen/smaller_warning_image_size"
+        android:layout_height="@dimen/smaller_warning_image_size"
+        android:contentDescription="@string/no_entries_for_date"
+        android:src="@drawable/ic_sentiment_dissatisfied_24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+      <TextView
+        android:id="@+id/txt_no_entries"
+        style="@style/TextAppearance.Hibi.WarningDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/no_entries_for_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_no_entries" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--endregion-->
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/calendar_entries"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/calendar_calendarview"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:scrollbars="vertical"
+      app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

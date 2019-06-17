@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_search_results"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <ProgressBar
+    android:id="@+id/prog_search_results"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_standard"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <LinearLayout
+    android:id="@+id/lin_search_no_connection"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_standard"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+      android:layout_width="@dimen/search_warning_icon_size"
+      android:layout_height="@dimen/search_warning_icon_size"
+      android:layout_gravity="center"
+      android:layout_margin="@dimen/margin_standard"
+      android:contentDescription="@string/no_connection_warning"
+      android:src="@drawable/ic_signal_wifi_off_24dp" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/no_connection_warning" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/lin_search_no_results"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_standard"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+      android:layout_width="@dimen/search_warning_icon_size"
+      android:layout_height="@dimen/search_warning_icon_size"
+      android:layout_gravity="center"
+      android:layout_margin="@dimen/margin_standard"
+      android:contentDescription="@string/no_results"
+      android:src="@drawable/ic_sentiment_dissatisfied_24dp" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/no_results" />
+  </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

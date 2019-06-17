@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/const_item_main_recycler"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground">
+
+    <TextView
+      android:id="@+id/item_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin_standard"
+      android:paddingTop="@dimen/margin_standard"
+      android:text="@string/date"
+      android:textAppearance="@style/TextAppearance.Hibi.MainEntryDateTime"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/item_date_time_divider"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintStart_toEndOf="@id/item_date"
+      android:src="@drawable/ic_divider_24dp"
+      android:paddingTop="@dimen/margin_standard"
+      app:layout_constraintTop_toTopOf="@id/item_date"
+      app:layout_constraintBottom_toBottomOf="@id/item_date" />
+
+    <TextView
+      android:id="@+id/item_time"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/time"
+      android:textAppearance="@style/TextAppearance.Hibi.MainEntryDateTime"
+      android:paddingTop="@dimen/margin_standard"
+      app:layout_constraintStart_toEndOf="@id/item_date_time_divider"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+      android:id="@+id/img_item_selected"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:layout_margin="@dimen/margin_standard"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toTopOf="@id/item_content"
+      android:src="@drawable/ic_check_circle_24dp" />
+
+    <TextView
+      android:id="@+id/item_content"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/content"
+      android:textAppearance="@style/TextAppearance.Hibi.MainEntryContent"
+      android:maxLines="3"
+      android:ellipsize="end"
+      android:padding="@dimen/margin_standard"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/item_date" />
+
+    <TextView
+      android:id="@+id/txt_item_location"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/location"
+      android:textAppearance="@style/TextAppearance.Hibi.MainEntryLocation"
+      android:gravity="start|center"
+      android:drawableStart="@drawable/ic_location_on_24dp"
+      android:drawablePadding="@dimen/margin_standard"
+      app:layout_constraintTop_toBottomOf="@id/item_content"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:maxLines="1"
+      android:ellipsize="end"
+      android:paddingStart="@dimen/margin_standard"
+      android:paddingEnd="@dimen/margin_standard"
+      android:paddingBottom="@dimen/margin_standard" />
+
+    <!--region Tags-->
+    <LinearLayout
+      android:id="@+id/lin_main_tags"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingStart="@dimen/margin_standard"
+      android:paddingEnd="@dimen/margin_standard"
+      android:paddingBottom="@dimen/margin_standard"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/txt_item_location">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_tag_24dp"
+        android:contentDescription="@string/entry_tags" />
+
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_main_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <com.google.android.material.chip.Chip
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/tag_name" />
+      </com.google.android.material.chip.ChipGroup>
+    </LinearLayout>
+    <!--endregion-->
+
+    <!--region Books-->
+    <LinearLayout
+      android:id="@+id/lin_main_books"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingStart="@dimen/margin_standard"
+      android:paddingEnd="@dimen/margin_standard"
+      android:paddingBottom="@dimen/margin_standard"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/lin_main_tags">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_book_24dp"
+        android:contentDescription="@string/entry_tags" />
+
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_main_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <com.google.android.material.chip.Chip
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/book_name" />
+      </com.google.android.material.chip.ChipGroup>
+    </LinearLayout>
+    <!--endregion-->
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

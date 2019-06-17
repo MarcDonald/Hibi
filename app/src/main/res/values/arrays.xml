@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="clipboard_behaviors">
+    <item>@string/display_menu</item>
+    <item>@string/long_press_paste</item>
+    <item>@string/long_press_copy</item>
+  </string-array>
+
+  <string-array name="clipboard_behaviors_values">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+  </string-array>
+</resources>

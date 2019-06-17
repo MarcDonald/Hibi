@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="top"
+    android:backgroundTint="?colorPrimaryDark">
+
+    <include layout="@layout/toolbar_back_scrolling" />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.core.widget.NestedScrollView
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_timber"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:description="@string/timber_description"
+        app:license="@string/apache"
+        app:title="@string/timber" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_kodein"
+        android:layout_width="match_parent"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/kodein_description"
+        app:license="@string/mit"
+        app:title="@string/kodein" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:id="@+id/license_retrofit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/retrofit_description"
+        app:license="@string/apache"
+        app:title="@string/retrofit" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:id="@+id/license_gson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/gson_description"
+        app:license="@string/apache"
+        app:title="@string/gson" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_android_file_picker"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/android_file_picker_description"
+        app:license="@string/apache"
+        app:title="@string/android_file_picker" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_mplus"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/mplus_description"
+        app:license="@string/ofl"
+        app:title="@string/mplus" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_open_sans"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/open_sans_description"
+        app:license="@string/apache"
+        app:title="@string/open_sans" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_google_material_icons"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/material_icons_description"
+        app:license="@string/apache"
+        app:title="@string/google_material_icons_title" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_material_icons"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/material_icons_description"
+        app:license="@string/sil"
+        app:title="@string/material_icons_title" />
+
+      <app.marcdev.hibi.uicomponents.views.LicenseDisplay
+        android:id="@+id/license_glide"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:description="@string/glide_description"
+        app:license="@string/glide_license"
+        app:title="@string/glide" />
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

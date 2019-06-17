@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory android:title="@string/credits">
+    <Preference
+      android:key="about_oss"
+      android:icon="@drawable/ic_description_24dp"
+      android:title="@string/open_source_licenses" />
+
+    <Preference
+      android:key="about_jisho"
+      android:icon="@drawable/ic_search_24dp"
+      android:title="@string/jisho_thanks" />
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/app_info">
+    <Preference
+      android:key="about_privacy"
+      android:title="@string/privacy_policy"
+      android:icon="@drawable/ic_visibility_24dp" />
+
+    <Preference
+      android:key="about_code"
+      android:icon="@drawable/ic_code_24dp"
+      android:title="@string/view_source_code" />
+
+    <Preference
+      android:key="about_author"
+      android:icon="@drawable/ic_person_24dp"
+      android:title="@string/author"
+      android:summary="@string/marc_donald" />
+
+    <Preference
+      android:key="about_version"
+      android:icon="@drawable/ic_build_24dp"
+      android:title="@string/version"
+      android:summary="@string/version" />
+  </PreferenceCategory>
+</PreferenceScreen>

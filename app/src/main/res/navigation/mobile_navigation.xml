@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/mobile_navigation"
+  app:startDestination="@id/destination_main_screen">
+
+  <!--region Main Screen-->
+  <fragment
+    android:id="@+id/destination_main_screen"
+    android:name="app.marcdev.hibi.maintabs.MainScreenFragment"
+    android:label="MainScreenFragment">
+    <action
+      android:id="@+id/add_entry_action"
+      app:destination="@id/destination_add_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+    <action
+      android:id="@+id/view_tagged_entries_action"
+      app:destination="@id/destination_tagged_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="tagID"
+        app:argType="integer" />
+    </action>
+    <action
+      android:id="@+id/view_book_entries_action"
+      app:destination="@id/destination_book_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="bookID"
+        app:argType="integer" />
+    </action>
+    <action
+      android:id="@+id/search_entries_action"
+      app:destination="@+id/destination_search_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+  </fragment>
+  <!--endregion -->
+
+  <!--region Add Entry-->
+  <fragment
+    android:id="@+id/destination_add_entry"
+    android:name="app.marcdev.hibi.entryscreens.addentryscreen.AddEntryFragment"
+    android:label="AddEntryFragment">
+    <argument
+      android:name="entryId"
+      android:defaultValue="0"
+      app:argType="integer" />
+  </fragment>
+  <!--endregion-->
+
+  <!--region View Entry-->
+  <fragment
+    android:id="@+id/destination_view_entry"
+    android:name="app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryFragment"
+    android:label="ViewEntryFragment">
+    <argument
+      android:name="entryId"
+      android:defaultValue="0"
+      app:argType="integer" />
+    <action
+      android:id="@+id/edit_entry_action"
+      app:destination="@id/destination_add_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/fullscreen_image_action"
+      app:destination="@id/destination_fullscreen_image"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+  </fragment>
+  <!--endregion-->
+
+  <!--region Tagged Entries-->
+  <fragment
+    android:id="@+id/destination_tagged_entries"
+    android:name="app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesFragment"
+    android:label="TaggedEntriesFragment">
+    <argument
+      android:name="tagID"
+      app:argType="integer" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <!--endregion-->
+
+  <!--region Book Entries-->
+  <fragment
+    android:id="@+id/destination_book_entries"
+    android:name="app.marcdev.hibi.maintabs.booksfragment.bookentriesfragment.BookEntriesFragment"
+    android:label="BookEntriesFragment">
+    <argument
+      android:name="bookID"
+      app:argType="integer" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <!--endregion-->
+
+  <!--region Search Entries-->
+  <fragment
+    android:id="@+id/destination_search_entries"
+    android:name="app.marcdev.hibi.maintabs.searchentries.searchentriesscreen.SearchEntriesFragment"
+    android:label="SearchEntriesFragment">
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <fragment
+    android:id="@+id/destination_fullscreen_image"
+    android:name="app.marcdev.hibi.entryscreens.viewentryscreen.FullscreenImageFragment"
+    android:label="FullscreenImageFragment">
+    <argument
+      android:name="image_path"
+      app:argType="string" />
+  </fragment>
+  <!--endregion-->
+</navigation>

@@ -1,0 +1,299 @@
+<resources>
+  <!--region Generic-->
+  <string name="app_name">Hibi</string>
+  <string name="coming_soon">Coming Soon</string>
+  <string name="back">Back</string>
+  <string name="save">Save</string>
+  <string name="ok">OK</string>
+  <string name="cancel">Cancel</string>
+  <string name="title">Title</string>
+  <string name="message">Message</string>
+  <string name="positive">Positive</string>
+  <string name="negative">Negative</string>
+  <string name="warning">Warning</string>
+  <string name="generic_error">An error occurred</string>
+  <string name="close">Close</string>
+  <string name="copied_to_clipboard_wc">Copied %1$s to clipboard</string>
+  <string name="go_back">Go Back</string>
+  <string name="stay">Stay</string>
+  <string name="yes">Yes</string>
+  <string name="no">No</string>
+  <string name="description">Description</string>
+  <string name="copy_to_clipboard">Copy to Clipboard</string>
+  <string name="copy">Copy</string>
+  <string name="paste">Paste</string>
+  <string name="nothing_in_clipboard">Nothing in Clipboard</string>
+  <string name="japanese_word_wc">Japanese: %1$s</string>
+  <string name="reading_wc">Reading: %1$s</string>
+  <string name="dismiss">Dismiss</string>
+  <string name="add">Add</string>
+  <string name="remove">Remove</string>
+  <!--endregion-->
+
+  <!--region Tab Titles-->
+  <string name="tab_entries">Entries</string>
+  <string name="tab_calendar">Calendar</string>
+  <string name="tab_tags">Tags</string>
+  <string name="tab_books">Books</string>
+  <!--endregion-->
+
+  <!--region Main Fab Text-->
+  <string name="fab_create_entry">Create Entry</string>
+  <string name="fab_create_tag">Create Tag</string>
+  <string name="fab_create_book">Create Book</string>
+  <!--endregion-->
+
+  <!--region Entry-->
+  <string name="loading_entries">Loading Entries</string>
+  <string name="date">Date</string>
+  <string name="time">Time</string>
+  <string name="content">Content</string>
+  <string name="content_hint">What did you do today?</string>
+  <string name="empty_content_warning">Please enter something before saving</string>
+  <string name="go_back_warning">Go back and lose unsaved progress?</string>
+  <string name="edit">Edit</string>
+  <string name="delete">Delete</string>
+  <string name="view_new_words">View new words in this entry</string>
+  <string name="copied_entry_to_clipboard">Copied entry to clipboard</string>
+  <string name="add_entry">Add Entry</string>
+  <string name="edit_entry">Edit Entry</string>
+  <string name="view_entry">View Entry</string>
+  <string name="delete_confirm_title">Delete Entry</string>
+  <string name="delete_confirm">Are you sure you want to delete this entry?</string>
+  <string name="no_entries">Entries you create will show up here</string>
+  <string name="no_entries_for_date">No entries found for date</string>
+  <string name="add_images">Add Images</string>
+  <string name="delete_image">Remove image from this entry?</string>
+  <!--endregion-->
+
+  <!--region Search-->
+  <string name="search">Search</string>
+  <string name="no_search_term_warning">Please enter something to search for</string>
+  <string name="search_bar_hint">Search on Jisho.org</string>
+  <string name="no_connection_warning">No Internet Connection</string>
+  <string name="no_results">No Results Found</string>
+  <string name="search_results_other">Other forms available</string>
+  <!--endregion-->
+
+  <!--region Search More Info-->
+  <string name="main_japanese">Japanese</string>
+  <string name="main_reading">Reading</string>
+  <string name="information">Information</string>
+  <string name="search_tags">Tags</string>
+  <string name="search_results_restrictions_wc">Restrictions: %1$s</string>
+  <string name="search_results_antonyms_wc">Antonyms: %1$s</string>
+  <string name="search_results_see_also_wc">See Also: %1$s</string>
+  <string name="type">Type</string>
+  <string name="english">English</string>
+  <string name="alternatives">Alternatives</string>
+  <!--endregion-->
+
+  <!--region Tags-->
+  <string name="add_tags_to_entry_hint">Add Tags to Entry</string>
+  <string name="add_tag">Add a Tag</string>
+  <string name="entry_tags">Tags</string>
+  <string name="no_tags_found_warning">No Tags Found</string>
+  <string name="create_tag">Create Tag</string>
+  <string name="tag_name">Tag Name</string>
+  <string name="loading_tags">Loading Tags</string>
+  <string name="no_tags">Tags you create will show up here</string>
+  <string name="no_tagged_entries">You haven\'t tagged any entries yet</string>
+  <string name="tag_use_count_wc">Entries: %1$s</string>
+  <string name="edit_or_delete_tag">Edit or Delete Tag</string>
+  <string name="edit_or_delete_tag_message">This will not affect any of your entries</string>
+  <string name="delete_tag">Delete Tag</string>
+  <string name="edit_tag">Edit Tag</string>
+  <string name="tag_already_exists">A tag already exists with that name</string>
+  <!--endregion-->
+
+  <!--region New Words-->
+  <string name="add_new_word">Add a New Word</string>
+  <string name="edit_new_word">Edit New Word</string>
+  <string name="new_words">New Words</string>
+  <string name="no_new_words">No New Words</string>
+  <string name="word">Word</string>
+  <string name="reading">Reading</string>
+  <string name="part_of_speech">Part of Speech</string>
+  <string name="notes">Notes</string>
+  <string name="edit_or_delete_word_title">Edit or Delete Word</string>
+  <string name="empty_input_new_word">Enter a word or reading before saving</string>
+  <string name="english_wc">English: %1$s</string>
+  <string name="notes_wc">Notes: %1$s</string>
+  <!--endregion-->
+
+  <!--region Books-->
+  <string name="book_already_exists">A book already exists with that name</string>
+  <string name="book_name">Book Name</string>
+  <string name="create_book">Create Book</string>
+  <string name="edit_book">Edit Book</string>
+  <string name="loading_books">Loading Books</string>
+  <string name="no_books">Books you create will show up here</string>
+  <string name="no_books_found_warning">No Books Found</string>
+  <string name="no_book_entries">You haven\'t added any entries to this book yet</string>
+  <string name="book_use_count_wc">Chapters: %1$s</string>
+  <string name="add_entry_to_book_hint">Add Entry to Book</string>
+  <!--endregion-->
+
+  <!--region Location-->
+  <string name="add_location_to_entry">Add Location</string>
+  <string name="location">Location</string>
+  <!--endregion-->
+
+  <!--region Notifications-->
+  <string name="reminder_notification_channel_title">Reminder</string>
+  <string name="reminder_notification_channel_description">Daily reminder notification</string>
+  <string name="reminder_notification_title">Journal Reminder</string>
+  <string name="reminder_notification_description">Would you like to make a journal entry for today?</string>
+  <string name="reminder_notification_add_action">Add Entry</string>
+  <!--endregion-->
+
+  <!--region Entry Search-->
+  <string name="search_entries">Search Entries</string>
+  <string name="search_criteria">Search Criteria</string>
+  <string name="start">Start</string>
+  <string name="to">to</string>
+  <string name="finish">Finish</string>
+  <string name="containing">Containing: %1$s</string>
+  <string name="any_text">Any Text</string>
+  <string name="at">At: %1$s</string>
+  <string name="any_location">Any Location</string>
+  <string name="with_tags">with tags</string>
+  <string name="in">in</string>
+  <string name="reset">Reset</string>
+  <string name="no_search_entry_results">No results found for that criteria</string>
+  <!--endregion-->
+
+  <!--region Shortcuts-->
+  <string name="shortcut_disabled">Shortcut Disabled</string>
+  <string name="shortcut_add">Add Entry</string>
+  <!--endregion-->
+
+  <!--region Settings-->
+  <string name="settings">Settings</string>
+  <string name="behaviour">Behaviour</string>
+  <string name="notifications">Notifications</string>
+  <string name="appearance">Appearance</string>
+  <string name="entry_dividers_pref_title">Entry Dividers</string>
+  <string name="theme_pref_title">Dark Theme</string>
+  <string name="may_need_restart">You may need to restart the app for this setting to take effect</string>
+  <string name="reminder_pref_title">Daily Reminder</string>
+  <string name="reminder_time_pref_title">Reminder time</string>
+  <string name="reminder_not_set">No reminder set</string>
+  <string name="backup_and_restore">Backup and Restore</string>
+  <string name="backup">Backup</string>
+  <string name="backing_up">Backing Up</string>
+  <string name="backup_success">Backup Successful</string>
+  <string name="backup_fail">Backup Failed</string>
+  <string name="restore">Restore</string>
+  <string name="restore_confirm">Continue with Restore</string>
+  <string name="restore_confirm_title">Restore from Backup?</string>
+  <string name="restore_confirm_message">Are you sure you want to restore from a backup? \nThis will replace all current data</string>
+  <string name="restore_error_title">An Error Occurred</string>
+  <string name="restore_error_message">Ensure you are restoring from a valid .hibi file</string>
+  <string name="restoring">Restoring</string>
+  <string name="clipboard_behaviour">Clipboard Behaviour</string>
+  <string name="long_press_copy">Long Press to Copy</string>
+  <string name="long_press_paste">Long Press to Paste</string>
+  <string name="display_menu">Display Menu</string>
+  <string name="save_on_lose_focus">Save when app loses focus</string>
+  <string name="save_on_lose_focus_summary">Can protect input in case of a crash while in the background, but can save over entries you are currently editing without you explicitly saving</string>
+  <string name="parts_to_display_on_main_screen">Parts to Display on Main Screen</string>
+  <string name="parts_to_display">Parts to Display</string>
+  <!--endregion-->
+
+  <!--region About-->
+  <string name="open_source_licenses">Open Source Licenses</string>
+  <string name="about">About</string>
+  <string name="view_source_code">View Source Code</string>
+  <string name="app_info">App Info</string>
+  <string name="version">Version</string>
+  <string name="build_code_with_output">Build Code: %1$s</string>
+  <string name="credits">Credits</string>
+  <string name="author">Author</string>
+  <string name="marc_donald">Marc Donald</string>
+  <string name="privacy_policy">Privacy Policy</string>
+  <string name="privacy_content">This app stores all user data on device and does not send analytics, user data etc. off-device
+    except when searching for a word using the Jisho.org API.
+    \nThis app also uses some Open Source Libraries which may
+    collect information. Please see the Open Source Licenses section for more information about which libraries are used.
+    \nFor more information about Jisho.org, click the button below.
+    \nIf you have any more questions or concerns about this app, you can look at the code on Github or contact marcsdeveloperemail@gmail.com.</string>
+  <string name="visit_jisho">Visit Jisho.org</string>
+
+  <!--endregion-->
+
+  <!--region OSS Licenses-->
+  <string name="license">License</string>
+  <string name="apache">Apache 2 License</string>
+  <string name="mit">MIT License</string>
+  <string name="ofl">Open Font License</string>
+  <string name="sil">SIL Open Font License 1.1</string>
+  <string name="glide_license">BSD, part MIT and Apache 2.0. See the LICENSE file for details</string>
+
+  <string name="timber">Timber</string>
+  <string name="timber_description">Used for logging</string>
+
+  <string name="kodein">Kodein</string>
+  <string name="kodein_description">Used for dependency injection</string>
+
+  <string name="retrofit">Retrofit</string>
+  <string name="retrofit_description">Used for API calls</string>
+
+  <string name="gson">GSon</string>
+  <string name="gson_description">Used for converting API responses into Kotlin objects</string>
+
+  <string name="android_file_picker">Android File Picker</string>
+  <string name="android_file_picker_description">Used for selecting file to restore from</string>
+
+  <string name="mplus">M PLUS Rounded 1c Bold</string>
+  <string name="mplus_description">Used as the icon font</string>
+
+  <string name="open_sans">Open Sans</string>
+  <string name="open_sans_description">Used throughout the application</string>
+
+  <string name="google_material_icons_title">Google Material Design Icons</string>
+  <string name="material_icons_title">Material Design Icons</string>
+  <string name="material_icons_description">Used throughout the application</string>
+
+  <string name="glide">Glide</string>
+  <string name="glide_description">Used for displaying images</string>
+
+  <string name="jisho_thanks">Search Powered by Jisho.org\'s API</string>
+  <string name="share">Share</string>
+  <string name="restore_title">Select a file to restore from</string>
+  <string name="backup_file">Backup</string>
+  <!--endregion-->
+
+  <!--region Plurals-->
+  <plurals name="count_results">
+    <item quantity="one">%d Result</item>
+    <item quantity="other">%d Results</item>
+  </plurals>
+
+  <plurals name="multi_delete_title">
+    <item quantity="one">Delete %d Entry</item>
+    <item quantity="other">Delete %d Entries</item>
+  </plurals>
+
+  <plurals name="multi_delete_message">
+    <item quantity="one">Are you sure you want to delete %d entry?</item>
+    <item quantity="other">Are you sure you want to delete %d entries?</item>
+  </plurals>
+
+  <plurals name="multi_location_title">
+    <item quantity="one">Add Location to %d Entry</item>
+    <item quantity="other">Add Location to %d Entries</item>
+  </plurals>
+
+  <plurals name="multi_tag_title">
+    <item quantity="one">Set Tags of %d Entry</item>
+    <item quantity="other">Set Tags of %d Entries</item>
+  </plurals>
+
+  <plurals name="multi_book_title">
+    <item quantity="one">Add %d Entry To Books</item>
+    <item quantity="other">Add %d Entries To Books</item>
+  </plurals>
+  <!--endregion-->
+
+</resources>

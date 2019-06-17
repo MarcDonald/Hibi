@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="AppTheme">
+    <attr name="hibiTextOnPrimary" format="color" />
+    <attr name="hibiSecondaryTextOnPrimary" format="color" />
+    <attr name="hibiHintTextOnPrimary" format="color" />
+    <attr name="hibiPrimaryIconTint" format="color" />
+    <attr name="colorPrimaryLight" format="color" />
+    <attr name="hibiSelectedItemColor" format="color" />
+  </declare-styleable>
+
+  <declare-styleable name="SearchBar">
+    <attr name="hint" format="string" />
+  </declare-styleable>
+
+  <declare-styleable name="LicenseDisplay">
+    <attr name="title" format="string" />
+    <attr name="description" format="string" />
+    <attr name="license" format="string" />
+  </declare-styleable>
+
+</resources>

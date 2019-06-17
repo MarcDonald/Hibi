@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="@dimen/margin_standard">
+
+  <androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fadeScrollbars="false"
+    android:scrollbarSize="@dimen/scroll_bar_size"
+    android:scrollbars="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:id="@+id/txt_add_book_title"
+        style="@style/TextAppearance.Hibi.DialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:gravity="start"
+        android:text="@string/create_book"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <EditText
+        android:id="@+id/edt_new_book_input"
+        android:layout_width="match_parent"
+        style="@style/ThemeOverlay.Hibi.EditText"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:inputType="textCapSentences"
+        android:hint="@string/book_name"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_book_title"
+        app:layout_constraintStart_toStartOf="parent" />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete_book"
+        android:layout_width="0dp"
+        style="@style/Widget.Hibi.Button.Negative"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gd_add_book_50_vert"
+        app:layout_constraintTop_toBottomOf="@id/edt_new_book_input"
+        android:text="@string/delete" />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_book"
+        style="@style/Widget.Hibi.Button.Borderless"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gd_add_book_50_vert"
+        app:layout_constraintTop_toBottomOf="@id/edt_new_book_input"
+        android:text="@string/save" />
+
+      <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gd_add_book_50_vert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

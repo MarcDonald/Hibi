@@ -1,0 +1,316 @@
+<resources>
+
+  <!--region Themes-->
+  <style name="AppTheme.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <item name="colorPrimary">@color/lightThemeColorPrimary</item>
+    <item name="colorPrimaryDark">@color/lightThemeColorPrimary</item>
+    <item name="colorPrimaryLight">@color/lightThemeColorPrimaryLight</item>
+    <item name="colorAccent">@color/lightThemeColorAccent</item>
+    <item name="colorError">@color/lightThemeError</item>
+    <item name="hibiTextOnPrimary">@color/lightThemePrimaryText</item>
+    <item name="hibiSecondaryTextOnPrimary">@color/lightThemeSecondaryText</item>
+    <item name="hibiHintTextOnPrimary">@color/lightThemeHintText</item>
+    <item name="hibiPrimaryIconTint">@color/lightThemeIconTint</item>
+    <item name="android:statusBarColor">?colorPrimary</item>
+    <item name="android:windowLightStatusBar">true</item>
+    <item name="materialButtonStyle">@style/Widget.Hibi.Button.Text</item>
+    <item name="chipStyle">@style/Widget.Hibi.Chip.Light</item>
+    <item name="hibiSelectedItemColor">@color/lightThemeSelectedItem</item>
+  </style>
+
+  <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">
+    <item name="colorPrimary">@color/darkThemeColorPrimary</item>
+    <item name="colorPrimaryDark">@color/darkThemeColorPrimaryDark</item>
+    <item name="colorPrimaryLight">@color/darkThemeColorPrimaryLight</item>
+    <item name="colorAccent">@color/darkThemeColorAccent</item>
+    <item name="colorError">@color/darkThemeError</item>
+    <item name="hibiTextOnPrimary">@color/darkThemePrimaryText</item>
+    <item name="hibiSecondaryTextOnPrimary">@color/darkThemeSecondaryText</item>
+    <item name="hibiHintTextOnPrimary">@color/darkThemeHintText</item>
+    <item name="hibiPrimaryIconTint">@color/darkThemeIconTint</item>
+    <item name="android:navigationBarColor">?colorPrimaryDark</item>
+    <item name="android:statusBarColor">?colorPrimaryDark</item>
+    <item name="android:windowLightStatusBar">false</item>
+    <item name="materialButtonStyle">@style/Widget.Hibi.Button.Text</item>
+    <item name="chipStyle">@style/Widget.Hibi.Chip.Dark</item>
+    <item name="hibiSelectedItemColor">@color/darkThemeSelectedItem</item>
+  </style>
+
+  <style name="Theme.Hibi.BottomSheetDialog.Light" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+    <item name="colorPrimary">@color/lightThemeColorPrimary</item>
+    <item name="colorAccent">@color/lightThemeColorAccent</item>
+    <item name="colorError">@color/lightThemeError</item>
+    <item name="android:windowLightStatusBar">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="buttonStyle">@style/Widget.Hibi.Button.Text</item>
+    <item name="materialButtonStyle">@style/Widget.Hibi.Button.Text</item>
+    <item name="bottomSheetStyle">@style/Widget.Hibi.BottomSheet.Modal</item>
+    <item name="android:windowSoftInputMode">adjustResize</item>
+  </style>
+
+  <style name="Theme.Hibi.BottomSheetDialog.Dark" parent="Theme.MaterialComponents.BottomSheetDialog">
+    <item name="colorPrimary">@color/darkThemeColorPrimary</item>
+    <item name="colorAccent">@color/darkThemeColorAccent</item>
+    <item name="colorError">@color/darkThemeError</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="buttonStyle">@style/Widget.Hibi.Button.Text</item>
+    <item name="materialButtonStyle">@style/Widget.Hibi.Button.Text</item>
+    <item name="bottomSheetStyle">@style/Widget.Hibi.BottomSheet.Modal</item>
+    <item name="android:windowLightStatusBar">false</item>
+    <item name="android:navigationBarColor">?colorPrimary</item>
+    <item name="android:windowSoftInputMode">adjustResize</item>
+  </style>
+  <!--endregion-->
+
+  <!--region Widgets-->
+  <style name="Widget.Hibi" parent="@android:style/Widget" />
+
+  <style name="Widget.Hibi.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+    <item name="android:background">@drawable/rounded_bottom_sheet_background</item>
+  </style>
+
+  <style name="Widget.Hibi.Chip.Light" parent="Base.Widget.MaterialComponents.Chip">
+    <item name="closeIconVisible">false</item>
+    <item name="android:textAppearance">@style/TextAppearance.Hibi.Chip</item>
+  </style>
+
+  <style name="Widget.Hibi.Chip.Dark" parent="Widget.Hibi.Chip.Light">
+    <item name="chipBackgroundColor">@color/darkThemeChipBackground</item>
+    <item name="android:textColor">@color/darkThemePrimaryText</item>
+    <item name="rippleColor">@color/darkThemeSelectedItem</item>
+  </style>
+
+  <style name="Widget.Hibi.CardView.Rounded" parent="Widget.MaterialComponents.CardView">
+    <item name="cardCornerRadius">8dp</item>
+  </style>
+
+  <style name="Widget.Hibi.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
+    <item name="android:fontFamily">@font/open_sans</item>
+    <item name="android:textColor">?hibiTextOnPrimary</item>
+    <item name="iconTint">?hibiPrimaryIconTint</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:letterSpacing">0.025</item>
+    <item name="android:padding">@dimen/margin_standard</item>
+  </style>
+
+  <style name="Widget.Hibi.Button.Borderless" parent="Widget.Hibi.Button.Text">
+    <item name="android:textColor">?colorAccent</item>
+    <item name="iconTint">?colorAccent</item>
+  </style>
+
+  <style name="Widget.Hibi.Button.Negative" parent="Widget.Hibi.Button.Text">
+    <item name="android:backgroundTint">?colorError</item>
+    <item name="android:textColor">@color/textOnError</item>
+    <item name="rippleColor">@color/textOnError</item>
+  </style>
+
+  <style name="Widget.Hibi.Button.EntryDate" parent="Widget.Hibi.Button.Text">
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="Widget.Hibi.Button.ExtendedFab" parent="Widget.MaterialComponents.Button">
+    <item name="android:layout_alignParentBottom">true</item>
+    <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:layout_marginBottom">24dp</item>
+    <item name="android:elevation">12dp</item>
+    <item name="android:paddingStart">20dp</item>
+    <item name="android:paddingEnd">20dp</item>
+    <item name="android:textAppearance">@style/TextAppearance.Hibi.ExtendedFab</item>
+    <item name="backgroundTint">?attr/colorAccent</item>
+    <item name="cornerRadius">32dp</item>
+    <item name="iconSize">24dp</item>
+    <item name="iconTint">@android:color/white</item>
+    <item name="iconPadding">12dp</item>
+  </style>
+  <!--endregion-->
+
+  <!--region Edit Texts-->
+  <style name="ThemeOverlay.Hibi.EditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText">
+    <item name="android:fontFamily">@font/open_sans</item>
+  </style>
+
+  <style name="ThemeOverlay.Hibi.EditText.AddNewWordDialog" parent="ThemeOverlay.Hibi.EditText">
+    <item name="android:inputType">textCapSentences|textMultiLine</item>
+    <item name="android:maxLines">3</item>
+  </style>
+  <!--endregion-->
+
+  <!--region Text Appearances-->
+  <style name="TextAppearance.Hibi.Base" parent="TextAppearance.MaterialComponents.Body1">
+    <item name="fontFamily">@font/open_sans</item>
+    <item name="android:textColor">?attr/hibiTextOnPrimary</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.ToolbarTitle" parent="TextAppearance.Hibi.Base">
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">22sp</item>
+    <item name="android:letterSpacing">0</item>
+    <item name="fontFamily">@font/open_sans</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.ToolbarTextButton" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">16sp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0.0125</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.Tab" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0.03125</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.DateTimeAddEntry" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0.0125</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.Chip" parent="TextAppearance.Hibi.Base">
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:letterSpacing">0.03125</item>
+    <item name="android:textColor">?hibiTextOnPrimary</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.ViewEntryContent" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0.03125</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.ExtendedFab" parent="TextAppearance.Hibi.Base">
+    <item name="android:textAllCaps">true</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.MainScreenRecyclerHeader" parent="TextAppearance.Hibi.Base">
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">20sp</item>
+    <item name="android:letterSpacing">0</item>
+    <item name="fontFamily">@font/open_sans_semibold</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.MainEntryDateTime" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0.0125</item>
+    <item name="fontFamily">@font/open_sans_semibold</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.MainEntryContent" parent="TextAppearance.Hibi.Base">
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:letterSpacing">0.03125</item>
+    <item name="android:textColor">?hibiSecondaryTextOnPrimary</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.MainEntryLocation" parent="TextAppearance.Hibi.Base">
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:letterSpacing">0.03125</item>
+    <item name="android:textColor">?hibiSecondaryTextOnPrimary</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.BottomSheetTitle" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">20sp</item>
+    <item name="android:textAlignment">textStart</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.DialogTitle" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">22sp</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:letterSpacing">0</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.DialogContent" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">16sp</item>
+    <item name="android:textColor">?hibiSecondaryTextOnPrimary</item>
+    <item name="android:letterSpacing">0</item>
+    <item name="android:textAlignment">textStart</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.ResultItemPrimary" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0.03125</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.ResultItemSecondary" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">16sp</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0.0333333333</item>
+    <item name="android:textColor">?hibiSecondaryTextOnPrimary</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.ResultItemTertiary" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0.0333333333</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.MainMenuOption" parent="TextAppearance.Hibi.Base">
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">12sp</item>
+    <item name="android:letterSpacing">0.0333333333</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.LicenseTitle" parent="TextAppearance.Hibi.Base">
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">24sp</item>
+    <item name="android:letterSpacing">0</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.LicenseDescription" parent="TextAppearance.Hibi.Base">
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:letterSpacing">0.03125</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.LicenseLicense" parent="TextAppearance.Hibi.Base">
+    <item name="android:textStyle">italic</item>
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:letterSpacing">0.0178571429</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.WarningDisplay" parent="TextAppearance.Hibi.Base">
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:letterSpacing">0.03125</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.SearchEntrySheetSubtitle" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:letterSpacing">0.0125</item>
+  </style>
+  <!--endregion-->
+
+</resources>
