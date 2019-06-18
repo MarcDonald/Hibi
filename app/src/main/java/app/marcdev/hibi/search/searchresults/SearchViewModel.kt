@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.marcdev.hibi.data.network.JishoAPIService
-import app.marcdev.hibi.data.network.apiresponse.Data
+import app.marcdev.hibi.data.network.jisho.JishoAPIService
+import app.marcdev.hibi.data.network.jisho.apiresponse.Data
 import app.marcdev.hibi.internal.NoConnectivityException
 import kotlinx.coroutines.launch
 

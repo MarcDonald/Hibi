@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.data.network.apiresponse.Data
+import app.marcdev.hibi.data.network.jisho.apiresponse.Data
 
 class SearchResultsRecyclerAdapter(context: Context, private val fragmentManager: FragmentManager) : RecyclerView.Adapter<SearchResultsRecyclerViewHolder>() {
 

@@ -9,7 +9,8 @@ import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.database.ProductionAppDatabase
 import app.marcdev.hibi.data.network.ConnectivityInterceptor
 import app.marcdev.hibi.data.network.ConnectivityInterceptorImpl
-import app.marcdev.hibi.data.network.JishoAPIService
+import app.marcdev.hibi.data.network.github.GithubAPIService
+import app.marcdev.hibi.data.network.jisho.JishoAPIService
 import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.entryscreens.addentryscreen.AddEntryViewModelFactory
 import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
@@ -70,6 +71,7 @@ class Hibi : Application(), KodeinAware {
     // <editor-fold desc="Connectivity and Jisho API">
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
+    bind<GithubAPIService>() with singleton { GithubAPIService(instance()) }
     // </editor-fold>
     // <editor-fold desc="View models">
     bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }

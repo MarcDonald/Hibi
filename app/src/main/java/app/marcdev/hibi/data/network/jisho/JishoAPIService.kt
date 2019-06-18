@@ -1,6 +1,7 @@
-package app.marcdev.hibi.data.network
+package app.marcdev.hibi.data.network.jisho
 
-import app.marcdev.hibi.data.network.apiresponse.SearchResponse
+import app.marcdev.hibi.data.network.ConnectivityInterceptor
+import app.marcdev.hibi.data.network.jisho.apiresponse.SearchResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

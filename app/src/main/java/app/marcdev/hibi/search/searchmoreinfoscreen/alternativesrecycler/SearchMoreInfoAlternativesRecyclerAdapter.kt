@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.data.network.apiresponse.Japanese
+import app.marcdev.hibi.data.network.jisho.apiresponse.Japanese
 
 class SearchMoreInfoAlternativesRecyclerAdapter(context: Context)
   : RecyclerView.Adapter<SearchMoreInfoAlternativesRecyclerViewHolder>() {
