@@ -19,6 +19,7 @@ import app.marcdev.hibi.internal.*
 import app.marcdev.hibi.internal.notification.NotificationHelper
 import app.marcdev.hibi.maintabs.settings.backupdialog.BackupDialog
 import app.marcdev.hibi.maintabs.settings.restoredialog.RestoreDialog
+import app.marcdev.hibi.maintabs.settings.updatedialog.UpdateDialog
 import app.marcdev.hibi.uicomponents.TimePickerDialog
 import com.google.android.material.snackbar.Snackbar
 import droidninja.filepicker.FilePickerBuilder
@@ -64,6 +65,12 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware {
 
     val mainEntryDisplayItems = findPreference(PREF_MAIN_ENTRY_DISPLAY_ITEMS)
     mainEntryDisplayItems.onPreferenceClickListener = mainEntryDisplayItemsClickListener
+
+    findPreference("pref_app_update").onPreferenceClickListener = Preference.OnPreferenceClickListener {
+      val dialog = UpdateDialog()
+      dialog.show(requireFragmentManager(), "Update Dialog")
+      true
+    }
   }
 
   private val onThemeChangeListener = Preference.OnPreferenceChangeListener { _, _ ->

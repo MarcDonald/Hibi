@@ -26,6 +26,7 @@ import app.marcdev.hibi.maintabs.mainentries.MainEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.searchentries.searchentriesscreen.SearchEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.settings.backupdialog.BackupDialogViewModelFactory
 import app.marcdev.hibi.maintabs.settings.restoredialog.RestoreDialogViewModelFactory
+import app.marcdev.hibi.maintabs.settings.updatedialog.UpdateDialogViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagsFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesViewModelFactory
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
@@ -96,6 +97,7 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddMultiEntryToBookViewModelFactory(instance()) }
     bind() from provider { BackupDialogViewModelFactory(instance()) }
     bind() from provider { RestoreDialogViewModelFactory(instance(), instance()) }
+    bind() from provider { UpdateDialogViewModelFactory(instance()) }
     // </editor-fold>
   }
 
