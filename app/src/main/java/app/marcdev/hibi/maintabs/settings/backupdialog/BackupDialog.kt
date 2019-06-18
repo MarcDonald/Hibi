@@ -65,14 +65,9 @@ class BackupDialog : HibiDialogFragment(), KodeinAware {
 
   private fun setupObservers() {
     viewModel.displayDismiss.observe(this, Observer { value ->
-      value?.let { display ->
-        if(display) {
-          dismissButton.show(true)
-          isCancelable = true
-        } else {
-          dismissButton.show(false)
-          isCancelable = false
-        }
+      value?.let { dismissable ->
+        dismissButton.show(dismissable)
+        isCancelable = dismissable
       }
     })
 

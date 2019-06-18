@@ -199,6 +199,14 @@
   <string name="save_on_lose_focus_summary">Can protect input in case of a crash while in the background, but can save over entries you are currently editing without you explicitly saving</string>
   <string name="parts_to_display_on_main_screen">Parts to Display on Main Screen</string>
   <string name="parts_to_display">Parts to Display</string>
+  <string name="update">Update</string>
+  <string name="check_for_update">Check for Updates</string>
+  <string name="no_update_title">No Updates Found</string>
+  <string name="no_update_message">You are running the latest version</string>
+  <string name="new_version_available_title">Update Available</string>
+  <string name="new_version_available_message">A newer version (%1$s) is available for download</string>
+  <string name="download">Download</string>
+  <string name="checking_for_updates">Checking for Updates</string>
   <!--endregion-->
 
   <!--region About-->

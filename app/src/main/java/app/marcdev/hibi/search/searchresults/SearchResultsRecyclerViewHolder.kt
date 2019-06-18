@@ -7,7 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.data.network.apiresponse.Data
+import app.marcdev.hibi.data.network.jisho.apiresponse.Data
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoDialog
 import com.google.gson.Gson
 

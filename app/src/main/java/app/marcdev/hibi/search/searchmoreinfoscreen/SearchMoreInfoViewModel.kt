@@ -3,8 +3,8 @@ package app.marcdev.hibi.search.searchmoreinfoscreen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import app.marcdev.hibi.data.network.apiresponse.Japanese
-import app.marcdev.hibi.data.network.apiresponse.Sense
+import app.marcdev.hibi.data.network.jisho.apiresponse.Japanese
+import app.marcdev.hibi.data.network.jisho.apiresponse.Sense
 import com.google.gson.Gson
 
 class SearchMoreInfoViewModel : ViewModel() {

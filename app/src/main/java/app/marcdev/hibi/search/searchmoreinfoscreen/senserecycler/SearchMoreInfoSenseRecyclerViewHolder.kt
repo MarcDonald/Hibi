@@ -8,7 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.data.network.apiresponse.Sense
+import app.marcdev.hibi.data.network.jisho.apiresponse.Sense
 
 class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
   : RecyclerView.ViewHolder(itemView) {

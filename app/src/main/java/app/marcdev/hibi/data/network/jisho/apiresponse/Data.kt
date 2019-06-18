@@ -1,4 +1,4 @@
-package app.marcdev.hibi.data.network.apiresponse
+package app.marcdev.hibi.data.network.jisho.apiresponse
 
 import com.google.gson.annotations.SerializedName
 

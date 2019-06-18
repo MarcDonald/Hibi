@@ -61,6 +61,5 @@ class AboutFragment : PreferenceFragmentCompat() {
     val launchBrowser = Intent(Intent.ACTION_VIEW)
     launchBrowser.data = uriUrl
     startActivity(launchBrowser)
-
   }
 }

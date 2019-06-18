@@ -9,7 +9,8 @@ import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.database.ProductionAppDatabase
 import app.marcdev.hibi.data.network.ConnectivityInterceptor
 import app.marcdev.hibi.data.network.ConnectivityInterceptorImpl
-import app.marcdev.hibi.data.network.JishoAPIService
+import app.marcdev.hibi.data.network.github.GithubAPIService
+import app.marcdev.hibi.data.network.jisho.JishoAPIService
 import app.marcdev.hibi.data.repository.*
 import app.marcdev.hibi.entryscreens.addentryscreen.AddEntryViewModelFactory
 import app.marcdev.hibi.entryscreens.viewentryscreen.ViewEntryViewModelFactory
@@ -25,6 +26,7 @@ import app.marcdev.hibi.maintabs.mainentries.MainEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.searchentries.searchentriesscreen.SearchEntriesViewModelFactory
 import app.marcdev.hibi.maintabs.settings.backupdialog.BackupDialogViewModelFactory
 import app.marcdev.hibi.maintabs.settings.restoredialog.RestoreDialogViewModelFactory
+import app.marcdev.hibi.maintabs.settings.updatedialog.UpdateDialogViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagsFragmentViewModelFactory
 import app.marcdev.hibi.maintabs.tagsfragment.taggedentriesfragment.TaggedEntriesViewModelFactory
 import app.marcdev.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
@@ -70,6 +72,7 @@ class Hibi : Application(), KodeinAware {
     // <editor-fold desc="Connectivity and Jisho API">
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
+    bind<GithubAPIService>() with singleton { GithubAPIService(instance()) }
     // </editor-fold>
     // <editor-fold desc="View models">
     bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }
@@ -94,6 +97,7 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { AddMultiEntryToBookViewModelFactory(instance()) }
     bind() from provider { BackupDialogViewModelFactory(instance()) }
     bind() from provider { RestoreDialogViewModelFactory(instance(), instance()) }
+    bind() from provider { UpdateDialogViewModelFactory(instance()) }
     // </editor-fold>
   }
 

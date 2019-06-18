@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <TextView
+    android:id="@+id/txt_update_title"
+    android:text="@string/checking_for_updates"
+    android:textAppearance="@style/TextAppearance.Hibi.DialogTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:padding="@dimen/margin_standard" />
+
+  <TextView
+    android:id="@+id/txt_update_message"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_standard"
+    android:textAppearance="@style/TextAppearance.Hibi.DialogContent"
+    app:layout_constraintTop_toBottomOf="@id/txt_update_title"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:text="@string/content" />
+
+  <LinearLayout
+    android:id="@+id/lin_update_img"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_standard"
+    android:orientation="vertical"
+    app:layout_constraintTop_toBottomOf="@id/txt_update_message"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <ProgressBar
+      android:id="@+id/prog_update"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/margin_standard" />
+
+    <ImageView
+      android:id="@+id/img_update_available"
+      android:contentDescription="@string/new_version_available_title"
+      android:layout_width="64dp"
+      android:layout_height="64dp"
+      android:padding="@dimen/margin_standard"
+      android:src="@drawable/ic_system_update_accent_24dp" />
+
+    <ImageView
+      android:id="@+id/img_no_update_available"
+      android:contentDescription="@string/no_update_title"
+      android:layout_width="64dp"
+      android:layout_height="64dp"
+      android:padding="@dimen/margin_standard"
+      android:src="@drawable/ic_check_24dp" />
+
+    <ImageView
+      android:id="@+id/img_update_error"
+      android:contentDescription="@string/generic_error"
+      android:layout_width="64dp"
+      android:layout_height="64dp"
+      android:padding="@dimen/margin_standard"
+      android:src="@drawable/ic_error_24dp" />
+
+    <LinearLayout
+      android:id="@+id/lin_update_no_connection"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:ignore="UseCompoundDrawables">
+
+      <ImageView
+        android:layout_width="@dimen/search_warning_icon_size"
+        android:layout_height="@dimen/search_warning_icon_size"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_standard"
+        android:contentDescription="@string/no_connection_warning"
+        android:src="@drawable/ic_signal_wifi_off_24dp" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        style="@style/TextAppearance.Hibi.WarningDisplay"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/no_connection_warning" />
+    </LinearLayout>
+  </LinearLayout>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_update_dismiss"
+    style="@style/Widget.Hibi.Button.Text"
+    android:text="@string/dismiss"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/lin_update_img"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/gd_update_50_vert"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/gd_update_50_vert"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.5" />
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/btn_update_open"
+    style="@style/Widget.Hibi.Button.Borderless"
+    android:text="@string/download"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/lin_update_img"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard"
+    app:layout_constraintEnd_toStartOf="@id/gd_update_50_vert"
+    android:layout_marginBottom="@dimen/margin_standard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

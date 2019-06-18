@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import app.marcdev.hibi.R
-import app.marcdev.hibi.data.network.apiresponse.Sense
+import app.marcdev.hibi.data.network.jisho.apiresponse.Sense
 
 class SearchMoreInfoSenseRecyclerAdapter(context: Context)
   : RecyclerView.Adapter<SearchMoreInfoSenseRecyclerViewHolder>() {
