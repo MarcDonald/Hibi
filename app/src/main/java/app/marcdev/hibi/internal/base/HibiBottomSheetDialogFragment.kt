@@ -16,10 +16,10 @@ abstract class HibiBottomSheetDialogFragment : BottomSheetDialogFragment(), Kode
   private val themeUtils: ThemeUtils by instance()
 
   override fun getTheme(): Int {
-    return if(themeUtils.isDarkMode())
-      R.style.Theme_Hibi_BottomSheetDialog_Dark
-    else
+    return if(themeUtils.isLightMode())
       R.style.Theme_Hibi_BottomSheetDialog_Light
+    else
+      R.style.Theme_Hibi_BottomSheetDialog_Dark
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

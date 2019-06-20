@@ -13,7 +13,7 @@ abstract class HibiActivity : AppCompatActivity(), KodeinAware {
   override val kodein: Kodein by closestKodein()
 
   private val themeUtils: ThemeUtils by instance()
-  private var isDarkTheme: Boolean = false
+  private var isLightTheme: Boolean = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -21,11 +21,11 @@ abstract class HibiActivity : AppCompatActivity(), KodeinAware {
   }
 
   private fun updateTheme() {
-    isDarkTheme = if(themeUtils.isDarkMode()) {
-      setTheme(R.style.AppTheme_Dark)
+    isLightTheme = if(themeUtils.isLightMode()) {
+      setTheme(R.style.AppTheme_Light)
       true
     } else {
-      setTheme(R.style.AppTheme_Light)
+      setTheme(R.style.AppTheme_Dark)
       false
     }
   }
@@ -33,8 +33,8 @@ abstract class HibiActivity : AppCompatActivity(), KodeinAware {
   override fun onResume() {
     super.onResume()
     // Checks if the theme was changed while it was paused and then sees if the current theme of the activity matches
-    val isDarkThemeNow = themeUtils.isDarkMode()
-    if(isDarkTheme != isDarkThemeNow) {
+    val isLightThemeNow = themeUtils.isLightMode()
+    if(isLightTheme != isLightThemeNow) {
       updateTheme()
       recreate()
     }
