@@ -1,6 +1,5 @@
 package app.marcdev.hibi.maintabs
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
 import app.marcdev.hibi.internal.base.HibiBottomSheetDialogFragment
-import app.marcdev.hibi.maintabs.settings.SettingsActivity
 import com.google.android.material.button.MaterialButton
 
 class MainScreenMenuDialog : HibiBottomSheetDialogFragment() {
@@ -28,8 +26,8 @@ class MainScreenMenuDialog : HibiBottomSheetDialogFragment() {
   }
 
   private val settingsClickListener = View.OnClickListener {
-    val intent = Intent(requireContext(), SettingsActivity::class.java)
-    startActivity(intent)
+    val settingsAction = MainScreenFragmentDirections.settingsAction()
+    Navigation.findNavController(requireParentFragment().requireView()).navigate(settingsAction)
     dismiss()
   }
 

@@ -13,7 +13,7 @@ import app.marcdev.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_TAGS
 import app.marcdev.hibi.internal.base.HibiDialogFragment
 import com.google.android.material.button.MaterialButton
 
-class MainEntriesDisplayPreferenceDialog(private val okClick: (Boolean) -> Unit) : HibiDialogFragment() {
+class MainEntriesDisplayPreferenceDialog : HibiDialogFragment() {
   // <editor-fold desc="UI Components">
   private lateinit var locationCheckBox: CheckBox
   private lateinit var tagsCheckBox: CheckBox
@@ -47,6 +47,5 @@ class MainEntriesDisplayPreferenceDialog(private val okClick: (Boolean) -> Unit)
     prefs.edit().putBoolean(PREF_MAIN_ENTRY_DISPLAY_TAGS, tagsCheckBox.isChecked).apply()
     prefs.edit().putBoolean(PREF_MAIN_ENTRY_DISPLAY_BOOKS, booksCheckBox.isChecked).apply()
     dismiss()
-    okClick(true)
   }
 }

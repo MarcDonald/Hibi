@@ -63,6 +63,13 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/settings_action"
+      app:destination="@id/destination_settings_screen"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
   <!--endregion -->
 
@@ -174,6 +181,13 @@
       app:argType="string" />
   </fragment>
   <!--endregion-->
+
+  <!--region Settings Screen-->
+  <fragment
+    android:id="@+id/destination_settings_screen"
+    android:name="app.marcdev.hibi.maintabs.settings.SettingsFragment"
+    android:label="SettingsFragment" />
+  <!--endregion -->
 
   <!--region About Screen-->
   <fragment

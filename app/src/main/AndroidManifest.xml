@@ -30,7 +30,7 @@
         android:resource="@xml/shortcuts" />
     </activity>
     <activity android:name=".maintabs.about.OpenSourceLicencesFragment" />
-    <activity android:name=".maintabs.settings.SettingsActivity" />
+    <activity android:name=".maintabs.settings.SettingsFragment" />
 
     <receiver android:name=".internal.notification.AlertReceiver" />
     <provider
