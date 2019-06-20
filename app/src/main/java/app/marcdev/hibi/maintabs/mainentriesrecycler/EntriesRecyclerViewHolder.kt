@@ -99,8 +99,6 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
           item.tags.forEach { tagName ->
             val chip = Chip(itemView.context)
             chip.text = tagName
-            chip.scaleX = 0.9f
-            chip.scaleY = 0.9f
             tagChipGroup.addView(chip)
           }
         }
@@ -121,8 +119,6 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
           item.books.forEach { bookName ->
             val chip = Chip(itemView.context)
             chip.text = bookName
-            chip.scaleX = 0.9f
-            chip.scaleY = 0.9f
             bookChipGroup.addView(chip)
           }
         }
