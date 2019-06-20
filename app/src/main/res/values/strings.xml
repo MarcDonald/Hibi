@@ -219,15 +219,18 @@
   <string name="credits">Credits</string>
   <string name="author">Author</string>
   <string name="marc_donald">Marc Donald</string>
-  <string name="privacy_policy">Privacy Policy</string>
-  <string name="privacy_content">This app stores all user data on device and does not send analytics, user data etc. off-device
-    except when searching for a word using the Jisho.org API.
-    \nThis app also uses some Open Source Libraries which may
-    collect information. Please see the Open Source Licenses section for more information about which libraries are used.
-    \nFor more information about Jisho.org, click the button below.
-    \nIf you have any more questions or concerns about this app, you can look at the code on Github or contact marcsdeveloperemail@gmail.com.</string>
-  <string name="visit_jisho">Visit Jisho.org</string>
+  <!--endregion-->
 
+  <!--region Privacy-->
+  <string name="privacy_policy">Privacy Policy</string>
+  <string name="what_analytics">What analytics does Hibi collect?</string>
+  <string name="analytics_answer">Hibi does not collect any analytics.</string>
+  <string name="data_sent">Where is my data sent?</string>
+  <string name="data_sent_answer">Your data is stored completely on-device. The only time data is sent off-device is when searching for a word on the Jisho.org API. When you search for a word, only the search term you entered is sent.</string>
+  <string name="libraries">What libraries are used?</string>
+  <string name="libraries_answer">See the Open Source Libraries section for more information on what libraries are used in this app.</string>
+  <string name="more_information">Where can I find more information?</string>
+  <string name="more_information_answer">For more information you can look at the source code on Github or contact marcsdeveloperemail@gmail.com.</string>
   <!--endregion-->
 
   <!--region OSS Licenses-->

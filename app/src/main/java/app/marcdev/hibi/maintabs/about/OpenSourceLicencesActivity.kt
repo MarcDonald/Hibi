@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.settings
+package app.marcdev.hibi.maintabs.about
 
 import android.content.Intent
 import android.net.Uri
