@@ -2,6 +2,7 @@ package app.marcdev.hibi.data.entity
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 
 @Entity(tableName = "BookEntryRelation",
   primaryKeys = ["bookId", "entryId"],
@@ -20,7 +21,9 @@ import androidx.room.ForeignKey
       onDelete = ForeignKey.CASCADE,
       onUpdate = ForeignKey.CASCADE
     )
-  ])
+  ],
+  indices = [Index(name = "BookEntryRelation_EntryId_Index", value = ["entryId"])]
+)
 data class BookEntryRelation(
   var bookId: Int,
   var entryId: Int

@@ -11,7 +11,9 @@ import app.marcdev.hibi.internal.PRODUCTION_DATABASE_NAME
 import app.marcdev.hibi.internal.PRODUCTION_DATABASE_VERSION
 import timber.log.Timber
 
-@Database(entities = [Entry::class, Tag::class, TagEntryRelation::class, NewWord::class, Book::class, BookEntryRelation::class, EntryImage::class], version = PRODUCTION_DATABASE_VERSION)
+@Database(entities = [Entry::class, Tag::class, TagEntryRelation::class, NewWord::class, Book::class, BookEntryRelation::class, EntryImage::class],
+  version = PRODUCTION_DATABASE_VERSION,
+  exportSchema = false)
 
 abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
   abstract override fun dao(): DAO
@@ -47,6 +49,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
         .addMigrations(MIGRATION_9_TO_10())
         .addMigrations(MIGRATION_10_TO_11())
         .addMigrations(MIGRATION_11_TO_12())
+        .addMigrations(MIGRATION_12_TO_13())
         .build()
 
     class MIGRATION_3_TO_5 : Migration(3, 5) {
@@ -163,6 +166,15 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
     class MIGRATION_11_TO_12 : Migration(11, 12) {
       // This is here because I forgot to add the EntryImage entity to the database in the last version
       override fun migrate(database: SupportSQLiteDatabase) {}
+    }
+
+    class MIGRATION_12_TO_13 : Migration(12, 13) {
+      override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("CREATE INDEX EntryImage_EntryId_Index ON EntryImage (entryId)")
+        database.execSQL("CREATE INDEX BookEntryRelation_EntryId_Index ON BookEntryRelation (entryId)")
+        database.execSQL("CREATE INDEX NewWord_EntryId_Index ON NewWord (entryId)")
+        database.execSQL("CREATE INDEX TagEntryRelation_EntryId_Index ON TagEntryRelation (entryId)")
+      }
     }
   }
 }
