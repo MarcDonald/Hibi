@@ -29,8 +29,7 @@
         android:name="android.app.shortcuts"
         android:resource="@xml/shortcuts" />
     </activity>
-    <activity android:name=".maintabs.about.OpenSourceLicencesActivity" />
-    <activity android:name=".maintabs.about.AboutActivity" />
+    <activity android:name=".maintabs.about.OpenSourceLicencesFragment" />
     <activity android:name=".maintabs.settings.SettingsActivity" />
 
     <receiver android:name=".internal.notification.AlertReceiver" />

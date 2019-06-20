@@ -20,8 +20,9 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
     initVersion()
 
     findPreference("about_oss").onPreferenceClickListener = Preference.OnPreferenceClickListener {
-      val intent = Intent(requireContext(), OpenSourceLicencesActivity::class.java)
-      startActivity(intent)
+      val ossAction = AboutFragmentDirections.ossAction()
+      Navigation.findNavController(requireView()).navigate(ossAction)
+
       true
     }
 
