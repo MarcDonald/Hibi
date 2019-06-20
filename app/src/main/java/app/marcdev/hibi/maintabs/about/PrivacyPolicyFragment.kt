@@ -1,4 +1,4 @@
-package app.marcdev.hibi.maintabs.settings
+package app.marcdev.hibi.maintabs.about
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,13 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import app.marcdev.hibi.R
 
-class SettingsFragment : Fragment() {
-
+class PrivacyPolicyFragment : Fragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val view = inflater.inflate(R.layout.fragment_settings, container, false)
-    view.findViewById<TextView>(R.id.txt_back_toolbar_title).text = resources.getString(R.string.settings)
+    val view = inflater.inflate(R.layout.fragment_privacy, container, false)
+    view.findViewById<TextView>(R.id.txt_back_toolbar_title).text = resources.getString(R.string.privacy_policy)
     view.findViewById<ImageView>(R.id.img_back_toolbar_back).setOnClickListener {
-      Navigation.findNavController(view).popBackStack()
+      Navigation.findNavController(requireView()).popBackStack()
     }
     return view
   }

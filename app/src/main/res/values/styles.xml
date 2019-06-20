@@ -311,6 +311,20 @@
     <item name="android:textAllCaps">false</item>
     <item name="android:letterSpacing">0.0125</item>
   </style>
+
+  <style name="TextAppearance.Hibi.QATitle" parent="TextAppearance.Hibi.Base">
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">24sp</item>
+    <item name="android:letterSpacing">0</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.QAContent" parent="TextAppearance.Hibi.Base">
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:letterSpacing">0.03125</item>
+  </style>
   <!--endregion-->
 
 </resources>

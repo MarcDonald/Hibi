@@ -56,6 +56,20 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/about_action"
+      app:destination="@id/destination_about_screen"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/settings_action"
+      app:destination="@id/destination_settings_screen"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
   <!--endregion -->
 
@@ -167,4 +181,47 @@
       app:argType="string" />
   </fragment>
   <!--endregion-->
+
+  <!--region Settings Screen-->
+  <fragment
+    android:id="@+id/destination_settings_screen"
+    android:name="app.marcdev.hibi.maintabs.settings.SettingsFragment"
+    android:label="SettingsFragment" />
+  <!--endregion -->
+
+  <!--region About Screen-->
+  <fragment
+    android:id="@+id/destination_about_screen"
+    android:name="app.marcdev.hibi.maintabs.about.AboutFragment"
+    android:label="AboutFragment">
+    <action
+      android:id="@+id/privacy_action"
+      app:destination="@+id/destination_privacy_policy"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/oss_action"
+      app:destination="@+id/destination_oss"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+  </fragment>
+  <!--endregion -->
+
+  <!--region OSS Fragment-->
+  <fragment
+    android:id="@+id/destination_oss"
+    android:name="app.marcdev.hibi.maintabs.about.OpenSourceLicencesFragment"
+    android:label="OSSFragment" />
+  <!--endregion -->
+
+  <!--region Privacy Policy-->
+  <fragment
+    android:id="@+id/destination_privacy_policy"
+    android:name="app.marcdev.hibi.maintabs.about.PrivacyPolicyFragment"
+    android:label="PrivacyPolicyFragment" />
+  <!--endregion -->
 </navigation>

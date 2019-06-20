@@ -1,15 +1,16 @@
-package app.marcdev.hibi.maintabs.settings
+package app.marcdev.hibi.maintabs.about
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import app.marcdev.hibi.BuildConfig
 import app.marcdev.hibi.R
 
-class AboutFragment : PreferenceFragmentCompat() {
+class AboutPreferenceFragment : PreferenceFragmentCompat() {
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
     setPreferencesFromResource(R.xml.about, rootKey)
     bindViews()
@@ -19,8 +20,9 @@ class AboutFragment : PreferenceFragmentCompat() {
     initVersion()
 
     findPreference("about_oss").onPreferenceClickListener = Preference.OnPreferenceClickListener {
-      val intent = Intent(requireContext(), OpenSourceLicencesActivity::class.java)
-      startActivity(intent)
+      val ossAction = AboutFragmentDirections.ossAction()
+      Navigation.findNavController(requireView()).navigate(ossAction)
+
       true
     }
 
@@ -30,8 +32,8 @@ class AboutFragment : PreferenceFragmentCompat() {
     }
 
     findPreference("about_privacy").onPreferenceClickListener = Preference.OnPreferenceClickListener {
-      val dialog = PrivacyDialog()
-      dialog.show(requireFragmentManager(), "Privacy Dialog")
+      val privacyAction = AboutFragmentDirections.privacyAction()
+      Navigation.findNavController(requireView()).navigate(privacyAction)
       true
     }
 
