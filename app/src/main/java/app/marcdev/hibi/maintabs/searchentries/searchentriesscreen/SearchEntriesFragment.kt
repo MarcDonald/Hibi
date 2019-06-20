@@ -356,7 +356,7 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
           displayTag.text = tag.name
           displayTag.itemId = tag.id
           displayTag.isCheckable = true
-          if(themeUtils.isDarkMode()) {
+          if(!themeUtils.isLightMode()) {
             displayTag.setChipBackgroundColorResource(R.color.darkThemeDarkChipBackground)
           }
           tagChipGroup.addView(displayTag)
@@ -385,7 +385,7 @@ class SearchEntriesFragment : Fragment(), KodeinAware {
           displayBook.text = book.name
           displayBook.itemId = book.id
           displayBook.isCheckable = true
-          if(themeUtils.isDarkMode()) {
+          if(!themeUtils.isLightMode()) {
             displayBook.setChipBackgroundColorResource(R.color.darkThemeDarkChipBackground)
           }
           bookChipGroup.addView(displayBook)

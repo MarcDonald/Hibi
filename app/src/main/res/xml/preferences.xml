@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
   <PreferenceCategory android:title="@string/appearance">
     <SwitchPreference
-      android:defaultValue="false"
+      android:defaultValue="true"
       android:icon="@drawable/ic_brightness_3_24dp"
       android:key="pref_dark_theme"
       android:title="@string/theme_pref_title" />
