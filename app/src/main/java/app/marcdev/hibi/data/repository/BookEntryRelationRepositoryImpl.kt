@@ -6,8 +6,8 @@ import app.marcdev.hibi.data.database.DAO
 import app.marcdev.hibi.data.entity.Book
 import app.marcdev.hibi.data.entity.BookEntryRelation
 import app.marcdev.hibi.data.entity.Entry
-import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BookDisplayItem
-import app.marcdev.hibi.maintabs.mainentriesrecycler.BookEntryDisplayItem
+import app.marcdev.hibi.mainscreens.booksfragment.mainbooksfragment.BookDisplayItem
+import app.marcdev.hibi.mainscreens.mainentriesrecycler.BookEntryDisplayItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber

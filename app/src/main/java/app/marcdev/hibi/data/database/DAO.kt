@@ -3,10 +3,10 @@ package app.marcdev.hibi.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import app.marcdev.hibi.data.entity.*
-import app.marcdev.hibi.maintabs.booksfragment.mainbooksfragment.BookDisplayItem
-import app.marcdev.hibi.maintabs.mainentriesrecycler.BookEntryDisplayItem
-import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
-import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
+import app.marcdev.hibi.mainscreens.booksfragment.mainbooksfragment.BookDisplayItem
+import app.marcdev.hibi.mainscreens.mainentriesrecycler.BookEntryDisplayItem
+import app.marcdev.hibi.mainscreens.mainentriesrecycler.TagEntryDisplayItem
+import app.marcdev.hibi.mainscreens.tagsfragment.maintagsfragment.TagDisplayItem
 
 @Dao
 interface DAO {

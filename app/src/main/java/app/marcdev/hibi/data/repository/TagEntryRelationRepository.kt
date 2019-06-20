@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import app.marcdev.hibi.data.entity.Entry
 import app.marcdev.hibi.data.entity.Tag
 import app.marcdev.hibi.data.entity.TagEntryRelation
-import app.marcdev.hibi.maintabs.mainentriesrecycler.TagEntryDisplayItem
-import app.marcdev.hibi.maintabs.tagsfragment.maintagsfragment.TagDisplayItem
+import app.marcdev.hibi.mainscreens.mainentriesrecycler.TagEntryDisplayItem
+import app.marcdev.hibi.mainscreens.tagsfragment.maintagsfragment.TagDisplayItem
 
 interface TagEntryRelationRepository {
 

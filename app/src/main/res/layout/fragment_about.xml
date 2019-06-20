@@ -16,7 +16,7 @@
 
   <fragment
     android:id="@+id/about_preference_fragment"
-    android:name="app.marcdev.hibi.maintabs.about.AboutPreferenceFragment"
+    android:name="app.marcdev.hibi.mainscreens.about.AboutPreferenceFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />

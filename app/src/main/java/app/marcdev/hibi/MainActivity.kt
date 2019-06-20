@@ -7,7 +7,7 @@ import app.marcdev.hibi.internal.ADD_ENTRY_NOTIFICATION_INTENT_ACTION
 import app.marcdev.hibi.internal.ADD_ENTRY_SHORTCUT_INTENT_ACTION
 import app.marcdev.hibi.internal.REMINDER_NOTIFICATION_ID
 import app.marcdev.hibi.internal.base.HibiActivity
-import app.marcdev.hibi.maintabs.MainScreenFragmentDirections
+import app.marcdev.hibi.mainscreens.MainScreenFragmentDirections
 import timber.log.Timber
 
 class MainActivity : HibiActivity() {
