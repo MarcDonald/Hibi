@@ -32,18 +32,18 @@ An app for Android designed to aid your Japanese learning through keeping a jour
 ## Screenshots
 | Main Screen | Main Screen Dark | Add Entry |
 |:-:|:-:|:-:|
-| ![Main Screen](/.github/assets/main-display-light.png?raw=true) | ![Dark Theme](/.github/assets/main-display-dark.png?raw=true) |![Add entry](/.github/assets/add-entry-dark.png?raw=true)
+| ![Main Screen](/.github/assets/main-display-light.png?raw=true) | ![Dark Theme](/.github/assets/main-display-dark.png?raw=true) |![Add entry](/.github/assets/add-entry.png?raw=true)
 
-| Search Jisho | Add Tags | Add New Words |
+| Search Jisho | More Info | Add New Words |
 |:-:|:-:|:-:|
-| ![Search Jisho](/.github/assets/search-jisho-dark.png?raw=true) | ![Add Tags](/.github/assets/add-tags-dark.png?raw=true) | ![Add New Words](/.github/assets/new-word-dark.png?raw=true)
+| ![Search Jisho](/.github/assets/search-jisho.png?raw=true) | ![More Info](/.github/assets/search-jisho-more.png?raw=true) | ![Add New Words](/.github/assets/add-words.png?raw=true)
 
-| Search Entries | View Entry |
+| Add Tags | Search Entries |
 |:-:|:-:|
-| ![Search Entries](/.github/assets/search-entries-dark.png?raw=true) | ![View Entry](/.github/assets/view-entry-dark.png?raw=true) |
+| ![Add Tags](/.github/assets/add-tags.png?raw=true) | ![Search Entries](/.github/assets/search-entries.png?raw=true) |
 
 ## Tech and Architecture
-Written in Kotlin and employing an MVVM architecture pattern using [AndroidX View Model](https://developer.android.com/topic/libraries/architecture/viewmodel) components. Navigation is handled by the [AndroidX Navigation Components](https://developer.android.com/guide/navigation/). Data is stored using a [Room](https://developer.android.com/jetpack/androidx/releases/room) database and then retrieved asynchronously using Kotlin coroutines and [LiveData](https://developer.android.com/topic/libraries/architecture/livedata). [Kodein](https://github.com/Kodein-Framework/Kodein-DI) is used for dependency injection due to it's native support for Kotlin and it's ease of writing. API calls are made using [Retrofit](https://github.com/square/retrofit) and then converted into Kotlin objects using [Gson](https://github.com/google/gson). Design inspired by [Material Design](https://material.io/) and implemented using [Material Components for Android](https://github.com/material-components/material-components-android).
+Hibi is written entirely in Kotlin and employs an MVVM architecture pattern using [AndroidX View Model](https://developer.android.com/topic/libraries/architecture/viewmodel) components. Navigation is handled by the [AndroidX Navigation Components](https://developer.android.com/guide/navigation/). Data is stored using a [Room](https://developer.android.com/jetpack/androidx/releases/room) database and then retrieved asynchronously using Kotlin coroutines and [LiveData](https://developer.android.com/topic/libraries/architecture/livedata). [Kodein](https://github.com/Kodein-Framework/Kodein-DI) is used for dependency injection due to it's native support for Kotlin and it's ease of writing. API calls are made using [Retrofit](https://github.com/square/retrofit) and then converted into Kotlin objects using [Gson](https://github.com/google/gson). Design inspired by [Material Design](https://material.io/) and implemented using [Material Components for Android](https://github.com/material-components/material-components-android).
 
 ## Open Source Libraries Used
 ### [Timber](https://github.com/JakeWharton/timber)
