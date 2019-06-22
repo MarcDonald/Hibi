@@ -7,7 +7,7 @@
   <!--region Main Screen-->
   <fragment
     android:id="@+id/destination_main_screen"
-    android:name="app.marcdev.hibi.mainscreens.MainScreenFragment"
+    android:name="com.marcdonald.hibi.mainscreens.MainScreenFragment"
     android:label="MainScreenFragment">
     <action
       android:id="@+id/add_entry_action"
@@ -76,7 +76,7 @@
   <!--region Add Entry-->
   <fragment
     android:id="@+id/destination_add_entry"
-    android:name="app.marcdev.hibi.mainscreens.entryscreens.addentryscreen.AddEntryFragment"
+    android:name="com.marcdonald.hibi.mainscreens.entryscreens.addentryscreen.AddEntryFragment"
     android:label="AddEntryFragment">
     <argument
       android:name="entryId"
@@ -88,7 +88,7 @@
   <!--region View Entry-->
   <fragment
     android:id="@+id/destination_view_entry"
-    android:name="app.marcdev.hibi.mainscreens.entryscreens.viewentryscreen.ViewEntryFragment"
+    android:name="com.marcdonald.hibi.mainscreens.entryscreens.viewentryscreen.ViewEntryFragment"
     android:label="ViewEntryFragment">
     <argument
       android:name="entryId"
@@ -114,7 +114,7 @@
   <!--region Tagged Entries-->
   <fragment
     android:id="@+id/destination_tagged_entries"
-    android:name="app.marcdev.hibi.mainscreens.tagsfragment.taggedentriesfragment.TaggedEntriesFragment"
+    android:name="com.marcdonald.hibi.mainscreens.tagsfragment.taggedentriesfragment.TaggedEntriesFragment"
     android:label="TaggedEntriesFragment">
     <argument
       android:name="tagID"
@@ -136,7 +136,7 @@
   <!--region Book Entries-->
   <fragment
     android:id="@+id/destination_book_entries"
-    android:name="app.marcdev.hibi.mainscreens.booksfragment.bookentriesfragment.BookEntriesFragment"
+    android:name="com.marcdonald.hibi.mainscreens.booksfragment.bookentriesfragment.BookEntriesFragment"
     android:label="BookEntriesFragment">
     <argument
       android:name="bookID"
@@ -158,7 +158,7 @@
   <!--region Search Entries-->
   <fragment
     android:id="@+id/destination_search_entries"
-    android:name="app.marcdev.hibi.mainscreens.searchentries.searchentriesscreen.SearchEntriesFragment"
+    android:name="com.marcdonald.hibi.mainscreens.searchentries.searchentriesscreen.SearchEntriesFragment"
     android:label="SearchEntriesFragment">
     <action
       android:id="@+id/view_entry_action"
@@ -174,7 +174,7 @@
   </fragment>
   <fragment
     android:id="@+id/destination_fullscreen_image"
-    android:name="app.marcdev.hibi.mainscreens.entryscreens.viewentryscreen.FullscreenImageFragment"
+    android:name="com.marcdonald.hibi.mainscreens.entryscreens.viewentryscreen.FullscreenImageFragment"
     android:label="FullscreenImageFragment">
     <argument
       android:name="image_path"
@@ -185,14 +185,14 @@
   <!--region Settings Screen-->
   <fragment
     android:id="@+id/destination_settings_screen"
-    android:name="app.marcdev.hibi.mainscreens.settings.SettingsFragment"
+    android:name="com.marcdonald.hibi.mainscreens.settings.SettingsFragment"
     android:label="SettingsFragment" />
   <!--endregion -->
 
   <!--region About Screen-->
   <fragment
     android:id="@+id/destination_about_screen"
-    android:name="app.marcdev.hibi.mainscreens.about.AboutFragment"
+    android:name="com.marcdonald.hibi.mainscreens.about.AboutFragment"
     android:label="AboutFragment">
     <action
       android:id="@+id/privacy_action"
@@ -214,14 +214,14 @@
   <!--region OSS Fragment-->
   <fragment
     android:id="@+id/destination_oss"
-    android:name="app.marcdev.hibi.mainscreens.about.OpenSourceLicencesFragment"
+    android:name="com.marcdonald.hibi.mainscreens.about.OpenSourceLicencesFragment"
     android:label="OSSFragment" />
   <!--endregion -->
 
   <!--region Privacy Policy-->
   <fragment
     android:id="@+id/destination_privacy_policy"
-    android:name="app.marcdev.hibi.mainscreens.about.PrivacyPolicyFragment"
+    android:name="com.marcdonald.hibi.mainscreens.about.PrivacyPolicyFragment"
     android:label="PrivacyPolicyFragment" />
   <!--endregion -->
 </navigation>
