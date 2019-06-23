@@ -94,6 +94,12 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
     return dao.getLocationLD(entryId)
   }
 
+  override suspend fun getAllYears(): List<Int> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getAllYears()
+    }
+  }
+
   companion object {
     @Volatile private var instance: EntryRepositoryImpl? = null
 

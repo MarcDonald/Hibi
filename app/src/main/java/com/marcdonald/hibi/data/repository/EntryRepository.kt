@@ -27,4 +27,6 @@ interface EntryRepository {
   suspend fun getLocation(entryId: Int): String
 
   fun getLocationLD(entryId: Int): LiveData<String>
+
+  suspend fun getAllYears(): List<Int>
 }

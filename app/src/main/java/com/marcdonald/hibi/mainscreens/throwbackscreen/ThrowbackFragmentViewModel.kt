@@ -46,9 +46,11 @@ class ThrowbackFragmentViewModel(private val entryRepository: EntryRepository,
 
   private suspend fun getDisplayItems() {
     val lastMonthEntries = getMonthThrowbackEntries()
+    val lastYearEntries = getYearThrowbackEntries()
+    val allEntries = lastMonthEntries + lastYearEntries
     val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
     val bookEntryDisplayItems = bookEntryRelationRepository.getBookEntryDisplayItems()
-    _entries.value = combineData(lastMonthEntries, tagEntryDisplayItems, bookEntryDisplayItems)
+    _entries.value = combineData(allEntries, tagEntryDisplayItems, bookEntryDisplayItems)
   }
 
   private suspend fun getMonthThrowbackEntries(): List<Entry> {
@@ -70,6 +72,34 @@ class ThrowbackFragmentViewModel(private val entryRepository: EntryRepository,
     }
 
     return returnList
+  }
+
+  private suspend fun getYearThrowbackEntries(): List<Entry> {
+    val returnList = mutableListOf<Entry>()
+    val dateToRetrieve = today.clone() as Calendar
+    entryRepository.getAllYears().forEach { year ->
+      if(year != today.get(Calendar.YEAR)) {
+        if(isDateOnPreviousYearValid(year)) {
+          dateToRetrieve.set(Calendar.YEAR, year)
+          val entriesOnDate = entryRepository.getEntriesOnDate(dateToRetrieve)
+          returnList.addAll(entriesOnDate)
+        }
+      }
+    }
+    return returnList
+  }
+
+  private fun isDateOnPreviousYearValid(year: Int): Boolean {
+    val calendarToCheck = today.clone() as Calendar
+    // Need to set day to 1 as if it's 31 and the last month has 30 days it doesn't behave as expected
+    if(calendarToCheck.get(Calendar.MONTH) == 1 && calendarToCheck.get(Calendar.DAY_OF_MONTH) == 29) {
+      calendarToCheck.set(Calendar.DAY_OF_MONTH, 1)
+      calendarToCheck.set(Calendar.YEAR, year)
+      if(calendarToCheck.getActualMaximum(Calendar.DAY_OF_YEAR) == 365) {
+        return false
+      }
+    }
+    return true
   }
 
   private suspend fun getLastDecemberEntries(): List<Entry> {

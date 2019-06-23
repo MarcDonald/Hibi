@@ -48,6 +48,9 @@ interface DAO {
 
   @Query("SELECT location FROM Entry WHERE id = :entryId")
   fun getLocationLD(entryId: Int): LiveData<String>
+
+  @Query("SELECT DISTINCT year FROM Entry ORDER BY year")
+  fun getAllYears(): List<Int>
   // </editor-fold>
 
   // <editor-fold desc="Tag">
