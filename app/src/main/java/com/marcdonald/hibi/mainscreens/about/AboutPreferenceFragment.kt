@@ -43,7 +43,7 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
     }
 
     findPreference("about_author").onPreferenceClickListener = Preference.OnPreferenceClickListener {
-      launchURL("https://github.com/MarcDonald/")
+      launchURL("https://marcdonald.com")
       true
     }
   }
