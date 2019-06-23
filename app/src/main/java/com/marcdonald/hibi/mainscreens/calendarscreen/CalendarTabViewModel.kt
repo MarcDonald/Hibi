@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.calendarfragment
+package com.marcdonald.hibi.mainscreens.calendarscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

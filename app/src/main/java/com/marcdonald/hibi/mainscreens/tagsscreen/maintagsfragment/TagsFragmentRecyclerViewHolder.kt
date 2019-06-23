@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.tagsfragment.maintagsfragment
+package com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment
 
 import android.os.Bundle
 import android.view.View

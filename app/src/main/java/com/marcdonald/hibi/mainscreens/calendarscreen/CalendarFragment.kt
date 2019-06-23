@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.calendarfragment
+package com.marcdonald.hibi.mainscreens.calendarscreen
 
 import android.os.Bundle
 import android.preference.PreferenceManager

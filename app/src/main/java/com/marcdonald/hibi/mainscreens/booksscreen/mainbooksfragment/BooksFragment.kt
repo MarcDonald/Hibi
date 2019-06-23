@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.tagsfragment.maintagsfragment
+package com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment
 
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -19,27 +19,26 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-
-class TagsFragment : Fragment(), KodeinAware {
+class BooksFragment : Fragment(), KodeinAware {
   override val kodein by closestKodein()
 
   // <editor-fold desc="View Model">
-  private val viewModelFactory: TagsFragmentViewModelFactory by instance()
-  private lateinit var viewModel: TagsFragmentViewModel
+  private val viewModelFactory: BooksFragmentViewModelFactory by instance()
+  private lateinit var viewModel: BooksFragmentViewModel
   // </editor-fold>
 
   // <editor-fold desc="UI Components">
   private lateinit var loadingDisplay: ConstraintLayout
   private lateinit var noResults: ConstraintLayout
-  private lateinit var recyclerAdapter: TagsRecyclerAdapter
+  private lateinit var recyclerAdapter: BooksRecyclerAdapter
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(TagsFragmentViewModel::class.java)
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(BooksFragmentViewModel::class.java)
   }
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val view = inflater.inflate(R.layout.fragment_tags, container, false)
+    val view = inflater.inflate(R.layout.fragment_books, container, false)
     bindViews(view)
     initRecycler(view)
     setupObservers()
@@ -47,13 +46,13 @@ class TagsFragment : Fragment(), KodeinAware {
   }
 
   private fun bindViews(view: View) {
-    loadingDisplay = view.findViewById(R.id.const_tags_loading)
-    noResults = view.findViewById(R.id.const_no_tags)
+    loadingDisplay = view.findViewById(R.id.const_books_loading)
+    noResults = view.findViewById(R.id.const_no_books)
   }
 
   private fun initRecycler(view: View) {
-    val recycler: RecyclerView = view.findViewById(R.id.recycler_tags)
-    this.recyclerAdapter = TagsRecyclerAdapter(requireContext(), requireFragmentManager())
+    val recycler: RecyclerView = view.findViewById(R.id.recycler_books)
+    this.recyclerAdapter = BooksRecyclerAdapter(requireContext(), requireFragmentManager())
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager
@@ -66,7 +65,7 @@ class TagsFragment : Fragment(), KodeinAware {
   }
 
   private fun setupObservers() {
-    viewModel.tags.observe(this, Observer { value ->
+    viewModel.books.observe(this, Observer { value ->
       value?.let { list ->
         viewModel.listReceived(list.isEmpty())
         recyclerAdapter.updateList(list)

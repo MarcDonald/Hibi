@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.booksfragment.mainbooksfragment
+package com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

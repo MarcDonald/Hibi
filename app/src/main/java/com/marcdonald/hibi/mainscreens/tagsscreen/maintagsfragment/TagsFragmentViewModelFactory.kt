@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.tagsfragment.maintagsfragment
+package com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

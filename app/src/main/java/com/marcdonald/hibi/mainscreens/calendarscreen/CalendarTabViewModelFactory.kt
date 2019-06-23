@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.calendarfragment
+package com.marcdonald.hibi.mainscreens.calendarscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

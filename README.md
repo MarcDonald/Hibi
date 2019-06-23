@@ -27,7 +27,7 @@ An app for Android designed to aid your Japanese learning through keeping a jour
 - Search your entries based on date, content, location, tags or books
 - Daily reminder to add an entry
 - Ability to backup and restore your data
-- Dark theme
+- Dark theme and Light theme
 
 ## Screenshots
 | Main Screen | Main Screen Dark | Add Entry |

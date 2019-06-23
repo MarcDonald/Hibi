@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.tagsfragment.taggedentriesfragment
+package com.marcdonald.hibi.mainscreens.tagsscreen.taggedentriesfragment
 
 import android.os.Bundle
 import android.preference.PreferenceManager

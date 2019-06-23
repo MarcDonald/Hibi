@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.booksfragment.bookentriesfragment
+package com.marcdonald.hibi.mainscreens.booksscreen.bookentriesfragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

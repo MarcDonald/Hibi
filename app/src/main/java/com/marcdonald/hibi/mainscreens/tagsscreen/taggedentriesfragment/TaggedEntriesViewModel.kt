@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.tagsfragment.taggedentriesfragment
+package com.marcdonald.hibi.mainscreens.tagsscreen.taggedentriesfragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -18,6 +18,24 @@
       android:orientation="vertical">
 
       <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_main_menu_throwback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/throwback"
+        android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_event_24dp"
+        app:iconPadding="@dimen/margin_standard"
+        app:iconTint="?attr/hibiPrimaryIconTint" />
+
+      <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
+        android:background="@drawable/divider_standard" />
+
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_main_menu_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

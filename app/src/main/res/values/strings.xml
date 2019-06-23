@@ -168,6 +168,10 @@
   <string name="shortcut_add">Add Entry</string>
   <!--endregion-->
 
+  <!--region Throwback-->
+  <string name="throwback">Throwback</string>
+  <!--endregion-->
+
   <!--region Settings-->
   <string name="settings">Settings</string>
   <string name="behaviour">Behaviour</string>

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.marcdonald.hibi.data.entity.Book
 import com.marcdonald.hibi.data.entity.BookEntryRelation
 import com.marcdonald.hibi.data.entity.Entry
-import com.marcdonald.hibi.mainscreens.booksfragment.mainbooksfragment.BookDisplayItem
+import com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment.BookDisplayItem
 import com.marcdonald.hibi.mainscreens.mainentriesrecycler.BookEntryDisplayItem
 
 interface BookEntryRelationRepository {

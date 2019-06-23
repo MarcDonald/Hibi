@@ -70,6 +70,14 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/throwback_action"
+      app:destination="@id/destination_throwback"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:launchSingleTop="false"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
   <!--endregion -->
 
@@ -114,7 +122,7 @@
   <!--region Tagged Entries-->
   <fragment
     android:id="@+id/destination_tagged_entries"
-    android:name="com.marcdonald.hibi.mainscreens.tagsfragment.taggedentriesfragment.TaggedEntriesFragment"
+    android:name="com.marcdonald.hibi.mainscreens.tagsscreen.taggedentriesfragment.TaggedEntriesFragment"
     android:label="TaggedEntriesFragment">
     <argument
       android:name="tagID"
@@ -136,7 +144,7 @@
   <!--region Book Entries-->
   <fragment
     android:id="@+id/destination_book_entries"
-    android:name="com.marcdonald.hibi.mainscreens.booksfragment.bookentriesfragment.BookEntriesFragment"
+    android:name="com.marcdonald.hibi.mainscreens.booksscreen.bookentriesfragment.BookEntriesFragment"
     android:label="BookEntriesFragment">
     <argument
       android:name="bookID"
@@ -180,6 +188,13 @@
       android:name="image_path"
       app:argType="string" />
   </fragment>
+  <!--endregion-->
+
+  <!--region Throwback Screen-->
+  <fragment
+    android:id="@+id/destination_throwback"
+    android:name="com.marcdonald.hibi.mainscreens.throwbackscreen.ThrowbackFragment"
+    android:label="SearchEntriesFragment" />
   <!--endregion-->
 
   <!--region Settings Screen-->

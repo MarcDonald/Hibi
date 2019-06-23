@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.booksfragment.mainbooksfragment
+package com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment
 
 import android.os.Bundle
 import android.view.View
