@@ -2,6 +2,7 @@ package com.marcdonald.hibi.data.repository
 
 import androidx.lifecycle.LiveData
 import com.marcdonald.hibi.data.entity.Entry
+import java.util.*
 
 interface EntryRepository {
 
@@ -18,6 +19,8 @@ interface EntryRepository {
   suspend fun getLastEntryId(): Int
 
   suspend fun getEntriesOnDate(year: Int, month: Int, day: Int): List<Entry>
+
+  suspend fun getEntriesOnDate(calendar: Calendar): List<Entry>
 
   suspend fun saveLocation(entryId: Int, location: String)
 

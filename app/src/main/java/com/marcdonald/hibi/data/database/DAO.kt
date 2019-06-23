@@ -37,7 +37,7 @@ interface DAO {
   @Query("SELECT id FROM Entry ORDER BY id DESC LIMIT 1")
   fun getLastEntryId(): Int
 
-  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day")
+  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
   fun getEntriesOnDate(year: Int, month: Int, day: Int): List<Entry>
 
   @Query("UPDATE Entry SET location = :location WHERE id = :entryId")

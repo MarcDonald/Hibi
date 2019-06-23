@@ -8,6 +8,7 @@ import com.marcdonald.hibi.internal.utils.FileUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.*
 
 class EntryRepositoryImpl private constructor(private val dao: DAO, private val fileUtils: FileUtils) : EntryRepository {
 
@@ -64,6 +65,16 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
   override suspend fun getEntriesOnDate(year: Int, month: Int, day: Int): List<Entry> {
     return withContext(Dispatchers.IO) {
       return@withContext dao.getEntriesOnDate(year, month, day)
+    }
+  }
+
+  override suspend fun getEntriesOnDate(calendar: Calendar): List<Entry> {
+    return withContext(Dispatchers.IO) {
+      return@withContext getEntriesOnDate(
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+      )
     }
   }
 
