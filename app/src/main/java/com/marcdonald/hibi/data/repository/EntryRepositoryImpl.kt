@@ -120,6 +120,20 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
     }
   }
 
+  override suspend fun getEntriesOnDate(calendar: Calendar, ascending: Boolean): List<Entry> {
+    if(ascending) {
+      return withContext(Dispatchers.IO) {
+        return@withContext dao.getEntriesOnDateAscending(
+          calendar.get(Calendar.YEAR),
+          calendar.get(Calendar.MONTH),
+          calendar.get(Calendar.DAY_OF_MONTH)
+        )
+      }
+    } else {
+      return getEntriesOnDate(calendar)
+    }
+  }
+
   companion object {
     @Volatile private var instance: EntryRepositoryImpl? = null
 

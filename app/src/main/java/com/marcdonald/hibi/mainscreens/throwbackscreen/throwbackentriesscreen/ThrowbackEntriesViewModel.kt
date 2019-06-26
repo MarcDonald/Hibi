@@ -58,8 +58,7 @@ class ThrowbackEntriesViewModel(private val entryRepository: EntryRepository,
   }
 
   private suspend fun getMainEntryDisplayItems() {
-    // TODO invert order
-    val entries = entryRepository.getEntriesOnDate(dateToRetrieve)
+    val entries = entryRepository.getEntriesOnDate(dateToRetrieve, true)
     val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
     val bookEntryDisplayItem = bookEntryRelationRepository.getBookEntryDisplayItems()
     _entries.value = combineData(entries, tagEntryDisplayItems, bookEntryDisplayItem)

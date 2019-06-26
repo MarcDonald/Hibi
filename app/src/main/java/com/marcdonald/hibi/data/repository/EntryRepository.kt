@@ -22,6 +22,8 @@ interface EntryRepository {
 
   suspend fun getEntriesOnDate(calendar: Calendar): List<Entry>
 
+  suspend fun getEntriesOnDate(calendar: Calendar, ascending: Boolean): List<Entry>
+
   suspend fun saveLocation(entryId: Int, location: String)
 
   suspend fun getLocation(entryId: Int): String

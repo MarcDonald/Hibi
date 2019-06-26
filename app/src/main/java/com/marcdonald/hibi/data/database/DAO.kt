@@ -40,6 +40,9 @@ interface DAO {
   @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
   fun getEntriesOnDate(year: Int, month: Int, day: Int): List<Entry>
 
+  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day ORDER BY year ASC, month ASC, day ASC, hour ASC, minute ASC, id ASC")
+  fun getEntriesOnDateAscending(year: Int, month: Int, day: Int): List<Entry>
+
   @Query("UPDATE Entry SET location = :location WHERE id = :entryId")
   fun setLocation(entryId: Int, location: String)
 
