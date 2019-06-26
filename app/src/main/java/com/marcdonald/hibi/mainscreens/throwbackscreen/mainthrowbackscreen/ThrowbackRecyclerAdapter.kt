@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.throwbackscreen
+package com.marcdonald.hibi.mainscreens.throwbackscreen.mainthrowbackscreen
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,9 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 
-class ThrowbackRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ThrowbackRecyclerViewHolder>() {
+class ThrowbackRecyclerAdapter(private val context: Context,
+                               private val onClick: (day: Int, month: Int, year: Int) -> Unit)
+  : RecyclerView.Adapter<ThrowbackRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
   private var items: List<ThrowbackDisplayItem> = listOf()
@@ -16,7 +18,7 @@ class ThrowbackRecyclerAdapter(private val context: Context) : RecyclerView.Adap
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThrowbackRecyclerViewHolder {
     val view = inflater.inflate(R.layout.item_throwback, parent, false)
-    return ThrowbackRecyclerViewHolder(view)
+    return ThrowbackRecyclerViewHolder(view, onClick)
   }
 
   override fun getItemCount(): Int {

@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.throwbackscreen
+package com.marcdonald.hibi.mainscreens.throwbackscreen.mainthrowbackscreen
 
 import com.marcdonald.hibi.mainscreens.mainentriesrecycler.MainEntriesDisplayItem
 

@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.throwbackscreen
+package com.marcdonald.hibi.mainscreens.throwbackscreen.mainthrowbackscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

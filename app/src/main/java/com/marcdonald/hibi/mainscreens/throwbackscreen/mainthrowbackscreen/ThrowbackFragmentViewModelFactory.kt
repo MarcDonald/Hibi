@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.throwbackscreen
+package com.marcdonald.hibi.mainscreens.throwbackscreen.mainthrowbackscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

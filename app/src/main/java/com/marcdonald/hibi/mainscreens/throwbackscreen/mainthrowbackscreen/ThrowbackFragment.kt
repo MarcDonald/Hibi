@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.throwbackscreen
+package com.marcdonald.hibi.mainscreens.throwbackscreen.mainthrowbackscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -61,7 +61,7 @@ class ThrowbackFragment : Fragment(), KodeinAware {
 
   private fun initRecycler(view: View) {
     val recycler: RecyclerView = view.findViewById(R.id.recycler_throwback)
-    this.recyclerAdapter = ThrowbackRecyclerAdapter(requireContext())
+    this.recyclerAdapter = ThrowbackRecyclerAdapter(requireContext(), ::onItemClick)
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager
@@ -85,5 +85,10 @@ class ThrowbackFragment : Fragment(), KodeinAware {
         recyclerAdapter.updateList(items)
       }
     })
+  }
+
+  private fun onItemClick(day: Int, month: Int, year: Int) {
+    val action = ThrowbackFragmentDirections.throwbackEntriesAction(day, month, year)
+    Navigation.findNavController(requireParentFragment().requireView()).navigate(action)
   }
 }

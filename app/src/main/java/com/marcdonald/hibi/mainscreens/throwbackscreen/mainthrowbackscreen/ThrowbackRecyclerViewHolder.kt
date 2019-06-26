@@ -1,4 +1,4 @@
-package com.marcdonald.hibi.mainscreens.throwbackscreen
+package com.marcdonald.hibi.mainscreens.throwbackscreen.mainthrowbackscreen
 
 import android.preference.PreferenceManager
 import android.view.View
@@ -16,7 +16,8 @@ import com.marcdonald.hibi.internal.utils.formatDateForDisplay
 import com.marcdonald.hibi.internal.utils.formatTimeForDisplay
 import java.util.*
 
-class ThrowbackRecyclerViewHolder(itemView: View)
+class ThrowbackRecyclerViewHolder(itemView: View,
+                                  onClick: (day: Int, month: Int, year: Int) -> Unit)
   : RecyclerView.ViewHolder(itemView) {
 
   // <editor-fold desc="UI Components">
@@ -34,6 +35,14 @@ class ThrowbackRecyclerViewHolder(itemView: View)
   private var displayedItem: ThrowbackDisplayItem? = null
   private val prefs = PreferenceManager.getDefaultSharedPreferences(itemView.context)
   // </editor-fold>
+
+  init {
+    itemView.findViewById<LinearLayout>(R.id.lin_throwback).setOnClickListener {
+      displayedItem?.let { item ->
+        onClick(item.entryDisplayItem.entry.day, item.entryDisplayItem.entry.month, item.entryDisplayItem.entry.year)
+      }
+    }
+  }
 
   fun display(item: ThrowbackDisplayItem) {
     this.displayedItem = item

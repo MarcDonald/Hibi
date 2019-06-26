@@ -29,7 +29,8 @@ import com.marcdonald.hibi.mainscreens.settings.restoredialog.RestoreDialogViewM
 import com.marcdonald.hibi.mainscreens.settings.updatedialog.UpdateDialogViewModelFactory
 import com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment.TagsFragmentViewModelFactory
 import com.marcdonald.hibi.mainscreens.tagsscreen.taggedentriesfragment.TaggedEntriesViewModelFactory
-import com.marcdonald.hibi.mainscreens.throwbackscreen.ThrowbackFragmentViewModelFactory
+import com.marcdonald.hibi.mainscreens.throwbackscreen.mainthrowbackscreen.ThrowbackFragmentViewModelFactory
+import com.marcdonald.hibi.mainscreens.throwbackscreen.throwbackentriesscreen.ThrowbackEntriesViewModelFactory
 import com.marcdonald.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
 import com.marcdonald.hibi.search.searchresults.SearchViewModelFactory
 import com.marcdonald.hibi.uicomponents.addbookdialog.AddBookViewModelFactory
@@ -100,6 +101,7 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { RestoreDialogViewModelFactory(instance(), instance()) }
     bind() from provider { UpdateDialogViewModelFactory(instance()) }
     bind() from provider { ThrowbackFragmentViewModelFactory(instance(), instance(), instance()) }
+    bind() from provider { ThrowbackEntriesViewModelFactory(instance(), instance(), instance()) }
     // </editor-fold>
   }
 
