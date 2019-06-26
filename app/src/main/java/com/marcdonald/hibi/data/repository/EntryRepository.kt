@@ -29,4 +29,8 @@ interface EntryRepository {
   fun getLocationLD(entryId: Int): LiveData<String>
 
   suspend fun getAllYears(): List<Int>
+
+  suspend fun getFirstEntryOnDate(calendar: Calendar): Entry?
+
+  suspend fun getAmountOfEntriesOnDate(calendar: Calendar): Int
 }

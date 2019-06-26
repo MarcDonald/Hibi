@@ -11,14 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
-import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
 import com.marcdonald.hibi.internal.extension.show
-import com.marcdonald.hibi.mainscreens.mainentriesrecycler.EntriesRecyclerAdapter
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -35,7 +31,7 @@ class ThrowbackFragment : Fragment(), KodeinAware {
   // <editor-fold desc="UI Components">
   private lateinit var loadingDisplay: ConstraintLayout
   private lateinit var noEntriesDisplay: ConstraintLayout
-  private lateinit var recyclerAdapter: EntriesRecyclerAdapter
+  private lateinit var recyclerAdapter: ThrowbackRecyclerAdapter
   // </editor-fold>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,16 +61,10 @@ class ThrowbackFragment : Fragment(), KodeinAware {
 
   private fun initRecycler(view: View) {
     val recycler: RecyclerView = view.findViewById(R.id.recycler_throwback)
-    this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
+    this.recyclerAdapter = ThrowbackRecyclerAdapter(requireContext())
     val layoutManager = LinearLayoutManager(context)
     recycler.adapter = recyclerAdapter
     recycler.layoutManager = layoutManager
-
-    val includeEntryDividers = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_ENTRY_DIVIDERS, true)
-    if(includeEntryDividers) {
-      val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
-      recycler.addItemDecoration(dividerItemDecoration)
-    }
   }
 
   private fun setupObservers() {
@@ -90,7 +80,7 @@ class ThrowbackFragment : Fragment(), KodeinAware {
       }
     })
 
-    viewModel.entries.observe(this, Observer { items ->
+    viewModel.displayItems.observe(this, Observer { items ->
       items?.let {
         recyclerAdapter.updateList(items)
       }

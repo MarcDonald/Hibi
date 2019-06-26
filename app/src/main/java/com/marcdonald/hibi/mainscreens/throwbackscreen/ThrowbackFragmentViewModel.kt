@@ -4,16 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.repository.BookEntryRelationRepository
 import com.marcdonald.hibi.data.repository.EntryRepository
 import com.marcdonald.hibi.data.repository.TagEntryRelationRepository
-import com.marcdonald.hibi.mainscreens.mainentriesrecycler.BookEntryDisplayItem
 import com.marcdonald.hibi.mainscreens.mainentriesrecycler.MainEntriesDisplayItem
-import com.marcdonald.hibi.mainscreens.mainentriesrecycler.TagEntryDisplayItem
 import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ThrowbackFragmentViewModel(private val entryRepository: EntryRepository,
                                  private val tagEntryRelationRepository: TagEntryRelationRepository,
@@ -30,9 +26,9 @@ class ThrowbackFragmentViewModel(private val entryRepository: EntryRepository,
   val displayNoResults: LiveData<Boolean>
     get() = _displayNoResults
 
-  private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
-  val entries: LiveData<List<MainEntriesDisplayItem>>
-    get() = _entries
+  private val _displayItems = MutableLiveData<List<ThrowbackDisplayItem>>()
+  val displayItems: LiveData<List<ThrowbackDisplayItem>>
+    get() = _displayItems
 
   fun loadEntries() {
     viewModelScope.launch {
@@ -40,49 +36,54 @@ class ThrowbackFragmentViewModel(private val entryRepository: EntryRepository,
       _displayNoResults.value = false
       getDisplayItems()
       _displayLoading.value = false
-      _displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
+      _displayNoResults.value = displayItems.value == null || displayItems.value!!.isEmpty()
     }
   }
 
   private suspend fun getDisplayItems() {
-    val lastMonthEntries = getMonthThrowbackEntries()
-    val lastYearEntries = getYearThrowbackEntries()
-    val allEntries = lastMonthEntries + lastYearEntries
-    val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
-    val bookEntryDisplayItems = bookEntryRelationRepository.getBookEntryDisplayItems()
-    _entries.value = combineData(allEntries, tagEntryDisplayItems, bookEntryDisplayItems)
+    val lastMonthThrowback = getMonthThrowback()
+    val lastYearThrowbacks = getYearThrowbacks()
+
+    val allItems = if(lastMonthThrowback != null)
+      listOf(lastMonthThrowback) + lastYearThrowbacks
+    else
+      lastYearThrowbacks
+
+    _displayItems.value = allItems
   }
 
-  private suspend fun getMonthThrowbackEntries(): List<Entry> {
-    val returnList: List<Entry>
+  private suspend fun getMonthThrowback(): ThrowbackDisplayItem? {
+    val returnItem: ThrowbackDisplayItem?
     val februaryMaxDay = if(today.getActualMaximum(Calendar.DAY_OF_YEAR) > 365) 29 else 28
 
-    returnList = if(today.get(Calendar.MONTH) == 0) {
-      getLastDecemberEntries()
+    returnItem = if(today.get(Calendar.MONTH) == 0) {
+      getLastDecemberThrowbackItem()
     } else if(today.get(Calendar.MONTH) == 2 && today.get(Calendar.DAY_OF_MONTH) > februaryMaxDay) {
-      listOf()
+      null
     } else if(today.get(Calendar.DAY_OF_MONTH) == 31) {
       if(doesLastMonthHave30Days()) {
-        listOf()
+        null
       } else {
-        getEntriesOnThisDateLastMonth()
+        getThrowbackItemOnThisDateLastMonth()
       }
     } else {
-      getEntriesOnThisDateLastMonth()
+      getThrowbackItemOnThisDateLastMonth()
     }
 
-    return returnList
+    return returnItem
   }
 
-  private suspend fun getYearThrowbackEntries(): List<Entry> {
-    val returnList = mutableListOf<Entry>()
+  private suspend fun getYearThrowbacks(): List<ThrowbackDisplayItem> {
+    val returnList = mutableListOf<ThrowbackDisplayItem>()
+
     val dateToRetrieve = today.clone() as Calendar
     entryRepository.getAllYears().forEach { year ->
       if(year != today.get(Calendar.YEAR)) {
         if(isDateOnPreviousYearValid(year)) {
           dateToRetrieve.set(Calendar.YEAR, year)
-          val entriesOnDate = entryRepository.getEntriesOnDate(dateToRetrieve)
-          returnList.addAll(entriesOnDate)
+          val throwbackItem = getThrowbackDisplayItem(dateToRetrieve)
+          if(throwbackItem != null)
+            returnList.add(throwbackItem)
         }
       }
     }
@@ -102,17 +103,17 @@ class ThrowbackFragmentViewModel(private val entryRepository: EntryRepository,
     return true
   }
 
-  private suspend fun getLastDecemberEntries(): List<Entry> {
+  private suspend fun getLastDecemberThrowbackItem(): ThrowbackDisplayItem? {
     val dateToRetrieve = today.clone() as Calendar
     dateToRetrieve.set(Calendar.MONTH, 11)
     dateToRetrieve.set(Calendar.YEAR, today.get(Calendar.YEAR) - 1)
-    return entryRepository.getEntriesOnDate(dateToRetrieve)
+    return getThrowbackDisplayItem(dateToRetrieve)
   }
 
-  private suspend fun getEntriesOnThisDateLastMonth(): List<Entry> {
+  private suspend fun getThrowbackItemOnThisDateLastMonth(): ThrowbackDisplayItem? {
     val dateToRetrieve = today.clone() as Calendar
     dateToRetrieve.set(Calendar.MONTH, today.get(Calendar.MONTH) - 1)
-    return entryRepository.getEntriesOnDate(dateToRetrieve)
+    return getThrowbackDisplayItem(dateToRetrieve)
   }
 
   private fun doesLastMonthHave30Days(): Boolean {
@@ -123,31 +124,26 @@ class ThrowbackFragmentViewModel(private val entryRepository: EntryRepository,
     return lastMonth.getActualMaximum(Calendar.DAY_OF_MONTH) == 30
   }
 
-  private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>, bookEntryDisplayItems: List<BookEntryDisplayItem>): List<MainEntriesDisplayItem> {
-    val itemList = ArrayList<MainEntriesDisplayItem>()
-
-    entries.forEach { entry ->
-      val item = MainEntriesDisplayItem(entry, listOf(), listOf())
-      val listOfTags = ArrayList<String>()
-      val listOfBooks = ArrayList<String>()
-
-      tagEntryDisplayItems.forEach { tagEntryDisplayItem ->
-        if(tagEntryDisplayItem.entryId == entry.id) {
-          listOfTags.add(tagEntryDisplayItem.tagName)
-        }
+  private suspend fun getThrowbackDisplayItem(dateToRetrieve: Calendar): ThrowbackDisplayItem? {
+    val entry = entryRepository.getFirstEntryOnDate(dateToRetrieve)
+    return if(entry != null) {
+      val tagsToAdd = mutableListOf<String>()
+      val allTags = tagEntryRelationRepository.getTagsWithEntry(entry.id)
+      allTags.forEach { tag ->
+        tagsToAdd.add(tag.name)
       }
 
-      bookEntryDisplayItems.forEach { bookEntryDisplayItem ->
-        if(bookEntryDisplayItem.entryId == entry.id) {
-          listOfBooks.add(bookEntryDisplayItem.bookName)
-        }
+      val booksToAdd = mutableListOf<String>()
+      val allBooks = bookEntryRelationRepository.getBooksWithEntry(entry.id)
+      allBooks.forEach { book ->
+        booksToAdd.add(book.name)
       }
 
-      item.tags = listOfTags
-      item.books = listOfBooks
-      itemList.add(item)
+      val mainEntryDisplayItem = MainEntriesDisplayItem(entry, tagsToAdd, booksToAdd)
+      val amountOfOtherEntries = entryRepository.getAmountOfEntriesOnDate(dateToRetrieve) - 1
+      ThrowbackDisplayItem(mainEntryDisplayItem, amountOfOtherEntries)
+    } else {
+      null
     }
-
-    return itemList
   }
 }

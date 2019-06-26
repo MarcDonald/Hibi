@@ -49,8 +49,14 @@ interface DAO {
   @Query("SELECT location FROM Entry WHERE id = :entryId")
   fun getLocationLD(entryId: Int): LiveData<String>
 
-  @Query("SELECT DISTINCT year FROM Entry ORDER BY year")
+  @Query("SELECT DISTINCT year FROM Entry ORDER BY year DESC")
   fun getAllYears(): List<Int>
+
+  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day ORDER BY year ASC, month ASC, day ASC, hour ASC, minute ASC, id LIMIT 1")
+  fun getFirstEntryOnDate(year: Int, month: Int, day: Int): Entry
+
+  @Query("SELECT COUNT(*) FROM Entry WHERE year = :year AND month = :month AND day = :day")
+  fun getAmountOfEntriesOnDate(year: Int, month: Int, day: Int): Int
   // </editor-fold>
 
   // <editor-fold desc="Tag">

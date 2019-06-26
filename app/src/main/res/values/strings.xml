@@ -170,6 +170,7 @@
 
   <!--region Throwback-->
   <string name="throwback">Throwback</string>
+  <string name="last_month">Last Month</string>
   <!--endregion-->
 
   <!--region Settings-->
@@ -308,6 +309,11 @@
   <plurals name="multi_book_title">
     <item quantity="one">Add %d Entry To Books</item>
     <item quantity="other">Add %d Entries To Books</item>
+  </plurals>
+
+  <plurals name="throwback_more_entries">
+    <item quantity="one">and %d more entry</item>
+    <item quantity="other">and %d more entries</item>
   </plurals>
   <!--endregion-->
 

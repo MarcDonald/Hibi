@@ -100,6 +100,26 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
     }
   }
 
+  override suspend fun getFirstEntryOnDate(calendar: Calendar): Entry {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getFirstEntryOnDate(
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+      )
+    }
+  }
+
+  override suspend fun getAmountOfEntriesOnDate(calendar: Calendar): Int {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getAmountOfEntriesOnDate(
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+      )
+    }
+  }
+
   companion object {
     @Volatile private var instance: EntryRepositoryImpl? = null
 
