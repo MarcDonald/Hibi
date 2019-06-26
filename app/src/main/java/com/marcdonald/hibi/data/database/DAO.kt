@@ -3,10 +3,10 @@ package com.marcdonald.hibi.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.marcdonald.hibi.data.entity.*
-import com.marcdonald.hibi.mainscreens.booksfragment.mainbooksfragment.BookDisplayItem
+import com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment.BookDisplayItem
 import com.marcdonald.hibi.mainscreens.mainentriesrecycler.BookEntryDisplayItem
 import com.marcdonald.hibi.mainscreens.mainentriesrecycler.TagEntryDisplayItem
-import com.marcdonald.hibi.mainscreens.tagsfragment.maintagsfragment.TagDisplayItem
+import com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment.TagDisplayItem
 
 @Dao
 interface DAO {
@@ -37,8 +37,11 @@ interface DAO {
   @Query("SELECT id FROM Entry ORDER BY id DESC LIMIT 1")
   fun getLastEntryId(): Int
 
-  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day")
+  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
   fun getEntriesOnDate(year: Int, month: Int, day: Int): List<Entry>
+
+  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day ORDER BY year ASC, month ASC, day ASC, hour ASC, minute ASC, id ASC")
+  fun getEntriesOnDateAscending(year: Int, month: Int, day: Int): List<Entry>
 
   @Query("UPDATE Entry SET location = :location WHERE id = :entryId")
   fun setLocation(entryId: Int, location: String)
@@ -48,6 +51,15 @@ interface DAO {
 
   @Query("SELECT location FROM Entry WHERE id = :entryId")
   fun getLocationLD(entryId: Int): LiveData<String>
+
+  @Query("SELECT DISTINCT year FROM Entry ORDER BY year DESC")
+  fun getAllYears(): List<Int>
+
+  @Query("SELECT * FROM Entry WHERE year = :year AND month = :month AND day = :day ORDER BY year ASC, month ASC, day ASC, hour ASC, minute ASC, id LIMIT 1")
+  fun getFirstEntryOnDate(year: Int, month: Int, day: Int): Entry
+
+  @Query("SELECT COUNT(*) FROM Entry WHERE year = :year AND month = :month AND day = :day")
+  fun getAmountOfEntriesOnDate(year: Int, month: Int, day: Int): Int
   // </editor-fold>
 
   // <editor-fold desc="Tag">

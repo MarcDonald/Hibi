@@ -63,7 +63,7 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository,
       list.forEach { entryImage ->
         returnList.add(fileUtils.imagesDirectory + entryImage.imageName)
       }
-      return@switchMap MutableLiveData<List<String>>(returnList) as LiveData<List<String>>
+      return@switchMap MutableLiveData<List<String>>(returnList)
     }
 
   fun passArguments(entryIdArg: Int) {

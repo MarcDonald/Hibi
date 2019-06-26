@@ -17,9 +17,9 @@ import com.marcdonald.hibi.internal.utils.FileUtils
 import com.marcdonald.hibi.internal.utils.FileUtilsImpl
 import com.marcdonald.hibi.internal.utils.ThemeUtils
 import com.marcdonald.hibi.internal.utils.ThemeUtilsImpl
-import com.marcdonald.hibi.mainscreens.booksfragment.bookentriesfragment.BookEntriesViewModelFactory
-import com.marcdonald.hibi.mainscreens.booksfragment.mainbooksfragment.BooksFragmentViewModelFactory
-import com.marcdonald.hibi.mainscreens.calendarfragment.CalendarTabViewModelFactory
+import com.marcdonald.hibi.mainscreens.booksscreen.bookentriesfragment.BookEntriesViewModelFactory
+import com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment.BooksFragmentViewModelFactory
+import com.marcdonald.hibi.mainscreens.calendarscreen.CalendarTabViewModelFactory
 import com.marcdonald.hibi.mainscreens.entryscreens.addentryscreen.AddEntryViewModelFactory
 import com.marcdonald.hibi.mainscreens.entryscreens.viewentryscreen.ViewEntryViewModelFactory
 import com.marcdonald.hibi.mainscreens.mainentries.MainEntriesViewModelFactory
@@ -27,8 +27,10 @@ import com.marcdonald.hibi.mainscreens.searchentries.searchentriesscreen.SearchE
 import com.marcdonald.hibi.mainscreens.settings.backupdialog.BackupDialogViewModelFactory
 import com.marcdonald.hibi.mainscreens.settings.restoredialog.RestoreDialogViewModelFactory
 import com.marcdonald.hibi.mainscreens.settings.updatedialog.UpdateDialogViewModelFactory
-import com.marcdonald.hibi.mainscreens.tagsfragment.maintagsfragment.TagsFragmentViewModelFactory
-import com.marcdonald.hibi.mainscreens.tagsfragment.taggedentriesfragment.TaggedEntriesViewModelFactory
+import com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment.TagsFragmentViewModelFactory
+import com.marcdonald.hibi.mainscreens.tagsscreen.taggedentriesfragment.TaggedEntriesViewModelFactory
+import com.marcdonald.hibi.mainscreens.throwbackscreen.mainthrowbackscreen.ThrowbackFragmentViewModelFactory
+import com.marcdonald.hibi.mainscreens.throwbackscreen.throwbackentriesscreen.ThrowbackEntriesViewModelFactory
 import com.marcdonald.hibi.search.searchmoreinfoscreen.SearchMoreInfoViewModelFactory
 import com.marcdonald.hibi.search.searchresults.SearchViewModelFactory
 import com.marcdonald.hibi.uicomponents.addbookdialog.AddBookViewModelFactory
@@ -98,6 +100,8 @@ class Hibi : Application(), KodeinAware {
     bind() from provider { BackupDialogViewModelFactory(instance()) }
     bind() from provider { RestoreDialogViewModelFactory(instance(), instance()) }
     bind() from provider { UpdateDialogViewModelFactory(instance()) }
+    bind() from provider { ThrowbackFragmentViewModelFactory(instance(), instance(), instance()) }
+    bind() from provider { ThrowbackEntriesViewModelFactory(instance(), instance(), instance()) }
     // </editor-fold>
   }
 

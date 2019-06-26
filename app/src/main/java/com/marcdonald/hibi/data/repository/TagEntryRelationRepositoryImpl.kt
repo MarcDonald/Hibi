@@ -7,7 +7,7 @@ import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.entity.Tag
 import com.marcdonald.hibi.data.entity.TagEntryRelation
 import com.marcdonald.hibi.mainscreens.mainentriesrecycler.TagEntryDisplayItem
-import com.marcdonald.hibi.mainscreens.tagsfragment.maintagsfragment.TagDisplayItem
+import com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment.TagDisplayItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber

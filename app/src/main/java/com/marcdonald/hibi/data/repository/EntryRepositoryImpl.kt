@@ -8,6 +8,7 @@ import com.marcdonald.hibi.internal.utils.FileUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.*
 
 class EntryRepositoryImpl private constructor(private val dao: DAO, private val fileUtils: FileUtils) : EntryRepository {
 
@@ -67,6 +68,16 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
     }
   }
 
+  override suspend fun getEntriesOnDate(calendar: Calendar): List<Entry> {
+    return withContext(Dispatchers.IO) {
+      return@withContext getEntriesOnDate(
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+      )
+    }
+  }
+
   override suspend fun saveLocation(entryId: Int, location: String) {
     withContext(Dispatchers.IO) {
       dao.setLocation(entryId, location)
@@ -81,6 +92,46 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
 
   override fun getLocationLD(entryId: Int): LiveData<String> {
     return dao.getLocationLD(entryId)
+  }
+
+  override suspend fun getAllYears(): List<Int> {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getAllYears()
+    }
+  }
+
+  override suspend fun getFirstEntryOnDate(calendar: Calendar): Entry {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getFirstEntryOnDate(
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+      )
+    }
+  }
+
+  override suspend fun getAmountOfEntriesOnDate(calendar: Calendar): Int {
+    return withContext(Dispatchers.IO) {
+      return@withContext dao.getAmountOfEntriesOnDate(
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),
+        calendar.get(Calendar.DAY_OF_MONTH)
+      )
+    }
+  }
+
+  override suspend fun getEntriesOnDate(calendar: Calendar, ascending: Boolean): List<Entry> {
+    if(ascending) {
+      return withContext(Dispatchers.IO) {
+        return@withContext dao.getEntriesOnDateAscending(
+          calendar.get(Calendar.YEAR),
+          calendar.get(Calendar.MONTH),
+          calendar.get(Calendar.DAY_OF_MONTH)
+        )
+      }
+    } else {
+      return getEntriesOnDate(calendar)
+    }
   }
 
   companion object {

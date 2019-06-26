@@ -15,10 +15,10 @@ import com.marcdonald.hibi.internal.BOOKS_TAB
 import com.marcdonald.hibi.internal.CALENDAR_TAB
 import com.marcdonald.hibi.internal.ENTRIES_TAB
 import com.marcdonald.hibi.internal.TAGS_TAB
-import com.marcdonald.hibi.mainscreens.booksfragment.mainbooksfragment.BooksFragment
-import com.marcdonald.hibi.mainscreens.calendarfragment.CalendarFragment
+import com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment.BooksFragment
+import com.marcdonald.hibi.mainscreens.calendarscreen.CalendarFragment
 import com.marcdonald.hibi.mainscreens.mainentries.MainEntriesFragment
-import com.marcdonald.hibi.mainscreens.tagsfragment.maintagsfragment.TagsFragment
+import com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment.TagsFragment
 import com.marcdonald.hibi.uicomponents.addbookdialog.AddBookDialog
 import com.marcdonald.hibi.uicomponents.addtagdialog.AddTagDialog
 import timber.log.Timber

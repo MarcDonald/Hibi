@@ -18,22 +18,25 @@ class MainScreenMenuDialog : HibiBottomSheetDialogFragment() {
   }
 
   private fun bindViews(view: View) {
-    val settingsButton: MaterialButton = view.findViewById(R.id.btn_main_menu_settings)
-    settingsButton.setOnClickListener(settingsClickListener)
+    view.findViewById<MaterialButton>(R.id.btn_main_menu_throwback)
+      .setOnClickListener {
+        val throwbackAction = MainScreenFragmentDirections.throwbackAction()
+        Navigation.findNavController(requireParentFragment().requireView()).navigate(throwbackAction)
+        dismiss()
+      }
 
-    val aboutButton: MaterialButton = view.findViewById(R.id.btn_main_menu_about)
-    aboutButton.setOnClickListener(aboutClickListener)
-  }
+    view.findViewById<MaterialButton>(R.id.btn_main_menu_settings)
+      .setOnClickListener {
+        val settingsAction = MainScreenFragmentDirections.settingsAction()
+        Navigation.findNavController(requireParentFragment().requireView()).navigate(settingsAction)
+        dismiss()
+      }
 
-  private val settingsClickListener = View.OnClickListener {
-    val settingsAction = MainScreenFragmentDirections.settingsAction()
-    Navigation.findNavController(requireParentFragment().requireView()).navigate(settingsAction)
-    dismiss()
-  }
-
-  private val aboutClickListener = View.OnClickListener {
-    val aboutAction = MainScreenFragmentDirections.aboutAction()
-    Navigation.findNavController(requireParentFragment().requireView()).navigate(aboutAction)
-    dismiss()
+    view.findViewById<MaterialButton>(R.id.btn_main_menu_about)
+      .setOnClickListener {
+        val aboutAction = MainScreenFragmentDirections.aboutAction()
+        Navigation.findNavController(requireParentFragment().requireView()).navigate(aboutAction)
+        dismiss()
+      }
   }
 }
