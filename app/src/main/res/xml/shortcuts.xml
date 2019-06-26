@@ -11,8 +11,8 @@
     tools:targetApi="n_mr1">
 
     <intent
-      android:action="app.marcdev.hibi.intent.ADD_ENTRY_SHORTCUT"
-      android:targetPackage="app.marcdev.hibi"
-      android:targetClass="app.marcdev.hibi.MainActivity" />
+      android:action="com.marcdonald.hibi.intent.ADD_ENTRY_SHORTCUT"
+      android:targetPackage="com.marcdonald.hibi"
+      android:targetClass="com.marcdonald.hibi.MainActivity" />
   </shortcut>
 </shortcuts>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/mobile_navigation"
+  app:startDestination="@id/destination_main_screen">
+
+  <!--region Main Screen-->
+  <fragment
+    android:id="@+id/destination_main_screen"
+    android:name="com.marcdonald.hibi.mainscreens.MainScreenFragment"
+    android:label="MainScreenFragment">
+    <action
+      android:id="@+id/add_entry_action"
+      app:destination="@id/destination_add_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+    <action
+      android:id="@+id/view_tagged_entries_action"
+      app:destination="@id/destination_tagged_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="tagID"
+        app:argType="integer" />
+    </action>
+    <action
+      android:id="@+id/view_book_entries_action"
+      app:destination="@id/destination_book_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="bookID"
+        app:argType="integer" />
+    </action>
+    <action
+      android:id="@+id/search_entries_action"
+      app:destination="@+id/destination_search_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/about_action"
+      app:destination="@id/destination_about_screen"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/settings_action"
+      app:destination="@id/destination_settings_screen"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/throwback_action"
+      app:destination="@id/destination_throwback"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:launchSingleTop="false"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+  </fragment>
+  <!--endregion -->
+
+  <!--region Add Entry-->
+  <fragment
+    android:id="@+id/destination_add_entry"
+    android:name="com.marcdonald.hibi.mainscreens.entryscreens.addentryscreen.AddEntryFragment"
+    android:label="AddEntryFragment">
+    <argument
+      android:name="entryId"
+      android:defaultValue="0"
+      app:argType="integer" />
+  </fragment>
+  <!--endregion-->
+
+  <!--region View Entry-->
+  <fragment
+    android:id="@+id/destination_view_entry"
+    android:name="com.marcdonald.hibi.mainscreens.entryscreens.viewentryscreen.ViewEntryFragment"
+    android:label="ViewEntryFragment">
+    <argument
+      android:name="entryId"
+      android:defaultValue="0"
+      app:argType="integer" />
+    <action
+      android:id="@+id/edit_entry_action"
+      app:destination="@id/destination_add_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/fullscreen_image_action"
+      app:destination="@id/destination_fullscreen_image"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+  </fragment>
+  <!--endregion-->
+
+  <!--region Tagged Entries-->
+  <fragment
+    android:id="@+id/destination_tagged_entries"
+    android:name="com.marcdonald.hibi.mainscreens.tagsscreen.taggedentriesfragment.TaggedEntriesFragment"
+    android:label="TaggedEntriesFragment">
+    <argument
+      android:name="tagID"
+      app:argType="integer" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <!--endregion-->
+
+  <!--region Book Entries-->
+  <fragment
+    android:id="@+id/destination_book_entries"
+    android:name="com.marcdonald.hibi.mainscreens.booksscreen.bookentriesfragment.BookEntriesFragment"
+    android:label="BookEntriesFragment">
+    <argument
+      android:name="bookID"
+      app:argType="integer" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <!--endregion-->
+
+  <!--region Search Entries-->
+  <fragment
+    android:id="@+id/destination_search_entries"
+    android:name="com.marcdonald.hibi.mainscreens.searchentries.searchentriesscreen.SearchEntriesFragment"
+    android:label="SearchEntriesFragment">
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <fragment
+    android:id="@+id/destination_fullscreen_image"
+    android:name="com.marcdonald.hibi.mainscreens.entryscreens.viewentryscreen.FullscreenImageFragment"
+    android:label="FullscreenImageFragment">
+    <argument
+      android:name="image_path"
+      app:argType="string" />
+  </fragment>
+  <!--endregion-->
+
+  <!--region Throwback Screen-->
+  <fragment
+    android:id="@+id/destination_throwback"
+    android:name="com.marcdonald.hibi.mainscreens.throwbackscreen.mainthrowbackscreen.ThrowbackFragment"
+    android:label="ThrowbackFragment">
+    <action
+      android:id="@+id/throwback_entries_action"
+      app:destination="@id/destination_throwback_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:launchSingleTop="false"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="day"
+        app:argType="integer" />
+      <argument
+        android:name="month"
+        app:argType="integer" />
+      <argument
+        android:name="year"
+        app:argType="integer" />
+    </action>
+  </fragment>
+  <!--endregion-->
+
+  <!--region Throwback Entries Screen-->
+  <fragment
+    android:id="@+id/destination_throwback_entries"
+    android:name="com.marcdonald.hibi.mainscreens.throwbackscreen.throwbackentriesscreen.ThrowbackEntriesFragment"
+    android:label="ThrowbackEntriesFragment">
+    <argument
+      android:name="day"
+      app:argType="integer"
+      android:defaultValue="0" />
+    <argument
+      android:name="month"
+      app:argType="integer"
+      android:defaultValue="0" />
+    <argument
+      android:name="year"
+      app:argType="integer"
+      android:defaultValue="0" />
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@+id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <!--endregion-->
+
+  <!--region Settings Screen-->
+  <fragment
+    android:id="@+id/destination_settings_screen"
+    android:name="com.marcdonald.hibi.mainscreens.settings.SettingsFragment"
+    android:label="SettingsFragment" />
+  <!--endregion -->
+
+  <!--region About Screen-->
+  <fragment
+    android:id="@+id/destination_about_screen"
+    android:name="com.marcdonald.hibi.mainscreens.about.AboutFragment"
+    android:label="AboutFragment">
+    <action
+      android:id="@+id/privacy_action"
+      app:destination="@+id/destination_privacy_policy"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/oss_action"
+      app:destination="@+id/destination_oss"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+  </fragment>
+  <!--endregion -->
+
+  <!--region OSS Fragment-->
+  <fragment
+    android:id="@+id/destination_oss"
+    android:name="com.marcdonald.hibi.mainscreens.about.OpenSourceLicencesFragment"
+    android:label="OSSFragment" />
+  <!--endregion -->
+
+  <!--region Privacy Policy-->
+  <fragment
+    android:id="@+id/destination_privacy_policy"
+    android:name="com.marcdonald.hibi.mainscreens.about.PrivacyPolicyFragment"
+    android:label="PrivacyPolicyFragment" />
+  <!--endregion -->
+</navigation>

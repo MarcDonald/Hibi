@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar_layout_view_entry"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:backgroundTint="?colorPrimaryDark">
+
+    <include layout="@layout/toolbar_back" />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/const_throwback_loading"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+      android:id="@+id/prog_throwback"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_standard"
+      app:layout_constraintBottom_toTopOf="@id/gd_throwback_loading"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+      android:id="@+id/txt_throwback_loading"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_standard"
+      android:text="@string/loading_entries"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/gd_throwback_loading" />
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/gd_throwback_loading"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.5" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/const_no_throwback"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+      android:id="@+id/img_no_throwback"
+      android:layout_width="@dimen/main_screen_warning_image_size"
+      android:layout_height="@dimen/main_screen_warning_image_size"
+      android:contentDescription="@string/no_entries_for_date"
+      android:src="@drawable/ic_sentiment_dissatisfied_24dp"
+      app:layout_constraintBottom_toTopOf="@id/gd_no_throwback"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+      android:id="@+id/txt_no_throwback"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_standard"
+      android:text="@string/no_entries_for_date"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/gd_no_throwback" />
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/gd_no_throwback"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.5" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_throwback"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

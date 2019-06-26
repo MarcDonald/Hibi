@@ -10,7 +10,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <app.marcdev.hibi.uicomponents.views.SearchBar
+    <com.marcdonald.hibi.uicomponents.views.SearchBar
       android:id="@+id/searchbar_add_entry"
       android:layout_width="match_parent"
       android:layout_height="@dimen/search_bar_height"
