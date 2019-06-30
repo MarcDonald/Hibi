@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -87,8 +88,14 @@ class ThrowbackFragment : Fragment(), KodeinAware {
     })
   }
 
-  private fun onItemClick(day: Int, month: Int, year: Int) {
-    val action = ThrowbackFragmentDirections.throwbackEntriesAction(day, month, year)
+  private fun onItemClick(amountOfOtherEntries: Int, entryId: Int, day: Int, month: Int, year: Int) {
+    val action: NavDirections
+    if(amountOfOtherEntries == 0) {
+      action = ThrowbackFragmentDirections.viewEntryAction()
+      action.entryId = entryId
+    } else {
+      action = ThrowbackFragmentDirections.throwbackEntriesAction(day, month, year)
+    }
     Navigation.findNavController(requireParentFragment().requireView()).navigate(action)
   }
 }

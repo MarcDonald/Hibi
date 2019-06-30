@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 
 class ThrowbackRecyclerAdapter(private val context: Context,
-                               private val onClick: (day: Int, month: Int, year: Int) -> Unit)
+                               private val onClick: (amountOfEntriesOnDay: Int, entryId: Int, day: Int, month: Int, year: Int) -> Unit)
   : RecyclerView.Adapter<ThrowbackRecyclerViewHolder>() {
 
   private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -18,7 +18,13 @@ class ThrowbackRecyclerAdapter(private val context: Context,
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThrowbackRecyclerViewHolder {
     val view = inflater.inflate(R.layout.item_throwback, parent, false)
-    return ThrowbackRecyclerViewHolder(view, onClick)
+    return ThrowbackRecyclerViewHolder(view, ::onViewHolderClick)
+  }
+
+  private fun onViewHolderClick(adapterPosition: Int) {
+    val item = items[adapterPosition]
+    val itemEntry = item.entryDisplayItem.entry
+    onClick(item.amountOfOtherEntries, itemEntry.id, itemEntry.day, itemEntry.month, itemEntry.year)
   }
 
   override fun getItemCount(): Int {

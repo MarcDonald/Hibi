@@ -17,7 +17,7 @@ import com.marcdonald.hibi.internal.utils.formatTimeForDisplay
 import java.util.*
 
 class ThrowbackRecyclerViewHolder(itemView: View,
-                                  onClick: (day: Int, month: Int, year: Int) -> Unit)
+                                  onClick: (adapterPosition: Int) -> Unit)
   : RecyclerView.ViewHolder(itemView) {
 
   // <editor-fold desc="UI Components">
@@ -38,9 +38,7 @@ class ThrowbackRecyclerViewHolder(itemView: View,
 
   init {
     itemView.findViewById<LinearLayout>(R.id.lin_throwback).setOnClickListener {
-      displayedItem?.let { item ->
-        onClick(item.entryDisplayItem.entry.day, item.entryDisplayItem.entry.month, item.entryDisplayItem.entry.year)
-      }
+      onClick(adapterPosition)
     }
   }
 
