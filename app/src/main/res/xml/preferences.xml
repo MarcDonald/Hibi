@@ -11,6 +11,11 @@
       android:icon="@drawable/ic_view_stream_24dp"
       android:key="pref_entry_dividers"
       android:title="@string/entry_dividers_pref_title" />
+    <SwitchPreference
+      android:defaultValue="true"
+      android:key="pref_recycler_animations"
+      android:icon="@drawable/ic_dehaze_24dp"
+      android:title="@string/list_animations" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/behaviour">

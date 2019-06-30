@@ -2,6 +2,7 @@ package com.marcdonald.hibi.mainscreens.mainentriesrecycler
 
 import android.content.Context
 import android.content.res.Resources
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
+import com.marcdonald.hibi.internal.PREF_RECYCLER_ANIMATIONS
 
 class EntriesRecyclerAdapter(private val context: Context, private val theme: Resources.Theme) : RecyclerView.Adapter<BaseEntriesRecyclerViewHolder>() {
 
@@ -19,6 +21,7 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
   private var lastPosition = -1
   private var itemsSelectable = false
   private var onSelectClick: View.OnClickListener? = null
+  private var animateEntries = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREF_RECYCLER_ANIMATIONS, true)
 
   private var _hasSelectedItems = MutableLiveData<Boolean>()
   val hasSelectedItems: LiveData<Boolean>
@@ -84,7 +87,9 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
         }
       }
     }
-    setAnimation(holder.itemView, position)
+
+    if(animateEntries)
+      setAnimation(holder.itemView, position)
   }
 
   fun updateList(list: List<MainEntriesDisplayItem>) {

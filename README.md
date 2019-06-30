@@ -28,6 +28,7 @@ An app for Android designed to aid your Japanese learning through keeping a jour
 - Daily reminder to add an entry
 - Ability to backup and restore your data
 - Dark theme and Light theme
+- Easily see entries made on this day last month, and in previous years, using the Throwback feature
 
 ## Screenshots
 | Main Screen | Main Screen Dark | Add Entry |
