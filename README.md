@@ -44,7 +44,16 @@ An app for Android designed to aid your Japanese learning through keeping a jour
 | ![Add Tags](/.github/assets/add-tags.png?raw=true) | ![Search Entries](/.github/assets/search-entries.png?raw=true) |
 
 ## Tech and Architecture
-Hibi is written entirely in Kotlin and employs an MVVM architecture pattern using [AndroidX View Model](https://developer.android.com/topic/libraries/architecture/viewmodel) components. Navigation is handled by the [AndroidX Navigation Components](https://developer.android.com/guide/navigation/). Data is stored using a [Room](https://developer.android.com/jetpack/androidx/releases/room) database and then retrieved asynchronously using Kotlin coroutines and [LiveData](https://developer.android.com/topic/libraries/architecture/livedata). [Kodein](https://github.com/Kodein-Framework/Kodein-DI) is used for dependency injection due to it's native support for Kotlin and it's ease of writing. API calls are made using [Retrofit](https://github.com/square/retrofit) and then converted into Kotlin objects using [Gson](https://github.com/google/gson). Design inspired by [Material Design](https://material.io/) and implemented using [Material Components for Android](https://github.com/material-components/material-components-android).
+![Architecture Diagram](/.github/assets/architecture-diagram.png?raw=true "Architecture Diagram")
+
+Hibi is written entirely in Kotlin and employs a single activity MVVM architecture pattern using [AndroidX View Model](https://developer.android.com/topic/libraries/architecture/viewmodel) components. 
+The activity contains a single NavHostFragment, part of the [AndroidX Navigation Components](https://developer.android.com/guide/navigation/), which hosts all other fragments such as the MainScreenFragment.
+Each fragment observes data in a View Model which may retrieve data from various repositories and API services and properly format it for display. All business logic is handled in the View Models and fragments are kept as minimal as possible (only having code for setting up Observers, click listeners, etc...).
+Data is stored using a [Room](https://developer.android.com/jetpack/androidx/releases/room) database and queries are provided in a DAO in the form of functions. 
+Data is then retrieved asynchronously within repositories using Kotlin coroutines and [LiveData](https://developer.android.com/topic/libraries/architecture/livedata). 
+[Kodein](https://github.com/Kodein-Framework/Kodein-DI) is used for dependency injection due to it's native support for Kotlin and it's ease of writing. 
+API calls are made using [Retrofit](https://github.com/square/retrofit) and then converted into Kotlin objects using [Gson](https://github.com/google/gson). 
+Design inspired by [Material Design](https://material.io/) and implemented using [Material Components for Android](https://github.com/material-components/material-components-android).
 
 ## Open Source Libraries Used
 ### [Timber](https://github.com/JakeWharton/timber)
