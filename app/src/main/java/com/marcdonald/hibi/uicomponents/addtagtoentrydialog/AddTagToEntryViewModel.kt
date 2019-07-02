@@ -11,67 +11,69 @@ import com.marcdonald.hibi.data.repository.TagRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class AddTagToEntryViewModel(tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) : ViewModel() {
-  private var entryId = 0
+class AddTagToEntryViewModel(tagRepository: TagRepository, private val tagEntryRelationRepository: TagEntryRelationRepository) :
+		ViewModel() {
 
-  val allTags: LiveData<List<Tag>> = tagRepository.getAllTagsLD()
+	private var entryId = 0
 
-  private var _dismiss = MutableLiveData<Boolean>()
-  val dismiss: LiveData<Boolean>
-    get() = _dismiss
+	val allTags: LiveData<List<Tag>> = tagRepository.getAllTagsLD()
 
-  private var _tagEntryRelations = MutableLiveData<List<Int>>()
-  val tagEntryRelations: LiveData<List<Int>>
-    get() = _tagEntryRelations
+	private var _dismiss = MutableLiveData<Boolean>()
+	val dismiss: LiveData<Boolean>
+		get() = _dismiss
 
-  private var _displayNoTagsWarning = MutableLiveData<Boolean>()
-  val displayNoTagsWarning: LiveData<Boolean>
-    get() = _displayNoTagsWarning
+	private var _tagEntryRelations = MutableLiveData<List<Int>>()
+	val tagEntryRelations: LiveData<List<Int>>
+		get() = _tagEntryRelations
 
-  fun passArguments(entryIdArg: Int) {
-    entryId = entryIdArg
-    viewModelScope.launch {
-      if(entryId != 0)
-        _tagEntryRelations.value = tagEntryRelationRepository.getTagIdsWithEntry(entryId)
-      else
-        Timber.e("Log: passArguments: entryId = 0")
-    }
-  }
+	private var _displayNoTagsWarning = MutableLiveData<Boolean>()
+	val displayNoTagsWarning: LiveData<Boolean>
+		get() = _displayNoTagsWarning
 
-  fun listReceived(isEmpty: Boolean) {
-    _displayNoTagsWarning.value = isEmpty
-  }
+	fun passArguments(entryIdArg: Int) {
+		entryId = entryIdArg
+		viewModelScope.launch {
+			if(entryId != 0)
+				_tagEntryRelations.value = tagEntryRelationRepository.getTagIdsWithEntry(entryId)
+			else
+				Timber.e("Log: passArguments: entryId = 0")
+		}
+	}
 
-  fun onSaveClick(list: ArrayList<Pair<Int, Boolean>>) {
-    list.forEach { idCheckedPair ->
-      // First is the TagId, Second is whether it's checked
-      if(idCheckedPair.second)
-        save(idCheckedPair.first)
-      else
-        delete(idCheckedPair.first)
-    }
-    _dismiss.value = true
-  }
+	fun listReceived(isEmpty: Boolean) {
+		_displayNoTagsWarning.value = isEmpty
+	}
 
-  private fun save(tagId: Int) {
-    if(entryId != 0) {
-      val tagEntryRelation = TagEntryRelation(tagId, entryId)
-      viewModelScope.launch {
-        tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
-      }
-    } else {
-      Timber.e("Log: save: entryId = 0")
-    }
-  }
+	fun onSaveClick(list: ArrayList<Pair<Int, Boolean>>) {
+		list.forEach { idCheckedPair ->
+			// First is the TagId, Second is whether it's checked
+			if(idCheckedPair.second)
+				save(idCheckedPair.first)
+			else
+				delete(idCheckedPair.first)
+		}
+		_dismiss.value = true
+	}
 
-  private fun delete(tagId: Int) {
-    if(entryId != 0) {
-      val tagEntryRelation = TagEntryRelation(tagId, entryId)
-      viewModelScope.launch {
-        tagEntryRelationRepository.deleteTagEntryRelation(tagEntryRelation)
-      }
-    } else {
-      Timber.e("Log: delete: entryId = 0")
-    }
-  }
+	private fun save(tagId: Int) {
+		if(entryId != 0) {
+			val tagEntryRelation = TagEntryRelation(tagId, entryId)
+			viewModelScope.launch {
+				tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
+			}
+		} else {
+			Timber.e("Log: save: entryId = 0")
+		}
+	}
+
+	private fun delete(tagId: Int) {
+		if(entryId != 0) {
+			val tagEntryRelation = TagEntryRelation(tagId, entryId)
+			viewModelScope.launch {
+				tagEntryRelationRepository.deleteTagEntryRelation(tagEntryRelation)
+			}
+		} else {
+			Timber.e("Log: delete: entryId = 0")
+		}
+	}
 }

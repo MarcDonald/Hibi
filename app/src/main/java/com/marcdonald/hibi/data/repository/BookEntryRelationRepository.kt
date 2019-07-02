@@ -9,21 +9,21 @@ import com.marcdonald.hibi.mainscreens.mainentriesrecycler.BookEntryDisplayItem
 
 interface BookEntryRelationRepository {
 
-  suspend fun addBookEntryRelation(bookEntryRelation: BookEntryRelation)
+	suspend fun addBookEntryRelation(bookEntryRelation: BookEntryRelation)
 
-  suspend fun deleteBookEntryRelation(bookEntryRelation: BookEntryRelation)
+	suspend fun deleteBookEntryRelation(bookEntryRelation: BookEntryRelation)
 
-  suspend fun getEntriesWithBook(bookId: Int): List<Entry>
+	suspend fun getEntriesWithBook(bookId: Int): List<Entry>
 
-  val bookDisplayItems: LiveData<List<BookDisplayItem>>
+	val bookDisplayItems: LiveData<List<BookDisplayItem>>
 
-  suspend fun getBookIdsWithEntry(entryId: Int): List<Int>
+	suspend fun getBookIdsWithEntry(entryId: Int): List<Int>
 
-  suspend fun getBooksWithEntry(entryId: Int): List<Book>
+	suspend fun getBooksWithEntry(entryId: Int): List<Book>
 
-  suspend fun getAllBookEntryRelationsWithIds(ids: List<Int>): List<BookEntryRelation>
+	suspend fun getAllBookEntryRelationsWithIds(ids: List<Int>): List<BookEntryRelation>
 
-  suspend fun getBookEntryDisplayItems(): List<BookEntryDisplayItem>
+	suspend fun getBookEntryDisplayItems(): List<BookEntryDisplayItem>
 
-  fun getCountBooksWithEntryLD(entryId: Int): LiveData<Int>
+	fun getCountBooksWithEntryLD(entryId: Int): LiveData<Int>
 }

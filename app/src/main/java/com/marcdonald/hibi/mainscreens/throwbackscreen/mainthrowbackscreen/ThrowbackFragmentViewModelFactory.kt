@@ -7,12 +7,12 @@ import com.marcdonald.hibi.data.repository.EntryRepository
 import com.marcdonald.hibi.data.repository.TagEntryRelationRepository
 
 class ThrowbackFragmentViewModelFactory(private val entryRepository: EntryRepository,
-                                        private val tagEntryRelationRepository: TagEntryRelationRepository,
-                                        private val bookEntryRelationRepository: BookEntryRelationRepository)
-  : ViewModelProvider.NewInstanceFactory() {
+																				private val tagEntryRelationRepository: TagEntryRelationRepository,
+																				private val bookEntryRelationRepository: BookEntryRelationRepository)
+	: ViewModelProvider.NewInstanceFactory() {
 
-  @Suppress("UNCHECKED_CAST")
-  override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-    return ThrowbackFragmentViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository) as T
-  }
+	@Suppress("UNCHECKED_CAST")
+	override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+		return ThrowbackFragmentViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository) as T
+	}
 }

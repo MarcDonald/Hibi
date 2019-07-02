@@ -19,115 +19,117 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-class AddMultiEntryToBookDialog(private val selectedCount: Int, private val onSaveClick: (Boolean, List<Int>) -> Unit) : HibiBottomSheetDialogFragment(), KodeinAware {
-  override val kodein: Kodein by closestKodein()
+class AddMultiEntryToBookDialog(private val selectedCount: Int, private val onSaveClick: (Boolean, List<Int>) -> Unit) :
+		HibiBottomSheetDialogFragment(), KodeinAware {
 
-  // <editor-fold desc="View Model">
-  private val viewModelFactory: AddMultiEntryToBookViewModelFactory by instance()
-  private lateinit var viewModel: AddMultiEntryToBookViewModel
-  // </editor-fold>
+	override val kodein: Kodein by closestKodein()
 
-  // <editor-fold desc="UI Components">
-  private lateinit var title: TextView
-  private lateinit var bookHolder: LinearLayout
-  private lateinit var noBooksWarning: TextView
-  // </editor-fold>
+	// <editor-fold desc="View Model">
+	private val viewModelFactory: AddMultiEntryToBookViewModelFactory by instance()
+	private lateinit var viewModel: AddMultiEntryToBookViewModel
+	// </editor-fold>
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddMultiEntryToBookViewModel::class.java)
-  }
+	// <editor-fold desc="UI Components">
+	private lateinit var title: TextView
+	private lateinit var bookHolder: LinearLayout
+	private lateinit var noBooksWarning: TextView
+	// </editor-fold>
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val view = inflater.inflate(R.layout.dialog_multi_entry_books, container, false)
-    bindViews(view)
-    setupObservers()
-    return view
-  }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddMultiEntryToBookViewModel::class.java)
+	}
 
-  private fun bindViews(view: View) {
-    title = view.findViewById(R.id.txt_add_books_multi_title)
-    title.text = resources.getQuantityString(R.plurals.multi_book_title, selectedCount, selectedCount)
-    bookHolder = view.findViewById(R.id.lin_books_entry_multi_books_holder)
-    noBooksWarning = view.findViewById(R.id.txt_no_books_multi_warning)
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		val view = inflater.inflate(R.layout.dialog_multi_entry_books, container, false)
+		bindViews(view)
+		setupObservers()
+		return view
+	}
 
-    val addButton: MaterialButton = view.findViewById(R.id.btn_add_book_multi)
-    addButton.setOnClickListener {
-      val dialog = AddBookDialog()
-      dialog.show(requireFragmentManager(), "Book Manager Dialog")
-    }
+	private fun bindViews(view: View) {
+		title = view.findViewById(R.id.txt_add_books_multi_title)
+		title.text = resources.getQuantityString(R.plurals.multi_book_title, selectedCount, selectedCount)
+		bookHolder = view.findViewById(R.id.lin_books_entry_multi_books_holder)
+		noBooksWarning = view.findViewById(R.id.txt_no_books_multi_warning)
 
-    val saveButton: MaterialButton = view.findViewById(R.id.btn_save_books_multi)
-    saveButton.setOnClickListener(saveClickListener)
+		val addButton: MaterialButton = view.findViewById(R.id.btn_add_book_multi)
+		addButton.setOnClickListener {
+			val dialog = AddBookDialog()
+			dialog.show(requireFragmentManager(), "Book Manager Dialog")
+		}
 
-    val deleteButton: MaterialButton = view.findViewById(R.id.btn_delete_books_multi)
-    deleteButton.setOnClickListener(deleteClickListener)
+		val saveButton: MaterialButton = view.findViewById(R.id.btn_save_books_multi)
+		saveButton.setOnClickListener(saveClickListener)
 
-  }
+		val deleteButton: MaterialButton = view.findViewById(R.id.btn_delete_books_multi)
+		deleteButton.setOnClickListener(deleteClickListener)
 
-  private fun setupObservers() {
-    viewModel.allBooks.observe(this, Observer { value ->
-      value?.let { books ->
-        viewModel.listReceived(books.isEmpty())
+	}
 
-        books.forEach { book ->
-          // Gets list of all books currently displayed
-          val alreadyDisplayedBooks = ArrayList<CheckBoxWithId>()
-          for(x in 0 until bookHolder.childCount) {
-            val bookCheckBox = bookHolder.getChildAt(x) as CheckBoxWithId
-            alreadyDisplayedBooks.add(bookCheckBox)
-          }
+	private fun setupObservers() {
+		viewModel.allBooks.observe(this, Observer { value ->
+			value?.let { books ->
+				viewModel.listReceived(books.isEmpty())
 
-          val displayBook = CheckBoxWithId(bookHolder.context)
-          displayBook.text = book.name
-          displayBook.itemId = book.id
-          if(theme == R.style.Theme_Hibi_BottomSheetDialog_Dark) {
-            displayBook.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
-          } else {
-            displayBook.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))
-          }
+				books.forEach { book ->
+					// Gets list of all books currently displayed
+					val alreadyDisplayedBooks = ArrayList<CheckBoxWithId>()
+					for(x in 0 until bookHolder.childCount) {
+						val bookCheckBox = bookHolder.getChildAt(x) as CheckBoxWithId
+						alreadyDisplayedBooks.add(bookCheckBox)
+					}
 
-          // If the new book is already displayed, don't add it
-          // This stops it removing user progress before saving
-          var addIt = true
-          alreadyDisplayedBooks.forEach { alreadyDisplayedBook ->
-            if(alreadyDisplayedBook.itemId == displayBook.itemId) {
-              addIt = false
-            }
-          }
+					val displayBook = CheckBoxWithId(bookHolder.context)
+					displayBook.text = book.name
+					displayBook.itemId = book.id
+					if(theme == R.style.Theme_Hibi_BottomSheetDialog_Dark) {
+						displayBook.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
+					} else {
+						displayBook.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))
+					}
 
-          if(addIt)
-            bookHolder.addView(displayBook)
-        }
-      }
-    })
+					// If the new book is already displayed, don't add it
+					// This stops it removing user progress before saving
+					var addIt = true
+					alreadyDisplayedBooks.forEach { alreadyDisplayedBook ->
+						if(alreadyDisplayedBook.itemId == displayBook.itemId) {
+							addIt = false
+						}
+					}
 
-    viewModel.displayNoBooksWarning.observe(this, Observer { value ->
-      value?.let { shouldShow ->
-        noBooksWarning.show(shouldShow)
-      }
-    })
-  }
+					if(addIt)
+						bookHolder.addView(displayBook)
+				}
+			}
+		})
 
-  private val saveClickListener = View.OnClickListener {
-    val list = mutableListOf<Int>()
-    for(x in 0 until bookHolder.childCount) {
-      val checkBox = bookHolder.getChildAt(x) as CheckBoxWithId
-      if(checkBox.isChecked)
-        list.add(checkBox.itemId)
-    }
-    onSaveClick(false, list)
-    dismiss()
-  }
+		viewModel.displayNoBooksWarning.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				noBooksWarning.show(shouldShow)
+			}
+		})
+	}
 
-  private val deleteClickListener = View.OnClickListener {
-    val list = mutableListOf<Int>()
-    for(x in 0 until bookHolder.childCount) {
-      val checkBox = bookHolder.getChildAt(x) as CheckBoxWithId
-      if(checkBox.isChecked)
-        list.add(checkBox.itemId)
-    }
-    onSaveClick(true, list)
-    dismiss()
-  }
+	private val saveClickListener = View.OnClickListener {
+		val list = mutableListOf<Int>()
+		for(x in 0 until bookHolder.childCount) {
+			val checkBox = bookHolder.getChildAt(x) as CheckBoxWithId
+			if(checkBox.isChecked)
+				list.add(checkBox.itemId)
+		}
+		onSaveClick(false, list)
+		dismiss()
+	}
+
+	private val deleteClickListener = View.OnClickListener {
+		val list = mutableListOf<Int>()
+		for(x in 0 until bookHolder.childCount) {
+			val checkBox = bookHolder.getChildAt(x) as CheckBoxWithId
+			if(checkBox.isChecked)
+				list.add(checkBox.itemId)
+		}
+		onSaveClick(true, list)
+		dismiss()
+	}
 }

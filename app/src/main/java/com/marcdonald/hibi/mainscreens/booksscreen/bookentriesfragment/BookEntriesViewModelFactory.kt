@@ -7,12 +7,12 @@ import com.marcdonald.hibi.data.repository.BookRepository
 import com.marcdonald.hibi.data.repository.TagEntryRelationRepository
 
 class BookEntriesViewModelFactory(private val bookRepository: BookRepository,
-                                  private val bookEntryRelationRepository: BookEntryRelationRepository,
-                                  private val tagEntryRelationRepository: TagEntryRelationRepository)
-  : ViewModelProvider.NewInstanceFactory() {
+																	private val bookEntryRelationRepository: BookEntryRelationRepository,
+																	private val tagEntryRelationRepository: TagEntryRelationRepository)
+	: ViewModelProvider.NewInstanceFactory() {
 
-  @Suppress("UNCHECKED_CAST")
-  override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-    return BookEntriesViewModel(bookRepository, bookEntryRelationRepository, tagEntryRelationRepository) as T
-  }
+	@Suppress("UNCHECKED_CAST")
+	override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+		return BookEntriesViewModel(bookRepository, bookEntryRelationRepository, tagEntryRelationRepository) as T
+	}
 }

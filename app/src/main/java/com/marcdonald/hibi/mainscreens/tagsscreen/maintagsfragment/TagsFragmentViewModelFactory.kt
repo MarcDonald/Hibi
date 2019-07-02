@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.marcdonald.hibi.data.repository.TagEntryRelationRepository
 
 class TagsFragmentViewModelFactory(private val tagEntryRelationRepository: TagEntryRelationRepository)
-  : ViewModelProvider.NewInstanceFactory() {
+	: ViewModelProvider.NewInstanceFactory() {
 
-  @Suppress("UNCHECKED_CAST")
-  override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-    return TagsFragmentViewModel(tagEntryRelationRepository) as T
-  }
+	@Suppress("UNCHECKED_CAST")
+	override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+		return TagsFragmentViewModel(tagEntryRelationRepository) as T
+	}
 }

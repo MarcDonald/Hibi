@@ -20,68 +20,69 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 class BooksFragment : Fragment(), KodeinAware {
-  override val kodein by closestKodein()
+	override val kodein by closestKodein()
 
-  // <editor-fold desc="View Model">
-  private val viewModelFactory: BooksFragmentViewModelFactory by instance()
-  private lateinit var viewModel: BooksFragmentViewModel
-  // </editor-fold>
+	// <editor-fold desc="View Model">
+	private val viewModelFactory: BooksFragmentViewModelFactory by instance()
+	private lateinit var viewModel: BooksFragmentViewModel
+	// </editor-fold>
 
-  // <editor-fold desc="UI Components">
-  private lateinit var loadingDisplay: ConstraintLayout
-  private lateinit var noResults: ConstraintLayout
-  private lateinit var recyclerAdapter: BooksRecyclerAdapter
-  // </editor-fold>
+	// <editor-fold desc="UI Components">
+	private lateinit var loadingDisplay: ConstraintLayout
+	private lateinit var noResults: ConstraintLayout
+	private lateinit var recyclerAdapter: BooksRecyclerAdapter
+	// </editor-fold>
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(BooksFragmentViewModel::class.java)
-  }
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val view = inflater.inflate(R.layout.fragment_books, container, false)
-    bindViews(view)
-    initRecycler(view)
-    setupObservers()
-    return view
-  }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		viewModel = ViewModelProviders.of(this, viewModelFactory).get(BooksFragmentViewModel::class.java)
+	}
 
-  private fun bindViews(view: View) {
-    loadingDisplay = view.findViewById(R.id.const_books_loading)
-    noResults = view.findViewById(R.id.const_no_books)
-  }
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		val view = inflater.inflate(R.layout.fragment_books, container, false)
+		bindViews(view)
+		initRecycler(view)
+		setupObservers()
+		return view
+	}
 
-  private fun initRecycler(view: View) {
-    val recycler: RecyclerView = view.findViewById(R.id.recycler_books)
-    this.recyclerAdapter = BooksRecyclerAdapter(requireContext(), requireFragmentManager())
-    val layoutManager = LinearLayoutManager(context)
-    recycler.adapter = recyclerAdapter
-    recycler.layoutManager = layoutManager
+	private fun bindViews(view: View) {
+		loadingDisplay = view.findViewById(R.id.const_books_loading)
+		noResults = view.findViewById(R.id.const_no_books)
+	}
 
-    val includeEntryDividers = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_ENTRY_DIVIDERS, true)
-    if(includeEntryDividers) {
-      val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
-      recycler.addItemDecoration(dividerItemDecoration)
-    }
-  }
+	private fun initRecycler(view: View) {
+		val recycler: RecyclerView = view.findViewById(R.id.recycler_books)
+		this.recyclerAdapter = BooksRecyclerAdapter(requireContext(), requireFragmentManager())
+		val layoutManager = LinearLayoutManager(context)
+		recycler.adapter = recyclerAdapter
+		recycler.layoutManager = layoutManager
 
-  private fun setupObservers() {
-    viewModel.books.observe(this, Observer { value ->
-      value?.let { list ->
-        viewModel.listReceived(list.isEmpty())
-        recyclerAdapter.updateList(list)
-      }
-    })
+		val includeEntryDividers = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_ENTRY_DIVIDERS, true)
+		if(includeEntryDividers) {
+			val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
+			recycler.addItemDecoration(dividerItemDecoration)
+		}
+	}
 
-    viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { shouldShow ->
-        loadingDisplay.show(shouldShow)
-      }
-    })
+	private fun setupObservers() {
+		viewModel.books.observe(this, Observer { value ->
+			value?.let { list ->
+				viewModel.listReceived(list.isEmpty())
+				recyclerAdapter.updateList(list)
+			}
+		})
 
-    viewModel.displayNoResults.observe(this, Observer { value ->
-      value?.let { shouldShow ->
-        noResults.show(shouldShow)
-      }
-    })
-  }
+		viewModel.displayLoading.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				loadingDisplay.show(shouldShow)
+			}
+		})
+
+		viewModel.displayNoResults.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				noResults.show(shouldShow)
+			}
+		})
+	}
 }

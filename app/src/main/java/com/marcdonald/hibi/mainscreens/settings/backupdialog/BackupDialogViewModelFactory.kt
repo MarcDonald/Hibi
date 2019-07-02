@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.marcdonald.hibi.internal.utils.FileUtils
 
 class BackupDialogViewModelFactory(private val fileUtils: FileUtils)
-  : ViewModelProvider.NewInstanceFactory() {
+	: ViewModelProvider.NewInstanceFactory() {
 
-  @Suppress("UNCHECKED_CAST")
-  override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-    return BackupDialogViewModel(fileUtils) as T
-  }
+	@Suppress("UNCHECKED_CAST")
+	override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+		return BackupDialogViewModel(fileUtils) as T
+	}
 }

@@ -7,14 +7,14 @@ import com.marcdonald.hibi.internal.utils.formatDateForHeader
 
 class EntriesRecyclerViewHolderHeader(itemView: View) : BaseEntriesRecyclerViewHolder(itemView) {
 
-  // Entry
-  private var displayedItem: MainEntriesDisplayItem? = null
+	// Entry
+	private var displayedItem: MainEntriesDisplayItem? = null
 
-  // UI Components
-  private val dateDisplay: TextView = itemView.findViewById(R.id.txt_header_date)
+	// UI Components
+	private val dateDisplay: TextView = itemView.findViewById(R.id.txt_header_date)
 
-  override fun display(item: MainEntriesDisplayItem) {
-    this.displayedItem = item
-    dateDisplay.text = formatDateForHeader(item.entry.month, item.entry.year)
-  }
+	override fun display(item: MainEntriesDisplayItem) {
+		this.displayedItem = item
+		dateDisplay.text = formatDateForHeader(item.entry.month, item.entry.year)
+	}
 }

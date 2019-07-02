@@ -23,94 +23,94 @@ import org.kodein.di.generic.instance
 import timber.log.Timber
 
 class SearchResultsDialog : HibiBottomSheetDialogFragment(), KodeinAware {
-  override val kodein by closestKodein()
+	override val kodein by closestKodein()
 
-  // <editor-fold desc="View Model">
-  private val viewModelFactory: SearchViewModelFactory by instance()
-  private lateinit var viewModel: SearchViewModel
-  // </editor-fold>
+	// <editor-fold desc="View Model">
+	private val viewModelFactory: SearchViewModelFactory by instance()
+	private lateinit var viewModel: SearchViewModel
+	// </editor-fold>
 
-  // <editor-fold desc="UI Components">
-  private lateinit var progressBar: ProgressBar
-  private lateinit var noConnectionWarning: LinearLayout
-  private lateinit var noResultsWarning: LinearLayout
-  private lateinit var recyclerAdapter: SearchResultsRecyclerAdapter
-  private lateinit var recycler: RecyclerView
-  // </editor-fold>
+	// <editor-fold desc="UI Components">
+	private lateinit var progressBar: ProgressBar
+	private lateinit var noConnectionWarning: LinearLayout
+	private lateinit var noResultsWarning: LinearLayout
+	private lateinit var recyclerAdapter: SearchResultsRecyclerAdapter
+	private lateinit var recycler: RecyclerView
+	// </editor-fold>
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
-  }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
+	}
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Timber.v("Log: onCreateView: Started")
-    val view = inflater.inflate(R.layout.dialog_search, container, false)
-    bindViews(view)
-    initRecycler()
-    setupObservers()
-    return view
-  }
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		Timber.v("Log: onCreateView: Started")
+		val view = inflater.inflate(R.layout.dialog_search, container, false)
+		bindViews(view)
+		initRecycler()
+		setupObservers()
+		return view
+	}
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    arguments?.let {
-      val searchTerm = arguments!!.getString(SEARCH_TERM_KEY, "")
-      val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-      imm.hideSoftInputFromWindow(requireView().windowToken, 0)
-      viewModel.search(searchTerm)
-    }
-  }
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		arguments?.let {
+			val searchTerm = arguments!!.getString(SEARCH_TERM_KEY, "")
+			val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+			imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+			viewModel.search(searchTerm)
+		}
+	}
 
-  private fun bindViews(view: View) {
-    recycler = view.findViewById(R.id.recycler_search_results)
-    recycler.show(false)
+	private fun bindViews(view: View) {
+		recycler = view.findViewById(R.id.recycler_search_results)
+		recycler.show(false)
 
-    progressBar = view.findViewById(R.id.prog_search_results)
-    progressBar.show(false)
+		progressBar = view.findViewById(R.id.prog_search_results)
+		progressBar.show(false)
 
-    noConnectionWarning = view.findViewById(R.id.lin_search_no_connection)
-    noConnectionWarning.show(false)
+		noConnectionWarning = view.findViewById(R.id.lin_search_no_connection)
+		noConnectionWarning.show(false)
 
-    noResultsWarning = view.findViewById(R.id.lin_search_no_results)
-    noResultsWarning.show(false)
-  }
+		noResultsWarning = view.findViewById(R.id.lin_search_no_results)
+		noResultsWarning.show(false)
+	}
 
-  private fun initRecycler() {
-    this.recyclerAdapter = SearchResultsRecyclerAdapter(requireContext(), requireFragmentManager())
-    val layoutManager = LinearLayoutManager(context)
-    recycler.adapter = recyclerAdapter
-    recycler.layoutManager = layoutManager
+	private fun initRecycler() {
+		this.recyclerAdapter = SearchResultsRecyclerAdapter(requireContext(), requireFragmentManager())
+		val layoutManager = LinearLayoutManager(context)
+		recycler.adapter = recyclerAdapter
+		recycler.layoutManager = layoutManager
 
-    val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
-    recycler.addItemDecoration(dividerItemDecoration)
-  }
+		val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
+		recycler.addItemDecoration(dividerItemDecoration)
+	}
 
-  private fun setupObservers() {
-    viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { shouldShow ->
-        progressBar.show(shouldShow)
-      }
-    })
+	private fun setupObservers() {
+		viewModel.displayLoading.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				progressBar.show(shouldShow)
+			}
+		})
 
-    viewModel.displayNoConnection.observe(this, Observer { value ->
-      value?.let { shouldShow ->
-        noConnectionWarning.show(shouldShow)
-      }
-    })
+		viewModel.displayNoConnection.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				noConnectionWarning.show(shouldShow)
+			}
+		})
 
-    viewModel.displayNoResults.observe(this, Observer { value ->
-      value?.let { shouldShow ->
-        noResultsWarning.show(shouldShow)
-      }
-    })
+		viewModel.displayNoResults.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				noResultsWarning.show(shouldShow)
+			}
+		})
 
-    viewModel.searchResults.observe(this, Observer { value ->
-      value?.let { searchResult ->
-        recyclerAdapter.updateList(searchResult)
-        recycler.scrollToPosition(0)
-        recycler.show(true)
-      }
-    })
-  }
+		viewModel.searchResults.observe(this, Observer { value ->
+			value?.let { searchResult ->
+				recyclerAdapter.updateList(searchResult)
+				recycler.scrollToPosition(0)
+				recycler.show(true)
+			}
+		})
+	}
 }

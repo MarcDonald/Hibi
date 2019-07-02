@@ -53,77 +53,77 @@ import timber.log.Timber
 
 class Hibi : Application(), KodeinAware {
 
-  override val kodein = Kodein.lazy {
-    import(androidXModule(this@Hibi))
+	override val kodein = Kodein.lazy {
+		import(androidXModule(this@Hibi))
 
-    // <editor-fold desc="Database">
-    bind<AppDatabase>() with singleton { ProductionAppDatabase.invoke(applicationContext) }
-    bind<DAO>() with singleton { instance<AppDatabase>().dao() }
-    bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance(), instance()) }
-    bind<TagRepository>() with singleton { TagRepositoryImpl.getInstance(instance()) }
-    bind<TagEntryRelationRepository>() with singleton { TagEntryRelationRepositoryImpl.getInstance(instance()) }
-    bind<NewWordRepository>() with singleton { NewWordRepositoryImpl.getInstance(instance()) }
-    bind<BookRepository>() with singleton { BookRepositoryImpl.getInstance(instance()) }
-    bind<BookEntryRelationRepository>() with singleton { BookEntryRelationRepositoryImpl.getInstance(instance()) }
-    bind<EntryImageRepository>() with singleton { EntryImageRepositoryImpl.getInstance(instance()) }
-    // </editor-fold>
-    // <editor-fold desc="Utils">
-    bind<FileUtils>() with provider { FileUtilsImpl(instance()) }
-    bind<ThemeUtils>() with provider { ThemeUtilsImpl(instance()) }
-    // </editor-fold>
-    // <editor-fold desc="Connectivity and Jisho API">
-    bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-    bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
-    bind<GithubAPIService>() with singleton { GithubAPIService(instance()) }
-    // </editor-fold>
-    // <editor-fold desc="View models">
-    bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }
-    bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
-    bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance()) }
-    bind() from provider { SearchViewModelFactory(instance()) }
-    bind() from provider { SearchMoreInfoViewModelFactory() }
-    bind() from provider { AddTagToEntryViewModelFactory(instance(), instance()) }
-    bind() from provider { AddTagViewModelFactory(instance()) }
-    bind() from provider { NewWordViewModelFactory(instance()) }
-    bind() from provider { AddNewWordViewModelFactory(instance()) }
-    bind() from provider { CalendarTabViewModelFactory(instance(), instance(), instance()) }
-    bind() from provider { TagsFragmentViewModelFactory(instance()) }
-    bind() from provider { TaggedEntriesViewModelFactory(instance(), instance(), instance()) }
-    bind() from provider { AddBookViewModelFactory(instance()) }
-    bind() from provider { BooksFragmentViewModelFactory(instance()) }
-    bind() from provider { BookEntriesViewModelFactory(instance(), instance(), instance()) }
-    bind() from provider { AddEntryToBookViewModelFactory(instance(), instance()) }
-    bind() from provider { AddLocationToEntryViewModelFactory(instance()) }
-    bind() from provider { SearchEntriesViewModelFactory(instance(), instance(), instance(), instance(), instance()) }
-    bind() from provider { AddTagToMultiEntryViewModelFactory(instance()) }
-    bind() from provider { AddMultiEntryToBookViewModelFactory(instance()) }
-    bind() from provider { BackupDialogViewModelFactory(instance()) }
-    bind() from provider { RestoreDialogViewModelFactory(instance(), instance()) }
-    bind() from provider { UpdateDialogViewModelFactory(instance()) }
-    bind() from provider { ThrowbackFragmentViewModelFactory(instance(), instance(), instance()) }
-    bind() from provider { ThrowbackEntriesViewModelFactory(instance(), instance(), instance()) }
-    // </editor-fold>
-  }
+		// <editor-fold desc="Database">
+		bind<AppDatabase>() with singleton { ProductionAppDatabase.invoke(applicationContext) }
+		bind<DAO>() with singleton { instance<AppDatabase>().dao() }
+		bind<EntryRepository>() with singleton { EntryRepositoryImpl.getInstance(instance(), instance()) }
+		bind<TagRepository>() with singleton { TagRepositoryImpl.getInstance(instance()) }
+		bind<TagEntryRelationRepository>() with singleton { TagEntryRelationRepositoryImpl.getInstance(instance()) }
+		bind<NewWordRepository>() with singleton { NewWordRepositoryImpl.getInstance(instance()) }
+		bind<BookRepository>() with singleton { BookRepositoryImpl.getInstance(instance()) }
+		bind<BookEntryRelationRepository>() with singleton { BookEntryRelationRepositoryImpl.getInstance(instance()) }
+		bind<EntryImageRepository>() with singleton { EntryImageRepositoryImpl.getInstance(instance()) }
+		// </editor-fold>
+		// <editor-fold desc="Utils">
+		bind<FileUtils>() with provider { FileUtilsImpl(instance()) }
+		bind<ThemeUtils>() with provider { ThemeUtilsImpl(instance()) }
+		// </editor-fold>
+		// <editor-fold desc="Connectivity and Jisho API">
+		bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
+		bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
+		bind<GithubAPIService>() with singleton { GithubAPIService(instance()) }
+		// </editor-fold>
+		// <editor-fold desc="View models">
+		bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }
+		bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
+		bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance()) }
+		bind() from provider { SearchViewModelFactory(instance()) }
+		bind() from provider { SearchMoreInfoViewModelFactory() }
+		bind() from provider { AddTagToEntryViewModelFactory(instance(), instance()) }
+		bind() from provider { AddTagViewModelFactory(instance()) }
+		bind() from provider { NewWordViewModelFactory(instance()) }
+		bind() from provider { AddNewWordViewModelFactory(instance()) }
+		bind() from provider { CalendarTabViewModelFactory(instance(), instance(), instance()) }
+		bind() from provider { TagsFragmentViewModelFactory(instance()) }
+		bind() from provider { TaggedEntriesViewModelFactory(instance(), instance(), instance()) }
+		bind() from provider { AddBookViewModelFactory(instance()) }
+		bind() from provider { BooksFragmentViewModelFactory(instance()) }
+		bind() from provider { BookEntriesViewModelFactory(instance(), instance(), instance()) }
+		bind() from provider { AddEntryToBookViewModelFactory(instance(), instance()) }
+		bind() from provider { AddLocationToEntryViewModelFactory(instance()) }
+		bind() from provider { SearchEntriesViewModelFactory(instance(), instance(), instance(), instance(), instance()) }
+		bind() from provider { AddTagToMultiEntryViewModelFactory(instance()) }
+		bind() from provider { AddMultiEntryToBookViewModelFactory(instance()) }
+		bind() from provider { BackupDialogViewModelFactory(instance()) }
+		bind() from provider { RestoreDialogViewModelFactory(instance(), instance()) }
+		bind() from provider { UpdateDialogViewModelFactory(instance()) }
+		bind() from provider { ThrowbackFragmentViewModelFactory(instance(), instance(), instance()) }
+		bind() from provider { ThrowbackEntriesViewModelFactory(instance(), instance(), instance()) }
+		// </editor-fold>
+	}
 
-  override fun onCreate() {
-    super.onCreate()
-    if(BuildConfig.DEBUG) {
-      Timber.plant(Timber.DebugTree())
-      Timber.i("Log: Timber Debug Tree planted")
-    }
-    createNotificationChannels()
-  }
+	override fun onCreate() {
+		super.onCreate()
+		if(BuildConfig.DEBUG) {
+			Timber.plant(Timber.DebugTree())
+			Timber.i("Log: Timber Debug Tree planted")
+		}
+		createNotificationChannels()
+	}
 
-  private fun createNotificationChannels() {
-    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      val reminderChannel = NotificationChannel(
-        NOTIFICATION_CHANNEL_REMINDER_ID,
-        resources.getString(R.string.reminder_notification_channel_title),
-        NotificationManager.IMPORTANCE_DEFAULT)
-      reminderChannel.description = resources.getString(R.string.reminder_notification_channel_description)
+	private fun createNotificationChannels() {
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			val reminderChannel = NotificationChannel(
+				NOTIFICATION_CHANNEL_REMINDER_ID,
+				resources.getString(R.string.reminder_notification_channel_title),
+				NotificationManager.IMPORTANCE_DEFAULT)
+			reminderChannel.description = resources.getString(R.string.reminder_notification_channel_description)
 
-      val manager: NotificationManager = getSystemService(NotificationManager::class.java)
-      manager.createNotificationChannel(reminderChannel)
-    }
-  }
+			val manager: NotificationManager = getSystemService(NotificationManager::class.java)
+			manager.createNotificationChannel(reminderChannel)
+		}
+	}
 }

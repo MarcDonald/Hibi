@@ -9,21 +9,21 @@ import com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment.TagDisplayIte
 
 interface TagEntryRelationRepository {
 
-  suspend fun addTagEntryRelation(tagEntryRelation: TagEntryRelation)
+	suspend fun addTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
-  suspend fun getAllTagEntryRelationsWithIds(ids: List<Int>): List<TagEntryRelation>
+	suspend fun getAllTagEntryRelationsWithIds(ids: List<Int>): List<TagEntryRelation>
 
-  suspend fun getEntriesWithTag(tagId: Int): List<Entry>
+	suspend fun getEntriesWithTag(tagId: Int): List<Entry>
 
-  suspend fun getTagsWithEntry(entryId: Int): List<Tag>
+	suspend fun getTagsWithEntry(entryId: Int): List<Tag>
 
-  suspend fun getTagIdsWithEntry(entryId: Int): List<Int>
+	suspend fun getTagIdsWithEntry(entryId: Int): List<Int>
 
-  suspend fun deleteTagEntryRelation(tagEntryRelation: TagEntryRelation)
+	suspend fun deleteTagEntryRelation(tagEntryRelation: TagEntryRelation)
 
-  val allTagDisplayItems: LiveData<List<TagDisplayItem>>
+	val allTagDisplayItems: LiveData<List<TagDisplayItem>>
 
-  suspend fun getTagEntryDisplayItems(): List<TagEntryDisplayItem>
+	suspend fun getTagEntryDisplayItems(): List<TagEntryDisplayItem>
 
-  fun getCountTagsWithEntry(entryId: Int): LiveData<Int>
+	fun getCountTagsWithEntry(entryId: Int): LiveData<Int>
 }

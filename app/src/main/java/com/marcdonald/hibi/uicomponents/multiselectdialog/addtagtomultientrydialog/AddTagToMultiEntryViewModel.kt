@@ -7,13 +7,13 @@ import com.marcdonald.hibi.data.entity.Tag
 import com.marcdonald.hibi.data.repository.TagRepository
 
 class AddTagToMultiEntryViewModel(tagRepository: TagRepository) : ViewModel() {
-  val allTags: LiveData<List<Tag>> = tagRepository.getAllTagsLD()
+	val allTags: LiveData<List<Tag>> = tagRepository.getAllTagsLD()
 
-  private var _displayNoTagsWarning = MutableLiveData<Boolean>()
-  val displayNoTagsWarning: LiveData<Boolean>
-    get() = _displayNoTagsWarning
+	private var _displayNoTagsWarning = MutableLiveData<Boolean>()
+	val displayNoTagsWarning: LiveData<Boolean>
+		get() = _displayNoTagsWarning
 
-  fun listReceived(isEmpty: Boolean) {
-    _displayNoTagsWarning.value = isEmpty
-  }
+	fun listReceived(isEmpty: Boolean) {
+		_displayNoTagsWarning.value = isEmpty
+	}
 }

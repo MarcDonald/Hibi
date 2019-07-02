@@ -23,93 +23,93 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
-  override val kodein: Kodein by closestKodein()
+	override val kodein: Kodein by closestKodein()
 
-  // <editor-fold desc="View Model">
-  private val viewModelFactory: NewWordViewModelFactory by instance()
-  private lateinit var viewModel: NewWordViewModel
-  // </editor-fold>
+	// <editor-fold desc="View Model">
+	private val viewModelFactory: NewWordViewModelFactory by instance()
+	private lateinit var viewModel: NewWordViewModel
+	// </editor-fold>
 
-  // <editor-fold desc="UI Components">
-  private lateinit var noResultsWarning: LinearLayout
-  private lateinit var addButton: MaterialButton
-  private lateinit var recyclerAdapter: NewWordsRecyclerAdapter
-  private lateinit var recycler: RecyclerView
-  // </editor-fold>
+	// <editor-fold desc="UI Components">
+	private lateinit var noResultsWarning: LinearLayout
+	private lateinit var addButton: MaterialButton
+	private lateinit var recyclerAdapter: NewWordsRecyclerAdapter
+	private lateinit var recycler: RecyclerView
+	// </editor-fold>
 
-  // <editor-fold desc="Other">
-  private var isEditMode = true
-  // </editor-fold>
+	// <editor-fold desc="Other">
+	private var isEditMode = true
+	// </editor-fold>
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewWordViewModel::class.java)
-  }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewWordViewModel::class.java)
+	}
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val view = inflater.inflate(R.layout.dialog_new_word, container, false)
-    arguments?.let { arguments ->
-      viewModel.passArguments(arguments.getInt(ENTRY_ID_KEY, 0), arguments.getBoolean(IS_EDIT_MODE_KEY, true))
-    }
-    bindViews(view)
-    setupObservers()
-    return view
-  }
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		val view = inflater.inflate(R.layout.dialog_new_word, container, false)
+		arguments?.let { arguments ->
+			viewModel.passArguments(arguments.getInt(ENTRY_ID_KEY, 0), arguments.getBoolean(IS_EDIT_MODE_KEY, true))
+		}
+		bindViews(view)
+		setupObservers()
+		return view
+	}
 
-  private fun bindViews(view: View) {
-    noResultsWarning = view.findViewById(R.id.lin_new_words_no_results)
-    recycler = view.findViewById(R.id.recycler_new_words)
+	private fun bindViews(view: View) {
+		noResultsWarning = view.findViewById(R.id.lin_new_words_no_results)
+		recycler = view.findViewById(R.id.recycler_new_words)
 
-    addButton = view.findViewById(R.id.btn_add_new_word)
-    addButton.setOnClickListener(addClickListener)
+		addButton = view.findViewById(R.id.btn_add_new_word)
+		addButton.setOnClickListener(addClickListener)
 
-    initRecycler()
-  }
+		initRecycler()
+	}
 
-  private fun setupObservers() {
-    viewModel.displayAddButton.observe(this, Observer { value ->
-      value?.let { shouldShow ->
-        addButton.show(shouldShow)
-      }
-    })
+	private fun setupObservers() {
+		viewModel.displayAddButton.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				addButton.show(shouldShow)
+			}
+		})
 
-    viewModel.allowEdits.observe(this, Observer { value ->
-      value?.let { allow ->
-        recyclerAdapter.isEditMode = allow
-      }
-    })
+		viewModel.allowEdits.observe(this, Observer { value ->
+			value?.let { allow ->
+				recyclerAdapter.isEditMode = allow
+			}
+		})
 
-    viewModel.displayNoWords.observe(this, Observer { value ->
-      value?.let { shouldShow ->
-        noResultsWarning.show(shouldShow)
-      }
-    })
+		viewModel.displayNoWords.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				noResultsWarning.show(shouldShow)
+			}
+		})
 
-    viewModel.getNewWords().observe(this, Observer { value ->
-      value?.let { list ->
-        viewModel.listReceived(list.isEmpty())
-        recyclerAdapter.updateList(list)
-      }
-    })
-  }
+		viewModel.getNewWords().observe(this, Observer { value ->
+			value?.let { list ->
+				viewModel.listReceived(list.isEmpty())
+				recyclerAdapter.updateList(list)
+			}
+		})
+	}
 
-  private val addClickListener = View.OnClickListener {
-    val dialog = AddNewWordDialog()
+	private val addClickListener = View.OnClickListener {
+		val dialog = AddNewWordDialog()
 
-    val bundle = Bundle()
-    bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
-    dialog.arguments = bundle
+		val bundle = Bundle()
+		bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
+		dialog.arguments = bundle
 
-    dialog.show(requireFragmentManager(), "Add New Word Dialog")
-  }
+		dialog.show(requireFragmentManager(), "Add New Word Dialog")
+	}
 
-  private fun initRecycler() {
-    this.recyclerAdapter = NewWordsRecyclerAdapter(requireContext(), requireFragmentManager())
-    val layoutManager = LinearLayoutManager(context)
-    recycler.adapter = recyclerAdapter
-    recycler.layoutManager = layoutManager
+	private fun initRecycler() {
+		this.recyclerAdapter = NewWordsRecyclerAdapter(requireContext(), requireFragmentManager())
+		val layoutManager = LinearLayoutManager(context)
+		recycler.adapter = recyclerAdapter
+		recycler.layoutManager = layoutManager
 
-    val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
-    recycler.addItemDecoration(dividerItemDecoration)
-  }
+		val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
+		recycler.addItemDecoration(dividerItemDecoration)
+	}
 }

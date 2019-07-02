@@ -24,84 +24,84 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 class ThrowbackEntriesFragment : Fragment(), KodeinAware {
-  override val kodein by closestKodein()
+	override val kodein by closestKodein()
 
-  // <editor-fold desc="View Model">
-  private val viewModelFactory: ThrowbackEntriesViewModelFactory by instance()
-  private lateinit var viewModel: ThrowbackEntriesViewModel
-  // </editor-fold>
+	// <editor-fold desc="View Model">
+	private val viewModelFactory: ThrowbackEntriesViewModelFactory by instance()
+	private lateinit var viewModel: ThrowbackEntriesViewModel
+	// </editor-fold>
 
-  // <editor-fold desc="UI Components">
-  private lateinit var loadingDisplay: ConstraintLayout
-  private lateinit var toolbarTitle: TextView
-  private lateinit var recyclerAdapter: EntriesRecyclerAdapter
-  // </editor-fold>
+	// <editor-fold desc="UI Components">
+	private lateinit var loadingDisplay: ConstraintLayout
+	private lateinit var toolbarTitle: TextView
+	private lateinit var recyclerAdapter: EntriesRecyclerAdapter
+	// </editor-fold>
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory).get(ThrowbackEntriesViewModel::class.java)
-  }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		viewModel = ViewModelProviders.of(this, viewModelFactory).get(ThrowbackEntriesViewModel::class.java)
+	}
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    val view = inflater.inflate(R.layout.fragment_throwback_entries, container, false)
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		val view = inflater.inflate(R.layout.fragment_throwback_entries, container, false)
 
-    bindViews(view)
-    initRecycler(view)
-    setupObservers()
-    viewModel.loadEntries()
+		bindViews(view)
+		initRecycler(view)
+		setupObservers()
+		viewModel.loadEntries()
 
-    return view
-  }
+		return view
+	}
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    arguments?.let { arguments ->
-      viewModel.passArguments(ThrowbackEntriesFragmentArgs.fromBundle(arguments).day,
-        ThrowbackEntriesFragmentArgs.fromBundle(arguments).month,
-        ThrowbackEntriesFragmentArgs.fromBundle(arguments).year)
-    }
-  }
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		arguments?.let { arguments ->
+			viewModel.passArguments(ThrowbackEntriesFragmentArgs.fromBundle(arguments).day,
+				ThrowbackEntriesFragmentArgs.fromBundle(arguments).month,
+				ThrowbackEntriesFragmentArgs.fromBundle(arguments).year)
+		}
+	}
 
-  private fun bindViews(view: View) {
-    loadingDisplay = view.findViewById(R.id.const_throwback_entries_loading)
-    toolbarTitle = view.findViewById(R.id.txt_back_toolbar_title)
-    val toolbarBack: ImageView = view.findViewById(R.id.img_back_toolbar_back)
-    toolbarBack.setOnClickListener {
-      Navigation.findNavController(requireView()).popBackStack()
-    }
-  }
+	private fun bindViews(view: View) {
+		loadingDisplay = view.findViewById(R.id.const_throwback_entries_loading)
+		toolbarTitle = view.findViewById(R.id.txt_back_toolbar_title)
+		val toolbarBack: ImageView = view.findViewById(R.id.img_back_toolbar_back)
+		toolbarBack.setOnClickListener {
+			Navigation.findNavController(requireView()).popBackStack()
+		}
+	}
 
-  private fun setupObservers() {
-    viewModel.toolbarTitle.observe(this, Observer { value ->
-      value?.let { title ->
-        toolbarTitle.text = title
-      }
-    })
+	private fun setupObservers() {
+		viewModel.toolbarTitle.observe(this, Observer { value ->
+			value?.let { title ->
+				toolbarTitle.text = title
+			}
+		})
 
-    viewModel.entries.observe(this, Observer { value ->
-      value?.let { list ->
-        recyclerAdapter.updateList(list)
-      }
-    })
+		viewModel.entries.observe(this, Observer { value ->
+			value?.let { list ->
+				recyclerAdapter.updateList(list)
+			}
+		})
 
-    viewModel.displayLoading.observe(this, Observer { value ->
-      value?.let { shouldShow ->
-        loadingDisplay.show(shouldShow)
-      }
-    })
-  }
+		viewModel.displayLoading.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				loadingDisplay.show(shouldShow)
+			}
+		})
+	}
 
-  private fun initRecycler(view: View) {
-    val recycler: RecyclerView = view.findViewById(R.id.recycler_throwback_entries)
-    this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
-    val layoutManager = LinearLayoutManager(context)
-    recycler.adapter = recyclerAdapter
-    recycler.layoutManager = layoutManager
+	private fun initRecycler(view: View) {
+		val recycler: RecyclerView = view.findViewById(R.id.recycler_throwback_entries)
+		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
+		val layoutManager = LinearLayoutManager(context)
+		recycler.adapter = recyclerAdapter
+		recycler.layoutManager = layoutManager
 
-    val includeEntryDividers = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_ENTRY_DIVIDERS, true)
-    if(includeEntryDividers) {
-      val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
-      recycler.addItemDecoration(dividerItemDecoration)
-    }
-  }
+		val includeEntryDividers = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_ENTRY_DIVIDERS, true)
+		if(includeEntryDividers) {
+			val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
+			recycler.addItemDecoration(dividerItemDecoration)
+		}
+	}
 }
