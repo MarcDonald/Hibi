@@ -16,10 +16,10 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
-import com.marcdonald.hibi.internal.notification.NotificationHelper
 import com.marcdonald.hibi.mainscreens.settings.backupdialog.BackupDialog
 import com.marcdonald.hibi.mainscreens.settings.restoredialog.RestoreDialog
 import com.marcdonald.hibi.mainscreens.settings.updatedialog.UpdateDialog
+import com.marcdonald.hibi.notification.ReminderAlertReceiver
 import com.marcdonald.hibi.uicomponents.TimePickerDialog
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
@@ -89,7 +89,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 	}
 
 	private val reminderChangeListener = Preference.OnPreferenceChangeListener { _, isActive ->
-		val helper = NotificationHelper()
+		val reminderAlertReceiver = ReminderAlertReceiver()
 		if(isActive == true) {
 			val calendar = getInstance()
 			val currentSetAlarmTime = PreferenceManager.getDefaultSharedPreferences(requireContext()).getLong(PREF_REMINDER_TIME, 0)
@@ -104,10 +104,10 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 			}
 
 			displayReminderTimeSummary(calendar)
-			helper.startAlarm(requireContext())
+			reminderAlertReceiver.startAlarm(requireContext())
 		} else {
 			findPreference(PREF_REMINDER_TIME).summary = resources.getString(R.string.reminder_not_set)
-			helper.cancelAlarm(requireContext())
+			reminderAlertReceiver.cancelAlarm(requireContext())
 		}
 		true
 	}
@@ -141,15 +141,15 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 	}
 
 	private val reminderTimeDialogOkClickListener = View.OnClickListener {
+		val reminderAlertReceiver = ReminderAlertReceiver()
 		val calendar = getInstance()
 		calendar.set(HOUR_OF_DAY, reminderTimePickerDialog.hour)
 		calendar.set(MINUTE, reminderTimePickerDialog.minute)
 		calendar.set(SECOND, 0)
 		PreferenceManager.getDefaultSharedPreferences(requireContext()).edit().putLong(PREF_REMINDER_TIME, calendar.timeInMillis).apply()
-		val helper = NotificationHelper()
 		// Cancel previously set alarm and set the new one with the new time
-		helper.cancelAlarm(requireContext())
-		helper.startAlarm(requireContext())
+		reminderAlertReceiver.cancelAlarm(requireContext())
+		reminderAlertReceiver.startAlarm(requireContext())
 		reminderTimePickerDialog.dismiss()
 	}
 

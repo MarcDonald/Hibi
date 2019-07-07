@@ -51,7 +51,7 @@ const val PACKAGE = "com.marcdonald.hibi"
 
 // <editor-fold desc="Request Codes">
 const val REMINDER_NOTIFICATION_REQUEST_CODE = 0
-const val ALERT_RECEIVER_REQUEST_CODE = 1
+const val REMINDER_ALERT_RECEIVER_REQUEST_CODE = 1
 const val CHOOSE_RESTORE_FILE_REQUEST_CODE = 2
 const val PERMISSION_REQUEST_CODE = 3
 const val CHOOSE_IMAGE_TO_ADD_REQUEST_CODE = 4

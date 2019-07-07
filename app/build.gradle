@@ -40,7 +40,7 @@ dependencies {
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     implementation 'androidx.preference:preference:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01"
@@ -52,8 +52,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Navigation components
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha05'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha05'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha06'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha06'
 
     // Timber for logging
     implementation 'com.jakewharton.timber:timber:4.7.1'
