@@ -13,10 +13,8 @@ import com.marcdonald.hibi.data.network.github.GithubAPIService
 import com.marcdonald.hibi.data.network.jisho.JishoAPIService
 import com.marcdonald.hibi.data.repository.*
 import com.marcdonald.hibi.internal.NOTIFICATION_CHANNEL_REMINDER_ID
-import com.marcdonald.hibi.internal.utils.FileUtils
-import com.marcdonald.hibi.internal.utils.FileUtilsImpl
-import com.marcdonald.hibi.internal.utils.ThemeUtils
-import com.marcdonald.hibi.internal.utils.ThemeUtilsImpl
+import com.marcdonald.hibi.internal.utils.*
+import com.marcdonald.hibi.mainscreens.MainScreenViewModelFactory
 import com.marcdonald.hibi.mainscreens.booksscreen.bookentriesfragment.BookEntriesViewModelFactory
 import com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment.BooksFragmentViewModelFactory
 import com.marcdonald.hibi.mainscreens.calendarscreen.CalendarTabViewModelFactory
@@ -70,6 +68,7 @@ class Hibi : Application(), KodeinAware {
 		// <editor-fold desc="Utils">
 		bind<FileUtils>() with provider { FileUtilsImpl(instance()) }
 		bind<ThemeUtils>() with provider { ThemeUtilsImpl(instance()) }
+		bind<UpdateUtils>() with provider { UpdateUtilsImpl(instance()) }
 		// </editor-fold>
 		// <editor-fold desc="Connectivity and Jisho API">
 		bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
@@ -78,6 +77,7 @@ class Hibi : Application(), KodeinAware {
 		// </editor-fold>
 		// <editor-fold desc="View models">
 		bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }
+		bind() from provider { MainScreenViewModelFactory(instance(), instance()) }
 		bind() from provider { AddEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
 		bind() from provider { ViewEntryViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance()) }
 		bind() from provider { SearchViewModelFactory(instance()) }

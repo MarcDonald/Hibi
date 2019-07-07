@@ -1,14 +1,19 @@
 package com.marcdonald.hibi.mainscreens
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.BOOKS_TAB
@@ -21,37 +26,58 @@ import com.marcdonald.hibi.mainscreens.mainentries.MainEntriesFragment
 import com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment.TagsFragment
 import com.marcdonald.hibi.uicomponents.addbookdialog.AddBookDialog
 import com.marcdonald.hibi.uicomponents.addtagdialog.AddTagDialog
-import timber.log.Timber
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class MainScreenFragment : Fragment() {
+class MainScreenFragment : Fragment(), KodeinAware {
+	override val kodein by closestKodein()
+
+	// <editor-fold desc="View Model">
+	private val viewModelFactory: MainScreenViewModelFactory by instance()
+	private lateinit var viewModel: MainScreenViewModel
+	// </editor-fold>
 
 	// <editor-fold desc="UI Components">
 	private lateinit var viewPager: ViewPager
 	private lateinit var fab: MaterialButton
 	private lateinit var mainMenu: MainScreenMenuDialog
+	private lateinit var updateSnackbar: Snackbar
 	// </editor-fold>
 
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainScreenViewModel::class.java)
+	}
+
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		Timber.v("Log: onCreateView: Started")
 		return inflater.inflate(R.layout.fragment_main, container, false)
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-
 		bindViews(view)
-
-		viewPager = view.findViewById(R.id.view_pager_main)
-		viewPager.addOnPageChangeListener(pageChangeListener)
-		setupViewPager(viewPager)
-
+		setupObservers()
+		setupViewPager(view)
+		viewModel.checkForUpdatesIfShould()
 		val tabLayout: TabLayout = view.findViewById(R.id.tabs_main)
 		tabLayout.setupWithViewPager(viewPager)
-
-		mainMenu = MainScreenMenuDialog()
 	}
 
-	private fun setupViewPager(viewPager: ViewPager) {
+	private fun setupObservers() {
+		viewModel.newVersion.observe(this, Observer { value ->
+			value?.let { newVersionName ->
+				if(newVersionName.isNotBlank() && !updateSnackbar.isShownOrQueued) {
+					updateSnackbar.setText(resources.getString(R.string.new_version_available_message, newVersionName))
+					updateSnackbar.show()
+				}
+			}
+		})
+	}
+
+	private fun setupViewPager(view: View) {
+		viewPager = view.findViewById(R.id.view_pager_main)
+		viewPager.addOnPageChangeListener(pageChangeListener)
 		val adapter = MainScreenPageAdapter(childFragmentManager)
 		adapter.addFragment(MainEntriesFragment(), resources.getString(R.string.tab_entries))
 		adapter.addFragment(CalendarFragment(), resources.getString(R.string.tab_calendar))
@@ -61,6 +87,8 @@ class MainScreenFragment : Fragment() {
 	}
 
 	private fun bindViews(view: View) {
+		mainMenu = MainScreenMenuDialog()
+
 		fab = view.findViewById(R.id.fab_main)
 		fab.setOnClickListener(fabClickListener)
 
@@ -68,6 +96,14 @@ class MainScreenFragment : Fragment() {
 		bottomLeftButton.setOnClickListener(bottomLeftClickListener)
 		val bottomRightButton: ImageView = view.findViewById(R.id.img_main_bot_right)
 		bottomRightButton.setOnClickListener(bottomRightClickListener)
+
+		updateSnackbar = Snackbar.make(requireView(), resources.getString(R.string.new_version_available_message), Snackbar.LENGTH_SHORT)
+		updateSnackbar.setAction(resources.getString(R.string.download)) {
+			val uriUrl = Uri.parse("https://www.github.com/MarcDonald/Hibi/releases/latest")
+			val launchBrowser = Intent(Intent.ACTION_VIEW)
+			launchBrowser.data = uriUrl
+			startActivity(launchBrowser)
+		}
 	}
 
 	private val pageChangeListener = object : ViewPager.OnPageChangeListener {

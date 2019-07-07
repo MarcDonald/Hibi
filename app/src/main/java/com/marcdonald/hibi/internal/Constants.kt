@@ -36,6 +36,8 @@ const val PREF_MAIN_ENTRY_DISPLAY_LOCATION = "pref_main_entry_display_location"
 const val PREF_MAIN_ENTRY_DISPLAY_TAGS = "pref_main_entry_display_tags"
 const val PREF_MAIN_ENTRY_DISPLAY_BOOKS = "pref_main_entry_display_books"
 const val PREF_RECYCLER_ANIMATIONS = "pref_recycler_animations"
+const val PREF_PERIODICALLY_CHECK_FOR_UPDATES = "pref_periodically_update_check"
+const val PREF_LAST_UPDATE_CHECK = "pref_last_update_check"
 // </editor-fold>
 
 // <editor-fold desc="Notifications">

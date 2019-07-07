@@ -213,6 +213,8 @@
   <string name="new_version_available_message">A newer version (%1$s) is available for download</string>
   <string name="download">Download</string>
   <string name="checking_for_updates">Checking for Updates</string>
+  <string name="periodically_update_check_title">Periodically Check for Updates</string>
+  <string name="periodically_update_check_summary">Check for updates in the background once per day</string>
   <!--endregion-->
 
   <!--region About-->

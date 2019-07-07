@@ -39,6 +39,13 @@
       android:key="pref_main_entry_display_items"
       android:title="@string/parts_to_display_on_main_screen"
       android:icon="@drawable/ic_format_list_bulleted_24dp" />
+
+    <SwitchPreference
+      android:key="pref_periodically_update_check"
+      android:title="@string/periodically_update_check_title"
+      android:summary="@string/periodically_update_check_summary"
+      android:icon="@drawable/ic_update_24dp"
+      android:defaultValue="true" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/notifications">
