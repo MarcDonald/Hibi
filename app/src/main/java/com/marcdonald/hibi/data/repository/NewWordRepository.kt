@@ -5,16 +5,16 @@ import com.marcdonald.hibi.data.entity.NewWord
 
 interface NewWordRepository {
 
-  suspend fun addNewWord(newWord: NewWord)
+	suspend fun addNewWord(newWord: NewWord)
 
-  suspend fun getNewWord(id: Int): NewWord
+	suspend fun getNewWord(id: Int): NewWord
 
-  suspend fun deleteNewWord(id: Int)
+	suspend fun deleteNewWord(id: Int)
 
-  fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>
+	fun getNewWordsByEntryId(entryId: Int): LiveData<List<NewWord>>
 
-  suspend fun getNewWordCountByEntryId(entryId: Int): Int
+	suspend fun getNewWordCountByEntryId(entryId: Int): Int
 
-  fun getNewWordCountByEntryIdLD(entryId: Int): LiveData<Int>
+	fun getNewWordCountByEntryIdLD(entryId: Int): LiveData<Int>
 
 }

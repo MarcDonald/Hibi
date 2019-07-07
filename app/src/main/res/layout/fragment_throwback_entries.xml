@@ -11,7 +11,7 @@
     android:layout_height="?attr/actionBarSize"
     android:backgroundTint="?colorPrimaryDark">
 
-    <include layout="@layout/toolbar_back" />
+    <include layout="@layout/toolbar_back_scrolling" />
   </com.google.android.material.appbar.AppBarLayout>
 
   <androidx.constraintlayout.widget.ConstraintLayout

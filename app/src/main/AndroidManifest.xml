@@ -29,10 +29,9 @@
         android:name="android.app.shortcuts"
         android:resource="@xml/shortcuts" />
     </activity>
-    <activity android:name=".mainscreens.about.OpenSourceLicencesFragment" />
-    <activity android:name=".mainscreens.settings.SettingsFragment" />
 
-    <receiver android:name=".internal.notification.AlertReceiver" />
+    <receiver android:name="com.marcdonald.hibi.notification.ReminderAlertReceiver" />
+
     <provider
       android:authorities="com.marcdonald.hibi.FileProvider"
       android:name="androidx.core.content.FileProvider"

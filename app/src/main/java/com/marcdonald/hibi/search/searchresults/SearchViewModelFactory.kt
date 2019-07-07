@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.marcdonald.hibi.data.network.jisho.JishoAPIService
 
 class SearchViewModelFactory(private val apiService: JishoAPIService)
-  : ViewModelProvider.NewInstanceFactory() {
+	: ViewModelProvider.NewInstanceFactory() {
 
-  @Suppress("UNCHECKED_CAST")
-  override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-    return SearchViewModel(apiService) as T
-  }
+	@Suppress("UNCHECKED_CAST")
+	override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+		return SearchViewModel(apiService) as T
+	}
 }

@@ -8,26 +8,26 @@ import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.network.jisho.apiresponse.Japanese
 
 class SearchMoreInfoAlternativesRecyclerAdapter(context: Context)
-  : RecyclerView.Adapter<SearchMoreInfoAlternativesRecyclerViewHolder>() {
+	: RecyclerView.Adapter<SearchMoreInfoAlternativesRecyclerViewHolder>() {
 
-  private val inflater: LayoutInflater = LayoutInflater.from(context)
-  private var japaneseList: List<Japanese> = listOf()
+	private val inflater: LayoutInflater = LayoutInflater.from(context)
+	private var japaneseList: List<Japanese> = listOf()
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchMoreInfoAlternativesRecyclerViewHolder {
-    val view = inflater.inflate(R.layout.item_search_result_more_info_alternative, parent, false)
-    return SearchMoreInfoAlternativesRecyclerViewHolder(view)
-  }
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchMoreInfoAlternativesRecyclerViewHolder {
+		val view = inflater.inflate(R.layout.item_search_result_more_info_alternative, parent, false)
+		return SearchMoreInfoAlternativesRecyclerViewHolder(view)
+	}
 
-  override fun getItemCount(): Int {
-    return japaneseList.size
-  }
+	override fun getItemCount(): Int {
+		return japaneseList.size
+	}
 
-  override fun onBindViewHolder(holder: SearchMoreInfoAlternativesRecyclerViewHolder, position: Int) {
-    holder.display(japaneseList[position])
-  }
+	override fun onBindViewHolder(holder: SearchMoreInfoAlternativesRecyclerViewHolder, position: Int) {
+		holder.display(japaneseList[position])
+	}
 
-  fun updateList(list: List<Japanese>) {
-    japaneseList = list
-    notifyDataSetChanged()
-  }
+	fun updateList(list: List<Japanese>) {
+		japaneseList = list
+		notifyDataSetChanged()
+	}
 }

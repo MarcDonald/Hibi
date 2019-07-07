@@ -10,52 +10,52 @@ import timber.log.Timber
 
 class BookRepositoryImpl private constructor(private val dao: DAO) : BookRepository {
 
-  override suspend fun addBook(book: Book) {
-    withContext(Dispatchers.IO) {
-      try {
-        dao.insertBook(book)
-        Timber.d("Log: addBook: Book doesn't exist, added new")
-      } catch(exception: SQLiteConstraintException) {
-        Timber.d("Log: addBook: Book already exists, updating existing")
-        dao.updateBook(book)
-      }
-    }
-  }
+	override suspend fun addBook(book: Book) {
+		withContext(Dispatchers.IO) {
+			try {
+				dao.insertBook(book)
+				Timber.d("Log: addBook: Book doesn't exist, added new")
+			} catch(exception: SQLiteConstraintException) {
+				Timber.d("Log: addBook: Book already exists, updating existing")
+				dao.updateBook(book)
+			}
+		}
+	}
 
-  override suspend fun deleteBook(bookId: Int) {
-    withContext(Dispatchers.IO) {
-      dao.deleteBook(bookId)
-    }
-  }
+	override suspend fun deleteBook(bookId: Int) {
+		withContext(Dispatchers.IO) {
+			dao.deleteBook(bookId)
+		}
+	}
 
-  override suspend fun isBookNameInUse(name: String): Boolean {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getCountBooksWithName(name) > 0
-    }
-  }
+	override suspend fun isBookNameInUse(name: String): Boolean {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getCountBooksWithName(name) > 0
+		}
+	}
 
-  override suspend fun getBookName(bookId: Int): String {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getBookName(bookId)
-    }
-  }
+	override suspend fun getBookName(bookId: Int): String {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getBookName(bookId)
+		}
+	}
 
-  override fun getAllBooksLD(): LiveData<List<Book>> {
-    return dao.getAllBooksLD()
-  }
+	override fun getAllBooksLD(): LiveData<List<Book>> {
+		return dao.getAllBooksLD()
+	}
 
-  override suspend fun getAllBooks(): List<Book> {
-    return withContext(Dispatchers.IO) {
-      return@withContext dao.getAllBooks()
-    }
-  }
+	override suspend fun getAllBooks(): List<Book> {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getAllBooks()
+		}
+	}
 
-  companion object {
-    @Volatile private var instance: BookRepositoryImpl? = null
+	companion object {
+		@Volatile private var instance: BookRepositoryImpl? = null
 
-    fun getInstance(dao: DAO) =
-      instance ?: synchronized(this) {
-        instance ?: BookRepositoryImpl(dao).also { instance = it }
-      }
-  }
+		fun getInstance(dao: DAO) =
+			instance ?: synchronized(this) {
+				instance ?: BookRepositoryImpl(dao).also { instance = it }
+			}
+	}
 }

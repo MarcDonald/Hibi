@@ -12,17 +12,17 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 abstract class HibiBottomSheetDialogFragment : BottomSheetDialogFragment(), KodeinAware {
-  override val kodein: Kodein by closestKodein()
-  private val themeUtils: ThemeUtils by instance()
+	override val kodein: Kodein by closestKodein()
+	private val themeUtils: ThemeUtils by instance()
 
-  override fun getTheme(): Int {
-    return if(themeUtils.isLightMode())
-      R.style.Theme_Hibi_BottomSheetDialog_Light
-    else
-      R.style.Theme_Hibi_BottomSheetDialog_Dark
-  }
+	override fun getTheme(): Int {
+		return if(themeUtils.isLightMode())
+			R.style.Theme_Hibi_BottomSheetDialog_Light
+		else
+			R.style.Theme_Hibi_BottomSheetDialog_Dark
+	}
 
-  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    return BottomSheetDialog(requireContext(), theme)
-  }
+	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+		return BottomSheetDialog(requireContext(), theme)
+	}
 }

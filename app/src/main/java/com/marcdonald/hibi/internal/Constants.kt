@@ -35,6 +35,9 @@ const val PREF_MAIN_ENTRY_DISPLAY_ITEMS = "pref_main_entry_display_items"
 const val PREF_MAIN_ENTRY_DISPLAY_LOCATION = "pref_main_entry_display_location"
 const val PREF_MAIN_ENTRY_DISPLAY_TAGS = "pref_main_entry_display_tags"
 const val PREF_MAIN_ENTRY_DISPLAY_BOOKS = "pref_main_entry_display_books"
+const val PREF_RECYCLER_ANIMATIONS = "pref_recycler_animations"
+const val PREF_PERIODICALLY_CHECK_FOR_UPDATES = "pref_periodically_update_check"
+const val PREF_LAST_UPDATE_CHECK = "pref_last_update_check"
 // </editor-fold>
 
 // <editor-fold desc="Notifications">
@@ -50,7 +53,7 @@ const val PACKAGE = "com.marcdonald.hibi"
 
 // <editor-fold desc="Request Codes">
 const val REMINDER_NOTIFICATION_REQUEST_CODE = 0
-const val ALERT_RECEIVER_REQUEST_CODE = 1
+const val REMINDER_ALERT_RECEIVER_REQUEST_CODE = 1
 const val CHOOSE_RESTORE_FILE_REQUEST_CODE = 2
 const val PERMISSION_REQUEST_CODE = 3
 const val CHOOSE_IMAGE_TO_ADD_REQUEST_CODE = 4

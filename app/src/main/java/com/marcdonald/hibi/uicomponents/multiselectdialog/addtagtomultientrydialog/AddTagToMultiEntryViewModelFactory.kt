@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.marcdonald.hibi.data.repository.TagRepository
 
 class AddTagToMultiEntryViewModelFactory(private val tagRepository: TagRepository)
-  : ViewModelProvider.NewInstanceFactory() {
+	: ViewModelProvider.NewInstanceFactory() {
 
-  @Suppress("UNCHECKED_CAST")
-  override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-    return AddTagToMultiEntryViewModel(tagRepository) as T
-  }
+	@Suppress("UNCHECKED_CAST")
+	override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+		return AddTagToMultiEntryViewModel(tagRepository) as T
+	}
 }

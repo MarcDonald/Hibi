@@ -14,8 +14,8 @@ android {
         applicationId "com.marcdonald.hibi"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 29
-        versionName "1.2.0"
+        versionCode 30
+        versionName "1.2.1"
         setProperty("archivesBaseName", "Hibi-v$versionName")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,12 +39,12 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     implementation 'androidx.preference:preference:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha02"
 
     // Testing
     testImplementation 'junit:junit:4.12'
@@ -52,8 +52,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Navigation components
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha05'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha05'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha06'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha06'
 
     // Timber for logging
     implementation 'com.jakewharton.timber:timber:4.7.1'

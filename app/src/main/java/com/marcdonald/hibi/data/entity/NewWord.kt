@@ -6,25 +6,25 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "NewWord",
-  foreignKeys = [
-    ForeignKey(
-      entity = Entry::class,
-      parentColumns = ["id"],
-      childColumns = ["entryId"],
-      onDelete = ForeignKey.CASCADE,
-      onUpdate = ForeignKey.CASCADE)
-  ],
-  indices = [Index(name = "NewWord_EntryId_Index", value = ["entryId"])]
+	foreignKeys = [
+		ForeignKey(
+			entity = Entry::class,
+			parentColumns = ["id"],
+			childColumns = ["entryId"],
+			onDelete = ForeignKey.CASCADE,
+			onUpdate = ForeignKey.CASCADE)
+	],
+	indices = [Index(name = "NewWord_EntryId_Index", value = ["entryId"])]
 )
 data class NewWord(
-  var word: String,
-  var reading: String,
-  var partOfSpeech: String,
-  var english: String,
-  var notes: String,
-  var entryId: Int
+	var word: String,
+	var reading: String,
+	var partOfSpeech: String,
+	var english: String,
+	var notes: String,
+	var entryId: Int
 ) {
 
-  @PrimaryKey(autoGenerate = true)
-  var id: Int = 0
+	@PrimaryKey(autoGenerate = true)
+	var id: Int = 0
 }
