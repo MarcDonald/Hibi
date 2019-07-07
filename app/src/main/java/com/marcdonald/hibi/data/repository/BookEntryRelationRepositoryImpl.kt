@@ -6,8 +6,8 @@ import com.marcdonald.hibi.data.database.DAO
 import com.marcdonald.hibi.data.entity.Book
 import com.marcdonald.hibi.data.entity.BookEntryRelation
 import com.marcdonald.hibi.data.entity.Entry
-import com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment.BookDisplayItem
-import com.marcdonald.hibi.mainscreens.mainentriesrecycler.BookEntryDisplayItem
+import com.marcdonald.hibi.screens.booksscreen.mainbooksfragment.BookDisplayItem
+import com.marcdonald.hibi.screens.mainentriesrecycler.BookEntryDisplayItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber

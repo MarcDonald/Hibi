@@ -3,10 +3,10 @@ package com.marcdonald.hibi.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.marcdonald.hibi.data.entity.*
-import com.marcdonald.hibi.mainscreens.booksscreen.mainbooksfragment.BookDisplayItem
-import com.marcdonald.hibi.mainscreens.mainentriesrecycler.BookEntryDisplayItem
-import com.marcdonald.hibi.mainscreens.mainentriesrecycler.TagEntryDisplayItem
-import com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment.TagDisplayItem
+import com.marcdonald.hibi.screens.booksscreen.mainbooksfragment.BookDisplayItem
+import com.marcdonald.hibi.screens.mainentriesrecycler.BookEntryDisplayItem
+import com.marcdonald.hibi.screens.mainentriesrecycler.TagEntryDisplayItem
+import com.marcdonald.hibi.screens.tagsscreen.maintagsfragment.TagDisplayItem
 
 @Dao
 interface DAO {

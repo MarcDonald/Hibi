@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.entity.Tag
 import com.marcdonald.hibi.data.entity.TagEntryRelation
-import com.marcdonald.hibi.mainscreens.mainentriesrecycler.TagEntryDisplayItem
-import com.marcdonald.hibi.mainscreens.tagsscreen.maintagsfragment.TagDisplayItem
+import com.marcdonald.hibi.screens.mainentriesrecycler.TagEntryDisplayItem
+import com.marcdonald.hibi.screens.tagsscreen.maintagsfragment.TagDisplayItem
 
 interface TagEntryRelationRepository {
 
