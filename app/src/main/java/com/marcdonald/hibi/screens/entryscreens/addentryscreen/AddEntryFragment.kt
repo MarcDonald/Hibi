@@ -22,6 +22,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
@@ -291,7 +292,12 @@ class AddEntryFragment : Fragment(), KodeinAware {
 	private fun setupImageRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_add_entry_images)
 		this.imageRecyclerAdapter = ImageRecyclerAdapter({}, ::onImageLongClick, requireContext(), requireActivity().theme)
-		val layoutManager = GridLayoutManager(context, 3)
+
+		val layoutManager = if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+			GridLayoutManager(context, 3)
+		else
+			GridLayoutManager(context, 5)
+
 		recycler.adapter = imageRecyclerAdapter
 		recycler.layoutManager = layoutManager
 	}
