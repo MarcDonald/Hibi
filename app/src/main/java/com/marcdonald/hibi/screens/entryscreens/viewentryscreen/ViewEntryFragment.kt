@@ -18,6 +18,7 @@ package com.marcdonald.hibi.screens.entryscreens.viewentryscreen
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
@@ -114,10 +116,16 @@ class ViewEntryFragment : Fragment(), KodeinAware {
 		tagDisplayHolder = view.findViewById(R.id.lin_view_tags)
 		bookDisplay = view.findViewById(R.id.cg_view_books)
 		bookDisplayHolder = view.findViewById(R.id.lin_view_books)
-		scrollView = view.findViewById(R.id.scroll_view_entry)
-		scrollView.setOnScrollChangeListener(scrollListener)
 		copyButton = view.findViewById(R.id.fab_view_copy)
 		copyButton.setOnClickListener { copyToClipboard() }
+
+		scrollView = view.findViewById(R.id.scroll_view_entry)
+		scrollView.setOnScrollChangeListener(scrollListener)
+
+		if(resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			val metaScrollView = view.findViewById<NestedScrollView>(R.id.scroll_view_entry_meta)
+			metaScrollView.setOnScrollChangeListener(scrollListener)
+		}
 
 		searchBar = view.findViewById(R.id.searchbar_view_entry)
 		searchBar.setSearchAction(this::search)
@@ -212,7 +220,12 @@ class ViewEntryFragment : Fragment(), KodeinAware {
 	private fun setupImageRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_view_entry_images)
 		this.imageRecyclerAdapter = ImageRecyclerAdapter(::onImageClick, {}, requireContext(), requireActivity().theme)
-		val layoutManager = GridLayoutManager(context, 3)
+
+		val layoutManager = if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+			GridLayoutManager(context, 3)
+		else
+			LinearLayoutManager(context)
+
 		recycler.adapter = imageRecyclerAdapter
 		recycler.layoutManager = layoutManager
 	}
