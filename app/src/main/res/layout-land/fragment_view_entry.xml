@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2019 Marc Donald
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar_layout_view_entry"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:backgroundTint="?colorPrimaryDark">
+
+    <include layout="@layout/toolbar_view_entry" />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="?attr/actionBarSize">
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/gd_add_entry_30_vert"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.core.widget.NestedScrollView
+      android:id="@+id/scroll_view_entry"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/gd_add_entry_30_vert"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent">
+
+      <TextView
+        android:id="@+id/txt_view_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:hint="@string/content_hint"
+        android:textAppearance="@style/TextAppearance.Hibi.ViewEntryContent"
+        android:textIsSelectable="true"
+        android:paddingBottom="@dimen/margin_standard" />
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.NestedScrollView
+      android:id="@+id/scroll_view_entry_meta"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/gd_add_entry_30_vert"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--region Date and Time-->
+        <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_view_date"
+          style="@style/Widget.Hibi.Button.EntryDate"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/margin_standard"
+          android:layout_marginEnd="@dimen/margin_standard"
+          android:text="@string/date"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_view_time"
+          style="@style/Widget.Hibi.Button.EntryDate"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/margin_standard"
+          android:layout_marginEnd="@dimen/margin_standard"
+          android:text="@string/time"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/btn_view_date" />
+        <!--endregion-->
+
+        <TextView
+          android:id="@+id/txt_view_location"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:text="@string/location"
+          android:textAppearance="@style/TextAppearance.Hibi.ViewEntryContent"
+          android:gravity="start|center"
+          android:drawableStart="@drawable/ic_location_on_24dp"
+          android:drawablePadding="@dimen/margin_standard"
+          android:maxLines="1"
+          android:ellipsize="end"
+          app:layout_constraintTop_toBottomOf="@id/btn_view_time"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:layout_marginStart="@dimen/margin_standard"
+          android:layout_marginEnd="@dimen/margin_standard"
+          android:paddingBottom="@dimen/margin_standard" />
+
+        <!--region Tags-->
+        <LinearLayout
+          android:id="@+id/lin_view_tags"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginStart="@dimen/margin_standard"
+          android:layout_marginEnd="@dimen/margin_standard"
+          android:paddingBottom="@dimen/margin_standard"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/txt_view_location">
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_tag_24dp"
+            android:contentDescription="@string/entry_tags" />
+
+          <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_view_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_standard" />
+        </LinearLayout>
+        <!--endregion-->
+
+        <!--region Books-->
+        <LinearLayout
+          android:id="@+id/lin_view_books"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginStart="@dimen/margin_standard"
+          android:layout_marginEnd="@dimen/margin_standard"
+          android:paddingBottom="@dimen/margin_standard"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/lin_view_tags">
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_book_24dp"
+            android:contentDescription="@string/entry_tags" />
+
+          <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_view_books"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_standard" />
+        </LinearLayout>
+        <!--endregion-->
+
+        <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_view_new_words"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/margin_standard"
+          android:layout_marginEnd="@dimen/margin_standard"
+          android:paddingBottom="@dimen/margin_standard"
+          android:text="@string/view_new_words"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/lin_view_books" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/recycler_view_entry_images"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/btn_view_new_words"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/fab_view_copy"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:src="@drawable/ic_content_copy_24dp"
+    android:tint="@color/black"
+    android:layout_marginEnd="@dimen/margin_standard"
+    android:layout_marginBottom="@dimen/view_entry_fab_bottom_margin" />
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar_layout_view_entry_option_bar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/search_bar_height"
+    android:layout_gravity="bottom"
+    android:backgroundTint="?colorPrimaryDark"
+    app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
+
+    <com.marcdonald.hibi.uicomponents.views.SearchBar
+      android:id="@+id/searchbar_view_entry"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/search_bar_height"
+      app:hint="@string/search_bar_hint" />
+  </com.google.android.material.appbar.AppBarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
