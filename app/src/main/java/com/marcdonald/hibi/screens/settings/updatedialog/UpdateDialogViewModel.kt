@@ -19,7 +19,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marcdonald.hibi.internal.NoConnectivityException
+import com.marcdonald.hibi.data.network.NoConnectivityException
+import com.marcdonald.hibi.data.network.github.GithubRateLimitExceededException
 import com.marcdonald.hibi.internal.utils.UpdateUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,6 +41,10 @@ class UpdateDialogViewModel(private val updateUtils: UpdateUtils) : ViewModel() 
 	private val _displayNoConnection = MutableLiveData<Boolean>()
 	val displayNoConnection: LiveData<Boolean>
 		get() = _displayNoConnection
+
+	private val _displayRateLimitError = MutableLiveData<Boolean>()
+	val displayRateLimitError: LiveData<Boolean>
+		get() = _displayRateLimitError
 
 	private val _displayNoUpdateAvailable = MutableLiveData<Boolean>()
 	val displayNoUpdateAvailable: LiveData<Boolean>
@@ -72,6 +77,8 @@ class UpdateDialogViewModel(private val updateUtils: UpdateUtils) : ViewModel() 
 				} else {
 					_displayNoUpdateAvailable.postValue(true)
 				}
+			} catch(e: GithubRateLimitExceededException) {
+				_displayRateLimitError.postValue(true)
 			} catch(e: NoConnectivityException) {
 				_displayNoConnection.postValue(true)
 			} catch(e: NumberFormatException) {

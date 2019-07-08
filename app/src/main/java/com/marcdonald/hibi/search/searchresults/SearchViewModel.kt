@@ -19,9 +19,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.marcdonald.hibi.data.network.NoConnectivityException
 import com.marcdonald.hibi.data.network.jisho.JishoAPIService
 import com.marcdonald.hibi.data.network.jisho.apiresponse.Data
-import com.marcdonald.hibi.internal.NoConnectivityException
 import kotlinx.coroutines.launch
 
 class SearchViewModel(private val apiService: JishoAPIService) : ViewModel() {

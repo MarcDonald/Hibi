@@ -135,6 +135,18 @@ class UpdateDialog : HibiDialogFragment(), KodeinAware {
 			}
 		})
 
+		viewModel.displayRateLimitError.observe(this, Observer { value ->
+			value?.let { display ->
+				errorDisplay.show(display)
+				if(display) {
+					title.text = resources.getString(R.string.generic_error)
+					message.text = resources.getString(R.string.github_rate_limit_exceeded)
+					message.show(true)
+				}
+			}
+		})
+
+
 		viewModel.newVersionName.observe(this, Observer { value ->
 			value?.let { versionName ->
 				title.text = resources.getString(R.string.new_version_available_title)

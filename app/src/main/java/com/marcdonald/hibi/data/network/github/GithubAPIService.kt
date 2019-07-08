@@ -28,9 +28,10 @@ interface GithubAPIService {
 	suspend fun getNewestVersion(): GithubVersionResponse
 
 	companion object {
-		operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): GithubAPIService {
+		operator fun invoke(connectivityInterceptor: ConnectivityInterceptor, githubStatusCodeInterceptor: GithubStatusCodeInterceptor): GithubAPIService {
 			val okHttpClient = OkHttpClient.Builder()
 				.addInterceptor(connectivityInterceptor)
+				.addInterceptor(githubStatusCodeInterceptor)
 				.build()
 
 			return Retrofit.Builder()

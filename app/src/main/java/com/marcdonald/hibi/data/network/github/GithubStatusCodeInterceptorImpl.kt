@@ -13,8 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.marcdonald.hibi.internal
+package com.marcdonald.hibi.data.network.github
 
+import okhttp3.Interceptor
+import okhttp3.Response
 import java.io.IOException
 
-class NoConnectivityException : IOException()
+class GithubStatusCodeInterceptorImpl : GithubStatusCodeInterceptor {
+	override fun intercept(chain: Interceptor.Chain): Response {
+		val response = chain.proceed(chain.request())
+
+		if(response.code() == 403) {
+			throw GithubRateLimitExceededException()
+		}
+
+		return response
+	}
+}
+
+class GithubRateLimitExceededException : IOException()

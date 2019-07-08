@@ -25,6 +25,8 @@ import com.marcdonald.hibi.data.database.ProductionAppDatabase
 import com.marcdonald.hibi.data.network.ConnectivityInterceptor
 import com.marcdonald.hibi.data.network.ConnectivityInterceptorImpl
 import com.marcdonald.hibi.data.network.github.GithubAPIService
+import com.marcdonald.hibi.data.network.github.GithubStatusCodeInterceptor
+import com.marcdonald.hibi.data.network.github.GithubStatusCodeInterceptorImpl
 import com.marcdonald.hibi.data.network.jisho.JishoAPIService
 import com.marcdonald.hibi.data.repository.*
 import com.marcdonald.hibi.internal.NOTIFICATION_CHANNEL_REMINDER_ID
@@ -87,8 +89,9 @@ class Hibi : Application(), KodeinAware {
 		// </editor-fold>
 		// <editor-fold desc="Connectivity and Jisho API">
 		bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
+		bind<GithubStatusCodeInterceptor>() with singleton { GithubStatusCodeInterceptorImpl() }
 		bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
-		bind<GithubAPIService>() with singleton { GithubAPIService(instance()) }
+		bind<GithubAPIService>() with singleton { GithubAPIService(instance(), instance()) }
 		// </editor-fold>
 		// <editor-fold desc="View models">
 		bind() from provider { MainEntriesViewModelFactory(instance(), instance(), instance()) }

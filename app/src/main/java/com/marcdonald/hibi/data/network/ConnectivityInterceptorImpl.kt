@@ -17,9 +17,9 @@ package com.marcdonald.hibi.data.network
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.marcdonald.hibi.internal.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.io.IOException
 
 class ConnectivityInterceptorImpl(context: Context) : ConnectivityInterceptor {
 
@@ -39,3 +39,5 @@ class ConnectivityInterceptorImpl(context: Context) : ConnectivityInterceptor {
 		return networkInfo != null && networkInfo.isConnected
 	}
 }
+
+class NoConnectivityException : IOException()
