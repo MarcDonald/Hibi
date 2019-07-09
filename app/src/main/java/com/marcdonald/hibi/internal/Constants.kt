@@ -16,7 +16,7 @@
 package com.marcdonald.hibi.internal
 
 // <editor-fold desc="Database">
-const val PRODUCTION_DATABASE_VERSION = 13
+const val PRODUCTION_DATABASE_VERSION = 14
 const val PRODUCTION_DATABASE_NAME = "Database.db"
 // </editor-fold>
 
