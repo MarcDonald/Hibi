@@ -30,8 +30,8 @@ android {
         applicationId "com.marcdonald.hibi"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 31
-        versionName "1.2.2"
+        versionCode 32
+        versionName "1.3.0"
         setProperty("archivesBaseName", "Hibi-v$versionName")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
