@@ -36,6 +36,7 @@ import com.marcdonald.hibi.screens.booksscreen.mainbooksfragment.BooksFragmentVi
 import com.marcdonald.hibi.screens.calendarscreen.CalendarTabViewModelFactory
 import com.marcdonald.hibi.screens.entryscreens.addentryscreen.AddEntryViewModelFactory
 import com.marcdonald.hibi.screens.entryscreens.viewentryscreen.ViewEntryViewModelFactory
+import com.marcdonald.hibi.screens.favouriteentries.FavouriteEntriesViewModelFactory
 import com.marcdonald.hibi.screens.mainentries.MainEntriesViewModelFactory
 import com.marcdonald.hibi.screens.mainscreen.MainScreenViewModelFactory
 import com.marcdonald.hibi.screens.searchentries.searchentriesscreen.SearchEntriesViewModelFactory
@@ -120,6 +121,7 @@ class Hibi : Application(), KodeinAware {
 		bind() from provider { UpdateDialogViewModelFactory(instance()) }
 		bind() from provider { ThrowbackFragmentViewModelFactory(instance(), instance(), instance()) }
 		bind() from provider { ThrowbackEntriesViewModelFactory(instance(), instance(), instance()) }
+		bind() from provider { FavouriteEntriesViewModelFactory(instance(), instance(), instance()) }
 		// </editor-fold>
 	}
 

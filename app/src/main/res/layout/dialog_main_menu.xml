@@ -33,6 +33,17 @@
       android:orientation="vertical">
 
       <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_main_menu_favourite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/favourites"
+        android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
+        android:textAlignment="textStart"
+        app:icon="@drawable/ic_star_24dp"
+        app:iconPadding="@dimen/margin_standard"
+        app:iconTint="?attr/hibiPrimaryIconTint" />
+
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_main_menu_throwback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

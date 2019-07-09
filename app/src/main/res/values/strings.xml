@@ -187,6 +187,12 @@
   <!--region Throwback-->
   <string name="throwback">Throwback</string>
   <string name="last_month">Last Month</string>
+  <string name="no_throwbacks_found">No throwbacks found</string>
+  <!--endregion-->
+
+  <!--region Favourites-->
+  <string name="favourites">Favourites</string>
+  <string name="no_favourites">You haven\'t favourited any entries yet</string>
   <!--endregion-->
 
   <!--region Settings-->
