@@ -59,6 +59,7 @@
         android:hint="@string/content_hint"
         android:textAppearance="@style/TextAppearance.Hibi.ViewEntryContent"
         android:textIsSelectable="true"
+        android:paddingTop="@dimen/margin_standard"
         android:paddingBottom="@dimen/margin_standard" />
     </androidx.core.widget.NestedScrollView>
 

@@ -15,11 +15,14 @@
  */
 package com.marcdonald.hibi.screens.about
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -32,6 +35,14 @@ class PrivacyPolicyFragment : Fragment() {
 		view.findViewById<ImageView>(R.id.img_back_toolbar_back).setOnClickListener {
 			Navigation.findNavController(requireView()).popBackStack()
 		}
+
+		view.findViewById<LinearLayout>(R.id.lin_privacy_more_info).setOnClickListener {
+			val uriUrl = Uri.parse("https://marcdonald.com/hibi-privacy-policy")
+			val launchBrowser = Intent(Intent.ACTION_VIEW)
+			launchBrowser.data = uriUrl
+			startActivity(launchBrowser)
+		}
+
 		return view
 	}
 }

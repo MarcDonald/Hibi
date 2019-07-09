@@ -254,8 +254,12 @@
   <string name="data_sent_answer">Your data is stored completely on-device. The only time data is sent off-device is when searching for a word on the Jisho.org API. When you search for a word, only the search term you entered is sent.</string>
   <string name="libraries">What libraries are used?</string>
   <string name="libraries_answer">See the Open Source Libraries section for more information on what libraries are used in this app.</string>
+  <string name="permissions">What permissions are used and why?</string>
+  <string name="permissions_answer">Internet and Access Network state for accessing Jisho.org, and checking for updates if you are on the Github version
+  \nSet Alarm for sending the reminder notification
+  \nWrite External Storage to save images</string>
   <string name="more_information">Where can I find more information?</string>
-  <string name="more_information_answer">For more information you can look at the source code on Github or contact marcsdeveloperemail@gmail.com.</string>
+  <string name="more_information_answer">For more information you can look at the source code on Github or contact marcsdeveloperemail@gmail.com. \nTo view the full version of this Privacy Policy, click this card.</string>
   <!--endregion-->
 
   <!--region OSS Licenses-->
