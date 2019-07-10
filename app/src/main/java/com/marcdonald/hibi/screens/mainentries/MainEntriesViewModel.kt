@@ -172,4 +172,13 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository,
 			getMainEntryDisplayItems()
 		}
 	}
+
+	fun setSelectedEntriesFavourited(isFavourited: Boolean, idList: List<Int>) {
+		viewModelScope.launch {
+			idList.forEach { id ->
+				entryRepository.setEntryIsFavourite(id, isFavourited)
+			}
+			getMainEntryDisplayItems()
+		}
+	}
 }

@@ -34,6 +34,7 @@ import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
+import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -111,5 +112,7 @@ class FavouriteEntriesFragment : Fragment(), KodeinAware {
 			val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
 			recycler.addItemDecoration(dividerItemDecoration)
 		}
+		val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
+		recycler.addItemDecoration(decoration)
 	}
 }

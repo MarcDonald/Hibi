@@ -76,6 +76,7 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 		displayLocation()
 		displayTags()
 		displayBooks()
+
 		if(item.isSelected) {
 			val typedValue = TypedValue()
 			theme.resolveAttribute(R.attr.hibiSelectedItemColor, typedValue, true)
@@ -86,6 +87,9 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 		val selectedIcon: ImageView = itemView.findViewById(R.id.img_item_selected)
 		selectedIcon.show(item.isSelected)
 		selectedIcon.setOnClickListener(onSelectClick)
+
+		val favouritedIcon: ImageView = itemView.findViewById(R.id.img_item_favourited)
+		favouritedIcon.show(item.entry.isFavourite)
 	}
 
 	private fun displayLocation() {

@@ -86,6 +86,39 @@ class FavouriteEntriesViewModel(private val entryRepository: EntryRepository,
 			itemList.add(item)
 		}
 
-		return itemList
+		return addListHeaders(itemList)
+	}
+
+	private fun addListHeaders(allItems: MutableList<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
+		val listWithHeaders = mutableListOf<MainEntriesDisplayItem>()
+		listWithHeaders.addAll(allItems)
+
+		var lastMonth = 12
+		var lastYear = 9999
+		if(allItems.isNotEmpty()) {
+			lastMonth = allItems.first().entry.month + 1
+			lastYear = allItems.first().entry.year
+		}
+
+		val headersToAdd = mutableListOf<Pair<Int, MainEntriesDisplayItem>>()
+
+		for(x in 0 until allItems.size) {
+			if(((allItems[x].entry.month < lastMonth) && (allItems[x].entry.year == lastYear))
+				 || (allItems[x].entry.month > lastMonth) && (allItems[x].entry.year < lastYear)
+				 || (allItems[x].entry.year < lastYear)
+			) {
+				val header = Entry(0, allItems[x].entry.month, allItems[x].entry.year, 0, 0, "")
+				val headerItem = MainEntriesDisplayItem(header, listOf(), listOf())
+				lastMonth = allItems[x].entry.month
+				lastYear = allItems[x].entry.year
+				headersToAdd.add(Pair(x, headerItem))
+			}
+		}
+
+		for((add, x) in (0 until headersToAdd.size).withIndex()) {
+			listWithHeaders.add(headersToAdd[x].first + add, headersToAdd[x].second)
+		}
+
+		return listWithHeaders
 	}
 }

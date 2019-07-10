@@ -132,7 +132,7 @@ interface DAO {
 	@Query("SELECT COUNT(*) FROM TagEntryRelation WHERE entryId = :entryId")
 	fun getTagCountByEntryId(entryId: Int): LiveData<Int>
 
-	@Query("SELECT * FROM Entry WHERE isFavourite = 1")
+	@Query("SELECT * FROM Entry WHERE isFavourite = 1 ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
 	fun getFavouriteEntries(): List<Entry>
 
 	@Query("UPDATE Entry SET isFavourite = :isFavourite WHERE id = :id")
