@@ -121,4 +121,13 @@ class FavouriteEntriesViewModel(private val entryRepository: EntryRepository,
 
 		return listWithHeaders
 	}
+
+	fun removeSelectedItemsFromFavourites(selectedIds: List<Int>) {
+		viewModelScope.launch {
+			selectedIds.forEach { id ->
+				entryRepository.setEntryIsFavourite(id, false)
+			}
+			getMainEntryDisplayItems()
+		}
+	}
 }

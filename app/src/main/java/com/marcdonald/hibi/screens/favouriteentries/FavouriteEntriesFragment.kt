@@ -35,6 +35,7 @@ import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDecoration
+import com.marcdonald.hibi.uicomponents.BinaryOptionDialog
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -102,7 +103,7 @@ class FavouriteEntriesFragment : Fragment(), KodeinAware {
 
 	private fun initRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_favourite_entries)
-		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
+		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), true, onSelectClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
@@ -114,5 +115,18 @@ class FavouriteEntriesFragment : Fragment(), KodeinAware {
 		}
 		val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
 		recycler.addItemDecoration(decoration)
+	}
+
+	private val onSelectClick = View.OnClickListener {
+		val removeDialog = BinaryOptionDialog()
+		val selectedAmount = recyclerAdapter.getSelectedEntryIds().size
+		removeDialog.setTitle(resources.getQuantityString(R.plurals.multi_favourites_remove_title, selectedAmount, selectedAmount))
+		removeDialog.setMessage(resources.getQuantityString(R.plurals.multi_favourites_remove_message, selectedAmount, selectedAmount))
+		removeDialog.setNegativeButton(resources.getString(R.string.remove), View.OnClickListener {
+			viewModel.removeSelectedItemsFromFavourites(recyclerAdapter.getSelectedEntryIds())
+			removeDialog.dismiss()
+		})
+		removeDialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { removeDialog.dismiss() })
+		removeDialog.show(requireFragmentManager(), "Confirm Multi Favourite Remove Dialog")
 	}
 }

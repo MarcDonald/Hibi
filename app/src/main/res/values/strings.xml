@@ -352,6 +352,16 @@
     <item quantity="other">Add or remove %d Entries from your Favourites</item>
   </plurals>
 
+  <plurals name="multi_favourites_remove_title">
+    <item quantity="one">Remove %d Entry</item>
+    <item quantity="other">Remove %d Entries</item>
+  </plurals>
+
+  <plurals name="multi_favourites_remove_message">
+    <item quantity="one">Remove %d Entry from your Favourites</item>
+    <item quantity="other">Remove %d Entries from your Favourites</item>
+  </plurals>
+
   <plurals name="throwback_more_entries">
     <item quantity="one">and %d more entry</item>
     <item quantity="other">and %d more entries</item>
