@@ -32,7 +32,7 @@ class MultiSelectMenu(private val listener: ItemSelectedListener?) : HibiDialogF
 
 	private fun setupDialog() {
 		val layoutParams: WindowManager.LayoutParams? = requireDialog().window?.attributes
-		if(layoutParams != null) {
+		layoutParams?.let {
 			layoutParams.gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
 			layoutParams.y = 500
 		}
@@ -51,6 +51,10 @@ class MultiSelectMenu(private val listener: ItemSelectedListener?) : HibiDialogF
 			listener?.itemSelected(LOCATION)
 			dismiss()
 		}
+		view.findViewById<ImageView>(R.id.img_select_favourite).setOnClickListener {
+			listener?.itemSelected(FAVOURITE)
+			dismiss()
+		}
 		view.findViewById<ImageView>(R.id.img_select_delete).setOnClickListener {
 			listener?.itemSelected(DELETE)
 			dismiss()
@@ -62,6 +66,7 @@ class MultiSelectMenu(private val listener: ItemSelectedListener?) : HibiDialogF
 		const val BOOK = 1
 		const val LOCATION = 2
 		const val DELETE = 3
+		const val FAVOURITE = 4
 	}
 
 	interface ItemSelectedListener {

@@ -187,6 +187,13 @@
   <!--region Throwback-->
   <string name="throwback">Throwback</string>
   <string name="last_month">Last Month</string>
+  <string name="no_throwbacks_found">No throwbacks found</string>
+  <!--endregion-->
+
+  <!--region Favourites-->
+  <string name="favourite_entry">Favourite Entry</string>
+  <string name="favourites">Favourites</string>
+  <string name="no_favourites">You haven\'t favourited any entries yet</string>
   <!--endregion-->
 
   <!--region Settings-->
@@ -333,6 +340,26 @@
   <plurals name="multi_book_title">
     <item quantity="one">Add %d Entry To Books</item>
     <item quantity="other">Add %d Entries To Books</item>
+  </plurals>
+
+  <plurals name="multi_favourite_title">
+    <item quantity="one">Favourite Entry</item>
+    <item quantity="other">Favourite Entries</item>
+  </plurals>
+
+  <plurals name="multi_favourite_message">
+    <item quantity="one">Add or remove %d Entry from your Favourites</item>
+    <item quantity="other">Add or remove %d Entries from your Favourites</item>
+  </plurals>
+
+  <plurals name="multi_favourites_remove_title">
+    <item quantity="one">Remove %d Entry</item>
+    <item quantity="other">Remove %d Entries</item>
+  </plurals>
+
+  <plurals name="multi_favourites_remove_message">
+    <item quantity="one">Remove %d Entry from your Favourites</item>
+    <item quantity="other">Remove %d Entries from your Favourites</item>
   </plurals>
 
   <plurals name="throwback_more_entries">

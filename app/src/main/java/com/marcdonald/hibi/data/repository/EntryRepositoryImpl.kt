@@ -150,6 +150,18 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
 		}
 	}
 
+	override suspend fun getFavouriteEntries(): List<Entry> {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getFavouriteEntries()
+		}
+	}
+
+	override suspend fun setEntryIsFavourite(id: Int, isFavourite: Boolean) {
+		withContext(Dispatchers.IO) {
+			dao.setEntryIsFavourite(id, isFavourite)
+		}
+	}
+
 	companion object {
 		@Volatile private var instance: EntryRepositoryImpl? = null
 

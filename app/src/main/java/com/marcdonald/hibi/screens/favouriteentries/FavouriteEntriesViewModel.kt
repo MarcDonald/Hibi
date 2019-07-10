@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.marcdonald.hibi.screens.mainentries
+package com.marcdonald.hibi.screens.favouriteentries
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marcdonald.hibi.data.entity.BookEntryRelation
 import com.marcdonald.hibi.data.entity.Entry
-import com.marcdonald.hibi.data.entity.TagEntryRelation
 import com.marcdonald.hibi.data.repository.BookEntryRelationRepository
 import com.marcdonald.hibi.data.repository.EntryRepository
 import com.marcdonald.hibi.data.repository.TagEntryRelationRepository
@@ -30,10 +28,14 @@ import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesDisplayItem
 import com.marcdonald.hibi.screens.mainentriesrecycler.TagEntryDisplayItem
 import kotlinx.coroutines.launch
 
-class MainEntriesViewModel(private val entryRepository: EntryRepository,
-													 private val tagEntryRelationRepository: TagEntryRelationRepository,
-													 private val bookEntryRelationRepository: BookEntryRelationRepository)
+class FavouriteEntriesViewModel(private val entryRepository: EntryRepository,
+																private val tagEntryRelationRepository: TagEntryRelationRepository,
+																private val bookEntryRelationRepository: BookEntryRelationRepository)
 	: ViewModel() {
+
+	private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
+	val entries: LiveData<List<MainEntriesDisplayItem>>
+		get() = _entries
 
 	private val _displayLoading = MutableLiveData<Boolean>()
 	val displayLoading: LiveData<Boolean>
@@ -43,25 +45,20 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository,
 	val displayNoResults: LiveData<Boolean>
 		get() = _displayNoResults
 
-	private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
-	val entries: LiveData<List<MainEntriesDisplayItem>>
-		get() = _entries
-
 	fun loadEntries() {
 		viewModelScope.launch {
 			_displayLoading.value = true
-			_displayNoResults.value = false
 			getMainEntryDisplayItems()
 			_displayLoading.value = false
-			_displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
 		}
 	}
 
 	private suspend fun getMainEntryDisplayItems() {
-		val allEntries = entryRepository.getAllEntries()
+		val favouriteEntries = entryRepository.getFavouriteEntries()
 		val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
-		val bookEntryDisplayItems = bookEntryRelationRepository.getBookEntryDisplayItems()
-		_entries.value = combineData(allEntries, tagEntryDisplayItems, bookEntryDisplayItems)
+		val bookEntryDisplayItem = bookEntryRelationRepository.getBookEntryDisplayItems()
+		_entries.value = combineData(favouriteEntries, tagEntryDisplayItems, bookEntryDisplayItem)
+		_displayNoResults.value = entries.value == null || entries.value!!.isEmpty()
 	}
 
 	private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>, bookEntryDisplayItems: List<BookEntryDisplayItem>): List<MainEntriesDisplayItem> {
@@ -125,58 +122,10 @@ class MainEntriesViewModel(private val entryRepository: EntryRepository,
 		return listWithHeaders
 	}
 
-	fun setTagsOfSelectedEntries(deleteMode: Boolean, tagIds: List<Int>, entryIds: List<Int>) {
+	fun removeSelectedItemsFromFavourites(selectedIds: List<Int>) {
 		viewModelScope.launch {
-			entryIds.forEach { entryId ->
-				tagIds.forEach { tagId ->
-					val tagEntryRelation = TagEntryRelation(tagId, entryId)
-					if(deleteMode)
-						tagEntryRelationRepository.deleteTagEntryRelation(tagEntryRelation)
-					else
-						tagEntryRelationRepository.addTagEntryRelation(tagEntryRelation)
-				}
-			}
-			getMainEntryDisplayItems()
-		}
-	}
-
-	fun setBooksOfSelectedEntries(deleteMode: Boolean, bookIds: List<Int>, entryIds: List<Int>) {
-		viewModelScope.launch {
-			entryIds.forEach { entryId ->
-				bookIds.forEach { bookId ->
-					val bookEntryRelation = BookEntryRelation(bookId, entryId)
-					if(deleteMode)
-						bookEntryRelationRepository.deleteBookEntryRelation(bookEntryRelation)
-					else
-						bookEntryRelationRepository.addBookEntryRelation(bookEntryRelation)
-				}
-			}
-			getMainEntryDisplayItems()
-		}
-	}
-
-	fun deleteSelectedEntries(idList: List<Int>) {
-		viewModelScope.launch {
-			idList.forEach { id ->
-				entryRepository.deleteEntry(id)
-			}
-			getMainEntryDisplayItems()
-		}
-	}
-
-	fun addLocationToSelectedEntries(location: String, idList: List<Int>) {
-		viewModelScope.launch {
-			idList.forEach { id ->
-				entryRepository.saveLocation(id, location)
-			}
-			getMainEntryDisplayItems()
-		}
-	}
-
-	fun setSelectedEntriesFavourited(isFavourited: Boolean, idList: List<Int>) {
-		viewModelScope.launch {
-			idList.forEach { id ->
-				entryRepository.setEntryIsFavourite(id, isFavourited)
+			selectedIds.forEach { id ->
+				entryRepository.setEntryIsFavourite(id, false)
 			}
 			getMainEntryDisplayItems()
 		}

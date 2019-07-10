@@ -136,10 +136,11 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 	private val onMultiSelectMenuItemSelected = object : MultiSelectMenu.ItemSelectedListener {
 		override fun itemSelected(item: Int) {
 			when(item) {
-				MultiSelectMenu.TAG      -> initMultiTagDialog()
-				MultiSelectMenu.BOOK     -> initMultiBookDialog()
-				MultiSelectMenu.LOCATION -> initMultiLocationSetDialog()
-				MultiSelectMenu.DELETE   -> initMultiDeleteDialog()
+				MultiSelectMenu.TAG       -> initMultiTagDialog()
+				MultiSelectMenu.BOOK      -> initMultiBookDialog()
+				MultiSelectMenu.LOCATION  -> initMultiLocationSetDialog()
+				MultiSelectMenu.DELETE    -> initMultiDeleteDialog()
+				MultiSelectMenu.FAVOURITE -> initMultiFavouriteDialog()
 			}
 		}
 	}
@@ -187,5 +188,21 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 		})
 		deleteConfirmDialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { deleteConfirmDialog.dismiss() })
 		deleteConfirmDialog.show(requireFragmentManager(), "Confirm Multi Delete Dialog")
+	}
+
+	private fun initMultiFavouriteDialog() {
+		val addOrRemoveFavouriteDialog = BinaryOptionDialog()
+		val selectedAmount = recyclerAdapter.getSelectedEntryIds().size
+		addOrRemoveFavouriteDialog.setTitle(resources.getQuantityString(R.plurals.multi_favourite_title, selectedAmount, selectedAmount))
+		addOrRemoveFavouriteDialog.setMessage(resources.getQuantityString(R.plurals.multi_favourite_message, selectedAmount, selectedAmount))
+		addOrRemoveFavouriteDialog.setNegativeButton(resources.getString(R.string.remove), View.OnClickListener {
+			viewModel.setSelectedEntriesFavourited(false, recyclerAdapter.getSelectedEntryIds())
+			addOrRemoveFavouriteDialog.dismiss()
+		})
+		addOrRemoveFavouriteDialog.setPositiveButton(resources.getString(R.string.add), View.OnClickListener {
+			viewModel.setSelectedEntriesFavourited(true, recyclerAdapter.getSelectedEntryIds())
+			addOrRemoveFavouriteDialog.dismiss()
+		})
+		addOrRemoveFavouriteDialog.show(requireFragmentManager(), "Multi Favourite Dialog")
 	}
 }

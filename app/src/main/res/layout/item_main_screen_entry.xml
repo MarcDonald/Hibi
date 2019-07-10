@@ -65,6 +65,16 @@
     app:layout_constraintBottom_toTopOf="@id/item_content"
     android:src="@drawable/ic_check_circle_24dp" />
 
+  <ImageView
+    android:id="@+id/img_item_favourited"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:layout_margin="@dimen/margin_standard"
+    app:layout_constraintEnd_toStartOf="@id/img_item_selected"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/item_content"
+    android:src="@drawable/ic_star_gold_24dp" />
+
   <TextView
     android:id="@+id/item_content"
     android:layout_width="match_parent"

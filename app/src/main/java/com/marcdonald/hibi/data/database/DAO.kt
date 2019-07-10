@@ -111,7 +111,7 @@ interface DAO {
 	@Query("SELECT * FROM TagEntryRelation WHERE tagId IN (:ids)")
 	fun getAllTagEntryRelationsWithIds(ids: List<Int>): List<TagEntryRelation>
 
-	@Query("SELECT e.id, e.location, e.day, e.month, e.year, e.hour, e.minute, e.content, e.isFavourite FROM Entry as e INNER JOIN TagEntryRelation as ter ON e.id = ter.entryId WHERE ter.tagId = :tagId ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
+	@Query("SELECT * FROM Entry as e INNER JOIN TagEntryRelation as ter ON e.id = ter.entryId WHERE ter.tagId = :tagId ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
 	fun getEntriesWithTag(tagId: Int): List<Entry>
 
 	@Query("SELECT Tag.id, Tag.name FROM Tag INNER JOIN TagEntryRelation ON Tag.id = TagEntryRelation.tagId WHERE entryId = :entryId")
@@ -131,6 +131,12 @@ interface DAO {
 
 	@Query("SELECT COUNT(*) FROM TagEntryRelation WHERE entryId = :entryId")
 	fun getTagCountByEntryId(entryId: Int): LiveData<Int>
+
+	@Query("SELECT * FROM Entry WHERE isFavourite = 1 ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
+	fun getFavouriteEntries(): List<Entry>
+
+	@Query("UPDATE Entry SET isFavourite = :isFavourite WHERE id = :id")
+	fun setEntryIsFavourite(id: Int, isFavourite: Boolean)
 	// </editor-fold>
 
 	// <editor-fold desc="New Word">
@@ -189,7 +195,7 @@ interface DAO {
 	@Delete
 	fun deleteBookEntryRelation(bookEntryRelation: BookEntryRelation)
 
-	@Query("SELECT e.id, e.location, e.day, e.month, e.year, e.hour, e.minute, e.content, e.isFavourite FROM Entry as e INNER JOIN BookEntryRelation as ber ON e.id = ber.entryId WHERE ber.bookId = :bookId ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
+	@Query("SELECT * FROM Entry as e INNER JOIN BookEntryRelation as ber ON e.id = ber.entryId WHERE ber.bookId = :bookId ORDER BY year DESC, month DESC, day DESC, hour DESC, minute DESC, id DESC")
 	fun getEntriesWithBook(bookId: Int): List<Entry>
 
 	@Query("SELECT b.id as bookId, b.name as bookName, COUNT(ber.entryId) as useCount FROM Book as b LEFT OUTER JOIN BookEntryRelation as ber ON b.id = ber.bookId GROUP BY b.name")

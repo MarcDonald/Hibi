@@ -50,4 +50,8 @@ interface EntryRepository {
 	suspend fun getFirstEntryOnDate(calendar: Calendar): Entry?
 
 	suspend fun getAmountOfEntriesOnDate(calendar: Calendar): Int
+
+	suspend fun getFavouriteEntries(): List<Entry>
+
+	suspend fun setEntryIsFavourite(id: Int, isFavourite: Boolean)
 }
