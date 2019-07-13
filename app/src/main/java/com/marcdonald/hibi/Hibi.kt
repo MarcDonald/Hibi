@@ -60,6 +60,7 @@ class Hibi : Application(), KodeinAware {
 		bind<FileUtils>() with provider { FileUtilsImpl(instance()) }
 		bind<ThemeUtils>() with provider { ThemeUtilsImpl(instance()) }
 		bind<UpdateUtils>() with provider { UpdateUtilsImpl(instance()) }
+		bind<EntryDisplayUtils>() with provider { EntryDisplayUtilsImpl() }
 		// </editor-fold>
 		// <editor-fold desc="Connectivity and Jisho API">
 		bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
@@ -68,7 +69,7 @@ class Hibi : Application(), KodeinAware {
 		bind<GithubAPIService>() with singleton { GithubAPIService(instance(), instance()) }
 		// </editor-fold>
 		// <editor-fold desc="View models">
-		bind() from provider { HibiViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
+		bind() from provider { HibiViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
 		bind() from provider { HibiAndroidViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
 		// </editor-fold>
 	}

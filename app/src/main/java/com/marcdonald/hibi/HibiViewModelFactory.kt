@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.marcdonald.hibi.data.database.AppDatabase
 import com.marcdonald.hibi.data.network.jisho.JishoAPIService
 import com.marcdonald.hibi.data.repository.*
+import com.marcdonald.hibi.internal.utils.EntryDisplayUtils
 import com.marcdonald.hibi.internal.utils.FileUtils
 import com.marcdonald.hibi.internal.utils.UpdateUtils
 import com.marcdonald.hibi.screens.booksscreen.bookentriesfragment.BookEntriesViewModel
@@ -58,6 +59,7 @@ class HibiViewModelFactory(private val entryRepository: EntryRepository,
 													 private val entryImageRepository: EntryImageRepository,
 													 private val fileUtils: FileUtils,
 													 private val updateUtils: UpdateUtils,
+													 private val entryDisplayUtils: EntryDisplayUtils,
 													 private val jishoAPIService: JishoAPIService,
 													 private val database: AppDatabase
 ) : ViewModelProvider.NewInstanceFactory() {
@@ -65,7 +67,7 @@ class HibiViewModelFactory(private val entryRepository: EntryRepository,
 	override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 		return with(modelClass) {
 			when {
-				isAssignableFrom(MainEntriesViewModel::class.java)         -> MainEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
+				isAssignableFrom(MainEntriesViewModel::class.java)         -> MainEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
 				isAssignableFrom(BooksFragmentViewModel::class.java)       -> BooksFragmentViewModel(bookEntryRelationRepository)
 				isAssignableFrom(ViewEntryViewModel::class.java)           -> ViewEntryViewModel(entryRepository, tagEntryRelationRepository, newWordRepository, bookEntryRelationRepository, entryImageRepository, fileUtils)
 				isAssignableFrom(SearchViewModel::class.java)              -> SearchViewModel(jishoAPIService)
@@ -74,22 +76,22 @@ class HibiViewModelFactory(private val entryRepository: EntryRepository,
 				isAssignableFrom(AddTagViewModel::class.java)              -> AddTagViewModel(tagRepository)
 				isAssignableFrom(NewWordViewModel::class.java)             -> NewWordViewModel(newWordRepository)
 				isAssignableFrom(AddNewWordViewModel::class.java)          -> AddNewWordViewModel(newWordRepository)
-				isAssignableFrom(CalendarTabViewModel::class.java)         -> CalendarTabViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
+				isAssignableFrom(CalendarTabViewModel::class.java)         -> CalendarTabViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
 				isAssignableFrom(TagsFragmentViewModel::class.java)        -> TagsFragmentViewModel(tagEntryRelationRepository)
-				isAssignableFrom(TaggedEntriesViewModel::class.java)       -> TaggedEntriesViewModel(tagRepository, tagEntryRelationRepository, bookEntryRelationRepository)
+				isAssignableFrom(TaggedEntriesViewModel::class.java)       -> TaggedEntriesViewModel(tagRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
 				isAssignableFrom(AddBookViewModel::class.java)             -> AddBookViewModel(bookRepository)
-				isAssignableFrom(BookEntriesViewModel::class.java)         -> BookEntriesViewModel(bookRepository, bookEntryRelationRepository, tagEntryRelationRepository)
+				isAssignableFrom(BookEntriesViewModel::class.java)         -> BookEntriesViewModel(bookRepository, bookEntryRelationRepository, tagEntryRelationRepository, entryDisplayUtils)
 				isAssignableFrom(AddEntryToBookViewModel::class.java)      -> AddEntryToBookViewModel(bookRepository, bookEntryRelationRepository)
 				isAssignableFrom(AddLocationToEntryViewModel::class.java)  -> AddLocationToEntryViewModel(entryRepository)
-				isAssignableFrom(SearchEntriesViewModel::class.java)       -> SearchEntriesViewModel(entryRepository, tagRepository, tagEntryRelationRepository, bookRepository, bookEntryRelationRepository)
+				isAssignableFrom(SearchEntriesViewModel::class.java)       -> SearchEntriesViewModel(entryRepository, tagRepository, tagEntryRelationRepository, bookRepository, bookEntryRelationRepository, entryDisplayUtils)
 				isAssignableFrom(AddTagToMultiEntryViewModel::class.java)  -> AddTagToMultiEntryViewModel(tagRepository)
 				isAssignableFrom(AddMultiEntryToBookViewModel::class.java) -> AddMultiEntryToBookViewModel(bookRepository)
 				isAssignableFrom(BackupDialogViewModel::class.java)        -> BackupDialogViewModel(fileUtils)
 				isAssignableFrom(RestoreDialogViewModel::class.java)       -> RestoreDialogViewModel(fileUtils, database)
 				isAssignableFrom(UpdateDialogViewModel::class.java)        -> UpdateDialogViewModel(updateUtils)
 				isAssignableFrom(ThrowbackFragmentViewModel::class.java)   -> ThrowbackFragmentViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
-				isAssignableFrom(ThrowbackEntriesViewModel::class.java)    -> ThrowbackEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
-				isAssignableFrom(FavouriteEntriesViewModel::class.java)    -> FavouriteEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
+				isAssignableFrom(ThrowbackEntriesViewModel::class.java)    -> ThrowbackEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
+				isAssignableFrom(FavouriteEntriesViewModel::class.java)    -> FavouriteEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
 				else                                                       -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
 			}
 		} as T

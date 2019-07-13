@@ -19,19 +19,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.repository.BookEntryRelationRepository
 import com.marcdonald.hibi.data.repository.EntryRepository
 import com.marcdonald.hibi.data.repository.TagEntryRelationRepository
-import com.marcdonald.hibi.screens.mainentriesrecycler.BookEntryDisplayItem
+import com.marcdonald.hibi.internal.utils.EntryDisplayUtils
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesDisplayItem
-import com.marcdonald.hibi.screens.mainentriesrecycler.TagEntryDisplayItem
 import kotlinx.coroutines.launch
 import java.util.*
 
 class CalendarTabViewModel(private val entryRepository: EntryRepository,
 													 private val tagEntryRelationRepository: TagEntryRelationRepository,
-													 private val bookEntryRelationRepository: BookEntryRelationRepository)
+													 private val bookEntryRelationRepository: BookEntryRelationRepository,
+													 private val entryDisplayUtils: EntryDisplayUtils)
 	: ViewModel() {
 
 	private val _entries = MutableLiveData<List<MainEntriesDisplayItem>>()
@@ -65,34 +64,6 @@ class CalendarTabViewModel(private val entryRepository: EntryRepository,
 		val allEntries = entryRepository.getEntriesOnDate(year, month, day)
 		val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
 		val bookEntryDisplayItems = bookEntryRelationRepository.getBookEntryDisplayItems()
-		_entries.value = combineData(allEntries, tagEntryDisplayItems, bookEntryDisplayItems)
-	}
-
-	private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>, bookEntryDisplayItems: List<BookEntryDisplayItem>): List<MainEntriesDisplayItem> {
-		val itemList = ArrayList<MainEntriesDisplayItem>()
-
-		entries.forEach { entry ->
-			val item = MainEntriesDisplayItem(entry, listOf(), listOf())
-			val listOfTags = ArrayList<String>()
-			val listOfBooks = ArrayList<String>()
-
-			tagEntryDisplayItems.forEach { tagEntryDisplayItem ->
-				if(tagEntryDisplayItem.entryId == entry.id) {
-					listOfTags.add(tagEntryDisplayItem.tagName)
-				}
-			}
-
-			bookEntryDisplayItems.forEach { bookEntryDisplayItem ->
-				if(bookEntryDisplayItem.entryId == entry.id) {
-					listOfBooks.add(bookEntryDisplayItem.bookName)
-				}
-			}
-
-			item.tags = listOfTags
-			item.books = listOfBooks
-			itemList.add(item)
-		}
-
-		return itemList
+		_entries.value = entryDisplayUtils.convertToMainEntriesDisplayItemList(allEntries, tagEntryDisplayItems, bookEntryDisplayItems)
 	}
 }

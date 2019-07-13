@@ -23,10 +23,9 @@ import com.marcdonald.hibi.data.entity.Book
 import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.entity.Tag
 import com.marcdonald.hibi.data.repository.*
+import com.marcdonald.hibi.internal.utils.EntryDisplayUtils
 import com.marcdonald.hibi.internal.utils.formatDateForDisplay
-import com.marcdonald.hibi.screens.mainentriesrecycler.BookEntryDisplayItem
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesDisplayItem
-import com.marcdonald.hibi.screens.mainentriesrecycler.TagEntryDisplayItem
 import com.marcdonald.hibi.screens.searchentries.EntrySearchCriteria
 import kotlinx.coroutines.launch
 
@@ -34,7 +33,8 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository,
 														 private val tagRepository: TagRepository,
 														 private val tagEntryRelationRepository: TagEntryRelationRepository,
 														 private val bookRepository: BookRepository,
-														 private val bookEntryRelationRepository: BookEntryRelationRepository)
+														 private val bookEntryRelationRepository: BookEntryRelationRepository,
+														 private val entryDisplayUtils: EntryDisplayUtils)
 	: ViewModel() {
 
 	private val _criteria = EntrySearchCriteria()
@@ -141,6 +141,14 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository,
 		}
 	}
 
+	private suspend fun displayResults(searchCriteria: EntrySearchCriteria) {
+		val filteredResults = filterEntries(searchCriteria)
+		val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
+		val bookEntryDisplayItems = bookEntryRelationRepository.getBookEntryDisplayItems()
+		_entries.value = entryDisplayUtils.convertToMainEntriesDisplayItemListWithDateHeaders(filteredResults, tagEntryDisplayItems, bookEntryDisplayItems)
+		_countResults.value = filteredResults.size
+	}
+
 	// <editor-fold desc="Filters">
 	private suspend fun filterEntries(searchCriteria: EntrySearchCriteria): List<Entry> {
 		val allEntries = entryRepository.getAllEntries()
@@ -226,77 +234,6 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository,
 			return entries
 		}
 		return returnList
-	}
-	// </editor-fold>
-
-	// <editor-fold desc="Result Display Methods">
-	private suspend fun displayResults(searchCriteria: EntrySearchCriteria) {
-		val filteredResults = filterEntries(searchCriteria)
-		val tagEntryDisplayItems = tagEntryRelationRepository.getTagEntryDisplayItems()
-		val bookEntryDisplayItems = bookEntryRelationRepository.getBookEntryDisplayItems()
-		_entries.value = combineData(filteredResults, tagEntryDisplayItems, bookEntryDisplayItems)
-		_countResults.value = filteredResults.size
-	}
-
-	private fun combineData(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>, bookEntryDisplayItems: List<BookEntryDisplayItem>): List<MainEntriesDisplayItem> {
-		val itemList = ArrayList<MainEntriesDisplayItem>()
-
-		entries.forEach { entry ->
-			val item = MainEntriesDisplayItem(entry, listOf(), listOf())
-			val listOfTags = ArrayList<String>()
-			val listOfBooks = ArrayList<String>()
-
-			tagEntryDisplayItems.forEach { tagEntryDisplayItem ->
-				if(tagEntryDisplayItem.entryId == entry.id) {
-					listOfTags.add(tagEntryDisplayItem.tagName)
-				}
-			}
-
-			bookEntryDisplayItems.forEach { bookEntryDisplayItem ->
-				if(bookEntryDisplayItem.entryId == entry.id) {
-					listOfBooks.add(bookEntryDisplayItem.bookName)
-				}
-			}
-
-			item.tags = listOfTags
-			item.books = listOfBooks
-			itemList.add(item)
-		}
-
-		return addListHeaders(itemList)
-	}
-
-	private fun addListHeaders(allItems: MutableList<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
-		val listWithHeaders = mutableListOf<MainEntriesDisplayItem>()
-		listWithHeaders.addAll(allItems)
-
-		var lastMonth = 12
-		var lastYear = 9999
-		if(allItems.isNotEmpty()) {
-			lastMonth = allItems.first().entry.month + 1
-			lastYear = allItems.first().entry.year
-		}
-
-		val headersToAdd = mutableListOf<Pair<Int, MainEntriesDisplayItem>>()
-
-		for(x in 0 until allItems.size) {
-			if(((allItems[x].entry.month < lastMonth) && (allItems[x].entry.year == lastYear))
-				 || (allItems[x].entry.month > lastMonth) && (allItems[x].entry.year < lastYear)
-				 || (allItems[x].entry.year < lastYear)
-			) {
-				val header = Entry(0, allItems[x].entry.month, allItems[x].entry.year, 0, 0, "")
-				val headerItem = MainEntriesDisplayItem(header, listOf(), listOf())
-				lastMonth = allItems[x].entry.month
-				lastYear = allItems[x].entry.year
-				headersToAdd.add(Pair(x, headerItem))
-			}
-		}
-
-		for((add, x) in (0 until headersToAdd.size).withIndex()) {
-			listWithHeaders.add(headersToAdd[x].first + add, headersToAdd[x].second)
-		}
-
-		return listWithHeaders
 	}
 	// </editor-fold>
 
