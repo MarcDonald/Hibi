@@ -68,7 +68,7 @@ class Hibi : Application(), KodeinAware {
 		bind<JishoAPIService>() with singleton { JishoAPIService(instance()) }
 		bind<GithubAPIService>() with singleton { GithubAPIService(instance(), instance()) }
 		// </editor-fold>
-		// <editor-fold desc="View models">
+		// <editor-fold desc="View Model Factories">
 		bind() from provider { HibiViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
 		bind() from provider { HibiAndroidViewModelFactory(instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
 		// </editor-fold>
