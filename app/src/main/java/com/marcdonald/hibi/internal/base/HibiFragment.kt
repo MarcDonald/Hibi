@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.marcdonald.hibi.uicomponents.newwordsdialog
+package com.marcdonald.hibi.internal.base
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.marcdonald.hibi.data.repository.NewWordRepository
+import androidx.fragment.app.Fragment
+import com.marcdonald.hibi.HibiAndroidViewModelFactory
+import com.marcdonald.hibi.HibiViewModelFactory
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class NewWordViewModelFactory(private val newWordRepository: NewWordRepository)
-	: ViewModelProvider.NewInstanceFactory() {
-
-	@Suppress("UNCHECKED_CAST")
-	override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-		return NewWordViewModel(newWordRepository) as T
-	}
+abstract class HibiFragment : Fragment(), KodeinAware {
+	override val kodein: Kodein by closestKodein()
+	protected val viewModelFactory: HibiViewModelFactory by instance()
+	protected val androidViewModelFactory: HibiAndroidViewModelFactory by instance()
 }

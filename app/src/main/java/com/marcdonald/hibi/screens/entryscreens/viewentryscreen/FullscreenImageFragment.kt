@@ -20,12 +20,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.marcdonald.hibi.R
+import com.marcdonald.hibi.internal.base.HibiFragment
 
-class FullscreenImageFragment : Fragment() {
+class FullscreenImageFragment : HibiFragment() {
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_fullscreen_image, container, false)

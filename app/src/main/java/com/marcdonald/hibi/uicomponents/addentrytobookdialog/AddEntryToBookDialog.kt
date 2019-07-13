@@ -30,16 +30,10 @@ import com.marcdonald.hibi.internal.base.HibiBottomSheetDialogFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.uicomponents.addbookdialog.AddBookDialog
 import com.marcdonald.hibi.uicomponents.views.CheckBoxWithId
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class AddEntryToBookDialog : HibiBottomSheetDialogFragment(), KodeinAware {
-	override val kodein: Kodein by closestKodein()
+class AddEntryToBookDialog : HibiBottomSheetDialogFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: AddEntryToBookViewModelFactory by instance()
 	private lateinit var viewModel: AddEntryToBookViewModel
 	// </editor-fold>
 

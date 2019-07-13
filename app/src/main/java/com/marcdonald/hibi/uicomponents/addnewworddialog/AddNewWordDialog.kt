@@ -28,15 +28,10 @@ import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.ENTRY_ID_KEY
 import com.marcdonald.hibi.internal.NEW_WORD_ID_KEY
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class AddNewWordDialog : HibiDialogFragment(), KodeinAware {
-	override val kodein: Kodein by closestKodein()
+class AddNewWordDialog : HibiDialogFragment() {
+
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: AddNewWordViewModelFactory by instance()
 	private lateinit var viewModel: AddNewWordViewModel
 	// </editor-fold>
 

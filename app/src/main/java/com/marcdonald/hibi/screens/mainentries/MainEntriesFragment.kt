@@ -21,7 +21,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
@@ -30,6 +29,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
+import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDecoration
@@ -38,15 +38,10 @@ import com.marcdonald.hibi.uicomponents.TextInputDialog
 import com.marcdonald.hibi.uicomponents.multiselectdialog.MultiSelectMenu
 import com.marcdonald.hibi.uicomponents.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
 import com.marcdonald.hibi.uicomponents.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryDialog
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class MainEntriesFragment : Fragment(), KodeinAware {
-	override val kodein by closestKodein()
+class MainEntriesFragment : HibiFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: MainEntriesViewModelFactory by instance()
 	private lateinit var viewModel: MainEntriesViewModel
 	// </editor-fold>
 

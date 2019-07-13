@@ -33,7 +33,6 @@ import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -42,6 +41,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
+import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.utils.ThemeUtils
 import com.marcdonald.hibi.screens.entryscreens.ImageRecyclerAdapter
 import com.marcdonald.hibi.search.searchresults.SearchResultsDialog
@@ -55,15 +55,11 @@ import com.marcdonald.hibi.uicomponents.newwordsdialog.NewWordDialog
 import com.marcdonald.hibi.uicomponents.views.SearchBar
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-class AddEntryFragment : Fragment(), KodeinAware {
-	override val kodein by closestKodein()
+class AddEntryFragment : HibiFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: AddEntryViewModelFactory by instance()
 	private lateinit var viewModel: AddEntryViewModel
 	// </editor-fold>
 
@@ -93,7 +89,7 @@ class AddEntryFragment : Fragment(), KodeinAware {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddEntryViewModel::class.java)
+		viewModel = ViewModelProviders.of(this, androidViewModelFactory).get(AddEntryViewModel::class.java)
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

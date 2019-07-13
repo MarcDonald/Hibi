@@ -28,16 +28,10 @@ import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.TAG_ID_KEY
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class AddTagDialog : HibiDialogFragment(), KodeinAware {
-	override val kodein: Kodein by closestKodein()
+class AddTagDialog : HibiDialogFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: AddTagViewModelFactory by instance()
 	private lateinit var viewModel: AddTagViewModel
 	// </editor-fold>
 

@@ -16,9 +16,19 @@
 package com.marcdonald.hibi.internal.base
 
 import androidx.fragment.app.DialogFragment
+import com.marcdonald.hibi.HibiAndroidViewModelFactory
+import com.marcdonald.hibi.HibiViewModelFactory
 import com.marcdonald.hibi.R
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-abstract class HibiDialogFragment : DialogFragment() {
+abstract class HibiDialogFragment : DialogFragment(), KodeinAware {
+	override val kodein: Kodein by closestKodein()
+	protected val viewModelFactory: HibiViewModelFactory by instance()
+	protected val androidViewModelFactory: HibiAndroidViewModelFactory by instance()
+
 	override fun onStart() {
 		super.onStart()
 		requireDialog().window?.setBackgroundDrawableResource(R.drawable.rounded_dialog_background)

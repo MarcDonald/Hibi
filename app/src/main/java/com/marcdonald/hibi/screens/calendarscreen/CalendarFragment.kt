@@ -22,7 +22,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -30,17 +29,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
+import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class CalendarFragment : Fragment(), KodeinAware {
-	override val kodein by closestKodein()
+class CalendarFragment : HibiFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: CalendarTabViewModelFactory by instance()
 	private lateinit var viewModel: CalendarTabViewModel
 	// </editor-fold>
 

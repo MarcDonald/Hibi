@@ -32,16 +32,10 @@ import com.marcdonald.hibi.internal.IS_EDIT_MODE_KEY
 import com.marcdonald.hibi.internal.base.HibiBottomSheetDialogFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.uicomponents.addnewworddialog.AddNewWordDialog
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class NewWordDialog : HibiBottomSheetDialogFragment(), KodeinAware {
-	override val kodein: Kodein by closestKodein()
+class NewWordDialog : HibiBottomSheetDialogFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: NewWordViewModelFactory by instance()
 	private lateinit var viewModel: NewWordViewModel
 	// </editor-fold>
 

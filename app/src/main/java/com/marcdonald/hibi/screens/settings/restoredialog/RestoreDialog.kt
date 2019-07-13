@@ -29,16 +29,10 @@ import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.RESTORE_FILE_PATH_KEY
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
 import com.marcdonald.hibi.internal.extension.show
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class RestoreDialog : HibiDialogFragment(), KodeinAware {
-	override val kodein: Kodein by closestKodein()
+class RestoreDialog : HibiDialogFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: RestoreDialogViewModelFactory by instance()
 	private lateinit var viewModel: RestoreDialogViewModel
 	// </editor-fold>
 

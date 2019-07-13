@@ -34,16 +34,10 @@ import com.marcdonald.hibi.internal.base.HibiDialogFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.search.searchmoreinfoscreen.alternativesrecycler.SearchMoreInfoAlternativesRecyclerAdapter
 import com.marcdonald.hibi.search.searchmoreinfoscreen.senserecycler.SearchMoreInfoSenseRecyclerAdapter
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class SearchMoreInfoDialog : HibiDialogFragment(), KodeinAware {
-	override val kodein: Kodein by closestKodein()
+class SearchMoreInfoDialog : HibiDialogFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: SearchMoreInfoViewModelFactory by instance()
 	private lateinit var viewModel: SearchMoreInfoViewModel
 	// </editor-fold>
 

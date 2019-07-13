@@ -28,7 +28,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.NestedScrollView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -43,21 +42,17 @@ import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.ENTRY_ID_KEY
 import com.marcdonald.hibi.internal.IS_EDIT_MODE_KEY
 import com.marcdonald.hibi.internal.SEARCH_TERM_KEY
+import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.entryscreens.ImageRecyclerAdapter
 import com.marcdonald.hibi.search.searchresults.SearchResultsDialog
 import com.marcdonald.hibi.uicomponents.BinaryOptionDialog
 import com.marcdonald.hibi.uicomponents.newwordsdialog.NewWordDialog
 import com.marcdonald.hibi.uicomponents.views.SearchBar
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class ViewEntryFragment : Fragment(), KodeinAware {
-	override val kodein by closestKodein()
+class ViewEntryFragment : HibiFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: ViewEntryViewModelFactory by instance()
 	private lateinit var viewModel: ViewEntryViewModel
 	// </editor-fold>
 

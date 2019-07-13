@@ -32,16 +32,11 @@ import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.SEARCH_TERM_KEY
 import com.marcdonald.hibi.internal.base.HibiBottomSheetDialogFragment
 import com.marcdonald.hibi.internal.extension.show
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class SearchResultsDialog : HibiBottomSheetDialogFragment(), KodeinAware {
-	override val kodein by closestKodein()
+class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: SearchViewModelFactory by instance()
 	private lateinit var viewModel: SearchViewModel
 	// </editor-fold>
 

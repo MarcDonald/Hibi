@@ -22,7 +22,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -35,21 +34,17 @@ import com.marcdonald.hibi.internal.BOOKS_TAB
 import com.marcdonald.hibi.internal.CALENDAR_TAB
 import com.marcdonald.hibi.internal.ENTRIES_TAB
 import com.marcdonald.hibi.internal.TAGS_TAB
+import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.screens.booksscreen.mainbooksfragment.BooksFragment
 import com.marcdonald.hibi.screens.calendarscreen.CalendarFragment
 import com.marcdonald.hibi.screens.mainentries.MainEntriesFragment
 import com.marcdonald.hibi.screens.tagsscreen.maintagsfragment.TagsFragment
 import com.marcdonald.hibi.uicomponents.addbookdialog.AddBookDialog
 import com.marcdonald.hibi.uicomponents.addtagdialog.AddTagDialog
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class MainScreenFragment : Fragment(), KodeinAware {
-	override val kodein by closestKodein()
+class MainScreenFragment : HibiFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: MainScreenViewModelFactory by instance()
 	private lateinit var viewModel: MainScreenViewModel
 	// </editor-fold>
 
@@ -62,7 +57,7 @@ class MainScreenFragment : Fragment(), KodeinAware {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainScreenViewModel::class.java)
+		viewModel = ViewModelProviders.of(this, androidViewModelFactory).get(MainScreenViewModel::class.java)
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

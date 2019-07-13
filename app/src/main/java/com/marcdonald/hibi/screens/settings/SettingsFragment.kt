@@ -21,11 +21,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.marcdonald.hibi.R
+import com.marcdonald.hibi.internal.base.HibiFragment
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : HibiFragment() {
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_settings, container, false)

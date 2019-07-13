@@ -25,7 +25,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -37,6 +36,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.ChipGroup
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
+import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.internal.utils.ThemeUtils
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
@@ -44,15 +44,11 @@ import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDeco
 import com.marcdonald.hibi.uicomponents.DatePickerDialog
 import com.marcdonald.hibi.uicomponents.TextInputDialog
 import com.marcdonald.hibi.uicomponents.views.ChipWithId
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
-class SearchEntriesFragment : Fragment(), KodeinAware {
-	override val kodein by closestKodein()
+class SearchEntriesFragment : HibiFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: SearchEntriesViewModelFactory by instance()
 	private lateinit var viewModel: SearchEntriesViewModel
 	// </editor-fold>
 

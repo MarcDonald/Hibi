@@ -21,7 +21,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -29,16 +28,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
+import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class BooksFragment : Fragment(), KodeinAware {
-	override val kodein by closestKodein()
+class BooksFragment : HibiFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: BooksFragmentViewModelFactory by instance()
 	private lateinit var viewModel: BooksFragmentViewModel
 	// </editor-fold>
 

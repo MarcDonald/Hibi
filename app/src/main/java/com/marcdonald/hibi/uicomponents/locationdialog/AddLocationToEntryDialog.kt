@@ -27,16 +27,10 @@ import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.ENTRY_ID_KEY
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class AddLocationToEntryDialog : HibiDialogFragment(), KodeinAware {
-	override val kodein: Kodein by closestKodein()
+class AddLocationToEntryDialog : HibiDialogFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: AddLocationToEntryViewModelFactory by instance()
 	private lateinit var viewModel: AddLocationToEntryViewModel
 	// </editor-fold>
 

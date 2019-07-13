@@ -31,16 +31,10 @@ import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
 import com.marcdonald.hibi.internal.extension.show
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class UpdateDialog : HibiDialogFragment(), KodeinAware {
-	override val kodein: Kodein by closestKodein()
+class UpdateDialog : HibiDialogFragment() {
 
 	// <editor-fold desc="View Model">
-	private val viewModelFactory: UpdateDialogViewModelFactory by instance()
 	private lateinit var viewModel: UpdateDialogViewModel
 	// </editor-fold>
 
