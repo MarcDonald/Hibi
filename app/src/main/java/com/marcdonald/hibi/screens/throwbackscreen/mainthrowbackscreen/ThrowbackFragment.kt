@@ -22,8 +22,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,20 +34,13 @@ import com.marcdonald.hibi.internal.extension.show
 
 class ThrowbackFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: ThrowbackFragmentViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<ThrowbackFragmentViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingDisplay: ConstraintLayout
 	private lateinit var noEntriesDisplay: ConstraintLayout
 	private lateinit var recyclerAdapter: ThrowbackRecyclerAdapter
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(ThrowbackFragmentViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_throwback, container, false)

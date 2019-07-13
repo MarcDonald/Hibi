@@ -21,8 +21,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.ENTRY_ID_KEY
@@ -31,9 +31,7 @@ import com.marcdonald.hibi.internal.base.HibiDialogFragment
 
 class AddNewWordDialog : HibiDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: AddNewWordViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<AddNewWordViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var dialogTitle: TextView
@@ -43,11 +41,6 @@ class AddNewWordDialog : HibiDialogFragment() {
 	private lateinit var englishInput: EditText
 	private lateinit var notesInput: EditText
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddNewWordViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.dialog_add_new_word, container, false)

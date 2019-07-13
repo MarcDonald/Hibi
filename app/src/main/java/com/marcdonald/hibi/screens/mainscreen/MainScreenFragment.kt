@@ -22,8 +22,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.button.MaterialButton
@@ -44,9 +44,7 @@ import com.marcdonald.hibi.uicomponents.addtagdialog.AddTagDialog
 
 class MainScreenFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: MainScreenViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<MainScreenViewModel> { androidViewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var viewPager: ViewPager
@@ -54,11 +52,6 @@ class MainScreenFragment : HibiFragment() {
 	private lateinit var mainMenu: MainScreenMenuDialog
 	private lateinit var updateSnackbar: Snackbar
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, androidViewModelFactory).get(MainScreenViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		return inflater.inflate(R.layout.fragment_main, container, false)

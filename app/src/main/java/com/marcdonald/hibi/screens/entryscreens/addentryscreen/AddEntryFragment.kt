@@ -33,8 +33,8 @@ import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -59,9 +59,7 @@ import org.kodein.di.generic.instance
 
 class AddEntryFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: AddEntryViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<AddEntryViewModel> { androidViewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var dateButton: MaterialButton
@@ -86,11 +84,6 @@ class AddEntryFragment : HibiFragment() {
 	// <editor-fold desc="Other">
 	private val themeUtils: ThemeUtils by instance()
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, androidViewModelFactory).get(AddEntryViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_add_entry, container, false)

@@ -23,8 +23,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
@@ -32,9 +32,7 @@ import com.marcdonald.hibi.internal.extension.show
 
 class BackupDialog : HibiDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: BackupDialogViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<BackupDialogViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingProgressBar: ProgressBar
@@ -46,7 +44,6 @@ class BackupDialog : HibiDialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(BackupDialogViewModel::class.java)
 		isCancelable = false
 	}
 

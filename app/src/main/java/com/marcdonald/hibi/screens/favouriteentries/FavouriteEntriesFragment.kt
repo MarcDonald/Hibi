@@ -23,8 +23,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,20 +39,13 @@ import com.marcdonald.hibi.uicomponents.BinaryOptionDialog
 
 class FavouriteEntriesFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: FavouriteEntriesViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<FavouriteEntriesViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingDisplay: ConstraintLayout
 	private lateinit var noEntries: ConstraintLayout
 	private lateinit var recyclerAdapter: EntriesRecyclerAdapter
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(FavouriteEntriesViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_favourite_entries, container, false)

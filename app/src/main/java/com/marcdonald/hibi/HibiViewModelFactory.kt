@@ -78,7 +78,6 @@ class HibiViewModelFactory(private val entryRepository: EntryRepository,
 				isAssignableFrom(TagsFragmentViewModel::class.java)        -> TagsFragmentViewModel(tagEntryRelationRepository)
 				isAssignableFrom(TaggedEntriesViewModel::class.java)       -> TaggedEntriesViewModel(tagRepository, tagEntryRelationRepository, bookEntryRelationRepository)
 				isAssignableFrom(AddBookViewModel::class.java)             -> AddBookViewModel(bookRepository)
-				isAssignableFrom(BooksFragmentViewModel::class.java)       -> BooksFragmentViewModel(bookEntryRelationRepository)
 				isAssignableFrom(BookEntriesViewModel::class.java)         -> BookEntriesViewModel(bookRepository, bookEntryRelationRepository, tagEntryRelationRepository)
 				isAssignableFrom(AddEntryToBookViewModel::class.java)      -> AddEntryToBookViewModel(bookRepository, bookEntryRelationRepository)
 				isAssignableFrom(AddLocationToEntryViewModel::class.java)  -> AddLocationToEntryViewModel(entryRepository)

@@ -28,8 +28,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,9 +52,7 @@ import com.marcdonald.hibi.uicomponents.views.SearchBar
 
 class ViewEntryFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: ViewEntryViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<ViewEntryViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var dateButton: MaterialButton
@@ -72,11 +70,6 @@ class ViewEntryFragment : HibiFragment() {
 	private lateinit var scrollView: NestedScrollView
 	private lateinit var imageRecyclerAdapter: ImageRecyclerAdapter
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(ViewEntryViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_view_entry, container, false)

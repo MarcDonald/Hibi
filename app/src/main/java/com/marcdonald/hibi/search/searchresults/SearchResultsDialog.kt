@@ -23,8 +23,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,9 +36,7 @@ import timber.log.Timber
 
 class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: SearchViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<SearchViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var progressBar: ProgressBar
@@ -47,11 +45,6 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 	private lateinit var recyclerAdapter: SearchResultsRecyclerAdapter
 	private lateinit var recycler: RecyclerView
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		Timber.v("Log: onCreateView: Started")

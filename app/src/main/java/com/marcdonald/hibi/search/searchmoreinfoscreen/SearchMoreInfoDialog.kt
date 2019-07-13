@@ -24,8 +24,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,9 +37,7 @@ import com.marcdonald.hibi.search.searchmoreinfoscreen.senserecycler.SearchMoreI
 
 class SearchMoreInfoDialog : HibiDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: SearchMoreInfoViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<SearchMoreInfoViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var mainWordDisplay: TextView
@@ -57,8 +55,6 @@ class SearchMoreInfoDialog : HibiDialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchMoreInfoViewModel::class.java)
-
 		arguments?.let {
 			val japaneseListJson = requireArguments().getStringArrayList("japaneseList")
 			val sensesListJson = requireArguments().getStringArrayList("sensesList")

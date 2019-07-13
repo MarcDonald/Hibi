@@ -23,8 +23,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,21 +38,14 @@ import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDeco
 
 class TaggedEntriesFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: TaggedEntriesViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<TaggedEntriesViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingDisplay: ConstraintLayout
 	private lateinit var noResults: ConstraintLayout
 	private lateinit var toolbarTitle: TextView
 	private lateinit var recyclerAdapter: EntriesRecyclerAdapter
-	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(TaggedEntriesViewModel::class.java)
-	}
+	// </editor-fold>=
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_tagged_entries, container, false)

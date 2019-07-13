@@ -21,8 +21,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.ENTRY_ID_KEY
@@ -30,9 +30,7 @@ import com.marcdonald.hibi.internal.base.HibiDialogFragment
 
 class AddLocationToEntryDialog : HibiDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: AddLocationToEntryViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<AddLocationToEntryViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var input: EditText
@@ -40,7 +38,6 @@ class AddLocationToEntryDialog : HibiDialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddLocationToEntryViewModel::class.java)
 		arguments?.let {
 			viewModel.passArgument(requireArguments().getInt(ENTRY_ID_KEY, 0))
 		}

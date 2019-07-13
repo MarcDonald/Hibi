@@ -22,8 +22,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.BOOK_ID_KEY
@@ -31,19 +31,12 @@ import com.marcdonald.hibi.internal.base.HibiDialogFragment
 
 class AddBookDialog : HibiDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: AddBookViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<AddBookViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var input: EditText
 	private lateinit var dialogTitle: TextView
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddBookViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.dialog_new_book, container, false)

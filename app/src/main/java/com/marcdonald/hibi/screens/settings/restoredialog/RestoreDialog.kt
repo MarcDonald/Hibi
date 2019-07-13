@@ -22,8 +22,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.RESTORE_FILE_PATH_KEY
@@ -32,10 +32,7 @@ import com.marcdonald.hibi.internal.extension.show
 
 class RestoreDialog : HibiDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: RestoreDialogViewModel
-	// </editor-fold>
-
+	private val viewModel by viewModels<RestoreDialogViewModel> { viewModelFactory }
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingProgressBar: ProgressBar
 	private lateinit var cancelButton: MaterialButton
@@ -45,11 +42,6 @@ class RestoreDialog : HibiDialogFragment() {
 	private lateinit var title: TextView
 	private lateinit var errorDisplay: ImageView
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(RestoreDialogViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.dialog_restore, container, false)

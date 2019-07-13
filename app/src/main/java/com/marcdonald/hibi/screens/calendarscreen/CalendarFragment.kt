@@ -22,8 +22,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,9 +35,7 @@ import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 
 class CalendarFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: CalendarTabViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<CalendarTabViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var calendarView: CalendarView
@@ -45,11 +43,6 @@ class CalendarFragment : HibiFragment() {
 	private lateinit var loadingDisplay: ConstraintLayout
 	private lateinit var noResults: ConstraintLayout
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(CalendarTabViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_calendar, container, false)

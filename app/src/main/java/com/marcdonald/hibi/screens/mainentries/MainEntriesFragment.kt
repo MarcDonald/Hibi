@@ -21,8 +21,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,9 +41,7 @@ import com.marcdonald.hibi.uicomponents.multiselectdialog.addtagtomultientrydial
 
 class MainEntriesFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: MainEntriesViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<MainEntriesViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingDisplay: ConstraintLayout
@@ -56,11 +54,6 @@ class MainEntriesFragment : HibiFragment() {
 			if(recyclerAdapter.getSelectedEntryIds().isNotEmpty())
 				recyclerAdapter.clearSelectedEntries()
 		}
-	}
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainEntriesViewModel::class.java)
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

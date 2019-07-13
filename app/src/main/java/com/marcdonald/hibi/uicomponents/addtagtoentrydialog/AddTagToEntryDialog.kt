@@ -21,8 +21,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.ENTRY_ID_KEY
@@ -33,9 +33,7 @@ import com.marcdonald.hibi.uicomponents.views.CheckBoxWithId
 
 class AddTagToEntryDialog : HibiBottomSheetDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: AddTagToEntryViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<AddTagToEntryViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var title: TextView
@@ -45,7 +43,6 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddTagToEntryViewModel::class.java)
 		arguments?.let {
 			viewModel.passArguments(requireArguments().getInt(ENTRY_ID_KEY, 0))
 		}

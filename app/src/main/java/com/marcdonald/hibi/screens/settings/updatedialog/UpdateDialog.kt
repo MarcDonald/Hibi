@@ -25,8 +25,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
@@ -34,9 +34,7 @@ import com.marcdonald.hibi.internal.extension.show
 
 class UpdateDialog : HibiDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: UpdateDialogViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<UpdateDialogViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var noUpdateAvailable: ImageView
@@ -49,11 +47,6 @@ class UpdateDialog : HibiDialogFragment() {
 	private lateinit var title: TextView
 	private lateinit var message: TextView
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(UpdateDialogViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.dialog_update, container, false)

@@ -20,8 +20,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,9 +35,7 @@ import com.marcdonald.hibi.uicomponents.addnewworddialog.AddNewWordDialog
 
 class NewWordDialog : HibiBottomSheetDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: NewWordViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<NewWordViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var noResultsWarning: LinearLayout
@@ -49,11 +47,6 @@ class NewWordDialog : HibiBottomSheetDialogFragment() {
 	// <editor-fold desc="Other">
 	private var isEditMode = true
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(NewWordViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.dialog_new_word, container, false)

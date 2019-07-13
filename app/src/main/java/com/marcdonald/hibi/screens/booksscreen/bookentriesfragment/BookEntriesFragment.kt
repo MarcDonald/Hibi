@@ -23,8 +23,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,9 +38,7 @@ import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDeco
 
 class BookEntriesFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private lateinit var viewModel: BookEntriesViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<BookEntriesViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingDisplay: ConstraintLayout
@@ -48,11 +46,6 @@ class BookEntriesFragment : HibiFragment() {
 	private lateinit var toolbarTitle: TextView
 	private lateinit var recyclerAdapter: EntriesRecyclerAdapter
 	// </editor-fold>
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(BookEntriesViewModel::class.java)
-	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_book_entries, container, false)
