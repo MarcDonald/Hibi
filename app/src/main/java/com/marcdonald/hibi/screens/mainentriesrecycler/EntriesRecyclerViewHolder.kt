@@ -23,7 +23,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.Navigation
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.marcdonald.hibi.R
@@ -32,13 +31,13 @@ import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_LOCATION
 import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_TAGS
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.internal.utils.DateTimeUtils
-import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 
-class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?,
+class EntriesRecyclerViewHolder(private val onClick: (Int) -> Unit,
+																private val onSelectClick: View.OnClickListener?,
 																itemView: View,
 																private val theme: Resources.Theme)
 	: BaseEntriesRecyclerViewHolder(itemView), KodeinAware {
@@ -61,11 +60,9 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 	// </editor-fold>
 
 	private val clickListener = View.OnClickListener {
-		val viewEntryAction = MainScreenFragmentDirections.viewEntryAction()
-		if(displayedItem != null) {
-			viewEntryAction.entryId = displayedItem!!.entry.id
+		displayedItem?.let { item ->
+			onClick(item.entry.id)
 		}
-		Navigation.findNavController(itemView).navigate(viewEntryAction)
 	}
 
 	init {

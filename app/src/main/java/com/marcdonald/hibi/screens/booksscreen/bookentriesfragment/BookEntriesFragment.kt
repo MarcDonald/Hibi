@@ -102,7 +102,7 @@ class BookEntriesFragment : HibiFragment() {
 
 	private fun initRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_book_entries)
-		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
+		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), ::onEntryClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
@@ -116,5 +116,11 @@ class BookEntriesFragment : HibiFragment() {
 			val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
 			recycler.addItemDecoration(decoration)
 		}
+	}
+
+	private fun onEntryClick(entryId: Int) {
+		val viewEntryAction = BookEntriesFragmentDirections.viewEntryAction()
+		viewEntryAction.entryId = entryId
+		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}
 }

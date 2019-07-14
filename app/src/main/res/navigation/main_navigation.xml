@@ -328,6 +328,18 @@
   <fragment
     android:id="@+id/destination_favourites"
     android:name="com.marcdonald.hibi.screens.favouriteentries.FavouriteEntriesFragment"
-    android:label="FavouriteEntriesFragment" />
+    android:label="FavouriteEntriesFragment">
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
   <!--endregion-->
 </navigation>

@@ -91,7 +91,7 @@ class FavouriteEntriesFragment : HibiFragment() {
 
 	private fun initRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_favourite_entries)
-		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), true, onSelectClick, requireActivity().theme)
+		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), ::onEntryClick, true, onSelectClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
@@ -118,5 +118,11 @@ class FavouriteEntriesFragment : HibiFragment() {
 		})
 		removeDialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { removeDialog.dismiss() })
 		removeDialog.show(requireFragmentManager(), "Confirm Multi Favourite Remove Dialog")
+	}
+
+	private fun onEntryClick(entryId: Int) {
+		val viewEntryAction = FavouriteEntriesFragmentDirections.viewEntryAction()
+		viewEntryAction.entryId = entryId
+		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}
 }

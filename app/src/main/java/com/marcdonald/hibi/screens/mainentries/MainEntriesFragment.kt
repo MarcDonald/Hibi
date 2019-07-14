@@ -23,6 +23,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +35,7 @@ import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDecoration
+import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
 import com.marcdonald.hibi.screens.multiselectdialog.MultiSelectMenu
 import com.marcdonald.hibi.screens.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
 import com.marcdonald.hibi.screens.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryDialog
@@ -77,7 +79,7 @@ class MainEntriesFragment : HibiFragment() {
 
 	private fun initRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_entries)
-		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), true, onSelectClick, requireActivity().theme)
+		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), ::onEntryClick, true, onSelectClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
@@ -195,5 +197,11 @@ class MainEntriesFragment : HibiFragment() {
 			addOrRemoveFavouriteDialog.dismiss()
 		})
 		addOrRemoveFavouriteDialog.show(requireFragmentManager(), "Multi Favourite Dialog")
+	}
+
+	private fun onEntryClick(entryId: Int) {
+		val viewEntryAction = MainScreenFragmentDirections.viewEntryAction()
+		viewEntryAction.entryId = entryId
+		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}
 }

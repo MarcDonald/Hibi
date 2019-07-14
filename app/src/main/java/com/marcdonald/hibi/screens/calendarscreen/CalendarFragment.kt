@@ -24,6 +24,7 @@ import android.widget.CalendarView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +33,7 @@ import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
 import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
+import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
 
 class CalendarFragment : HibiFragment() {
 
@@ -72,7 +74,7 @@ class CalendarFragment : HibiFragment() {
 
 	private fun initRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.calendar_entries)
-		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
+		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), ::onEntryClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
@@ -102,5 +104,11 @@ class CalendarFragment : HibiFragment() {
 				recyclerAdapter.updateList(items)
 			}
 		})
+	}
+
+	private fun onEntryClick(entryId: Int) {
+		val viewEntryAction = MainScreenFragmentDirections.viewEntryAction()
+		viewEntryAction.entryId = entryId
+		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}
 }

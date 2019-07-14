@@ -103,7 +103,7 @@ class TaggedEntriesFragment : HibiFragment() {
 
 	private fun initRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_tagged_entries)
-		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
+		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), ::onEntryClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
@@ -117,5 +117,11 @@ class TaggedEntriesFragment : HibiFragment() {
 			val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
 			recycler.addItemDecoration(decoration)
 		}
+	}
+
+	private fun onEntryClick(entryId: Int) {
+		val viewEntryAction = TaggedEntriesFragmentDirections.viewEntryAction()
+		viewEntryAction.entryId = entryId
+		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}
 }

@@ -150,7 +150,7 @@ class SearchEntriesFragment : HibiFragment() {
 
 	private fun initRecycler(view: View) {
 		recycler = view.findViewById(R.id.recycler_search_entries)
-		recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
+		recyclerAdapter = EntriesRecyclerAdapter(requireContext(), ::onEntryClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
@@ -468,5 +468,11 @@ class SearchEntriesFragment : HibiFragment() {
 				returnList.add(chip.itemId)
 		}
 		return returnList
+	}
+
+	private fun onEntryClick(entryId: Int) {
+		val viewEntryAction = SearchEntriesFragmentDirections.viewEntryAction()
+		viewEntryAction.entryId = entryId
+		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}
 }

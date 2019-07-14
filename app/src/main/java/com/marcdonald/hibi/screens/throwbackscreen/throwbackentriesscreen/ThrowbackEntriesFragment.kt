@@ -96,7 +96,7 @@ class ThrowbackEntriesFragment : HibiFragment() {
 
 	private fun initRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_throwback_entries)
-		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), requireActivity().theme)
+		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), ::onEntryClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
@@ -106,5 +106,11 @@ class ThrowbackEntriesFragment : HibiFragment() {
 			val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
 			recycler.addItemDecoration(dividerItemDecoration)
 		}
+	}
+
+	private fun onEntryClick(entryId: Int) {
+		val viewEntryAction = ThrowbackEntriesFragmentDirections.viewEntryAction()
+		viewEntryAction.entryId = entryId
+		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}
 }

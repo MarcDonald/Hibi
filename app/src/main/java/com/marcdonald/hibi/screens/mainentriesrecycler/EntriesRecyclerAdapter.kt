@@ -29,8 +29,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.PREF_RECYCLER_ANIMATIONS
 
-class EntriesRecyclerAdapter(private val context: Context, private val theme: Resources.Theme) :
-		RecyclerView.Adapter<BaseEntriesRecyclerViewHolder>() {
+class EntriesRecyclerAdapter(private val context: Context,
+														 private val onClick: (Int) -> Unit,
+														 private val theme: Resources.Theme)
+	: RecyclerView.Adapter<BaseEntriesRecyclerViewHolder>() {
 
 	private val inflater: LayoutInflater = LayoutInflater.from(context)
 	private var items: List<MainEntriesDisplayItem> = listOf()
@@ -43,7 +45,7 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
 	val hasSelectedItems: LiveData<Boolean>
 		get() = _hasSelectedItems
 
-	constructor(context: Context, itemsSelectable: Boolean, onSelectClick: View.OnClickListener, theme: Resources.Theme) : this(context, theme) {
+	constructor(context: Context, onClick: (Int) -> Unit, itemsSelectable: Boolean, onSelectClick: View.OnClickListener, theme: Resources.Theme) : this(context, onClick, theme) {
 		this.itemsSelectable = itemsSelectable
 		this.onSelectClick = onSelectClick
 	}
@@ -82,7 +84,7 @@ class EntriesRecyclerAdapter(private val context: Context, private val theme: Re
 			}
 			else -> {
 				val view = inflater.inflate(R.layout.item_main_screen_entry, parent, false)
-				EntriesRecyclerViewHolder(onSelectClick, view, theme)
+				EntriesRecyclerViewHolder(onClick, onSelectClick, view, theme)
 			}
 		}
 	}
