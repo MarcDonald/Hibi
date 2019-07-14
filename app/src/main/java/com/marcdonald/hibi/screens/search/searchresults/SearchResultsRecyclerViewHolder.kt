@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.network.jisho.apiresponse.Data
-import com.marcdonald.hibi.screens.search.searchmoreinfoscreen.SearchMoreInfoDialog
+import com.marcdonald.hibi.screens.search.searchmoreinfo.SearchMoreInfoDialog
 import java.util.*
 import kotlin.collections.ArrayList
 

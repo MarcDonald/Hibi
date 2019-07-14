@@ -27,28 +27,28 @@ import com.marcdonald.hibi.internal.utils.UpdateUtils
 import com.marcdonald.hibi.screens.addbookdialog.AddBookViewModel
 import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordViewModel
 import com.marcdonald.hibi.screens.addtagdialog.AddTagViewModel
-import com.marcdonald.hibi.screens.booksscreen.bookentriesfragment.BookEntriesViewModel
-import com.marcdonald.hibi.screens.booksscreen.mainbooksfragment.BooksFragmentViewModel
-import com.marcdonald.hibi.screens.calendarscreen.CalendarTabViewModel
-import com.marcdonald.hibi.screens.entryscreens.addentryscreen.addentrytobookdialog.AddEntryToBookViewModel
-import com.marcdonald.hibi.screens.entryscreens.addentryscreen.addtagtoentrydialog.AddTagToEntryViewModel
-import com.marcdonald.hibi.screens.entryscreens.viewentryscreen.ViewEntryViewModel
+import com.marcdonald.hibi.screens.books.bookentries.BookEntriesViewModel
+import com.marcdonald.hibi.screens.books.mainbooks.BooksFragmentViewModel
+import com.marcdonald.hibi.screens.calendar.CalendarTabViewModel
+import com.marcdonald.hibi.screens.entries.addentry.addentrytobookdialog.AddEntryToBookViewModel
+import com.marcdonald.hibi.screens.entries.addentry.addtagtoentrydialog.AddTagToEntryViewModel
+import com.marcdonald.hibi.screens.entries.viewentry.ViewEntryViewModel
 import com.marcdonald.hibi.screens.favouriteentries.FavouriteEntriesViewModel
 import com.marcdonald.hibi.screens.locationdialog.AddLocationToEntryViewModel
 import com.marcdonald.hibi.screens.mainentries.MainEntriesViewModel
 import com.marcdonald.hibi.screens.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookViewModel
 import com.marcdonald.hibi.screens.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryViewModel
 import com.marcdonald.hibi.screens.newwordsdialog.NewWordViewModel
-import com.marcdonald.hibi.screens.search.searchmoreinfoscreen.SearchMoreInfoViewModel
+import com.marcdonald.hibi.screens.search.searchmoreinfo.SearchMoreInfoViewModel
 import com.marcdonald.hibi.screens.search.searchresults.SearchViewModel
-import com.marcdonald.hibi.screens.searchentries.searchentriesscreen.SearchEntriesViewModel
+import com.marcdonald.hibi.screens.searchentries.mainsearchentries.SearchEntriesViewModel
 import com.marcdonald.hibi.screens.settings.backupdialog.BackupDialogViewModel
 import com.marcdonald.hibi.screens.settings.restoredialog.RestoreDialogViewModel
 import com.marcdonald.hibi.screens.settings.updatedialog.UpdateDialogViewModel
-import com.marcdonald.hibi.screens.tagsscreen.maintagsfragment.TagsFragmentViewModel
-import com.marcdonald.hibi.screens.tagsscreen.taggedentriesfragment.TaggedEntriesViewModel
-import com.marcdonald.hibi.screens.throwbackscreen.mainthrowbackscreen.ThrowbackFragmentViewModel
-import com.marcdonald.hibi.screens.throwbackscreen.throwbackentriesscreen.ThrowbackEntriesViewModel
+import com.marcdonald.hibi.screens.tags.maintags.TagsFragmentViewModel
+import com.marcdonald.hibi.screens.tags.taggedentries.TaggedEntriesViewModel
+import com.marcdonald.hibi.screens.throwback.mainthrowback.ThrowbackFragmentViewModel
+import com.marcdonald.hibi.screens.throwback.throwbackentries.ThrowbackEntriesViewModel
 
 @Suppress("UNCHECKED_CAST")
 class HibiViewModelFactory(private val entryRepository: EntryRepository,

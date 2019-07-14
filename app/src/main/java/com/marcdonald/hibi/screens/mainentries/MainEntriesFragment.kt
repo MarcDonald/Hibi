@@ -33,9 +33,9 @@ import com.marcdonald.hibi.internal.PREF_DATE_HEADER_PERIOD
 import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
 import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
+import com.marcdonald.hibi.screens.main.MainScreenFragmentDirections
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDecoration
-import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
 import com.marcdonald.hibi.screens.multiselectdialog.MultiSelectMenu
 import com.marcdonald.hibi.screens.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
 import com.marcdonald.hibi.screens.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryDialog

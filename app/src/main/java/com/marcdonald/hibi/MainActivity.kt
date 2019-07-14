@@ -22,7 +22,7 @@ import com.marcdonald.hibi.internal.ADD_ENTRY_NOTIFICATION_INTENT_ACTION
 import com.marcdonald.hibi.internal.ADD_ENTRY_SHORTCUT_INTENT_ACTION
 import com.marcdonald.hibi.internal.REMINDER_NOTIFICATION_ID
 import com.marcdonald.hibi.internal.base.HibiActivity
-import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
+import com.marcdonald.hibi.screens.main.MainScreenFragmentDirections
 import timber.log.Timber
 
 class MainActivity : HibiActivity() {

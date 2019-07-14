@@ -22,8 +22,8 @@ import com.marcdonald.hibi.data.repository.*
 import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import com.marcdonald.hibi.internal.utils.FileUtils
 import com.marcdonald.hibi.internal.utils.UpdateUtils
-import com.marcdonald.hibi.screens.entryscreens.addentryscreen.AddEntryViewModel
-import com.marcdonald.hibi.screens.mainscreen.MainScreenViewModel
+import com.marcdonald.hibi.screens.entries.addentry.AddEntryViewModel
+import com.marcdonald.hibi.screens.main.MainScreenViewModel
 
 @Suppress("UNCHECKED_CAST")
 class HibiAndroidViewModelFactory(private val application: Application,
