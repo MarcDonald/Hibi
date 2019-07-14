@@ -45,9 +45,9 @@ import com.marcdonald.hibi.internal.SEARCH_TERM_KEY
 import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.entryscreens.ImageRecyclerAdapter
-import com.marcdonald.hibi.search.searchresults.SearchResultsDialog
+import com.marcdonald.hibi.screens.newwordsdialog.NewWordDialog
+import com.marcdonald.hibi.screens.search.searchresults.SearchResultsDialog
 import com.marcdonald.hibi.uicomponents.BinaryOptionDialog
-import com.marcdonald.hibi.uicomponents.newwordsdialog.NewWordDialog
 import com.marcdonald.hibi.uicomponents.views.SearchBar
 
 class ViewEntryFragment : HibiFragment() {

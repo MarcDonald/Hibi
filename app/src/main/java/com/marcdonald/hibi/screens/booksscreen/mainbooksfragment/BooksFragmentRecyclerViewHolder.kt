@@ -23,8 +23,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.BOOK_ID_KEY
+import com.marcdonald.hibi.screens.addbookdialog.AddBookDialog
 import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
-import com.marcdonald.hibi.uicomponents.addbookdialog.AddBookDialog
 
 class BooksFragmentRecyclerViewHolder(itemView: View, private val fragmentManager: FragmentManager) :
 		RecyclerView.ViewHolder(itemView) {

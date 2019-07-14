@@ -34,11 +34,11 @@ import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDecoration
+import com.marcdonald.hibi.screens.multiselectdialog.MultiSelectMenu
+import com.marcdonald.hibi.screens.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
+import com.marcdonald.hibi.screens.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryDialog
 import com.marcdonald.hibi.uicomponents.BinaryOptionDialog
 import com.marcdonald.hibi.uicomponents.TextInputDialog
-import com.marcdonald.hibi.uicomponents.multiselectdialog.MultiSelectMenu
-import com.marcdonald.hibi.uicomponents.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
-import com.marcdonald.hibi.uicomponents.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryDialog
 
 class MainEntriesFragment : HibiFragment() {
 

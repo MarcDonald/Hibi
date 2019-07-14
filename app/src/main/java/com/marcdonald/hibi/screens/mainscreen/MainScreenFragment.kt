@@ -35,12 +35,12 @@ import com.marcdonald.hibi.internal.CALENDAR_TAB
 import com.marcdonald.hibi.internal.ENTRIES_TAB
 import com.marcdonald.hibi.internal.TAGS_TAB
 import com.marcdonald.hibi.internal.base.HibiFragment
+import com.marcdonald.hibi.screens.addbookdialog.AddBookDialog
+import com.marcdonald.hibi.screens.addtagdialog.AddTagDialog
 import com.marcdonald.hibi.screens.booksscreen.mainbooksfragment.BooksFragment
 import com.marcdonald.hibi.screens.calendarscreen.CalendarFragment
 import com.marcdonald.hibi.screens.mainentries.MainEntriesFragment
 import com.marcdonald.hibi.screens.tagsscreen.maintagsfragment.TagsFragment
-import com.marcdonald.hibi.uicomponents.addbookdialog.AddBookDialog
-import com.marcdonald.hibi.uicomponents.addtagdialog.AddTagDialog
 
 class MainScreenFragment : HibiFragment() {
 

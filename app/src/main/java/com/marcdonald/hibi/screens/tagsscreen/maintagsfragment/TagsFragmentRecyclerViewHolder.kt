@@ -23,8 +23,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.TAG_ID_KEY
+import com.marcdonald.hibi.screens.addtagdialog.AddTagDialog
 import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
-import com.marcdonald.hibi.uicomponents.addtagdialog.AddTagDialog
 
 class TagsFragmentRecyclerViewHolder(itemView: View,
 																		 private val fragmentManager: FragmentManager)
