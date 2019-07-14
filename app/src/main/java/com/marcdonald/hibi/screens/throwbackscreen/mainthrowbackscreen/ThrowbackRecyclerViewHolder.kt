@@ -27,13 +27,19 @@ import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_BOOKS
 import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_LOCATION
 import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_TAGS
 import com.marcdonald.hibi.internal.extension.show
-import com.marcdonald.hibi.internal.utils.formatDateForDisplay
-import com.marcdonald.hibi.internal.utils.formatTimeForDisplay
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 import java.util.*
 
 class ThrowbackRecyclerViewHolder(itemView: View,
 																	onClick: (adapterPosition: Int) -> Unit)
-	: RecyclerView.ViewHolder(itemView) {
+	: RecyclerView.ViewHolder(itemView), KodeinAware {
+
+	override val kodein: Kodein by closestKodein(itemView.context)
+	private val dateTimeUtils: DateTimeUtils by instance()
 
 	// <editor-fold desc="UI Components">
 	private var titleDisplay: TextView = itemView.findViewById(R.id.txt_throwback_title)
@@ -59,9 +65,9 @@ class ThrowbackRecyclerViewHolder(itemView: View,
 
 	fun display(item: ThrowbackDisplayItem) {
 		this.displayedItem = item
-		val dateDisplayText = formatDateForDisplay(item.entryDisplayItem.entry.day, item.entryDisplayItem.entry.month, item.entryDisplayItem.entry.year)
+		val dateDisplayText = dateTimeUtils.formatDateForDisplay(item.entryDisplayItem.entry.day, item.entryDisplayItem.entry.month, item.entryDisplayItem.entry.year)
 		dateDisplay.text = dateDisplayText
-		val timeDisplayText = formatTimeForDisplay(item.entryDisplayItem.entry.hour, item.entryDisplayItem.entry.minute)
+		val timeDisplayText = dateTimeUtils.formatTimeForDisplay(item.entryDisplayItem.entry.hour, item.entryDisplayItem.entry.minute)
 		timeDisplay.text = timeDisplayText
 		contentDisplay.text = item.entryDisplayItem.entry.content
 		displayTitle()

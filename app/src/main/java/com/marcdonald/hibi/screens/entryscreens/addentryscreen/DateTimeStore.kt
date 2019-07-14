@@ -17,11 +17,10 @@ package com.marcdonald.hibi.screens.entryscreens.addentryscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.marcdonald.hibi.internal.utils.formatDateForDisplay
-import com.marcdonald.hibi.internal.utils.formatTimeForDisplay
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import java.util.*
 
-class DateTimeStore {
+class DateTimeStore(private val dateTimeUtils: DateTimeUtils) {
 	private var calendar = Calendar.getInstance()
 
 	private val _readableDate = MutableLiveData<String>()
@@ -48,8 +47,8 @@ class DateTimeStore {
 		get() = calendar.get(Calendar.MINUTE)
 
 	init {
-		_readableDate.postValue(formatDateForDisplay(calendar))
-		_readableTime.postValue(formatTimeForDisplay(calendar))
+		_readableDate.postValue(dateTimeUtils.formatDateForDisplay(calendar))
+		_readableTime.postValue(dateTimeUtils.formatTimeForDisplay(calendar))
 	}
 
 	fun setDate(day: Int, month: Int, year: Int) {
@@ -57,13 +56,13 @@ class DateTimeStore {
 		calendar.set(Calendar.MONTH, month)
 		calendar.set(Calendar.YEAR, year)
 
-		_readableDate.postValue(formatDateForDisplay(calendar))
+		_readableDate.postValue(dateTimeUtils.formatDateForDisplay(calendar))
 	}
 
 	fun setTime(hour: Int, minute: Int) {
 		calendar.set(Calendar.HOUR_OF_DAY, hour)
 		calendar.set(Calendar.MINUTE, minute)
 
-		_readableTime.postValue(formatTimeForDisplay(calendar))
+		_readableTime.postValue(dateTimeUtils.formatTimeForDisplay(calendar))
 	}
 }

@@ -239,6 +239,10 @@
   <string name="checking_for_updates">Checking for Updates</string>
   <string name="periodically_update_check_title">Periodically Check for Updates</string>
   <string name="periodically_update_check_summary">Check for updates in the background once per day</string>
+  <string name="date_header_period">Date Header Period</string>
+  <string name="none">None</string>
+  <string name="month">Month</string>
+  <string name="year">Year</string>
   <!--endregion-->
 
   <!--region About-->

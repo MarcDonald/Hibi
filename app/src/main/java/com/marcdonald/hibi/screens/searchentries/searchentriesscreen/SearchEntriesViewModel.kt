@@ -23,8 +23,8 @@ import com.marcdonald.hibi.data.entity.Book
 import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.entity.Tag
 import com.marcdonald.hibi.data.repository.*
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import com.marcdonald.hibi.internal.utils.EntryDisplayUtils
-import com.marcdonald.hibi.internal.utils.formatDateForDisplay
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesDisplayItem
 import com.marcdonald.hibi.screens.searchentries.EntrySearchCriteria
 import kotlinx.coroutines.launch
@@ -34,7 +34,8 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository,
 														 private val tagEntryRelationRepository: TagEntryRelationRepository,
 														 private val bookRepository: BookRepository,
 														 private val bookEntryRelationRepository: BookEntryRelationRepository,
-														 private val entryDisplayUtils: EntryDisplayUtils)
+														 private val entryDisplayUtils: EntryDisplayUtils,
+														 private val dateTimeUtils: DateTimeUtils)
 	: ViewModel() {
 
 	private val _criteria = EntrySearchCriteria()
@@ -254,7 +255,7 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository,
 		_criteria.startYear = year
 		_criteria.startMonth = month
 		_criteria.startDay = day
-		_beginningDisplay.value = formatDateForDisplay(day, month, year)
+		_beginningDisplay.value = dateTimeUtils.formatDateForDisplay(day, month, year)
 	}
 
 	fun startIsBeginning(): Boolean {
@@ -269,7 +270,7 @@ class SearchEntriesViewModel(private val entryRepository: EntryRepository,
 		_criteria.endYear = year
 		_criteria.endMonth = month
 		_criteria.endDay = day
-		_endDisplay.value = formatDateForDisplay(day, month, year)
+		_endDisplay.value = dateTimeUtils.formatDateForDisplay(day, month, year)
 	}
 
 	fun setContaining(contentArg: String) {

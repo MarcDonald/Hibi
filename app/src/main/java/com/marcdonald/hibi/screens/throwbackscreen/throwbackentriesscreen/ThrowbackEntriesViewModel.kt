@@ -22,8 +22,8 @@ import androidx.lifecycle.viewModelScope
 import com.marcdonald.hibi.data.repository.BookEntryRelationRepository
 import com.marcdonald.hibi.data.repository.EntryRepository
 import com.marcdonald.hibi.data.repository.TagEntryRelationRepository
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import com.marcdonald.hibi.internal.utils.EntryDisplayUtils
-import com.marcdonald.hibi.internal.utils.formatDateForDisplay
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesDisplayItem
 import kotlinx.coroutines.launch
 import java.util.*
@@ -31,7 +31,8 @@ import java.util.*
 class ThrowbackEntriesViewModel(private val entryRepository: EntryRepository,
 																private val tagEntryRelationRepository: TagEntryRelationRepository,
 																private val bookEntryRelationRepository: BookEntryRelationRepository,
-																private val entryDisplayUtils: EntryDisplayUtils)
+																private val entryDisplayUtils: EntryDisplayUtils,
+																private val dateTimeUtils: DateTimeUtils)
 	: ViewModel() {
 
 	private val dateToRetrieve = Calendar.getInstance()
@@ -58,7 +59,7 @@ class ThrowbackEntriesViewModel(private val entryRepository: EntryRepository,
 		dateToRetrieve.set(Calendar.DAY_OF_MONTH, day)
 
 		viewModelScope.launch {
-			_toolbarTitle.value = formatDateForDisplay(dateToRetrieve)
+			_toolbarTitle.value = dateTimeUtils.formatDateForDisplay(dateToRetrieve)
 		}
 	}
 

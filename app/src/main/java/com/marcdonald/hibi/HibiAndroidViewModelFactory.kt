@@ -19,6 +19,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.marcdonald.hibi.data.repository.*
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import com.marcdonald.hibi.internal.utils.FileUtils
 import com.marcdonald.hibi.internal.utils.UpdateUtils
 import com.marcdonald.hibi.screens.entryscreens.addentryscreen.AddEntryViewModel
@@ -32,14 +33,15 @@ class HibiAndroidViewModelFactory(private val application: Application,
 																	private val bookEntryRelationRepository: BookEntryRelationRepository,
 																	private val entryImageRepository: EntryImageRepository,
 																	private val fileUtils: FileUtils,
-																	private val updateUtils: UpdateUtils
+																	private val updateUtils: UpdateUtils,
+																	private val dateTimeUtils: DateTimeUtils
 ) : ViewModelProvider.NewInstanceFactory() {
 
 	override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 		return with(modelClass) {
 			when {
 				isAssignableFrom(MainScreenViewModel::class.java) -> MainScreenViewModel(application, updateUtils)
-				isAssignableFrom(AddEntryViewModel::class.java)   -> AddEntryViewModel(application, entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, newWordRepository, entryImageRepository, fileUtils)
+				isAssignableFrom(AddEntryViewModel::class.java)   -> AddEntryViewModel(application, entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, newWordRepository, entryImageRepository, fileUtils, dateTimeUtils)
 				else                                              -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
 			}
 		} as T

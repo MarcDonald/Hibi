@@ -16,7 +16,6 @@
 package com.marcdonald.hibi.screens.searchentries.searchentriesscreen
 
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +34,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.ChipGroup
 import com.marcdonald.hibi.R
+import com.marcdonald.hibi.internal.PREF_DATE_HEADER_PERIOD
 import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
 import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
@@ -155,14 +155,15 @@ class SearchEntriesFragment : HibiFragment() {
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
 
-		val includeEntryDividers = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_ENTRY_DIVIDERS, true)
-		if(includeEntryDividers) {
+		val prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(requireContext())
+		if(prefs.getBoolean(PREF_ENTRY_DIVIDERS, true)) {
 			val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
 			recycler.addItemDecoration(dividerItemDecoration)
 		}
-
-		val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
-		recycler.addItemDecoration(decoration)
+		if(prefs.getString(PREF_DATE_HEADER_PERIOD, "1") != "0") {
+			val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
+			recycler.addItemDecoration(decoration)
+		}
 	}
 
 	private fun initBottomSheet(view: View) {

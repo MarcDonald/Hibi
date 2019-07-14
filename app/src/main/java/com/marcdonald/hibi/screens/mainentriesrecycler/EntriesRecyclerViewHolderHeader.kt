@@ -18,9 +18,17 @@ package com.marcdonald.hibi.screens.mainentriesrecycler
 import android.view.View
 import android.widget.TextView
 import com.marcdonald.hibi.R
-import com.marcdonald.hibi.internal.utils.formatDateForHeader
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
-class EntriesRecyclerViewHolderHeader(itemView: View) : BaseEntriesRecyclerViewHolder(itemView) {
+class EntriesRecyclerViewHolderHeader(itemView: View) : BaseEntriesRecyclerViewHolder(itemView),
+																												KodeinAware {
+
+	override val kodein: Kodein by closestKodein(itemView.context)
+	private val dateTimeUtils: DateTimeUtils by instance()
 
 	// Entry
 	private var displayedItem: MainEntriesDisplayItem? = null
@@ -30,6 +38,6 @@ class EntriesRecyclerViewHolderHeader(itemView: View) : BaseEntriesRecyclerViewH
 
 	override fun display(item: MainEntriesDisplayItem) {
 		this.displayedItem = item
-		dateDisplay.text = formatDateForHeader(item.entry.month, item.entry.year)
+		dateDisplay.text = dateTimeUtils.formatDateForHeader(item.entry.month, item.entry.year)
 	}
 }

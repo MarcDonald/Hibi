@@ -22,6 +22,7 @@ import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.entity.EntryImage
 import com.marcdonald.hibi.data.repository.*
 import com.marcdonald.hibi.internal.PREF_SAVE_ON_PAUSE
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import com.marcdonald.hibi.internal.utils.FileUtils
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -33,10 +34,11 @@ class AddEntryViewModel(application: Application,
 												private val bookEntryRelationRepository: BookEntryRelationRepository,
 												private val newWordRepository: NewWordRepository,
 												private val entryImageRepository: EntryImageRepository,
-												private val fileUtils: FileUtils)
+												private val fileUtils: FileUtils,
+												dateTimeUtils: DateTimeUtils)
 	: AndroidViewModel(application) {
 
-	val dateTimeStore = DateTimeStore()
+	val dateTimeStore = DateTimeStore(dateTimeUtils)
 	private var isNewEntry: Boolean = false
 	private var needsArgs = true
 

@@ -15,12 +15,15 @@
  */
 package com.marcdonald.hibi.internal.utils
 
+import android.content.Context
+import android.preference.PreferenceManager
 import com.marcdonald.hibi.data.entity.Entry
+import com.marcdonald.hibi.internal.PREF_DATE_HEADER_PERIOD
 import com.marcdonald.hibi.screens.mainentriesrecycler.BookEntryDisplayItem
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesDisplayItem
 import com.marcdonald.hibi.screens.mainentriesrecycler.TagEntryDisplayItem
 
-class EntryDisplayUtilsImpl : EntryDisplayUtils {
+class EntryDisplayUtilsImpl(private val context: Context) : EntryDisplayUtils {
 	override fun convertToMainEntriesDisplayItemList(entries: List<Entry>, tagEntryDisplayItems: List<TagEntryDisplayItem>, bookEntryDisplayItems: List<BookEntryDisplayItem>): List<MainEntriesDisplayItem> {
 		val itemList = ArrayList<MainEntriesDisplayItem>()
 
@@ -53,6 +56,15 @@ class EntryDisplayUtilsImpl : EntryDisplayUtils {
 	}
 
 	private fun addListHeaders(allItems: List<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
+		return when(PreferenceManager.getDefaultSharedPreferences(context).getString(PREF_DATE_HEADER_PERIOD, "1")) {
+			"0"  -> allItems
+			"1"  -> addMonthHeaders(allItems)
+			"2"  -> addYearHeaders(allItems)
+			else -> allItems
+		}
+	}
+
+	private fun addMonthHeaders(allItems: List<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
 		val listWithHeaders = mutableListOf<MainEntriesDisplayItem>()
 		listWithHeaders.addAll(allItems)
 
@@ -73,6 +85,33 @@ class EntryDisplayUtilsImpl : EntryDisplayUtils {
 				val header = Entry(0, allItems[x].entry.month, allItems[x].entry.year, 0, 0, "")
 				val headerItem = MainEntriesDisplayItem(header, listOf(), listOf())
 				lastMonth = allItems[x].entry.month
+				lastYear = allItems[x].entry.year
+				headersToAdd.add(Pair(x, headerItem))
+			}
+		}
+
+		for((add, x) in (0 until headersToAdd.size).withIndex()) {
+			listWithHeaders.add(headersToAdd[x].first + add, headersToAdd[x].second)
+		}
+
+		return listWithHeaders
+	}
+
+	private fun addYearHeaders(allItems: List<MainEntriesDisplayItem>): List<MainEntriesDisplayItem> {
+		val listWithHeaders = mutableListOf<MainEntriesDisplayItem>()
+		listWithHeaders.addAll(allItems)
+
+		var lastYear = 9999
+		if(allItems.isNotEmpty()) {
+			lastYear = allItems.first().entry.year + 1
+		}
+
+		val headersToAdd = mutableListOf<Pair<Int, MainEntriesDisplayItem>>()
+
+		for(x in 0 until allItems.size) {
+			if(allItems[x].entry.year < lastYear) {
+				val header = Entry(0, allItems[x].entry.month, allItems[x].entry.year, 0, 0, "")
+				val headerItem = MainEntriesDisplayItem(header, listOf(), listOf())
 				lastYear = allItems[x].entry.year
 				headersToAdd.add(Pair(x, headerItem))
 			}

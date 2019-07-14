@@ -19,9 +19,8 @@ import androidx.lifecycle.*
 import com.marcdonald.hibi.data.entity.Book
 import com.marcdonald.hibi.data.entity.Tag
 import com.marcdonald.hibi.data.repository.*
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import com.marcdonald.hibi.internal.utils.FileUtils
-import com.marcdonald.hibi.internal.utils.formatDateForDisplay
-import com.marcdonald.hibi.internal.utils.formatTimeForDisplay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -30,7 +29,8 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository,
 												 private val newWordRepository: NewWordRepository,
 												 private val bookEntryRelationRepository: BookEntryRelationRepository,
 												 private val entryImageRepository: EntryImageRepository,
-												 private val fileUtils: FileUtils)
+												 private val fileUtils: FileUtils,
+												 private val dateTimeUtils: DateTimeUtils)
 	: ViewModel() {
 
 	private var _entryId = 0
@@ -99,8 +99,8 @@ class ViewEntryViewModel(private val entryRepository: EntryRepository,
 		viewModelScope.launch {
 			val entry = entryRepository.getEntry(entryId)
 			_content.value = entry.content
-			_readableDate.value = formatDateForDisplay(entry.day, entry.month, entry.year)
-			_readableTime.value = formatTimeForDisplay(entry.hour, entry.minute)
+			_readableDate.value = dateTimeUtils.formatDateForDisplay(entry.day, entry.month, entry.year)
+			_readableTime.value = dateTimeUtils.formatTimeForDisplay(entry.hour, entry.minute)
 			_location.value = entry.location
 		}
 	}

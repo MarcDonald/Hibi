@@ -72,6 +72,10 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 		matchSummaryToSelection(findPreference(PREF_CLIPBOARD_BEHAVIOR), sharedPreferences.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
 		sharedPreferences.registerOnSharedPreferenceChangeListener(clipboardBehaviorChangeListener)
 
+		@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+		matchSummaryToSelection(findPreference(PREF_DATE_HEADER_PERIOD), sharedPreferences.getString(PREF_DATE_HEADER_PERIOD, "1"))
+		sharedPreferences.registerOnSharedPreferenceChangeListener(dateHeaderPeriodChangeListener)
+
 		findPreference(PREF_BACKUP).onPreferenceClickListener = backupClickListener
 		findPreference(PREF_RESTORE).onPreferenceClickListener = restoreClickListener
 
@@ -137,6 +141,11 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 	private val clipboardBehaviorChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, _ ->
 		@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 		matchSummaryToSelection(findPreference(PREF_CLIPBOARD_BEHAVIOR), prefs.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
+	}
+
+	private val dateHeaderPeriodChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, _ ->
+		@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+		matchSummaryToSelection(findPreference(PREF_DATE_HEADER_PERIOD), prefs.getString(PREF_DATE_HEADER_PERIOD, "1"))
 	}
 
 	private val reminderTimeClickListener = Preference.OnPreferenceClickListener {

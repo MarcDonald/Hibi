@@ -31,14 +31,20 @@ import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_BOOKS
 import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_LOCATION
 import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_TAGS
 import com.marcdonald.hibi.internal.extension.show
-import com.marcdonald.hibi.internal.utils.formatDateForDisplay
-import com.marcdonald.hibi.internal.utils.formatTimeForDisplay
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
 class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?,
 																itemView: View,
 																private val theme: Resources.Theme)
-	: BaseEntriesRecyclerViewHolder(itemView) {
+	: BaseEntriesRecyclerViewHolder(itemView), KodeinAware {
+
+	override val kodein: Kodein by closestKodein(itemView.context)
+	private val dateTimeUtils: DateTimeUtils by instance()
 
 	// <editor-fold desc="UI Components">
 	private var dateDisplay: TextView = itemView.findViewById(R.id.item_date)
@@ -68,9 +74,9 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 
 	override fun display(item: MainEntriesDisplayItem) {
 		this.displayedItem = item
-		val dateDisplayText = formatDateForDisplay(item.entry.day, item.entry.month, item.entry.year)
+		val dateDisplayText = dateTimeUtils.formatDateForDisplay(item.entry.day, item.entry.month, item.entry.year)
 		dateDisplay.text = dateDisplayText
-		val timeDisplayText = formatTimeForDisplay(item.entry.hour, item.entry.minute)
+		val timeDisplayText = dateTimeUtils.formatTimeForDisplay(item.entry.hour, item.entry.minute)
 		timeDisplay.text = timeDisplayText
 		contentDisplay.text = item.entry.content
 		displayLocation()
