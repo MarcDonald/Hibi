@@ -76,6 +76,12 @@ interface DAO {
 
 	@Query("SELECT COUNT(*) FROM Entry WHERE year = :year AND month = :month AND day = :day")
 	fun getAmountOfEntriesOnDate(year: Int, month: Int, day: Int): Int
+
+	@Query("SELECT COUNT(*) FROM Entry")
+	fun getCountEntries(): LiveData<Int>
+
+	@Query("SELECT COUNT(*) FROM Entry WHERE isFavourite = 1")
+	fun getCountFavourites(): LiveData<Int>
 	// </editor-fold>
 
 	// <editor-fold desc="Tag">

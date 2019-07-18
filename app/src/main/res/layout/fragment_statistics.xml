@@ -29,18 +29,40 @@
     <include layout="@layout/toolbar_back_scrolling" />
   </com.google.android.material.appbar.AppBarLayout>
 
-  <LinearLayout
+  <androidx.core.widget.NestedScrollView
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+    android:layout_height="wrap_content">
 
-    <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
+    <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/margin_standard"
-      style="@style/Widget.Hibi.CardView.Rounded"
-      app:tsTitle="Entries made"
-      app:tsMessage="853 since 1st January 2014" />
-  </LinearLayout>
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
+        android:id="@+id/stat_total_entries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        app:tsTitle="@string/total_entries_written"
+        app:tsMessage="@string/message" />
+
+      <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
+        android:id="@+id/stat_total_favourites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginBottom="@dimen/margin_standard"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        app:tsTitle="@string/total_entries_favourited"
+        app:tsMessage="@string/message" />
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

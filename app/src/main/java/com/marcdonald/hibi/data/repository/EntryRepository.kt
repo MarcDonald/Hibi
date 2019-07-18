@@ -54,4 +54,8 @@ interface EntryRepository {
 	suspend fun getFavouriteEntries(): List<Entry>
 
 	suspend fun setEntryIsFavourite(id: Int, isFavourite: Boolean)
+
+	val entryCount: LiveData<Int>
+
+	val favouritesCount: LiveData<Int>
 }

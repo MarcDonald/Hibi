@@ -15,9 +15,18 @@
  */
 package com.marcdonald.hibi.screens.statistics
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.marcdonald.hibi.data.repository.EntryRepository
 
-class StatisticsViewModel
+class StatisticsViewModel(private val entryRepository: EntryRepository)
 	: ViewModel() {
-	// TODO
+
+	private val _totalEntries = entryRepository.entryCount
+	val totalEntries: LiveData<Int>
+		get() = _totalEntries
+
+	private val _totalFavourites = entryRepository.favouritesCount
+	val totalFavourites: LiveData<Int>
+		get() = _totalFavourites
 }

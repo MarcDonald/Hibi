@@ -198,6 +198,8 @@
 
   <!--region Statistics-->
   <string name="statistics">Statistics</string>
+  <string name="total_entries_written">Total entries written</string>
+  <string name="total_entries_favourited">Total entries favourited</string>
   <!--endregion-->
 
   <!--region Settings-->
@@ -373,6 +375,11 @@
   <plurals name="throwback_more_entries">
     <item quantity="one">and %d more entry</item>
     <item quantity="other">and %d more entries</item>
+  </plurals>
+
+  <plurals name="stat_total_entries">
+    <item quantity="one">%d entry</item>
+    <item quantity="other">%d entries</item>
   </plurals>
   <!--endregion-->
 
