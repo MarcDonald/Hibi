@@ -44,9 +44,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        app:description="@string/timber_description"
-        app:license="@string/apache"
-        app:title="@string/timber" />
+        app:ldDescription="@string/timber_description"
+        app:ldLicense="@string/apache"
+        app:ldTitle="@string/timber" />
 
       <com.marcdonald.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_kodein"
@@ -56,9 +56,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:description="@string/kodein_description"
-        app:license="@string/mit"
-        app:title="@string/kodein" />
+        app:ldDescription="@string/kodein_description"
+        app:ldLicense="@string/mit"
+        app:ldTitle="@string/kodein" />
 
       <com.marcdonald.hibi.uicomponents.views.LicenseDisplay
         style="@style/Widget.Hibi.CardView.Rounded"
@@ -68,9 +68,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:description="@string/retrofit_description"
-        app:license="@string/apache"
-        app:title="@string/retrofit" />
+        app:ldDescription="@string/retrofit_description"
+        app:ldLicense="@string/apache"
+        app:ldTitle="@string/retrofit" />
 
       <com.marcdonald.hibi.uicomponents.views.LicenseDisplay
         style="@style/Widget.Hibi.CardView.Rounded"
@@ -80,9 +80,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:description="@string/gson_description"
-        app:license="@string/apache"
-        app:title="@string/gson" />
+        app:ldDescription="@string/gson_description"
+        app:ldLicense="@string/apache"
+        app:ldTitle="@string/gson" />
 
       <com.marcdonald.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_android_file_picker"
@@ -92,9 +92,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:description="@string/android_file_picker_description"
-        app:license="@string/apache"
-        app:title="@string/android_file_picker" />
+        app:ldDescription="@string/android_file_picker_description"
+        app:ldLicense="@string/apache"
+        app:ldTitle="@string/android_file_picker" />
 
       <com.marcdonald.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_mplus"
@@ -104,9 +104,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:description="@string/mplus_description"
-        app:license="@string/ofl"
-        app:title="@string/mplus" />
+        app:ldDescription="@string/mplus_description"
+        app:ldLicense="@string/ofl"
+        app:ldTitle="@string/mplus" />
 
       <com.marcdonald.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_open_sans"
@@ -116,9 +116,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:description="@string/open_sans_description"
-        app:license="@string/apache"
-        app:title="@string/open_sans" />
+        app:ldDescription="@string/open_sans_description"
+        app:ldLicense="@string/apache"
+        app:ldTitle="@string/open_sans" />
 
       <com.marcdonald.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_google_material_icons"
@@ -128,9 +128,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:description="@string/material_icons_description"
-        app:license="@string/apache"
-        app:title="@string/google_material_icons_title" />
+        app:ldDescription="@string/material_icons_description"
+        app:ldLicense="@string/apache"
+        app:ldTitle="@string/google_material_icons_title" />
 
       <com.marcdonald.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_material_icons"
@@ -140,9 +140,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:description="@string/material_icons_description"
-        app:license="@string/sil"
-        app:title="@string/material_icons_title" />
+        app:ldDescription="@string/material_icons_description"
+        app:ldLicense="@string/sil"
+        app:ldTitle="@string/material_icons_title" />
 
       <com.marcdonald.hibi.uicomponents.views.LicenseDisplay
         android:id="@+id/license_glide"
@@ -152,9 +152,9 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:description="@string/glide_description"
-        app:license="@string/glide_license"
-        app:title="@string/glide" />
+        app:ldDescription="@string/glide_description"
+        app:ldLicense="@string/glide_license"
+        app:ldTitle="@string/glide" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

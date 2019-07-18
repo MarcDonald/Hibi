@@ -42,7 +42,7 @@ class SearchBar(context: Context, attributeSet: AttributeSet?, defStyle: Int) :
 		if(attributeSet != null) {
 			val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.SearchBar, defStyle, 0)
 
-			val hint = attributes.getString(R.styleable.SearchBar_hint)
+			val hint = attributes.getString(R.styleable.SearchBar_sbHint)
 			editText.hint = hint
 
 			attributes.recycle()

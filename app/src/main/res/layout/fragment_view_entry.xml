@@ -214,6 +214,6 @@
       android:id="@+id/searchbar_view_entry"
       android:layout_width="match_parent"
       android:layout_height="@dimen/search_bar_height"
-      app:hint="@string/search_bar_hint" />
+      app:sbHint="@string/search_bar_hint" />
   </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

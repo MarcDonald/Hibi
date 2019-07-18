@@ -22,34 +22,37 @@ import android.widget.TextView
 import com.google.android.material.card.MaterialCardView
 import com.marcdonald.hibi.R
 
-class LicenseDisplay(context: Context, attributeSet: AttributeSet?, defStyle: Int) :
+class TextStatisticDisplay(context: Context, attributeSet: AttributeSet?, defStyle: Int) :
 		MaterialCardView(context, attributeSet, defStyle) {
 
 	private var titleText: TextView
-	private var descriptionText: TextView
-	private var licenseText: TextView
+	private var messageText: TextView
 
 	init {
 		val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-		val view = inflater.inflate(R.layout.view_license, this, true)
-		titleText = view.findViewById(R.id.txt_license_title)
-		descriptionText = view.findViewById(R.id.txt_license_description)
-		licenseText = view.findViewById(R.id.txt_license_license)
+		val view = inflater.inflate(R.layout.view_text_statistic, this, true)
+		titleText = view.findViewById(R.id.txt_text_statistic_title)
+		messageText = view.findViewById(R.id.txt_text_statistic_message)
 
 		if(attributeSet != null) {
-			val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.LicenseDisplay, defStyle, 0)
+			val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.TextStatisticDisplay, defStyle, 0)
 
-			val title = attributes.getString(R.styleable.LicenseDisplay_ldTitle)
+			val title = attributes.getString(R.styleable.TextStatisticDisplay_tsTitle)
 			titleText.text = title
 
-			val description = attributes.getString(R.styleable.LicenseDisplay_ldDescription)
-			descriptionText.text = description
-
-			val license = attributes.getString(R.styleable.LicenseDisplay_ldLicense)
-			licenseText.text = license
+			val message = attributes.getString(R.styleable.TextStatisticDisplay_tsMessage)
+			messageText.text = message
 
 			attributes.recycle()
 		}
+	}
+
+	fun setTitle(title: String) {
+		titleText.text = title
+	}
+
+	fun setMessage(message: String) {
+		messageText.text = message
 	}
 
 	constructor(context: Context) : this(context, null)
