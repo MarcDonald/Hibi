@@ -196,6 +196,10 @@
   <string name="no_favourites">You haven\'t favourited any entries yet</string>
   <!--endregion-->
 
+  <!--region Statistics-->
+  <string name="statistics">Statistics</string>
+  <!--endregion-->
+
   <!--region Settings-->
   <string name="settings">Settings</string>
   <string name="behaviour">Behaviour</string>

@@ -100,6 +100,13 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/statistics_action"
+      app:destination="@id/destination_statistics"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
   <!--endregion -->
 
@@ -342,4 +349,11 @@
     </action>
   </fragment>
   <!--endregion-->
+
+  <!--region Statistics-->
+  <fragment
+    android:id="@+id/destination_statistics"
+    android:name="com.marcdonald.hibi.screens.statistics.StatisticsFragment"
+    android:label="StatisticsFragment" />
+  <!--endregion -->
 </navigation>

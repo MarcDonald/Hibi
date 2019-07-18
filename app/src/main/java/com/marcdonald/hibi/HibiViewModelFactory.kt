@@ -45,6 +45,7 @@ import com.marcdonald.hibi.screens.searchentries.mainsearchentries.SearchEntries
 import com.marcdonald.hibi.screens.settings.backupdialog.BackupDialogViewModel
 import com.marcdonald.hibi.screens.settings.restoredialog.RestoreDialogViewModel
 import com.marcdonald.hibi.screens.settings.updatedialog.UpdateDialogViewModel
+import com.marcdonald.hibi.screens.statistics.StatisticsViewModel
 import com.marcdonald.hibi.screens.tags.maintags.TagsFragmentViewModel
 import com.marcdonald.hibi.screens.tags.taggedentries.TaggedEntriesViewModel
 import com.marcdonald.hibi.screens.throwback.mainthrowback.ThrowbackFragmentViewModel
@@ -94,6 +95,7 @@ class HibiViewModelFactory(private val entryRepository: EntryRepository,
 				isAssignableFrom(ThrowbackFragmentViewModel::class.java)   -> ThrowbackFragmentViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
 				isAssignableFrom(ThrowbackEntriesViewModel::class.java)    -> ThrowbackEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils, dateTimeUtils)
 				isAssignableFrom(FavouriteEntriesViewModel::class.java)    -> FavouriteEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
+				isAssignableFrom(StatisticsViewModel::class.java)          -> StatisticsViewModel()
 				else                                                       -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
 			}
 		} as T
