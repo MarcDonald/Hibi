@@ -82,6 +82,12 @@ interface DAO {
 
 	@Query("SELECT COUNT(*) FROM Entry WHERE isFavourite = 1")
 	fun getCountFavourites(): LiveData<Int>
+
+	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT day, month, year FROM Entry)")
+	fun getCountDays(): LiveData<Int>
+
+	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT location COLLATE NOCASE FROM Entry )")
+	fun getCountLocations(): LiveData<Int>
 	// </editor-fold>
 
 	// <editor-fold desc="Tag">
@@ -143,6 +149,9 @@ interface DAO {
 
 	@Query("UPDATE Entry SET isFavourite = :isFavourite WHERE id = :id")
 	fun setEntryIsFavourite(id: Int, isFavourite: Boolean)
+
+	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT entryId FROM TagEntryRelation )")
+	fun getCountTaggedEntries(): LiveData<Int>
 	// </editor-fold>
 
 	// <editor-fold desc="New Word">
@@ -166,6 +175,9 @@ interface DAO {
 
 	@Query("SELECT COUNT(*) FROM NewWord WHERE entryId = :entryId")
 	fun getNewWordCountByEntryIdLD(entryId: Int): LiveData<Int>
+
+	@Query("SELECT COUNT(*) FROM NewWord")
+	fun getCountNewWords(): LiveData<Int>
 	// </editor-fold>
 
 	// <editor-fold desc="Book">
@@ -221,6 +233,9 @@ interface DAO {
 
 	@Query("SELECT ber.entryId as entryId, b.name as bookName FROM BookEntryRelation as ber LEFT OUTER JOIN Book as b ON ber.bookId = b.id")
 	fun getBookEntryDisplayItems(): List<BookEntryDisplayItem>
+
+	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT entryId FROM BookEntryRelation )")
+	fun getCountEntriesInBooks(): LiveData<Int>
 	// </editor-fold>
 
 	// <editor-fold desc="Entry Image">

@@ -58,4 +58,8 @@ interface EntryRepository {
 	val entryCount: LiveData<Int>
 
 	val favouritesCount: LiveData<Int>
+
+	val dayCount: LiveData<Int>
+
+	val locationCount: LiveData<Int>
 }

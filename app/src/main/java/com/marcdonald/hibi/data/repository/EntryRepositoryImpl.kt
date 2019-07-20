@@ -168,6 +168,12 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
 	override val favouritesCount: LiveData<Int>
 		get() = dao.getCountFavourites()
 
+	override val dayCount: LiveData<Int>
+		get() = dao.getCountDays()
+
+	override val locationCount: LiveData<Int>
+		get() = dao.getCountLocations()
+
 	companion object {
 		@Volatile private var instance: EntryRepositoryImpl? = null
 

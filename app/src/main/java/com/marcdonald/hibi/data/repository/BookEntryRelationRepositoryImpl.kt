@@ -86,6 +86,9 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
 		}
 	}
 
+	override val entriesInBooksCount: LiveData<Int>
+		get() = dao.getCountEntriesInBooks()
+
 	companion object {
 		@Volatile private var instance: BookEntryRelationRepositoryImpl? = null
 

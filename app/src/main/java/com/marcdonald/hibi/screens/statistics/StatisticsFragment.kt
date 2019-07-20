@@ -35,6 +35,11 @@ class StatisticsFragment : HibiFragment() {
 	// <editor-fold desc="UI Components">
 	private lateinit var totalEntriesDisplay: TextStatisticDisplay
 	private lateinit var totalFavouritesDisplay: TextStatisticDisplay
+	private lateinit var totalDaysDisplay: TextStatisticDisplay
+	private lateinit var totalLocationsDisplay: TextStatisticDisplay
+	private lateinit var totalTaggedEntriesDisplay: TextStatisticDisplay
+	private lateinit var totalBookEntriesDisplay: TextStatisticDisplay
+	private lateinit var totalNewWordsDisplay: TextStatisticDisplay
 	// </editor-fold>
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,7 +55,12 @@ class StatisticsFragment : HibiFragment() {
 		}
 		view.findViewById<TextView>(R.id.txt_back_toolbar_title).text = resources.getString(R.string.statistics)
 		totalEntriesDisplay = view.findViewById(R.id.stat_total_entries)
+		totalDaysDisplay = view.findViewById(R.id.stat_total_days)
 		totalFavouritesDisplay = view.findViewById(R.id.stat_total_favourites)    // TODO maybe click to go to favourites screen
+		totalLocationsDisplay = view.findViewById(R.id.stat_total_locations)
+		totalTaggedEntriesDisplay = view.findViewById(R.id.stat_total_tagged_entries)
+		totalBookEntriesDisplay = view.findViewById(R.id.stat_total_entries_added_to_books)
+		totalNewWordsDisplay = view.findViewById(R.id.stat_total_new_words)
 	}
 
 	private fun setupObservers() {
@@ -60,9 +70,39 @@ class StatisticsFragment : HibiFragment() {
 			}
 		})
 
+		viewModel.totalDays.observe(this, Observer { value ->
+			value?.let { totalDays ->
+				totalDaysDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_days, totalDays, totalDays))
+			}
+		})
+
 		viewModel.totalFavourites.observe(this, Observer { value ->
 			value?.let { totalFavourites ->
 				totalFavouritesDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, totalFavourites, totalFavourites))
+			}
+		})
+
+		viewModel.totalLocations.observe(this, Observer { value ->
+			value?.let { totalLocations ->
+				totalLocationsDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_locations, totalLocations, totalLocations))
+			}
+		})
+
+		viewModel.totalTaggedEntries.observe(this, Observer { value ->
+			value?.let { totalTaggedEntries ->
+				totalTaggedEntriesDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, totalTaggedEntries, totalTaggedEntries))
+			}
+		})
+
+		viewModel.totalEntriesInBooks.observe(this, Observer { value ->
+			value?.let { totalEntriesInBooks ->
+				totalBookEntriesDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, totalEntriesInBooks, totalEntriesInBooks))
+			}
+		})
+
+		viewModel.totalNewWords.observe(this, Observer { value ->
+			value?.let { totalNewWords ->
+				totalNewWordsDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, totalNewWords, totalNewWords))
 			}
 		})
 	}

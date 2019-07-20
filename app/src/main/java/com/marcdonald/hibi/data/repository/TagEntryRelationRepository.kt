@@ -41,4 +41,6 @@ interface TagEntryRelationRepository {
 	suspend fun getTagEntryDisplayItems(): List<TagEntryDisplayItem>
 
 	fun getCountTagsWithEntry(entryId: Int): LiveData<Int>
+
+	val taggedEntriesCount: LiveData<Int>
 }

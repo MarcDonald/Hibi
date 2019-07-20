@@ -63,6 +63,9 @@ class NewWordRepositoryImpl private constructor(private val dao: DAO) : NewWordR
 		return dao.getNewWordCountByEntryIdLD(entryId)
 	}
 
+	override val newWordCount: LiveData<Int>
+		get() = dao.getCountNewWords()
+
 	companion object {
 		@Volatile private var instance: NewWordRepositoryImpl? = null
 

@@ -17,16 +17,35 @@ package com.marcdonald.hibi.screens.statistics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.marcdonald.hibi.data.repository.BookEntryRelationRepository
 import com.marcdonald.hibi.data.repository.EntryRepository
+import com.marcdonald.hibi.data.repository.NewWordRepository
+import com.marcdonald.hibi.data.repository.TagEntryRelationRepository
 
-class StatisticsViewModel(private val entryRepository: EntryRepository)
+class StatisticsViewModel(private val entryRepository: EntryRepository,
+													private val tagEntryRelationRepository: TagEntryRelationRepository,
+													private val bookEntryRelationRepository: BookEntryRelationRepository,
+													private val newWordRepository: NewWordRepository)
 	: ViewModel() {
 
-	private val _totalEntries = entryRepository.entryCount
 	val totalEntries: LiveData<Int>
-		get() = _totalEntries
+		get() = entryRepository.entryCount
 
-	private val _totalFavourites = entryRepository.favouritesCount
 	val totalFavourites: LiveData<Int>
-		get() = _totalFavourites
+		get() = entryRepository.favouritesCount
+
+	val totalDays: LiveData<Int>
+		get() = entryRepository.dayCount
+
+	val totalLocations: LiveData<Int>
+		get() = entryRepository.locationCount
+
+	val totalTaggedEntries: LiveData<Int>
+		get() = tagEntryRelationRepository.taggedEntriesCount
+
+	val totalEntriesInBooks: LiveData<Int>
+		get() = bookEntryRelationRepository.entriesInBooksCount
+
+	val totalNewWords: LiveData<Int>
+		get() = newWordRepository.newWordCount
 }

@@ -92,11 +92,11 @@ class HibiViewModelFactory(private val entryRepository: EntryRepository,
 				isAssignableFrom(BackupDialogViewModel::class.java)        -> BackupDialogViewModel(fileUtils)
 				isAssignableFrom(RestoreDialogViewModel::class.java)       -> RestoreDialogViewModel(fileUtils, database)
 				isAssignableFrom(UpdateDialogViewModel::class.java)        -> UpdateDialogViewModel(updateUtils)
-				isAssignableFrom(ThrowbackFragmentViewModel::class.java)   -> ThrowbackFragmentViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
-				isAssignableFrom(ThrowbackEntriesViewModel::class.java)    -> ThrowbackEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils, dateTimeUtils)
-				isAssignableFrom(FavouriteEntriesViewModel::class.java)    -> FavouriteEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
-				isAssignableFrom(StatisticsViewModel::class.java)          -> StatisticsViewModel(entryRepository)
-				else                                                       -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+				isAssignableFrom(ThrowbackFragmentViewModel::class.java) -> ThrowbackFragmentViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
+				isAssignableFrom(ThrowbackEntriesViewModel::class.java)  -> ThrowbackEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils, dateTimeUtils)
+				isAssignableFrom(FavouriteEntriesViewModel::class.java)  -> FavouriteEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
+				isAssignableFrom(StatisticsViewModel::class.java)        -> StatisticsViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, newWordRepository)
+				else                                                     -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
 			}
 		} as T
 	}
