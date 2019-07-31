@@ -41,4 +41,13 @@
     android:layout_margin="@dimen/margin_standard"
     android:text="@string/message"
     android:textAlignment="textStart" />
+
+  <TextView
+    android:id="@+id/txt_text_statistic_secondary_message"
+    style="@style/TextAppearance.Hibi.StatisticMessage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_standard"
+    android:text="@string/message"
+    android:textAlignment="textStart" />
 </LinearLayout>

@@ -21,18 +21,21 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import com.google.android.material.card.MaterialCardView
 import com.marcdonald.hibi.R
+import com.marcdonald.hibi.internal.extension.show
 
 class TextStatisticDisplay(context: Context, attributeSet: AttributeSet?, defStyle: Int) :
 		MaterialCardView(context, attributeSet, defStyle) {
 
 	private var titleText: TextView
 	private var messageText: TextView
+	private var secondaryMessageText: TextView
 
 	init {
 		val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 		val view = inflater.inflate(R.layout.view_text_statistic, this, true)
 		titleText = view.findViewById(R.id.txt_text_statistic_title)
 		messageText = view.findViewById(R.id.txt_text_statistic_message)
+		secondaryMessageText = view.findViewById(R.id.txt_text_statistic_secondary_message)
 
 		if(attributeSet != null) {
 			val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.TextStatisticDisplay, defStyle, 0)
@@ -42,6 +45,12 @@ class TextStatisticDisplay(context: Context, attributeSet: AttributeSet?, defSty
 
 			val message = attributes.getString(R.styleable.TextStatisticDisplay_tsMessage)
 			messageText.text = message
+
+			val secondaryMessage = attributes.getString(R.styleable.TextStatisticDisplay_tsSecondaryMessage)
+			if(secondaryMessage != null)
+				secondaryMessageText.text = message
+			else
+				secondaryMessageText.show(false)
 
 			attributes.recycle()
 		}
@@ -53,6 +62,19 @@ class TextStatisticDisplay(context: Context, attributeSet: AttributeSet?, defSty
 
 	fun setMessage(message: String) {
 		messageText.text = message
+	}
+
+	fun setSecondaryMessage(message: String) {
+		if(message.isNotBlank()) {
+			secondaryMessageText.show(true)
+			secondaryMessageText.text = message
+		} else {
+			secondaryMessageText.show(false)
+		}
+	}
+
+	fun showSecondaryMessage(show: Boolean) {
+		secondaryMessageText.show(show)
 	}
 
 	constructor(context: Context) : this(context, null)

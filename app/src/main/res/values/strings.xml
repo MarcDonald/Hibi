@@ -200,6 +200,7 @@
   <string name="statistics">Statistics</string>
   <string name="total_entries_written">Total entries written</string>
   <string name="total_entries_favourited">Total entries favourited</string>
+  <string name="total_percent_favourited">That\'s %1$s of all your entries</string>
   <string name="total_days_written_about">Total days written about</string>
   <string name="total_locations_written_about">Total locations written about</string>
   <string name="total_tagged_entries">Total entries tagged</string>
