@@ -17,6 +17,7 @@ package com.marcdonald.hibi.screens.mainentriesrecycler
 
 import android.content.res.Resources
 import android.preference.PreferenceManager
+import android.text.TextUtils
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -120,6 +121,7 @@ class EntriesRecyclerViewHolder(private val onClick: (Int) -> Unit,
 				if(item.tags.isNotEmpty()) {
 					item.tags.forEach { tagName ->
 						val chip = Chip(itemView.context)
+						chip.ellipsize = TextUtils.TruncateAt.END
 						chip.text = tagName
 						tagChipGroup.addView(chip)
 					}
@@ -140,6 +142,7 @@ class EntriesRecyclerViewHolder(private val onClick: (Int) -> Unit,
 				if(item.books.isNotEmpty()) {
 					item.books.forEach { bookName ->
 						val chip = Chip(itemView.context)
+						chip.ellipsize = TextUtils.TruncateAt.END
 						chip.text = bookName
 						bookChipGroup.addView(chip)
 					}
