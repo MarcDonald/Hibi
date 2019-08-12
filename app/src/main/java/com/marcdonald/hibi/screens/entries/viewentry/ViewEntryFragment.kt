@@ -20,6 +20,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -165,6 +166,7 @@ class ViewEntryFragment : HibiFragment() {
 				tagDisplayHolder.show(tags.isNotEmpty())
 				tags.forEach { tag ->
 					val displayTag = Chip(tagDisplay.context)
+					displayTag.ellipsize = TextUtils.TruncateAt.END
 					displayTag.text = tag.name
 					tagDisplay.addView(displayTag)
 				}
@@ -178,6 +180,7 @@ class ViewEntryFragment : HibiFragment() {
 				bookDisplayHolder.show(books.isNotEmpty())
 				books.forEach { book ->
 					val displayBook = Chip(bookDisplay.context)
+					displayBook.ellipsize = TextUtils.TruncateAt.END
 					displayBook.text = book.name
 					bookDisplay.addView(displayBook)
 				}
