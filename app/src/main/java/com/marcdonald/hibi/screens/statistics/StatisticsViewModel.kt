@@ -55,14 +55,13 @@ class StatisticsViewModel(private val entryRepository: EntryRepository,
 	val totalNewWords: LiveData<Int>
 		get() = newWordRepository.newWordCount
 
-	private val _mostNewWordsInOneDay = MutableLiveData<Int>()
+	private val _mostNewWordsInOneDay = MutableLiveData<NumberAndDateObject>()
 	val mostNewWordsInOneDay: LiveData<Int>
-		get() = _mostNewWordsInOneDay
+		get() = Transformations.map(_mostNewWordsInOneDay) { it.number }
 
 	private val _mostEntriesInOneDay = MutableLiveData<NumberAndDateObject>()
 	val mostEntriesInOneDay: LiveData<Int>
 		get() = Transformations.map(_mostEntriesInOneDay) { it.number }
-
 
 	private fun getMostNewWordsInOneEntry() {
 		viewModelScope.launch {

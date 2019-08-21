@@ -16,6 +16,7 @@
 package com.marcdonald.hibi.data.repository
 
 import androidx.lifecycle.LiveData
+import com.marcdonald.hibi.data.database.NumberAndDateObject
 import com.marcdonald.hibi.data.entity.NewWord
 
 interface NewWordRepository {
@@ -34,5 +35,5 @@ interface NewWordRepository {
 
 	val newWordCount: LiveData<Int>
 
-	suspend fun getMostNewWordsInOneDay(): Int
+	suspend fun getMostNewWordsInOneDay(): NumberAndDateObject
 }

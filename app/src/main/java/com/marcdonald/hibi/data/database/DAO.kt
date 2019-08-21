@@ -182,8 +182,8 @@ interface DAO {
 	@Query("SELECT COUNT(*) FROM NewWord")
 	fun getCountNewWords(): LiveData<Int>
 
-	@Query("SELECT MAX(numWords) FROM (SELECT COUNT(*) as numWords FROM NewWord INNER JOIN Entry on NewWord.entryId = Entry.id GROUP BY Entry.year, Entry.month, Entry.day)")
-	fun getMostNewWordsInOneDay(): Int
+	@Query("SELECT MAX(numWords) as number, year, month, day FROM (SELECT COUNT(*) as numWords, Entry.year as year, Entry.month as month, Entry.day as day FROM NewWord INNER JOIN Entry on NewWord.entryId = Entry.id GROUP BY Entry.year, Entry.month, Entry.day)")
+	fun getMostNewWordsInOneDay(): NumberAndDateObject
 	// </editor-fold>
 
 	// <editor-fold desc="Book">

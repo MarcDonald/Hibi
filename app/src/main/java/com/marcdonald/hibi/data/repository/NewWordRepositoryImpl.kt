@@ -18,6 +18,7 @@ package com.marcdonald.hibi.data.repository
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import com.marcdonald.hibi.data.database.DAO
+import com.marcdonald.hibi.data.database.NumberAndDateObject
 import com.marcdonald.hibi.data.entity.NewWord
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -66,7 +67,7 @@ class NewWordRepositoryImpl private constructor(private val dao: DAO) : NewWordR
 	override val newWordCount: LiveData<Int>
 		get() = dao.getCountNewWords()
 
-	override suspend fun getMostNewWordsInOneDay(): Int {
+	override suspend fun getMostNewWordsInOneDay(): NumberAndDateObject {
 		return withContext(Dispatchers.IO) {
 			return@withContext dao.getMostNewWordsInOneDay()
 		}
