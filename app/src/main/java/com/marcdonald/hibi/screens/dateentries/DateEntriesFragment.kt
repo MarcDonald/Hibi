@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.marcdonald.hibi.screens.throwback.throwbackentries
+package com.marcdonald.hibi.screens.dateentries
 
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -35,9 +35,9 @@ import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 
-class ThrowbackEntriesFragment : HibiFragment() {
+class DateEntriesFragment : HibiFragment() {
 
-	private val viewModel by viewModels<ThrowbackEntriesViewModel> { viewModelFactory }
+	private val viewModel by viewModels<DateEntriesViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingDisplay: ConstraintLayout
@@ -46,7 +46,7 @@ class ThrowbackEntriesFragment : HibiFragment() {
 	// </editor-fold>
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		val view = inflater.inflate(R.layout.fragment_throwback_entries, container, false)
+		val view = inflater.inflate(R.layout.fragment_date_entries, container, false)
 
 		bindViews(view)
 		initRecycler(view)
@@ -59,14 +59,14 @@ class ThrowbackEntriesFragment : HibiFragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		arguments?.let { arguments ->
-			viewModel.passArguments(ThrowbackEntriesFragmentArgs.fromBundle(arguments).day,
-				ThrowbackEntriesFragmentArgs.fromBundle(arguments).month,
-				ThrowbackEntriesFragmentArgs.fromBundle(arguments).year)
+			viewModel.passArguments(DateEntriesFragmentArgs.fromBundle(arguments).day,
+				DateEntriesFragmentArgs.fromBundle(arguments).month,
+				DateEntriesFragmentArgs.fromBundle(arguments).year)
 		}
 	}
 
 	private fun bindViews(view: View) {
-		loadingDisplay = view.findViewById(R.id.const_throwback_entries_loading)
+		loadingDisplay = view.findViewById(R.id.const_date_entries_loading)
 		toolbarTitle = view.findViewById(R.id.txt_back_toolbar_title)
 		val toolbarBack: ImageView = view.findViewById(R.id.img_back_toolbar_back)
 		toolbarBack.setOnClickListener {
@@ -95,7 +95,7 @@ class ThrowbackEntriesFragment : HibiFragment() {
 	}
 
 	private fun initRecycler(view: View) {
-		val recycler: RecyclerView = view.findViewById(R.id.recycler_throwback_entries)
+		val recycler: RecyclerView = view.findViewById(R.id.recycler_date_entries)
 		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), ::onEntryClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
@@ -109,7 +109,7 @@ class ThrowbackEntriesFragment : HibiFragment() {
 	}
 
 	private fun onEntryClick(entryId: Int) {
-		val viewEntryAction = ThrowbackEntriesFragmentDirections.viewEntryAction()
+		val viewEntryAction = DateEntriesFragmentDirections.viewEntryAction()
 		viewEntryAction.entryId = entryId
 		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}

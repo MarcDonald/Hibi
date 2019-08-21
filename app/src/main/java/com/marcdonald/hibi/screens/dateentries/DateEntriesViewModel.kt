@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.marcdonald.hibi.screens.throwback.throwbackentries
+package com.marcdonald.hibi.screens.dateentries
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,11 +28,11 @@ import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesDisplayItem
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ThrowbackEntriesViewModel(private val entryRepository: EntryRepository,
-																private val tagEntryRelationRepository: TagEntryRelationRepository,
-																private val bookEntryRelationRepository: BookEntryRelationRepository,
-																private val entryDisplayUtils: EntryDisplayUtils,
-																private val dateTimeUtils: DateTimeUtils)
+class DateEntriesViewModel(private val entryRepository: EntryRepository,
+													 private val tagEntryRelationRepository: TagEntryRelationRepository,
+													 private val bookEntryRelationRepository: BookEntryRelationRepository,
+													 private val entryDisplayUtils: EntryDisplayUtils,
+													 private val dateTimeUtils: DateTimeUtils)
 	: ViewModel() {
 
 	private val dateToRetrieve = Calendar.getInstance()

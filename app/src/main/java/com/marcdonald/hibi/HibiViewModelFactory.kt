@@ -30,6 +30,7 @@ import com.marcdonald.hibi.screens.addtagdialog.AddTagViewModel
 import com.marcdonald.hibi.screens.books.bookentries.BookEntriesViewModel
 import com.marcdonald.hibi.screens.books.mainbooks.BooksFragmentViewModel
 import com.marcdonald.hibi.screens.calendar.CalendarTabViewModel
+import com.marcdonald.hibi.screens.dateentries.DateEntriesViewModel
 import com.marcdonald.hibi.screens.entries.addentry.addentrytobookdialog.AddEntryToBookViewModel
 import com.marcdonald.hibi.screens.entries.addentry.addtagtoentrydialog.AddTagToEntryViewModel
 import com.marcdonald.hibi.screens.entries.viewentry.ViewEntryViewModel
@@ -48,8 +49,7 @@ import com.marcdonald.hibi.screens.settings.updatedialog.UpdateDialogViewModel
 import com.marcdonald.hibi.screens.statistics.StatisticsViewModel
 import com.marcdonald.hibi.screens.tags.maintags.TagsFragmentViewModel
 import com.marcdonald.hibi.screens.tags.taggedentries.TaggedEntriesViewModel
-import com.marcdonald.hibi.screens.throwback.mainthrowback.ThrowbackFragmentViewModel
-import com.marcdonald.hibi.screens.throwback.throwbackentries.ThrowbackEntriesViewModel
+import com.marcdonald.hibi.screens.throwback.ThrowbackFragmentViewModel
 
 @Suppress("UNCHECKED_CAST")
 class HibiViewModelFactory(private val entryRepository: EntryRepository,
@@ -92,11 +92,11 @@ class HibiViewModelFactory(private val entryRepository: EntryRepository,
 				isAssignableFrom(BackupDialogViewModel::class.java)        -> BackupDialogViewModel(fileUtils)
 				isAssignableFrom(RestoreDialogViewModel::class.java)       -> RestoreDialogViewModel(fileUtils, database)
 				isAssignableFrom(UpdateDialogViewModel::class.java)        -> UpdateDialogViewModel(updateUtils)
-				isAssignableFrom(ThrowbackFragmentViewModel::class.java) -> ThrowbackFragmentViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
-				isAssignableFrom(ThrowbackEntriesViewModel::class.java)  -> ThrowbackEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils, dateTimeUtils)
-				isAssignableFrom(FavouriteEntriesViewModel::class.java)  -> FavouriteEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
-				isAssignableFrom(StatisticsViewModel::class.java)        -> StatisticsViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, newWordRepository)
-				else                                                     -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+				isAssignableFrom(ThrowbackFragmentViewModel::class.java)   -> ThrowbackFragmentViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
+				isAssignableFrom(DateEntriesViewModel::class.java)         -> DateEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils, dateTimeUtils)
+				isAssignableFrom(FavouriteEntriesViewModel::class.java)    -> FavouriteEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
+				isAssignableFrom(StatisticsViewModel::class.java)          -> StatisticsViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, newWordRepository)
+				else                                                       -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
 			}
 		} as T
 	}

@@ -222,11 +222,11 @@
   <!--region Throwback Screen-->
   <fragment
     android:id="@+id/destination_throwback"
-    android:name="com.marcdonald.hibi.screens.throwback.mainthrowback.ThrowbackFragment"
+    android:name="com.marcdonald.hibi.screens.throwback.ThrowbackFragment"
     android:label="ThrowbackFragment">
     <action
-      android:id="@+id/throwback_entries_action"
-      app:destination="@id/destination_throwback_entries"
+      android:id="@+id/date_entries_action"
+      app:destination="@id/destination_date_entries"
       app:enterAnim="@anim/nav_default_enter_anim"
       app:exitAnim="@anim/nav_default_exit_anim"
       app:launchSingleTop="false"
@@ -257,11 +257,11 @@
   </fragment>
   <!--endregion-->
 
-  <!--region Throwback Entries Screen-->
+  <!--region Date Entries Screen-->
   <fragment
-    android:id="@+id/destination_throwback_entries"
-    android:name="com.marcdonald.hibi.screens.throwback.throwbackentries.ThrowbackEntriesFragment"
-    android:label="ThrowbackEntriesFragment">
+    android:id="@+id/destination_date_entries"
+    android:name="com.marcdonald.hibi.screens.dateentries.DateEntriesFragment"
+    android:label="DateEntriesFragment">
     <argument
       android:name="day"
       app:argType="integer"
