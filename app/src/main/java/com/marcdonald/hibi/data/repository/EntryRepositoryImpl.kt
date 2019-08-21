@@ -18,6 +18,7 @@ package com.marcdonald.hibi.data.repository
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import com.marcdonald.hibi.data.database.DAO
+import com.marcdonald.hibi.data.database.NumberAndDateObject
 import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.internal.utils.FileUtils
 import kotlinx.coroutines.Dispatchers
@@ -173,6 +174,12 @@ class EntryRepositoryImpl private constructor(private val dao: DAO, private val 
 
 	override val locationCount: LiveData<Int>
 		get() = dao.getCountLocations()
+
+	override suspend fun getMostEntriesInOneDay(): NumberAndDateObject {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getMostEntriesInOneDay()
+		}
+	}
 
 	companion object {
 		@Volatile private var instance: EntryRepositoryImpl? = null

@@ -134,6 +134,18 @@
         style="@style/Widget.Hibi.CardView.Rounded"
         app:tsTitle="@string/most_new_words_one_day"
         app:tsMessage="@string/message" />
+
+      <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
+        android:id="@+id/stat_most_entries_one_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginBottom="@dimen/margin_standard"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        app:tsTitle="@string/most_entries_one_day"
+        app:tsMessage="@string/message" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 

@@ -15,10 +15,8 @@
  */
 package com.marcdonald.hibi.screens.statistics
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.marcdonald.hibi.data.database.NumberAndDateObject
 import com.marcdonald.hibi.data.repository.BookEntryRelationRepository
 import com.marcdonald.hibi.data.repository.EntryRepository
 import com.marcdonald.hibi.data.repository.NewWordRepository
@@ -33,6 +31,7 @@ class StatisticsViewModel(private val entryRepository: EntryRepository,
 
 	init {
 		getMostNewWordsInOneEntry()
+		getMostEntriesInOneEntry()
 	}
 
 	val totalEntries: LiveData<Int>
@@ -60,10 +59,22 @@ class StatisticsViewModel(private val entryRepository: EntryRepository,
 	val mostNewWordsInOneDay: LiveData<Int>
 		get() = _mostNewWordsInOneDay
 
+	private val _mostEntriesInOneDay = MutableLiveData<NumberAndDateObject>()
+	val mostEntriesInOneDay: LiveData<Int>
+		get() = Transformations.map(_mostEntriesInOneDay) { it.number }
+
+
 	private fun getMostNewWordsInOneEntry() {
 		viewModelScope.launch {
 			val mostNewWords = newWordRepository.getMostNewWordsInOneDay()
 			_mostNewWordsInOneDay.postValue(mostNewWords)
+		}
+	}
+
+	private fun getMostEntriesInOneEntry() {
+		viewModelScope.launch {
+			val mostEntries = entryRepository.getMostEntriesInOneDay()
+			_mostEntriesInOneDay.postValue(mostEntries)
 		}
 	}
 }

@@ -207,6 +207,7 @@
   <string name="total_entries_in_books">Total entries in books</string>
   <string name="total_new_words">Total new words learnt</string>
   <string name="most_new_words_one_day">Most new words learnt in one day</string>
+  <string name="most_entries_one_day">Most entries made in one day</string>
   <!--endregion-->
 
   <!--region Settings-->

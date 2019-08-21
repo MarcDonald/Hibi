@@ -88,6 +88,9 @@ interface DAO {
 
 	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT location COLLATE NOCASE FROM Entry )")
 	fun getCountLocations(): LiveData<Int>
+
+	@Query("SELECT MAX(numEntries) as number, year, month, day FROM (SELECT COUNT(*) as numEntries, year, month, day FROM Entry GROUP BY Entry.year, Entry.month, Entry.day)")
+	fun getMostEntriesInOneDay(): NumberAndDateObject
 	// </editor-fold>
 
 	// <editor-fold desc="Tag">
@@ -264,3 +267,5 @@ interface DAO {
 	fun getCountImagesForEntry(entryId: Int): LiveData<Int>
 	// </editor-fold>
 }
+
+data class NumberAndDateObject(val number: Int, val year: Int, val month: Int, val day: Int)
