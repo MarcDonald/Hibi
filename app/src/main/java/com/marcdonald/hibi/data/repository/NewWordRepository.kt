@@ -33,4 +33,6 @@ interface NewWordRepository {
 	fun getNewWordCountByEntryIdLD(entryId: Int): LiveData<Int>
 
 	val newWordCount: LiveData<Int>
+
+	suspend fun getMostNewWordsInOneDay(): Int
 }

@@ -66,6 +66,12 @@ class NewWordRepositoryImpl private constructor(private val dao: DAO) : NewWordR
 	override val newWordCount: LiveData<Int>
 		get() = dao.getCountNewWords()
 
+	override suspend fun getMostNewWordsInOneDay(): Int {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getMostNewWordsInOneDay()
+		}
+	}
+
 	companion object {
 		@Volatile private var instance: NewWordRepositoryImpl? = null
 

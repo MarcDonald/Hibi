@@ -40,6 +40,7 @@ class StatisticsFragment : HibiFragment() {
 	private lateinit var totalTaggedEntriesDisplay: TextStatisticDisplay
 	private lateinit var totalBookEntriesDisplay: TextStatisticDisplay
 	private lateinit var totalNewWordsDisplay: TextStatisticDisplay
+	private lateinit var mostNewWordsDisplay: TextStatisticDisplay
 	// </editor-fold>
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,6 +62,7 @@ class StatisticsFragment : HibiFragment() {
 		totalTaggedEntriesDisplay = view.findViewById(R.id.stat_total_tagged_entries)
 		totalBookEntriesDisplay = view.findViewById(R.id.stat_total_entries_added_to_books)
 		totalNewWordsDisplay = view.findViewById(R.id.stat_total_new_words)
+		mostNewWordsDisplay = view.findViewById(R.id.stat_most_new_words_one_day)
 	}
 
 	private fun setupObservers() {
@@ -103,6 +105,12 @@ class StatisticsFragment : HibiFragment() {
 		viewModel.totalNewWords.observe(this, Observer { value ->
 			value?.let { totalNewWords ->
 				totalNewWordsDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, totalNewWords, totalNewWords))
+			}
+		})
+
+		viewModel.mostNewWordsInOneDay.observe(this, Observer { value ->
+			value?.let { mostNewWords ->
+				mostNewWordsDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
 			}
 		})
 	}
