@@ -184,6 +184,9 @@ interface DAO {
 
 	@Query("SELECT MAX(numWords) as number, year, month, day FROM (SELECT COUNT(*) as numWords, Entry.year as year, Entry.month as month, Entry.day as day FROM NewWord INNER JOIN Entry on NewWord.entryId = Entry.id GROUP BY Entry.year, Entry.month, Entry.day)")
 	fun getMostNewWordsInOneDay(): NumberAndDateObject
+
+	@Query("SELECT MAX(numWords) as number, id FROM (SELECT COUNT(*) as numWords, Entry.id as id FROM NewWord INNER JOIN Entry on NewWord.entryId = Entry.id GROUP BY Entry.id)")
+	fun getMostNewWordsInOneEntry(): NumberAndIdObject
 	// </editor-fold>
 
 	// <editor-fold desc="Book">
@@ -269,3 +272,4 @@ interface DAO {
 }
 
 data class NumberAndDateObject(val number: Int, val year: Int, val month: Int, val day: Int)
+data class NumberAndIdObject(val number: Int, val id: Int)

@@ -40,7 +40,8 @@ class StatisticsFragment : HibiFragment() {
 	private lateinit var totalTaggedEntriesDisplay: TextStatisticDisplay
 	private lateinit var totalBookEntriesDisplay: TextStatisticDisplay
 	private lateinit var totalNewWordsDisplay: TextStatisticDisplay
-	private lateinit var mostNewWordsDisplay: TextStatisticDisplay
+	private lateinit var mostNewWordsOneDayDisplay: TextStatisticDisplay
+	private lateinit var mostNewWordsOneEntryDisplay: TextStatisticDisplay
 	private lateinit var mostEntriesInOneDayDisplay: TextStatisticDisplay
 	// </editor-fold>
 
@@ -56,14 +57,17 @@ class StatisticsFragment : HibiFragment() {
 			Navigation.findNavController(view).popBackStack()
 		}
 		view.findViewById<TextView>(R.id.txt_back_toolbar_title).text = resources.getString(R.string.statistics)
+
+		// Some of these should open appropriate dates/entries when clicked
 		totalEntriesDisplay = view.findViewById(R.id.stat_total_entries)
 		totalDaysDisplay = view.findViewById(R.id.stat_total_days)
-		totalFavouritesDisplay = view.findViewById(R.id.stat_total_favourites)    // TODO maybe click to go to favourites screen
+		totalFavouritesDisplay = view.findViewById(R.id.stat_total_favourites)
 		totalLocationsDisplay = view.findViewById(R.id.stat_total_locations)
 		totalTaggedEntriesDisplay = view.findViewById(R.id.stat_total_tagged_entries)
 		totalBookEntriesDisplay = view.findViewById(R.id.stat_total_entries_added_to_books)
 		totalNewWordsDisplay = view.findViewById(R.id.stat_total_new_words)
-		mostNewWordsDisplay = view.findViewById(R.id.stat_most_new_words_one_day)
+		mostNewWordsOneDayDisplay = view.findViewById(R.id.stat_most_new_words_one_day)
+		mostNewWordsOneEntryDisplay = view.findViewById(R.id.stat_most_new_words_one_entry)
 		mostEntriesInOneDayDisplay = view.findViewById(R.id.stat_most_entries_one_day)
 	}
 
@@ -112,7 +116,13 @@ class StatisticsFragment : HibiFragment() {
 
 		viewModel.mostNewWordsInOneDay.observe(this, Observer { value ->
 			value?.let { mostNewWords ->
-				mostNewWordsDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
+				mostNewWordsOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
+			}
+		})
+
+		viewModel.mostNewWordsInOneEntry.observe(this, Observer { value ->
+			value?.let { mostNewWords ->
+				mostNewWordsOneEntryDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
 			}
 		})
 
