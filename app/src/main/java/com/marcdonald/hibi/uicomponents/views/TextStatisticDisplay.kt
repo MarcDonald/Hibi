@@ -18,6 +18,7 @@ package com.marcdonald.hibi.uicomponents.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.google.android.material.card.MaterialCardView
 import com.marcdonald.hibi.R
@@ -29,6 +30,7 @@ class TextStatisticDisplay(context: Context, attributeSet: AttributeSet?, defSty
 	private var titleText: TextView
 	private var messageText: TextView
 	private var secondaryMessageText: TextView
+	private var linearLayout: LinearLayout
 
 	init {
 		val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -36,6 +38,7 @@ class TextStatisticDisplay(context: Context, attributeSet: AttributeSet?, defSty
 		titleText = view.findViewById(R.id.txt_text_statistic_title)
 		messageText = view.findViewById(R.id.txt_text_statistic_message)
 		secondaryMessageText = view.findViewById(R.id.txt_text_statistic_secondary_message)
+		linearLayout = view.findViewById(R.id.lin_text_statistic)
 
 		if(attributeSet != null) {
 			val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.TextStatisticDisplay, defStyle, 0)
@@ -75,6 +78,10 @@ class TextStatisticDisplay(context: Context, attributeSet: AttributeSet?, defSty
 
 	fun showSecondaryMessage(show: Boolean) {
 		secondaryMessageText.show(show)
+	}
+
+	override fun setOnClickListener(l: OnClickListener?) {
+		linearLayout.setOnClickListener(l)
 	}
 
 	constructor(context: Context) : this(context, null)

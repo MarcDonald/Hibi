@@ -354,6 +354,43 @@
   <fragment
     android:id="@+id/destination_statistics"
     android:name="com.marcdonald.hibi.screens.statistics.StatisticsFragment"
-    android:label="StatisticsFragment" />
+    android:label="StatisticsFragment">
+    <action
+      android:id="@+id/date_entries_action"
+      app:destination="@id/destination_date_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:launchSingleTop="false"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="day"
+        app:argType="integer" />
+      <argument
+        android:name="month"
+        app:argType="integer" />
+      <argument
+        android:name="year"
+        app:argType="integer" />
+    </action>
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+    <action
+      android:id="@+id/favourites_action"
+      app:destination="@id/destination_favourites"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+  </fragment>
   <!--endregion -->
 </navigation>

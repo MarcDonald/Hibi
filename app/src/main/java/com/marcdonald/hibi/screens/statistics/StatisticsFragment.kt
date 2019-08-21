@@ -48,6 +48,7 @@ class StatisticsFragment : HibiFragment() {
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val view = inflater.inflate(R.layout.fragment_statistics, container, false)
 		bindViews(view)
+		setupClickListeners(view)
 		setupObservers()
 		return view
 	}
@@ -69,6 +70,35 @@ class StatisticsFragment : HibiFragment() {
 		mostNewWordsOneDayDisplay = view.findViewById(R.id.stat_most_new_words_one_day)
 		mostNewWordsOneEntryDisplay = view.findViewById(R.id.stat_most_new_words_one_entry)
 		mostEntriesInOneDayDisplay = view.findViewById(R.id.stat_most_entries_one_day)
+	}
+
+	private fun setupClickListeners(view: View) {
+		mostNewWordsOneDayDisplay.setOnClickListener {
+			viewModel.mostNewWordsInOneDay.value?.let { date ->
+				val action = StatisticsFragmentDirections.dateEntriesAction(date.day, date.month, date.year)
+				Navigation.findNavController(view).navigate(action)
+			}
+		}
+
+		mostNewWordsOneEntryDisplay.setOnClickListener {
+			viewModel.mostNewWordsInOneEntry.value?.let { entry ->
+				val action = StatisticsFragmentDirections.viewEntryAction()
+				action.entryId = entry.id
+				Navigation.findNavController(view).navigate(action)
+			}
+		}
+
+		mostEntriesInOneDayDisplay.setOnClickListener {
+			viewModel.mostEntriesInOneDay.value?.let { date ->
+				val action = StatisticsFragmentDirections.dateEntriesAction(date.day, date.month, date.year)
+				Navigation.findNavController(view).navigate(action)
+			}
+		}
+
+		totalFavouritesDisplay.setOnClickListener {
+			val action = StatisticsFragmentDirections.favouritesAction()
+			Navigation.findNavController(view).navigate(action)
+		}
 	}
 
 	private fun setupObservers() {
@@ -115,19 +145,22 @@ class StatisticsFragment : HibiFragment() {
 		})
 
 		viewModel.mostNewWordsInOneDay.observe(this, Observer { value ->
-			value?.let { mostNewWords ->
+			value?.let { newValue ->
+				val mostNewWords = newValue.number
 				mostNewWordsOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
 			}
 		})
 
 		viewModel.mostNewWordsInOneEntry.observe(this, Observer { value ->
-			value?.let { mostNewWords ->
+			value?.let { newValue ->
+				val mostNewWords = newValue.number
 				mostNewWordsOneEntryDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
 			}
 		})
 
 		viewModel.mostEntriesInOneDay.observe(this, Observer { value ->
-			value?.let { mostEntries ->
+			value?.let { newValue ->
+				val mostEntries = newValue.number
 				mostEntriesInOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, mostEntries, mostEntries))
 			}
 		})
