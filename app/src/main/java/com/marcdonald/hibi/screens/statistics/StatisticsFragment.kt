@@ -26,9 +26,16 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.base.HibiFragment
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class StatisticsFragment : HibiFragment() {
+class StatisticsFragment : HibiFragment(), KodeinAware {
+
+	override val kodein by closestKodein()
+	private val dateTimeUtils: DateTimeUtils by instance()
 
 	private val viewModel by viewModels<StatisticsViewModel> { viewModelFactory }
 
@@ -148,6 +155,8 @@ class StatisticsFragment : HibiFragment() {
 			value?.let { newValue ->
 				val mostNewWords = newValue.number
 				mostNewWordsOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
+				val date = dateTimeUtils.formatDateForDisplay(newValue.day, newValue.month, newValue.year)
+				mostNewWordsOneDayDisplay.setSecondaryMessage(resources.getString(R.string.on_date, date))
 			}
 		})
 
@@ -162,6 +171,8 @@ class StatisticsFragment : HibiFragment() {
 			value?.let { newValue ->
 				val mostEntries = newValue.number
 				mostEntriesInOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, mostEntries, mostEntries))
+				val date = dateTimeUtils.formatDateForDisplay(newValue.day, newValue.month, newValue.year)
+				mostEntriesInOneDayDisplay.setSecondaryMessage(resources.getString(R.string.on_date, date))
 			}
 		})
 	}
