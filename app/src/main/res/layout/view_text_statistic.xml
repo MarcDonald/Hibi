@@ -28,9 +28,9 @@
     style="@style/TextAppearance.Hibi.StatisticTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/margin_standard"
-    android:layout_marginEnd="@dimen/margin_standard"
-    android:layout_marginTop="@dimen/margin_standard"
+    android:paddingStart="@dimen/margin_standard"
+    android:paddingEnd="@dimen/margin_standard"
+    android:paddingTop="@dimen/margin_standard"
     android:text="@string/title"
     android:textAlignment="textStart" />
 
@@ -39,16 +39,18 @@
     style="@style/TextAppearance.Hibi.StatisticMessage"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_standard"
+    android:padding="@dimen/margin_standard"
     android:text="@string/message"
     android:textAlignment="textStart" />
 
   <TextView
     android:id="@+id/txt_text_statistic_secondary_message"
-    style="@style/TextAppearance.Hibi.StatisticMessage"
+    style="@style/TextAppearance.Hibi.StatisticSecondaryMessage"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_standard"
+    android:paddingBottom="@dimen/margin_standard"
+    android:paddingStart="@dimen/margin_standard"
+    android:paddingEnd="@dimen/margin_standard"
     android:text="@string/message"
     android:textAlignment="textStart" />
 </LinearLayout>
