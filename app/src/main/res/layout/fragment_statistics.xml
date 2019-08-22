@@ -39,13 +39,19 @@
       android:layout_height="match_parent"
       android:orientation="vertical">
 
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        style="@style/TextAppearance.Hibi.StatisticSectionHeader"
+        android:text="@string/general" />
+
       <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
         android:id="@+id/stat_total_entries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:layout_marginTop="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_half"
         style="@style/Widget.Hibi.CardView.Rounded"
         app:tsTitle="@string/total_entries_written"
@@ -58,10 +64,32 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_half"
-        android:layout_marginBottom="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
         style="@style/Widget.Hibi.CardView.Rounded"
         app:tsTitle="@string/total_days_written_about"
         app:tsMessage="@string/message" />
+
+      <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
+        android:id="@+id/stat_most_entries_one_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginBottom="@dimen/margin_half"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        app:tsTitle="@string/most_entries_one_day"
+        app:tsMessage="@string/message" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        style="@style/TextAppearance.Hibi.StatisticSectionHeader"
+        android:text="@string/favourites" />
 
       <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
         android:id="@+id/stat_total_favourites"
@@ -69,11 +97,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
-        android:layout_marginTop="@dimen/margin_half"
-        android:layout_marginBottom="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
         style="@style/Widget.Hibi.CardView.Rounded"
         app:tsTitle="@string/total_entries_favourited"
         app:tsMessage="@string/message" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
+        style="@style/TextAppearance.Hibi.StatisticSectionHeader"
+        android:text="@string/location" />
 
       <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
         android:id="@+id/stat_total_locations"
@@ -82,10 +119,20 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_half"
-        android:layout_marginBottom="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
         style="@style/Widget.Hibi.CardView.Rounded"
         app:tsTitle="@string/total_locations_written_about"
         app:tsMessage="@string/message" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
+        style="@style/TextAppearance.Hibi.StatisticSectionHeader"
+        android:text="@string/tags" />
 
       <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
         android:id="@+id/stat_total_tagged_entries"
@@ -94,10 +141,20 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_half"
-        android:layout_marginBottom="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
         style="@style/Widget.Hibi.CardView.Rounded"
         app:tsTitle="@string/total_tagged_entries"
         app:tsMessage="@string/message" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
+        style="@style/TextAppearance.Hibi.StatisticSectionHeader"
+        android:text="@string/books" />
 
       <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
         android:id="@+id/stat_total_entries_added_to_books"
@@ -106,10 +163,20 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_half"
-        android:layout_marginBottom="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
         style="@style/Widget.Hibi.CardView.Rounded"
         app:tsTitle="@string/total_entries_in_books"
         app:tsMessage="@string/message" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
+        style="@style/TextAppearance.Hibi.StatisticSectionHeader"
+        android:text="@string/new_words" />
 
       <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
         android:id="@+id/stat_total_new_words"
@@ -145,18 +212,6 @@
         android:layout_marginBottom="@dimen/margin_standard"
         style="@style/Widget.Hibi.CardView.Rounded"
         app:tsTitle="@string/most_new_words_one_entry"
-        app:tsMessage="@string/message" />
-
-      <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
-        android:id="@+id/stat_most_entries_one_day"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginEnd="@dimen/margin_standard"
-        android:layout_marginTop="@dimen/margin_half"
-        android:layout_marginBottom="@dimen/margin_standard"
-        style="@style/Widget.Hibi.CardView.Rounded"
-        app:tsTitle="@string/most_entries_one_day"
         app:tsMessage="@string/message" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>

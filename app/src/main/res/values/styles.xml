@@ -376,6 +376,13 @@
     <item name="android:textStyle">normal</item>
     <item name="android:textAllCaps">false</item>
   </style>
+
+  <style name="TextAppearance.Hibi.StatisticSectionHeader" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+  </style>
   <!--endregion-->
 
 </resources>
