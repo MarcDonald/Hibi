@@ -90,23 +90,31 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 	private fun setupClickListeners(view: View) {
 		mostNewWordsOneDayDisplay.setOnClickListener {
 			viewModel.mostNewWordsInOneDay.value?.let { date ->
-				val action = StatisticsFragmentDirections.dateEntriesAction(date.day, date.month, date.year)
-				Navigation.findNavController(view).navigate(action)
+				// Defaults to 31/12/2 when nothing found, so this stops it being clickable in that case
+				if(date.year > 2) {
+					val action = StatisticsFragmentDirections.dateEntriesAction(date.day, date.month, date.year)
+					Navigation.findNavController(view).navigate(action)
+				}
 			}
 		}
 
 		mostNewWordsOneEntryDisplay.setOnClickListener {
 			viewModel.mostNewWordsInOneEntry.value?.let { entry ->
-				val action = StatisticsFragmentDirections.viewEntryAction()
-				action.entryId = entry.id
-				Navigation.findNavController(view).navigate(action)
+				if(entry.id > 0) {
+					val action = StatisticsFragmentDirections.viewEntryAction()
+					action.entryId = entry.id
+					Navigation.findNavController(view).navigate(action)
+				}
 			}
 		}
 
 		mostEntriesInOneDayDisplay.setOnClickListener {
 			viewModel.mostEntriesInOneDay.value?.let { date ->
-				val action = StatisticsFragmentDirections.dateEntriesAction(date.day, date.month, date.year)
-				Navigation.findNavController(view).navigate(action)
+				// Defaults to 31/12/2 when nothing found, so this stops it being clickable in that case
+				if(date.year > 2) {
+					val action = StatisticsFragmentDirections.dateEntriesAction(date.day, date.month, date.year)
+					Navigation.findNavController(view).navigate(action)
+				}
 			}
 		}
 
@@ -163,7 +171,7 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 
 		viewModel.tagWithMostEntries.observe(this, Observer { value ->
 			value?.let { tag ->
-				bookWithMostEntriesDisplay.show(true)
+				tagWithMostEntriesDisplay.show(true)
 				tagWithMostEntriesDisplay.setMessage(tag.name)
 			}
 		})
@@ -191,8 +199,12 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 			value?.let { newValue ->
 				val mostNewWords = newValue.number
 				mostNewWordsOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
-				val date = dateTimeUtils.formatDateForDisplay(newValue.day, newValue.month, newValue.year)
-				mostNewWordsOneDayDisplay.setSecondaryMessage(resources.getString(R.string.on_date, date))
+				if(newValue.number > 0) {
+					val date = dateTimeUtils.formatDateForDisplay(newValue.day, newValue.month, newValue.year)
+					mostNewWordsOneDayDisplay.setSecondaryMessage(resources.getString(R.string.on_date, date))
+				} else {
+					mostNewWordsOneDayDisplay.showSecondaryMessage(false)
+				}
 			}
 		})
 
@@ -208,8 +220,12 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 			value?.let { newValue ->
 				val mostEntries = newValue.number
 				mostEntriesInOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, mostEntries, mostEntries))
-				val date = dateTimeUtils.formatDateForDisplay(newValue.day, newValue.month, newValue.year)
-				mostEntriesInOneDayDisplay.setSecondaryMessage(resources.getString(R.string.on_date, date))
+				if(newValue.number > 0) {
+					val date = dateTimeUtils.formatDateForDisplay(newValue.day, newValue.month, newValue.year)
+					mostEntriesInOneDayDisplay.setSecondaryMessage(resources.getString(R.string.on_date, date))
+				} else {
+					mostEntriesInOneDayDisplay.showSecondaryMessage(false)
+				}
 			}
 		})
 	}
