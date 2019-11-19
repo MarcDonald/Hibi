@@ -26,11 +26,13 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.base.HibiFragment
+import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.internal.utils.DateTimeUtils
 import com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 class StatisticsFragment : HibiFragment(), KodeinAware {
 
@@ -75,8 +77,10 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 		totalLocationsDisplay = view.findViewById(R.id.stat_total_locations)
 		totalTaggedEntriesDisplay = view.findViewById(R.id.stat_total_tagged_entries)
 		tagWithMostEntriesDisplay = view.findViewById(R.id.stat_tag_with_most_entries)
+		tagWithMostEntriesDisplay.show(false)
 		totalBookEntriesDisplay = view.findViewById(R.id.stat_total_entries_added_to_books)
 		bookWithMostEntriesDisplay = view.findViewById(R.id.stat_book_with_most_entries)
+		bookWithMostEntriesDisplay.show(false)
 		totalNewWordsDisplay = view.findViewById(R.id.stat_total_new_words)
 		mostNewWordsOneDayDisplay = view.findViewById(R.id.stat_most_new_words_one_day)
 		mostNewWordsOneEntryDisplay = view.findViewById(R.id.stat_most_new_words_one_entry)
@@ -159,6 +163,7 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 
 		viewModel.tagWithMostEntries.observe(this, Observer { value ->
 			value?.let { tag ->
+				bookWithMostEntriesDisplay.show(true)
 				tagWithMostEntriesDisplay.setMessage(tag.name)
 			}
 		})
@@ -171,6 +176,7 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 
 		viewModel.bookWithMostEntries.observe(this, Observer { value ->
 			value?.let { book ->
+				bookWithMostEntriesDisplay.show(true)
 				bookWithMostEntriesDisplay.setMessage(book.name)
 			}
 		})
@@ -192,6 +198,7 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 
 		viewModel.mostNewWordsInOneEntry.observe(this, Observer { value ->
 			value?.let { newValue ->
+				Timber.i("Log: setupObservers: $newValue")
 				val mostNewWords = newValue.number
 				mostNewWordsOneEntryDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
 			}

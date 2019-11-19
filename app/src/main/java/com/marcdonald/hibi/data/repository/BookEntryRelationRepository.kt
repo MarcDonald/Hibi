@@ -16,6 +16,7 @@
 package com.marcdonald.hibi.data.repository
 
 import androidx.lifecycle.LiveData
+import com.marcdonald.hibi.data.database.NumberAndIdObject
 import com.marcdonald.hibi.data.entity.Book
 import com.marcdonald.hibi.data.entity.BookEntryRelation
 import com.marcdonald.hibi.data.entity.Entry
@@ -44,5 +45,5 @@ interface BookEntryRelationRepository {
 
 	val entriesInBooksCount: LiveData<Int>
 
-	suspend fun getBookWithMostEntries(): Book?
+	suspend fun getBookWithMostEntries(): NumberAndIdObject?
 }

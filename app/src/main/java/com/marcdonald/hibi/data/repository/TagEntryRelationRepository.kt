@@ -16,6 +16,7 @@
 package com.marcdonald.hibi.data.repository
 
 import androidx.lifecycle.LiveData
+import com.marcdonald.hibi.data.database.NumberAndIdObject
 import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.entity.Tag
 import com.marcdonald.hibi.data.entity.TagEntryRelation
@@ -44,5 +45,5 @@ interface TagEntryRelationRepository {
 
 	val taggedEntriesCount: LiveData<Int>
 
-	suspend fun getTagWithMostEntries(): Tag?
+	suspend fun getTagWithMostEntries(): NumberAndIdObject?
 }

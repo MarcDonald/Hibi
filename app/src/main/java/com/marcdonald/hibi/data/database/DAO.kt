@@ -86,6 +86,7 @@ interface DAO {
 	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT day, month, year FROM Entry)")
 	fun getCountDays(): LiveData<Int>
 
+	@Suppress("SpellCheckingInspection")
 	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT location COLLATE NOCASE FROM Entry )")
 	fun getCountLocations(): LiveData<Int>
 
@@ -99,6 +100,9 @@ interface DAO {
 
 	@Update
 	fun updateTag(tag: Tag)
+
+	@Query("SELECT * FROM Tag WHERE id = :tagId")
+	fun getTagById(tagId: Int): Tag
 
 	@Query("SELECT * FROM Tag")
 	fun getAllTagsLD(): LiveData<List<Tag>>
@@ -156,9 +160,8 @@ interface DAO {
 	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT entryId FROM TagEntryRelation )")
 	fun getCountTaggedEntries(): LiveData<Int>
 
-	// TODO
-	@Query("SELECT * FROM Tag LIMIT 1")
-	fun getTagWithMostEntries(): Tag?
+	@Query("SELECT t.id as id, COUNT(ter.entryId) as number FROM Tag as t LEFT OUTER JOIN TagEntryRelation as ter ON t.id = ter.tagId GROUP BY t.name ORDER BY number DESC LIMIT 1")
+	fun getTagWithMostEntries(): NumberAndIdObject?
 
 	// </editor-fold>
 
@@ -198,6 +201,9 @@ interface DAO {
 	@Insert(onConflict = OnConflictStrategy.ABORT)
 	fun insertBook(book: Book)
 
+	@Query("SELECT * FROM Book WHERE id = :bookId")
+	fun getBookById(bookId: Int): Book
+
 	@Update
 	fun updateBook(book: Book)
 
@@ -210,8 +216,8 @@ interface DAO {
 	@Query("DELETE FROM Book WHERE id = :bookId")
 	fun deleteBook(bookId: Int)
 
-	@Query("SELECT COUNT(*) From Book WHERE name = :tag")
-	fun getCountBooksWithName(tag: String): Int
+	@Query("SELECT COUNT(*) From Book WHERE name = :book")
+	fun getCountBooksWithName(book: String): Int
 
 	@Query("SELECT name FROM Book WHERE id = :bookId")
 	fun getBookName(bookId: Int): String
@@ -252,8 +258,8 @@ interface DAO {
 	fun getCountEntriesInBooks(): LiveData<Int>
 
 	// TODO
-	@Query("SELECT * FROM Book LIMIT 1")
-	fun getBookWithMostEntries(): Book?
+	@Query("SELECT b.id as id, COUNT(ber.entryId) as number FROM Book as b LEFT OUTER JOIN BookEntryRelation as ber ON b.id = ber.bookId GROUP BY b.name ORDER BY number DESC LIMIT 1")
+	fun getBookWithMostEntries(): NumberAndIdObject?
 	// </editor-fold>
 
 	// <editor-fold desc="Entry Image">

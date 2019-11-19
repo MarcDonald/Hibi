@@ -30,7 +30,8 @@ class StatisticsViewModel(private val entryRepository: EntryRepository,
 													private val tagEntryRelationRepository: TagEntryRelationRepository,
 													private val bookEntryRelationRepository: BookEntryRelationRepository,
 													private val newWordRepository: NewWordRepository,
-													private val tagRepository: TagRepository)
+													private val tagRepository: TagRepository,
+													private val bookRepository: BookRepository)
 	: ViewModel() {
 
 	init {
@@ -105,15 +106,21 @@ class StatisticsViewModel(private val entryRepository: EntryRepository,
 
 	private fun getTagWithMostEntries() {
 		viewModelScope.launch {
-			val tagWithMostEntries = tagEntryRelationRepository.getTagWithMostEntries()
-			_tagWithMostEntries.postValue(tagWithMostEntries)
+			val numberAndIdObject = tagEntryRelationRepository.getTagWithMostEntries()
+			numberAndIdObject?.let {
+				val tagWithMostEntries = tagRepository.getTag(numberAndIdObject.id)
+				_tagWithMostEntries.postValue(tagWithMostEntries)
+			}
 		}
 	}
 
 	private fun getBookWithMostEntries() {
 		viewModelScope.launch {
-			val bookWithMostEntries = bookEntryRelationRepository.getBookWithMostEntries()
-			_bookWithMostEntries.postValue(bookWithMostEntries)
+			val numberAndIdObject = bookEntryRelationRepository.getBookWithMostEntries()
+			numberAndIdObject?.let {
+				val bookWithMostEntries = bookRepository.getBook(numberAndIdObject.id)
+				_bookWithMostEntries.postValue(bookWithMostEntries)
+			}
 		}
 	}
 }
