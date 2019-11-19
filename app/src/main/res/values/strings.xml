@@ -105,6 +105,7 @@
   <!--endregion-->
 
   <!--region Tags-->
+  <string name="tags">Tags</string>
   <string name="add_tags_to_entry_hint">Add Tags to Entry</string>
   <string name="add_tag">Add a Tag</string>
   <string name="entry_tags">Tags</string>
@@ -138,6 +139,7 @@
   <!--endregion-->
 
   <!--region Books-->
+  <string name="books">Books</string>
   <string name="book_already_exists">A book already exists with that name</string>
   <string name="book_name">Book Name</string>
   <string name="create_book">Create Book</string>
@@ -194,6 +196,25 @@
   <string name="favourite_entry">Favourite Entry</string>
   <string name="favourites">Favourites</string>
   <string name="no_favourites">You haven\'t favourited any entries yet</string>
+  <!--endregion-->
+
+  <!--region Statistics-->
+  <string name="statistics">Statistics</string>
+  <string name="general">General</string>
+  <string name="total_entries_written">Total entries written</string>
+  <string name="total_entries_favourited">Total entries favourited</string>
+  <string name="total_percent_favourited">That\'s %1$s of all your entries</string>
+  <string name="total_days_written_about">Total days written about</string>
+  <string name="total_locations_written_about">Total locations written about</string>
+  <string name="total_tagged_entries">Total entries tagged</string>
+  <string name="total_entries_in_books">Total entries in books</string>
+  <string name="total_new_words">Total new words learnt</string>
+  <string name="most_new_words_one_day">Most new words learnt in one day</string>
+  <string name="most_new_words_one_entry">Most new words learnt in one entry</string>
+  <string name="most_entries_one_day">Most entries made in one day</string>
+  <string name="on_date">on %1$s</string>
+  <string name="tag_with_most_entries">Tag with most entries</string>
+  <string name="book_with_most_entries">Book with most entries</string>
   <!--endregion-->
 
   <!--region Settings-->
@@ -369,6 +390,26 @@
   <plurals name="throwback_more_entries">
     <item quantity="one">and %d more entry</item>
     <item quantity="other">and %d more entries</item>
+  </plurals>
+
+  <plurals name="stat_total_entries">
+    <item quantity="one">%d entry</item>
+    <item quantity="other">%d entries</item>
+  </plurals>
+
+  <plurals name="stat_total_days">
+    <item quantity="one">%d day</item>
+    <item quantity="other">%d days</item>
+  </plurals>
+
+  <plurals name="stat_total_locations">
+    <item quantity="one">%d location</item>
+    <item quantity="other">%d locations</item>
+  </plurals>
+
+  <plurals name="stat_total_new_words">
+    <item quantity="one">%d new word</item>
+    <item quantity="other">%d new words</item>
   </plurals>
   <!--endregion-->
 

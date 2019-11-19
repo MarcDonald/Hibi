@@ -355,6 +355,34 @@
     <item name="android:textAllCaps">false</item>
     <item name="android:letterSpacing">0.0333333333</item>
   </style>
+
+  <style name="TextAppearance.Hibi.StatisticTitle" parent="TextAppearance.Hibi.Base">
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">20sp</item>
+    <item name="android:letterSpacing">0.03125</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.StatisticMessage" parent="TextAppearance.Hibi.Base">
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">24sp</item>
+    <item name="android:letterSpacing">0</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.StatisticSecondaryMessage" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+  </style>
+
+  <style name="TextAppearance.Hibi.StatisticSectionHeader" parent="TextAppearance.Hibi.Base">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">?attr/hibiSecondaryTextOnPrimary</item>
+    <item name="android:textStyle">normal</item>
+    <item name="android:textAllCaps">false</item>
+  </style>
   <!--endregion-->
 
 </resources>

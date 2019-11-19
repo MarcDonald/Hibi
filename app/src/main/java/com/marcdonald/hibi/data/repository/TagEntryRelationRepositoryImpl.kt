@@ -18,6 +18,7 @@ package com.marcdonald.hibi.data.repository
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import com.marcdonald.hibi.data.database.DAO
+import com.marcdonald.hibi.data.database.NumberAndIdObject
 import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.entity.Tag
 import com.marcdonald.hibi.data.entity.TagEntryRelation
@@ -82,9 +83,18 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
 		}
 	}
 
+	override suspend fun getTagWithMostEntries(): NumberAndIdObject? {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getTagWithMostEntries()
+		}
+	}
+
 	override fun getCountTagsWithEntry(entryId: Int): LiveData<Int> {
 		return dao.getTagCountByEntryId(entryId)
 	}
+
+	override val taggedEntriesCount: LiveData<Int>
+		get() = dao.getCountTaggedEntries()
 
 	companion object {
 		@Volatile private var instance: TagEntryRelationRepositoryImpl? = null

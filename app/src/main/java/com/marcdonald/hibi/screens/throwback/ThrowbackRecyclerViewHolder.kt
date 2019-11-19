@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.marcdonald.hibi.screens.throwback.mainthrowback
+package com.marcdonald.hibi.screens.throwback
 
 import android.preference.PreferenceManager
 import android.view.View

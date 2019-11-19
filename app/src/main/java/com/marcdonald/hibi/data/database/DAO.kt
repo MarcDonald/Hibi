@@ -76,6 +76,22 @@ interface DAO {
 
 	@Query("SELECT COUNT(*) FROM Entry WHERE year = :year AND month = :month AND day = :day")
 	fun getAmountOfEntriesOnDate(year: Int, month: Int, day: Int): Int
+
+	@Query("SELECT COUNT(*) FROM Entry")
+	fun getCountEntries(): LiveData<Int>
+
+	@Query("SELECT COUNT(*) FROM Entry WHERE isFavourite = 1")
+	fun getCountFavourites(): LiveData<Int>
+
+	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT day, month, year FROM Entry)")
+	fun getCountDays(): LiveData<Int>
+
+	@Suppress("SpellCheckingInspection")
+	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT location COLLATE NOCASE FROM Entry )")
+	fun getCountLocations(): LiveData<Int>
+
+	@Query("SELECT MAX(numEntries) as number, year, month, day FROM (SELECT COUNT(*) as numEntries, year, month, day FROM Entry GROUP BY Entry.year, Entry.month, Entry.day)")
+	fun getMostEntriesInOneDay(): NumberAndDateObject
 	// </editor-fold>
 
 	// <editor-fold desc="Tag">
@@ -84,6 +100,9 @@ interface DAO {
 
 	@Update
 	fun updateTag(tag: Tag)
+
+	@Query("SELECT * FROM Tag WHERE id = :tagId")
+	fun getTagById(tagId: Int): Tag
 
 	@Query("SELECT * FROM Tag")
 	fun getAllTagsLD(): LiveData<List<Tag>>
@@ -137,6 +156,13 @@ interface DAO {
 
 	@Query("UPDATE Entry SET isFavourite = :isFavourite WHERE id = :id")
 	fun setEntryIsFavourite(id: Int, isFavourite: Boolean)
+
+	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT entryId FROM TagEntryRelation )")
+	fun getCountTaggedEntries(): LiveData<Int>
+
+	@Query("SELECT t.id as id, COUNT(ter.entryId) as number FROM Tag as t LEFT OUTER JOIN TagEntryRelation as ter ON t.id = ter.tagId GROUP BY t.name ORDER BY number DESC LIMIT 1")
+	fun getTagWithMostEntries(): NumberAndIdObject?
+
 	// </editor-fold>
 
 	// <editor-fold desc="New Word">
@@ -160,11 +186,23 @@ interface DAO {
 
 	@Query("SELECT COUNT(*) FROM NewWord WHERE entryId = :entryId")
 	fun getNewWordCountByEntryIdLD(entryId: Int): LiveData<Int>
+
+	@Query("SELECT COUNT(*) FROM NewWord")
+	fun getCountNewWords(): LiveData<Int>
+
+	@Query("SELECT MAX(numWords) as number, year, month, day FROM (SELECT COUNT(*) as numWords, Entry.year as year, Entry.month as month, Entry.day as day FROM NewWord INNER JOIN Entry on NewWord.entryId = Entry.id GROUP BY Entry.year, Entry.month, Entry.day)")
+	fun getMostNewWordsInOneDay(): NumberAndDateObject
+
+	@Query("SELECT MAX(numWords) as number, id FROM (SELECT COUNT(*) as numWords, Entry.id as id FROM NewWord INNER JOIN Entry on NewWord.entryId = Entry.id GROUP BY Entry.id)")
+	fun getMostNewWordsInOneEntry(): NumberAndIdObject
 	// </editor-fold>
 
 	// <editor-fold desc="Book">
 	@Insert(onConflict = OnConflictStrategy.ABORT)
 	fun insertBook(book: Book)
+
+	@Query("SELECT * FROM Book WHERE id = :bookId")
+	fun getBookById(bookId: Int): Book
 
 	@Update
 	fun updateBook(book: Book)
@@ -178,8 +216,8 @@ interface DAO {
 	@Query("DELETE FROM Book WHERE id = :bookId")
 	fun deleteBook(bookId: Int)
 
-	@Query("SELECT COUNT(*) From Book WHERE name = :tag")
-	fun getCountBooksWithName(tag: String): Int
+	@Query("SELECT COUNT(*) From Book WHERE name = :book")
+	fun getCountBooksWithName(book: String): Int
 
 	@Query("SELECT name FROM Book WHERE id = :bookId")
 	fun getBookName(bookId: Int): String
@@ -215,6 +253,13 @@ interface DAO {
 
 	@Query("SELECT ber.entryId as entryId, b.name as bookName FROM BookEntryRelation as ber LEFT OUTER JOIN Book as b ON ber.bookId = b.id")
 	fun getBookEntryDisplayItems(): List<BookEntryDisplayItem>
+
+	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT entryId FROM BookEntryRelation )")
+	fun getCountEntriesInBooks(): LiveData<Int>
+
+	// TODO
+	@Query("SELECT b.id as id, COUNT(ber.entryId) as number FROM Book as b LEFT OUTER JOIN BookEntryRelation as ber ON b.id = ber.bookId GROUP BY b.name ORDER BY number DESC LIMIT 1")
+	fun getBookWithMostEntries(): NumberAndIdObject?
 	// </editor-fold>
 
 	// <editor-fold desc="Entry Image">
@@ -240,3 +285,6 @@ interface DAO {
 	fun getCountImagesForEntry(entryId: Int): LiveData<Int>
 	// </editor-fold>
 }
+
+data class NumberAndDateObject(val number: Int, val year: Int, val month: Int, val day: Int)
+data class NumberAndIdObject(val number: Int, val id: Int)

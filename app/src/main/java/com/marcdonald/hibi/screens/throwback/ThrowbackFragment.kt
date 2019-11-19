@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.marcdonald.hibi.screens.throwback.mainthrowback
+package com.marcdonald.hibi.screens.throwback
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -96,7 +96,7 @@ class ThrowbackFragment : HibiFragment() {
 			action = ThrowbackFragmentDirections.viewEntryAction()
 			action.entryId = entryId
 		} else {
-			action = ThrowbackFragmentDirections.throwbackEntriesAction(day, month, year)
+			action = ThrowbackFragmentDirections.dateEntriesAction(day, month, year)
 		}
 		Navigation.findNavController(requireParentFragment().requireView()).navigate(action)
 	}

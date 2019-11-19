@@ -20,6 +20,8 @@ import com.marcdonald.hibi.data.entity.Tag
 
 interface TagRepository {
 
+	suspend fun getTag(tagId: Int): Tag
+
 	suspend fun addTag(tag: Tag)
 
 	suspend fun deleteTag(tagId: Int)

@@ -25,6 +25,12 @@ import timber.log.Timber
 
 class TagRepositoryImpl private constructor(private val dao: DAO) : TagRepository {
 
+	override suspend fun getTag(tagId: Int): Tag {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getTagById(tagId)
+		}
+	}
+
 	override suspend fun addTag(tag: Tag) {
 		withContext(Dispatchers.IO) {
 			try {

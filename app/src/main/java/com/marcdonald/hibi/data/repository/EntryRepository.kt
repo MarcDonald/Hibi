@@ -16,6 +16,7 @@
 package com.marcdonald.hibi.data.repository
 
 import androidx.lifecycle.LiveData
+import com.marcdonald.hibi.data.database.NumberAndDateObject
 import com.marcdonald.hibi.data.entity.Entry
 import java.util.*
 
@@ -54,4 +55,14 @@ interface EntryRepository {
 	suspend fun getFavouriteEntries(): List<Entry>
 
 	suspend fun setEntryIsFavourite(id: Int, isFavourite: Boolean)
+
+	val entryCount: LiveData<Int>
+
+	val favouritesCount: LiveData<Int>
+
+	val dayCount: LiveData<Int>
+
+	val locationCount: LiveData<Int>
+
+	suspend fun getMostEntriesInOneDay(): NumberAndDateObject
 }

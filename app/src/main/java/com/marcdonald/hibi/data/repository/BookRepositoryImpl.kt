@@ -37,6 +37,12 @@ class BookRepositoryImpl private constructor(private val dao: DAO) : BookReposit
 		}
 	}
 
+	override suspend fun getBook(bookId: Int): Book {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getBookById(bookId)
+		}
+	}
+
 	override suspend fun deleteBook(bookId: Int) {
 		withContext(Dispatchers.IO) {
 			dao.deleteBook(bookId)

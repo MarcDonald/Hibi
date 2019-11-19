@@ -33,6 +33,13 @@ class MainScreenMenuDialog : HibiBottomSheetDialogFragment() {
 	}
 
 	private fun bindViews(view: View) {
+		view.findViewById<MaterialButton>(R.id.btn_main_menu_statistics)
+			.setOnClickListener {
+				val statisticsAction = MainScreenFragmentDirections.statisticsAction()
+				Navigation.findNavController(requireParentFragment().requireView()).navigate(statisticsAction)
+				dismiss()
+			}
+
 		view.findViewById<MaterialButton>(R.id.btn_main_menu_favourite)
 			.setOnClickListener {
 				val favouriteAction = MainScreenFragmentDirections.favouritesAction()

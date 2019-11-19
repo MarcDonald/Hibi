@@ -39,13 +39,13 @@ class LicenseDisplay(context: Context, attributeSet: AttributeSet?, defStyle: In
 		if(attributeSet != null) {
 			val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.LicenseDisplay, defStyle, 0)
 
-			val title = attributes.getString(R.styleable.LicenseDisplay_title)
+			val title = attributes.getString(R.styleable.LicenseDisplay_ldTitle)
 			titleText.text = title
 
-			val description = attributes.getString(R.styleable.LicenseDisplay_description)
+			val description = attributes.getString(R.styleable.LicenseDisplay_ldDescription)
 			descriptionText.text = description
 
-			val license = attributes.getString(R.styleable.LicenseDisplay_license)
+			val license = attributes.getString(R.styleable.LicenseDisplay_ldLicense)
 			licenseText.text = license
 
 			attributes.recycle()
