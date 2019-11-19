@@ -89,6 +89,12 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
 	override val entriesInBooksCount: LiveData<Int>
 		get() = dao.getCountEntriesInBooks()
 
+	override suspend fun getBookWithMostEntries(): Book? {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getBookWithMostEntries()
+		}
+	}
+
 	companion object {
 		@Volatile private var instance: BookEntryRelationRepositoryImpl? = null
 

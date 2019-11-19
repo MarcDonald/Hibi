@@ -95,7 +95,7 @@ class HibiViewModelFactory(private val entryRepository: EntryRepository,
 				isAssignableFrom(ThrowbackFragmentViewModel::class.java)   -> ThrowbackFragmentViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository)
 				isAssignableFrom(DateEntriesViewModel::class.java)         -> DateEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils, dateTimeUtils)
 				isAssignableFrom(FavouriteEntriesViewModel::class.java)    -> FavouriteEntriesViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, entryDisplayUtils)
-				isAssignableFrom(StatisticsViewModel::class.java)          -> StatisticsViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, newWordRepository)
+				isAssignableFrom(StatisticsViewModel::class.java)          -> StatisticsViewModel(entryRepository, tagEntryRelationRepository, bookEntryRelationRepository, newWordRepository, tagRepository)
 				else                                                       -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
 			}
 		} as T

@@ -391,6 +391,28 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/view_tagged_entries_action"
+      app:destination="@id/destination_tagged_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="tagID"
+        app:argType="integer" />
+    </action>
+    <action
+      android:id="@+id/view_book_entries_action"
+      app:destination="@id/destination_book_entries"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="bookID"
+        app:argType="integer" />
+    </action>
   </fragment>
   <!--endregion -->
 </navigation>

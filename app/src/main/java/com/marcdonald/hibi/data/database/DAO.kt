@@ -155,6 +155,11 @@ interface DAO {
 
 	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT entryId FROM TagEntryRelation )")
 	fun getCountTaggedEntries(): LiveData<Int>
+
+	// TODO
+	@Query("SELECT * FROM Tag LIMIT 1")
+	fun getTagWithMostEntries(): Tag?
+
 	// </editor-fold>
 
 	// <editor-fold desc="New Word">
@@ -245,6 +250,10 @@ interface DAO {
 
 	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT entryId FROM BookEntryRelation )")
 	fun getCountEntriesInBooks(): LiveData<Int>
+
+	// TODO
+	@Query("SELECT * FROM Book LIMIT 1")
+	fun getBookWithMostEntries(): Book?
 	// </editor-fold>
 
 	// <editor-fold desc="Entry Image">

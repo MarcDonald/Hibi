@@ -21,22 +21,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marcdonald.hibi.data.database.NumberAndDateObject
 import com.marcdonald.hibi.data.database.NumberAndIdObject
-import com.marcdonald.hibi.data.repository.BookEntryRelationRepository
-import com.marcdonald.hibi.data.repository.EntryRepository
-import com.marcdonald.hibi.data.repository.NewWordRepository
-import com.marcdonald.hibi.data.repository.TagEntryRelationRepository
+import com.marcdonald.hibi.data.entity.Book
+import com.marcdonald.hibi.data.entity.Tag
+import com.marcdonald.hibi.data.repository.*
 import kotlinx.coroutines.launch
 
 class StatisticsViewModel(private val entryRepository: EntryRepository,
 													private val tagEntryRelationRepository: TagEntryRelationRepository,
 													private val bookEntryRelationRepository: BookEntryRelationRepository,
-													private val newWordRepository: NewWordRepository)
+													private val newWordRepository: NewWordRepository,
+													private val tagRepository: TagRepository)
 	: ViewModel() {
 
 	init {
 		getMostNewWordsInOneDay()
 		getMostNewWordsInOneEntry()
 		getMostEntriesInOneDay()
+		getTagWithMostEntries()
+		getBookWithMostEntries()
 	}
 
 	val totalEntries: LiveData<Int>
@@ -54,8 +56,16 @@ class StatisticsViewModel(private val entryRepository: EntryRepository,
 	val totalTaggedEntries: LiveData<Int>
 		get() = tagEntryRelationRepository.taggedEntriesCount
 
+	private val _tagWithMostEntries = MutableLiveData<Tag>()
+	val tagWithMostEntries: LiveData<Tag>
+		get() = _tagWithMostEntries
+
 	val totalEntriesInBooks: LiveData<Int>
 		get() = bookEntryRelationRepository.entriesInBooksCount
+
+	private val _bookWithMostEntries = MutableLiveData<Book>()
+	val bookWithMostEntries: LiveData<Book>
+		get() = _bookWithMostEntries
 
 	val totalNewWords: LiveData<Int>
 		get() = newWordRepository.newWordCount
@@ -67,7 +77,6 @@ class StatisticsViewModel(private val entryRepository: EntryRepository,
 	private val _mostNewWordsInOneEntry = MutableLiveData<NumberAndIdObject>()
 	val mostNewWordsInOneEntry: LiveData<NumberAndIdObject>
 		get() = _mostNewWordsInOneEntry
-
 
 	private val _mostEntriesInOneDay = MutableLiveData<NumberAndDateObject>()
 	val mostEntriesInOneDay: LiveData<NumberAndDateObject>
@@ -91,6 +100,20 @@ class StatisticsViewModel(private val entryRepository: EntryRepository,
 		viewModelScope.launch {
 			val mostEntries = entryRepository.getMostEntriesInOneDay()
 			_mostEntriesInOneDay.postValue(mostEntries)
+		}
+	}
+
+	private fun getTagWithMostEntries() {
+		viewModelScope.launch {
+			val tagWithMostEntries = tagEntryRelationRepository.getTagWithMostEntries()
+			_tagWithMostEntries.postValue(tagWithMostEntries)
+		}
+	}
+
+	private fun getBookWithMostEntries() {
+		viewModelScope.launch {
+			val bookWithMostEntries = bookEntryRelationRepository.getBookWithMostEntries()
+			_bookWithMostEntries.postValue(bookWithMostEntries)
 		}
 	}
 }

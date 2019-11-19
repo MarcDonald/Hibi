@@ -43,4 +43,6 @@ interface TagEntryRelationRepository {
 	fun getCountTagsWithEntry(entryId: Int): LiveData<Int>
 
 	val taggedEntriesCount: LiveData<Int>
+
+	suspend fun getTagWithMostEntries(): Tag?
 }

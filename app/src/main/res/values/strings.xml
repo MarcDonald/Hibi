@@ -213,6 +213,8 @@
   <string name="most_new_words_one_entry">Most new words learnt in one entry</string>
   <string name="most_entries_one_day">Most entries made in one day</string>
   <string name="on_date">on %1$s</string>
+  <string name="tag_with_most_entries">Tag with most entries</string>
+  <string name="book_with_most_entries">Book with most entries</string>
   <!--endregion-->
 
   <!--region Settings-->

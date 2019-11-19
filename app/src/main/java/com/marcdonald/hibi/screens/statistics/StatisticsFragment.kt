@@ -45,7 +45,9 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 	private lateinit var totalDaysDisplay: TextStatisticDisplay
 	private lateinit var totalLocationsDisplay: TextStatisticDisplay
 	private lateinit var totalTaggedEntriesDisplay: TextStatisticDisplay
+	private lateinit var tagWithMostEntriesDisplay: TextStatisticDisplay
 	private lateinit var totalBookEntriesDisplay: TextStatisticDisplay
+	private lateinit var bookWithMostEntriesDisplay: TextStatisticDisplay
 	private lateinit var totalNewWordsDisplay: TextStatisticDisplay
 	private lateinit var mostNewWordsOneDayDisplay: TextStatisticDisplay
 	private lateinit var mostNewWordsOneEntryDisplay: TextStatisticDisplay
@@ -72,7 +74,9 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 		totalFavouritesDisplay = view.findViewById(R.id.stat_total_favourites)
 		totalLocationsDisplay = view.findViewById(R.id.stat_total_locations)
 		totalTaggedEntriesDisplay = view.findViewById(R.id.stat_total_tagged_entries)
+		tagWithMostEntriesDisplay = view.findViewById(R.id.stat_tag_with_most_entries)
 		totalBookEntriesDisplay = view.findViewById(R.id.stat_total_entries_added_to_books)
+		bookWithMostEntriesDisplay = view.findViewById(R.id.stat_book_with_most_entries)
 		totalNewWordsDisplay = view.findViewById(R.id.stat_total_new_words)
 		mostNewWordsOneDayDisplay = view.findViewById(R.id.stat_most_new_words_one_day)
 		mostNewWordsOneEntryDisplay = view.findViewById(R.id.stat_most_new_words_one_entry)
@@ -105,6 +109,20 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 		totalFavouritesDisplay.setOnClickListener {
 			val action = StatisticsFragmentDirections.favouritesAction()
 			Navigation.findNavController(view).navigate(action)
+		}
+
+		tagWithMostEntriesDisplay.setOnClickListener {
+			viewModel.tagWithMostEntries.value?.let { tag ->
+				val action = StatisticsFragmentDirections.viewTaggedEntriesAction(tag.id)
+				Navigation.findNavController(view).navigate(action)
+			}
+		}
+
+		bookWithMostEntriesDisplay.setOnClickListener {
+			viewModel.bookWithMostEntries.value?.let { book ->
+				val action = StatisticsFragmentDirections.viewBookEntriesAction(book.id)
+				Navigation.findNavController(view).navigate(action)
+			}
 		}
 	}
 
@@ -139,9 +157,21 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 			}
 		})
 
+		viewModel.tagWithMostEntries.observe(this, Observer { value ->
+			value?.let { tag ->
+				tagWithMostEntriesDisplay.setMessage(tag.name)
+			}
+		})
+
 		viewModel.totalEntriesInBooks.observe(this, Observer { value ->
 			value?.let { totalEntriesInBooks ->
 				totalBookEntriesDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, totalEntriesInBooks, totalEntriesInBooks))
+			}
+		})
+
+		viewModel.bookWithMostEntries.observe(this, Observer { value ->
+			value?.let { book ->
+				bookWithMostEntriesDisplay.setMessage(book.name)
 			}
 		})
 

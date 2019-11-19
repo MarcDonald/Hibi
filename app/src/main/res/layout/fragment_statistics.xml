@@ -146,6 +146,18 @@
         app:tsTitle="@string/total_tagged_entries"
         app:tsMessage="@string/message" />
 
+      <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
+        android:id="@+id/stat_tag_with_most_entries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginBottom="@dimen/margin_half"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        app:tsTitle="@string/tag_with_most_entries"
+        app:tsMessage="@string/message" />
+
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -160,12 +172,24 @@
         android:id="@+id/stat_total_entries_added_to_books"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_half"
+        style="@style/Widget.Hibi.CardView.Rounded"
+        app:tsTitle="@string/total_entries_in_books"
+        app:tsMessage="@string/message" />
+
+      <com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
+        android:id="@+id/stat_book_with_most_entries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_half"
         android:layout_marginBottom="@dimen/margin_half"
         style="@style/Widget.Hibi.CardView.Rounded"
-        app:tsTitle="@string/total_entries_in_books"
+        app:tsTitle="@string/book_with_most_entries"
         app:tsMessage="@string/message" />
 
       <TextView

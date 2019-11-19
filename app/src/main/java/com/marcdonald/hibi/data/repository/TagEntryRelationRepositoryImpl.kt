@@ -82,6 +82,12 @@ class TagEntryRelationRepositoryImpl private constructor(private val dao: DAO) :
 		}
 	}
 
+	override suspend fun getTagWithMostEntries(): Tag? {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getTagWithMostEntries()
+		}
+	}
+
 	override fun getCountTagsWithEntry(entryId: Int): LiveData<Int> {
 		return dao.getTagCountByEntryId(entryId)
 	}
