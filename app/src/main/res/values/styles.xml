@@ -102,6 +102,12 @@
     <item name="cardCornerRadius">8dp</item>
   </style>
 
+  <style name="Widget.Hibi.LicenseDisplay" parent="Widget.Hibi.CardView.Rounded">
+    <item name="sldTitleTextAppearance">@style/TextAppearance.Hibi.LicenseTitle</item>
+    <item name="sldDescriptionTextAppearance">@style/TextAppearance.Hibi.LicenseDescription</item>
+    <item name="sldLicenseTextAppearance">@style/TextAppearance.Hibi.LicenseLicense</item>
+  </style>
+
   <style name="Widget.Hibi.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
     <item name="android:fontFamily">@font/open_sans</item>
     <item name="android:textColor">?hibiTextOnPrimary</item>

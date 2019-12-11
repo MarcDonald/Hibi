@@ -330,6 +330,9 @@
   <string name="glide">Glide</string>
   <string name="glide_description">Used for displaying images</string>
 
+  <string name="simple_license_display">Simple License Display</string>
+  <string name="simple_license_display_description">Used for displaying OSS licenses (like this one!)</string>
+
   <string name="jisho_thanks">Search Powered by Jisho.org\'s API</string>
   <string name="share">Share</string>
   <string name="restore_title">Select a file to restore from</string>

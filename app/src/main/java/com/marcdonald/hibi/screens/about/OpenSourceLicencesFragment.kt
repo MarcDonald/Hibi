@@ -26,7 +26,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.marcdonald.hibi.R
-import com.marcdonald.hibi.uicomponents.views.LicenseDisplay
+import com.marcdonald.simplelicensedisplay.SimpleLicenseDisplay
 
 class OpenSourceLicencesFragment : Fragment() {
 
@@ -40,35 +40,38 @@ class OpenSourceLicencesFragment : Fragment() {
 		view.findViewById<TextView>(R.id.txt_back_toolbar_title).text = resources.getString(R.string.open_source_licenses)
 		view.findViewById<ImageView>(R.id.img_back_toolbar_back).setOnClickListener(backClickListener)
 
-		view.findViewById<LicenseDisplay>(R.id.license_timber)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_timber)
 			.setOnClickListener(openURLClickListener("https://github.com/JakeWharton/timber"))
 
-		view.findViewById<LicenseDisplay>(R.id.license_kodein)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_kodein)
 			.setOnClickListener(openURLClickListener("https://github.com/Kodein-Framework/Kodein-DI"))
 
-		view.findViewById<LicenseDisplay>(R.id.license_retrofit)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_retrofit)
 			.setOnClickListener(openURLClickListener("https://github.com/square/retrofit"))
 
-		view.findViewById<LicenseDisplay>(R.id.license_gson)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_gson)
 			.setOnClickListener(openURLClickListener("https://github.com/google/gson"))
 
-		view.findViewById<LicenseDisplay>(R.id.license_android_file_picker)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_android_file_picker)
 			.setOnClickListener(openURLClickListener("https://github.com/DroidNinja/Android-FilePicker"))
 
-		view.findViewById<LicenseDisplay>(R.id.license_mplus)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_mplus)
 			.setOnClickListener(openURLClickListener("https://fonts.google.com/specimen/M+PLUS+Rounded+1c"))
 
-		view.findViewById<LicenseDisplay>(R.id.license_open_sans)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_open_sans)
 			.setOnClickListener(openURLClickListener("https://fonts.google.com/specimen/Open+Sans"))
 
-		view.findViewById<LicenseDisplay>(R.id.license_google_material_icons)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_google_material_icons)
 			.setOnClickListener(openURLClickListener("https://material.io/tools/icons/"))
 
-		view.findViewById<LicenseDisplay>(R.id.license_material_icons)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_material_icons)
 			.setOnClickListener(openURLClickListener("https://materialdesignicons.com/"))
 
-		view.findViewById<LicenseDisplay>(R.id.license_glide)
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_glide)
 			.setOnClickListener(openURLClickListener("https://github.com/bumptech/glide"))
+
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_simple_license_display)
+			.setOnClickListener(openURLClickListener("https://github.com/MarcDonald/SimpleLicenseDisplay"))
 	}
 
 	private val backClickListener = View.OnClickListener {

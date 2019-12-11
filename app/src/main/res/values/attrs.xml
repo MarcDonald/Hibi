@@ -28,12 +28,6 @@
     <attr name="sbHint" format="string" />
   </declare-styleable>
 
-  <declare-styleable name="LicenseDisplay">
-    <attr name="ldTitle" format="string" />
-    <attr name="ldDescription" format="string" />
-    <attr name="ldLicense" format="string" />
-  </declare-styleable>
-
   <declare-styleable name="TextStatisticDisplay">
     <attr name="tsTitle" format="string" />
     <attr name="tsMessage" format="string" />
