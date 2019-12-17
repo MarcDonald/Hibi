@@ -16,11 +16,12 @@
 package com.marcdonald.hibi.data.repository
 
 import androidx.lifecycle.LiveData
+import com.marcdonald.hibi.data.database.NumberAndIdObject
 import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.entity.Tag
 import com.marcdonald.hibi.data.entity.TagEntryRelation
 import com.marcdonald.hibi.screens.mainentriesrecycler.TagEntryDisplayItem
-import com.marcdonald.hibi.screens.tagsscreen.maintagsfragment.TagDisplayItem
+import com.marcdonald.hibi.screens.tags.maintags.TagDisplayItem
 
 interface TagEntryRelationRepository {
 
@@ -41,4 +42,8 @@ interface TagEntryRelationRepository {
 	suspend fun getTagEntryDisplayItems(): List<TagEntryDisplayItem>
 
 	fun getCountTagsWithEntry(entryId: Int): LiveData<Int>
+
+	val taggedEntriesCount: LiveData<Int>
+
+	suspend fun getTagWithMostEntries(): NumberAndIdObject?
 }

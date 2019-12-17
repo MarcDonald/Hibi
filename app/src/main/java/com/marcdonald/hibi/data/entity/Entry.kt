@@ -31,4 +31,5 @@ data class Entry(
 	@PrimaryKey(autoGenerate = true)
 	var id: Int = 0
 	var location: String = ""
+	var isFavourite: Boolean = false
 }

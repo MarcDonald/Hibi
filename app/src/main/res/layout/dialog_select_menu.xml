@@ -22,49 +22,71 @@
 
   <ImageView
     android:id="@+id/img_select_tag"
-    android:layout_width="@dimen/option_bar_icon_width"
-    android:layout_height="@dimen/option_bar_height"
+    android:layout_width="@dimen/select_menu_icon_width"
+    android:layout_height="@dimen/select_menu_icon_height"
     android:background="?selectableItemBackground"
     android:clickable="true"
     android:contentDescription="@string/add_tags_to_entry_hint"
     android:focusable="true"
-    android:padding="@dimen/option_bar_icon_padding"
+    android:padding="@dimen/select_menu_icon_padding"
+    android:layout_marginStart="@dimen/select_menu_icon_margin"
+    android:layout_marginEnd="@dimen/select_menu_icon_margin"
     android:layout_weight="1"
     android:src="@drawable/ic_tag_24dp" />
 
   <ImageView
     android:id="@+id/img_select_book"
-    android:layout_width="@dimen/option_bar_icon_width"
-    android:layout_height="@dimen/option_bar_height"
+    android:layout_width="@dimen/select_menu_icon_width"
+    android:layout_height="@dimen/select_menu_icon_height"
     android:background="?selectableItemBackground"
     android:clickable="true"
     android:contentDescription="@string/add_entry_to_book_hint"
     android:focusable="true"
-    android:padding="@dimen/option_bar_icon_padding"
+    android:padding="@dimen/select_menu_icon_padding"
+    android:layout_marginStart="@dimen/select_menu_icon_margin"
+    android:layout_marginEnd="@dimen/select_menu_icon_margin"
     android:layout_weight="1"
     android:src="@drawable/ic_book_24dp" />
 
   <ImageView
     android:id="@+id/img_select_location"
-    android:layout_width="@dimen/option_bar_icon_width"
-    android:layout_height="@dimen/option_bar_height"
+    android:layout_width="@dimen/select_menu_icon_width"
+    android:layout_height="@dimen/select_menu_icon_height"
     android:background="?selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
     android:contentDescription="@string/add_location_to_entry"
-    android:padding="@dimen/option_bar_icon_padding"
+    android:padding="@dimen/select_menu_icon_padding"
+    android:layout_marginStart="@dimen/select_menu_icon_margin"
+    android:layout_marginEnd="@dimen/select_menu_icon_margin"
     android:layout_weight="1"
     android:src="@drawable/ic_location_on_24dp" />
 
   <ImageView
+    android:id="@+id/img_select_favourite"
+    android:layout_width="@dimen/select_menu_icon_width"
+    android:layout_height="@dimen/select_menu_icon_height"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:contentDescription="@string/favourite_entry"
+    android:padding="@dimen/select_menu_icon_padding"
+    android:layout_marginStart="@dimen/select_menu_icon_margin"
+    android:layout_marginEnd="@dimen/select_menu_icon_margin"
+    android:layout_weight="1"
+    android:src="@drawable/ic_star_24dp" />
+
+  <ImageView
     android:id="@+id/img_select_delete"
-    android:layout_width="@dimen/option_bar_icon_width"
-    android:layout_height="@dimen/option_bar_height"
+    android:layout_width="@dimen/select_menu_icon_width"
+    android:layout_height="@dimen/select_menu_icon_height"
     android:background="?selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
     android:contentDescription="@string/delete"
-    android:padding="@dimen/option_bar_icon_padding"
+    android:padding="@dimen/select_menu_icon_padding"
+    android:layout_marginStart="@dimen/select_menu_icon_margin"
+    android:layout_marginEnd="@dimen/select_menu_icon_margin"
     android:layout_weight="1"
     android:src="@drawable/ic_delete_24dp" />
 </LinearLayout>

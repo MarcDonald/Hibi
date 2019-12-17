@@ -16,10 +16,11 @@
 package com.marcdonald.hibi.data.repository
 
 import androidx.lifecycle.LiveData
+import com.marcdonald.hibi.data.database.NumberAndIdObject
 import com.marcdonald.hibi.data.entity.Book
 import com.marcdonald.hibi.data.entity.BookEntryRelation
 import com.marcdonald.hibi.data.entity.Entry
-import com.marcdonald.hibi.screens.booksscreen.mainbooksfragment.BookDisplayItem
+import com.marcdonald.hibi.screens.books.mainbooks.BookDisplayItem
 import com.marcdonald.hibi.screens.mainentriesrecycler.BookEntryDisplayItem
 
 interface BookEntryRelationRepository {
@@ -41,4 +42,8 @@ interface BookEntryRelationRepository {
 	suspend fun getBookEntryDisplayItems(): List<BookEntryDisplayItem>
 
 	fun getCountBooksWithEntryLD(entryId: Int): LiveData<Int>
+
+	val entriesInBooksCount: LiveData<Int>
+
+	suspend fun getBookWithMostEntries(): NumberAndIdObject?
 }

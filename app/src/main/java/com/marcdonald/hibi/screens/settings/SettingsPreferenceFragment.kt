@@ -60,25 +60,35 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 	private fun bindViews() {
 		val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
-		findPreference(PREF_DARK_THEME).onPreferenceChangeListener = onThemeChangeListener
-		findPreference(PREF_REMINDER_NOTIFICATION).onPreferenceChangeListener = reminderChangeListener
+		findPreference<Preference>(PREF_DARK_THEME)?.onPreferenceChangeListener = onThemeChangeListener
+		findPreference<Preference>(PREF_REMINDER_NOTIFICATION)?.onPreferenceChangeListener = reminderChangeListener
 		if(sharedPreferences.getBoolean(PREF_REMINDER_NOTIFICATION, false)) {
 			displayReminderTimeSummary()
 		}
-		findPreference(PREF_REMINDER_TIME).onPreferenceClickListener = reminderTimeClickListener
+		findPreference<Preference>(PREF_REMINDER_TIME)?.onPreferenceClickListener = reminderTimeClickListener
 		sharedPreferences.registerOnSharedPreferenceChangeListener(reminderTimeChangeListener)
 
-		@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-		matchSummaryToSelection(findPreference(PREF_CLIPBOARD_BEHAVIOR), sharedPreferences.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
-		sharedPreferences.registerOnSharedPreferenceChangeListener(clipboardBehaviorChangeListener)
+		val clipboardBehaviorPreference = findPreference<Preference>(PREF_CLIPBOARD_BEHAVIOR)
+		clipboardBehaviorPreference?.let {
+			@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+			matchSummaryToSelection(clipboardBehaviorPreference, sharedPreferences.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
+			sharedPreferences.registerOnSharedPreferenceChangeListener(clipboardBehaviorChangeListener)
+		}
 
-		findPreference(PREF_BACKUP).onPreferenceClickListener = backupClickListener
-		findPreference(PREF_RESTORE).onPreferenceClickListener = restoreClickListener
+		val dateHeaderPeriodPreference = findPreference<Preference>(PREF_DATE_HEADER_PERIOD)
+		dateHeaderPeriodPreference?.let {
+			@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+			matchSummaryToSelection(dateHeaderPeriodPreference, sharedPreferences.getString(PREF_DATE_HEADER_PERIOD, "1"))
+			sharedPreferences.registerOnSharedPreferenceChangeListener(dateHeaderPeriodChangeListener)
+		}
 
-		val mainEntryDisplayItems = findPreference(PREF_MAIN_ENTRY_DISPLAY_ITEMS)
-		mainEntryDisplayItems.onPreferenceClickListener = mainEntryDisplayItemsClickListener
+		findPreference<Preference>(PREF_BACKUP)?.onPreferenceClickListener = backupClickListener
+		findPreference<Preference>(PREF_RESTORE)?.onPreferenceClickListener = restoreClickListener
 
-		findPreference("pref_app_update").onPreferenceClickListener = Preference.OnPreferenceClickListener {
+		val mainEntryDisplayItems = findPreference<Preference>(PREF_MAIN_ENTRY_DISPLAY_ITEMS)
+		mainEntryDisplayItems?.onPreferenceClickListener = mainEntryDisplayItemsClickListener
+
+		findPreference<Preference>("pref_app_update")?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
 			val dialog = UpdateDialog()
 			dialog.show(requireFragmentManager(), "Update Dialog")
 			true
@@ -93,7 +103,10 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 	private fun displayReminderTimeSummary(calendar: Calendar) {
 		val timePattern = DateFormat.getBestDateTimePattern(Locale.getDefault(), "HHmm")
 		val formattedTime = DateFormat.format(timePattern, calendar) as String
-		matchSummaryToSelection(findPreference(PREF_REMINDER_TIME), formattedTime)
+		val reminderTimePreference = findPreference<Preference>(PREF_REMINDER_TIME)
+		reminderTimePreference?.let {
+			matchSummaryToSelection(reminderTimePreference, formattedTime)
+		}
 	}
 
 	private fun displayReminderTimeSummary() {
@@ -121,7 +134,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 			displayReminderTimeSummary(calendar)
 			reminderAlertReceiver.startAlarm(requireContext())
 		} else {
-			findPreference(PREF_REMINDER_TIME).summary = resources.getString(R.string.reminder_not_set)
+			findPreference<Preference>(PREF_REMINDER_TIME)?.summary = resources.getString(R.string.reminder_not_set)
 			reminderAlertReceiver.cancelAlarm(requireContext())
 		}
 		true
@@ -130,13 +143,29 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 	private val reminderTimeChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, _ ->
 		if(prefs.getBoolean(PREF_REMINDER_NOTIFICATION, false))
 			displayReminderTimeSummary()
-		else
-			matchSummaryToSelection(findPreference(PREF_REMINDER_TIME), resources.getString(R.string.reminder_not_set))
+		else {
+			val reminderTimePreference = findPreference<Preference>(PREF_REMINDER_TIME)
+			reminderTimePreference?.let {
+				matchSummaryToSelection(reminderTimePreference, resources.getString(R.string.reminder_not_set))
+			}
+		}
 	}
 
 	private val clipboardBehaviorChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, _ ->
 		@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-		matchSummaryToSelection(findPreference(PREF_CLIPBOARD_BEHAVIOR), prefs.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
+		val clipboardBehaviorPreference = findPreference<Preference>(PREF_CLIPBOARD_BEHAVIOR)
+		clipboardBehaviorPreference?.let {
+			@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+			matchSummaryToSelection(clipboardBehaviorPreference, prefs.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
+		}
+	}
+
+	private val dateHeaderPeriodChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, _ ->
+		val dateHeaderPeriodPreference = findPreference<Preference>(PREF_DATE_HEADER_PERIOD)
+		dateHeaderPeriodPreference?.let {
+			@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+			matchSummaryToSelection(dateHeaderPeriodPreference, prefs.getString(PREF_DATE_HEADER_PERIOD, "1"))
+		}
 	}
 
 	private val reminderTimeClickListener = Preference.OnPreferenceClickListener {

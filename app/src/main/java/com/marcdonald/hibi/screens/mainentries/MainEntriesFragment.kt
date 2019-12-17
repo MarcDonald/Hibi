@@ -21,34 +21,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
+import com.marcdonald.hibi.internal.PREF_DATE_HEADER_PERIOD
 import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
+import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
+import com.marcdonald.hibi.screens.main.MainScreenFragmentDirections
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDecoration
+import com.marcdonald.hibi.screens.multiselectdialog.MultiSelectMenu
+import com.marcdonald.hibi.screens.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
+import com.marcdonald.hibi.screens.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryDialog
 import com.marcdonald.hibi.uicomponents.BinaryOptionDialog
 import com.marcdonald.hibi.uicomponents.TextInputDialog
-import com.marcdonald.hibi.uicomponents.multiselectdialog.MultiSelectMenu
-import com.marcdonald.hibi.uicomponents.multiselectdialog.addmultientrytobookdialog.AddMultiEntryToBookDialog
-import com.marcdonald.hibi.uicomponents.multiselectdialog.addtagtomultientrydialog.AddTagToMultiEntryDialog
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class MainEntriesFragment : Fragment(), KodeinAware {
-	override val kodein by closestKodein()
+class MainEntriesFragment : HibiFragment() {
 
-	// <editor-fold desc="View Model">
-	private val viewModelFactory: MainEntriesViewModelFactory by instance()
-	private lateinit var viewModel: MainEntriesViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<MainEntriesViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingDisplay: ConstraintLayout
@@ -61,11 +57,6 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 			if(recyclerAdapter.getSelectedEntryIds().isNotEmpty())
 				recyclerAdapter.clearSelectedEntries()
 		}
-	}
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainEntriesViewModel::class.java)
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -88,18 +79,20 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 
 	private fun initRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_entries)
-		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), true, onSelectClick, requireActivity().theme)
+		this.recyclerAdapter = EntriesRecyclerAdapter(requireContext(), ::onEntryClick, true, onSelectClick, requireActivity().theme)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
 
-		val includeEntryDividers = PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(PREF_ENTRY_DIVIDERS, true)
-		if(includeEntryDividers) {
+		val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+		if(prefs.getBoolean(PREF_ENTRY_DIVIDERS, true)) {
 			val dividerItemDecoration = DividerItemDecoration(recycler.context, layoutManager.orientation)
 			recycler.addItemDecoration(dividerItemDecoration)
 		}
-		val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
-		recycler.addItemDecoration(decoration)
+		if(prefs.getString(PREF_DATE_HEADER_PERIOD, "1") != "0") {
+			val decoration = MainEntriesHeaderItemDecoration(recycler, recyclerAdapter)
+			recycler.addItemDecoration(decoration)
+		}
 	}
 
 	private fun setupObservers() {
@@ -136,10 +129,11 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 	private val onMultiSelectMenuItemSelected = object : MultiSelectMenu.ItemSelectedListener {
 		override fun itemSelected(item: Int) {
 			when(item) {
-				MultiSelectMenu.TAG      -> initMultiTagDialog()
-				MultiSelectMenu.BOOK     -> initMultiBookDialog()
-				MultiSelectMenu.LOCATION -> initMultiLocationSetDialog()
-				MultiSelectMenu.DELETE   -> initMultiDeleteDialog()
+				MultiSelectMenu.TAG       -> initMultiTagDialog()
+				MultiSelectMenu.BOOK      -> initMultiBookDialog()
+				MultiSelectMenu.LOCATION  -> initMultiLocationSetDialog()
+				MultiSelectMenu.DELETE    -> initMultiDeleteDialog()
+				MultiSelectMenu.FAVOURITE -> initMultiFavouriteDialog()
 			}
 		}
 	}
@@ -187,5 +181,27 @@ class MainEntriesFragment : Fragment(), KodeinAware {
 		})
 		deleteConfirmDialog.setPositiveButton(resources.getString(R.string.cancel), View.OnClickListener { deleteConfirmDialog.dismiss() })
 		deleteConfirmDialog.show(requireFragmentManager(), "Confirm Multi Delete Dialog")
+	}
+
+	private fun initMultiFavouriteDialog() {
+		val addOrRemoveFavouriteDialog = BinaryOptionDialog()
+		val selectedAmount = recyclerAdapter.getSelectedEntryIds().size
+		addOrRemoveFavouriteDialog.setTitle(resources.getQuantityString(R.plurals.multi_favourite_title, selectedAmount, selectedAmount))
+		addOrRemoveFavouriteDialog.setMessage(resources.getQuantityString(R.plurals.multi_favourite_message, selectedAmount, selectedAmount))
+		addOrRemoveFavouriteDialog.setNegativeButton(resources.getString(R.string.remove), View.OnClickListener {
+			viewModel.setSelectedEntriesFavourited(false, recyclerAdapter.getSelectedEntryIds())
+			addOrRemoveFavouriteDialog.dismiss()
+		})
+		addOrRemoveFavouriteDialog.setPositiveButton(resources.getString(R.string.add), View.OnClickListener {
+			viewModel.setSelectedEntriesFavourited(true, recyclerAdapter.getSelectedEntryIds())
+			addOrRemoveFavouriteDialog.dismiss()
+		})
+		addOrRemoveFavouriteDialog.show(requireFragmentManager(), "Multi Favourite Dialog")
+	}
+
+	private fun onEntryClick(entryId: Int) {
+		val viewEntryAction = MainScreenFragmentDirections.viewEntryAction()
+		viewEntryAction.entryId = entryId
+		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}
 }

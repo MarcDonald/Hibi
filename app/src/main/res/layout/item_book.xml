@@ -30,6 +30,8 @@
     android:text="@string/book_name"
     android:textAppearance="@style/TextAppearance.Hibi.MainEntryDateTime"
     android:layout_margin="@dimen/margin_standard"
+    android:maxLines="1"
+    android:ellipsize="end"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/book_item_count"
     app:layout_constraintTop_toTopOf="parent"

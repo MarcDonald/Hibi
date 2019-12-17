@@ -66,6 +66,7 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
 				.addMigrations(MIGRATION_10_TO_11())
 				.addMigrations(MIGRATION_11_TO_12())
 				.addMigrations(MIGRATION_12_TO_13())
+				.addMigrations(MIGRATION_13_TO_14())
 				.build()
 
 		class MIGRATION_3_TO_5 : Migration(3, 5) {
@@ -190,6 +191,25 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
 				database.execSQL("CREATE INDEX BookEntryRelation_EntryId_Index ON BookEntryRelation (entryId)")
 				database.execSQL("CREATE INDEX NewWord_EntryId_Index ON NewWord (entryId)")
 				database.execSQL("CREATE INDEX TagEntryRelation_EntryId_Index ON TagEntryRelation (entryId)")
+			}
+		}
+
+		class MIGRATION_13_TO_14 : Migration(13, 14) {
+			override fun migrate(database: SupportSQLiteDatabase) {
+				// Add locationId to Entry table
+				database.execSQL("ALTER TABLE Entry RENAME TO EntryOLD")
+				database.execSQL("CREATE TABLE Entry(id INTEGER PRIMARY KEY NOT NULL, " +
+												 "day INTEGER NOT NULL," +
+												 "month INTEGER NOT NULL," +
+												 "year INTEGER NOT NULL," +
+												 "hour INTEGER NOT NULL," +
+												 "minute INTEGER NOT NULL," +
+												 "content TEXT NOT NULL," +
+												 "location TEXT NOT NULL DEFAULT ''," +
+												 "isFavourite INTEGER NOT NULL DEFAULT 0)")
+				database.execSQL("INSERT INTO Entry(id, day, month, year, hour, minute, content) " +
+												 "SELECT id, day, month, year, hour, minute, content FROM EntryOLD")
+				database.execSQL("DROP TABLE EntryOLD")
 			}
 		}
 	}

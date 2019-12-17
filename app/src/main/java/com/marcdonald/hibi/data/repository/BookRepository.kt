@@ -20,6 +20,8 @@ import com.marcdonald.hibi.data.entity.Book
 
 interface BookRepository {
 
+	suspend fun getBook(bookId: Int): Book
+
 	suspend fun addBook(book: Book)
 
 	suspend fun deleteBook(bookId: Int)

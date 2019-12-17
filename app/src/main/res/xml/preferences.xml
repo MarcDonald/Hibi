@@ -31,6 +31,18 @@
       android:key="pref_recycler_animations"
       android:icon="@drawable/ic_dehaze_24dp"
       android:title="@string/list_animations" />
+    <Preference
+      android:key="pref_main_entry_display_items"
+      android:title="@string/parts_to_display_on_main_screen"
+      android:icon="@drawable/ic_format_list_bulleted_24dp" />
+    <ListPreference
+      android:key="pref_date_header_period"
+      android:title="@string/date_header_period"
+      android:icon="@drawable/ic_date_range_24dp"
+      android:entries="@array/date_header_periods"
+      android:entryValues="@array/date_header_periods_values"
+      android:defaultValue="1"
+      android:summary="@string/month" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/behaviour">
@@ -49,11 +61,6 @@
       android:summary="@string/save_on_lose_focus_summary"
       android:icon="@drawable/ic_save_24dp"
       android:defaultValue="false" />
-
-    <Preference
-      android:key="pref_main_entry_display_items"
-      android:title="@string/parts_to_display_on_main_screen"
-      android:icon="@drawable/ic_format_list_bulleted_24dp" />
 
     <SwitchPreference
       android:key="pref_periodically_update_check"

@@ -29,7 +29,7 @@
       android:id="@+id/searchbar_add_entry"
       android:layout_width="match_parent"
       android:layout_height="@dimen/search_bar_height"
-      app:hint="@string/search_bar_hint" />
+      app:sbHint="@string/search_bar_hint" />
 
     <include layout="@layout/include_option_bar" />
   </LinearLayout>

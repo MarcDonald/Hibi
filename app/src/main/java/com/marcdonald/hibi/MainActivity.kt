@@ -22,7 +22,7 @@ import com.marcdonald.hibi.internal.ADD_ENTRY_NOTIFICATION_INTENT_ACTION
 import com.marcdonald.hibi.internal.ADD_ENTRY_SHORTCUT_INTENT_ACTION
 import com.marcdonald.hibi.internal.REMINDER_NOTIFICATION_ID
 import com.marcdonald.hibi.internal.base.HibiActivity
-import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
+import com.marcdonald.hibi.screens.main.MainScreenFragmentDirections
 import timber.log.Timber
 
 class MainActivity : HibiActivity() {
@@ -36,7 +36,11 @@ class MainActivity : HibiActivity() {
 			Timber.d("Log: onCreate: Started with Add Entry intent")
 
 			val addEntryAction = MainScreenFragmentDirections.addEntryAction()
-			Navigation.findNavController(this, R.id.nav_host_fragment).navigate(addEntryAction)
+			try {
+				Navigation.findNavController(this, R.id.nav_host_fragment).navigate(addEntryAction)
+			} catch(e: IllegalArgumentException) {
+				Timber.w("Log: onCreate: Theme changed after opening app with an intent")
+			}
 
 			if(intent.action == ADD_ENTRY_NOTIFICATION_INTENT_ACTION)
 				NotificationManagerCompat.from(this).cancel(REMINDER_NOTIFICATION_ID)

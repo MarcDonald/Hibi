@@ -1,4 +1,5 @@
 # Built application files
+app/release/
 *.apk
 *.ap_
 
@@ -79,3 +80,6 @@ fastlane/readme.md
 /build
 /captures
 .externalNativeBuild
+
+# Test Files
+test-databases/

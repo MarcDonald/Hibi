@@ -17,13 +17,13 @@ package com.marcdonald.hibi.screens.mainentriesrecycler
 
 import android.content.res.Resources
 import android.preference.PreferenceManager
+import android.text.TextUtils
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.Navigation
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.marcdonald.hibi.R
@@ -31,14 +31,20 @@ import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_BOOKS
 import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_LOCATION
 import com.marcdonald.hibi.internal.PREF_MAIN_ENTRY_DISPLAY_TAGS
 import com.marcdonald.hibi.internal.extension.show
-import com.marcdonald.hibi.internal.utils.formatDateForDisplay
-import com.marcdonald.hibi.internal.utils.formatTimeForDisplay
-import com.marcdonald.hibi.screens.mainscreen.MainScreenFragmentDirections
+import com.marcdonald.hibi.internal.utils.DateTimeUtils
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
-class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?,
+class EntriesRecyclerViewHolder(private val onClick: (Int) -> Unit,
+																private val onSelectClick: View.OnClickListener?,
 																itemView: View,
 																private val theme: Resources.Theme)
-	: BaseEntriesRecyclerViewHolder(itemView) {
+	: BaseEntriesRecyclerViewHolder(itemView), KodeinAware {
+
+	override val kodein: Kodein by closestKodein(itemView.context)
+	private val dateTimeUtils: DateTimeUtils by instance()
 
 	// <editor-fold desc="UI Components">
 	private var dateDisplay: TextView = itemView.findViewById(R.id.item_date)
@@ -55,11 +61,9 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 	// </editor-fold>
 
 	private val clickListener = View.OnClickListener {
-		val viewEntryAction = MainScreenFragmentDirections.viewEntryAction()
-		if(displayedItem != null) {
-			viewEntryAction.entryId = displayedItem!!.entry.id
+		displayedItem?.let { item ->
+			onClick(item.entry.id)
 		}
-		Navigation.findNavController(itemView).navigate(viewEntryAction)
 	}
 
 	init {
@@ -68,14 +72,15 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 
 	override fun display(item: MainEntriesDisplayItem) {
 		this.displayedItem = item
-		val dateDisplayText = formatDateForDisplay(item.entry.day, item.entry.month, item.entry.year)
+		val dateDisplayText = dateTimeUtils.formatDateForDisplay(item.entry.day, item.entry.month, item.entry.year)
 		dateDisplay.text = dateDisplayText
-		val timeDisplayText = formatTimeForDisplay(item.entry.hour, item.entry.minute)
+		val timeDisplayText = dateTimeUtils.formatTimeForDisplay(item.entry.hour, item.entry.minute)
 		timeDisplay.text = timeDisplayText
 		contentDisplay.text = item.entry.content
 		displayLocation()
 		displayTags()
 		displayBooks()
+
 		if(item.isSelected) {
 			val typedValue = TypedValue()
 			theme.resolveAttribute(R.attr.hibiSelectedItemColor, typedValue, true)
@@ -86,6 +91,9 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 		val selectedIcon: ImageView = itemView.findViewById(R.id.img_item_selected)
 		selectedIcon.show(item.isSelected)
 		selectedIcon.setOnClickListener(onSelectClick)
+
+		val favouritedIcon: ImageView = itemView.findViewById(R.id.img_item_favourited)
+		favouritedIcon.show(item.entry.isFavourite)
 	}
 
 	private fun displayLocation() {
@@ -113,6 +121,7 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 				if(item.tags.isNotEmpty()) {
 					item.tags.forEach { tagName ->
 						val chip = Chip(itemView.context)
+						chip.ellipsize = TextUtils.TruncateAt.END
 						chip.text = tagName
 						tagChipGroup.addView(chip)
 					}
@@ -133,6 +142,7 @@ class EntriesRecyclerViewHolder(private val onSelectClick: View.OnClickListener?
 				if(item.books.isNotEmpty()) {
 					item.books.forEach { bookName ->
 						val chip = Chip(itemView.context)
+						chip.ellipsize = TextUtils.TruncateAt.END
 						chip.text = bookName
 						bookChipGroup.addView(chip)
 					}

@@ -18,10 +18,11 @@ package com.marcdonald.hibi.data.repository
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import com.marcdonald.hibi.data.database.DAO
+import com.marcdonald.hibi.data.database.NumberAndIdObject
 import com.marcdonald.hibi.data.entity.Book
 import com.marcdonald.hibi.data.entity.BookEntryRelation
 import com.marcdonald.hibi.data.entity.Entry
-import com.marcdonald.hibi.screens.booksscreen.mainbooksfragment.BookDisplayItem
+import com.marcdonald.hibi.screens.books.mainbooks.BookDisplayItem
 import com.marcdonald.hibi.screens.mainentriesrecycler.BookEntryDisplayItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -83,6 +84,15 @@ class BookEntryRelationRepositoryImpl private constructor(private val dao: DAO) 
 	override suspend fun getBookEntryDisplayItems(): List<BookEntryDisplayItem> {
 		return withContext(Dispatchers.IO) {
 			return@withContext dao.getBookEntryDisplayItems()
+		}
+	}
+
+	override val entriesInBooksCount: LiveData<Int>
+		get() = dao.getCountEntriesInBooks()
+
+	override suspend fun getBookWithMostEntries(): NumberAndIdObject? {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getBookWithMostEntries()
 		}
 	}
 

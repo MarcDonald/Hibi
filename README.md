@@ -106,6 +106,11 @@ Used for image loading and caching
 
 [License](https://github.com/bumptech/glide/blob/master/LICENSE)
 
+### [Simple License Display](https://github.com/MarcDonald/SimpleLicenseDisplay)
+Used for displaying OSS licenses
+
+MIT License
+
 ## Acknowledgments
 Thanks to [Jisho.org](https://jisho.org/) for making the API used for searching up words.
 

@@ -23,24 +23,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
 import com.marcdonald.hibi.internal.extension.show
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
 
-class BackupDialog : HibiDialogFragment(), KodeinAware {
-	override val kodein: Kodein by closestKodein()
+class BackupDialog : HibiDialogFragment() {
 
-	// <editor-fold desc="View Model">
-	private val viewModelFactory: BackupDialogViewModelFactory by instance()
-	private lateinit var viewModel: BackupDialogViewModel
-	// </editor-fold>
+	private val viewModel by viewModels<BackupDialogViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingProgressBar: ProgressBar
@@ -52,7 +44,6 @@ class BackupDialog : HibiDialogFragment(), KodeinAware {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		viewModel = ViewModelProviders.of(this, viewModelFactory).get(BackupDialogViewModel::class.java)
 		isCancelable = false
 	}
 
