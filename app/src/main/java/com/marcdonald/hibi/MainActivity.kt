@@ -36,7 +36,11 @@ class MainActivity : HibiActivity() {
 			Timber.d("Log: onCreate: Started with Add Entry intent")
 
 			val addEntryAction = MainScreenFragmentDirections.addEntryAction()
-			Navigation.findNavController(this, R.id.nav_host_fragment).navigate(addEntryAction)
+			try {
+				Navigation.findNavController(this, R.id.nav_host_fragment).navigate(addEntryAction)
+			} catch(e: IllegalArgumentException) {
+				Timber.w("Log: onCreate: Theme changed after opening app with an intent")
+			}
 
 			if(intent.action == ADD_ENTRY_NOTIFICATION_INTENT_ACTION)
 				NotificationManagerCompat.from(this).cancel(REMINDER_NOTIFICATION_ID)
