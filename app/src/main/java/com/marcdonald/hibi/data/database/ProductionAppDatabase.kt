@@ -207,8 +207,8 @@ abstract class ProductionAppDatabase : RoomDatabase(), AppDatabase {
 												 "content TEXT NOT NULL," +
 												 "location TEXT NOT NULL DEFAULT ''," +
 												 "isFavourite INTEGER NOT NULL DEFAULT 0)")
-				database.execSQL("INSERT INTO Entry(id, day, month, year, hour, minute, content) " +
-												 "SELECT id, day, month, year, hour, minute, content FROM EntryOLD")
+				database.execSQL("INSERT INTO Entry(id, day, month, year, hour, minute, content, location) " +
+												 "SELECT id, day, month, year, hour, minute, content, location FROM EntryOLD")
 				database.execSQL("DROP TABLE EntryOLD")
 			}
 		}
