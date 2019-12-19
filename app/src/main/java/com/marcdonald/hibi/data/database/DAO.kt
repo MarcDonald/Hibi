@@ -87,7 +87,7 @@ interface DAO {
 	fun getCountDays(): LiveData<Int>
 
 	@Suppress("SpellCheckingInspection")
-	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT location COLLATE NOCASE FROM Entry )")
+	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT location COLLATE NOCASE FROM Entry WHERE location != '')")
 	fun getCountLocations(): LiveData<Int>
 
 	@Query("SELECT MAX(numEntries) as number, year, month, day FROM (SELECT COUNT(*) as numEntries, year, month, day FROM Entry GROUP BY Entry.year, Entry.month, Entry.day)")

@@ -135,7 +135,7 @@ class ThrowbackFragmentViewModel(private val entryRepository: EntryRepository,
 		val lastMonth = today.clone() as Calendar
 		// Need to set day to 1 as if it's 31 and the last month has 30 days it doesn't behave as expected
 		lastMonth.set(Calendar.DAY_OF_MONTH, 1)
-		lastMonth.set(Calendar.MONTH, lastMonth.get(Calendar.MONTH - 1))
+		lastMonth.set(Calendar.MONTH, lastMonth.get(Calendar.MONTH) - 1)
 		return lastMonth.getActualMaximum(Calendar.DAY_OF_MONTH) == 30
 	}
 
