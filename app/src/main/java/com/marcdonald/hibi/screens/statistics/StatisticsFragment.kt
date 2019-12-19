@@ -32,7 +32,6 @@ import com.marcdonald.hibi.uicomponents.views.TextStatisticDisplay
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class StatisticsFragment : HibiFragment(), KodeinAware {
 
@@ -83,8 +82,11 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 		bookWithMostEntriesDisplay.show(false)
 		totalNewWordsDisplay = view.findViewById(R.id.stat_total_new_words)
 		mostNewWordsOneDayDisplay = view.findViewById(R.id.stat_most_new_words_one_day)
+		mostNewWordsOneDayDisplay.show(false)
 		mostNewWordsOneEntryDisplay = view.findViewById(R.id.stat_most_new_words_one_entry)
+		mostNewWordsOneEntryDisplay.show(false)
 		mostEntriesInOneDayDisplay = view.findViewById(R.id.stat_most_entries_one_day)
+		mostEntriesInOneDayDisplay.show(false)
 	}
 
 	private fun setupClickListeners(view: View) {
@@ -200,9 +202,11 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 				val mostNewWords = newValue.number
 				mostNewWordsOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
 				if(newValue.number > 0) {
+					mostNewWordsOneDayDisplay.show(true)
 					val date = dateTimeUtils.formatDateForDisplay(newValue.day, newValue.month, newValue.year)
 					mostNewWordsOneDayDisplay.setSecondaryMessage(resources.getString(R.string.on_date, date))
 				} else {
+					mostNewWordsOneDayDisplay.show(false)
 					mostNewWordsOneDayDisplay.showSecondaryMessage(false)
 				}
 			}
@@ -210,9 +214,13 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 
 		viewModel.mostNewWordsInOneEntry.observe(this, Observer { value ->
 			value?.let { newValue ->
-				Timber.i("Log: setupObservers: $newValue")
 				val mostNewWords = newValue.number
-				mostNewWordsOneEntryDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
+				if(newValue.number > 0) {
+					mostNewWordsOneEntryDisplay.show(true)
+					mostNewWordsOneEntryDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
+				} else {
+					mostNewWordsOneEntryDisplay.show(false)
+				}
 			}
 		})
 
@@ -220,11 +228,12 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 			value?.let { newValue ->
 				val mostEntries = newValue.number
 				mostEntriesInOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, mostEntries, mostEntries))
-				if(newValue.number > 0) {
+				if(newValue.number > 1) {
+					mostEntriesInOneDayDisplay.show(true)
 					val date = dateTimeUtils.formatDateForDisplay(newValue.day, newValue.month, newValue.year)
 					mostEntriesInOneDayDisplay.setSecondaryMessage(resources.getString(R.string.on_date, date))
 				} else {
-					mostEntriesInOneDayDisplay.showSecondaryMessage(false)
+					mostEntriesInOneDayDisplay.show(false)
 				}
 			}
 		})
