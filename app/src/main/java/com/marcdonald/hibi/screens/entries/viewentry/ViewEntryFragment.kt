@@ -21,9 +21,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -101,6 +99,7 @@ class ViewEntryFragment : HibiFragment() {
 		dateButton = view.findViewById(R.id.btn_view_date)
 		timeButton = view.findViewById(R.id.btn_view_time)
 		contentDisplay = view.findViewById(R.id.txt_view_content)
+		contentDisplay.customSelectionActionModeCallback = quickSearchCallback
 		tagDisplay = view.findViewById(R.id.cg_view_tags)
 		tagDisplayHolder = view.findViewById(R.id.lin_view_tags)
 		bookDisplay = view.findViewById(R.id.cg_view_books)
@@ -131,6 +130,29 @@ class ViewEntryFragment : HibiFragment() {
 
 		newWordsButton = view.findViewById(R.id.btn_view_new_words)
 		newWordsButton.setOnClickListener(newWordsClickListener)
+	}
+
+	private val quickSearchCallback = object : ActionMode.Callback {
+		override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+			mode?.menuInflater?.inflate(R.menu.menu_text_selection, menu)
+			return true
+		}
+
+		override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+			item?.let {
+				if(item.itemId == R.id.selection_menu_search) {
+					val selectionStart = contentDisplay.selectionStart
+					val selectionEnd = contentDisplay.selectionEnd
+					val searchTerm = contentDisplay.text.substring(selectionStart, selectionEnd)
+					search(searchTerm)
+					return true
+				}
+			}
+			return false
+		}
+
+		override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = false
+		override fun onDestroyActionMode(mode: ActionMode?) {}
 	}
 
 	private fun setupObservers() {
