@@ -25,9 +25,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
@@ -122,6 +120,7 @@ class AddEntryFragment : HibiFragment() {
 		timeButton.setOnClickListener(timeClickListener)
 
 		contentInput = view.findViewById(R.id.edt_content)
+		contentInput.customSelectionActionModeCallback = quickSearchCallback
 
 		val saveButton: MaterialButton = view.findViewById(R.id.btn_save)
 		saveButton.setOnClickListener(saveClickListener)
@@ -145,6 +144,29 @@ class AddEntryFragment : HibiFragment() {
 		wordButton = view.findViewById(R.id.img_option_words)
 		wordButton.setOnClickListener(wordClickListener)
 		// </editor-fold>
+	}
+
+	private val quickSearchCallback = object : ActionMode.Callback {
+		override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+			mode?.menuInflater?.inflate(R.menu.menu_text_selection, menu)
+			return true
+		}
+
+		override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+			item?.let {
+				if(item.itemId == R.id.selection_menu_search) {
+					val selectionStart = contentInput.selectionStart
+					val selectionEnd = contentInput.selectionEnd
+					val searchTerm = contentInput.text.substring(selectionStart, selectionEnd)
+					search(searchTerm)
+					return true
+				}
+			}
+			return false
+		}
+
+		override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = false
+		override fun onDestroyActionMode(mode: ActionMode?) {}
 	}
 
 	private fun initClipboardButton(view: View) {
