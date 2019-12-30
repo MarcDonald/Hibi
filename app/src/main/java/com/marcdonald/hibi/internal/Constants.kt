@@ -35,6 +35,7 @@ const val IS_EDIT_MODE_KEY = "isEditMode"
 const val TAG_ID_KEY = "tagId"
 const val BOOK_ID_KEY = "bookId"
 const val RESTORE_FILE_PATH_KEY = "restore_file_path"
+const val NEW_WORD_QUICK_ADD = "new_word_quick_add"
 // </editor-fold>
 
 // <editor-fold desc="Preferences">

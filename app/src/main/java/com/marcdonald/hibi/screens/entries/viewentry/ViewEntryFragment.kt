@@ -134,7 +134,7 @@ class ViewEntryFragment : HibiFragment() {
 
 	private val quickSearchCallback = object : ActionMode.Callback {
 		override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-			mode?.menuInflater?.inflate(R.menu.menu_text_selection, menu)
+			mode?.menuInflater?.inflate(R.menu.menu_text_selection_view, menu)
 			return true
 		}
 

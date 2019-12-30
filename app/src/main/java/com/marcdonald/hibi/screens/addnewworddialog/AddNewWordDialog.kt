@@ -27,6 +27,7 @@ import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.ENTRY_ID_KEY
 import com.marcdonald.hibi.internal.NEW_WORD_ID_KEY
+import com.marcdonald.hibi.internal.NEW_WORD_QUICK_ADD
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
 
 class AddNewWordDialog : HibiDialogFragment() {
@@ -51,8 +52,10 @@ class AddNewWordDialog : HibiDialogFragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		arguments?.let {
-			viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0), arguments!!.getInt(NEW_WORD_ID_KEY, 0))
+		arguments?.let { arguments ->
+			val quickAddWord = arguments.getString(NEW_WORD_QUICK_ADD)
+			if(quickAddWord != null) wordInput.setText(quickAddWord)
+			viewModel.passArguments(arguments.getInt(ENTRY_ID_KEY, 0), arguments.getInt(NEW_WORD_ID_KEY, 0))
 		}
 	}
 

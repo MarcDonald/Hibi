@@ -41,6 +41,7 @@ import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
 import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.utils.ThemeUtils
+import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordDialog
 import com.marcdonald.hibi.screens.entries.ImageRecyclerAdapter
 import com.marcdonald.hibi.screens.entries.addentry.addentrytobookdialog.AddEntryToBookDialog
 import com.marcdonald.hibi.screens.entries.addentry.addtagtoentrydialog.AddTagToEntryDialog
@@ -120,7 +121,7 @@ class AddEntryFragment : HibiFragment() {
 		timeButton.setOnClickListener(timeClickListener)
 
 		contentInput = view.findViewById(R.id.edt_content)
-		contentInput.customSelectionActionModeCallback = quickSearchCallback
+		contentInput.customSelectionActionModeCallback = textSelectionCallback
 
 		val saveButton: MaterialButton = view.findViewById(R.id.btn_save)
 		saveButton.setOnClickListener(saveClickListener)
@@ -146,20 +147,30 @@ class AddEntryFragment : HibiFragment() {
 		// </editor-fold>
 	}
 
-	private val quickSearchCallback = object : ActionMode.Callback {
+	private val textSelectionCallback = object : ActionMode.Callback {
 		override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-			mode?.menuInflater?.inflate(R.menu.menu_text_selection, menu)
+			mode?.menuInflater?.inflate(R.menu.menu_text_selection_edit, menu)
 			return true
 		}
 
 		override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
 			item?.let {
-				if(item.itemId == R.id.selection_menu_search) {
-					val selectionStart = contentInput.selectionStart
-					val selectionEnd = contentInput.selectionEnd
-					val searchTerm = contentInput.text.substring(selectionStart, selectionEnd)
-					search(searchTerm)
-					return true
+				when(item.itemId) {
+					R.id.selection_menu_search       -> {
+						val selectionStart = contentInput.selectionStart
+						val selectionEnd = contentInput.selectionEnd
+						val searchTerm = contentInput.text.substring(selectionStart, selectionEnd)
+						search(searchTerm)
+						return true
+					}
+					R.id.selection_menu_add_new_word -> {
+						val selectionStart = contentInput.selectionStart
+						val selectionEnd = contentInput.selectionEnd
+						val selectedTerm = contentInput.text.substring(selectionStart, selectionEnd)
+						addNewWord(selectedTerm)
+						return true
+					}
+					else                             -> return false
 				}
 			}
 			return false
@@ -167,6 +178,18 @@ class AddEntryFragment : HibiFragment() {
 
 		override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = false
 		override fun onDestroyActionMode(mode: ActionMode?) {}
+	}
+
+	private fun addNewWord(wordToAdd: String) {
+		val dialog = AddNewWordDialog()
+
+		val bundle = Bundle()
+		bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
+		bundle.putString(NEW_WORD_QUICK_ADD, wordToAdd)
+		dialog.arguments = bundle
+
+		dialog.show(requireFragmentManager(), "New Words Dialog")
+
 	}
 
 	private fun initClipboardButton(view: View) {
