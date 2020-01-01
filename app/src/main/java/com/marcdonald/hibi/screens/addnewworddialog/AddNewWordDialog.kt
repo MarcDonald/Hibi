@@ -25,9 +25,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
-import com.marcdonald.hibi.internal.ENTRY_ID_KEY
-import com.marcdonald.hibi.internal.NEW_WORD_ID_KEY
-import com.marcdonald.hibi.internal.NEW_WORD_QUICK_ADD
+import com.marcdonald.hibi.internal.*
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
 
 class AddNewWordDialog : HibiDialogFragment() {
@@ -53,10 +51,23 @@ class AddNewWordDialog : HibiDialogFragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		arguments?.let { arguments ->
-			val quickAddWord = arguments.getString(NEW_WORD_QUICK_ADD)
-			if(quickAddWord != null) wordInput.setText(quickAddWord)
+			fillFromQuickAdd(arguments)
 			viewModel.passArguments(arguments.getInt(ENTRY_ID_KEY, 0), arguments.getInt(NEW_WORD_ID_KEY, 0))
 		}
+	}
+
+	private fun fillFromQuickAdd(arguments: Bundle) {
+		val quickAddWord = arguments.getString(NEW_WORD_QUICK_ADD)
+		if(quickAddWord != null) wordInput.setText(quickAddWord)
+
+		val quickAddReading = arguments.getString(NEW_WORD_READING_QUICK_ADD)
+		if(quickAddReading != null) readingInput.setText(quickAddReading)
+
+		val quickAddPart = arguments.getString(NEW_WORD_PART_QUICK_ADD)
+		if(quickAddPart != null) typeInput.setText(quickAddPart)
+
+		val quickAddEnglish = arguments.getString(NEW_WORD_MEANING_QUICK_ADD)
+		if(quickAddEnglish != null) englishInput.setText(quickAddEnglish)
 	}
 
 	private fun bindViews(view: View) {

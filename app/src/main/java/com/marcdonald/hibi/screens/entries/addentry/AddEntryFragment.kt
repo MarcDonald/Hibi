@@ -189,7 +189,6 @@ class AddEntryFragment : HibiFragment() {
 		dialog.arguments = bundle
 
 		dialog.show(requireFragmentManager(), "New Words Dialog")
-
 	}
 
 	private fun initClipboardButton(view: View) {
@@ -522,6 +521,7 @@ class AddEntryFragment : HibiFragment() {
 	private fun search(searchTerm: String) {
 		val args = Bundle()
 		args.putString(SEARCH_TERM_KEY, searchTerm)
+		args.putInt(ENTRY_ID_KEY, viewModel.entryId)
 
 		val searchDialog = SearchResultsDialog()
 		searchDialog.arguments = args

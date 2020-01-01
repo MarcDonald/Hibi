@@ -41,6 +41,8 @@ class SearchViewModel(private val apiService: JishoAPIService) : ViewModel() {
 	val searchResults: LiveData<List<Data>>
 		get() = _searchResults
 
+	var entryId: Int = 0
+
 	fun search(searchTerm: String) {
 		_displayLoading.value = true
 		viewModelScope.launch {

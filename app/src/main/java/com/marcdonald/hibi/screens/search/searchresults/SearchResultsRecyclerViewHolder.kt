@@ -24,11 +24,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.network.jisho.apiresponse.Data
+import com.marcdonald.hibi.internal.ENTRY_ID_KEY
 import com.marcdonald.hibi.screens.search.searchmoreinfo.SearchMoreInfoDialog
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManager) :
+class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentManager, private val entryId: Int) :
 		RecyclerView.ViewHolder(itemView) {
 
 	private val wordDisplay: TextView = itemView.findViewById(R.id.txt_search_result_word)
@@ -48,6 +49,7 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
 		val bundle = Bundle()
 		bundle.putStringArrayList("japaneseList", listOfJapaneseJson)
 		bundle.putStringArrayList("sensesList", listOfSensesJson)
+		bundle.putInt(ENTRY_ID_KEY, entryId)
 
 		dialog.arguments = bundle
 		dialog.show(fragmentManager, "Search Result More Info Dialog")
