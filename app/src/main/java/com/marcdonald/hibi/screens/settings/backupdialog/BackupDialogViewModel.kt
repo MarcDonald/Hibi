@@ -93,14 +93,17 @@ class BackupDialogViewModel(private val fileUtils: FileUtils) : ViewModel() {
 	}
 
 	private fun backupImages(zipOutputStream: ZipOutputStream) {
-		for(fileName in File(fileUtils.imagesDirectory).list()) {
-			val fileInputStream = FileInputStream(fileUtils.imagesDirectory + fileName)
-			val origin = BufferedInputStream(fileInputStream)
-			val entry = ZipEntry(fileName)
-			zipOutputStream.putNextEntry(entry)
-			origin.copyTo(zipOutputStream, 1024)
-			zipOutputStream.closeEntry()
-			origin.close()
+		val imageDirectory = File(fileUtils.imagesDirectory)
+		if(imageDirectory.exists()) {
+			for(fileName in imageDirectory.list()) {
+				val fileInputStream = FileInputStream(fileUtils.imagesDirectory + fileName)
+				val origin = BufferedInputStream(fileInputStream)
+				val entry = ZipEntry(fileName)
+				zipOutputStream.putNextEntry(entry)
+				origin.copyTo(zipOutputStream, 1024)
+				zipOutputStream.closeEntry()
+				origin.close()
+			}
 		}
 	}
 }
