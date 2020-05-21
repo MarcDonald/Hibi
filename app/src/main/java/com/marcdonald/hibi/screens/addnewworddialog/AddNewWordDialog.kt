@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,19 @@
  */
 package com.marcdonald.hibi.screens.addnewworddialog
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
-import com.marcdonald.hibi.internal.ENTRY_ID_KEY
-import com.marcdonald.hibi.internal.NEW_WORD_ID_KEY
+import com.marcdonald.hibi.internal.*
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
 
 class AddNewWordDialog : HibiDialogFragment() {
@@ -51,9 +52,25 @@ class AddNewWordDialog : HibiDialogFragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		arguments?.let {
-			viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0), arguments!!.getInt(NEW_WORD_ID_KEY, 0))
+		arguments?.let { arguments ->
+			fillFromQuickAdd(arguments)
+			val isQuickAdd = arguments.getString(NEW_WORD_QUICK_ADD) != null
+			viewModel.passArguments(arguments.getInt(ENTRY_ID_KEY, 0), arguments.getInt(NEW_WORD_ID_KEY, 0), isQuickAdd)
 		}
+	}
+
+	private fun fillFromQuickAdd(arguments: Bundle) {
+		val quickAddWord = arguments.getString(NEW_WORD_QUICK_ADD)
+		if(quickAddWord != null) wordInput.setText(quickAddWord)
+
+		val quickAddReading = arguments.getString(NEW_WORD_READING_QUICK_ADD)
+		if(quickAddReading != null) readingInput.setText(quickAddReading)
+
+		val quickAddPart = arguments.getStringArrayList(NEW_WORD_PART_QUICK_ADD)
+		if(quickAddPart != null) typeInput.setText(viewModel.getSingleStringFromList(quickAddPart))
+
+		val quickAddEnglish = arguments.getStringArrayList(NEW_WORD_MEANING_QUICK_ADD)
+		if(quickAddEnglish != null) englishInput.setText(viewModel.getSingleStringFromList(quickAddEnglish))
 	}
 
 	private fun bindViews(view: View) {
@@ -106,5 +123,12 @@ class AddNewWordDialog : HibiDialogFragment() {
 					dismiss()
 			}
 		})
+	}
+
+	override fun onDismiss(dialog: DialogInterface) {
+		if(viewModel.isQuickAdd) {
+			Toast.makeText(requireContext(), "New Word Added", Toast.LENGTH_SHORT).show()
+		}
+		super.onDismiss(dialog)
 	}
 }

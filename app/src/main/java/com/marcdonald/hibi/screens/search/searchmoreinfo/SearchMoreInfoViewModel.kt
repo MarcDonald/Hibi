@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,18 @@ class SearchMoreInfoViewModel : ViewModel() {
 	val displayMainReading: LiveData<Boolean>
 		get() = _displayMainReading
 
-	fun passArguments(japaneseListArg: ArrayList<String>, sensesListArg: ArrayList<String>) {
+	private var _displayQuickAddWord = MutableLiveData<Boolean>()
+	val displayQuickAddWord: LiveData<Boolean>
+		get() = _displayQuickAddWord
+
+	var entryId = 0
+		private set
+
+	fun passArguments(japaneseListArg: ArrayList<String>, sensesListArg: ArrayList<String>, entryId: Int) {
 		getJapaneseObjectList(japaneseListArg)
 		getSensesObjectList(sensesListArg)
+		this.entryId = entryId
+		_displayQuickAddWord.value = entryId != 0
 	}
 
 	private fun getJapaneseObjectList(jsonList: ArrayList<String>?) {

@@ -37,9 +37,6 @@
       <option name="WRAP_EXPRESSION_BODY_FUNCTIONS" value="0" />
       <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
     </JetCodeStyleSettings>
-    <MarkdownNavigatorCodeStyleSettings>
-      <option name="RIGHT_MARGIN" value="72" />
-    </MarkdownNavigatorCodeStyleSettings>
     <XML>
       <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
     </XML>
@@ -94,7 +91,6 @@
       </indentOptions>
     </codeStyleSettings>
     <codeStyleSettings language="XML">
-      <option name="FORCE_REARRANGE_MODE" value="2" />
       <indentOptions>
         <option name="INDENT_SIZE" value="2" />
         <option name="CONTINUATION_INDENT_SIZE" value="2" />
@@ -107,6 +103,7 @@
               <match>
                 <AND>
                   <NAME>xmlns:android</NAME>
+                  <XML_ATTRIBUTE />
                   <XML_NAMESPACE>^$</XML_NAMESPACE>
                 </AND>
               </match>
@@ -117,6 +114,7 @@
               <match>
                 <AND>
                   <NAME>xmlns:.*</NAME>
+                  <XML_ATTRIBUTE />
                   <XML_NAMESPACE>^$</XML_NAMESPACE>
                 </AND>
               </match>
@@ -128,6 +126,7 @@
               <match>
                 <AND>
                   <NAME>.*:id</NAME>
+                  <XML_ATTRIBUTE />
                   <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
                 </AND>
               </match>
@@ -138,6 +137,7 @@
               <match>
                 <AND>
                   <NAME>.*:name</NAME>
+                  <XML_ATTRIBUTE />
                   <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
                 </AND>
               </match>
@@ -148,6 +148,7 @@
               <match>
                 <AND>
                   <NAME>name</NAME>
+                  <XML_ATTRIBUTE />
                   <XML_NAMESPACE>^$</XML_NAMESPACE>
                 </AND>
               </match>
@@ -158,6 +159,7 @@
               <match>
                 <AND>
                   <NAME>style</NAME>
+                  <XML_ATTRIBUTE />
                   <XML_NAMESPACE>^$</XML_NAMESPACE>
                 </AND>
               </match>
@@ -168,6 +170,7 @@
               <match>
                 <AND>
                   <NAME>.*</NAME>
+                  <XML_ATTRIBUTE />
                   <XML_NAMESPACE>^$</XML_NAMESPACE>
                 </AND>
               </match>
@@ -179,6 +182,7 @@
               <match>
                 <AND>
                   <NAME>.*</NAME>
+                  <XML_ATTRIBUTE />
                   <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
                 </AND>
               </match>
@@ -190,6 +194,7 @@
               <match>
                 <AND>
                   <NAME>.*</NAME>
+                  <XML_ATTRIBUTE />
                   <XML_NAMESPACE>.*</XML_NAMESPACE>
                 </AND>
               </match>

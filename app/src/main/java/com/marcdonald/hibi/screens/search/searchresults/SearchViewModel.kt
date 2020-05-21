@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,8 @@ class SearchViewModel(private val apiService: JishoAPIService) : ViewModel() {
 	private var _searchResults = MutableLiveData<List<Data>>()
 	val searchResults: LiveData<List<Data>>
 		get() = _searchResults
+
+	var entryId: Int = 0
 
 	fun search(searchTerm: String) {
 		_displayLoading.value = true

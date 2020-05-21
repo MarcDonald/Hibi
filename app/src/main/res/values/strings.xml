@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2019 Marc Donald
+  ~ Copyright 2020 Marc Donald
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -125,6 +125,7 @@
 
   <!--region New Words-->
   <string name="add_new_word">Add a New Word</string>
+  <string name="add_as_new_word">Add as New Word</string>
   <string name="edit_new_word">Edit New Word</string>
   <string name="new_words">New Words</string>
   <string name="no_new_words">No New Words</string>
@@ -234,6 +235,7 @@
   <string name="backing_up">Backing Up</string>
   <string name="backup_success">Backup Successful</string>
   <string name="backup_fail">Backup Failed</string>
+  <string name="backup_file_explanation">To restore from this backup, click \'Save\' and select your local storage using a file explorer app</string>
   <string name="restore">Restore</string>
   <string name="restore_confirm">Continue with Restore</string>
   <string name="restore_confirm_title">Restore from Backup?</string>

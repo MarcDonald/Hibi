@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,15 +23,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.network.jisho.apiresponse.Data
 
-class SearchResultsRecyclerAdapter(context: Context, private val fragmentManager: FragmentManager) :
-		RecyclerView.Adapter<SearchResultsRecyclerViewHolder>() {
+class SearchResultsRecyclerAdapter(context: Context,
+																	 private val fragmentManager: FragmentManager)
+	: RecyclerView.Adapter<SearchResultsRecyclerViewHolder>() {
 
 	private val inflater: LayoutInflater = LayoutInflater.from(context)
 	private var dataList: List<Data> = listOf()
+	private var entryId: Int = 0
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultsRecyclerViewHolder {
 		val view = inflater.inflate(R.layout.item_search_result, parent, false)
-		return SearchResultsRecyclerViewHolder(view, fragmentManager)
+		return SearchResultsRecyclerViewHolder(view, fragmentManager, entryId)
 	}
 
 	override fun getItemCount(): Int {
@@ -42,7 +44,8 @@ class SearchResultsRecyclerAdapter(context: Context, private val fragmentManager
 		holder.display(dataList[position])
 	}
 
-	fun updateList(list: List<Data>) {
+	fun updateList(list: List<Data>, entryId: Int) {
+		this.entryId = entryId
 		dataList = list
 		notifyDataSetChanged()
 	}

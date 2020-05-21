@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ android {
         minSdkVersion 23
         //noinspection OldTargetApi
         targetSdkVersion 28
-        versionCode 35
+        versionCode 36
         versionName "1.4.0"
         setProperty("archivesBaseName", "Hibi-v$versionName")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

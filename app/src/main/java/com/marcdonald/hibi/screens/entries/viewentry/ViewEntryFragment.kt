@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -134,7 +134,7 @@ class ViewEntryFragment : HibiFragment() {
 
 	private val quickSearchCallback = object : ActionMode.Callback {
 		override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-			mode?.menuInflater?.inflate(R.menu.menu_text_selection, menu)
+			mode?.menuInflater?.inflate(R.menu.menu_text_selection_view, menu)
 			return true
 		}
 

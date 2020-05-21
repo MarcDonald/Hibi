@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -30,16 +31,20 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
+import com.marcdonald.hibi.internal.*
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
 import com.marcdonald.hibi.internal.extension.show
+import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordDialog
 import com.marcdonald.hibi.screens.search.searchmoreinfo.alternativesrecycler.SearchMoreInfoAlternativesRecyclerAdapter
 import com.marcdonald.hibi.screens.search.searchmoreinfo.senserecycler.SearchMoreInfoSenseRecyclerAdapter
+import timber.log.Timber
 
 class SearchMoreInfoDialog : HibiDialogFragment() {
 
 	private val viewModel by viewModels<SearchMoreInfoViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
+	private lateinit var quickAddImageView: ImageView
 	private lateinit var mainWordDisplay: TextView
 	private lateinit var mainReadingDisplay: TextView
 	private lateinit var senseTitle: TextView
@@ -55,10 +60,12 @@ class SearchMoreInfoDialog : HibiDialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		arguments?.let {
-			val japaneseListJson = requireArguments().getStringArrayList("japaneseList")
-			val sensesListJson = requireArguments().getStringArrayList("sensesList")
-			viewModel.passArguments(japaneseListJson as ArrayList<String>, sensesListJson as ArrayList<String>)
+		arguments?.let { arguments ->
+			val japaneseListJson = arguments.getStringArrayList("japaneseList")
+			val sensesListJson = arguments.getStringArrayList("sensesList")
+
+			val entryId = arguments.getInt(ENTRY_ID_KEY)
+			viewModel.passArguments(japaneseListJson as ArrayList<String>, sensesListJson as ArrayList<String>, entryId)
 		}
 	}
 
@@ -115,6 +122,12 @@ class SearchMoreInfoDialog : HibiDialogFragment() {
 				senseRecyclerAdapter.updateList(list)
 			}
 		})
+
+		viewModel.displayQuickAddWord.observe(this, Observer { value ->
+			value?.let { shouldShow ->
+				quickAddImageView.show(shouldShow)
+			}
+		})
 	}
 
 	private fun bindViews(view: View) {
@@ -123,6 +136,10 @@ class SearchMoreInfoDialog : HibiDialogFragment() {
 
 		mainReadingDisplay = view.findViewById(R.id.txt_search_more_info_main_reading)
 		mainReadingDisplay.setOnClickListener(mainReadingClickListener)
+
+		quickAddImageView = view.findViewById(R.id.img_quick_add_new_word)
+		quickAddImageView.show(false)
+		quickAddImageView.setOnClickListener(quickAddClickListener)
 
 		senseTitle = view.findViewById(R.id.txt_search_more_info_sense_title)
 		senseRecycler = view.findViewById(R.id.recycler_search_more_info_sense)
@@ -151,6 +168,24 @@ class SearchMoreInfoDialog : HibiDialogFragment() {
 			val toastMessage = resources.getString(R.string.copied_to_clipboard_wc, viewModel.mainReading.value)
 			Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
 		}
+	}
+
+	private val quickAddClickListener = View.OnClickListener {
+		if(viewModel.entryId != 0) {
+			val dialog = AddNewWordDialog()
+
+			val bundle = Bundle()
+			bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
+			bundle.putString(NEW_WORD_QUICK_ADD, viewModel.mainWord.value)
+			bundle.putString(NEW_WORD_READING_QUICK_ADD, viewModel.mainReading.value)
+
+			bundle.putStringArrayList(NEW_WORD_PART_QUICK_ADD, viewModel.senseList.value?.get(0)?.partsOfSpeech as ArrayList<String>)
+			bundle.putStringArrayList(NEW_WORD_MEANING_QUICK_ADD, viewModel.senseList.value?.get(0)?.englishDefinitions as ArrayList<String>)
+			dialog.arguments = bundle
+
+			dialog.show(requireFragmentManager(), "New Words Dialog")
+		} else
+			Timber.e("Log: quickAddClickListener: Tried to add new word when not in edit mode")
 	}
 
 	private fun initAlternativesRecycler() {

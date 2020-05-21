@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright 2020 Marc Donald
+  ~ Copyright 2019 Marc Donald
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,17 +16,18 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item
-    android:id="@+id/clipboard_menu_copy"
-    android:title="@string/copy"
-    android:icon="@drawable/ic_content_copy_24dp"
-    android:contentDescription="@string/copy_to_clipboard"
-    android:alphabeticShortcut="c"
+    android:id="@+id/selection_menu_search"
+    android:title="@string/search"
+    android:icon="@drawable/ic_search_24dp"
+    android:contentDescription="@string/search"
+    android:alphabeticShortcut="s"
     android:numericShortcut="1" />
+
   <item
-    android:id="@+id/clipboard_menu_paste"
-    android:title="@string/paste"
-    android:icon="@drawable/ic_content_paste_24dp"
-    android:contentDescription="@string/paste"
-    android:alphabeticShortcut="p"
+    android:id="@+id/selection_menu_add_new_word"
+    android:title="@string/add_as_new_word"
+    android:icon="@drawable/ic_word"
+    android:contentDescription="@string/add_as_new_word"
+    android:alphabeticShortcut="w"
     android:numericShortcut="2" />
 </menu>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
@@ -37,7 +38,7 @@ class BackupDialog : HibiDialogFragment() {
 	// <editor-fold desc="UI Components">
 	private lateinit var loadingProgressBar: ProgressBar
 	private lateinit var shareButton: MaterialButton
-	private lateinit var successDisplay: ImageView
+	private lateinit var successDisplay: ConstraintLayout
 	private lateinit var dismissButton: MaterialButton
 	private lateinit var title: TextView
 	// </editor-fold>
@@ -58,7 +59,7 @@ class BackupDialog : HibiDialogFragment() {
 	private fun bindViews(view: View) {
 		title = view.findViewById(R.id.txt_backup_title)
 		loadingProgressBar = view.findViewById(R.id.prog_backup)
-		successDisplay = view.findViewById(R.id.img_backup_success)
+		successDisplay = view.findViewById(R.id.con_backup_success)
 		dismissButton = view.findViewById(R.id.btn_backup_dismiss)
 		dismissButton.setOnClickListener {
 			dismiss()

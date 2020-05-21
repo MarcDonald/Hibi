@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
+import com.marcdonald.hibi.internal.ENTRY_ID_KEY
 import com.marcdonald.hibi.internal.SEARCH_TERM_KEY
 import com.marcdonald.hibi.internal.base.HibiBottomSheetDialogFragment
 import com.marcdonald.hibi.internal.extension.show
@@ -57,8 +58,9 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		arguments?.let {
-			val searchTerm = arguments!!.getString(SEARCH_TERM_KEY, "")
+		arguments?.let { arguments ->
+			val searchTerm = arguments.getString(SEARCH_TERM_KEY, "")
+			viewModel.entryId = arguments.getInt(ENTRY_ID_KEY, 0)
 			val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 			imm.hideSoftInputFromWindow(requireView().windowToken, 0)
 			viewModel.search(searchTerm)
@@ -110,7 +112,7 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 
 		viewModel.searchResults.observe(this, Observer { value ->
 			value?.let { searchResult ->
-				recyclerAdapter.updateList(searchResult)
+				recyclerAdapter.updateList(searchResult, viewModel.entryId)
 				recycler.scrollToPosition(0)
 				recycler.show(true)
 			}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Marc Donald
+ * Copyright 2020 Marc Donald
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,9 +44,13 @@ class AddNewWordViewModel(private val newWordRepository: NewWordRepository) : Vi
 	val dismiss: LiveData<Boolean>
 		get() = _dismiss
 
-	fun passArguments(entryIdArg: Int, newWordIdArg: Int) {
+	var isQuickAdd: Boolean = false
+		private set
+
+	fun passArguments(entryIdArg: Int, newWordIdArg: Int, isQuickAdd: Boolean) {
 		entryId = entryIdArg
 		newWordId = newWordIdArg
+		this.isQuickAdd = isQuickAdd
 
 		if(newWordId != 0) {
 			_isEditMode.value = true
@@ -85,6 +89,17 @@ class AddNewWordViewModel(private val newWordRepository: NewWordRepository) : Vi
 				_dismiss.value = true
 			}
 		}
+	}
+
+	fun getSingleStringFromList(list: List<String>): String {
+		val builder = StringBuilder()
+		list.forEachIndexed { index, string ->
+			if(index == 0)
+				builder.append(string)
+			else
+				builder.append(", $string")
+		}
+		return builder.toString()
 	}
 
 	private fun getNewWord() {
