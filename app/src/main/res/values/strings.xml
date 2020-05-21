@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2019 Marc Donald
+  ~ Copyright 2020 Marc Donald
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -235,6 +235,7 @@
   <string name="backing_up">Backing Up</string>
   <string name="backup_success">Backup Successful</string>
   <string name="backup_fail">Backup Failed</string>
+  <string name="backup_file_explanation">To restore from this backup, click \'Save\' and select your local storage using a file explorer app</string>
   <string name="restore">Restore</string>
   <string name="restore_confirm">Continue with Restore</string>
   <string name="restore_confirm_title">Restore from Backup?</string>

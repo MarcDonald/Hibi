@@ -14,7 +14,12 @@ An app for Android designed to aid your Japanese learning through keeping a jour
 - [License](#license)
 
 ## Download
-[Click Here to Go To the Latest Release](https://github.com/MarcDonald/Hibi/releases/latest)
+
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/com.marcdonald.hibi/)
+
+[Or Click Here to Go To the Latest Release](https://github.com/MarcDonald/Hibi/releases/latest)
 
 ## Features
 - Add entries at any date and time
@@ -118,7 +123,7 @@ Thanks to [this gist](https://gist.github.com/filipkowicz/1a769001fae407b8813ab4
 
 ## License
 ```   
-Copyright 2019 Marc Donald
+Copyright 2020 Marc Donald
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
