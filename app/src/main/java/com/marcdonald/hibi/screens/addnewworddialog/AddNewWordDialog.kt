@@ -15,12 +15,14 @@
  */
 package com.marcdonald.hibi.screens.addnewworddialog
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
@@ -52,7 +54,8 @@ class AddNewWordDialog : HibiDialogFragment() {
 		super.onViewCreated(view, savedInstanceState)
 		arguments?.let { arguments ->
 			fillFromQuickAdd(arguments)
-			viewModel.passArguments(arguments.getInt(ENTRY_ID_KEY, 0), arguments.getInt(NEW_WORD_ID_KEY, 0))
+			val isQuickAdd = arguments.getString(NEW_WORD_QUICK_ADD) != null
+			viewModel.passArguments(arguments.getInt(ENTRY_ID_KEY, 0), arguments.getInt(NEW_WORD_ID_KEY, 0), isQuickAdd)
 		}
 	}
 
@@ -63,11 +66,11 @@ class AddNewWordDialog : HibiDialogFragment() {
 		val quickAddReading = arguments.getString(NEW_WORD_READING_QUICK_ADD)
 		if(quickAddReading != null) readingInput.setText(quickAddReading)
 
-		val quickAddPart = arguments.getString(NEW_WORD_PART_QUICK_ADD)
-		if(quickAddPart != null) typeInput.setText(quickAddPart)
+		val quickAddPart = arguments.getStringArrayList(NEW_WORD_PART_QUICK_ADD)
+		if(quickAddPart != null) typeInput.setText(viewModel.getSingleStringFromList(quickAddPart))
 
-		val quickAddEnglish = arguments.getString(NEW_WORD_MEANING_QUICK_ADD)
-		if(quickAddEnglish != null) englishInput.setText(quickAddEnglish)
+		val quickAddEnglish = arguments.getStringArrayList(NEW_WORD_MEANING_QUICK_ADD)
+		if(quickAddEnglish != null) englishInput.setText(viewModel.getSingleStringFromList(quickAddEnglish))
 	}
 
 	private fun bindViews(view: View) {
@@ -120,5 +123,12 @@ class AddNewWordDialog : HibiDialogFragment() {
 					dismiss()
 			}
 		})
+	}
+
+	override fun onDismiss(dialog: DialogInterface) {
+		if(viewModel.isQuickAdd) {
+			Toast.makeText(requireContext(), "New Word Added", Toast.LENGTH_SHORT).show()
+		}
+		super.onDismiss(dialog)
 	}
 }

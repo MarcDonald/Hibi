@@ -179,9 +179,8 @@ class SearchMoreInfoDialog : HibiDialogFragment() {
 			bundle.putString(NEW_WORD_QUICK_ADD, viewModel.mainWord.value)
 			bundle.putString(NEW_WORD_READING_QUICK_ADD, viewModel.mainReading.value)
 
-			// TODO get parts of speech and English definitions out of whatever format it's in into a proper one
-			bundle.putStringArrayList(NEW_WORD_PART_QUICK_ADD, viewModel.senseList.value?.get(0)?.partsOfSpeech as java.util.ArrayList<String>)
-			bundle.putStringArrayList(NEW_WORD_MEANING_QUICK_ADD, viewModel.senseList.value?.get(0)?.englishDefinitions as java.util.ArrayList<String>)
+			bundle.putStringArrayList(NEW_WORD_PART_QUICK_ADD, viewModel.senseList.value?.get(0)?.partsOfSpeech as ArrayList<String>)
+			bundle.putStringArrayList(NEW_WORD_MEANING_QUICK_ADD, viewModel.senseList.value?.get(0)?.englishDefinitions as ArrayList<String>)
 			dialog.arguments = bundle
 
 			dialog.show(requireFragmentManager(), "New Words Dialog")
