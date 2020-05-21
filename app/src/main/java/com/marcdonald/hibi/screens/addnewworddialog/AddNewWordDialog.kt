@@ -123,12 +123,12 @@ class AddNewWordDialog : HibiDialogFragment() {
 					dismiss()
 			}
 		})
-	}
 
-	override fun onDismiss(dialog: DialogInterface) {
-		if(viewModel.isQuickAdd) {
-			Toast.makeText(requireContext(), "New Word Added", Toast.LENGTH_SHORT).show()
-		}
-		super.onDismiss(dialog)
+		viewModel.showAddedToast.observe(this, Observer { value ->
+			value?.let { show ->
+				if(show)
+					Toast.makeText(requireContext(), getString(R.string.new_word_added), Toast.LENGTH_SHORT).show()
+			}
+		})
 	}
 }

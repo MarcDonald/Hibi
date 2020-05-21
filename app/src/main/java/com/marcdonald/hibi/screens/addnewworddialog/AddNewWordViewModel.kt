@@ -44,8 +44,11 @@ class AddNewWordViewModel(private val newWordRepository: NewWordRepository) : Vi
 	val dismiss: LiveData<Boolean>
 		get() = _dismiss
 
-	var isQuickAdd: Boolean = false
-		private set
+	private var _showAddedToast = MutableLiveData<Boolean>()
+	val showAddedToast: LiveData<Boolean>
+		get() = _showAddedToast
+
+	private var isQuickAdd: Boolean = false
 
 	fun passArguments(entryIdArg: Int, newWordIdArg: Int, isQuickAdd: Boolean) {
 		entryId = entryIdArg
@@ -75,7 +78,9 @@ class AddNewWordViewModel(private val newWordRepository: NewWordRepository) : Vi
 				} else {
 					Timber.e("Log: saveNewWord: entryId = 0")
 				}
-				_dismiss.value = true
+				if(isQuickAdd)
+					_showAddedToast.postValue(true)
+				_dismiss.postValue(true)
 			}
 		}
 	}

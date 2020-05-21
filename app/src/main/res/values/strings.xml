@@ -137,6 +137,7 @@
   <string name="empty_input_new_word">Enter a word or reading before saving</string>
   <string name="english_wc">English: %1$s</string>
   <string name="notes_wc">Notes: %1$s</string>
+  <string name="new_word_added">New Word Added</string>
   <!--endregion-->
 
   <!--region Books-->
