@@ -16,6 +16,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:layout_margin="@dimen/margin_standard">
@@ -38,10 +39,10 @@
         android:layout_height="wrap_content"
         android:text="@string/statistics"
         android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
+        style="@style/Widget.Hibi.Button.Text"
         android:textAlignment="textStart"
         app:icon="@drawable/ic_show_chart_24dp"
-        app:iconPadding="@dimen/margin_standard"
-        app:iconTint="?attr/hibiPrimaryIconTint" />
+        app:iconPadding="@dimen/margin_standard" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_main_menu_favourite"
@@ -50,9 +51,9 @@
         android:text="@string/favourites"
         android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
         android:textAlignment="textStart"
+        style="@style/Widget.Hibi.Button.Text"
         app:icon="@drawable/ic_star_24dp"
-        app:iconPadding="@dimen/margin_standard"
-        app:iconTint="?attr/hibiPrimaryIconTint" />
+        app:iconPadding="@dimen/margin_standard" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_main_menu_throwback"
@@ -61,16 +62,17 @@
         android:text="@string/throwback"
         android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
         android:textAlignment="textStart"
+        style="@style/Widget.Hibi.Button.Text"
         app:icon="@drawable/ic_event_24dp"
-        app:iconPadding="@dimen/margin_standard"
-        app:iconTint="?attr/hibiPrimaryIconTint" />
+        app:iconPadding="@dimen/margin_standard"/>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="42dp"
         android:layout_marginEnd="42dp"
-        android:background="@drawable/divider_standard" />
+        android:background="@drawable/divider_standard"
+        tools:ignore="ContentDescription" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_main_menu_settings"
@@ -79,9 +81,9 @@
         android:text="@string/settings"
         android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
         android:textAlignment="textStart"
+        style="@style/Widget.Hibi.Button.Text"
         app:icon="@drawable/ic_settings_24dp"
-        app:iconPadding="@dimen/margin_standard"
-        app:iconTint="?attr/hibiPrimaryIconTint" />
+        app:iconPadding="@dimen/margin_standard" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_main_menu_about"
@@ -89,10 +91,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
         android:text="@string/about"
+        style="@style/Widget.Hibi.Button.Text"
         android:textAlignment="textStart"
         app:icon="@drawable/ic_info_outline_24dp"
-        app:iconPadding="@dimen/margin_standard"
-        app:iconTint="?attr/hibiPrimaryIconTint" />
+        app:iconPadding="@dimen/margin_standard" />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

@@ -64,34 +64,34 @@ class AddBookDialog : HibiDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.bookTitle.observe(this, Observer { value ->
+		viewModel.bookTitle.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { title ->
 				input.setText(title)
 			}
 		})
 
-		viewModel.isEditMode.observe(this, Observer { value ->
+		viewModel.isEditMode.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { isEditMode ->
 				if(isEditMode)
 					dialogTitle.text = resources.getString(R.string.edit_book)
 			}
 		})
 
-		viewModel.displayEmptyContentWarning.observe(this, Observer { value ->
+		viewModel.displayEmptyContentWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					input.error = resources.getString(R.string.empty_content_warning)
 			}
 		})
 
-		viewModel.displayDuplicateNameWarning.observe(this, Observer { value ->
+		viewModel.displayDuplicateNameWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					input.error = resources.getString(R.string.book_already_exists)
 			}
 		})
 
-		viewModel.dismiss.observe(this, Observer { value ->
+		viewModel.dismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { dismiss ->
 				if(dismiss)
 					dismiss()

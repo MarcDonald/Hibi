@@ -15,15 +15,6 @@
   -->
 
 <resources>
-  <declare-styleable name="AppTheme">
-    <attr name="hibiTextOnPrimary" format="color" />
-    <attr name="hibiSecondaryTextOnPrimary" format="color" />
-    <attr name="hibiHintTextOnPrimary" format="color" />
-    <attr name="hibiPrimaryIconTint" format="color" />
-    <attr name="colorPrimaryLight" format="color" />
-    <attr name="hibiSelectedItemColor" format="color" />
-  </declare-styleable>
-
   <declare-styleable name="SearchBar">
     <attr name="sbHint" format="string" />
   </declare-styleable>

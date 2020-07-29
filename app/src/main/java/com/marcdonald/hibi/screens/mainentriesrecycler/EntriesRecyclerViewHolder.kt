@@ -82,9 +82,7 @@ class EntriesRecyclerViewHolder(private val onClick: (Int) -> Unit,
 		displayBooks()
 
 		if(item.isSelected) {
-			val typedValue = TypedValue()
-			theme.resolveAttribute(R.attr.hibiSelectedItemColor, typedValue, true)
-			itemView.setBackgroundColor(typedValue.data)
+			itemView.setBackgroundColor(itemView.resources.getColor(R.color.colorSelectedItem, theme))
 		} else {
 			itemView.background = null
 		}

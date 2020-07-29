@@ -69,25 +69,25 @@ class NewWordDialog : HibiBottomSheetDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayAddButton.observe(this, Observer { value ->
+		viewModel.displayAddButton.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				addButton.show(shouldShow)
 			}
 		})
 
-		viewModel.allowEdits.observe(this, Observer { value ->
+		viewModel.allowEdits.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { allow ->
 				recyclerAdapter.isEditMode = allow
 			}
 		})
 
-		viewModel.displayNoWords.observe(this, Observer { value ->
+		viewModel.displayNoWords.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noResultsWarning.show(shouldShow)
 			}
 		})
 
-		viewModel.getNewWords().observe(this, Observer { value ->
+		viewModel.getNewWords().observe(viewLifecycleOwner, Observer { value ->
 			value?.let { list ->
 				viewModel.listReceived(list.isEmpty())
 				recyclerAdapter.updateList(list)

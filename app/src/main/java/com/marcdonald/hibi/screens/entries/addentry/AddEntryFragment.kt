@@ -40,7 +40,6 @@ import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
 import com.marcdonald.hibi.internal.base.HibiFragment
-import com.marcdonald.hibi.internal.utils.ThemeUtils
 import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordDialog
 import com.marcdonald.hibi.screens.entries.ImageRecyclerAdapter
 import com.marcdonald.hibi.screens.entries.addentry.addentrytobookdialog.AddEntryToBookDialog
@@ -54,7 +53,6 @@ import com.marcdonald.hibi.uicomponents.TimePickerDialog
 import com.marcdonald.hibi.uicomponents.views.SearchBar
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
-import org.kodein.di.generic.instance
 
 class AddEntryFragment : HibiFragment() {
 
@@ -78,10 +76,6 @@ class AddEntryFragment : HibiFragment() {
 	private lateinit var wordButton: ImageView
 	private lateinit var clipboardButton: ImageView
 	// </editor-fold>
-	// </editor-fold>
-
-	// <editor-fold desc="Other">
-	private val themeUtils: ThemeUtils by instance()
 	// </editor-fold>
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -213,33 +207,33 @@ class AddEntryFragment : HibiFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayEmptyContentWarning.observe(this, Observer { value ->
+		viewModel.displayEmptyContentWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					contentInput.error = resources.getString(R.string.empty_content_warning)
 			}
 		})
 
-		viewModel.dateTimeStore.readableDate.observe(this, Observer { date ->
+		viewModel.dateTimeStore.readableDate.observe(viewLifecycleOwner, Observer { date ->
 			date?.let {
 				dateButton.text = date
 			}
 		})
 
-		viewModel.dateTimeStore.readableTime.observe(this, Observer { time ->
+		viewModel.dateTimeStore.readableTime.observe(viewLifecycleOwner, Observer { time ->
 			time?.let {
 				timeButton.text = time
 			}
 		})
 
-		viewModel.popBackStack.observe(this, Observer { pop ->
+		viewModel.popBackStack.observe(viewLifecycleOwner, Observer { pop ->
 			pop?.let {
 				if(pop)
 					popBackStack()
 			}
 		})
 
-		viewModel.isEditMode.observe(this, Observer { value ->
+		viewModel.isEditMode.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { isEditMode ->
 				if(isEditMode)
 					toolbarTitle.text =
@@ -250,13 +244,13 @@ class AddEntryFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.entry.observe(this, Observer { entry ->
+		viewModel.entry.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let {
 				contentInput.setText(entry.content)
 			}
 		})
 
-		viewModel.displayBackWarning.observe(this, Observer { value ->
+		viewModel.displayBackWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				if(display)
 					backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
@@ -265,7 +259,7 @@ class AddEntryFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.startObservingEntrySpecificItems.observe(this, Observer { entry ->
+		viewModel.startObservingEntrySpecificItems.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { observe ->
 				if(observe)
 					setupEntrySpecificObservers()
@@ -277,37 +271,37 @@ class AddEntryFragment : HibiFragment() {
 	 * This has to be called after the original because the entryId isn't always provided immediately
 	 */
 	private fun setupEntrySpecificObservers() {
-		viewModel.colorTagIcon.observe(this, Observer { entry ->
+		viewModel.colorTagIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(addTagButton, shouldColor)
 			}
 		})
 
-		viewModel.colorBookIcon.observe(this, Observer { entry ->
+		viewModel.colorBookIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(addToBookButton, shouldColor)
 			}
 		})
 
-		viewModel.colorLocationIcon.observe(this, Observer { entry ->
+		viewModel.colorLocationIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(addLocationButton, shouldColor)
 			}
 		})
 
-		viewModel.colorNewWordIcon.observe(this, Observer { entry ->
+		viewModel.colorNewWordIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(wordButton, shouldColor)
 			}
 		})
 
-		viewModel.colorImagesIcon.observe(this, Observer { entry ->
+		viewModel.colorImagesIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(addMediaButton, shouldColor)
 			}
 		})
 
-		viewModel.images.observe(this, Observer { entry ->
+		viewModel.images.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { imagePaths ->
 				imageRecyclerAdapter.updateItems(imagePaths)
 			}
@@ -316,7 +310,7 @@ class AddEntryFragment : HibiFragment() {
 
 	private fun colorImageDrawable(imageView: ImageView, shouldColor: Boolean) {
 		if(shouldColor) {
-			imageView.setColorFilter(themeUtils.getAccentColor())
+			imageView.setColorFilter(requireContext().resources.getColor(R.color.colorSecondary, null))
 		} else {
 			imageView.clearColorFilter()
 		}
@@ -446,7 +440,7 @@ class AddEntryFragment : HibiFragment() {
 			askForStoragePermissions()
 		} else {
 			FilePickerBuilder.instance
-				.setActivityTheme(R.style.AppTheme_Dark)
+				.setActivityTheme(R.style.AppTheme)
 				.setActivityTitle(resources.getString(R.string.add_images))
 				.setSelectedFiles(arrayListOf())
 				.pickPhoto(this, CHOOSE_IMAGE_TO_ADD_REQUEST_CODE)

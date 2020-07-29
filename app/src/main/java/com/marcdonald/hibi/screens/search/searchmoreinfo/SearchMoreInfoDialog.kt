@@ -79,51 +79,51 @@ class SearchMoreInfoDialog : HibiDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.mainWord.observe(this, Observer { value ->
+		viewModel.mainWord.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { word ->
 				mainWordDisplay.text = resources.getString(R.string.japanese_word_wc, word)
 			}
 		})
 
-		viewModel.mainReading.observe(this, Observer { value ->
+		viewModel.mainReading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { reading ->
 				mainReadingDisplay.text = resources.getString(R.string.reading_wc, reading)
 			}
 		})
 
-		viewModel.displayMainReading.observe(this, Observer { value ->
+		viewModel.displayMainReading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				mainReadingDisplay.show(shouldShow)
 			}
 		})
 
-		viewModel.displayAlternatives.observe(this, Observer { value ->
+		viewModel.displayAlternatives.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				alternativeRecycler.show(shouldShow)
 				alternativeTitle.show(shouldShow)
 			}
 		})
 
-		viewModel.alternatives.observe(this, Observer { value ->
+		viewModel.alternatives.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { list ->
 				alternativesRecyclerAdapter.updateList(list)
 			}
 		})
 
-		viewModel.displaySense.observe(this, Observer { value ->
+		viewModel.displaySense.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				senseRecycler.show(shouldShow)
 				senseTitle.show(shouldShow)
 			}
 		})
 
-		viewModel.senseList.observe(this, Observer { value ->
+		viewModel.senseList.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { list ->
 				senseRecyclerAdapter.updateList(list)
 			}
 		})
 
-		viewModel.displayQuickAddWord.observe(this, Observer { value ->
+		viewModel.displayQuickAddWord.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				quickAddImageView.show(shouldShow)
 			}

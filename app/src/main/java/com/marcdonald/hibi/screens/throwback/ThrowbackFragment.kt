@@ -71,19 +71,19 @@ class ThrowbackFragment : HibiFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayLoading.observe(this, Observer { value ->
+		viewModel.displayLoading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				loadingDisplay.show(shouldShow)
 			}
 		})
 
-		viewModel.displayNoResults.observe(this, Observer { value ->
+		viewModel.displayNoResults.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noEntriesDisplay.show(shouldShow)
 			}
 		})
 
-		viewModel.displayItems.observe(this, Observer { items ->
+		viewModel.displayItems.observe(viewLifecycleOwner, Observer { items ->
 			items?.let {
 				recyclerAdapter.updateList(items)
 			}

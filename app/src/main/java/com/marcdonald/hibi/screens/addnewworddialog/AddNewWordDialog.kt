@@ -93,7 +93,7 @@ class AddNewWordDialog : HibiDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.word.observe(this, Observer { value ->
+		viewModel.word.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { newWord ->
 				wordInput.setText(newWord.word)
 				readingInput.setText(newWord.reading)
@@ -103,28 +103,28 @@ class AddNewWordDialog : HibiDialogFragment() {
 			}
 		})
 
-		viewModel.isEditMode.observe(this, Observer { value ->
+		viewModel.isEditMode.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { isEditMode ->
 				if(isEditMode)
 					dialogTitle.text = resources.getString(R.string.edit_new_word)
 			}
 		})
 
-		viewModel.displayEmptyInputWarning.observe(this, Observer { value ->
+		viewModel.displayEmptyInputWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					wordInput.error = resources.getString(R.string.empty_input_new_word)
 			}
 		})
 
-		viewModel.dismiss.observe(this, Observer { value ->
+		viewModel.dismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { dismiss ->
 				if(dismiss)
 					dismiss()
 			}
 		})
 
-		viewModel.showAddedToast.observe(this, Observer { value ->
+		viewModel.showAddedToast.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					Toast.makeText(requireContext(), getString(R.string.new_word_added), Toast.LENGTH_SHORT).show()

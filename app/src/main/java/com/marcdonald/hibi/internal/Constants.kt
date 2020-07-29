@@ -46,7 +46,7 @@ const val NEW_WORD_PART_QUICK_ADD = "new_word_part_quick_add"
 
 // <editor-fold desc="Preferences">
 const val PREF_ENTRY_DIVIDERS = "pref_entry_dividers"
-const val PREF_DARK_THEME = "pref_dark_theme"
+const val PREF_NIGHT_MODE = "pref_night_mode"
 const val PREF_REMINDER_NOTIFICATION = "pref_reminder_notification"
 const val PREF_REMINDER_TIME = "pref_reminder_time"
 const val PREF_BACKUP = "pref_backup"

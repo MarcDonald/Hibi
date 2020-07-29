@@ -71,7 +71,7 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.allBooks.observe(this, Observer { value ->
+		viewModel.allBooks.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { books ->
 				viewModel.listReceived(books.isEmpty())
 
@@ -86,11 +86,6 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment() {
 					val displayBook = CheckBoxWithId(bookHolder.context)
 					displayBook.text = book.name
 					displayBook.itemId = book.id
-					if(theme == R.style.Theme_Hibi_BottomSheetDialog_Dark) {
-						displayBook.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
-					} else {
-						displayBook.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))
-					}
 
 					// If the new book is already displayed, don't add it
 					// This stops it removing user progress before saving
@@ -107,13 +102,13 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment() {
 			}
 		})
 
-		viewModel.displayNoBookWarning.observe(this, Observer { value ->
+		viewModel.displayNoBookWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noBooksWarning.show(shouldShow)
 			}
 		})
 
-		viewModel.bookEntryRelations.observe(this, Observer { value ->
+		viewModel.bookEntryRelations.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { bookEntryRelations ->
 				bookEntryRelations.forEach { bookId ->
 					for(x in 0 until bookHolder.childCount) {
@@ -125,7 +120,7 @@ class AddEntryToBookDialog : HibiBottomSheetDialogFragment() {
 			}
 		})
 
-		viewModel.dismiss.observe(this, Observer { value ->
+		viewModel.dismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { dismiss ->
 				if(dismiss)
 					dismiss()

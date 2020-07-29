@@ -71,26 +71,26 @@ class BackupDialog : HibiDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayDismiss.observe(this, Observer { value ->
+		viewModel.displayDismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { dismissable ->
 				dismissButton.show(dismissable)
 				isCancelable = dismissable
 			}
 		})
 
-		viewModel.displayLoading.observe(this, Observer { value ->
+		viewModel.displayLoading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				loadingProgressBar.show(display)
 			}
 		})
 
-		viewModel.displayShareButton.observe(this, Observer { value ->
+		viewModel.displayShareButton.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				shareButton.show(display)
 			}
 		})
 
-		viewModel.displaySuccess.observe(this, Observer { value ->
+		viewModel.displaySuccess.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				if(display) {
 					successDisplay.show(true)

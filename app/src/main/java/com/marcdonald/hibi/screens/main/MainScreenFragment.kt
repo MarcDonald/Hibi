@@ -68,7 +68,7 @@ class MainScreenFragment : HibiFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.newVersion.observe(this, Observer { value ->
+		viewModel.newVersion.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { newVersionName ->
 				if(newVersionName.isNotBlank() && !updateSnackbar.isShownOrQueued) {
 					updateSnackbar.setText(resources.getString(R.string.new_version_available_message, newVersionName))

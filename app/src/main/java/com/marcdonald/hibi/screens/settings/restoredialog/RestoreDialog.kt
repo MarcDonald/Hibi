@@ -75,14 +75,14 @@ class RestoreDialog : HibiDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayButtons.observe(this, Observer { value ->
+		viewModel.displayButtons.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				cancelButton.show(display)
 				confirmButton.show(display)
 			}
 		})
 
-		viewModel.displayLoading.observe(this, Observer { value ->
+		viewModel.displayLoading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				if(display) {
 					loadingProgressBar.show(true)
@@ -93,13 +93,13 @@ class RestoreDialog : HibiDialogFragment() {
 			}
 		})
 
-		viewModel.displayMessage.observe(this, Observer { value ->
+		viewModel.displayMessage.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				messageDisplay.show(display)
 			}
 		})
 
-		viewModel.displayError.observe(this, Observer { value ->
+		viewModel.displayError.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				if(display) {
 					errorDisplay.show(true)
@@ -112,13 +112,13 @@ class RestoreDialog : HibiDialogFragment() {
 			}
 		})
 
-		viewModel.displayDismiss.observe(this, Observer { value ->
+		viewModel.displayDismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				dismissButton.show(display)
 			}
 		})
 
-		viewModel.canDismiss.observe(this, Observer { value ->
+		viewModel.canDismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { canDismiss ->
 				isCancelable = canDismiss
 			}

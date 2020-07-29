@@ -16,10 +16,10 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
   <PreferenceCategory android:title="@string/appearance">
-    <SwitchPreference
-      android:defaultValue="true"
+    <DropDownPreference
       android:icon="@drawable/ic_brightness_3_24dp"
-      android:key="pref_dark_theme"
+      android:key="pref_night_mode"
+      android:summary="@string/follow_system"
       android:title="@string/theme_pref_title" />
     <SwitchPreference
       android:defaultValue="true"

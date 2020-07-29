@@ -92,25 +92,25 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayLoading.observe(this, Observer { value ->
+		viewModel.displayLoading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				progressBar.show(shouldShow)
 			}
 		})
 
-		viewModel.displayNoConnection.observe(this, Observer { value ->
+		viewModel.displayNoConnection.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noConnectionWarning.show(shouldShow)
 			}
 		})
 
-		viewModel.displayNoResults.observe(this, Observer { value ->
+		viewModel.displayNoResults.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noResultsWarning.show(shouldShow)
 			}
 		})
 
-		viewModel.searchResults.observe(this, Observer { value ->
+		viewModel.searchResults.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { searchResult ->
 				recyclerAdapter.updateList(searchResult, viewModel.entryId)
 				recycler.scrollToPosition(0)

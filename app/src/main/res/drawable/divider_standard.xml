@@ -1,5 +1,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-  <solid android:color="?hibiPrimaryIconTint" />
+  <solid android:color="?colorOnBackground" />
   <size
     android:height="1dp"
     android:width="1dp" />

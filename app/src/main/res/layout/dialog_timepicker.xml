@@ -24,7 +24,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:timePickerMode="clock"
-    android:numbersTextColor="?attr/hibiTextOnPrimary"
+    android:numbersTextColor="@color/colorOnPrimary"
     android:headerBackground="@drawable/rounded_datepicker_background"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"

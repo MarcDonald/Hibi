@@ -141,63 +141,63 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 	}
 
 	private fun setupObservers() {
-		viewModel.totalEntries.observe(this, Observer { value ->
+		viewModel.totalEntries.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { totalEntries ->
 				totalEntriesDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, totalEntries, totalEntries))
 			}
 		})
 
-		viewModel.totalDays.observe(this, Observer { value ->
+		viewModel.totalDays.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { totalDays ->
 				totalDaysDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_days, totalDays, totalDays))
 			}
 		})
 
-		viewModel.totalFavourites.observe(this, Observer { value ->
+		viewModel.totalFavourites.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { totalFavourites ->
 				totalFavouritesDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, totalFavourites, totalFavourites))
 			}
 		})
 
-		viewModel.totalLocations.observe(this, Observer { value ->
+		viewModel.totalLocations.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { totalLocations ->
 				totalLocationsDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_locations, totalLocations, totalLocations))
 			}
 		})
 
-		viewModel.totalTaggedEntries.observe(this, Observer { value ->
+		viewModel.totalTaggedEntries.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { totalTaggedEntries ->
 				totalTaggedEntriesDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, totalTaggedEntries, totalTaggedEntries))
 			}
 		})
 
-		viewModel.tagWithMostEntries.observe(this, Observer { value ->
+		viewModel.tagWithMostEntries.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { tag ->
 				tagWithMostEntriesDisplay.show(true)
 				tagWithMostEntriesDisplay.setMessage(tag.name)
 			}
 		})
 
-		viewModel.totalEntriesInBooks.observe(this, Observer { value ->
+		viewModel.totalEntriesInBooks.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { totalEntriesInBooks ->
 				totalBookEntriesDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, totalEntriesInBooks, totalEntriesInBooks))
 			}
 		})
 
-		viewModel.bookWithMostEntries.observe(this, Observer { value ->
+		viewModel.bookWithMostEntries.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { book ->
 				bookWithMostEntriesDisplay.show(true)
 				bookWithMostEntriesDisplay.setMessage(book.name)
 			}
 		})
 
-		viewModel.totalNewWords.observe(this, Observer { value ->
+		viewModel.totalNewWords.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { totalNewWords ->
 				totalNewWordsDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, totalNewWords, totalNewWords))
 			}
 		})
 
-		viewModel.mostNewWordsInOneDay.observe(this, Observer { value ->
+		viewModel.mostNewWordsInOneDay.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { newValue ->
 				val mostNewWords = newValue.number
 				mostNewWordsOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_new_words, mostNewWords, mostNewWords))
@@ -212,7 +212,7 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 			}
 		})
 
-		viewModel.mostNewWordsInOneEntry.observe(this, Observer { value ->
+		viewModel.mostNewWordsInOneEntry.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { newValue ->
 				val mostNewWords = newValue.number
 				if(newValue.number > 0) {
@@ -224,7 +224,7 @@ class StatisticsFragment : HibiFragment(), KodeinAware {
 			}
 		})
 
-		viewModel.mostEntriesInOneDay.observe(this, Observer { value ->
+		viewModel.mostEntriesInOneDay.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { newValue ->
 				val mostEntries = newValue.number
 				mostEntriesInOneDayDisplay.setMessage(resources.getQuantityString(R.plurals.stat_total_entries, mostEntries, mostEntries))

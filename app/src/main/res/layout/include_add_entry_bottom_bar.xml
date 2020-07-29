@@ -28,6 +28,7 @@
     <com.marcdonald.hibi.uicomponents.views.SearchBar
       android:id="@+id/searchbar_add_entry"
       android:layout_width="match_parent"
+      android:background="?colorSurface"
       android:layout_height="@dimen/search_bar_height"
       app:sbHint="@string/search_bar_hint" />
 

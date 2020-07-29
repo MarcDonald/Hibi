@@ -226,7 +226,7 @@
   <string name="appearance">Appearance</string>
   <string name="entry_dividers_pref_title">Entry Dividers</string>
   <string name="list_animations">List Animations</string>
-  <string name="theme_pref_title">Dark Theme</string>
+  <string name="theme_pref_title">Night Mode</string>
   <string name="may_need_restart">You may need to restart the app for this setting to take effect</string>
   <string name="reminder_pref_title">Daily Reminder</string>
   <string name="reminder_time_pref_title">Reminder time</string>
@@ -267,6 +267,12 @@
   <string name="none">None</string>
   <string name="month">Month</string>
   <string name="year">Year</string>
+  <!--region Night Modes-->
+  <string name="follow_system">Follow System (Default)</string>
+  <string name="always_night">Always Night Mode</string>
+  <string name="always_day">Always Day Mode</string>
+  <string name="night_mode">Night Mode</string>
+  <!--endregion-->
   <!--endregion-->
 
   <!--region About-->

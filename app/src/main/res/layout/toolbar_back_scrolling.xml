@@ -36,6 +36,7 @@
       android:background="?selectableItemBackgroundBorderless"
       android:contentDescription="@string/back"
       android:padding="@dimen/toolbar_icon_padding"
+      app:tint="?colorOnSecondary"
       android:src="@drawable/ic_arrow_back_24dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"

@@ -71,7 +71,7 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.allTags.observe(this, Observer { value ->
+		viewModel.allTags.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { tags ->
 				viewModel.listReceived(tags.isEmpty())
 
@@ -86,11 +86,6 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment() {
 					val displayTag = CheckBoxWithId(tagHolder.context)
 					displayTag.text = tag.name
 					displayTag.itemId = tag.id
-					if(theme == R.style.Theme_Hibi_BottomSheetDialog_Dark) {
-						displayTag.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
-					} else {
-						displayTag.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))
-					}
 
 					// If the new tag is already displayed, don't add it
 					// This stops it removing user progress before saving
@@ -107,13 +102,13 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment() {
 			}
 		})
 
-		viewModel.displayNoTagsWarning.observe(this, Observer { value ->
+		viewModel.displayNoTagsWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noTagsWarning.show(shouldShow)
 			}
 		})
 
-		viewModel.tagEntryRelations.observe(this, Observer { value ->
+		viewModel.tagEntryRelations.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { tagEntryRelations ->
 				tagEntryRelations.forEach { tagId ->
 					for(x in 0 until tagHolder.childCount) {
@@ -125,7 +120,7 @@ class AddTagToEntryDialog : HibiBottomSheetDialogFragment() {
 			}
 		})
 
-		viewModel.dismiss.observe(this, Observer { value ->
+		viewModel.dismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { dismiss ->
 				if(dismiss)
 					dismiss()

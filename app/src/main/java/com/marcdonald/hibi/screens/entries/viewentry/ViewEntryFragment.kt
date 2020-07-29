@@ -88,7 +88,7 @@ class ViewEntryFragment : HibiFragment() {
 		}
 
 		// Has to start observing here since the argument needs to be passed first
-		viewModel.images.observe(this, Observer { value ->
+		viewModel.images.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { imagePaths ->
 				imageRecyclerAdapter.updateItems(imagePaths)
 			}
@@ -156,32 +156,32 @@ class ViewEntryFragment : HibiFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayErrorToast.observe(this, Observer { value ->
+		viewModel.displayErrorToast.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					Toast.makeText(requireContext(), resources.getString(R.string.generic_error), Toast.LENGTH_SHORT).show()
 			}
 		})
 
-		viewModel.content.observe(this, Observer { value ->
+		viewModel.content.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { content ->
 				contentDisplay.text = content
 			}
 		})
 
-		viewModel.readableDate.observe(this, Observer { value ->
+		viewModel.readableDate.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { date ->
 				dateButton.text = date
 			}
 		})
 
-		viewModel.readableTime.observe(this, Observer { value ->
+		viewModel.readableTime.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { time ->
 				timeButton.text = time
 			}
 		})
 
-		viewModel.tags.observe(this, Observer { value ->
+		viewModel.tags.observe(viewLifecycleOwner, Observer { value ->
 			tagDisplay.removeAllViews()
 
 			value?.let { tags ->
@@ -195,7 +195,7 @@ class ViewEntryFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.books.observe(this, Observer { value ->
+		viewModel.books.observe(viewLifecycleOwner, Observer { value ->
 			bookDisplay.removeAllViews()
 
 			value?.let { books ->
@@ -209,20 +209,20 @@ class ViewEntryFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.displayNewWordButton.observe(this, Observer { value ->
+		viewModel.displayNewWordButton.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				newWordsButton.show(shouldShow)
 			}
 		})
 
-		viewModel.popBackStack.observe(this, Observer { value ->
+		viewModel.popBackStack.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { pop ->
 				if(pop)
 					Navigation.findNavController(requireView()).popBackStack()
 			}
 		})
 
-		viewModel.location.observe(this, Observer { value ->
+		viewModel.location.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { location ->
 				locationDisplay.show(location.isNotBlank())
 				locationDisplay.text = location

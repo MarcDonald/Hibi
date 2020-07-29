@@ -24,8 +24,10 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.text.format.DateFormat
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.preference.DropDownPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -60,7 +62,8 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 	private fun bindViews() {
 		val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
-		findPreference<Preference>(PREF_DARK_THEME)?.onPreferenceChangeListener = onThemeChangeListener
+		setupNightModePref()
+
 		findPreference<Preference>(PREF_REMINDER_NOTIFICATION)?.onPreferenceChangeListener = reminderChangeListener
 		if(sharedPreferences.getBoolean(PREF_REMINDER_NOTIFICATION, false)) {
 			displayReminderTimeSummary()
@@ -95,9 +98,29 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 		}
 	}
 
-	private val onThemeChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
-		requireActivity().recreate()
-		true
+	private fun setupNightModePref() {
+		val nightModePref = findPreference<DropDownPreference>(PREF_NIGHT_MODE)
+		nightModePref?.let {
+			nightModePref.apply {
+				entries = arrayOf(resources.getString(R.string.follow_system), resources.getString(R.string.always_day), resources.getString(R.string.always_night))
+				entryValues = arrayOf(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM.toString(), AppCompatDelegate.MODE_NIGHT_NO.toString(), AppCompatDelegate.MODE_NIGHT_YES.toString())
+				summary = getNightModeSummary(AppCompatDelegate.getDefaultNightMode())
+			}
+			nightModePref.setOnPreferenceChangeListener { pref, newValue ->
+				PreferenceManager.getDefaultSharedPreferences(requireContext()).edit().putString(PREF_NIGHT_MODE, newValue as String).apply()
+				AppCompatDelegate.setDefaultNightMode(newValue.toInt())
+				pref.summary = getNightModeSummary(newValue.toInt())
+				true
+			}
+		}
+	}
+
+	private fun getNightModeSummary(mode: Int): String {
+		return when(mode) {
+			AppCompatDelegate.MODE_NIGHT_YES -> resources.getString(R.string.always_night)
+			AppCompatDelegate.MODE_NIGHT_NO -> resources.getString(R.string.always_day)
+			else -> resources.getString(R.string.follow_system)
+		}
 	}
 
 	private fun displayReminderTimeSummary(calendar: Calendar) {
@@ -217,7 +240,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 		} else {
 			FilePickerBuilder.instance
 				.setMaxCount(1)
-				.setActivityTheme(R.style.AppTheme_Dark)
+				.setActivityTheme(R.style.AppTheme)
 				.setActivityTitle(resources.getString(R.string.restore_title))
 				.enableDocSupport(false)
 				.addFileSupport(resources.getString(R.string.backup_file), Array(1) { ".hibi" })
