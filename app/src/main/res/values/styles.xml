@@ -36,6 +36,7 @@
     <item name="shapeAppearanceLargeComponent">@style/ShapeAppearanceOverlay.Hibi.RoundedCorners</item>
     <item name="iconTint">@color/iconTint</item>
     <item name="tint">@color/iconTint</item>
+    <item name="drawableTint">@color/iconTint</item>
     <item name="colorBackgroundFloating">@color/colorBackgroundFloating</item>
     <item name="tabStyle">@style/Widget.Hibi.TabLayout</item>
     <item name="toolbarStyle">@style/Widget.Hibi.Toolbar</item>
@@ -67,6 +68,7 @@
   </style>
 
   <style name="Widget.Hibi.CardView.Rounded" parent="Widget.MaterialComponents.CardView">
+    <item name="android:backgroundTint">?colorBackgroundFloating</item>
     <item name="cardCornerRadius">8dp</item>
   </style>
 
