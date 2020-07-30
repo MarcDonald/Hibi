@@ -23,8 +23,8 @@ class UpdateUtilsImpl(private val githubAPIService: GithubAPIService) : UpdateUt
 
 	override suspend fun checkForUpdate(): GithubVersionResponse? {
 		val newestVersion = githubAPIService.getNewestVersion()
-		val semicolonIndex = newestVersion.tag_name.indexOf(';')
-		val newestVersionCode = newestVersion.tag_name.substring(semicolonIndex + 1)
+		val semicolonIndex = newestVersion.tagName.indexOf(';')
+		val newestVersionCode = newestVersion.tagName.substring(semicolonIndex + 1)
 		return if(newestVersionCode.toInt() > BuildConfig.VERSION_CODE) {
 			newestVersion
 		} else {

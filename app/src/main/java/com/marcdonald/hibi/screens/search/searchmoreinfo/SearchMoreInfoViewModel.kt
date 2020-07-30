@@ -18,9 +18,9 @@ package com.marcdonald.hibi.screens.search.searchmoreinfo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.gson.Gson
 import com.marcdonald.hibi.data.network.jisho.apiresponse.Japanese
 import com.marcdonald.hibi.data.network.jisho.apiresponse.Sense
+import com.squareup.moshi.Moshi
 
 class SearchMoreInfoViewModel : ViewModel() {
 	private var _senseList = MutableLiveData<List<Sense>>()
@@ -58,6 +58,8 @@ class SearchMoreInfoViewModel : ViewModel() {
 	var entryId = 0
 		private set
 
+	private val moshi = Moshi.Builder().build()
+
 	fun passArguments(japaneseListArg: ArrayList<String>, sensesListArg: ArrayList<String>, entryId: Int) {
 		getJapaneseObjectList(japaneseListArg)
 		getSensesObjectList(sensesListArg)
@@ -70,8 +72,10 @@ class SearchMoreInfoViewModel : ViewModel() {
 
 		jsonList?.let {
 			jsonList.forEach { json ->
-				val japaneseObject = Gson().fromJson(json, Japanese::class.java)
-				objectList.add(japaneseObject)
+				val japaneseObject = moshi.adapter<Japanese>(Japanese::class.java).fromJson(json)
+				if(japaneseObject != null) {
+					objectList.add(japaneseObject)
+				}
 			}
 		}
 
@@ -116,8 +120,10 @@ class SearchMoreInfoViewModel : ViewModel() {
 
 		jsonList?.let {
 			jsonList.forEach { json ->
-				val senseObject = Gson().fromJson(json, Sense::class.java)
-				objectList.add(senseObject)
+				val senseObject = moshi.adapter<Sense>(Sense::class.java).fromJson(json)
+				if(senseObject != null) {
+					objectList.add(senseObject)
+				}
 			}
 		}
 

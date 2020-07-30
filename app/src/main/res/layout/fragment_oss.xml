@@ -73,16 +73,16 @@
         app:sldTitle="@string/retrofit" />
 
       <com.marcdonald.simplelicensedisplay.SimpleLicenseDisplay
-        android:id="@+id/license_gson"
+        android:id="@+id/license_moshi"
         style="@style/Widget.Hibi.LicenseDisplay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginEnd="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
-        app:sldDescription="@string/gson_description"
+        app:sldDescription="@string/moshi_description"
         app:sldLicense="@string/apache"
-        app:sldTitle="@string/gson" />
+        app:sldTitle="@string/moshi" />
 
       <com.marcdonald.simplelicensedisplay.SimpleLicenseDisplay
         android:id="@+id/license_android_file_picker"

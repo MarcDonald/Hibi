@@ -15,8 +15,13 @@
  */
 package com.marcdonald.hibi.data.network.jisho.apiresponse
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class Attribution(
-	val dbpedia: Boolean,
+	// API either returns boolean false or the String url of the dbpedia entry
+	val dbpedia: Any,
 	val jmdict: Boolean,
 	val jmnedict: Boolean
 )

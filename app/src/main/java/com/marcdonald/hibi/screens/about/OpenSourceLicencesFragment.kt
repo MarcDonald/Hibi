@@ -49,8 +49,8 @@ class OpenSourceLicencesFragment : Fragment() {
 		view.findViewById<SimpleLicenseDisplay>(R.id.license_retrofit)
 			.setOnClickListener(openURLClickListener("https://github.com/square/retrofit"))
 
-		view.findViewById<SimpleLicenseDisplay>(R.id.license_gson)
-			.setOnClickListener(openURLClickListener("https://github.com/google/gson"))
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_moshi)
+			.setOnClickListener(openURLClickListener("https://github.com/square/moshi"))
 
 		view.findViewById<SimpleLicenseDisplay>(R.id.license_android_file_picker)
 			.setOnClickListener(openURLClickListener("https://github.com/DroidNinja/Android-FilePicker"))

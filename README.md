@@ -57,7 +57,7 @@ Each fragment observes data in a View Model which may retrieve data from various
 Data is stored using a [Room](https://developer.android.com/jetpack/androidx/releases/room) database and queries are provided in a DAO in the form of functions. 
 Data is then retrieved asynchronously within repositories using Kotlin coroutines and [LiveData](https://developer.android.com/topic/libraries/architecture/livedata). 
 [Kodein](https://github.com/Kodein-Framework/Kodein-DI) is used for dependency injection due to it's native support for Kotlin and it's ease of writing. 
-API calls are made using [Retrofit](https://github.com/square/retrofit) and then converted into Kotlin objects using [Gson](https://github.com/google/gson). 
+API calls are made using [Retrofit](https://github.com/square/retrofit) and then converted into Kotlin objects using [Moshi](https://github.com/square/moshi).
 Design inspired by [Material Design](https://material.io/) and implemented using [Material Components for Android](https://github.com/material-components/material-components-android).
 
 ## Open Source Libraries Used
@@ -76,7 +76,7 @@ Used for API calls
 
 Apache 2 License
 
-### [Gson](https://github.com/google/gson)
+### [Moshi](https://github.com/square/moshi)
 Used for converting API responses into Kotlin objects
 
 Apache 2 License

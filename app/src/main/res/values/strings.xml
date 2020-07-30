@@ -320,8 +320,8 @@
   <string name="retrofit">Retrofit</string>
   <string name="retrofit_description">Used for API calls</string>
 
-  <string name="gson">GSon</string>
-  <string name="gson_description">Used for converting API responses into Kotlin objects</string>
+  <string name="moshi">Moshi</string>
+  <string name="moshi_description">Used for converting API responses into Kotlin objects</string>
 
   <string name="android_file_picker">Android File Picker</string>
   <string name="android_file_picker_description">Used for selecting file to restore from</string>

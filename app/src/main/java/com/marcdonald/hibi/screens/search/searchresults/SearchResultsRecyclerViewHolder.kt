@@ -21,11 +21,13 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.network.jisho.apiresponse.Data
+import com.marcdonald.hibi.data.network.jisho.apiresponse.Japanese
+import com.marcdonald.hibi.data.network.jisho.apiresponse.Sense
 import com.marcdonald.hibi.internal.ENTRY_ID_KEY
 import com.marcdonald.hibi.screens.search.searchmoreinfo.SearchMoreInfoDialog
+import com.squareup.moshi.Moshi
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -40,6 +42,8 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
 	private val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.const_search_result)
 
 	private var displayedData: Data? = null
+
+	private val moshi = Moshi.Builder().build()
 
 	private val clickListener = View.OnClickListener {
 		val dialog = SearchMoreInfoDialog()
@@ -105,8 +109,8 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
 		var englishDisplayString = ""
 		val definitionList = mutableListOf<String>()
 
-		for(x in 0 until data.senses.size) {
-			for(y in 0 until data.senses[x].englishDefinitions.size) {
+		for(x in data.senses.indices) {
+			for(y in data.senses[x].englishDefinitions.indices) {
 				val englishDefinition = data.senses[x].englishDefinitions[y]
 				// If the definition isn't already being displayed
 				if(!definitionList.contains(englishDefinition.toLowerCase(Locale.getDefault()))) {
@@ -133,10 +137,10 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
 	private fun getAllJapaneseAsJson(): ArrayList<String> {
 		val listOfJapaneseJson = ArrayList<String>()
 
-		displayedData?.let {
-			if(displayedData!!.japanese.isNotEmpty()) {
-				for(x in 0 until displayedData!!.japanese.size) {
-					val japaneseJson = Gson().toJson(displayedData!!.japanese[x])
+		displayedData?.let { data ->
+			if(data.japanese.isNotEmpty()) {
+				for(element in data.japanese) {
+					val japaneseJson = moshi.adapter<Japanese>(Japanese::class.java).toJson(element)
 					listOfJapaneseJson.add(japaneseJson)
 				}
 			}
@@ -148,10 +152,10 @@ class SearchResultsRecyclerViewHolder(itemView: View, fragmentManager: FragmentM
 	private fun getAllSensesAsJson(): ArrayList<String> {
 		val listOfSensesJson = ArrayList<String>()
 
-		displayedData?.let {
-			if(displayedData!!.senses.isNotEmpty()) {
-				for(x in 0 until displayedData!!.senses.size) {
-					val sensesJson = Gson().toJson(displayedData!!.senses[x])
+		displayedData?.let { data ->
+			if(data.senses.isNotEmpty()) {
+				for(element in data.senses) {
+					val sensesJson = moshi.adapter<Sense>(Sense::class.java).toJson(element)
 					listOfSensesJson.add(sensesJson)
 				}
 			}

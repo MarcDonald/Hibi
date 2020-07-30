@@ -73,7 +73,9 @@
     app:layout_constraintEnd_toStartOf="@id/img_item_selected"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toTopOf="@id/item_content"
-    android:src="@drawable/ic_star_gold_24dp" />
+    app:tint="#FFA500"
+    android:src="@drawable/ic_star_24dp"
+    android:contentDescription="@string/favourite_entry" />
 
   <TextView
     android:id="@+id/item_content"

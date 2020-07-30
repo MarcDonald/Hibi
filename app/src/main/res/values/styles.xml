@@ -29,6 +29,8 @@
     <item name="android:windowLightStatusBar">false</item>
     <item name="android:statusBarColor">@color/colorToolbar</item>
     <item name="android:navigationBarColor">@color/colorNavigationBar</item>
+    <item name="colorError">@color/colorError</item>
+    <item name="colorOnError">@color/colorOnError</item>
     <item name="colorSurface">@color/colorSurface</item>
     <item name="colorOnSurface">@color/colorOnSurface</item>
     <item name="shapeAppearanceLargeComponent">@style/ShapeAppearanceOverlay.Hibi.RoundedCorners</item>
