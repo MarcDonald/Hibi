@@ -97,6 +97,7 @@
     android:text="@string/location"
     android:textAppearance="@style/TextAppearance.Hibi.MainEntryLocation"
     android:gravity="start|center"
+    android:drawableTint="?iconTint"
     android:drawableStart="@drawable/ic_location_on_24dp"
     android:drawablePadding="@dimen/margin_standard"
     app:layout_constraintTop_toBottomOf="@id/item_content"
