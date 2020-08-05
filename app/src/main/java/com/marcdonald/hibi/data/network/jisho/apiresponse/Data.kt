@@ -21,7 +21,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Data(
 	val attribution: Attribution,
-	@Json(name = "is_common") val isCommon: Boolean,
+	@Json(name = "is_common") val isCommon: Boolean?,
 	val japanese: List<Japanese>,
 	val senses: List<Sense>,
 	val tags: List<String>
