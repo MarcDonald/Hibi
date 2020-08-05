@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
+import com.marcdonald.hibi.internal.base.HibiBottomSheetDialogFragment
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordDialog
@@ -39,7 +40,7 @@ import com.marcdonald.hibi.screens.search.searchmoreinfo.alternativesrecycler.Se
 import com.marcdonald.hibi.screens.search.searchmoreinfo.senserecycler.SearchMoreInfoSenseRecyclerAdapter
 import timber.log.Timber
 
-class SearchMoreInfoDialog : HibiDialogFragment() {
+class SearchMoreInfoDialog : HibiBottomSheetDialogFragment() {
 
 	private val viewModel by viewModels<SearchMoreInfoViewModel> { viewModelFactory }
 
