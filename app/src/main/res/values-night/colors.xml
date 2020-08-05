@@ -18,6 +18,7 @@
 <resources>
   <color name="colorBackground">#303030</color>
   <color name="colorBackgroundDark">#212121</color>
+  <color name="colorBackgroundLight">#595959</color>
   <color name="colorOnBackground">@color/white</color>
   <color name="colorOnBackgroundSecondary">@color/white70</color>
   <color name="colorOnBackgroundHint">@color/white50</color>
@@ -41,7 +42,7 @@
   <color name="colorOnToolbarSecondary">@color/colorOnBackgroundSecondary</color>
   <color name="colorOnToolbarHint">@color/colorOnBackgroundHint</color>
   <color name="colorSelectedItem">#26FFFFFF</color>
-  <color name="colorBackgroundFloating">@color/colorBackgroundDark</color>
+  <color name="colorBackgroundFloating">@color/colorBackgroundLight</color>
   <color name="colorShortcutBackground">#F5F5F5</color>
   <color name="chipBackground">@color/colorSecondary</color>
   <color name="chipBackgroundDark">@color/colorSecondary</color>
