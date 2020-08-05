@@ -87,6 +87,8 @@
   <string name="no_search_term_warning">Please enter something to search for</string>
   <string name="search_bar_hint">Search on Jisho.org</string>
   <string name="no_connection_warning">No Internet Connection</string>
+  <string name="search_timed_out">Search Timed Out</string>
+  <string name="search_timed_out_explanation">You may have a slow connection, or Jisho.org could be having issues</string>
   <string name="no_results">No Results Found</string>
   <string name="search_results_other">Other forms available</string>
   <!--endregion-->

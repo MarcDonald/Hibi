@@ -18,7 +18,6 @@ package com.marcdonald.hibi.screens.mainentriesrecycler
 import android.content.res.Resources
 import android.preference.PreferenceManager
 import android.text.TextUtils
-import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout

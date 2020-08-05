@@ -24,6 +24,8 @@ import com.marcdonald.hibi.data.network.github.GithubRateLimitExceededException
 import com.marcdonald.hibi.internal.utils.UpdateUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import java.net.SocketTimeoutException
 
 class UpdateDialogViewModel(private val updateUtils: UpdateUtils) : ViewModel() {
 	private val _displayDismiss = MutableLiveData<Boolean>()
@@ -81,8 +83,9 @@ class UpdateDialogViewModel(private val updateUtils: UpdateUtils) : ViewModel() 
 				_displayRateLimitError.postValue(true)
 			} catch(e: NoConnectivityException) {
 				_displayNoConnection.postValue(true)
-			} catch(e: NumberFormatException) {
+			} catch(e: Exception) {
 				_displayError.postValue(true)
+				Timber.e("Log: updateDialogViewModel: check: ${e.message}")
 			} finally {
 				_displayLoading.postValue(false)
 			}

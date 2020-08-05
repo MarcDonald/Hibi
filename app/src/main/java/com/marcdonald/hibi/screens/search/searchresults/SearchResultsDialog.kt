@@ -42,6 +42,8 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 	// <editor-fold desc="UI Components">
 	private lateinit var progressBar: ProgressBar
 	private lateinit var noConnectionWarning: LinearLayout
+	private lateinit var timeoutWarning: LinearLayout
+	private lateinit var errorWarning: LinearLayout
 	private lateinit var noResultsWarning: LinearLayout
 	private lateinit var recyclerAdapter: SearchResultsRecyclerAdapter
 	private lateinit var recycler: RecyclerView
@@ -77,6 +79,13 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 		noConnectionWarning = view.findViewById(R.id.lin_search_no_connection)
 		noConnectionWarning.show(false)
 
+		timeoutWarning = view.findViewById(R.id.lin_search_timeout)
+		timeoutWarning.show(false)
+
+		errorWarning = view.findViewById(R.id.lin_search_error)
+		errorWarning.show(false)
+
+
 		noResultsWarning = view.findViewById(R.id.lin_search_no_results)
 		noResultsWarning.show(false)
 	}
@@ -101,6 +110,18 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 		viewModel.displayNoConnection.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noConnectionWarning.show(shouldShow)
+			}
+		})
+
+		viewModel.displayTimeout.observe(viewLifecycleOwner, Observer { value ->
+			value?.let { shouldShow ->
+				timeoutWarning.show(shouldShow)
+			}
+		})
+
+		viewModel.displayError.observe(viewLifecycleOwner, Observer { value ->
+			value?.let { shouldShow ->
+				errorWarning.show(shouldShow)
 			}
 		})
 
