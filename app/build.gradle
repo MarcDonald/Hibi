@@ -104,7 +104,7 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.6.0"
 
     // Android-FilePicker
-    implementation 'com.droidninja:filepicker:2.2.1'
+    implementation 'com.droidninja:filepicker:2.2.4'
 
     // Glide for image loading and caching
     implementation 'com.github.bumptech.glide:glide:4.9.0'

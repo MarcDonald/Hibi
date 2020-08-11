@@ -48,6 +48,7 @@
   <color name="chipBackgroundDark">@color/colorSecondary</color>
   <color name="tabIndicatorColor">@color/colorPrimary</color>
   <color name="iconTint">@color/colorOnBackgroundSecondary</color>
+  <color name="launcherIconBackground">@color/colorBackground</color>
 
   <!--region Other-->
   <color name="white">#FFFFFF</color>
