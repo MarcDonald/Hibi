@@ -172,7 +172,7 @@ interface DAO {
 	@Update
 	fun updateNewWord(newWord: NewWord)
 
-	@Query("SELECT * FROM NewWord")
+	@Query("SELECT * FROM NewWord ORDER BY id")
 	fun getAllNewWords(): List<NewWord>
 
 	@Query("SELECT * FROM NewWord WHERE id = :id")

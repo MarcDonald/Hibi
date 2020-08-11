@@ -15,20 +15,16 @@
  */
 package com.marcdonald.hibi.screens.newwords
 
-import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.entity.NewWord
-import com.marcdonald.hibi.internal.ENTRY_ID_KEY
-import com.marcdonald.hibi.internal.NEW_WORD_ID_KEY
 import com.marcdonald.hibi.internal.extension.show
-import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordDialog
+import timber.log.Timber
 
-class NewWordsRecyclerViewHolder(itemView: View)
+class NewWordsRecyclerViewHolder(itemView: View, private val onClick: (Int) -> Unit)
 	: RecyclerView.ViewHolder(itemView) {
 
 	private val wordDisplay: TextView = itemView.findViewById(R.id.txt_new_word_word)
@@ -36,15 +32,24 @@ class NewWordsRecyclerViewHolder(itemView: View)
 	private val readingDisplay: TextView = itemView.findViewById(R.id.txt_new_word_reading)
 	private val englishDisplay: TextView = itemView.findViewById(R.id.txt_new_word_english)
 	private val notesDisplay: TextView = itemView.findViewById(R.id.txt_new_word_notes)
+	private val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.const_new_word)
 
 	private var displayedNewWord: NewWord? = null
+
+	init {
+		constraintLayout.setOnClickListener {
+			displayedNewWord?.let { newWord ->
+				onClick(newWord.entryId)
+			}
+		}
+	}
 
 	fun display(newWord: NewWord) {
 		displayedNewWord = newWord
 
-		if(newWord.word.isNotBlank()) {
+		if(newWord.word.isNotBlank())
 			wordDisplay.text = itemView.resources.getString(R.string.japanese_word_wc, newWord.word)
-		} else
+		else
 			wordDisplay.show(false)
 
 		if(newWord.partOfSpeech.isNotBlank())
@@ -52,9 +57,9 @@ class NewWordsRecyclerViewHolder(itemView: View)
 		else
 			typeDisplay.show(false)
 
-		if(newWord.reading.isNotBlank()) {
+		if(newWord.reading.isNotBlank())
 			readingDisplay.text = itemView.resources.getString(R.string.reading_wc, newWord.reading)
-		} else
+		else
 			readingDisplay.show(false)
 
 		if(newWord.english.isNotBlank())
@@ -62,9 +67,9 @@ class NewWordsRecyclerViewHolder(itemView: View)
 		else
 			englishDisplay.show(false)
 
-		if(newWord.notes.isNotBlank()) {
+		if(newWord.notes.isNotBlank())
 			notesDisplay.text = itemView.resources.getString(R.string.notes_wc, newWord.notes)
-		} else
+		else
 			notesDisplay.show(false)
 	}
 }

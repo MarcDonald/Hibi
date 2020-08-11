@@ -24,8 +24,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.entity.NewWord
+import timber.log.Timber
 
-class NewWordsRecyclerAdapter(private val context: Context)
+class NewWordsRecyclerAdapter(private val context: Context, private val onClick: (Int) -> Unit)
 	: RecyclerView.Adapter<NewWordsRecyclerViewHolder>() {
 
 	private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -34,7 +35,7 @@ class NewWordsRecyclerAdapter(private val context: Context)
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewWordsRecyclerViewHolder {
 		val view = inflater.inflate(R.layout.item_new_word, parent, false)
-		return NewWordsRecyclerViewHolder(view)
+		return NewWordsRecyclerViewHolder(view, onClick)
 	}
 
 	override fun getItemCount(): Int {

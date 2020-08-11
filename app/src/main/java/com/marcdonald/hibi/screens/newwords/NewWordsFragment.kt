@@ -30,6 +30,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
+import com.marcdonald.hibi.screens.favouriteentries.FavouriteEntriesFragmentDirections
+import timber.log.Timber
 
 class NewWordsFragment : HibiFragment() {
 
@@ -76,9 +78,15 @@ class NewWordsFragment : HibiFragment() {
 
 	private fun initRecycler(view: View) {
 		val recycler: RecyclerView = view.findViewById(R.id.recycler_new_words)
-		this.recyclerAdapter = NewWordsRecyclerAdapter(requireContext())
+		this.recyclerAdapter = NewWordsRecyclerAdapter(requireContext(), ::onWordClick)
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager
+	}
+
+	private fun onWordClick(entryId: Int) {
+		val viewEntryAction = NewWordsFragmentDirections.viewEntryAction()
+		viewEntryAction.entryId = entryId
+		Navigation.findNavController(requireView()).navigate(viewEntryAction)
 	}
 }
