@@ -75,7 +75,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Navigation components
-    // TODO Updating these anymore breaks non-Liveata Room queries
+    // TODO Updating these anymore breaks non-LiveData Room queries
     //noinspection GradleDependency
     implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha06'
     //noinspection GradleDependency
