@@ -27,6 +27,12 @@ import timber.log.Timber
 
 class NewWordRepositoryImpl private constructor(private val dao: DAO) : NewWordRepository {
 
+	override suspend fun getAll(): List<NewWord> {
+		return withContext(Dispatchers.IO) {
+			return@withContext dao.getAllNewWords()
+		}
+	}
+
 	override suspend fun addNewWord(newWord: NewWord) {
 		withContext(Dispatchers.IO) {
 			try {

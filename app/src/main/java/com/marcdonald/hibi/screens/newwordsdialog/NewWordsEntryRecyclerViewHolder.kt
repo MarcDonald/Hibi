@@ -28,9 +28,9 @@ import com.marcdonald.hibi.internal.NEW_WORD_ID_KEY
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordDialog
 
-class NewWordsRecyclerViewHolder(itemView: View,
-																 fragmentManager: FragmentManager,
-																 isEditMode: Boolean)
+class NewWordsEntryRecyclerViewHolder(itemView: View,
+																			fragmentManager: FragmentManager,
+																			isEditMode: Boolean)
 	: RecyclerView.ViewHolder(itemView) {
 
 	private val wordDisplay: TextView = itemView.findViewById(R.id.txt_new_word_word)

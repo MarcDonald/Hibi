@@ -31,32 +31,32 @@
 
   <!--region Loading-->
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/const_favourite_entries_loading"
+    android:id="@+id/const_new_words_loading"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ProgressBar
-      android:id="@+id/prog_favourite_entries"
+      android:id="@+id/prog_new_words"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
-      app:layout_constraintBottom_toTopOf="@id/gd_favourite_entries_loading"
+      app:layout_constraintBottom_toTopOf="@id/gd_new_words_loading"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-      android:id="@+id/txt_favourite_entries_loading"
+      android:id="@+id/txt_new_words_loading"
       style="@style/TextAppearance.Hibi.WarningDisplay"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
-      android:text="@string/loading_entries"
+      android:text="@string/loading_new_words"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/gd_favourite_entries_loading" />
+      app:layout_constraintTop_toBottomOf="@id/gd_new_words_loading" />
 
     <androidx.constraintlayout.widget.Guideline
-      android:id="@+id/gd_favourite_entries_loading"
+      android:id="@+id/gd_new_words_loading"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -67,33 +67,33 @@
 
   <!--region No Results-->
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/const_no_favourites"
+    android:id="@+id/const_no_new_words"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
-      android:id="@+id/img_no_favourites"
+      android:id="@+id/img_no_new_words"
       android:layout_width="@dimen/main_screen_warning_image_size"
       android:layout_height="@dimen/main_screen_warning_image_size"
-      android:contentDescription="@string/no_entries_found"
+      android:contentDescription="@string/no_new_words"
       android:src="@drawable/ic_sentiment_dissatisfied_24dp"
-      app:layout_constraintBottom_toTopOf="@id/gd_no_favourites"
+      app:layout_constraintBottom_toTopOf="@id/gd_no_new_words"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-      android:id="@+id/txt_no_favourites"
+      android:id="@+id/txt_no_new_words"
       style="@style/TextAppearance.Hibi.WarningDisplay"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/margin_standard"
-      android:text="@string/no_favourites"
+      android:text="@string/no_new_words"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/gd_no_favourites" />
+      app:layout_constraintTop_toBottomOf="@id/gd_no_new_words" />
 
     <androidx.constraintlayout.widget.Guideline
-      android:id="@+id/gd_no_favourites"
+      android:id="@+id/gd_no_new_words"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -103,7 +103,7 @@
   <!--endregion-->
 
   <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recycler_favourite_entries"
+    android:id="@+id/recycler_new_words"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"

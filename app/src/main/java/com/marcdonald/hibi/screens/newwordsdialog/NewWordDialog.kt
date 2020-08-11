@@ -34,13 +34,12 @@ import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordDialog
 
 class NewWordDialog : HibiBottomSheetDialogFragment() {
-
 	private val viewModel by viewModels<NewWordViewModel> { viewModelFactory }
 
 	// <editor-fold desc="UI Components">
 	private lateinit var noResultsWarning: LinearLayout
 	private lateinit var addButton: MaterialButton
-	private lateinit var recyclerAdapter: NewWordsRecyclerAdapter
+	private lateinit var recyclerAdapter: NewWordsEntryRecyclerAdapter
 	private lateinit var recycler: RecyclerView
 	// </editor-fold>
 
@@ -106,7 +105,7 @@ class NewWordDialog : HibiBottomSheetDialogFragment() {
 	}
 
 	private fun initRecycler() {
-		this.recyclerAdapter = NewWordsRecyclerAdapter(requireContext(), requireFragmentManager())
+		this.recyclerAdapter = NewWordsEntryRecyclerAdapter(requireContext(), requireFragmentManager())
 		val layoutManager = LinearLayoutManager(context)
 		recycler.adapter = recyclerAdapter
 		recycler.layoutManager = layoutManager

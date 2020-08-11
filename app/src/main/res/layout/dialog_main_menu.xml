@@ -66,6 +66,17 @@
         app:icon="@drawable/ic_event_24dp"
         app:iconPadding="@dimen/margin_standard"/>
 
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_main_menu_new_words"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_words"
+        android:textAppearance="@style/TextAppearance.Hibi.MainMenuOption"
+        android:textAlignment="textStart"
+        style="@style/Widget.Hibi.Button.Text"
+        app:icon="@drawable/ic_word"
+        app:iconPadding="@dimen/margin_standard"/>
+
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"

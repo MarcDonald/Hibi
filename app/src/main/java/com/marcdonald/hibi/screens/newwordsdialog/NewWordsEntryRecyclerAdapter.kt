@@ -25,25 +25,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.entity.NewWord
 
-class NewWordsRecyclerAdapter(private val context: Context,
-															private val fragmentManager: FragmentManager)
-	: RecyclerView.Adapter<NewWordsRecyclerViewHolder>() {
+class NewWordsEntryRecyclerAdapter(private val context: Context,
+																	 private val fragmentManager: FragmentManager)
+	: RecyclerView.Adapter<NewWordsEntryRecyclerViewHolder>() {
 
 	private val inflater: LayoutInflater = LayoutInflater.from(context)
 	private var dataList: List<NewWord> = listOf()
 	private var lastPosition = -1
 	var isEditMode = false
 
-	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewWordsRecyclerViewHolder {
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewWordsEntryRecyclerViewHolder {
 		val view = inflater.inflate(R.layout.item_new_word, parent, false)
-		return NewWordsRecyclerViewHolder(view, fragmentManager, isEditMode)
+		return NewWordsEntryRecyclerViewHolder(view, fragmentManager, isEditMode)
 	}
 
 	override fun getItemCount(): Int {
 		return dataList.size
 	}
 
-	override fun onBindViewHolder(holder: NewWordsRecyclerViewHolder, position: Int) {
+	override fun onBindViewHolder(holder: NewWordsEntryRecyclerViewHolder, position: Int) {
 		holder.display(dataList[position])
 		setAnimation(holder.itemView, position)
 	}
