@@ -66,7 +66,7 @@ class ReminderAlertReceiver : BroadcastReceiver() {
 				.setContentText(context.resources.getString(R.string.reminder_notification_description))
 				.addAction(R.drawable.ic_add_24dp, context.resources.getString(R.string.reminder_notification_add_action), pendingIntent)
 				.setContentIntent(pendingIntent)
-			builder.color = context.resources.getColor(R.color.lightThemeColorAccent, null)
+			builder.color = context.resources.getColor(R.color.colorSecondary, context.theme)
 			val notification = builder.build()
 
 			val manager = NotificationManagerCompat.from(context)

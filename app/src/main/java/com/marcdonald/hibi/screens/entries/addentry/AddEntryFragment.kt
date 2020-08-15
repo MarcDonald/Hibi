@@ -25,9 +25,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
@@ -42,7 +40,7 @@ import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
 import com.marcdonald.hibi.internal.base.HibiFragment
-import com.marcdonald.hibi.internal.utils.ThemeUtils
+import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordDialog
 import com.marcdonald.hibi.screens.entries.ImageRecyclerAdapter
 import com.marcdonald.hibi.screens.entries.addentry.addentrytobookdialog.AddEntryToBookDialog
 import com.marcdonald.hibi.screens.entries.addentry.addtagtoentrydialog.AddTagToEntryDialog
@@ -55,7 +53,6 @@ import com.marcdonald.hibi.uicomponents.TimePickerDialog
 import com.marcdonald.hibi.uicomponents.views.SearchBar
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
-import org.kodein.di.generic.instance
 
 class AddEntryFragment : HibiFragment() {
 
@@ -79,10 +76,6 @@ class AddEntryFragment : HibiFragment() {
 	private lateinit var wordButton: ImageView
 	private lateinit var clipboardButton: ImageView
 	// </editor-fold>
-	// </editor-fold>
-
-	// <editor-fold desc="Other">
-	private val themeUtils: ThemeUtils by instance()
 	// </editor-fold>
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -122,6 +115,7 @@ class AddEntryFragment : HibiFragment() {
 		timeButton.setOnClickListener(timeClickListener)
 
 		contentInput = view.findViewById(R.id.edt_content)
+		contentInput.customSelectionActionModeCallback = textSelectionCallback
 
 		val saveButton: MaterialButton = view.findViewById(R.id.btn_save)
 		saveButton.setOnClickListener(saveClickListener)
@@ -147,6 +141,50 @@ class AddEntryFragment : HibiFragment() {
 		// </editor-fold>
 	}
 
+	private val textSelectionCallback = object : ActionMode.Callback {
+		override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+			mode?.menuInflater?.inflate(R.menu.menu_text_selection_edit, menu)
+			return true
+		}
+
+		override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+			item?.let {
+				when(item.itemId) {
+					R.id.selection_menu_search       -> {
+						val selectionStart = contentInput.selectionStart
+						val selectionEnd = contentInput.selectionEnd
+						val searchTerm = contentInput.text.substring(selectionStart, selectionEnd)
+						search(searchTerm)
+						return true
+					}
+					R.id.selection_menu_add_new_word -> {
+						val selectionStart = contentInput.selectionStart
+						val selectionEnd = contentInput.selectionEnd
+						val selectedTerm = contentInput.text.substring(selectionStart, selectionEnd)
+						addNewWord(selectedTerm)
+						return true
+					}
+					else                             -> return false
+				}
+			}
+			return false
+		}
+
+		override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = false
+		override fun onDestroyActionMode(mode: ActionMode?) {}
+	}
+
+	private fun addNewWord(wordToAdd: String) {
+		val dialog = AddNewWordDialog()
+
+		val bundle = Bundle()
+		bundle.putInt(ENTRY_ID_KEY, viewModel.entryId)
+		bundle.putString(NEW_WORD_QUICK_ADD, wordToAdd)
+		dialog.arguments = bundle
+
+		dialog.show(requireFragmentManager(), "New Words Dialog")
+	}
+
 	private fun initClipboardButton(view: View) {
 		clipboardButton = view.findViewById(R.id.img_option_clipboard)
 		@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -169,33 +207,33 @@ class AddEntryFragment : HibiFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayEmptyContentWarning.observe(this, Observer { value ->
+		viewModel.displayEmptyContentWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					contentInput.error = resources.getString(R.string.empty_content_warning)
 			}
 		})
 
-		viewModel.dateTimeStore.readableDate.observe(this, Observer { date ->
+		viewModel.dateTimeStore.readableDate.observe(viewLifecycleOwner, Observer { date ->
 			date?.let {
 				dateButton.text = date
 			}
 		})
 
-		viewModel.dateTimeStore.readableTime.observe(this, Observer { time ->
+		viewModel.dateTimeStore.readableTime.observe(viewLifecycleOwner, Observer { time ->
 			time?.let {
 				timeButton.text = time
 			}
 		})
 
-		viewModel.popBackStack.observe(this, Observer { pop ->
+		viewModel.popBackStack.observe(viewLifecycleOwner, Observer { pop ->
 			pop?.let {
 				if(pop)
 					popBackStack()
 			}
 		})
 
-		viewModel.isEditMode.observe(this, Observer { value ->
+		viewModel.isEditMode.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { isEditMode ->
 				if(isEditMode)
 					toolbarTitle.text =
@@ -206,13 +244,13 @@ class AddEntryFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.entry.observe(this, Observer { entry ->
+		viewModel.entry.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let {
 				contentInput.setText(entry.content)
 			}
 		})
 
-		viewModel.displayBackWarning.observe(this, Observer { value ->
+		viewModel.displayBackWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				if(display)
 					backConfirmDialog.show(requireFragmentManager(), "Back Confirm Dialog")
@@ -221,7 +259,7 @@ class AddEntryFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.startObservingEntrySpecificItems.observe(this, Observer { entry ->
+		viewModel.startObservingEntrySpecificItems.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { observe ->
 				if(observe)
 					setupEntrySpecificObservers()
@@ -233,37 +271,37 @@ class AddEntryFragment : HibiFragment() {
 	 * This has to be called after the original because the entryId isn't always provided immediately
 	 */
 	private fun setupEntrySpecificObservers() {
-		viewModel.colorTagIcon.observe(this, Observer { entry ->
+		viewModel.colorTagIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(addTagButton, shouldColor)
 			}
 		})
 
-		viewModel.colorBookIcon.observe(this, Observer { entry ->
+		viewModel.colorBookIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(addToBookButton, shouldColor)
 			}
 		})
 
-		viewModel.colorLocationIcon.observe(this, Observer { entry ->
+		viewModel.colorLocationIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(addLocationButton, shouldColor)
 			}
 		})
 
-		viewModel.colorNewWordIcon.observe(this, Observer { entry ->
+		viewModel.colorNewWordIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(wordButton, shouldColor)
 			}
 		})
 
-		viewModel.colorImagesIcon.observe(this, Observer { entry ->
+		viewModel.colorImagesIcon.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { shouldColor ->
 				colorImageDrawable(addMediaButton, shouldColor)
 			}
 		})
 
-		viewModel.images.observe(this, Observer { entry ->
+		viewModel.images.observe(viewLifecycleOwner, Observer { entry ->
 			entry?.let { imagePaths ->
 				imageRecyclerAdapter.updateItems(imagePaths)
 			}
@@ -272,7 +310,7 @@ class AddEntryFragment : HibiFragment() {
 
 	private fun colorImageDrawable(imageView: ImageView, shouldColor: Boolean) {
 		if(shouldColor) {
-			imageView.setColorFilter(themeUtils.getAccentColor())
+			imageView.setColorFilter(requireContext().resources.getColor(R.color.colorSecondary, null))
 		} else {
 			imageView.clearColorFilter()
 		}
@@ -402,7 +440,7 @@ class AddEntryFragment : HibiFragment() {
 			askForStoragePermissions()
 		} else {
 			FilePickerBuilder.instance
-				.setActivityTheme(R.style.AppTheme_Dark)
+				.setActivityTheme(R.style.AppTheme)
 				.setActivityTitle(resources.getString(R.string.add_images))
 				.setSelectedFiles(arrayListOf())
 				.pickPhoto(this, CHOOSE_IMAGE_TO_ADD_REQUEST_CODE)
@@ -477,6 +515,7 @@ class AddEntryFragment : HibiFragment() {
 	private fun search(searchTerm: String) {
 		val args = Bundle()
 		args.putString(SEARCH_TERM_KEY, searchTerm)
+		args.putInt(ENTRY_ID_KEY, viewModel.entryId)
 
 		val searchDialog = SearchResultsDialog()
 		searchDialog.arguments = args

@@ -107,6 +107,13 @@
       app:exitAnim="@anim/nav_default_exit_anim"
       app:popEnterAnim="@anim/nav_default_pop_enter_anim"
       app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    <action
+      android:id="@+id/new_words_action"
+      app:destination="@id/destination_new_words"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
   <!--endregion -->
 
@@ -415,4 +422,23 @@
     </action>
   </fragment>
   <!--endregion -->
+
+  <!--region New Words-->
+  <fragment
+    android:id="@+id/destination_new_words"
+    android:name="com.marcdonald.hibi.screens.newwords.NewWordsFragment"
+    android:label="NewWordsEntriesFragment">
+    <action
+      android:id="@+id/view_entry_action"
+      app:destination="@id/destination_view_entry"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim">
+      <argument
+        android:name="entryId"
+        android:defaultValue="0" />
+    </action>
+  </fragment>
+  <!--endregion-->
 </navigation>

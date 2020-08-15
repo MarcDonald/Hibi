@@ -38,13 +38,11 @@ import com.marcdonald.hibi.internal.PREF_DATE_HEADER_PERIOD
 import com.marcdonald.hibi.internal.PREF_ENTRY_DIVIDERS
 import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
-import com.marcdonald.hibi.internal.utils.ThemeUtils
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDecoration
 import com.marcdonald.hibi.uicomponents.DatePickerDialog
 import com.marcdonald.hibi.uicomponents.TextInputDialog
 import com.marcdonald.hibi.uicomponents.views.ChipWithId
-import org.kodein.di.generic.instance
 
 class SearchEntriesFragment : HibiFragment() {
 
@@ -75,10 +73,6 @@ class SearchEntriesFragment : HibiFragment() {
 	private lateinit var endDateDialog: DatePickerDialog
 	private lateinit var containingDialog: TextInputDialog
 	private lateinit var locationDialog: TextInputDialog
-	// </editor-fold>
-
-	// <editor-fold desc="Other">
-	private val themeUtils: ThemeUtils by instance()
 	// </editor-fold>
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -117,25 +111,25 @@ class SearchEntriesFragment : HibiFragment() {
 	}
 
 	private fun setupMainObservers() {
-		viewModel.entries.observe(this, Observer { value ->
+		viewModel.entries.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { list ->
 				recyclerAdapter.updateList(list)
 			}
 		})
 
-		viewModel.displayLoading.observe(this, Observer { value ->
+		viewModel.displayLoading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				loadingDisplay.show(shouldShow)
 			}
 		})
 
-		viewModel.countResults.observe(this, Observer { value ->
+		viewModel.countResults.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { amount ->
 				toolbarTitle.text = resources.getQuantityString(R.plurals.count_results, amount, amount)
 			}
 		})
 
-		viewModel.displayNoResults.observe(this, Observer { value ->
+		viewModel.displayNoResults.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show) {
 					noResults.show(true)
@@ -319,7 +313,7 @@ class SearchEntriesFragment : HibiFragment() {
 	}
 
 	private fun setupBottomSheetObservers() {
-		viewModel.beginningDisplay.observe(this, Observer { value ->
+		viewModel.beginningDisplay.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { beginningText ->
 				if(beginningText.isBlank())
 					beginningDateButton.text = resources.getString(R.string.start)
@@ -328,7 +322,7 @@ class SearchEntriesFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.endDisplay.observe(this, Observer { value ->
+		viewModel.endDisplay.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { endText ->
 				if(endText.isBlank())
 					endDateButton.text = resources.getString(R.string.finish)
@@ -337,21 +331,21 @@ class SearchEntriesFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.containingDisplay.observe(this, Observer { value ->
+		viewModel.containingDisplay.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { contentText ->
 				val fillText = if(contentText.isBlank()) resources.getString(R.string.any_text) else contentText
 				containingButton.text = resources.getString(R.string.containing, fillText)
 			}
 		})
 
-		viewModel.locationDisplay.observe(this, Observer { value ->
+		viewModel.locationDisplay.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { locationText ->
 				val fillText = if(locationText.isBlank()) resources.getString(R.string.any_location) else locationText
 				locationButton.text = resources.getString(R.string.at, fillText)
 			}
 		})
 
-		viewModel.tags.observe(this, Observer { value ->
+		viewModel.tags.observe(viewLifecycleOwner, Observer { value ->
 			tagChipGroup.removeAllViews()
 
 			value?.let { list ->
@@ -360,15 +354,12 @@ class SearchEntriesFragment : HibiFragment() {
 					displayTag.text = tag.name
 					displayTag.itemId = tag.id
 					displayTag.isCheckable = true
-					if(!themeUtils.isLightMode()) {
-						displayTag.setChipBackgroundColorResource(R.color.darkThemeDarkChipBackground)
-					}
 					tagChipGroup.addView(displayTag)
 				}
 			}
 		})
 
-		viewModel.displayNoTagsWarning.observe(this, Observer { value ->
+		viewModel.displayNoTagsWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				if(display) {
 					noTagsWarning.show(true)
@@ -380,7 +371,7 @@ class SearchEntriesFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.books.observe(this, Observer { value ->
+		viewModel.books.observe(viewLifecycleOwner, Observer { value ->
 			bookChipGroup.removeAllViews()
 
 			value?.let { list ->
@@ -389,15 +380,12 @@ class SearchEntriesFragment : HibiFragment() {
 					displayBook.text = book.name
 					displayBook.itemId = book.id
 					displayBook.isCheckable = true
-					if(!themeUtils.isLightMode()) {
-						displayBook.setChipBackgroundColorResource(R.color.darkThemeDarkChipBackground)
-					}
 					bookChipGroup.addView(displayBook)
 				}
 			}
 		})
 
-		viewModel.displayNoBooksWarning.observe(this, Observer { value ->
+		viewModel.displayNoBooksWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				if(display) {
 					noBooksWarning.show(true)
@@ -409,14 +397,14 @@ class SearchEntriesFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.dismissBottomSheet.observe(this, Observer { value ->
+		viewModel.dismissBottomSheet.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { dismiss ->
 				if(dismiss)
 					criteriaBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 			}
 		})
 
-		viewModel.clearChipTicks.observe(this, Observer { value ->
+		viewModel.clearChipTicks.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { clear ->
 				if(clear) {
 					for(i in 0 until tagChipGroup.childCount) {
@@ -431,7 +419,7 @@ class SearchEntriesFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.checkedTags.observe(this, Observer { value ->
+		viewModel.checkedTags.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { checkedTags ->
 				for(i in 0 until tagChipGroup.childCount) {
 					val chip = tagChipGroup.getChildAt(i) as ChipWithId
@@ -440,7 +428,7 @@ class SearchEntriesFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.checkedBooks.observe(this, Observer { value ->
+		viewModel.checkedBooks.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { checkedBooks ->
 				for(i in 0 until bookChipGroup.childCount) {
 					val chip = bookChipGroup.getChildAt(i) as ChipWithId

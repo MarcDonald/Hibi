@@ -75,7 +75,7 @@
       android:id="@+id/img_no_favourites"
       android:layout_width="@dimen/main_screen_warning_image_size"
       android:layout_height="@dimen/main_screen_warning_image_size"
-      android:contentDescription="@string/no_entries_for_date"
+      android:contentDescription="@string/no_entries_found"
       android:src="@drawable/ic_sentiment_dissatisfied_24dp"
       app:layout_constraintBottom_toTopOf="@id/gd_no_favourites"
       app:layout_constraintEnd_toEndOf="parent"

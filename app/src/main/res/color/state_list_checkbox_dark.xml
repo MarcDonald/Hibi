@@ -15,6 +15,6 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:color="@color/darkThemeColorAccent" android:state_checked="true" />
-  <item android:color="@color/darkThemeIconTint" android:state_enabled="true" />
+  <item android:color="@color/colorSecondary" android:state_checked="true" />
+  <item android:color="@color/colorOnBackground" android:state_enabled="true" />
 </selector>

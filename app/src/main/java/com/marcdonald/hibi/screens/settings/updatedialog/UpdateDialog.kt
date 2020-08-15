@@ -82,13 +82,13 @@ class UpdateDialog : HibiDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayDismiss.observe(this, Observer { value ->
+		viewModel.displayDismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				dismissButton.show(display)
 			}
 		})
 
-		viewModel.displayLoading.observe(this, Observer { value ->
+		viewModel.displayLoading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				loadingProgressBar.show(display)
 				if(display)
@@ -96,13 +96,13 @@ class UpdateDialog : HibiDialogFragment() {
 			}
 		})
 
-		viewModel.displayOpenButton.observe(this, Observer { value ->
+		viewModel.displayOpenButton.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				openButton.show(display)
 			}
 		})
 
-		viewModel.displayNoUpdateAvailable.observe(this, Observer { value ->
+		viewModel.displayNoUpdateAvailable.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				noUpdateAvailable.show(display)
 				if(display) {
@@ -113,7 +113,7 @@ class UpdateDialog : HibiDialogFragment() {
 			}
 		})
 
-		viewModel.displayNoConnection.observe(this, Observer { value ->
+		viewModel.displayNoConnection.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				noConnection.show(display)
 				if(display) {
@@ -122,7 +122,7 @@ class UpdateDialog : HibiDialogFragment() {
 			}
 		})
 
-		viewModel.displayRateLimitError.observe(this, Observer { value ->
+		viewModel.displayRateLimitError.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				errorDisplay.show(display)
 				if(display) {
@@ -134,7 +134,7 @@ class UpdateDialog : HibiDialogFragment() {
 		})
 
 
-		viewModel.newVersionName.observe(this, Observer { value ->
+		viewModel.newVersionName.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { versionName ->
 				title.text = resources.getString(R.string.new_version_available_title)
 				message.text = resources.getString(R.string.new_version_available_message, versionName)
@@ -143,7 +143,7 @@ class UpdateDialog : HibiDialogFragment() {
 			}
 		})
 
-		viewModel.displayError.observe(this, Observer { value ->
+		viewModel.displayError.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { display ->
 				errorDisplay.show(display)
 				if(display)

@@ -87,6 +87,8 @@
   <string name="no_search_term_warning">Please enter something to search for</string>
   <string name="search_bar_hint">Search on Jisho.org</string>
   <string name="no_connection_warning">No Internet Connection</string>
+  <string name="search_timed_out">Search Timed Out</string>
+  <string name="search_timed_out_explanation">You may have a slow connection, or Jisho.org could be having issues</string>
   <string name="no_results">No Results Found</string>
   <string name="search_results_other">Other forms available</string>
   <!--endregion-->
@@ -125,9 +127,11 @@
 
   <!--region New Words-->
   <string name="add_new_word">Add a New Word</string>
+  <string name="add_as_new_word">Add as New Word</string>
   <string name="edit_new_word">Edit New Word</string>
   <string name="new_words">New Words</string>
   <string name="no_new_words">No New Words</string>
+  <string name="loading_new_words">Loading New Words</string>
   <string name="word">Word</string>
   <string name="reading">Reading</string>
   <string name="part_of_speech">Part of Speech</string>
@@ -136,6 +140,7 @@
   <string name="empty_input_new_word">Enter a word or reading before saving</string>
   <string name="english_wc">English: %1$s</string>
   <string name="notes_wc">Notes: %1$s</string>
+  <string name="new_word_added">New Word Added</string>
   <!--endregion-->
 
   <!--region Books-->
@@ -224,7 +229,7 @@
   <string name="appearance">Appearance</string>
   <string name="entry_dividers_pref_title">Entry Dividers</string>
   <string name="list_animations">List Animations</string>
-  <string name="theme_pref_title">Dark Theme</string>
+  <string name="theme_pref_title">Night Mode</string>
   <string name="may_need_restart">You may need to restart the app for this setting to take effect</string>
   <string name="reminder_pref_title">Daily Reminder</string>
   <string name="reminder_time_pref_title">Reminder time</string>
@@ -265,6 +270,12 @@
   <string name="none">None</string>
   <string name="month">Month</string>
   <string name="year">Year</string>
+  <!--region Night Modes-->
+  <string name="follow_system">Follow System (Default)</string>
+  <string name="always_night">Always Night Mode</string>
+  <string name="always_day">Always Day Mode</string>
+  <string name="night_mode">Night Mode</string>
+  <!--endregion-->
   <!--endregion-->
 
   <!--region About-->
@@ -312,8 +323,8 @@
   <string name="retrofit">Retrofit</string>
   <string name="retrofit_description">Used for API calls</string>
 
-  <string name="gson">GSon</string>
-  <string name="gson_description">Used for converting API responses into Kotlin objects</string>
+  <string name="moshi">Moshi</string>
+  <string name="moshi_description">Used for converting API responses into Kotlin objects</string>
 
   <string name="android_file_picker">Android File Picker</string>
   <string name="android_file_picker_description">Used for selecting file to restore from</string>
@@ -338,6 +349,7 @@
   <string name="share">Share</string>
   <string name="restore_title">Select a file to restore from</string>
   <string name="backup_file">Backup</string>
+  <string name="no_entries_found">No Entries Found</string>
   <!--endregion-->
 
   <!--region Plurals-->

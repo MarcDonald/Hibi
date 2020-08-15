@@ -23,20 +23,14 @@
     android:id="@+id/top_app_bar_layout_main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="top"
-    android:backgroundTint="?colorPrimaryDark">
+    android:layout_gravity="top">
 
     <include layout="@layout/toolbar_main" />
 
     <com.google.android.material.tabs.TabLayout
       android:id="@+id/tabs_main"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:backgroundTint="?colorPrimaryDark"
-      app:tabIndicator="@drawable/tab_indicator"
-      app:tabIndicatorColor="?colorAccent"
-      app:tabIndicatorFullWidth="false"
-      app:tabTextAppearance="@style/TextAppearance.Hibi.Tab" />
+      android:layout_height="wrap_content" />
   </com.google.android.material.appbar.AppBarLayout>
 
   <androidx.viewpager.widget.ViewPager

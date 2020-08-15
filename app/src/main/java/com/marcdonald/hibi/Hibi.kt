@@ -58,7 +58,6 @@ class Hibi : Application(), KodeinAware {
 		// </editor-fold>
 		// <editor-fold desc="Utils">
 		bind<FileUtils>() with provider { FileUtilsImpl(instance()) }
-		bind<ThemeUtils>() with provider { ThemeUtilsImpl(instance()) }
 		bind<UpdateUtils>() with provider { UpdateUtilsImpl(instance()) }
 		bind<EntryDisplayUtils>() with provider { EntryDisplayUtilsImpl(instance()) }
 		bind<DateTimeUtils>() with provider { DateTimeUtilsImpl(instance()) }

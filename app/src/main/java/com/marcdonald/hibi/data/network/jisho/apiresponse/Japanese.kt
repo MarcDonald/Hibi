@@ -15,7 +15,10 @@
  */
 package com.marcdonald.hibi.data.network.jisho.apiresponse
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class Japanese(
-	val reading: String,
-	val word: String
+	val reading: String?,
+	val word: String?
 )

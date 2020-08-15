@@ -70,7 +70,7 @@ class AddMultiEntryToBookDialog(private val selectedCount: Int,
 	}
 
 	private fun setupObservers() {
-		viewModel.allBooks.observe(this, Observer { value ->
+		viewModel.allBooks.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { books ->
 				viewModel.listReceived(books.isEmpty())
 
@@ -85,11 +85,6 @@ class AddMultiEntryToBookDialog(private val selectedCount: Int,
 					val displayBook = CheckBoxWithId(bookHolder.context)
 					displayBook.text = book.name
 					displayBook.itemId = book.id
-					if(theme == R.style.Theme_Hibi_BottomSheetDialog_Dark) {
-						displayBook.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
-					} else {
-						displayBook.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))
-					}
 
 					// If the new book is already displayed, don't add it
 					// This stops it removing user progress before saving
@@ -106,7 +101,7 @@ class AddMultiEntryToBookDialog(private val selectedCount: Int,
 			}
 		})
 
-		viewModel.displayNoBooksWarning.observe(this, Observer { value ->
+		viewModel.displayNoBooksWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noBooksWarning.show(shouldShow)
 			}

@@ -15,5 +15,5 @@
   -->
 
 <resources>
-  <color name="ic_shortcut_add_background">@color/shortcutBackground</color>
+  <color name="ic_shortcut_add_background">@color/colorShortcutBackground</color>
 </resources>

@@ -18,7 +18,7 @@
   android:id="@+id/const_option_bar"
   android:layout_width="match_parent"
   android:layout_height="@dimen/option_bar_height"
-  android:background="?colorPrimaryDark"
+  android:background="?colorSurface"
   android:orientation="horizontal">
 
   <ImageView

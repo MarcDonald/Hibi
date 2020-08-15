@@ -21,9 +21,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -90,7 +88,7 @@ class ViewEntryFragment : HibiFragment() {
 		}
 
 		// Has to start observing here since the argument needs to be passed first
-		viewModel.images.observe(this, Observer { value ->
+		viewModel.images.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { imagePaths ->
 				imageRecyclerAdapter.updateItems(imagePaths)
 			}
@@ -101,6 +99,7 @@ class ViewEntryFragment : HibiFragment() {
 		dateButton = view.findViewById(R.id.btn_view_date)
 		timeButton = view.findViewById(R.id.btn_view_time)
 		contentDisplay = view.findViewById(R.id.txt_view_content)
+		contentDisplay.customSelectionActionModeCallback = quickSearchCallback
 		tagDisplay = view.findViewById(R.id.cg_view_tags)
 		tagDisplayHolder = view.findViewById(R.id.lin_view_tags)
 		bookDisplay = view.findViewById(R.id.cg_view_books)
@@ -133,33 +132,56 @@ class ViewEntryFragment : HibiFragment() {
 		newWordsButton.setOnClickListener(newWordsClickListener)
 	}
 
+	private val quickSearchCallback = object : ActionMode.Callback {
+		override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+			mode?.menuInflater?.inflate(R.menu.menu_text_selection_view, menu)
+			return true
+		}
+
+		override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+			item?.let {
+				if(item.itemId == R.id.selection_menu_search) {
+					val selectionStart = contentDisplay.selectionStart
+					val selectionEnd = contentDisplay.selectionEnd
+					val searchTerm = contentDisplay.text.substring(selectionStart, selectionEnd)
+					search(searchTerm)
+					return true
+				}
+			}
+			return false
+		}
+
+		override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = false
+		override fun onDestroyActionMode(mode: ActionMode?) {}
+	}
+
 	private fun setupObservers() {
-		viewModel.displayErrorToast.observe(this, Observer { value ->
+		viewModel.displayErrorToast.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					Toast.makeText(requireContext(), resources.getString(R.string.generic_error), Toast.LENGTH_SHORT).show()
 			}
 		})
 
-		viewModel.content.observe(this, Observer { value ->
+		viewModel.content.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { content ->
 				contentDisplay.text = content
 			}
 		})
 
-		viewModel.readableDate.observe(this, Observer { value ->
+		viewModel.readableDate.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { date ->
 				dateButton.text = date
 			}
 		})
 
-		viewModel.readableTime.observe(this, Observer { value ->
+		viewModel.readableTime.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { time ->
 				timeButton.text = time
 			}
 		})
 
-		viewModel.tags.observe(this, Observer { value ->
+		viewModel.tags.observe(viewLifecycleOwner, Observer { value ->
 			tagDisplay.removeAllViews()
 
 			value?.let { tags ->
@@ -173,7 +195,7 @@ class ViewEntryFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.books.observe(this, Observer { value ->
+		viewModel.books.observe(viewLifecycleOwner, Observer { value ->
 			bookDisplay.removeAllViews()
 
 			value?.let { books ->
@@ -187,20 +209,20 @@ class ViewEntryFragment : HibiFragment() {
 			}
 		})
 
-		viewModel.displayNewWordButton.observe(this, Observer { value ->
+		viewModel.displayNewWordButton.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				newWordsButton.show(shouldShow)
 			}
 		})
 
-		viewModel.popBackStack.observe(this, Observer { value ->
+		viewModel.popBackStack.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { pop ->
 				if(pop)
 					Navigation.findNavController(requireView()).popBackStack()
 			}
 		})
 
-		viewModel.location.observe(this, Observer { value ->
+		viewModel.location.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { location ->
 				locationDisplay.show(location.isNotBlank())
 				locationDisplay.text = location

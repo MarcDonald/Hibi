@@ -172,6 +172,9 @@ interface DAO {
 	@Update
 	fun updateNewWord(newWord: NewWord)
 
+	@Query("SELECT * FROM NewWord ORDER BY id DESC")
+	fun getAllNewWords(): List<NewWord>
+
 	@Query("SELECT * FROM NewWord WHERE id = :id")
 	fun getNewWord(id: Int): NewWord
 
@@ -257,7 +260,6 @@ interface DAO {
 	@Query("SELECT COUNT(*) FROM (SELECT DISTINCT entryId FROM BookEntryRelation )")
 	fun getCountEntriesInBooks(): LiveData<Int>
 
-	// TODO
 	@Query("SELECT b.id as id, COUNT(ber.entryId) as number FROM Book as b LEFT OUTER JOIN BookEntryRelation as ber ON b.id = ber.bookId GROUP BY b.name ORDER BY number DESC LIMIT 1")
 	fun getBookWithMostEntries(): NumberAndIdObject?
 	// </editor-fold>

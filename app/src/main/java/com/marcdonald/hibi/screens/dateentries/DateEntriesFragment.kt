@@ -75,19 +75,19 @@ class DateEntriesFragment : HibiFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.toolbarTitle.observe(this, Observer { value ->
+		viewModel.toolbarTitle.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { title ->
 				toolbarTitle.text = title
 			}
 		})
 
-		viewModel.entries.observe(this, Observer { value ->
+		viewModel.entries.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { list ->
 				recyclerAdapter.updateList(list)
 			}
 		})
 
-		viewModel.displayLoading.observe(this, Observer { value ->
+		viewModel.displayLoading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				loadingDisplay.show(shouldShow)
 			}

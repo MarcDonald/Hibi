@@ -15,12 +15,13 @@
  */
 package com.marcdonald.hibi.data.network.jisho.apiresponse
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Data(
 	val attribution: Attribution,
-	@SerializedName("is_common")
-	val isCommon: Boolean,
+	@Json(name = "is_common") val isCommon: Boolean?,
 	val japanese: List<Japanese>,
 	val senses: List<Sense>,
 	val tags: List<String>

@@ -69,20 +69,20 @@ class TagsFragment : HibiFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.tags.observe(this, Observer { value ->
+		viewModel.tags.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { list ->
 				viewModel.listReceived(list.isEmpty())
 				recyclerAdapter.updateList(list)
 			}
 		})
 
-		viewModel.displayLoading.observe(this, Observer { value ->
+		viewModel.displayLoading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				loadingDisplay.show(shouldShow)
 			}
 		})
 
-		viewModel.displayNoResults.observe(this, Observer { value ->
+		viewModel.displayNoResults.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noResults.show(shouldShow)
 			}

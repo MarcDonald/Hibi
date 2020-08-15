@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.marcdonald.hibi.screens.newwordsdialog
+package com.marcdonald.hibi.screens.newwords
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -24,19 +24,18 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.entity.NewWord
+import timber.log.Timber
 
-class NewWordsRecyclerAdapter(private val context: Context,
-															private val fragmentManager: FragmentManager)
+class NewWordsRecyclerAdapter(private val context: Context, private val onClick: (Int) -> Unit)
 	: RecyclerView.Adapter<NewWordsRecyclerViewHolder>() {
 
 	private val inflater: LayoutInflater = LayoutInflater.from(context)
 	private var dataList: List<NewWord> = listOf()
 	private var lastPosition = -1
-	var isEditMode = false
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewWordsRecyclerViewHolder {
 		val view = inflater.inflate(R.layout.item_new_word, parent, false)
-		return NewWordsRecyclerViewHolder(view, fragmentManager, isEditMode)
+		return NewWordsRecyclerViewHolder(view, onClick)
 	}
 
 	override fun getItemCount(): Int {

@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
+import com.marcdonald.hibi.internal.ENTRY_ID_KEY
 import com.marcdonald.hibi.internal.SEARCH_TERM_KEY
 import com.marcdonald.hibi.internal.base.HibiBottomSheetDialogFragment
 import com.marcdonald.hibi.internal.extension.show
@@ -41,6 +42,8 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 	// <editor-fold desc="UI Components">
 	private lateinit var progressBar: ProgressBar
 	private lateinit var noConnectionWarning: LinearLayout
+	private lateinit var timeoutWarning: LinearLayout
+	private lateinit var errorWarning: LinearLayout
 	private lateinit var noResultsWarning: LinearLayout
 	private lateinit var recyclerAdapter: SearchResultsRecyclerAdapter
 	private lateinit var recycler: RecyclerView
@@ -57,8 +60,9 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		arguments?.let {
-			val searchTerm = arguments!!.getString(SEARCH_TERM_KEY, "")
+		arguments?.let { arguments ->
+			val searchTerm = arguments.getString(SEARCH_TERM_KEY, "")
+			viewModel.entryId = arguments.getInt(ENTRY_ID_KEY, 0)
 			val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 			imm.hideSoftInputFromWindow(requireView().windowToken, 0)
 			viewModel.search(searchTerm)
@@ -75,6 +79,13 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 		noConnectionWarning = view.findViewById(R.id.lin_search_no_connection)
 		noConnectionWarning.show(false)
 
+		timeoutWarning = view.findViewById(R.id.lin_search_timeout)
+		timeoutWarning.show(false)
+
+		errorWarning = view.findViewById(R.id.lin_search_error)
+		errorWarning.show(false)
+
+
 		noResultsWarning = view.findViewById(R.id.lin_search_no_results)
 		noResultsWarning.show(false)
 	}
@@ -90,27 +101,39 @@ class SearchResultsDialog : HibiBottomSheetDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.displayLoading.observe(this, Observer { value ->
+		viewModel.displayLoading.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				progressBar.show(shouldShow)
 			}
 		})
 
-		viewModel.displayNoConnection.observe(this, Observer { value ->
+		viewModel.displayNoConnection.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noConnectionWarning.show(shouldShow)
 			}
 		})
 
-		viewModel.displayNoResults.observe(this, Observer { value ->
+		viewModel.displayTimeout.observe(viewLifecycleOwner, Observer { value ->
+			value?.let { shouldShow ->
+				timeoutWarning.show(shouldShow)
+			}
+		})
+
+		viewModel.displayError.observe(viewLifecycleOwner, Observer { value ->
+			value?.let { shouldShow ->
+				errorWarning.show(shouldShow)
+			}
+		})
+
+		viewModel.displayNoResults.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noResultsWarning.show(shouldShow)
 			}
 		})
 
-		viewModel.searchResults.observe(this, Observer { value ->
+		viewModel.searchResults.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { searchResult ->
-				recyclerAdapter.updateList(searchResult)
+				recyclerAdapter.updateList(searchResult, viewModel.entryId)
 				recycler.scrollToPosition(0)
 				recycler.show(true)
 			}

@@ -26,6 +26,7 @@
     android:layout_height="match_parent"
     android:layout_marginStart="@dimen/margin_standard"
     android:layout_marginEnd="@dimen/margin_standard"
+    android:scrollbars="none"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +60,7 @@
       android:layout_gravity="center"
       android:layout_margin="@dimen/margin_standard"
       android:contentDescription="@string/no_connection_warning"
+      app:tint="?colorError"
       android:src="@drawable/ic_signal_wifi_off_24dp" />
 
     <TextView
@@ -67,6 +69,76 @@
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:text="@string/no_connection_warning" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/lin_search_error"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_standard"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+      android:layout_width="@dimen/search_warning_icon_size"
+      android:layout_height="@dimen/search_warning_icon_size"
+      android:layout_gravity="center"
+      android:layout_margin="@dimen/margin_standard"
+      android:contentDescription="@string/generic_error"
+      app:tint="?colorError"
+      android:src="@drawable/ic_error_24dp" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/generic_error" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/lin_search_timeout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_standard"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+      android:layout_width="@dimen/search_warning_icon_size"
+      android:layout_height="@dimen/search_warning_icon_size"
+      android:layout_gravity="center"
+      android:layout_margin="@dimen/margin_standard"
+      android:contentDescription="@string/search_timed_out"
+      app:tint="?colorError"
+      android:src="@drawable/ic_error_24dp" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:textStyle="bold"
+      android:text="@string/search_timed_out" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      style="@style/TextAppearance.Hibi.WarningDisplay"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:textAlignment="center"
+      android:textSize="14sp"
+      android:paddingVertical="@dimen/margin_half"
+      android:paddingHorizontal="@dimen/margin_standard"
+      android:text="@string/search_timed_out_explanation" />
   </LinearLayout>
 
   <LinearLayout

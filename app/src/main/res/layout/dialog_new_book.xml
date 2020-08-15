@@ -43,16 +43,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_new_book_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_book_title"
+        app:layout_constraintStart_toStartOf="parent">
       <EditText
         android:id="@+id/edt_new_book_input"
         android:layout_width="match_parent"
         style="@style/ThemeOverlay.Hibi.EditText"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_standard"
         android:inputType="textCapSentences"
         android:hint="@string/book_name"
-        app:layout_constraintTop_toBottomOf="@id/txt_add_book_title"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:autofillHints="@string/book_name" />
+      </com.google.android.material.textfield.TextInputLayout>
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete_book"
@@ -63,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/gd_add_book_50_vert"
-        app:layout_constraintTop_toBottomOf="@id/edt_new_book_input"
+        app:layout_constraintTop_toBottomOf="@id/til_new_book_input"
         android:text="@string/delete" />
 
       <com.google.android.material.button.MaterialButton
@@ -75,7 +82,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/gd_add_book_50_vert"
-        app:layout_constraintTop_toBottomOf="@id/edt_new_book_input"
+        app:layout_constraintTop_toBottomOf="@id/til_new_book_input"
         android:text="@string/save" />
 
       <androidx.constraintlayout.widget.Guideline

@@ -68,20 +68,20 @@ class AddLocationToEntryDialog : HibiDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.currentLocation.observe(this, Observer { value ->
+		viewModel.currentLocation.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { currentLocation ->
 				input.setText(currentLocation)
 			}
 		})
 
-		viewModel.displayEmptyError.observe(this, Observer { value ->
+		viewModel.displayEmptyError.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					input.error = resources.getString(R.string.empty_content_warning)
 			}
 		})
 
-		viewModel.dismiss.observe(this, Observer { value ->
+		viewModel.dismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { dismiss ->
 				if(dismiss)
 					dismiss()

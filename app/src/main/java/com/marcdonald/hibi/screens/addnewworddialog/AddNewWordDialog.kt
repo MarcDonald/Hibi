@@ -21,12 +21,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
-import com.marcdonald.hibi.internal.ENTRY_ID_KEY
-import com.marcdonald.hibi.internal.NEW_WORD_ID_KEY
+import com.marcdonald.hibi.internal.*
 import com.marcdonald.hibi.internal.base.HibiDialogFragment
 
 class AddNewWordDialog : HibiDialogFragment() {
@@ -51,9 +51,25 @@ class AddNewWordDialog : HibiDialogFragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		arguments?.let {
-			viewModel.passArguments(arguments!!.getInt(ENTRY_ID_KEY, 0), arguments!!.getInt(NEW_WORD_ID_KEY, 0))
+		arguments?.let { arguments ->
+			fillFromQuickAdd(arguments)
+			val isQuickAdd = arguments.getString(NEW_WORD_QUICK_ADD) != null
+			viewModel.passArguments(arguments.getInt(ENTRY_ID_KEY, 0), arguments.getInt(NEW_WORD_ID_KEY, 0), isQuickAdd)
 		}
+	}
+
+	private fun fillFromQuickAdd(arguments: Bundle) {
+		val quickAddWord = arguments.getString(NEW_WORD_QUICK_ADD)
+		if(quickAddWord != null) wordInput.setText(quickAddWord)
+
+		val quickAddReading = arguments.getString(NEW_WORD_READING_QUICK_ADD)
+		if(quickAddReading != null) readingInput.setText(quickAddReading)
+
+		val quickAddPart = arguments.getStringArrayList(NEW_WORD_PART_QUICK_ADD)
+		if(quickAddPart != null) typeInput.setText(viewModel.getSingleStringFromList(quickAddPart))
+
+		val quickAddEnglish = arguments.getStringArrayList(NEW_WORD_MEANING_QUICK_ADD)
+		if(quickAddEnglish != null) englishInput.setText(viewModel.getSingleStringFromList(quickAddEnglish))
 	}
 
 	private fun bindViews(view: View) {
@@ -76,7 +92,7 @@ class AddNewWordDialog : HibiDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		viewModel.word.observe(this, Observer { value ->
+		viewModel.word.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { newWord ->
 				wordInput.setText(newWord.word)
 				readingInput.setText(newWord.reading)
@@ -86,24 +102,31 @@ class AddNewWordDialog : HibiDialogFragment() {
 			}
 		})
 
-		viewModel.isEditMode.observe(this, Observer { value ->
+		viewModel.isEditMode.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { isEditMode ->
 				if(isEditMode)
 					dialogTitle.text = resources.getString(R.string.edit_new_word)
 			}
 		})
 
-		viewModel.displayEmptyInputWarning.observe(this, Observer { value ->
+		viewModel.displayEmptyInputWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { show ->
 				if(show)
 					wordInput.error = resources.getString(R.string.empty_input_new_word)
 			}
 		})
 
-		viewModel.dismiss.observe(this, Observer { value ->
+		viewModel.dismiss.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { dismiss ->
 				if(dismiss)
 					dismiss()
+			}
+		})
+
+		viewModel.showAddedToast.observe(viewLifecycleOwner, Observer { value ->
+			value?.let { show ->
+				if(show)
+					Toast.makeText(requireContext(), getString(R.string.new_word_added), Toast.LENGTH_SHORT).show()
 			}
 		})
 	}

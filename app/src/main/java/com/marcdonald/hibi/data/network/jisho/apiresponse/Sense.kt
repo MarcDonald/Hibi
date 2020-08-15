@@ -15,19 +15,18 @@
  */
 package com.marcdonald.hibi.data.network.jisho.apiresponse
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Sense(
 	val antonyms: List<Any>,
-	@SerializedName("english_definitions")
-	val englishDefinitions: List<String>,
+	@Json(name = "english_definitions") val englishDefinitions: List<String>,
 	val info: List<Any>,
 	val links: List<Any>,
-	@SerializedName("parts_of_speech")
-	val partsOfSpeech: List<String>,
+	@Json(name = "parts_of_speech") val partsOfSpeech: List<String>,
 	val restrictions: List<Any>,
-	@SerializedName("see_also")
-	val seeAlso: List<Any>,
+	@Json(name = "see_also") val seeAlso: List<Any>,
 	val source: List<Any>,
 	val tags: List<Any>
 )

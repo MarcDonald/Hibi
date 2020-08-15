@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2020 Marc Donald
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+  <color name="colorBackground">#303030</color>
+  <color name="colorBackgroundDark">#212121</color>
+  <color name="colorBackgroundLight">#595959</color>
+  <color name="colorOnBackground">@color/white</color>
+  <color name="colorOnBackgroundSecondary">@color/white70</color>
+  <color name="colorOnBackgroundHint">@color/white50</color>
+  <color name="colorNavigationBar">@color/colorBackgroundDark</color>
+  <color name="colorPrimary">#F57C00</color>
+  <color name="colorPrimaryVariant">#F57C00</color>
+  <color name="colorOnPrimary">@color/white</color>
+  <color name="colorOnPrimarySecondary">@color/white70</color>
+  <color name="colorOnPrimaryHint">@color/white50</color>
+  <color name="colorSecondary">#FF9700</color>
+  <color name="colorOnSecondary">@color/white</color>
+  <color name="colorSecondaryVariant">#FF9700</color>
+  <color name="colorError">#F44336</color>
+  <color name="colorOnError">@color/white</color>
+  <color name="colorSurface">@color/colorBackgroundDark</color>
+  <color name="colorOnSurface">@color/white</color>
+  <color name="colorOnSurfaceSecondary">@color/white70</color>
+  <color name="colorOnSurfaceHint">@color/white50</color>
+  <color name="colorToolbar">@color/colorBackgroundDark</color>
+  <color name="colorOnToolbar">@color/colorOnBackground</color>
+  <color name="colorOnToolbarSecondary">@color/colorOnBackgroundSecondary</color>
+  <color name="colorOnToolbarHint">@color/colorOnBackgroundHint</color>
+  <color name="colorSelectedItem">#26FFFFFF</color>
+  <color name="colorBackgroundFloating">@color/colorBackgroundLight</color>
+  <color name="colorShortcutBackground">#F5F5F5</color>
+  <color name="chipBackground">@color/colorSecondary</color>
+  <color name="chipBackgroundDark">@color/colorSecondary</color>
+  <color name="tabIndicatorColor">@color/colorPrimary</color>
+  <color name="iconTint">@color/colorOnBackgroundSecondary</color>
+  <color name="launcherIconBackground">@color/colorBackground</color>
+
+  <!--region Other-->
+  <color name="white">#FFFFFF</color>
+  <color name="white70">#B3FFFFFF</color>
+  <color name="white60">#99FFFFFF</color>
+  <color name="white50">#80FFFFFF</color>
+  <color name="black">#000000</color>
+  <color name="black70">#B3000000</color>
+  <color name="black50">#80000000</color>
+  <!--endregion-->
+</resources>

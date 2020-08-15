@@ -43,86 +43,112 @@
         android:gravity="start"
         android:text="@string/add_new_word" />
 
-      <EditText
-        android:id="@+id/edt_new_word_word"
-        style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
+      <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_standard"
-        android:autofillHints="@string/word"
-        android:hint="@string/word" />
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+        <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/edt_new_word_word"
+          style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
+          android:autofillHints="@string/word"
+          android:hint="@string/word" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
       <EditText
         android:id="@+id/edt_new_word_reading"
         style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_standard"
         android:autofillHints="@string/reading"
         android:hint="@string/reading" />
+      </com.google.android.material.textfield.TextInputLayout>
 
+      <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
       <EditText
         android:id="@+id/edt_new_word_type"
         style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_standard"
         android:autofillHints="@string/part_of_speech"
         android:hint="@string/part_of_speech" />
+      </com.google.android.material.textfield.TextInputLayout>
 
+      <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
       <EditText
         android:id="@+id/edt_new_word_english"
         style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_standard"
         android:autofillHints="@string/english"
         android:hint="@string/english" />
+      </com.google.android.material.textfield.TextInputLayout>
 
+      <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
       <EditText
         android:id="@+id/edt_new_word_notes"
         style="@style/ThemeOverlay.Hibi.EditText.AddNewWordDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_standard"
         android:autofillHints="@string/notes"
         android:hint="@string/notes" />
+      </com.google.android.material.textfield.TextInputLayout>
 
       <!--region Buttons-->
       <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-      <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gd_add_new_word_vert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.5"
-        android:orientation="vertical" />
+        <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/gd_add_new_word_vert"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintGuide_percent="0.5"
+          android:orientation="vertical" />
 
-      <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_save_new_word"
-        style="@style/Widget.Hibi.Button.Borderless"
-        android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:text="@string/save"
-        android:layout_margin="@dimen/margin_standard"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/gd_add_new_word_vert"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_save_new_word"
+          style="@style/Widget.Hibi.Button.Borderless"
+          android:layout_height="wrap_content"
+          android:layout_width="0dp"
+          android:text="@string/save"
+          android:layout_margin="@dimen/margin_standard"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toStartOf="@id/gd_add_new_word_vert"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent" />
 
-      <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_delete_new_word"
-        style="@style/Widget.Hibi.Button.Negative"
-        android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:text="@string/delete"
-        android:layout_margin="@dimen/margin_standard"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/gd_add_new_word_vert"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <com.google.android.material.button.MaterialButton
+          android:id="@+id/btn_delete_new_word"
+          style="@style/Widget.Hibi.Button.Negative"
+          android:layout_height="wrap_content"
+          android:layout_width="0dp"
+          android:text="@string/delete"
+          android:layout_margin="@dimen/margin_standard"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="@id/gd_add_new_word_vert"
+          app:layout_constraintBottom_toBottomOf="parent" />
       </androidx.constraintlayout.widget.ConstraintLayout>
       <!--endregion-->
     </LinearLayout>

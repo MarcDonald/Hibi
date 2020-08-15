@@ -23,6 +23,8 @@ import com.marcdonald.hibi.data.network.NoConnectivityException
 import com.marcdonald.hibi.data.network.jisho.JishoAPIService
 import com.marcdonald.hibi.data.network.jisho.apiresponse.Data
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import java.net.SocketTimeoutException
 
 class SearchViewModel(private val apiService: JishoAPIService) : ViewModel() {
 	private var _displayLoading = MutableLiveData<Boolean>()
@@ -33,6 +35,14 @@ class SearchViewModel(private val apiService: JishoAPIService) : ViewModel() {
 	val displayNoConnection: LiveData<Boolean>
 		get() = _displayNoConnection
 
+	private var _displayTimeout = MutableLiveData<Boolean>()
+	val displayTimeout: LiveData<Boolean>
+		get() = _displayTimeout
+
+	private var _displayError = MutableLiveData<Boolean>()
+	val displayError: LiveData<Boolean>
+		get() = _displayError
+
 	private var _displayNoResults = MutableLiveData<Boolean>()
 	val displayNoResults: LiveData<Boolean>
 		get() = _displayNoResults
@@ -41,6 +51,8 @@ class SearchViewModel(private val apiService: JishoAPIService) : ViewModel() {
 	val searchResults: LiveData<List<Data>>
 		get() = _searchResults
 
+	var entryId: Int = 0
+
 	fun search(searchTerm: String) {
 		_displayLoading.value = true
 		viewModelScope.launch {
@@ -48,14 +60,18 @@ class SearchViewModel(private val apiService: JishoAPIService) : ViewModel() {
 				val searchResponse = apiService.searchTerm(searchTerm)
 				if(searchResponse.data.isNotEmpty()) {
 					_searchResults.value = searchResponse.data
-					_displayLoading.value = false
 				} else {
-					_displayLoading.value = false
 					_displayNoResults.value = true
 				}
 			} catch(e: NoConnectivityException) {
-				_displayLoading.value = false
 				_displayNoConnection.value = true
+			} catch(e: SocketTimeoutException) {
+				_displayTimeout.value = true
+			} catch(e: Exception) {
+				_displayError.value = true
+				Timber.e("Log: searchViewModel: search: ${e.message}")
+			} finally {
+				_displayLoading.value = false
 			}
 		}
 	}

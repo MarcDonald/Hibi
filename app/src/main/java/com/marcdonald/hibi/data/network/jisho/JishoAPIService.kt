@@ -17,9 +17,11 @@ package com.marcdonald.hibi.data.network.jisho
 
 import com.marcdonald.hibi.data.network.ConnectivityInterceptor
 import com.marcdonald.hibi.data.network.jisho.apiresponse.SearchResponse
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -34,10 +36,12 @@ interface JishoAPIService {
 				.addInterceptor(connectivityInterceptor)
 				.build()
 
+			val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
 			return Retrofit.Builder()
 				.client(okHttpClient)
 				.baseUrl("https://jisho.org/api/v1/search/")
-				.addConverterFactory(GsonConverterFactory.create())
+				.addConverterFactory(MoshiConverterFactory.create(moshi))
 				.build()
 				.create(JishoAPIService::class.java)
 		}

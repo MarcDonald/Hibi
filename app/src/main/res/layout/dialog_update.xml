@@ -64,7 +64,8 @@
       android:layout_width="64dp"
       android:layout_height="64dp"
       android:padding="@dimen/margin_standard"
-      android:src="@drawable/ic_system_update_accent_24dp" />
+      app:tint="?colorSecondary"
+      android:src="@drawable/ic_system_update_24dp" />
 
     <ImageView
       android:id="@+id/img_no_update_available"
@@ -72,6 +73,7 @@
       android:layout_width="64dp"
       android:layout_height="64dp"
       android:padding="@dimen/margin_standard"
+      app:tint="?colorSecondary"
       android:src="@drawable/ic_check_24dp" />
 
     <ImageView
@@ -80,6 +82,7 @@
       android:layout_width="64dp"
       android:layout_height="64dp"
       android:padding="@dimen/margin_standard"
+      app:tint="?colorError"
       android:src="@drawable/ic_error_24dp" />
 
     <LinearLayout
@@ -99,6 +102,7 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_standard"
         android:contentDescription="@string/no_connection_warning"
+        app:tint="?colorError"
         android:src="@drawable/ic_signal_wifi_off_24dp" />
 
       <TextView

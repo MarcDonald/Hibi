@@ -70,7 +70,7 @@ class AddTagToMultiEntryDialog(private val selectedCount: Int,
 	}
 
 	private fun setupObservers() {
-		viewModel.allTags.observe(this, Observer { value ->
+		viewModel.allTags.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { tags ->
 				viewModel.listReceived(tags.isEmpty())
 
@@ -85,11 +85,6 @@ class AddTagToMultiEntryDialog(private val selectedCount: Int,
 					val displayTag = CheckBoxWithId(tagHolder.context)
 					displayTag.text = tag.name
 					displayTag.itemId = tag.id
-					if(theme == R.style.Theme_Hibi_BottomSheetDialog_Dark) {
-						displayTag.setTextColor(resources.getColor(R.color.darkThemePrimaryText, null))
-					} else {
-						displayTag.setTextColor(resources.getColor(R.color.lightThemePrimaryText, null))
-					}
 
 					// If the new tag is already displayed, don't add it
 					// This stops it removing user progress before saving
@@ -106,7 +101,7 @@ class AddTagToMultiEntryDialog(private val selectedCount: Int,
 			}
 		})
 
-		viewModel.displayNoTagsWarning.observe(this, Observer { value ->
+		viewModel.displayNoTagsWarning.observe(viewLifecycleOwner, Observer { value ->
 			value?.let { shouldShow ->
 				noTagsWarning.show(shouldShow)
 			}

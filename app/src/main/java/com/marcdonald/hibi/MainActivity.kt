@@ -16,10 +16,13 @@
 package com.marcdonald.hibi
 
 import android.os.Bundle
+import android.preference.PreferenceManager
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.Navigation
 import com.marcdonald.hibi.internal.ADD_ENTRY_NOTIFICATION_INTENT_ACTION
 import com.marcdonald.hibi.internal.ADD_ENTRY_SHORTCUT_INTENT_ACTION
+import com.marcdonald.hibi.internal.PREF_NIGHT_MODE
 import com.marcdonald.hibi.internal.REMINDER_NOTIFICATION_ID
 import com.marcdonald.hibi.internal.base.HibiActivity
 import com.marcdonald.hibi.screens.main.MainScreenFragmentDirections
@@ -30,6 +33,7 @@ class MainActivity : HibiActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		Timber.v("Log: onCreate: Started")
 		super.onCreate(savedInstanceState)
+		setupNightMode()
 		setContentView(R.layout.activity_main)
 
 		if(intent.action == ADD_ENTRY_SHORTCUT_INTENT_ACTION || intent.action == ADD_ENTRY_NOTIFICATION_INTENT_ACTION) {
@@ -45,5 +49,10 @@ class MainActivity : HibiActivity() {
 			if(intent.action == ADD_ENTRY_NOTIFICATION_INTENT_ACTION)
 				NotificationManagerCompat.from(this).cancel(REMINDER_NOTIFICATION_ID)
 		}
+	}
+
+	private fun setupNightMode() {
+		val nightMode = PreferenceManager.getDefaultSharedPreferences(this).getString(PREF_NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM.toString())
+		nightMode?.let { AppCompatDelegate.setDefaultNightMode(it.toInt()) }
 	}
 }

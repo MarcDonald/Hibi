@@ -22,6 +22,8 @@ import com.marcdonald.hibi.data.entity.NewWord
 
 interface NewWordRepository {
 
+	suspend fun getAll(): List<NewWord>
+
 	suspend fun addNewWord(newWord: NewWord)
 
 	suspend fun getNewWord(id: Int): NewWord

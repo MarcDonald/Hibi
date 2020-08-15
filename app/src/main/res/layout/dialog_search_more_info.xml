@@ -17,15 +17,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:layout_margin="@dimen/margin_standard">
+  android:layout_height="wrap_content">
 
   <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fadeScrollbars="false"
     android:scrollbarSize="@dimen/scroll_bar_size"
-    android:scrollbars="vertical">
+    android:scrollbars="vertical"
+    android:layout_margin="@dimen/margin_standard">
 
     <!--Blocks descendant focusability so that it doesn't scroll to the bottom if it's too long-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,32 +33,42 @@
       android:layout_height="wrap_content"
       android:descendantFocusability="blocksDescendants">
 
+      <ImageView
+        android:id="@+id/img_quick_add_new_word"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="@dimen/margin_standard"
+        android:padding="@dimen/margin_standard"
+        android:contentDescription="@string/add_as_new_word"
+        android:src="@drawable/ic_add_24dp"
+        android:background="?selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/txt_search_more_info_alternative_title"/>
+
       <TextView
         android:id="@+id/txt_search_more_info_main_word"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_standard"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginHorizontal="@dimen/margin_standard"
         android:gravity="start"
         android:text="@string/main_japanese"
         android:textAlignment="viewStart"
         style="@style/TextAppearance.Hibi.ResultItemPrimary"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/img_quick_add_new_word"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
       <TextView
         android:id="@+id/txt_search_more_info_main_reading"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginHorizontal="@dimen/margin_standard"
         android:text="@string/main_reading"
         style="@style/TextAppearance.Hibi.ResultItemPrimary"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/img_quick_add_new_word"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_search_more_info_main_word" />
 
@@ -78,8 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginHorizontal="@dimen/margin_standard"
         android:layout_marginBottom="@dimen/margin_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,9 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginEnd="@dimen/margin_standard"
-        android:layout_marginBottom="@dimen/margin_standard"
+        android:layout_marginHorizontal="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -48,7 +48,7 @@
       android:layout_marginStart="@dimen/margin_standard"
       android:layout_marginEnd="@dimen/margin_standard"
       android:layout_marginBottom="@dimen/margin_standard"
-      android:background="?colorPrimary">
+      android:background="?colorBackgroundFloating">
 
       <TextView
         android:id="@+id/item_date"
