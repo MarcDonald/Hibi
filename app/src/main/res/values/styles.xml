@@ -53,6 +53,13 @@
     <item name="android:tint">@color/iconTint</item>
   </style>
 
+  <style name="Hibi.ImagePicker" parent="ef_BaseTheme">
+    <item name="colorPrimary">@color/colorToolbar</item>
+    <item name="colorPrimaryDark">@color/colorToolbar</item>
+    <item name="colorAccent">@color/colorSecondary</item>
+    <item name="android:colorBackground">@color/colorBackground</item>
+  </style>
+
   <!--region Widgets-->
   <style name="Widget.Hibi" parent="@android:style/Widget" />
 

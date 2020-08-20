@@ -446,6 +446,11 @@ class AddEntryFragment : HibiFragment() {
 			ImagePicker.create(this)
 				.includeVideo(false)
 				.includeAnimation(false)
+				.toolbarImageTitle(resources.getString(R.string.add_images))
+				.toolbarFolderTitle(resources.getString(R.string.add_images))
+				.showCamera(false)
+				.folderMode(true)
+				.theme(R.style.Hibi_ImagePicker)
 				.start()
 		}
 	}

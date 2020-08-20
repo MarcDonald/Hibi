@@ -81,5 +81,6 @@ class ImageRecyclerViewHolder(itemView: View,
 			.apply(RequestOptions().centerCrop())
 			.apply(RequestOptions().error(itemView.resources.getDrawable(R.drawable.ic_error_24dp, theme)))
 			.into(imageDisplay)
+		imageDisplay.imageTintList = null
 	}
 }
