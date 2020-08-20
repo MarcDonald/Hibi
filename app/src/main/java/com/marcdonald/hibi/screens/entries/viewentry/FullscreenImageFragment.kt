@@ -44,5 +44,6 @@ class FullscreenImageFragment : HibiFragment() {
 			.apply(RequestOptions().fitCenter())
 			.apply(RequestOptions().error(resources.getDrawable(R.drawable.ic_error_24dp, requireActivity().theme)))
 			.into(imageView)
+		imageView.imageTintList = null
 	}
 }
