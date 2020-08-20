@@ -86,6 +86,11 @@ Used for selecting file to restore from
 
 Apache 2 License
 
+### [Android Image Picker](https://github.com/esafirm/android-image-picker)
+Used for selecting images
+
+[License](https://github.com/esafirm/android-image-picker/blob/master/LICENSE)
+
 ### [M PLUS Rounded 1c Bold](https://fonts.google.com/specimen/M+PLUS+Rounded+1c)
 Used as the icon font
 

@@ -55,6 +55,9 @@ class OpenSourceLicencesFragment : Fragment() {
 		view.findViewById<SimpleLicenseDisplay>(R.id.license_android_file_picker)
 			.setOnClickListener(openURLClickListener("https://github.com/DroidNinja/Android-FilePicker"))
 
+		view.findViewById<SimpleLicenseDisplay>(R.id.license_android_image_picker)
+			.setOnClickListener(openURLClickListener("https://github.com/esafirm/android-image-picker"))
+
 		view.findViewById<SimpleLicenseDisplay>(R.id.license_mplus)
 			.setOnClickListener(openURLClickListener("https://fonts.google.com/specimen/M+PLUS+Rounded+1c"))
 

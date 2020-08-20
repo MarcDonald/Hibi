@@ -18,6 +18,7 @@ package com.marcdonald.hibi.screens.entries.addentry
 import android.app.Application
 import android.preference.PreferenceManager
 import androidx.lifecycle.*
+import com.esafirm.imagepicker.model.Image
 import com.marcdonald.hibi.data.entity.Entry
 import com.marcdonald.hibi.data.entity.EntryImage
 import com.marcdonald.hibi.data.repository.*
@@ -206,10 +207,10 @@ class AddEntryViewModel(application: Application,
 		return ld
 	}
 
-	fun addImages(pathList: List<String>) {
+	fun addImages(imageList: List<Image>) {
 		viewModelScope.launch {
-			pathList.forEach { path ->
-				val file = File(path)
+			imageList.forEach { image ->
+				val file = File(image.path)
 				val entryImage = EntryImage(file.name, entryId)
 				entryImageRepository.addEntryImage(entryImage)
 				fileUtils.saveImage(file)

@@ -97,6 +97,18 @@
         app:sldTitle="@string/android_file_picker" />
 
       <com.marcdonald.simplelicensedisplay.SimpleLicenseDisplay
+        android:id="@+id/license_android_image_picker"
+        style="@style/Widget.Hibi.LicenseDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/margin_standard"
+        app:sldDescription="@string/android_image_picker_description"
+        app:sldLicense="@string/see_license"
+        app:sldTitle="@string/android_image_picker" />
+
+      <com.marcdonald.simplelicensedisplay.SimpleLicenseDisplay
         android:id="@+id/license_mplus"
         style="@style/Widget.Hibi.LicenseDisplay"
         android:layout_width="match_parent"

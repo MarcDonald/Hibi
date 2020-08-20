@@ -23,6 +23,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.*
@@ -36,6 +37,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.esafirm.imagepicker.features.ImagePicker
+import com.esafirm.imagepicker.features.ReturnMode
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
@@ -53,6 +56,7 @@ import com.marcdonald.hibi.uicomponents.TimePickerDialog
 import com.marcdonald.hibi.uicomponents.views.SearchBar
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
+import timber.log.Timber
 
 class AddEntryFragment : HibiFragment() {
 
@@ -439,11 +443,10 @@ class AddEntryFragment : HibiFragment() {
 		if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 			askForStoragePermissions()
 		} else {
-			FilePickerBuilder.instance
-				.setActivityTheme(R.style.AppTheme)
-				.setActivityTitle(resources.getString(R.string.add_images))
-				.setSelectedFiles(arrayListOf())
-				.pickPhoto(this, CHOOSE_IMAGE_TO_ADD_REQUEST_CODE)
+			ImagePicker.create(this)
+				.includeVideo(false)
+				.includeAnimation(false)
+				.start()
 		}
 	}
 
@@ -454,9 +457,9 @@ class AddEntryFragment : HibiFragment() {
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		super.onActivityResult(requestCode, resultCode, data)
 
-		if(requestCode == CHOOSE_IMAGE_TO_ADD_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-			val photoPathArray = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA)
-			viewModel.addImages(photoPathArray)
+		if(ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+			val images = ImagePicker.getImages(data)
+			viewModel.addImages(images)
 		}
 	}
 

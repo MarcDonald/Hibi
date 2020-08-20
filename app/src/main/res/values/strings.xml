@@ -313,6 +313,7 @@
   <string name="ofl">Open Font License</string>
   <string name="sil">SIL Open Font License 1.1</string>
   <string name="glide_license">BSD, part MIT and Apache 2.0. See the LICENSE file for details</string>
+  <string name="see_license">See License File for Details</string>
 
   <string name="timber">Timber</string>
   <string name="timber_description">Used for logging</string>
@@ -328,6 +329,9 @@
 
   <string name="android_file_picker">Android File Picker</string>
   <string name="android_file_picker_description">Used for selecting file to restore from</string>
+
+  <string name="android_image_picker">Android Image Picker</string>
+  <string name="android_image_picker_description">Used for selecting images</string>
 
   <string name="mplus">M PLUS Rounded 1c Bold</string>
   <string name="mplus_description">Used as the icon font</string>
