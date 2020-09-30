@@ -41,7 +41,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
 	private val seeAlsoClickListener = View.OnClickListener {
 		val clipboard: ClipboardManager = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 		val clip: ClipData = ClipData.newPlainText("See Also", seeAlsoContent)
-		clipboard.primaryClip = clip
+		clipboard.setPrimaryClip(clip)
 
 		val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard_wc, seeAlsoContent)
 		Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
@@ -50,7 +50,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
 	private val antonymClickListener = View.OnClickListener {
 		val clipboard: ClipboardManager = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 		val clip: ClipData = ClipData.newPlainText("Antonym", antonymContent)
-		clipboard.primaryClip = clip
+		clipboard.setPrimaryClip(clip)
 
 		val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard_wc, antonymContent)
 		Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()

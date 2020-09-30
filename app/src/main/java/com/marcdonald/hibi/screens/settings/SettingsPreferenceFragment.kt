@@ -21,16 +21,12 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.text.format.DateFormat
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.preference.DropDownPreference
-import androidx.preference.ListPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.*
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
 import com.marcdonald.hibi.notification.ReminderAlertReceiver
@@ -47,6 +43,7 @@ import java.util.*
 import java.util.Calendar.*
 
 class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
+
 	// Kodein initialisation
 	override val kodein by closestKodein()
 
@@ -73,15 +70,13 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 
 		val clipboardBehaviorPreference = findPreference<Preference>(PREF_CLIPBOARD_BEHAVIOR)
 		clipboardBehaviorPreference?.let {
-			@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-			matchSummaryToSelection(clipboardBehaviorPreference, sharedPreferences.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
+			(sharedPreferences.getString(PREF_CLIPBOARD_BEHAVIOR, "0")?.let { value -> matchSummaryToSelection(clipboardBehaviorPreference, value) })
 			sharedPreferences.registerOnSharedPreferenceChangeListener(clipboardBehaviorChangeListener)
 		}
 
 		val dateHeaderPeriodPreference = findPreference<Preference>(PREF_DATE_HEADER_PERIOD)
 		dateHeaderPeriodPreference?.let {
-			@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-			matchSummaryToSelection(dateHeaderPeriodPreference, sharedPreferences.getString(PREF_DATE_HEADER_PERIOD, "1"))
+			(sharedPreferences.getString(PREF_DATE_HEADER_PERIOD, "1")?.let { value -> matchSummaryToSelection(dateHeaderPeriodPreference, value) })
 			sharedPreferences.registerOnSharedPreferenceChangeListener(dateHeaderPeriodChangeListener)
 		}
 
@@ -93,7 +88,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 
 		findPreference<Preference>("pref_app_update")?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
 			val dialog = UpdateDialog()
-			dialog.show(requireFragmentManager(), "Update Dialog")
+			dialog.show(parentFragmentManager, "Update Dialog")
 			true
 		}
 	}
@@ -119,7 +114,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 		return when(mode) {
 			AppCompatDelegate.MODE_NIGHT_YES -> resources.getString(R.string.always_night)
 			AppCompatDelegate.MODE_NIGHT_NO -> resources.getString(R.string.always_day)
-			else -> resources.getString(R.string.follow_system)
+			else                             -> resources.getString(R.string.follow_system)
 		}
 	}
 
@@ -175,19 +170,16 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 	}
 
 	private val clipboardBehaviorChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, _ ->
-		@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 		val clipboardBehaviorPreference = findPreference<Preference>(PREF_CLIPBOARD_BEHAVIOR)
 		clipboardBehaviorPreference?.let {
-			@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-			matchSummaryToSelection(clipboardBehaviorPreference, prefs.getString(PREF_CLIPBOARD_BEHAVIOR, "0"))
+			(prefs.getString(PREF_CLIPBOARD_BEHAVIOR, "0")?.let { value -> matchSummaryToSelection(clipboardBehaviorPreference, value) })
 		}
 	}
 
 	private val dateHeaderPeriodChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, _ ->
 		val dateHeaderPeriodPreference = findPreference<Preference>(PREF_DATE_HEADER_PERIOD)
 		dateHeaderPeriodPreference?.let {
-			@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-			matchSummaryToSelection(dateHeaderPeriodPreference, prefs.getString(PREF_DATE_HEADER_PERIOD, "1"))
+			prefs.getString(PREF_DATE_HEADER_PERIOD, "1")?.let { value -> matchSummaryToSelection(dateHeaderPeriodPreference, value) }
 		}
 	}
 
@@ -203,7 +195,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 			.setCancelClickListener(reminderTimeDialogCancelClickListener)
 			.initTimePicker(hour, minute, null)
 			.build()
-		reminderTimePickerDialog.show(requireFragmentManager(), "Reminder Time Picker Dialog")
+		reminderTimePickerDialog.show(parentFragmentManager, "Reminder Time Picker Dialog")
 		true
 	}
 
@@ -229,7 +221,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 			ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
 		} else {
 			val dialog = BackupDialog()
-			dialog.show(requireFragmentManager(), "Backup Dialog")
+			dialog.show(parentFragmentManager, "Backup Dialog")
 		}
 		true
 	}
@@ -253,7 +245,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 		if(requestCode == CHOOSE_RESTORE_FILE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 			if(data != null) {
 				val filePathArray = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS)
-				val filePath = filePathArray[0]
+				val filePath = filePathArray?.get(0)
 				if(filePath != null)
 					displayRestoreDialog(filePath)
 			}
@@ -266,12 +258,12 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), KodeinAware {
 		val bundle = Bundle()
 		bundle.putString(RESTORE_FILE_PATH_KEY, path)
 		dialog.arguments = bundle
-		dialog.show(requireFragmentManager(), "Restore Dialog")
+		dialog.show(parentFragmentManager, "Restore Dialog")
 	}
 
 	private val mainEntryDisplayItemsClickListener = Preference.OnPreferenceClickListener {
 		val dialog = MainEntriesDisplayPreferenceDialog()
-		dialog.show(requireFragmentManager(), "Main Entries Display Preference Dialog")
+		dialog.show(parentFragmentManager, "Main Entries Display Preference Dialog")
 		true
 	}
 

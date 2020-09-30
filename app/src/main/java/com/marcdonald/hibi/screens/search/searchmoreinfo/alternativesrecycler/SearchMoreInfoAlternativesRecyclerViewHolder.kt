@@ -38,7 +38,7 @@ class SearchMoreInfoAlternativesRecyclerViewHolder(itemView: View)
 	private val wordClickListener = View.OnClickListener {
 		val clipboard: ClipboardManager = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 		val clip: ClipData = ClipData.newPlainText("Alternative Word", wordContent)
-		clipboard.primaryClip = clip
+		clipboard.setPrimaryClip(clip)
 
 		val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard_wc, wordContent)
 		Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
@@ -47,7 +47,7 @@ class SearchMoreInfoAlternativesRecyclerViewHolder(itemView: View)
 	private val readingClickListener = View.OnClickListener {
 		val clipboard: ClipboardManager = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 		val clip: ClipData = ClipData.newPlainText("Alternative Reading", readingContent)
-		clipboard.primaryClip = clip
+		clipboard.setPrimaryClip(clip)
 
 		val toastMessage = itemView.resources.getString(R.string.copied_to_clipboard_wc, readingContent)
 		Toast.makeText(itemView.context, toastMessage, Toast.LENGTH_SHORT).show()
