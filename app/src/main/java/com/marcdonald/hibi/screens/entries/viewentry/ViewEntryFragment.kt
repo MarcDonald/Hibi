@@ -313,7 +313,7 @@ class ViewEntryFragment : HibiFragment() {
 	private fun copyToClipboard() {
 		val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 		val clip: ClipData = ClipData.newPlainText("Entry", contentDisplay.text.toString())
-		clipboard.primaryClip = clip
+		clipboard.setPrimaryClip(clip)
 		Toast.makeText(requireContext(), resources.getString(R.string.copied_entry_to_clipboard), Toast.LENGTH_SHORT).show()
 	}
 }

@@ -192,7 +192,7 @@ class AddEntryFragment : HibiFragment() {
 	private fun initClipboardButton(view: View) {
 		clipboardButton = view.findViewById(R.id.img_option_clipboard)
 		@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-		when(PreferenceManager.getDefaultSharedPreferences(requireContext()).getString(PREF_CLIPBOARD_BEHAVIOR, "0").toInt()) {
+		when(PreferenceManager.getDefaultSharedPreferences(requireContext()).getString(PREF_CLIPBOARD_BEHAVIOR, "0")?.toInt()) {
 			0 -> {
 				clipboardButton.setImageResource(R.drawable.ic_clipboard_plus)
 				clipboardButton.setOnClickListener { showClipBoardMenu() }
@@ -488,7 +488,7 @@ class AddEntryFragment : HibiFragment() {
 	private fun copyToClipboard() {
 		val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 		val clip: ClipData = ClipData.newPlainText("Entry", contentInput.text.toString())
-		clipboard.primaryClip = clip
+		clipboard.setPrimaryClip(clip)
 		Toast.makeText(requireContext(), resources.getString(R.string.copied_entry_to_clipboard), Toast.LENGTH_SHORT).show()
 	}
 

@@ -153,7 +153,7 @@ class SearchMoreInfoDialog : HibiBottomSheetDialogFragment() {
 		viewModel.mainWord.value?.let {
 			val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 			val clip: ClipData = ClipData.newPlainText("Main Word", viewModel.mainWord.value)
-			clipboard.primaryClip = clip
+			clipboard.setPrimaryClip(clip)
 
 			val toastMessage = resources.getString(R.string.copied_to_clipboard_wc, viewModel.mainWord.value)
 			Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
@@ -164,7 +164,7 @@ class SearchMoreInfoDialog : HibiBottomSheetDialogFragment() {
 		viewModel.mainReading.value?.let {
 			val clipboard: ClipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 			val clip: ClipData = ClipData.newPlainText("Main Reading", viewModel.mainReading.value)
-			clipboard.primaryClip = clip
+			clipboard.setPrimaryClip(clip)
 
 			val toastMessage = resources.getString(R.string.copied_to_clipboard_wc, viewModel.mainReading.value)
 			Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
