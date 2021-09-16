@@ -53,7 +53,6 @@ class BookEntriesFragment : HibiFragment() {
 		bindViews(view)
 		initRecycler(view)
 		setupObservers()
-		viewModel.loadEntries()
 		return view
 	}
 
@@ -62,6 +61,7 @@ class BookEntriesFragment : HibiFragment() {
 		arguments?.let { arguments ->
 			viewModel.passArguments(BookEntriesFragmentArgs.fromBundle(arguments).bookID)
 		}
+		viewModel.loadEntries()
 	}
 
 	private fun bindViews(view: View) {

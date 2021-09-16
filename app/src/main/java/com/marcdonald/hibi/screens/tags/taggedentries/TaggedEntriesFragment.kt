@@ -35,6 +35,7 @@ import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.mainentriesrecycler.EntriesRecyclerAdapter
 import com.marcdonald.hibi.screens.mainentriesrecycler.MainEntriesHeaderItemDecoration
+import timber.log.Timber
 
 class TaggedEntriesFragment : HibiFragment() {
 
@@ -53,7 +54,6 @@ class TaggedEntriesFragment : HibiFragment() {
 		bindViews(view)
 		initRecycler(view)
 		setupObservers()
-		viewModel.loadEntries()
 
 		return view
 	}
@@ -61,8 +61,10 @@ class TaggedEntriesFragment : HibiFragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		arguments?.let { arguments ->
+			Timber.i("Log: onViewCreated: ${TaggedEntriesFragmentArgs.fromBundle(arguments).tagID}")
 			viewModel.passArguments(TaggedEntriesFragmentArgs.fromBundle(arguments).tagID)
 		}
+		viewModel.loadEntries()
 	}
 
 	private fun bindViews(view: View) {
