@@ -128,7 +128,7 @@ Thanks to [this gist](https://gist.github.com/filipkowicz/1a769001fae407b8813ab4
 
 ## License
 ```   
-Copyright 2020 Marc Donald
+Copyright 2021 Marc Donald
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
