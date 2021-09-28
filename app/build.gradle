@@ -25,11 +25,11 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.marcdonald.hibi"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 38
         versionName "1.5.0"
         setProperty("archivesBaseName", "Hibi-v$versionName")

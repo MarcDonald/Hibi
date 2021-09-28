@@ -79,5 +79,7 @@ fastlane/readme.md
 /build
 /captures
 
+/.idea/misc.xml
+
 # Test Files
 test-databases/
