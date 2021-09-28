@@ -29,7 +29,7 @@
     <include layout="@layout/toolbar_back_scrolling" />
   </com.google.android.material.appbar.AppBarLayout>
 
-  <fragment
+  <androidx.fragment.app.FragmentContainerView
     android:id="@+id/settings_preference_fragment"
     android:name="com.marcdonald.hibi.screens.settings.SettingsPreferenceFragment"
     android:layout_width="match_parent"

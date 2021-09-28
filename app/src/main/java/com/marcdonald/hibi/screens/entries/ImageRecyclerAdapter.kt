@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -79,7 +80,7 @@ class ImageRecyclerViewHolder(itemView: View,
 		Glide.with(itemView)
 			.load(imagePath)
 			.apply(RequestOptions().centerCrop())
-			.apply(RequestOptions().error(itemView.resources.getDrawable(R.drawable.ic_error_24dp, theme)))
+			.apply(RequestOptions().error(ResourcesCompat.getDrawable(itemView.resources, R.drawable.ic_error_24dp, theme)))
 			.into(imageDisplay)
 		imageDisplay.imageTintList = null
 	}

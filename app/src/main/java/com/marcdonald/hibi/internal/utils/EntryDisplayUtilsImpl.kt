@@ -77,7 +77,7 @@ class EntryDisplayUtilsImpl(private val context: Context) : EntryDisplayUtils {
 
 		val headersToAdd = mutableListOf<Pair<Int, MainEntriesDisplayItem>>()
 
-		for(x in 0 until allItems.size) {
+		for(x in allItems.indices) {
 			if(((allItems[x].entry.month < lastMonth) && (allItems[x].entry.year == lastYear))
 				 || (allItems[x].entry.month > lastMonth) && (allItems[x].entry.year < lastYear)
 				 || (allItems[x].entry.year < lastYear)
@@ -108,7 +108,7 @@ class EntryDisplayUtilsImpl(private val context: Context) : EntryDisplayUtils {
 
 		val headersToAdd = mutableListOf<Pair<Int, MainEntriesDisplayItem>>()
 
-		for(x in 0 until allItems.size) {
+		for(x in allItems.indices) {
 			if(allItems[x].entry.year < lastYear) {
 				val header = Entry(0, allItems[x].entry.month, allItems[x].entry.year, 0, 0, "")
 				val headerItem = MainEntriesDisplayItem(header, listOf(), listOf())

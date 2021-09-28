@@ -109,7 +109,6 @@
           android:text="@string/location"
           android:textAppearance="@style/TextAppearance.Hibi.ViewEntryContent"
           android:gravity="start|center"
-          android:drawableStart="@drawable/ic_location_on_24dp"
           android:drawablePadding="@dimen/margin_standard"
           android:maxLines="1"
           android:ellipsize="end"
@@ -118,7 +117,8 @@
           app:layout_constraintEnd_toEndOf="parent"
           android:layout_marginStart="@dimen/margin_standard"
           android:layout_marginEnd="@dimen/margin_standard"
-          android:paddingBottom="@dimen/margin_standard" />
+          android:paddingBottom="@dimen/margin_standard"
+          app:drawableStartCompat="@drawable/ic_location_on_24dp" />
 
         <!--region Tags-->
         <LinearLayout

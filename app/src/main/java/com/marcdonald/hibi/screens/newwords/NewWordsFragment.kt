@@ -30,8 +30,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.base.HibiFragment
 import com.marcdonald.hibi.internal.extension.show
-import com.marcdonald.hibi.screens.favouriteentries.FavouriteEntriesFragmentDirections
-import timber.log.Timber
 
 class NewWordsFragment : HibiFragment() {
 

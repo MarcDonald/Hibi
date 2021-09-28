@@ -36,7 +36,8 @@
     tools:ignore="GoogleAppIndexingWarning">
     <activity
       android:name=".MainActivity"
-      android:windowSoftInputMode="adjustResize">
+      android:windowSoftInputMode="adjustResize"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />

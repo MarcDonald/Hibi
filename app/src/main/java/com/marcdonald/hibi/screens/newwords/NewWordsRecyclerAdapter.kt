@@ -20,11 +20,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.entity.NewWord
-import timber.log.Timber
 
 class NewWordsRecyclerAdapter(private val context: Context, private val onClick: (Int) -> Unit)
 	: RecyclerView.Adapter<NewWordsRecyclerViewHolder>() {

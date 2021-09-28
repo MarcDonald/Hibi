@@ -25,6 +25,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -33,7 +34,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
 import com.marcdonald.hibi.internal.base.HibiBottomSheetDialogFragment
-import com.marcdonald.hibi.internal.base.HibiDialogFragment
 import com.marcdonald.hibi.internal.extension.show
 import com.marcdonald.hibi.screens.addnewworddialog.AddNewWordDialog
 import com.marcdonald.hibi.screens.search.searchmoreinfo.alternativesrecycler.SearchMoreInfoAlternativesRecyclerAdapter
@@ -184,7 +184,7 @@ class SearchMoreInfoDialog : HibiBottomSheetDialogFragment() {
 			bundle.putStringArrayList(NEW_WORD_MEANING_QUICK_ADD, viewModel.senseList.value?.get(0)?.englishDefinitions as ArrayList<String>)
 			dialog.arguments = bundle
 
-			dialog.show(requireFragmentManager(), "New Words Dialog")
+			dialog.show(parentFragmentManager, "New Words Dialog")
 		} else
 			Timber.e("Log: quickAddClickListener: Tried to add new word when not in edit mode")
 	}
@@ -196,7 +196,7 @@ class SearchMoreInfoDialog : HibiBottomSheetDialogFragment() {
 		alternativeRecycler.layoutManager = layoutManager
 
 		val dividerItemDecoration = DividerItemDecoration(alternativeRecycler.context, layoutManager.orientation)
-		dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_standard, null))
+		ResourcesCompat.getDrawable(resources, R.drawable.divider_standard, requireActivity().theme)?.let { dividerItemDecoration.setDrawable(it) }
 		alternativeRecycler.addItemDecoration(dividerItemDecoration)
 	}
 
@@ -207,7 +207,7 @@ class SearchMoreInfoDialog : HibiBottomSheetDialogFragment() {
 		senseRecycler.layoutManager = layoutManager
 
 		val dividerItemDecoration = DividerItemDecoration(senseRecycler.context, layoutManager.orientation)
-		dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_standard, null))
+		ResourcesCompat.getDrawable(resources, R.drawable.divider_standard, null)?.let { dividerItemDecoration.setDrawable(it) }
 		senseRecycler.addItemDecoration(dividerItemDecoration)
 	}
 }

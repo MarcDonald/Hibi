@@ -29,6 +29,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.zip.ZipException
 import java.util.zip.ZipFile
+import kotlin.system.exitProcess
 
 class RestoreDialogViewModel(private val fileUtils: FileUtils,
 														 private val database: AppDatabase)
@@ -164,6 +165,6 @@ class RestoreDialogViewModel(private val fileUtils: FileUtils,
 		}
 		/* This is apparently bad practice but I can't find any other way of completely destroying
 		 * the application so that the database can be opened again */
-		System.exit(1)
+		exitProcess(1)
 	}
 }

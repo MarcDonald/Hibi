@@ -25,7 +25,6 @@ import com.marcdonald.hibi.internal.utils.UpdateUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.net.SocketTimeoutException
 
 class UpdateDialogViewModel(private val updateUtils: UpdateUtils) : ViewModel() {
 	private val _displayDismiss = MutableLiveData<Boolean>()

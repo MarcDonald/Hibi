@@ -23,7 +23,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.*
@@ -38,7 +37,6 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esafirm.imagepicker.features.ImagePicker
-import com.esafirm.imagepicker.features.ReturnMode
 import com.google.android.material.button.MaterialButton
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.internal.*
@@ -54,9 +52,6 @@ import com.marcdonald.hibi.uicomponents.BinaryOptionDialog
 import com.marcdonald.hibi.uicomponents.DatePickerDialog
 import com.marcdonald.hibi.uicomponents.TimePickerDialog
 import com.marcdonald.hibi.uicomponents.views.SearchBar
-import droidninja.filepicker.FilePickerBuilder
-import droidninja.filepicker.FilePickerConst
-import timber.log.Timber
 
 class AddEntryFragment : HibiFragment() {
 
@@ -92,7 +87,7 @@ class AddEntryFragment : HibiFragment() {
 				viewModel.backPress(contentInput.text.toString().isEmpty())
 			}
 		}
-		requireActivity().onBackPressedDispatcher.addCallback(this, backPressCallback)
+		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressCallback)
 		setupObservers()
 		setupImageRecycler(view)
 		return view

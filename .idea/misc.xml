@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Marc/Documents/Code/Android/Hibi/app/src/main/res/layout-land/fragment_view_entry.xml" value="0.2760141093474427" />
+        <entry key="..\:/Users/Marc/Documents/Code/Android/Hibi/app/src/main/res/layout/activity_main.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/Marc/Documents/Code/Android/Hibi/app/src/main/res/layout/fragment_about.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/Marc/Documents/Code/Android/Hibi/app/src/main/res/layout/fragment_settings.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/Marc/Documents/Code/Android/Hibi/app/src/main/res/layout/fragment_view_entry.xml" value="0.2708333333333333" />
         <entry key="..\:/Users/Marc/Documents/Code/Android/Hibi/app/src/main/res/layout/test_dialog.xml" value="0.48194444444444445" />
       </map>
     </option>

@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marcdonald.hibi.R
 import com.marcdonald.hibi.data.entity.NewWord
 import com.marcdonald.hibi.internal.extension.show
-import timber.log.Timber
 
 class NewWordsRecyclerViewHolder(itemView: View, private val onClick: (Int) -> Unit)
 	: RecyclerView.ViewHolder(itemView) {

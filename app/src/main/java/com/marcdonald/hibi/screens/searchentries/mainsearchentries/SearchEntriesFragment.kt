@@ -91,7 +91,7 @@ class SearchEntriesFragment : HibiFragment() {
 					Navigation.findNavController(requireView()).popBackStack()
 			}
 		}
-		requireActivity().onBackPressedDispatcher.addCallback(this, backPressCallback)
+		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressCallback)
 
 		return view
 	}

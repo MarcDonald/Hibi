@@ -73,7 +73,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
 	private fun displayType(sense: Sense) {
 		if(sense.partsOfSpeech.isNotEmpty()) {
 			var displayString = ""
-			for(x in 0 until sense.partsOfSpeech.size) {
+			for(x in sense.partsOfSpeech.indices) {
 				displayString += if(x == sense.partsOfSpeech.size - 1)
 					"${sense.partsOfSpeech[x]} "
 				else
@@ -88,7 +88,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
 	private fun displayTags(sense: Sense) {
 		if(sense.tags.isNotEmpty()) {
 			var displayString = ""
-			for(x in 0 until sense.tags.size) {
+			for(x in sense.tags.indices) {
 				displayString += if(x == sense.tags.size - 1)
 					"${sense.tags[x]} "
 				else
@@ -103,7 +103,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
 	private fun displayEnglish(sense: Sense) {
 		if(sense.englishDefinitions.isNotEmpty()) {
 			var displayString = ""
-			for(x in 0 until sense.englishDefinitions.size) {
+			for(x in sense.englishDefinitions.indices) {
 				displayString += if(x == sense.englishDefinitions.size - 1)
 					"${sense.englishDefinitions[x]} "
 				else
@@ -118,7 +118,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
 	private fun displayRestrictions(sense: Sense) {
 		if(sense.restrictions.isNotEmpty()) {
 			var restrictionsString = ""
-			for(x in 0 until sense.restrictions.size) {
+			for(x in sense.restrictions.indices) {
 				restrictionsString += if(x == sense.restrictions.size - 1)
 					"${sense.restrictions[x]} "
 				else
@@ -134,7 +134,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
 	private fun displayAntonyms(sense: Sense) {
 		if(sense.antonyms.isNotEmpty()) {
 			var antonymsString = ""
-			for(x in 0 until sense.antonyms.size) {
+			for(x in sense.antonyms.indices) {
 				antonymsString += if(x == sense.antonyms.size - 1)
 					"${sense.antonyms[x]} "
 				else
@@ -152,7 +152,7 @@ class SearchMoreInfoSenseRecyclerViewHolder(itemView: View)
 	private fun displaySeeAlso(sense: Sense) {
 		if(sense.seeAlso.isNotEmpty()) {
 			var seeAlsoString = ""
-			for(x in 0 until sense.seeAlso.size) {
+			for(x in sense.seeAlso.indices) {
 				seeAlsoString += if(x == sense.seeAlso.size - 1)
 					"${sense.seeAlso[x]} "
 				else

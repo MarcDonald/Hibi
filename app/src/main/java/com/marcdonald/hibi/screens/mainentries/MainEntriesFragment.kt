@@ -64,7 +64,7 @@ class MainEntriesFragment : HibiFragment() {
 		bindViews(view)
 		initRecycler(view)
 		setupObservers()
-		requireActivity().onBackPressedDispatcher.addCallback(this, backPressCallback)
+		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressCallback)
 		viewModel.loadEntries()
 		return view
 	}

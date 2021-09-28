@@ -69,7 +69,6 @@ fastlane/test_output
 fastlane/readme.md
 
 # Default gitignore from Android Studio
-*.iml
 .gradle
 /local.properties
 /.idea/caches/build_file_checksums.ser
@@ -79,7 +78,6 @@ fastlane/readme.md
 .DS_Store
 /build
 /captures
-.externalNativeBuild
 
 # Test Files
 test-databases/

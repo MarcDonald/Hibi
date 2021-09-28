@@ -249,7 +249,7 @@ class ViewEntryFragment : HibiFragment() {
 	}
 
 	private val backClickListener = View.OnClickListener {
-		Navigation.findNavController(view!!).popBackStack()
+		Navigation.findNavController(requireView()).popBackStack()
 	}
 
 	private val editClickListener = View.OnClickListener {
