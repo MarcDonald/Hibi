@@ -1,6 +1,8 @@
 ﻿![Header](/.github/assets/header.png?raw=true "Header")
 
 # Hibi 「日々」
+![Maintenance](https://img.shields.io/maintenance/no/2020)
+
 An app for Android designed to aid your Japanese learning through keeping a journal.
 
 ## Table of Contents
